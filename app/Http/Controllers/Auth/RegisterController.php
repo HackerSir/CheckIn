@@ -51,6 +51,11 @@ class RegisterController extends Controller
             'resendConfirmMailPage',
             'resendConfirmMail',
         ]);
+
+        $this->middleware('register.toggle')->only([
+            'showRegistrationForm',
+            'register',
+        ]);
     }
 
     /**
