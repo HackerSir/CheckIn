@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Iatstuti\Database\Support\NullableFields;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -27,9 +28,17 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Club extends Model
 {
+    use NullableFields;
+
     protected $fillable = [
         'name',
         'club_type_id',
+        'description',
+        'url',
+        'image_url',
+    ];
+
+    protected $nullable = [
         'description',
         'url',
         'image_url',

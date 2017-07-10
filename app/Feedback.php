@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Iatstuti\Database\Support\NullableFields;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -25,9 +26,17 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Feedback extends Model
 {
+    use NullableFields;
+
     protected $fillable = [
         'student_id',
         'club_id',
+        'phone',
+        'email',
+    ];
+
+
+    protected $nullable = [
         'phone',
         'email',
     ];
