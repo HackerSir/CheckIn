@@ -18,7 +18,7 @@
                 @endif
                 {{ csrf_field() }}
                 <div class="form-group row{{ $errors->has('name') ? ' has-danger' : '' }}">
-                    <label for="name" class="col-md-4 form-control-label">角色英文名稱</label>
+                    <label for="name" class="col-md-4 col-form-label">角色英文名稱</label>
                     <div class="col-md-6">
                         @if($isEditMode && $role->protection)
                             <input id="name" type="text"
@@ -43,7 +43,7 @@
                 </div>
 
                 <div class="form-group row{{ $errors->has('display_name') ? ' has-danger' : '' }}">
-                    <label for="display_name" class="col-md-4 form-control-label">角色顯示名稱</label>
+                    <label for="display_name" class="col-md-4 col-form-label">角色顯示名稱</label>
                     <div class="col-md-6">
                         <input id="display_name" type="text"
                                class="form-control{{ $errors->has('display_name') ? ' form-control-danger' : '' }}"
@@ -59,7 +59,7 @@
                 </div>
 
                 <div class="form-group row{{ $errors->has('description') ? ' has-danger' : '' }}">
-                    <label for="description" class="col-md-4 form-control-label">角色簡介</label>
+                    <label for="description" class="col-md-4 col-form-label">角色簡介</label>
                     <div class="col-md-6">
                         <input id="description" type="text"
                                class="form-control{{ $errors->has('description') ? ' form-control-danger' : '' }}"
@@ -76,7 +76,7 @@
 
 
                 <div class="form-group row{{ $errors->has('name') ? ' has-danger' : '' }}">
-                    <label class="col-md-4 form-control-label">權限</label>
+                    <label class="col-md-4 col-form-label">權限</label>
                     <div class="col-md-6">
                         @foreach($permissions as $permission)
                             @if(isset($role) && $role->protection)

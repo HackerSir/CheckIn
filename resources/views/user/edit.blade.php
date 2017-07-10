@@ -13,7 +13,7 @@
                 {{ method_field('patch') }}
 
                 <div class="form-group row">
-                    <label for="email" class="col-md-4 form-control-label">E-Mail Address</label>
+                    <label for="email" class="col-md-4 col-form-label">E-Mail Address</label>
 
                     <div class="col-md-6">
                         <input id="email" type="email" class="form-control" value="{{ $user->email }}" readonly>
@@ -22,7 +22,7 @@
                 </div>
 
                 <div class="form-group row{{ $errors->has('name') ? ' has-danger' : '' }}">
-                    <label for="name" class="col-md-4 form-control-label">Name</label>
+                    <label for="name" class="col-md-4 col-form-label">Name</label>
 
                     <div class="col-md-6">
                         <input id="name" type="text"
@@ -39,7 +39,7 @@
                 </div>
 
                 <div class="form-group row{{ $errors->has('role') ? ' has-danger' : '' }}">
-                    <label class="col-md-4 form-control-label">角色</label>
+                    <label class="col-md-4 col-form-label">角色</label>
                     <div class="col-md-6">
                         @foreach($roles as $role)
                             @if($user->id == Auth::user()->id && $role->name == 'Admin')
