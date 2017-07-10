@@ -1,0 +1,13 @@
+preset: laravel
+
+enabled:
+  - concat_with_spaces
+  - align_double_arrow
+  - alpha_ordered_imports
+
+disabled:
+  - phpdoc_summary
+  - concat_without_spaces
+  - not_operator_with_successor_space
+  - simplified_null_return
+  - length_ordered_imports
