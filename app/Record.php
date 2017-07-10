@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 class Record extends Model
 {
     protected $fillable = [
-        'ip'
+        'student_id',
+        'club_id',
+        'ip',
     ];
 }

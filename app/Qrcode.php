@@ -8,6 +8,7 @@ class Qrcode extends Model
 {
     protected $fillable = [
         'code',
+        'student_id',
         'bind_at',
     ];
 }
