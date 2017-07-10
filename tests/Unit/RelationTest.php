@@ -195,7 +195,6 @@ class RelationTest extends TestCase
         $this->assertEquals($ticket->id, $student->ticket->id);
     }
 
-
     /**
      * @return void
      */

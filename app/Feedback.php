@@ -42,7 +42,6 @@ class Feedback extends Model
         'email',
     ];
 
-
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo|\Illuminate\Database\Eloquent\Builder
      */
