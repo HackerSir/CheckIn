@@ -30,6 +30,7 @@ $factory->define(App\Student::class, function (Faker\Generator $faker) {
 
     return [
         'nid'       => $nid,
+        'name'      => $faker->name,
         'class'     => '資訊工程學系一年級丁班',
         'unit_name' => '資訊工程學系',
         'dept_name' => '資訊電機學院',
