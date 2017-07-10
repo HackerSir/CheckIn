@@ -14,6 +14,12 @@
 //首頁
 Route::get('/', 'HomeController@index')->name('index');
 
+//OAuth
+Route::group(['prefix' => 'oauth', 'namespace' => 'Auth'], function () {
+    Route::get('/', 'OAuthController@index')->name('oauth.index');
+    Route::any('login', 'OAuthController@login')->name('oauth.login');
+});
+
 //會員（須完成信箱驗證）
 Route::group(['middleware' => ['auth', 'email']], function () {
     //會員管理
