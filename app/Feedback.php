@@ -35,7 +35,6 @@ class Feedback extends Model
         'email',
     ];
 
-
     protected $nullable = [
         'phone',
         'email',
