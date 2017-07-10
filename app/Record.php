@@ -13,6 +13,8 @@ use Illuminate\Database\Eloquent\Model;
  * @property int|null $club_id 對應社團
  * @property \Carbon\Carbon|null $created_at
  * @property \Carbon\Carbon|null $updated_at
+ * @property-read \App\Club|null $club
+ * @property-read \App\Student|null $student
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Record whereClubId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Record whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Record whereId($value)
@@ -28,4 +30,20 @@ class Record extends Model
         'club_id',
         'ip',
     ];
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo|\Illuminate\Database\Eloquent\Builder
+     */
+    public function club()
+    {
+        return $this->belongsTo(Club::class);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo|\Illuminate\Database\Eloquent\Builder
+     */
+    public function student()
+    {
+        return $this->belongsTo(Student::class);
+    }
 }

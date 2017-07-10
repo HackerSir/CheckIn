@@ -13,33 +13,34 @@ use Laratrust\Traits\LaratrustUserTrait;
  * @property string $name
  * @property string $email
  * @property string $password
- * @property string $confirm_code
- * @property string $confirm_at
- * @property string $register_at
- * @property string $register_ip
- * @property string $last_login_at
- * @property string $last_login_ip
- * @property string $remember_token
- * @property \Carbon\Carbon $created_at
- * @property \Carbon\Carbon $updated_at
+ * @property string|null $confirm_code
+ * @property string|null $confirm_at
+ * @property string|null $register_at
+ * @property string|null $register_ip
+ * @property string|null $last_login_at
+ * @property string|null $last_login_ip
+ * @property string|null $remember_token
+ * @property \Carbon\Carbon|null $created_at
+ * @property \Carbon\Carbon|null $updated_at
  * @property-read bool $is_confirmed
  * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $notifications
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Permission[] $permissions
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Role[] $roles
- * @method static \Illuminate\Database\Query\Builder|\App\User whereConfirmAt($value)
- * @method static \Illuminate\Database\Query\Builder|\App\User whereConfirmCode($value)
- * @method static \Illuminate\Database\Query\Builder|\App\User whereCreatedAt($value)
- * @method static \Illuminate\Database\Query\Builder|\App\User whereEmail($value)
- * @method static \Illuminate\Database\Query\Builder|\App\User whereId($value)
- * @method static \Illuminate\Database\Query\Builder|\App\User whereLastLoginAt($value)
- * @method static \Illuminate\Database\Query\Builder|\App\User whereLastLoginIp($value)
- * @method static \Illuminate\Database\Query\Builder|\App\User whereName($value)
- * @method static \Illuminate\Database\Query\Builder|\App\User wherePassword($value)
- * @method static \Illuminate\Database\Query\Builder|\App\User whereRegisterAt($value)
- * @method static \Illuminate\Database\Query\Builder|\App\User whereRegisterIp($value)
- * @method static \Illuminate\Database\Query\Builder|\App\User whereRememberToken($value)
- * @method static \Illuminate\Database\Query\Builder|\App\User whereRoleIs($role = '')
- * @method static \Illuminate\Database\Query\Builder|\App\User whereUpdatedAt($value)
+ * @property-read \App\Student $student
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereConfirmAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereConfirmCode($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereEmail($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereLastLoginAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereLastLoginIp($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User wherePassword($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereRegisterAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereRegisterIp($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereRememberToken($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereRoleIs($role = '')
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereUpdatedAt($value)
  * @mixin \Eloquent
  */
 class User extends Authenticatable
@@ -85,5 +86,13 @@ class User extends Authenticatable
     public function getIsConfirmedAttribute()
     {
         return !empty($this->confirm_at);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne|\Illuminate\Database\Eloquent\Builder
+     */
+    public function student()
+    {
+        return $this->hasOne(Student::class);
     }
 }

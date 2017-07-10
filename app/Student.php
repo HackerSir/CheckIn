@@ -18,6 +18,11 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $gender 性別
  * @property \Carbon\Carbon|null $created_at
  * @property \Carbon\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Feedback[] $feedback
+ * @property-read \App\Qrcode $qrcode
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Record[] $records
+ * @property-read \App\Ticket $ticket
+ * @property-read \App\User|null $user
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Student whereClass($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Student whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Student whereDeptName($value)
@@ -43,4 +48,44 @@ class Student extends Model
         'in_year',
         'gender',
     ];
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo|\Illuminate\Database\Eloquent\Builder
+     */
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne|\Illuminate\Database\Eloquent\Builder
+     */
+    public function qrcode()
+    {
+        return $this->hasOne(Qrcode::class)->orderBy('bind_at', 'desc');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany|\Illuminate\Database\Eloquent\Builder
+     */
+    public function records()
+    {
+        return $this->hasMany(Record::class);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne|\Illuminate\Database\Eloquent\Builder
+     */
+    public function ticket()
+    {
+        return $this->hasOne(Ticket::class);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany|\Illuminate\Database\Eloquent\Builder
+     */
+    public function feedback()
+    {
+        return $this->hasMany(Feedback::class);
+    }
 }

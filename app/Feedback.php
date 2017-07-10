@@ -15,6 +15,8 @@ use Illuminate\Database\Eloquent\Model;
  * @property string|null $email 聯絡信箱
  * @property \Carbon\Carbon|null $created_at
  * @property \Carbon\Carbon|null $updated_at
+ * @property-read \App\Club|null $club
+ * @property-read \App\Student|null $student
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Feedback whereClubId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Feedback whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Feedback whereEmail($value)
@@ -39,4 +41,21 @@ class Feedback extends Model
         'phone',
         'email',
     ];
+
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo|\Illuminate\Database\Eloquent\Builder
+     */
+    public function club()
+    {
+        return $this->belongsTo(Club::class);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo|\Illuminate\Database\Eloquent\Builder
+     */
+    public function student()
+    {
+        return $this->belongsTo(Student::class);
+    }
 }

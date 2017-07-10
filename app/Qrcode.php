@@ -13,6 +13,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string|null $bind_at 綁定時間
  * @property \Carbon\Carbon|null $created_at
  * @property \Carbon\Carbon|null $updated_at
+ * @property-read \App\Student|null $student
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Qrcode whereBindAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Qrcode whereCode($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Qrcode whereCreatedAt($value)
@@ -28,4 +29,12 @@ class Qrcode extends Model
         'student_id',
         'bind_at',
     ];
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo|\Illuminate\Database\Eloquent\Builder
+     */
+    public function student()
+    {
+        return $this->belongsTo(Student::class);
+    }
 }

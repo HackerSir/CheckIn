@@ -16,6 +16,10 @@ use Illuminate\Database\Eloquent\Model;
  * @property string|null $image_url 圖片網址
  * @property \Carbon\Carbon|null $created_at
  * @property \Carbon\Carbon|null $updated_at
+ * @property-read \App\Booth $booth
+ * @property-read \App\ClubType|null $clubType
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Feedback[] $feedback
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Record[] $records
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Club whereClubTypeId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Club whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Club whereDescription($value)
@@ -43,4 +47,36 @@ class Club extends Model
         'url',
         'image_url',
     ];
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo|\Illuminate\Database\Eloquent\Builder
+     */
+    public function clubType()
+    {
+        return $this->belongsTo(ClubType::class);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne|\Illuminate\Database\Eloquent\Builder
+     */
+    public function booth()
+    {
+        return $this->hasOne(Booth::class);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany|\Illuminate\Database\Eloquent\Builder
+     */
+    public function records()
+    {
+        return $this->hasMany(Record::class);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany|\Illuminate\Database\Eloquent\Builder
+     */
+    public function feedback()
+    {
+        return $this->hasMany(Feedback::class);
+    }
 }

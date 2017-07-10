@@ -14,6 +14,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property float|null $latitude 緯度
  * @property \Carbon\Carbon|null $created_at
  * @property \Carbon\Carbon|null $updated_at
+ * @property-read \App\Club|null $club
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Booth whereClubId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Booth whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Booth whereId($value)
@@ -31,4 +32,12 @@ class Booth extends Model
         'longitude',
         'latitude',
     ];
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo|\Illuminate\Database\Eloquent\Builder
+     */
+    public function club()
+    {
+        return $this->belongsTo(Club::class);
+    }
 }

@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property int|null $student_id 對應學生
  * @property \Carbon\Carbon|null $created_at
  * @property \Carbon\Carbon|null $updated_at
+ * @property-read \App\Student|null $student
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Ticket whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Ticket whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Ticket whereStudentId($value)
@@ -22,4 +23,12 @@ class Ticket extends Model
     protected $fillable = [
         'student_id',
     ];
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo|\Illuminate\Database\Eloquent\Builder
+     */
+    public function student()
+    {
+        return $this->belongsTo(Student::class);
+    }
 }
