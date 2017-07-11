@@ -9,7 +9,7 @@
             <div class="card">
                 <div class="card-block">
                     <form role="form" method="POST" action="{{ route('profile.2fa.toggle') }}"
-                          @if($user->google2fa_secret)onsubmit="confirm('確定停用？')"@endif>
+                          @if($user->google2fa_secret)onsubmit="return confirm('確定停用？')"@endif>
                         {{ csrf_field() }}
 
                         <div class="form-group row">
