@@ -17,7 +17,7 @@
 
                             <div class="col-md-10">
                                 <input id="email" type="email" class="form-control" value="{{ $user->email }}" readonly>
-                                <span class="form-text">信箱作為帳號使用，故無法修改</span>
+                                <small class="form-text text-muted">信箱作為帳號使用，故無法修改</small>
                             </div>
                         </div>
 
