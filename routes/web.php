@@ -55,6 +55,10 @@ Route::group(['namespace' => 'Auth'], function () {
     // Authentication Routes...
     Route::get('login', 'LoginController@showLoginForm')->name('login');
     Route::post('login', 'LoginController@login')->name('login');
+    // Google 2FA
+    Route::get('login/2fa', 'LoginController@login2FAForm')->name('login.2fa');
+    Route::post('login/2fa', 'LoginController@login2FA')->name('login.2fa');
+
     Route::get('logout', 'LoginController@logout')->name('logout');
     Route::post('logout', 'LoginController@logout')->name('logout');
     // Registration Routes...
