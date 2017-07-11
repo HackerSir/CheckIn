@@ -22,6 +22,7 @@ class OAuthController extends Controller
     public function __construct(FcuApiService $fcuApiService)
     {
         $this->fcuApiService = $fcuApiService;
+        $this->middleware('guest');
     }
 
     public function index()
