@@ -72,7 +72,6 @@ class LoginController extends Controller
             }
         }
 
-
         if ($this->attemptLogin($request)) {
             return $this->sendLoginResponse($request);
         }
