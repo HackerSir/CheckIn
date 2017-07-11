@@ -15,8 +15,8 @@ class Google2FAController extends Controller
 
         if (!$user->google2fa_secret) {
             $google2fa = app('pragmarx.google2fa');
-            //產生隨機SecretKey，暫存5分鐘
-            $secretKey = \Cache::remember('2faSecretKey' . $user->id, 5, function () use ($google2fa) {
+            //產生隨機SecretKey，暫存60分鐘
+            $secretKey = \Cache::remember('2faSecretKey' . $user->id, 60, function () use ($google2fa) {
                 $secretKey = $google2fa->generateSecretKey();
 
                 return $secretKey;
