@@ -75,6 +75,9 @@ class AuthListener
     {
         /* @var \App\User $user */
         $user = $event->user;
+        if (!$user) {
+            return;
+        }
         $ip = Request::getClientIp();
         //寫入紀錄
         $this->logService->info('[Auth][Logout] ' . $user->name . ' (' . $user->email . ')' . PHP_EOL, [
