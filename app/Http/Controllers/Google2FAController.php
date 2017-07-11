@@ -68,13 +68,13 @@ class Google2FAController extends Controller
             //啟用
             $user->save();
 
-            return back()->with('global', '已啟用兩步驟驗證');
+            return redirect()->route('profile')->with('global', '已啟用兩步驟驗證');
         } else {
             //停用
             $user->google2fa_secret = null;
             $user->save();
 
-            return back()->with('global', '已停用兩步驟驗證');
+            return redirect()->route('profile')->with('global', '已停用兩步驟驗證');
         }
     }
 }
