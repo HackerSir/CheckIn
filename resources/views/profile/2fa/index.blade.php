@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', '兩步驟認證')
+@section('title', '兩步驟驗證')
 
 @section('content')
     <div class="row mt-3">
