@@ -50,7 +50,6 @@ Route::group(['middleware' => ['auth', 'email']], function () {
 });
 
 //會員系統
-Auth::routes();
 //將 Auth::routes() 複製出來自己命名
 Route::group(['namespace' => 'Auth'], function () {
     // Authentication Routes...
