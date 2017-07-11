@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "29daa97b4201dffa92eed3f86a7ec7fd",
+    "content-hash": "50ebaa3b17f0aa0f7eb217911c908c0c",
     "packages": [
         {
             "name": "arcanedev/log-viewer",
@@ -1718,6 +1718,52 @@
                 "laravel"
             ],
             "time": "2017-07-02T07:00:56+00:00"
+        },
+        {
+            "name": "mojoblanco/domainos",
+            "version": "1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mojoblanco/domainos.git",
+                "reference": "999e8158de47c82a58b28eaaa92136c42953808b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mojoblanco/domainos/zipball/999e8158de47c82a58b28eaaa92136c42953808b",
+                "reference": "999e8158de47c82a58b28eaaa92136c42953808b",
+                "shasum": ""
+            },
+            "require": {
+                "php": "~5.6|~7.0"
+            },
+            "type": "package",
+            "autoload": {
+                "psr-4": {
+                    "Mojoblanco\\Domainos\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": ":John Olawale",
+                    "email": "mojoblanco@gmail.com",
+                    "homepage": "http://grienberg.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A laravel package for allowing or blocking specific email domains",
+            "homepage": "https://github.com/mojoblanco/domainos",
+            "keywords": [
+                "domains",
+                "emails",
+                "laravel",
+                "mojoblanco",
+                "security"
+            ],
+            "time": "2017-05-15T07:42:01+00:00"
         },
         {
             "name": "monolog/monolog",

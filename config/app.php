@@ -184,6 +184,7 @@ return [
         Recca0120\LaravelTracy\LaravelTracyServiceProvider::class,
         Laratrust\LaratrustServiceProvider::class,
         PragmaRX\Google2FALaravel\ServiceProvider::class,
+        Mojoblanco\Domainos\DomainosServiceProvider::class,
 
         /*
          * Application Service Providers...

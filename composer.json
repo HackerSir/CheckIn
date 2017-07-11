@@ -19,6 +19,7 @@
         "laravel/tinker": "~1.0",
         "laravelcollective/html": "^5.4",
         "lavary/laravel-menu": "^1.6",
+        "mojoblanco/domainos": "^1.1",
         "pragmarx/google2fa-laravel": "^0.1.2",
         "predis/predis": "^1.1",
         "recca0120/laravel-tracy": "^1.8",
