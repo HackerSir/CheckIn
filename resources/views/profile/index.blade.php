@@ -31,18 +31,20 @@
                     <td class="text-md-right">Email：</td>
                     <td>{{ $user->email }}</td>
                 </tr>
-                <tr>
-                    <td class="text-md-right">兩步驟驗證：</td>
-                    <td>
-                        <a href="{{ route('profile.2fa.index') }}">
-                            @if($user->google2fa_secret)
-                                <span class="text-success">已啟用</span>
-                            @else
-                                <span class="text-danger">未啟用</span>
-                            @endif
-                        </a>
-                    </td>
-                </tr>
+                @if($user->is_local_account)
+                    <tr>
+                        <td class="text-md-right">兩步驟驗證：</td>
+                        <td>
+                            <a href="{{ route('profile.2fa.index') }}">
+                                @if($user->google2fa_secret)
+                                    <span class="text-success">已啟用</span>
+                                @else
+                                    <span class="text-danger">未啟用</span>
+                                @endif
+                            </a>
+                        </td>
+                    </tr>
+                @endif
                 <tr>
                     <td class="text-md-right">角色：</td>
                     <td>
@@ -69,9 +71,11 @@
                 </tr>
             </table>
         </div>
-        <div class="card-block text-center">
-            <a href="{{ route('profile.edit') }}" class="btn btn-primary">編輯資料</a>
-            <a href="{{ route('password.change') }}" class="btn btn-primary">修改密碼</a>
-        </div>
+        @if($user->is_local_account)
+            <div class="card-block text-center">
+                <a href="{{ route('profile.edit') }}" class="btn btn-primary">編輯資料</a>
+                <a href="{{ route('password.change') }}" class="btn btn-primary">修改密碼</a>
+            </div>
+        @endif
     </div>
 @endsection
