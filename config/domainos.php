@@ -6,7 +6,6 @@ return [
         'fcu.edu.tw',
     ],
 
-
     'allow' => [
         // Domains you want to allow e.g gmail.com
     ],
