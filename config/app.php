@@ -183,6 +183,7 @@ return [
         Yajra\Datatables\ButtonsServiceProvider::class,
         Recca0120\LaravelTracy\LaravelTracyServiceProvider::class,
         Laratrust\LaratrustServiceProvider::class,
+        PragmaRX\Google2FALaravel\ServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -247,6 +248,7 @@ return [
         'Throttle'     => GrahamCampbell\Throttle\Facades\Throttle::class,
         'Menu'         => Lavary\Menu\Facade::class,
         'Laratrust'    => Laratrust\LaratrustFacade::class,
+        'Google2FA'    => PragmaRX\Google2FALaravel\Facade::class,
     ],
 
 ];
