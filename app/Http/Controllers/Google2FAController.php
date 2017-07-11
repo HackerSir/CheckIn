@@ -60,6 +60,9 @@ class Google2FAController extends Controller
             return back()->withErrors(['one_time_password' => '驗證碼無效']);
         }
 
+        \Cache::forget('2faSecretKey' . $user->id);
+        session(['2faSecretKey' => null]);
+
         //更新資料
         if ($toggleOn) {
             //啟用
