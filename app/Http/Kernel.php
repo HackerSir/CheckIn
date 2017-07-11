@@ -62,5 +62,6 @@ class Kernel extends HttpKernel
         'permission'      => \Laratrust\Middleware\LaratrustPermission::class,
         'ability'         => \Laratrust\Middleware\LaratrustAbility::class,
         'register.toggle' => \App\Http\Middleware\RegisterEnableToggle::class,
+        'local_account'   => \App\Http\Middleware\LocalAccount::class,
     ];
 }
