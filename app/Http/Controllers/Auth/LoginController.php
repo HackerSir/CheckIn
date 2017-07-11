@@ -104,7 +104,7 @@ class LoginController extends Controller
         $valid = (new Google2FAAuthenticator($request, $user))->isAuthenticated();
 
         if (!$valid) {
-            return redirect()->back()->with('warning', 'OTP無效');
+            return back()->withErrors(['one_time_password' => '驗證碼無效']);
         }
 
         $this->guard()->login($user, session('remember'));

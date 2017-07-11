@@ -1,27 +1,38 @@
 @extends('layouts.app')
 
-@section('title', 'Google 2FA')
+@section('title', '兩步驟驗證')
 
 @section('content')
     <div class="card">
         <div class="card-header">
-            Google 2FA
+            兩步驟驗證
         </div>
         <div class="card-block">
             <form role="form" method="POST" action="{{ route('login.2fa') }}">
                 {{ csrf_field() }}
 
-                <div class="form-group row">
-                    <label for="one_time_password" class="col-md-4 col-form-label">OTP</label>
+                <div class="form-group row{{ $errors->has('one_time_password') ? ' has-danger' : '' }}">
+                    <label for="one_time_password" class="col-md-4 col-form-label">驗證碼</label>
 
                     <div class="col-md-6">
-                        <input id="one_time_password" name="one_time_password" type="text" class="form-control">
+                        <input id="one_time_password" type="text"
+                               class="form-control{{ $errors->has('one_time_password') ? ' form-control-danger' : '' }}"
+                               name="one_time_password" required autofocus>
+                        <span class="form-text">請輸入 <a
+                                href="https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2"
+                                target="_blank">Google Authenticator</a> 顯示之驗證碼</span>
+
+                        @if ($errors->has('one_time_password'))
+                            <span class="form-control-feedback">
+                                <strong>{{ $errors->first('one_time_password') }}</strong>
+                            </span>
+                        @endif
                     </div>
                 </div>
 
                 <div class="form-group row">
                     <div class="col-md-8 offset-md-4">
-                        <button type="submit" class="btn btn-primary">Authenticate</button>
+                        <button type="submit" class="btn btn-primary">確認</button>
                     </div>
                 </div>
             </form>

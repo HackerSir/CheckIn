@@ -46,6 +46,11 @@ Route::group(['middleware' => ['auth', 'email']], function () {
         //編輯會員資料
         Route::get('edit', 'ProfileController@getEditProfile')->name('profile.edit');
         Route::put('update', 'ProfileController@updateProfile')->name('profile.update');
+        //兩步驟驗證
+        Route::group(['prefix' => '2fa'], function () {
+            Route::get('/', 'Google2FAController@index')->name('profile.2fa.index');
+            Route::post('toggle', 'Google2FAController@toggle')->name('profile.2fa.toggle');
+        });
     });
 });
 

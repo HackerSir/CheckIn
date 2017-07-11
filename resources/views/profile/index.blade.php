@@ -32,6 +32,18 @@
                     <td>{{ $user->email }}</td>
                 </tr>
                 <tr>
+                    <td class="text-md-right">兩步驟驗證：</td>
+                    <td>
+                        <a href="{{ route('profile.2fa.index') }}">
+                            @if($user->google2fa_secret)
+                                <span class="text-success">已啟用</span>
+                            @else
+                                <span class="text-danger">未啟用</span>
+                            @endif
+                        </a>
+                    </td>
+                </tr>
+                <tr>
                     <td class="text-md-right">角色：</td>
                     <td>
                         @foreach($user->roles as $role)
