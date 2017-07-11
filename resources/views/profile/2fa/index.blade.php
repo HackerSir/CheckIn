@@ -1,11 +1,11 @@
 @extends('layouts.app')
 
-@section('title', '兩步驟認證')
+@section('title', '兩步驟驗證')
 
 @section('content')
     <div class="card">
         <div class="card-header">
-            兩步驟認證
+            兩步驟驗證
         </div>
         <div class="card-block">
             <form role="form" method="POST" action="{{ route('profile.2fa.toggle') }}" onsubmit="return confirm('確定嗎？')">
