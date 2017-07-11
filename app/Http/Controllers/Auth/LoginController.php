@@ -86,13 +86,18 @@ class LoginController extends Controller
 
     public function login2FAForm()
     {
+        $user = User::find(session('user2fa'));
+        if (!$user || !$user->google2fa_secret) {
+            return redirect()->route('login');
+        }
+
         return view(config('google2fa.view'));
     }
 
     public function login2FA(Request $request)
     {
         $user = User::find(session('user2fa'));
-        if (!$user) {
+        if (!$user || !$user->google2fa_secret) {
             return redirect()->route('login');
         }
 
