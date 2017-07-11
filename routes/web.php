@@ -43,13 +43,15 @@ Route::group(['middleware' => ['auth', 'email']], function () {
     Route::group(['prefix' => 'profile'], function () {
         //查看會員資料
         Route::get('/', 'ProfileController@getProfile')->name('profile');
-        //編輯會員資料
-        Route::get('edit', 'ProfileController@getEditProfile')->name('profile.edit');
-        Route::put('update', 'ProfileController@updateProfile')->name('profile.update');
-        //兩步驟驗證
-        Route::group(['prefix' => '2fa'], function () {
-            Route::get('/', 'Google2FAController@index')->name('profile.2fa.index');
-            Route::post('toggle', 'Google2FAController@toggle')->name('profile.2fa.toggle');
+        Route::group(['middleware' => 'local_account'], function () {
+            //編輯會員資料
+            Route::get('edit', 'ProfileController@getEditProfile')->name('profile.edit');
+            Route::put('update', 'ProfileController@updateProfile')->name('profile.update');
+            //兩步驟驗證
+            Route::group(['prefix' => '2fa'], function () {
+                Route::get('/', 'Google2FAController@index')->name('profile.2fa.index');
+                Route::post('toggle', 'Google2FAController@toggle')->name('profile.2fa.toggle');
+            });
         });
     });
 });
@@ -74,9 +76,11 @@ Route::group(['namespace' => 'Auth'], function () {
     Route::post('password/email', 'ForgotPasswordController@sendResetLinkEmail')->name('password.email');
     Route::get('password/reset/{token}', 'ResetPasswordController@showResetForm')->name('password.reset');
     Route::post('password/reset', 'ResetPasswordController@reset');
-    //修改密碼
-    Route::get('password/change', 'PasswordController@getChangePassword')->name('password.change');
-    Route::put('password/change', 'PasswordController@putChangePassword')->name('password.change');
+    Route::group(['middleware' => 'local_account'], function () {
+        //修改密碼
+        Route::get('password/change', 'PasswordController@getChangePassword')->name('password.change');
+        Route::put('password/change', 'PasswordController@putChangePassword')->name('password.change');
+    });
     //驗證信箱
     Route::get('resend', 'RegisterController@resendConfirmMailPage')->name('confirm-mail.resend');
     Route::post('resend', 'RegisterController@resendConfirmMail')->name('confirm-mail.resend');
