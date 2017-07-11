@@ -47,7 +47,6 @@ class Google2FAController extends Controller
         //強制登出OTP
         (new Google2FAAuthenticator($request, $user))->logout();
 
-
         $toggleOn = $request->exists('toggle');
 
         if ($toggleOn) {
