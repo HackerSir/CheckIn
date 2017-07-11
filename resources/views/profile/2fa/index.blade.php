@@ -1,15 +1,15 @@
 @extends('layouts.app')
 
-@section('title', '兩步驟驗證')
+@section('title', '兩步驟認證')
 
 @section('content')
-    <div class="card">
-        <div class="card-header">
-            兩步驟驗證
-        </div>
-        <div class="card-block">
-            <form role="form" method="POST" action="{{ route('profile.2fa.toggle') }}" onsubmit="return confirm('確定嗎？')">
-                {{ csrf_field() }}
+    <div class="row mt-3">
+        <div class="col-md-8 offset-md-2">
+            <h1>兩步驟驗證</h1>
+            <div class="card">
+                <div class="card-block">
+                    <form role="form" method="POST" action="{{ route('profile.2fa.toggle') }}">
+                        {{ csrf_field() }}
 
                 <div class="form-group row">
                     <label class="col-md-4 col-form-label">目前狀態</label>
