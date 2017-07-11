@@ -22,6 +22,7 @@ use Laratrust\Traits\LaratrustUserTrait;
  * @property string|null $remember_token
  * @property \Carbon\Carbon|null $created_at
  * @property \Carbon\Carbon|null $updated_at
+ * @property string|null $google2fa_secret
  * @property-read bool $is_confirmed
  * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $notifications
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Permission[] $permissions
@@ -31,6 +32,7 @@ use Laratrust\Traits\LaratrustUserTrait;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereConfirmCode($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereEmail($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereGoogle2faSecret($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereLastLoginAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereLastLoginIp($value)
@@ -63,6 +65,7 @@ class User extends Authenticatable
         'register_ip',
         'last_login_at',
         'last_login_ip',
+        'google2fa_secret',
     ];
 
     /**
