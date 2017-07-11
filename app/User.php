@@ -24,6 +24,7 @@ use Laratrust\Traits\LaratrustUserTrait;
  * @property \Carbon\Carbon|null $updated_at
  * @property string|null $google2fa_secret
  * @property-read bool $is_confirmed
+ * @property-read bool $is_local_account
  * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $notifications
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Permission[] $permissions
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Role[] $roles
@@ -89,6 +90,16 @@ class User extends Authenticatable
     public function getIsConfirmedAttribute()
     {
         return !empty($this->confirm_at);
+    }
+
+    /**
+     * 是否為本地帳號（非NID登入）
+     *
+     * @return bool
+     */
+    public function getIsLocalAccountAttribute()
+    {
+        return !ends_with($this->email, '@fcu.edu.tw');
     }
 
     /**
