@@ -14,7 +14,7 @@ class CreateQrcodesTable extends Migration
     {
         Schema::create('qrcodes', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('code')->comment('代碼');
+            $table->string('code')->unique()->comment('代碼');
             $table->unsignedInteger('student_id')->nullable()->comment('對應學生');
             $table->timestamp('bind_at')->nullable()->comment('綁定時間');
             $table->timestamps();
