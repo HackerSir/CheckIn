@@ -64,6 +64,7 @@ flycheck_*.el
 .idea/**/workspace.xml
 .idea/**/tasks.xml
 .idea/dictionaries
+.idea/vagrant.xml
 
 # Sensitive or high-churn files:
 .idea/**/dataSources/
