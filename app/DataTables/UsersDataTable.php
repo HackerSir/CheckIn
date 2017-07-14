@@ -32,7 +32,7 @@ class UsersDataTable extends DataTable
     public function query()
     {
         /* @var Builder $query */
-        $query = User::with('roles')->select(array_keys($this->getColumns()));
+        $query = User::with('roles');
 
         return $this->applyScopes($query);
     }
