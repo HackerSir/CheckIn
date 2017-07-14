@@ -19,6 +19,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property \Carbon\Carbon|null $created_at
  * @property \Carbon\Carbon|null $updated_at
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Feedback[] $feedback
+ * @property-read string $display_name
  * @property-read \App\Qrcode $qrcode
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Record[] $records
  * @property-read \App\Ticket $ticket
@@ -87,5 +88,13 @@ class Student extends Model
     public function feedback()
     {
         return $this->hasMany(Feedback::class);
+    }
+
+    /**
+     * @return string
+     */
+    public function getDisplayNameAttribute()
+    {
+        return $this->nid . ' ' . $this->name;
     }
 }
