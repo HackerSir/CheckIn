@@ -41,7 +41,7 @@ $factory->define(App\Student::class, function (Faker\Generator $faker) {
 
 $factory->define(App\Qrcode::class, function (Faker\Generator $faker) {
     return [
-        'code'    => $faker->regexify('[A-Z0-9]{8}'),
+        'code'    => $faker->unique()->regexify('[A-Z0-9]{8}'),
         'bind_at' => $faker->optional()->dateTime,
     ];
 });
