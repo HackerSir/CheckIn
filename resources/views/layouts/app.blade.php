@@ -33,7 +33,7 @@
     <style>
         body > .container {
             padding-top: 60px;
-            min-height: calc(100vh - 70px);
+            min-height: calc(100vh - 86px);
         }
 
         .table td, .table th {
