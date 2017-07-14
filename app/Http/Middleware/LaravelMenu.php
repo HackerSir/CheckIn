@@ -42,6 +42,10 @@ class LaravelMenu
                         $adminMenu->add('會員清單', ['route' => 'user.index'])->active('user/*');
                     }
 
+                    if (Laratrust::can('student.manage')) {
+                        $adminMenu->add('學生管理', ['route' => 'student.index']);
+                    }
+
                     if (Laratrust::can('role.manage')) {
                         $adminMenu->add('角色管理', ['route' => 'role.index']);
                     }
