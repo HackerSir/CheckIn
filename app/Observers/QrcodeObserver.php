@@ -3,6 +3,7 @@
 namespace App\Observers;
 
 use App\Qrcode;
+use Carbon\Carbon;
 
 class QrcodeObserver
 {
@@ -15,6 +16,14 @@ class QrcodeObserver
                 $code = strtoupper(str_random(8));
             } while (Qrcode::where('code', $code)->count() != 0);
             $qrcode->code = $code;
+        }
+    }
+
+    public function saving(Qrcode $qrcode)
+    {
+        //剛綁定
+        if ($qrcode->student_id && $qrcode->isDirty('student_id')) {
+            $qrcode->bind_at = Carbon::now();
         }
     }
 }
