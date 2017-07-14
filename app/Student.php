@@ -20,6 +20,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property \Carbon\Carbon|null $updated_at
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Feedback[] $feedback
  * @property-read string $display_name
+ * @property-read bool $is_freshman
  * @property-read \App\Qrcode $qrcode
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Record[] $records
  * @property-read \App\Ticket $ticket
@@ -96,5 +97,24 @@ class Student extends Model
     public function getDisplayNameAttribute()
     {
         return $this->nid . ' ' . $this->name;
+    }
+
+    /**
+     * 是否為新生
+     *
+     * @return bool
+     */
+    public function getIsFreshmanAttribute()
+    {
+        //檢查入學年度
+        if ($this->in_year == 106) {
+            return true;
+        }
+        //檢查年級
+        if (str_contains($this->class, '一年級')) {
+            return true;
+        }
+
+        return false;
     }
 }
