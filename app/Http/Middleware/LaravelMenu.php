@@ -63,7 +63,7 @@ class LaravelMenu
                 $userMenu->add('登出', ['route' => 'logout']);
             } else {
                 //遊客
-                $menu->add('登入', ['route' => 'login']);
+                $menu->add('登入', ['route' => 'oauth.index']);
             }
         });
 
