@@ -24,9 +24,9 @@ class RelationTest extends TestCase
     public function testStudentUserRelation()
     {
         /** @var Student $student */
-        $student = factory(Student::class)->create();
+        $student = $this->factoryWithoutObservers(Student::class)->create();
         /** @var User $user */
-        $user = factory(User::class)->create();
+        $user = $this->factoryWithoutObservers(User::class)->create();
 
         $student->user()->associate($user);
         $student->save();
@@ -40,9 +40,9 @@ class RelationTest extends TestCase
     public function testUserStudentRelation()
     {
         /** @var User $user */
-        $user = factory(User::class)->create();
+        $user = $this->factoryWithoutObservers(User::class)->create();
         /** @var Student $student */
-        $student = factory(Student::class)->create();
+        $student = $this->factoryWithoutObservers(Student::class)->create();
 
         $user->student()->save($student);
 
@@ -55,9 +55,9 @@ class RelationTest extends TestCase
     public function testQrcodeStudentRelation()
     {
         /** @var Qrcode $qrcode */
-        $qrcode = factory(Qrcode::class)->create();
+        $qrcode = $this->factoryWithoutObservers(Qrcode::class)->create();
         /** @var Student $student */
-        $student = factory(Student::class)->create();
+        $student = $this->factoryWithoutObservers(Student::class)->create();
 
         $qrcode->student()->associate($student);
         $qrcode->save();
@@ -71,9 +71,9 @@ class RelationTest extends TestCase
     public function testStudentQrcodeRelation()
     {
         /** @var Student $student */
-        $student = factory(Student::class)->create();
+        $student = $this->factoryWithoutObservers(Student::class)->create();
         /** @var Qrcode $qrcode */
-        $qrcode = factory(Qrcode::class)->create();
+        $qrcode = $this->factoryWithoutObservers(Qrcode::class)->create();
 
         $student->qrcode()->save($qrcode);
 
@@ -86,9 +86,9 @@ class RelationTest extends TestCase
     public function testClubClubTypeRelation()
     {
         /** @var Club $club */
-        $club = factory(Club::class)->create();
+        $club = $this->factoryWithoutObservers(Club::class)->create();
         /** @var ClubType $clubType */
-        $clubType = factory(ClubType::class)->create();
+        $clubType = $this->factoryWithoutObservers(ClubType::class)->create();
 
         $club->clubType()->associate($clubType);
         $club->save();
@@ -102,9 +102,9 @@ class RelationTest extends TestCase
     public function testClubTypeClubRelation()
     {
         /** @var ClubType $clubType */
-        $clubType = factory(ClubType::class)->create();
+        $clubType = $this->factoryWithoutObservers(ClubType::class)->create();
         /** @var Club $club */
-        $club = factory(Club::class)->create();
+        $club = $this->factoryWithoutObservers(Club::class)->create();
 
         $clubType->clubs()->save($club);
 
@@ -117,9 +117,9 @@ class RelationTest extends TestCase
     public function testBoothClubRelation()
     {
         /** @var Booth $booth */
-        $booth = factory(Booth::class)->create();
+        $booth = $this->factoryWithoutObservers(Booth::class)->create();
         /** @var Club $club */
-        $club = factory(Club::class)->create();
+        $club = $this->factoryWithoutObservers(Club::class)->create();
 
         $booth->club()->associate($club);
         $booth->save();
@@ -133,9 +133,9 @@ class RelationTest extends TestCase
     public function testClubBoothRelation()
     {
         /** @var Club $club */
-        $club = factory(Club::class)->create();
+        $club = $this->factoryWithoutObservers(Club::class)->create();
         /** @var Booth $booth */
-        $booth = factory(Booth::class)->create();
+        $booth = $this->factoryWithoutObservers(Booth::class)->create();
 
         $club->booth()->save($booth);
 
@@ -148,11 +148,11 @@ class RelationTest extends TestCase
     public function testRecordClubStudentRelation()
     {
         /** @var Record $record */
-        $record = factory(Record::class)->create();
+        $record = $this->factoryWithoutObservers(Record::class)->create();
         /** @var Club $club */
-        $club = factory(Club::class)->create();
+        $club = $this->factoryWithoutObservers(Club::class)->create();
         /** @var Student $student */
-        $student = factory(Student::class)->create();
+        $student = $this->factoryWithoutObservers(Student::class)->create();
 
         $record->club()->associate($club);
         $record->student()->associate($student);
@@ -170,9 +170,9 @@ class RelationTest extends TestCase
     public function testTicketStudentRelation()
     {
         /** @var Ticket $ticket */
-        $ticket = factory(Ticket::class)->create();
+        $ticket = $this->factoryWithoutObservers(Ticket::class)->create();
         /** @var Student $student */
-        $student = factory(Student::class)->create();
+        $student = $this->factoryWithoutObservers(Student::class)->create();
 
         $ticket->student()->associate($student);
         $ticket->save();
@@ -186,9 +186,9 @@ class RelationTest extends TestCase
     public function testStudentTicketRelation()
     {
         /** @var Student $student */
-        $student = factory(Student::class)->create();
+        $student = $this->factoryWithoutObservers(Student::class)->create();
         /** @var Ticket $ticket */
-        $ticket = factory(Ticket::class)->create();
+        $ticket = $this->factoryWithoutObservers(Ticket::class)->create();
 
         $student->ticket()->save($ticket);
 
@@ -201,11 +201,11 @@ class RelationTest extends TestCase
     public function testFeedbackClubStudentRelation()
     {
         /** @var Feedback $feedback */
-        $feedback = factory(Feedback::class)->create();
+        $feedback = $this->factoryWithoutObservers(Feedback::class)->create();
         /** @var Club $club */
-        $club = factory(Club::class)->create();
+        $club = $this->factoryWithoutObservers(Club::class)->create();
         /** @var Student $student */
-        $student = factory(Student::class)->create();
+        $student = $this->factoryWithoutObservers(Student::class)->create();
 
         $feedback->club()->associate($club);
         $feedback->student()->associate($student);
