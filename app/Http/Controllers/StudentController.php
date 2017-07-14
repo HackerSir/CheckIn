@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\DataTables\StudentsDataTable;
 use App\Student;
 use Illuminate\Http\Request;
 
@@ -10,11 +11,12 @@ class StudentController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @param StudentsDataTable $dataTable
+     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\Response|\Illuminate\View\View
      */
-    public function index()
+    public function index(StudentsDataTable $dataTable)
     {
-        //TODO
+        return $dataTable->render('student.index');
     }
 
     /**
