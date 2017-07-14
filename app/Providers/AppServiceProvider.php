@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Observers\QrcodeObserver;
+use App\Qrcode;
 use Illuminate\Support\ServiceProvider;
 use Monolog\Logger;
 use Schema;
@@ -33,6 +35,9 @@ class AppServiceProvider extends ServiceProvider
             );
             $monolog->pushHandler($slackHandler);
         }
+
+        //Observers
+        Qrcode::observe(QrcodeObserver::class);
     }
 
     /**
