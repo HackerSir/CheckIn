@@ -3,11 +3,33 @@
 namespace App\Http\Controllers;
 
 use App\DataTables\StudentsDataTable;
+use App\Services\FcuApiService;
+use App\Services\LogService;
 use App\Student;
 use Illuminate\Http\Request;
 
 class StudentController extends Controller
 {
+    /**
+     * @var FcuApiService
+     */
+    private $fcuApiService;
+    /**
+     * @var LogService
+     */
+    private $logService;
+
+    /**
+     * StudentController constructor.
+     * @param FcuApiService $fcuApiService
+     * @param LogService $logService
+     */
+    public function __construct(FcuApiService $fcuApiService, LogService $logService)
+    {
+        $this->fcuApiService = $fcuApiService;
+        $this->logService = $logService;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -26,7 +48,7 @@ class StudentController extends Controller
      */
     public function create()
     {
-        //TODO
+        return view('student.create');
     }
 
     /**
@@ -37,18 +59,62 @@ class StudentController extends Controller
      */
     public function store(Request $request)
     {
-        //TODO
+        $this->validate($request, [
+            'nid' => [
+                'required',
+                'unique:students,nid',
+                'regex:/\\w\\d+/',
+            ],
+        ]);
+
+        $stuInfo = $this->fcuApiService->getStuInfo($request->get('nid'));
+        if (!$stuInfo) {
+            return back()->with('warning', '查無此人');
+        }
+
+        $student = Student::create([
+            'nid'       => $stuInfo['stu_id'],
+            'name'      => $stuInfo['stu_name'],
+            'class'     => $stuInfo['stu_class'],
+            'unit_name' => $stuInfo['unit_name'],
+            'dept_name' => $stuInfo['dept_name'],
+            'in_year'   => $stuInfo['in_year'],
+            'gender'    => $stuInfo['stu_sex'],
+        ]);
+
+        //Log
+        $operator = auth()->user();
+        $this->logService->info("[Student][Create] {$operator->name} 新增了 {$student->display_name}", [
+            'ip'       => request()->ip(),
+            'operator' => $operator,
+            'student'  => $student,
+        ]);
+
+        return redirect()->route('student.index')->with('global', '學生已新增');
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
      * @param  \App\Student $student
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Student $student)
+    public function update(Student $student)
     {
-        //TODO
+        $stuInfo = $this->fcuApiService->getStuInfo($student->nid);
+        if (!$stuInfo) {
+            return back()->with('warning', '無法更新資料');
+        }
+
+        $student->update([
+            'name'      => $stuInfo['stu_name'],
+            'class'     => $stuInfo['stu_class'],
+            'unit_name' => $stuInfo['unit_name'],
+            'dept_name' => $stuInfo['dept_name'],
+            'in_year'   => $stuInfo['in_year'],
+            'gender'    => $stuInfo['stu_sex'],
+        ]);
+
+        return redirect()->route('student.index')->with('global', '學生已更新');
     }
 }
