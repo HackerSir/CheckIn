@@ -39,6 +39,19 @@ Route::group(['middleware' => ['auth', 'email']], function () {
             ],
         ]);
     });
+    //學生管理
+    //權限：student.manage
+    Route::group(['middleware' => 'permission:student.manage'], function () {
+        Route::resource('student', 'StudentController', [
+            'only' => [
+                'index',
+                'create',
+                'store',
+                'update',
+            ],
+        ]);
+    });
+
     //會員資料
     Route::group(['prefix' => 'profile'], function () {
         //查看會員資料
