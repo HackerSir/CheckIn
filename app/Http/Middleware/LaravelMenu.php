@@ -46,6 +46,10 @@ class LaravelMenu
                         $adminMenu->add('學生管理', ['route' => 'student.index']);
                     }
 
+                    if (Laratrust::can('qrcode.manage')) {
+                        $adminMenu->add('QR Code', ['route' => 'qrcode.index']);
+                    }
+
                     if (Laratrust::can('role.manage')) {
                         $adminMenu->add('角色管理', ['route' => 'role.index']);
                     }

@@ -51,6 +51,18 @@ Route::group(['middleware' => ['auth', 'email']], function () {
             ],
         ]);
     });
+    //QR Code管理
+    //權限：qrcode.manage
+    Route::group(['middleware' => 'permission:qrcode.manage'], function () {
+        Route::resource('qrcode', 'QrcodeController', [
+            'only' => [
+                'index',
+                'create',
+                'store',
+                'show',
+            ],
+        ]);
+    });
 
     //會員資料
     Route::group(['prefix' => 'profile'], function () {
