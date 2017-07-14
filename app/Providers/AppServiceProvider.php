@@ -3,7 +3,9 @@
 namespace App\Providers;
 
 use App\Observers\QrcodeObserver;
+use App\Observers\StudentObserver;
 use App\Qrcode;
+use App\Student;
 use Illuminate\Support\ServiceProvider;
 use Monolog\Logger;
 use Schema;
@@ -38,6 +40,7 @@ class AppServiceProvider extends ServiceProvider
 
         //Observers
         Qrcode::observe(QrcodeObserver::class);
+        Student::observe(StudentObserver::class);
     }
 
     /**
