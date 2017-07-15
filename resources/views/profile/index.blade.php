@@ -15,7 +15,7 @@
         <div class="col-md-8 offset-md-2">
             <h1>個人資料</h1>
             <div class="card">
-                <div class="text-center">
+                <div class="card-block text-center">
                     {{-- Gravatar大頭貼 --}}
                     <a href="https://zh-tw.gravatar.com/" target="_blank" title="透過Gravatar更換照片">
                         <img src="{{ Gravatar::src($user->email, 200) }}" class="img-thumbnail" id="gravatar"/>
