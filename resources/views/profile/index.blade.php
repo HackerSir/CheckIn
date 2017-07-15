@@ -11,7 +11,7 @@
 @endsection
 
 @section('content')
-    <div class="row mt-3">
+    <div class="row mt-3 pb-3">
         <div class="col-md-8 offset-md-2">
             <h1>個人資料</h1>
             <div class="card">
