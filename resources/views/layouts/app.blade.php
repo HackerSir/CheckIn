@@ -39,6 +39,10 @@
         .table td, .table th {
             vertical-align: middle;
         }
+
+        body {
+            background: url("{{ asset('img/background.jpg') }}") no-repeat fixed center !important;
+        }
     </style>
     @yield('css')
 </head>
