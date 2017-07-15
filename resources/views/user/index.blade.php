@@ -4,7 +4,11 @@
 
 @section('content')
     <h1>會員清單</h1>
-    {!! $dataTable->table() !!}
+    <div class="card">
+        <div class="card-block">
+            {!! $dataTable->table() !!}
+        </div>
+    </div>
 @endsection
 
 @section('js')

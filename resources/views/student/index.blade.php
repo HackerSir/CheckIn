@@ -5,9 +5,13 @@
 @section('content')
     <h1>學生管理</h1>
     <a href="{{ route('student.create') }}" class="btn btn-primary">
-        新增學生
+        <i class="fa fa-plus-circle" aria-hidden="true"></i> 新增學生
     </a>
-    {!! $dataTable->table() !!}
+    <div class="card mt-1">
+        <div class="card-block">
+            {!! $dataTable->table() !!}
+        </div>
+    </div>
 @endsection
 
 @section('js')

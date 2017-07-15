@@ -5,9 +5,13 @@
 @section('content')
     <h1>QR Code</h1>
     <a href="{{ route('qrcode.create') }}" class="btn btn-primary">
-        新增 QR Code
+        <i class="fa fa-plus-circle" aria-hidden="true"></i> 新增 QR Code
     </a>
-    {!! $dataTable->table() !!}
+    <div class="card mt-1">
+        <div class="card-block">
+            {!! $dataTable->table() !!}
+        </div>
+    </div>
 @endsection
 
 @section('js')
