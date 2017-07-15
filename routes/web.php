@@ -20,6 +20,16 @@ Route::group(['prefix' => 'oauth', 'namespace' => 'Auth'], function () {
     Route::any('login', 'OAuthController@login')->name('oauth.login');
 });
 
+//服務條款(含隱私權跟免責)
+Route::get('terms', function () {
+    return view('misc.terms');
+})->name('terms');
+
+//服務條款(含隱私權跟免責)
+Route::get('faq', function () {
+    return view('misc.faq');
+})->name('faq');
+
 //會員（須完成信箱驗證）
 Route::group(['middleware' => ['auth', 'email']], function () {
     //會員管理
