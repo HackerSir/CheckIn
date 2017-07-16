@@ -15,7 +15,7 @@
                             <label for="nid" class="col-md-2 col-form-label">學號</label>
 
                             <div class="col-md-10">
-                                <input id="nid" type="text"
+                                <input id="nid" type="text" value="{{ old('nid') }}"
                                        class="form-control{{ $errors->has('nid') ? ' form-control-danger' : '' }}"
                                        name="nid" required autofocus>
 
@@ -31,7 +31,7 @@
                             <label for="code" class="col-md-2 col-form-label">代號</label>
 
                             <div class="col-md-10">
-                                <input id="code" type="text"
+                                <input id="code" type="text" value="{{ old('code') }}"
                                        class="form-control{{ $errors->has('code') ? ' form-control-danger' : '' }}"
                                        name="code" required>
 

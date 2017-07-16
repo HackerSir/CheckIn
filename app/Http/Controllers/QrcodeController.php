@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\DataTables\QrcodesDataTable;
 use App\Qrcode;
+use App\Services\StudentService;
 use Illuminate\Http\Request;
 
 class QrcodeController extends Controller
@@ -78,21 +79,38 @@ class QrcodeController extends Controller
      * 綁定QRCode
      *
      * @param Request $request
-     * @return \Illuminate\Http\Response
+     * @param StudentService $studentService
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\Response
      */
-    public function bind(Request $request)
+    public function bind(Request $request, StudentService $studentService)
     {
         $this->validate($request, [
             'nid'  => ['required', 'regex:#^[a-zA-Z]\d+$#'],
             'code' => 'required|exists:qrcodes,code',
         ]);
 
-        //TODO: 找出學生
+        $nid = trim(strtoupper($request->get('nid')));
+        //若以掃描槍輸入，需去除最後一碼
+        $nidLength = strlen($nid);
+        if (strlen($nid) == 7 || strlen($nid) == 9) {
+            $nid = substr($nid, 0, $nidLength - 1);
+        }
+        //找出學生（若本地沒有，會自動從API找）
+        $student = $studentService->findByNid($nid);
+        if (!$student) {
+            return back()->withErrors(['nid' => '無法找到此學生'])->withInput();
+        }
 
-        //TODO: 找出QRCode
+        //找出QRCode
+        /** @var Qrcode $qrcode */
+        $qrcode = Qrcode::where('code', $request->get('code'))->first();
+        if ($qrcode->bind_at) {
+            return back()->withErrors(['code' => '代碼無效（已使用過）'])->withInput();
+        }
 
-        //TODO: 綁定
+        //綁定
+        $student->qrcode()->save($qrcode);
 
-        dd($request->all());
+        return back()->with('global', '已綁定');
     }
 }
