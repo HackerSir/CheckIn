@@ -76,3 +76,23 @@
         </div>
     </div>
 @endsection
+
+@section('js')
+    <script>
+        $('form').on('submit', function () {
+            var nidInput = $('input#nid');
+            var codeInput = $('input#code');
+            //原輸入值
+            var nid = nidInput.val();
+            var code = codeInput.val();
+            //NID簡易正則表達式
+            var re = /[a-zA-Z]\d+/;
+            //若code比nid還像NID
+            if (!re.test(nid) && re.test(code)) {
+                //交換
+                nidInput.val(code);
+                codeInput.val(nid);
+            }
+        });
+    </script>
+@endsection
