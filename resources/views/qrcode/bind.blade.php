@@ -15,10 +15,17 @@
                             <label for="nid" class="col-md-2 col-form-label">學號</label>
 
                             <div class="col-md-10">
-                                <input id="nid" type="text" value="{{ old('nid') }}"
-                                       class="form-control{{ $errors->has('nid') ? ' form-control-danger' : '' }}"
-                                       name="nid" required autofocus>
-
+                                <div class="input-group">
+                                    <input id="nid" type="text" value="{{ old('nid') }}"
+                                           class="form-control{{ $errors->has('nid') ? ' form-control-danger' : '' }}"
+                                           name="nid" required autofocus>
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-secondary" type="button"
+                                                onclick="$('input#nid').val('');$('input#nid').focus()">
+                                            <i class="fa fa-trash-o" aria-hidden="true"></i>
+                                        </button>
+                                    </span>
+                                </div>
                                 @if ($errors->has('nid'))
                                     <span class="form-control-feedback">
                                         <strong>{{ $errors->first('nid') }}</strong>
@@ -31,9 +38,17 @@
                             <label for="code" class="col-md-2 col-form-label">代號</label>
 
                             <div class="col-md-10">
-                                <input id="code" type="text" value="{{ old('code') }}"
-                                       class="form-control{{ $errors->has('code') ? ' form-control-danger' : '' }}"
-                                       name="code" required>
+                                <div class="input-group">
+                                    <input id="code" type="text" value="{{ old('code') }}"
+                                           class="form-control{{ $errors->has('code') ? ' form-control-danger' : '' }}"
+                                           name="code" required>
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-secondary" type="button"
+                                                onclick="$('input#code').val('');$('input#code').focus()">
+                                            <i class="fa fa-trash-o" aria-hidden="true"></i>
+                                        </button>
+                                    </span>
+                                </div>
 
                                 @if ($errors->has('code'))
                                     <span class="form-control-feedback">
