@@ -66,7 +66,12 @@ class QrcodeController extends Controller
      */
     public function bindForm()
     {
-        return view('qrcode.bind');
+        $qrcodes = Qrcode::with('student')
+            ->whereNotNull('student_id')
+            ->whereNotNull('bind_at')
+            ->orderBy('bind_at', 'desc')->take(10)->get();
+
+        return view('qrcode.bind', compact('qrcodes'));
     }
 
     /**
@@ -77,6 +82,17 @@ class QrcodeController extends Controller
      */
     public function bind(Request $request)
     {
-        //TODO
+        $this->validate($request, [
+            'nid'  => ['required', 'regex:#^[a-zA-Z]\d+$#'],
+            'code' => 'required|exists:qrcodes,code',
+        ]);
+
+        //TODO: 找出學生
+
+        //TODO: 找出QRCode
+
+        //TODO: 綁定
+
+        dd($request->all());
     }
 }

@@ -30,6 +30,10 @@ class Qrcode extends Model
         'bind_at',
     ];
 
+    protected $dates = [
+        'bind_at',
+    ];
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo|\Illuminate\Database\Eloquent\Builder
      */

@@ -4,7 +4,7 @@
 
 @section('content')
     <div class="row mt-3">
-        <div class="col-md-8 offset-md-2">
+        <div class="col-md-8">
             <h1>綁定 QR Code</h1>
             <div class="card">
                 <div class="card-block">
@@ -33,7 +33,7 @@
                             <div class="col-md-10">
                                 <input id="code" type="text"
                                        class="form-control{{ $errors->has('code') ? ' form-control-danger' : '' }}"
-                                       name="code" required autofocus>
+                                       name="code" required>
 
                                 @if ($errors->has('code'))
                                     <span class="form-control-feedback">
@@ -51,6 +51,26 @@
                             </div>
                         </div>
                     </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <h1>綁定紀錄</h1>
+            <div class="card">
+                <div class="card-block">
+                    <ul>
+                        @foreach($qrcodes as $qrcode)
+                            <li>
+                                <span class="badge badge-default">{{ $qrcode->code }}</span>
+                                {{ $qrcode->student->display_name }}
+                                <br/>
+                                <small class="text-muted">
+                                    {{ $qrcode->bind_at }}
+                                    （{{ $qrcode->bind_at->diffForHumans() }}）
+                                </small>
+                            </li>
+                        @endforeach
+                    </ul>
                 </div>
             </div>
         </div>
