@@ -26,7 +26,7 @@ class QrcodeController extends Controller
      */
     public function create()
     {
-        //TODO
+        return view('qrcode.create');
     }
 
     /**
@@ -37,7 +37,15 @@ class QrcodeController extends Controller
      */
     public function store(Request $request)
     {
-        //TODO
+        $this->validate($request, [
+            'amount' => 'required|integer|min:1',
+        ]);
+        $amount = $request->get('amount');
+        for ($i = 0; $i < $amount; $i++) {
+            Qrcode::create();
+        }
+
+        return redirect()->route('qrcode.index')->with('global', "QR Code 已新增{$amount}組");
     }
 
     /**

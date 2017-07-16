@@ -1,0 +1,42 @@
+@extends('layouts.app')
+
+@section('title', '新增 QR Code')
+
+@section('content')
+    <div class="row mt-3">
+        <div class="col-md-8 offset-md-2">
+            <h1>新增 QR Code</h1>
+            <div class="card">
+                <div class="card-block">
+                    <form role="form" method="POST" action="{{ route('qrcode.store') }}">
+                        {{ csrf_field() }}
+
+                        <div class="form-group row{{ $errors->has('amount') ? ' has-danger' : '' }}">
+                            <label for="amount" class="col-md-2 col-form-label">數量</label>
+
+                            <div class="col-md-10">
+                                <input id="amount" type="number"
+                                       class="form-control{{ $errors->has('nid') ? ' form-control-danger' : '' }}"
+                                       name="amount" required autofocus min="1" value="1">
+
+                                @if ($errors->has('amount'))
+                                    <span class="form-control-feedback">
+                                        <strong>{{ $errors->first('amount') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+
+                        <div class="form-group row">
+                            <div class="col-md-10 offset-md-2">
+                                <button type="submit" class="btn btn-primary"> 新增 QR Code</button>
+                                <a href="{{ route('qrcode.index') }}" class="btn btn-secondary">返回 QR Code 管理</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+@endsection
