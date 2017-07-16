@@ -63,7 +63,7 @@ class StudentController extends Controller
             'nid' => [
                 'required',
                 'unique:students,nid',
-                'regex:/\\w\\d+/',
+                'regex:#^[a-zA-Z]\d+$#',
             ],
         ]);
 
