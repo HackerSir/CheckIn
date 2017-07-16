@@ -8,6 +8,9 @@
         <a href="{{ route('qrcode.create') }}" class="btn btn-primary">
             <i class="fa fa-plus-circle" aria-hidden="true"></i> 新增 QR Code
         </a>
+        <a href="{{ route('qrcode.bind') }}" class="btn btn-primary">
+            <i class="fa fa-link" aria-hidden="true"></i> 綁定 QR Code
+        </a>
         <div class="card mt-1">
             <div class="card-block">
                 {!! $dataTable->table() !!}

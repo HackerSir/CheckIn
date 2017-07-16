@@ -66,7 +66,7 @@ class QrcodeController extends Controller
      */
     public function bindForm()
     {
-        //TODO
+        return view('qrcode.bind');
     }
 
     /**
