@@ -2,6 +2,14 @@
 
 @section('title', '綁定 QR Code')
 
+@section('css')
+    <style>
+        input.upper {
+            text-transform: uppercase;
+        }
+    </style>
+@endsection
+
 @section('content')
     <div class="row mt-3">
         <div class="col-md-8">
@@ -17,7 +25,7 @@
                             <div class="col-md-10">
                                 <div class="input-group">
                                     <input id="nid" type="text" value="{{ old('nid') }}"
-                                           class="form-control{{ $errors->has('nid') ? ' form-control-danger' : '' }}"
+                                           class="upper form-control{{ $errors->has('nid') ? ' form-control-danger' : '' }}"
                                            name="nid" required autofocus>
                                     <span class="input-group-btn">
                                         <button class="btn btn-secondary" type="button"
@@ -40,7 +48,7 @@
                             <div class="col-md-10">
                                 <div class="input-group">
                                     <input id="code" type="text" value="{{ old('code') }}"
-                                           class="form-control{{ $errors->has('code') ? ' form-control-danger' : '' }}"
+                                           class="upper form-control{{ $errors->has('code') ? ' form-control-danger' : '' }}"
                                            name="code" required>
                                     <span class="input-group-btn">
                                         <button class="btn btn-secondary" type="button"
@@ -95,6 +103,10 @@
 @section('js')
     <script>
         $('form').on('submit', function () {
+            //全部轉大寫
+            $('input.upper[type=text]').val(function () {
+                return this.value.toUpperCase();
+            });
             var nidInput = $('input#nid');
             var codeInput = $('input#code');
             //原輸入值
