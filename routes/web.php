@@ -64,6 +64,10 @@ Route::group(['middleware' => ['auth', 'email']], function () {
     //QR Code管理
     //權限：qrcode.manage
     Route::group(['middleware' => 'permission:qrcode.manage'], function () {
+        //綁定
+        Route::get('qrcode/bind', 'QrcodeController@bindForm')->name('qrcode.bind');
+        Route::post('qrcode/bind', 'QrcodeController@bind')->name('qrcode.bind');
+
         Route::resource('qrcode', 'QrcodeController', [
             'only' => [
                 'index',

@@ -58,4 +58,25 @@ class QrcodeController extends Controller
     {
         //TODO
     }
+
+    /**
+     * 綁定QRCode的表單
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function bindForm()
+    {
+        //TODO
+    }
+
+    /**
+     * 綁定QRCode
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function bind(Request $request)
+    {
+        //TODO
+    }
 }
