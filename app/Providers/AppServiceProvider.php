@@ -6,6 +6,7 @@ use App\Observers\QrcodeObserver;
 use App\Observers\StudentObserver;
 use App\Qrcode;
 use App\Student;
+use Carbon\Carbon;
 use Illuminate\Support\ServiceProvider;
 use Monolog\Logger;
 use Schema;
@@ -20,6 +21,9 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Schema::defaultStringLength(191);
+
+        //Carbon語系
+        Carbon::setLocale(env('APP_LOCALE', 'en'));
 
         //Slack通知
         $slackEnable = env('SLACK_ENABLE', false) === true;
