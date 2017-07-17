@@ -57,7 +57,7 @@ class QrcodeController extends Controller
      */
     public function show(Qrcode $qrcode)
     {
-        //TODO
+        return view('qrcode.show', compact('qrcode'));
     }
 
     /**
