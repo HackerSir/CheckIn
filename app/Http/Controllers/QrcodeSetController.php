@@ -27,5 +27,7 @@ class QrcodeSetController extends Controller
     public function show(QrcodeSet $qrcodeSet)
     {
         //TODO
+        $qrcodeSet->load('qrcodes');
+        dd($qrcodeSet->toArray());
     }
 }

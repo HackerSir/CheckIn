@@ -49,7 +49,7 @@ class QrcodeController extends Controller
             Qrcode::create(['qrcode_set_id' => $qrcodeSet->id]);
         }
 
-        return redirect()->route('qrcode.index')->with('global', "QR Code 已新增{$amount}組");
+        return redirect()->route('qrcode-set.show', $qrcodeSet->id)->with('global', "QR Code 已新增{$amount}組");
     }
 
     /**
