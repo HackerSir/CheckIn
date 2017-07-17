@@ -48,6 +48,7 @@ class LaravelMenu
 
                     if (Laratrust::can('qrcode.manage')) {
                         $adminMenu->add('QR Code', ['route' => 'qrcode.index']);
+                        $adminMenu->add('QR Code 集', ['route' => 'qrcode-set.index']);
                     }
 
                     if (Laratrust::can('role.manage')) {
