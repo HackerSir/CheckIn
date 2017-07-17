@@ -76,7 +76,12 @@ Route::group(['middleware' => ['auth', 'email']], function () {
                 'show',
             ],
         ]);
-        Route::resource('qrcode-set', 'QrcodeSetController');
+        Route::resource('qrcode-set', 'QrcodeSetController', [
+            'only' => [
+                'index',
+                'show',
+            ],
+        ]);
     });
     //QR Code 掃描
     Route::get('qr/{code}', 'QrcodeScanController@scan')->name('qrcode.scan');

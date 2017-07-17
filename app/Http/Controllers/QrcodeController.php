@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\DataTables\QrcodesDataTable;
 use App\Qrcode;
+use App\QrcodeSet;
 use App\Services\StudentService;
 use Illuminate\Http\Request;
 
@@ -41,9 +42,11 @@ class QrcodeController extends Controller
         $this->validate($request, [
             'amount' => 'required|integer|min:1',
         ]);
+        $qrcodeSet = QrcodeSet::create();
+
         $amount = $request->get('amount');
         for ($i = 0; $i < $amount; $i++) {
-            Qrcode::create();
+            Qrcode::create(['qrcode_set_id' => $qrcodeSet->id]);
         }
 
         return redirect()->route('qrcode.index')->with('global', "QR Code 已新增{$amount}組");

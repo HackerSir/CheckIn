@@ -32,6 +32,7 @@ class Qrcode extends Model
         'code',
         'student_id',
         'bind_at',
+        'qrcode_set_id',
     ];
 
     protected $dates = [
