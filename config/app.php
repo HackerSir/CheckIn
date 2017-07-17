@@ -185,6 +185,7 @@ return [
         Laratrust\LaratrustServiceProvider::class,
         PragmaRX\Google2FALaravel\ServiceProvider::class,
         Mojoblanco\Domainos\DomainosServiceProvider::class,
+        Milon\Barcode\BarcodeServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -250,6 +251,8 @@ return [
         'Menu'         => Lavary\Menu\Facade::class,
         'Laratrust'    => Laratrust\LaratrustFacade::class,
         'Google2FA'    => PragmaRX\Google2FALaravel\Facade::class,
+        'DNS1D'        => Milon\Barcode\Facades\DNS1DFacade::class,
+        'DNS2D'        => Milon\Barcode\Facades\DNS2DFacade::class,
     ],
 
 ];

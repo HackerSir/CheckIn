@@ -36,6 +36,7 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/lavary/laravel-menu" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/league/flysystem" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/maatwebsite/excel" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/milon/barcode" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/mockery/mockery" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/mojoblanco/domainos" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/monolog/monolog" />
@@ -144,6 +145,7 @@
           <root url="file://$MODULE_DIR$/vendor/lavary/laravel-menu" />
           <root url="file://$MODULE_DIR$/vendor/league/flysystem" />
           <root url="file://$MODULE_DIR$/vendor/maatwebsite/excel" />
+          <root url="file://$MODULE_DIR$/vendor/milon/barcode" />
           <root url="file://$MODULE_DIR$/vendor/mockery/mockery" />
           <root url="file://$MODULE_DIR$/vendor/mojoblanco/domainos" />
           <root url="file://$MODULE_DIR$/vendor/monolog/monolog" />
@@ -248,6 +250,7 @@
           <root url="file://$MODULE_DIR$/vendor/lavary/laravel-menu" />
           <root url="file://$MODULE_DIR$/vendor/league/flysystem" />
           <root url="file://$MODULE_DIR$/vendor/maatwebsite/excel" />
+          <root url="file://$MODULE_DIR$/vendor/milon/barcode" />
           <root url="file://$MODULE_DIR$/vendor/mockery/mockery" />
           <root url="file://$MODULE_DIR$/vendor/mojoblanco/domainos" />
           <root url="file://$MODULE_DIR$/vendor/monolog/monolog" />
