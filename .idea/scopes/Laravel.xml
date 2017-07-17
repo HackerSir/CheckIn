@@ -1,3 +1,3 @@
 <component name="DependencyValidationManager">
-  <scope name="Laravel" pattern="!file:.idea//*&amp;&amp;!file:vendor//*&amp;&amp;!file:_ide_helper.php&amp;&amp;!file:_migration_helper.php&amp;&amp;!file:public/vendor//*&amp;&amp;!file:resources/lang/vendor//*&amp;&amp;!file:.phpstorm.meta.php&amp;&amp;!file:resources/views/vendor//*&amp;&amp;!file:bootstrap/cache//*&amp;&amp;!file[laravel-base]:storage//*&amp;&amp;!file:public/index.php&amp;&amp;!file:artisan" />
+  <scope name="Laravel" pattern="!file:.idea//*&amp;&amp;!file:vendor//*&amp;&amp;!file:_ide_helper.php&amp;&amp;!file:_migration_helper.php&amp;&amp;!file:public/vendor//*&amp;&amp;!file:resources/lang/vendor//*&amp;&amp;!file:.phpstorm.meta.php&amp;&amp;!file:resources/views/vendor//*&amp;&amp;!file:bootstrap/cache//*&amp;&amp;!file:storage//*&amp;&amp;!file:public/index.php&amp;&amp;!file:artisan" />
 </component>
