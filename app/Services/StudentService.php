@@ -21,7 +21,6 @@ class StudentService extends Service
         $this->fcuApiService = $fcuApiService;
     }
 
-
     /**
      * 根據NID找到學生，若找到且無本地紀錄，則一併新增
      *
