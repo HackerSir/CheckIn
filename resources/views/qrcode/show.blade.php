@@ -11,10 +11,10 @@
             <h1>{{ $qrcode->code }} - QR Code</h1>
             <div class="card">
                 <div class="card-block text-center">
-                    <img src="data:image/png;base64,{{ DNS2D::getBarcodePNG($qrcode->scan_url, "QRCODE", 12, 12) }}">
+                    <img src="{{ route('code-picture.qrcode', $qrcode->code) }}">
                     <br/>
                     <br/>
-                    <img src="data:image/png;base64,{{ DNS1D::getBarcodePNG($qrcode->code, 'C128B', 3, 90) }}">
+                    <img src="{{ route('code-picture.barcode', $qrcode->code) }}">
                 </div>
                 <div class="card-block">
                     <table class="table table-hover">

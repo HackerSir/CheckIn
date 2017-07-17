@@ -20,6 +20,12 @@ Route::group(['prefix' => 'oauth', 'namespace' => 'Auth'], function () {
     Route::any('login', 'OAuthController@login')->name('oauth.login');
 });
 
+//條碼圖
+Route::group(['prefix' => 'code'], function () {
+    Route::get('qrcode/{code}', 'CodePictureController@qrcode')->name('code-picture.qrcode');
+    Route::get('barcode/{code}', 'CodePictureController@barcode')->name('code-picture.barcode');
+});
+
 //服務條款(含隱私權跟免責)
 Route::get('terms', function () {
     return view('misc.terms');
