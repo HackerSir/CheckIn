@@ -6,7 +6,6 @@ use App\Qrcode;
 
 class QrcodeScanController extends Controller
 {
-
     /**
      * 掃描QRCode
      *
