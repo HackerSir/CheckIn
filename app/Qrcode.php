@@ -10,9 +10,10 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $id
  * @property string $code 代碼
  * @property int|null $student_id 對應學生
- * @property string|null $bind_at 綁定時間
+ * @property \Carbon\Carbon|null $bind_at 綁定時間
  * @property \Carbon\Carbon|null $created_at
  * @property \Carbon\Carbon|null $updated_at
+ * @property-read string $scan_url
  * @property-read \App\Student|null $student
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Qrcode whereBindAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Qrcode whereCode($value)
@@ -40,5 +41,15 @@ class Qrcode extends Model
     public function student()
     {
         return $this->belongsTo(Student::class);
+    }
+
+    /**
+     * 掃描用網址
+     *
+     * @return string
+     */
+    public function getScanUrlAttribute()
+    {
+        return route('qrcode.scan', $this->code);
     }
 }

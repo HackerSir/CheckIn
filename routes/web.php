@@ -77,6 +77,8 @@ Route::group(['middleware' => ['auth', 'email']], function () {
             ],
         ]);
     });
+    //QR Code 掃描
+    Route::get('qr/{code}', 'QrcodeScanController@scan')->name('qrcode.scan');
 
     //會員資料
     Route::group(['prefix' => 'profile'], function () {
