@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\DataTables\QrcodesDataTable;
 use App\DataTables\QrcodeSetsDataTable;
+use App\DataTables\Scopes\QrcodeQrcodeSetScope;
 use App\QrcodeSet;
 
 class QrcodeSetController extends Controller
@@ -22,12 +24,13 @@ class QrcodeSetController extends Controller
      * Display the specified resource.
      *
      * @param  \App\QrcodeSet $qrcodeSet
-     * @return \Illuminate\Http\Response
+     * @param QrcodesDataTable $qrcodesDataTable
+     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\Response|\Illuminate\View\View
      */
-    public function show(QrcodeSet $qrcodeSet)
+    public function show(QrcodeSet $qrcodeSet, QrcodesDataTable $qrcodesDataTable)
     {
-        //TODO
-        $qrcodeSet->load('qrcodes');
-        dd($qrcodeSet->toArray());
+        $qrcodesDataTable->addScope(new QrcodeQrcodeSetScope($qrcodeSet->id));
+
+        return $qrcodesDataTable->render('qrcode-set.show', compact('qrcodeSet'));
     }
 }
