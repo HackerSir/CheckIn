@@ -25,6 +25,11 @@
                     </tr>
                 </table>
             </div>
+            <div class="card-block text-center">
+                <a href="javascript:void(0)" class="btn btn-primary" onclick="alert('Coming soon...')">
+                    <i class="fa fa-file-pdf-o" aria-hidden="true"></i> 下載 QR Code 列印用 PDF
+                </a>
+            </div>
         </div>
         <div class="card mt-1">
             <div class="card-block">
