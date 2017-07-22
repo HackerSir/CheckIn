@@ -5,7 +5,7 @@
 @section('content')
     <div class="row mt-3">
         <div class="col-md-8 offset-md-2">
-            <h1>新增 QR Code</h1>
+            <h1>新增 QR Code 集</h1>
             <div class="card">
                 <div class="card-block">
                     <form role="form" method="POST" action="{{ route('qrcode-set.store') }}">
