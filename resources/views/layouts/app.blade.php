@@ -30,6 +30,7 @@
     <link rel="stylesheet" href="//cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css">
     {{--<link rel="stylesheet" href="//cdn.datatables.net/buttons/1.3.1/css/buttons.dataTables.min.css">--}}
     <link rel="stylesheet" href="//cdn.datatables.net/responsive/2.1.1/css/responsive.dataTables.min.css">
+    <link rel="stylesheet" href="{{ asset('css/jquery.datetimepicker.min.css') }}">
     <style>
         body > .container {
             padding-top: 60px;
@@ -71,6 +72,7 @@
 {{--<script src="//cdn.datatables.net/buttons/1.3.1/js/dataTables.buttons.min.js"></script>--}}
 <script src="//cdn.datatables.net/responsive/2.1.1/js/dataTables.responsive.min.js"></script>
 {{--<script src="{{ asset('vendor/datatables/buttons.server-side.js') }}"></script>--}}
+<script src="{{ asset('js/jquery.datetimepicker.full.min.js') }}"></script>
 <script>
     //CSRF Token
     window.Laravel = <?php echo json_encode([
@@ -134,6 +136,8 @@
                 placement: 'right'
             });
         });
+        //DataTimePicker
+        $.datetimepicker.setLocale('zh-TW');
         // Google分析
         @if(env('GOOGLE_ANALYSIS'))
         (function (i, s, o, g, r, a, m) {

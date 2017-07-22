@@ -15,7 +15,7 @@
                             <label for="start_at" class="col-md-3 col-form-label">開始打卡時間</label>
 
                             <div class="col-md-9">
-                                <input id="start_at" name="start_at" type="datetime-local"
+                                <input id="start_at" name="start_at" type="text"
                                        class="form-control{{ $errors->has('start_at') ? ' form-control-danger' : '' }}"
                                        required value="{{ Setting::get('start_at') }}">
 
@@ -31,7 +31,7 @@
                             <label for="end_at" class="col-md-3 col-form-label">結束打卡時間</label>
 
                             <div class="col-md-9">
-                                <input id="end_at" name="end_at" type="datetime-local"
+                                <input id="end_at" name="end_at" type="text"
                                        class="form-control{{ $errors->has('end_at') ? ' form-control-danger' : '' }}"
                                        required value="{{ Setting::get('end_at') }}">
 
@@ -54,4 +54,13 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('js')
+    <script>
+        $(function(){
+            $('#start_at').datetimepicker();
+            $('#end_at').datetimepicker();
+        });
+    </script>
 @endsection
