@@ -67,8 +67,8 @@ $factory->define(App\ClubType::class, function (Faker\Generator $faker) {
 $factory->define(App\Booth::class, function (Faker\Generator $faker) {
     return [
         'name'      => $faker->regexify('[A-E]([0-9]){2}'),
-        'longitude' => $faker->numberBetween(-180, 180),
-        'latitude'  => $faker->numberBetween(-90, 90),
+        'longitude' => $faker->randomFloat(6, -180, 180),
+        'latitude'  => $faker->randomFloat(6, -90, 90),
     ];
 });
 
