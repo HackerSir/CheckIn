@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Booth;
+use App\DataTables\BoothsDataTable;
 use Illuminate\Http\Request;
 
 class BoothController extends Controller
@@ -10,11 +11,12 @@ class BoothController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @param BoothsDataTable $dataTable
+     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\Response|\Illuminate\View\View
      */
-    public function index()
+    public function index(BoothsDataTable $dataTable)
     {
-        //TODO
+        return $dataTable->render('booth.index');
     }
 
     /**
@@ -30,7 +32,7 @@ class BoothController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -41,7 +43,7 @@ class BoothController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Booth  $booth
+     * @param  \App\Booth $booth
      * @return \Illuminate\Http\Response
      */
     public function show(Booth $booth)
@@ -52,7 +54,7 @@ class BoothController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Booth  $booth
+     * @param  \App\Booth $booth
      * @return \Illuminate\Http\Response
      */
     public function edit(Booth $booth)
@@ -63,8 +65,8 @@ class BoothController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Booth  $booth
+     * @param  \Illuminate\Http\Request $request
+     * @param  \App\Booth $booth
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Booth $booth)
@@ -75,7 +77,7 @@ class BoothController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Booth  $booth
+     * @param  \App\Booth $booth
      * @return \Illuminate\Http\Response
      */
     public function destroy(Booth $booth)
