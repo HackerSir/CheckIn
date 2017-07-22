@@ -1,4 +1,5 @@
 <?php
+
 return [
     // which type of store to use.
     // valid options: 'json', 'database'
