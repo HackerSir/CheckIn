@@ -37,7 +37,16 @@ class ClubController extends Controller
      */
     public function store(Request $request)
     {
-        //TODO
+        $this->validate($request, [
+            'name'         => 'required',
+            'club_type_id' => 'exists:club_types,id',
+            'url'          => 'url',
+            'image_url'    => 'url',
+        ]);
+
+        $club = Club::create($request->all());
+
+        return redirect()->route('club.show', $club)->with('global', '社團已新增');
     }
 
     /**
@@ -71,7 +80,16 @@ class ClubController extends Controller
      */
     public function update(Request $request, Club $club)
     {
-        //TODO
+        $this->validate($request, [
+            'name'         => 'required',
+            'club_type_id' => 'exists:club_types,id',
+            'url'          => 'url',
+            'image_url'    => 'url',
+        ]);
+
+        $club->update($request->all());
+
+        return redirect()->route('club.show', $club)->with('global', '社團已更新');
     }
 
     /**
@@ -82,6 +100,8 @@ class ClubController extends Controller
      */
     public function destroy(Club $club)
     {
-        //TODO
+        $club->delete();
+
+        return redirect()->route('club.index')->with('global', '社團已刪除');
     }
 }

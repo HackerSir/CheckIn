@@ -37,7 +37,16 @@ class BoothController extends Controller
      */
     public function store(Request $request)
     {
-        //TODO
+        $this->validate($request, [
+            'club_id'   => 'exists:clubs,id',
+            'name'      => 'required',
+            'longitude' => 'numeric|min:-180|max:180',
+            'latitude'  => 'numeric|min:-90|max:90',
+        ]);
+
+        $booth = Booth::create($request->all());
+
+        return redirect()->route('booth.show', $booth)->with('global', '攤位已新增');
     }
 
     /**
@@ -71,7 +80,16 @@ class BoothController extends Controller
      */
     public function update(Request $request, Booth $booth)
     {
-        //TODO
+        $this->validate($request, [
+            'club_id'   => 'exists:clubs,id',
+            'name'      => 'required',
+            'longitude' => 'numeric|min:-180|max:180',
+            'latitude'  => 'numeric|min:-90|max:90',
+        ]);
+
+        $booth->update($request->all());
+
+        return redirect()->route('booth.show', $booth)->with('global', '攤位已更新');
     }
 
     /**
@@ -82,6 +100,8 @@ class BoothController extends Controller
      */
     public function destroy(Booth $booth)
     {
-        //TODO
+        $booth->delete();
+
+        return redirect()->route('booth.index')->with('global', '攤位已刪除');
     }
 }
