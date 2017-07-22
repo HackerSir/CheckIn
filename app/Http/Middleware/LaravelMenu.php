@@ -39,20 +39,20 @@ class LaravelMenu
                     $activityMenu = $menu->add('活動選單', 'javascript:void(0)');
 
                     if (Laratrust::can('student.manage')) {
-                        $activityMenu->add('學生管理', ['route' => 'student.index']);
+                        $activityMenu->add('學生管理', ['route' => 'student.index'])->active('student/*');
                     }
 
                     if (Laratrust::can('qrcode.manage')) {
-                        $activityMenu->add('QR Code', ['route' => 'qrcode.index']);
-                        $activityMenu->add('QR Code 集', ['route' => 'qrcode-set.index']);
+                        $activityMenu->add('QR Code', ['route' => 'qrcode.index'])->active('qrcode/*');
+                        $activityMenu->add('QR Code 集', ['route' => 'qrcode-set.index'])->active('qrcode-set/*');
                     }
 
                     if (Laratrust::can('booth.manage')) {
-                        $activityMenu->add('攤位管理', ['route' => 'booth.index']);
+                        $activityMenu->add('攤位管理', ['route' => 'booth.index'])->active('booth/*');
                     }
 
                     if (Laratrust::can('club.manage')) {
-                        $activityMenu->add('社團管理', ['route' => 'club.index']);
+                        $activityMenu->add('社團管理', ['route' => 'club.index'])->active('club/*');
                     }
                 }
                 //管理員
@@ -65,7 +65,7 @@ class LaravelMenu
                     }
 
                     if (Laratrust::can('role.manage')) {
-                        $adminMenu->add('角色管理', ['route' => 'role.index']);
+                        $adminMenu->add('角色管理', ['route' => 'role.index'])->active('role/*');
                     }
 
                     if (Laratrust::can('log-viewer.access')) {
