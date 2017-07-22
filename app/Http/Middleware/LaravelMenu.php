@@ -54,6 +54,10 @@ class LaravelMenu
                     if (Laratrust::can('club.manage')) {
                         $activityMenu->add('社團管理', ['route' => 'club.index'])->active('club/*');
                     }
+
+                    if (Laratrust::can('setting.manage')) {
+                        $activityMenu->add('網站設定', ['route' => 'setting.edit']);
+                    }
                 }
                 //管理員
                 if (Laratrust::can('menu.view') and auth()->user()->isConfirmed) {

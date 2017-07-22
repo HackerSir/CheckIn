@@ -93,6 +93,13 @@ Route::group(['middleware' => ['auth', 'email']], function () {
     Route::group(['middleware' => 'permission:club.manage'], function () {
         Route::resource('club', 'ClubController');
     });
+    //網站設定
+    //權限：setting.manage
+    Route::group(['middleware' => 'permission:setting.manage', 'prefix' => 'setting'], function () {
+        Route::get('/', 'SettingController@edit')->name('setting.edit');
+        Route::post('update', 'SettingController@update')->name('setting.update');
+    });
+
     //QR Code 掃描
     Route::get('qr/{code}', 'QrcodeScanController@scan')->name('qrcode.scan');
     //條碼圖
