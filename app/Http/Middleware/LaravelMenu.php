@@ -37,6 +37,15 @@ class LaravelMenu
                 if (Laratrust::can('activity-menu.view') and auth()->user()->isConfirmed) {
                     /** @var \Lavary\Menu\Builder $activityMenu */
                     $activityMenu = $menu->add('活動選單', 'javascript:void(0)');
+
+                    if (Laratrust::can('student.manage')) {
+                        $activityMenu->add('學生管理', ['route' => 'student.index']);
+                    }
+
+                    if (Laratrust::can('qrcode.manage')) {
+                        $activityMenu->add('QR Code', ['route' => 'qrcode.index']);
+                        $activityMenu->add('QR Code 集', ['route' => 'qrcode-set.index']);
+                    }
                 }
                 //管理員
                 if (Laratrust::can('menu.view') and auth()->user()->isConfirmed) {
@@ -45,15 +54,6 @@ class LaravelMenu
 
                     if (Laratrust::can(['user.manage', 'user.view'])) {
                         $adminMenu->add('會員清單', ['route' => 'user.index'])->active('user/*');
-                    }
-
-                    if (Laratrust::can('student.manage')) {
-                        $adminMenu->add('學生管理', ['route' => 'student.index']);
-                    }
-
-                    if (Laratrust::can('qrcode.manage')) {
-                        $adminMenu->add('QR Code', ['route' => 'qrcode.index']);
-                        $adminMenu->add('QR Code 集', ['route' => 'qrcode-set.index']);
                     }
 
                     if (Laratrust::can('role.manage')) {
