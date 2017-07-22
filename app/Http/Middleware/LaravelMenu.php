@@ -33,6 +33,11 @@ class LaravelMenu
                     $menu->add('尚未完成信箱驗證', ['route' => 'confirm-mail.resend'])
                         ->link->attr(['class' => 'text-danger']);
                 }
+                //活動選單
+                if (Laratrust::can('activity-menu.view') and auth()->user()->isConfirmed) {
+                    /** @var \Lavary\Menu\Builder $activityMenu */
+                    $activityMenu = $menu->add('活動選單', 'javascript:void(0)');
+                }
                 //管理員
                 if (Laratrust::can('menu.view') and auth()->user()->isConfirmed) {
                     /** @var \Lavary\Menu\Builder $adminMenu */
