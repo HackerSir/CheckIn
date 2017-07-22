@@ -83,6 +83,16 @@ Route::group(['middleware' => ['auth', 'email']], function () {
             ],
         ]);
     });
+    //攤位管理
+    //權限：booth.manage
+    Route::group(['middleware' => 'permission:booth.manage'], function () {
+        Route::resource('booth', 'BoothController');
+    });
+    //社團管理
+    //權限：club.manage
+    Route::group(['middleware' => 'permission:club.manage'], function () {
+        Route::resource('club', 'ClubController');
+    });
     //QR Code 掃描
     Route::get('qr/{code}', 'QrcodeScanController@scan')->name('qrcode.scan');
     //條碼圖
