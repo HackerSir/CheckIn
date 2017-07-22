@@ -46,6 +46,14 @@ class LaravelMenu
                         $activityMenu->add('QR Code', ['route' => 'qrcode.index']);
                         $activityMenu->add('QR Code 集', ['route' => 'qrcode-set.index']);
                     }
+
+                    if (Laratrust::can('booth.manage')) {
+                        $activityMenu->add('攤位管理', ['route' => 'booth.index']);
+                    }
+
+                    if (Laratrust::can('club.manage')) {
+                        $activityMenu->add('社團管理', ['route' => 'club.index']);
+                    }
                 }
                 //管理員
                 if (Laratrust::can('menu.view') and auth()->user()->isConfirmed) {
