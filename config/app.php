@@ -186,6 +186,7 @@ return [
         PragmaRX\Google2FALaravel\ServiceProvider::class,
         Mojoblanco\Domainos\DomainosServiceProvider::class,
         Milon\Barcode\BarcodeServiceProvider::class,
+        anlutro\LaravelSettings\ServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -253,6 +254,7 @@ return [
         'Google2FA'    => PragmaRX\Google2FALaravel\Facade::class,
         'DNS1D'        => Milon\Barcode\Facades\DNS1DFacade::class,
         'DNS2D'        => Milon\Barcode\Facades\DNS2DFacade::class,
+        'Setting'      => anlutro\LaravelSettings\Facade::class,
     ],
 
 ];
