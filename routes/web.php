@@ -71,14 +71,14 @@ Route::group(['middleware' => ['auth', 'email']], function () {
         Route::resource('qrcode', 'QrcodeController', [
             'only' => [
                 'index',
-                'create',
-                'store',
                 'show',
             ],
         ]);
         Route::resource('qrcode-set', 'QrcodeSetController', [
             'only' => [
                 'index',
+                'create',
+                'store',
                 'show',
             ],
         ]);

@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', '新增 QR Code')
+@section('title', '新增 QR Code 集')
 
 @section('content')
     <div class="row mt-3">
@@ -8,7 +8,7 @@
             <h1>新增 QR Code</h1>
             <div class="card">
                 <div class="card-block">
-                    <form role="form" method="POST" action="{{ route('qrcode.store') }}">
+                    <form role="form" method="POST" action="{{ route('qrcode-set.store') }}">
                         {{ csrf_field() }}
 
                         <div class="form-group row{{ $errors->has('amount') ? ' has-danger' : '' }}">
@@ -30,8 +30,8 @@
 
                         <div class="form-group row">
                             <div class="col-md-10 offset-md-2">
-                                <button type="submit" class="btn btn-primary"> 新增 QR Code</button>
-                                <a href="{{ route('qrcode.index') }}" class="btn btn-secondary">返回 QR Code 管理</a>
+                                <button type="submit" class="btn btn-primary"> 新增 QR Code 集</button>
+                                <a href="{{ route('qrcode-set.index') }}" class="btn btn-secondary">返回 QR Code 集</a>
                             </div>
                         </div>
                     </form>
