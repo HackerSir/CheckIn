@@ -16,7 +16,7 @@
 
                             <div class="col-md-10">
                                 <input id="amount" type="number"
-                                       class="form-control{{ $errors->has('nid') ? ' form-control-danger' : '' }}"
+                                       class="form-control{{ $errors->has('amount') ? ' form-control-danger' : '' }}"
                                        name="amount" required autofocus min="1" value="1">
 
                                 @if ($errors->has('amount'))
