@@ -11,7 +11,7 @@ class SettingController extends Controller
      */
     public function edit()
     {
-        //TODO
+        return view('setting.edit');
     }
 
     /**
@@ -20,6 +20,16 @@ class SettingController extends Controller
      */
     public function update(Request $request)
     {
-        //TODO
+        $this->validate($request, [
+            'start_at' => 'required|date',
+            'end_at'   => 'required|date',
+        ]);
+
+        \Setting::set('start_at', $request->get('start_at'));
+        \Setting::set('end_at', $request->get('end_at'));
+
+        \Setting::save();
+
+        return redirect()->route('setting.edit')->with('global', '設定已更新');
     }
 }
