@@ -1,0 +1,1 @@
+{{ $club->clubType->name ?? '' }}

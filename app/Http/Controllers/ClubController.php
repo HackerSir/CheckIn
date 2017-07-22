@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Club;
+use App\DataTables\ClubsDataTable;
 use Illuminate\Http\Request;
 
 class ClubController extends Controller
@@ -10,11 +11,12 @@ class ClubController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @param ClubsDataTable $dataTable
+     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\Response|\Illuminate\View\View
      */
-    public function index()
+    public function index(ClubsDataTable $dataTable)
     {
-        //TODO
+        return $dataTable->render('club.index');
     }
 
     /**
@@ -30,7 +32,7 @@ class ClubController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -41,7 +43,7 @@ class ClubController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Club  $club
+     * @param  \App\Club $club
      * @return \Illuminate\Http\Response
      */
     public function show(Club $club)
@@ -52,7 +54,7 @@ class ClubController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Club  $club
+     * @param  \App\Club $club
      * @return \Illuminate\Http\Response
      */
     public function edit(Club $club)
@@ -63,8 +65,8 @@ class ClubController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Club  $club
+     * @param  \Illuminate\Http\Request $request
+     * @param  \App\Club $club
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Club $club)
@@ -75,7 +77,7 @@ class ClubController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Club  $club
+     * @param  \App\Club $club
      * @return \Illuminate\Http\Response
      */
     public function destroy(Club $club)
