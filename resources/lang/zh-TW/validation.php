@@ -146,6 +146,8 @@ return [
         'year'                  => '年',
         'longitude'             => '經度',
         'latitude'              => '緯度',
+        'url'                   => '網址',
+        'image_url'             => '圖片網址',
     ],
 
 ];

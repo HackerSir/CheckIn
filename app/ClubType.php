@@ -40,4 +40,14 @@ class ClubType extends Model
     {
         return $this->hasMany(Club::class);
     }
+
+    /**
+     * @return array
+     */
+    public static function selectOptions()
+    {
+        $options = [null => ''] + static::pluck('name', 'id')->toArray();
+
+        return $options;
+    }
 }

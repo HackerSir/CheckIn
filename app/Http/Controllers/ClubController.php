@@ -26,7 +26,7 @@ class ClubController extends Controller
      */
     public function create()
     {
-        //TODO
+        return view('club.create-or-edit');
     }
 
     /**
@@ -39,9 +39,9 @@ class ClubController extends Controller
     {
         $this->validate($request, [
             'name'         => 'required',
-            'club_type_id' => 'exists:club_types,id',
-            'url'          => 'url',
-            'image_url'    => 'url',
+            'club_type_id' => 'nullable|exists:club_types,id',
+            'url'          => 'nullable|url',
+            'image_url'    => 'nullable|url',
         ]);
 
         $club = Club::create($request->all());
@@ -68,7 +68,7 @@ class ClubController extends Controller
      */
     public function edit(Club $club)
     {
-        //TODO
+        return view('club.create-or-edit', compact('club'));
     }
 
     /**
@@ -82,9 +82,9 @@ class ClubController extends Controller
     {
         $this->validate($request, [
             'name'         => 'required',
-            'club_type_id' => 'exists:club_types,id',
-            'url'          => 'url',
-            'image_url'    => 'url',
+            'club_type_id' => 'nullable|exists:club_types,id',
+            'url'          => 'nullable|url',
+            'image_url'    => 'nullable|url',
         ]);
 
         $club->update($request->all());

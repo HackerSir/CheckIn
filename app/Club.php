@@ -85,7 +85,7 @@ class Club extends Model
      */
     public static function selectOptions()
     {
-        $options = [null => ''] + \App\Club::pluck('name', 'id')->toArray();
+        $options = [null => ''] + static::pluck('name', 'id')->toArray();
 
         return $options;
     }
