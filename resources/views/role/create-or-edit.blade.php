@@ -77,7 +77,7 @@
 
                         <div class="form-group row{{ $errors->has('name') ? ' has-danger' : '' }}">
                             <label class="col-md-2 col-form-label">權限</label>
-                            <div class="col-md-10" style="margin-top: 8px;">
+                            <div class="col-md-10" style="padding-top: calc(.5rem - 1px * 2);">
                                 @foreach($permissions as $permission)
                                     @if(isset($role) && $role->protection)
                                         <label class="custom-control custom-checkbox">

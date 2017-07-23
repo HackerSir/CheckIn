@@ -40,7 +40,7 @@
 
                         <div class="form-group row{{ $errors->has('role') ? ' has-danger' : '' }}">
                             <label class="col-md-2 col-form-label">角色</label>
-                            <div class="col-md-10" style="margin-top: 8px;">
+                            <div class="col-md-10" style="padding-top: calc(.5rem - 1px * 2);">
                                     @foreach($roles as $role)
                                         @if($user->id == Auth::user()->id && $role->name == 'Admin')
                                             <label class="custom-control custom-checkbox">
