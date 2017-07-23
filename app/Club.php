@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Model;
  *
  * @property int $id
  * @property int|null $club_type_id 社團類型
+ * @property string|null $number 社團編號
  * @property string $name 名稱
  * @property string|null $description 簡介
  * @property string|null $url 網址
@@ -26,6 +27,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Club whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Club whereImageUrl($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Club whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Club whereNumber($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Club whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Club whereUrl($value)
  * @mixin \Eloquent
@@ -36,6 +38,7 @@ class Club extends Model
 
     protected $fillable = [
         'name',
+        'number',
         'club_type_id',
         'description',
         'url',

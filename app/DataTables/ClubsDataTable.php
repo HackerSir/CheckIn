@@ -86,6 +86,7 @@ class ClubsDataTable extends DataTable
         return [
             'id'           => ['title' => '#'],
             'club_type_id' => ['title' => '類型'],
+            'number'       => ['title' => '編號'],
             'name'         => ['title' => '名稱'],
             'booth'        => ['title' => '攤位'],
         ];

@@ -48,6 +48,7 @@ $factory->define(App\Qrcode::class, function (Faker\Generator $faker) {
 
 $factory->define(App\Club::class, function (Faker\Generator $faker) {
     return [
+        'number'      => $faker->optional()->regexify('[A-E]([0-9]){2}'),
         'name'        => $faker->company,
         'description' => $faker->sentence,
         'url'         => $faker->url,

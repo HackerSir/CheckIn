@@ -19,6 +19,18 @@
                         {{ Form::open(['route' => 'club.store']) }}
                     @endif
 
+                    <div class="form-group row{{ $errors->has('number') ? ' has-danger' : '' }}">
+                        <label for="number" class="col-md-2 col-form-label">社團編號</label>
+                        <div class="col-md-10">
+                            {{ Form::text('number', null, ['class' => 'form-control', 'placeholder' => '如：A66']) }}
+                            @if ($errors->has('number'))
+                                <span class="form-control-feedback">
+                                    <strong>{{ $errors->first('number') }}</strong>
+                                </span>
+                            @endif
+                        </div>
+                    </div>
+
                     <div class="form-group row{{ $errors->has('name') ? ' has-danger' : '' }}">
                         <label for="name" class="col-md-2 col-form-label">名稱</label>
                         <div class="col-md-10">
