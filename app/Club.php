@@ -79,4 +79,14 @@ class Club extends Model
     {
         return $this->hasMany(Feedback::class);
     }
+
+    /**
+     * @return array
+     */
+    public static function selectOptions()
+    {
+        $options = [null => ''] + \App\Club::pluck('name', 'id')->toArray();
+
+        return $options;
+    }
 }

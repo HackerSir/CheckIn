@@ -144,6 +144,8 @@ return [
         'title'                 => '標題',
         'username'              => '使用者名字',
         'year'                  => '年',
+        'longitude'             => '經度',
+        'latitude'              => '緯度',
     ],
 
 ];

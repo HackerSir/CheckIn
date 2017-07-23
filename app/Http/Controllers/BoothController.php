@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Booth;
 use App\DataTables\BoothsDataTable;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class BoothController extends Controller
 {
@@ -26,7 +27,7 @@ class BoothController extends Controller
      */
     public function create()
     {
-        //TODO
+        return view('booth.create-or-edit');
     }
 
     /**
@@ -38,10 +39,10 @@ class BoothController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'club_id'   => 'exists:clubs,id',
-            'name'      => 'required',
-            'longitude' => 'numeric|min:-180|max:180',
-            'latitude'  => 'numeric|min:-90|max:90',
+            'club_id'   => 'nullable|exists:clubs,id',
+            'name'      => 'required|unique:booths',
+            'longitude' => 'nullable|required_with:latitude|numeric|min:-180|max:180',
+            'latitude'  => 'nullable|required_with:longitude|numeric|min:-90|max:90',
         ]);
 
         $booth = Booth::create($request->all());
@@ -68,7 +69,7 @@ class BoothController extends Controller
      */
     public function edit(Booth $booth)
     {
-        //TODO
+        return view('booth.create-or-edit', compact('booth'));
     }
 
     /**
@@ -81,10 +82,10 @@ class BoothController extends Controller
     public function update(Request $request, Booth $booth)
     {
         $this->validate($request, [
-            'club_id'   => 'exists:clubs,id',
-            'name'      => 'required',
-            'longitude' => 'numeric|min:-180|max:180',
-            'latitude'  => 'numeric|min:-90|max:90',
+            'club_id'   => 'nullable|exists:clubs,id',
+            'name'      => ['required', Rule::unique('booths')->ignore($booth->id)],
+            'longitude' => 'nullable|required_with:latitude|numeric|min:-180|max:180',
+            'latitude'  => 'nullable|required_with:longitude|numeric|min:-90|max:90',
         ]);
 
         $booth->update($request->all());
