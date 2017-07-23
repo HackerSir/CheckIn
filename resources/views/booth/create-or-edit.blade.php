@@ -1,7 +1,9 @@
 @extends('layouts.app')
 
-@php($isEditMode = isset($booth))
-@php($methodText = $isEditMode ? '編輯' : '新增')
+@php
+    $isEditMode = isset($booth);
+    $methodText = $isEditMode ? '編輯' : '新增';
+@endphp
 
 @section('title', $methodText . '攤位')
 
