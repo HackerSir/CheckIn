@@ -22,7 +22,7 @@
                     <div class="form-group row{{ $errors->has('name') ? ' has-danger' : '' }}">
                         <label for="name" class="col-md-2 col-form-label">名稱</label>
                         <div class="col-md-10">
-                            {{ Form::text('name', null, ['class' => 'form-control', 'placeholder' => '如：A01']) }}
+                            {{ Form::text('name', null, ['class' => 'form-control', 'placeholder' => '如：黑客社']) }}
                             @if ($errors->has('name'))
                                 <span class="form-control-feedback">
                                     <strong>{{ $errors->first('name') }}</strong>
