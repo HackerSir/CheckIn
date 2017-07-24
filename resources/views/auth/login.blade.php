@@ -9,7 +9,7 @@
             <div class="card">
                 <div class="card-block">
                     <div class="alert alert-warning" role="alert">
-                        <strong>Warning!</strong> 學生請使用右上角的
+                        <strong>Warning!</strong> 學生請使用上方的
                         <a href="{{ route('oauth.login') }}" class="alert-link">登入</a>
                     </div>
                     <form role="form" method="POST" action="{{ route('login') }}">
