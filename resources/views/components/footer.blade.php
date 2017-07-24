@@ -1,5 +1,5 @@
 <footer class="footer bg-inverse">
-    <div class="container" style="padding: 15px 0">
+    <div class="container" style="padding: 15px 10px">
         <p class="text-muted" style="margin-bottom: 8px">©2017 HackerSir. All rights reserved.</p>
         <ol class="breadcrumb" style="padding: 0; margin-bottom: 0; background-color: #292b2c;">
             <li class="breadcrumb-item" style="color: #636c72">
