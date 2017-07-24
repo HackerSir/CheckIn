@@ -8,6 +8,10 @@
             <h1>管理員登入</h1>
             <div class="card">
                 <div class="card-block">
+                    <div class="alert alert-warning" role="alert">
+                        <strong>Warning!</strong> 學生請使用右上角的
+                        <a href="{{ route('oauth.login') }}" class="alert-link">登入</a>
+                    </div>
                     <form role="form" method="POST" action="{{ route('login') }}">
                         {{ csrf_field() }}
 
