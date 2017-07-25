@@ -31,18 +31,6 @@
                         </div>
                     </div>
 
-                    <div class="form-group row{{ $errors->has('target') ? ' has-danger' : '' }}">
-                        <label for="target" class="col-md-2 col-form-label">過關需求該類型攤位數量</label>
-                        <div class="col-md-10">
-                            {{ Form::number('target', null, ['class' => 'form-control', 'min' => 0]) }}
-                            @if ($errors->has('target'))
-                                <span class="form-control-feedback">
-                                    <strong>{{ $errors->first('target') }}</strong>
-                                </span>
-                            @endif
-                        </div>
-                    </div>
-
                     <div class="form-group row{{ $errors->has('color') ? ' has-danger' : '' }}">
                         <label for="color" class="col-md-2 col-form-label">標籤顏色</label>
                         <div class="col-md-10">
