@@ -43,7 +43,8 @@ class ClubsDataTable extends DataTable
                         ->join('clubs', 'clubs.id', '=', 'booths.club_id')
                         ->whereRaw('booths.name LIKE ?', ['%' . $keyword . '%']);
                 });
-            });
+            })
+            ->escapeColumns(['club_type_id']);
     }
 
     /**

@@ -16,7 +16,9 @@ class ClubTypesDataTable extends DataTable
     {
         return $this->datatables
             ->eloquent($this->query())
-            ->addColumn('action', 'club-type.datatables.action');
+            ->addColumn('action', 'club-type.datatables.action')
+            ->editColumn('name', 'club-type.datatables.name')
+            ->escapeColumns(['name']);
     }
 
     /**
@@ -27,7 +29,7 @@ class ClubTypesDataTable extends DataTable
     public function query()
     {
         /** @var ClubType|\Illuminate\Database\Eloquent\Builder $query */
-        $query = ClubType::query()->select(array_keys($this->getColumns()));
+        $query = ClubType::query();
 
         return $this->applyScopes($query);
     }
@@ -59,7 +61,6 @@ class ClubTypesDataTable extends DataTable
         return [
             'id'         => ['title' => '#'],
             'name'       => ['title' => '名稱'],
-            'color'      => ['title' => '標籤顏色'],
             'is_counted' => ['title' => '是否列入抽獎集點'],
         ];
     }

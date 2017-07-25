@@ -34,7 +34,7 @@
                     <div class="form-group row{{ $errors->has('color') ? ' has-danger' : '' }}">
                         <label for="color" class="col-md-2 col-form-label">標籤顏色</label>
                         <div class="col-md-10">
-                            {{ Form::text('color', null, ['class' => 'form-control']) }}
+                            {{ Form::color('color', null, ['class' => 'form-control', 'style' => 'padding:.1rem .2rem; height: 100%']) }}
                             @if ($errors->has('color'))
                                 <span class="form-control-feedback">
                                     <strong>{{ $errors->first('color') }}</strong>

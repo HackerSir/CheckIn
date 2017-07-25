@@ -1,1 +1,1 @@
-{{ $club->clubType->name ?? '' }}
+{!! $club->clubType->tag ?? '' !!}

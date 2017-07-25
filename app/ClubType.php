@@ -30,6 +30,10 @@ class ClubType extends Model
         'is_counted',
     ];
 
+    protected $appends = [
+        'tag',
+    ];
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany|\Illuminate\Database\Eloquent\Builder
      */
@@ -46,5 +50,10 @@ class ClubType extends Model
         $options = [null => ''] + static::pluck('name', 'id')->toArray();
 
         return $options;
+    }
+
+    public function getTagAttribute()
+    {
+        return "<span class='badge badge-default tag' style='background-color:{$this->color}'>{$this->name}</span>";
     }
 }
