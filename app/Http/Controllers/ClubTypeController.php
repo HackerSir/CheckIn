@@ -40,13 +40,11 @@ class ClubTypeController extends Controller
     {
         $this->validate($request, [
             'name'       => 'required|unique:club_types',
-            'target'     => 'nullable|integer|min:0',
             'color'      => 'required',
             'is_counted' => 'boolean',
         ]);
 
         ClubType::create(array_merge($request->all(), [
-            'target'     => $request->get('target') ?: 0,
             'is_counted' => $request->has('is_counted'),
         ]));
 
@@ -75,13 +73,11 @@ class ClubTypeController extends Controller
     {
         $this->validate($request, [
             'name'       => ['required', Rule::unique('club_types')->ignore($clubType->id)],
-            'target'     => 'nullable|integer|min:0',
             'color'      => 'required',
             'is_counted' => 'boolean',
         ]);
 
         $clubType->update(array_merge($request->all(), [
-            'target'     => $request->get('target') ?: 0,
             'is_counted' => $request->has('is_counted'),
         ]));
 

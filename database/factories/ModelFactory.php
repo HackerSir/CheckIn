@@ -59,7 +59,6 @@ $factory->define(App\Club::class, function (Faker\Generator $faker) {
 $factory->define(App\ClubType::class, function (Faker\Generator $faker) {
     return [
         'name'       => $faker->company,
-        'target'     => $faker->randomDigit,
         'color'      => $faker->safeColorName,
         'is_counted' => $faker->boolean(),
     ];

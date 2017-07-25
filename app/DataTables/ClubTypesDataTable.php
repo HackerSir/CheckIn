@@ -59,7 +59,6 @@ class ClubTypesDataTable extends DataTable
         return [
             'id'         => ['title' => '#'],
             'name'       => ['title' => '名稱'],
-            'target'     => ['title' => '過關需求該類型攤位數量'],
             'color'      => ['title' => '標籤顏色'],
             'is_counted' => ['title' => '是否列入抽獎集點'],
         ];
