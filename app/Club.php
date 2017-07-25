@@ -88,7 +88,17 @@ class Club extends Model
      */
     public static function selectOptions()
     {
-        $options = [null => ''] + static::pluck('name', 'id')->toArray();
+        $options = [null => ''];
+
+        $clubs = static::all();
+        $clubTypes = ClubType::all();
+        foreach ($clubTypes as $clubType) {
+            $clubsOfClubType = $clubs->where('club_type_id', $clubType->id)->pluck('name', 'id')->toArray();
+            if (count($clubsOfClubType)) {
+                $options[$clubType->name] = $clubsOfClubType;
+            }
+        }
+        $options += $clubs->where('club_type_id', null)->pluck('name', 'id')->toArray();
 
         return $options;
     }
