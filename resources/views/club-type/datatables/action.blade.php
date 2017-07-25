@@ -1,6 +1,3 @@
-<a href="{{ route('club-type.show', $id) }}" class="btn btn-primary" title="社團類型資料">
-    <i class="fa fa-search" aria-hidden="true"></i>
-</a>
 <a href="{{ route('club-type.edit', $id) }}" class="btn btn-primary" title="編輯社團類型">
     <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
 </a>
