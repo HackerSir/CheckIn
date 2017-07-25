@@ -88,7 +88,7 @@ class Club extends Model
      */
     public static function selectOptions()
     {
-        $options = [null => ''];
+        $options = [null => '&nbsp;'];
 
         $clubs = static::all();
         $clubTypes = ClubType::has('clubs', '>', 0)->get();

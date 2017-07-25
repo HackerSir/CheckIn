@@ -79,3 +79,11 @@
         </div>
     </div>
 @endsection
+
+@section('js')
+    <script>
+        $(function () {
+            $('select[name=club_id]').select2();
+        });
+    </script>
+@endsection
