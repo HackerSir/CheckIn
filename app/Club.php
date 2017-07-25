@@ -91,12 +91,9 @@ class Club extends Model
         $options = [null => ''];
 
         $clubs = static::all();
-        $clubTypes = ClubType::all();
+        $clubTypes = ClubType::has('clubs', '>', 0)->get();
         foreach ($clubTypes as $clubType) {
-            $clubsOfClubType = $clubs->where('club_type_id', $clubType->id)->pluck('name', 'id')->toArray();
-            if (count($clubsOfClubType)) {
-                $options[$clubType->name] = $clubsOfClubType;
-            }
+            $options[$clubType->name] = $clubs->where('club_type_id', $clubType->id)->pluck('name', 'id')->toArray();
         }
         $options += $clubs->where('club_type_id', null)->pluck('name', 'id')->toArray();
 
