@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\ClubType;
 use App\DataTables\ClubTypesDataTable;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class ClubTypeController extends Controller
 {
@@ -26,7 +27,7 @@ class ClubTypeController extends Controller
      */
     public function create()
     {
-        //TODO
+        return view('club-type.create-or-edit');
     }
 
     /**
@@ -37,18 +38,19 @@ class ClubTypeController extends Controller
      */
     public function store(Request $request)
     {
-        //TODO
-    }
+        $this->validate($request, [
+            'name'       => 'required|unique:club_types',
+            'target'     => 'nullable|integer|min:0',
+            'color'      => 'required',
+            'is_counted' => 'boolean',
+        ]);
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\ClubType $clubType
-     * @return \Illuminate\Http\Response
-     */
-    public function show(ClubType $clubType)
-    {
-        //TODO
+        ClubType::create(array_merge($request->all(), [
+            'target'     => $request->get('target') ?: 0,
+            'is_counted' => $request->has('is_counted'),
+        ]));
+
+        return redirect()->route('club-type.index')->with('global', '社團類型已新增');
     }
 
     /**
@@ -59,7 +61,7 @@ class ClubTypeController extends Controller
      */
     public function edit(ClubType $clubType)
     {
-        //TODO
+        return view('club-type.create-or-edit', compact('clubType'));
     }
 
     /**
@@ -71,7 +73,19 @@ class ClubTypeController extends Controller
      */
     public function update(Request $request, ClubType $clubType)
     {
-        //TODO
+        $this->validate($request, [
+            'name'       => ['required', Rule::unique('club_types')->ignore($clubType->id)],
+            'target'     => 'nullable|integer|min:0',
+            'color'      => 'required',
+            'is_counted' => 'boolean',
+        ]);
+
+        $clubType->update(array_merge($request->all(), [
+            'target'     => $request->get('target') ?: 0,
+            'is_counted' => $request->has('is_counted'),
+        ]));
+
+        return redirect()->route('club-type.index')->with('global', '社團類型已更新');
     }
 
     /**
@@ -82,6 +96,8 @@ class ClubTypeController extends Controller
      */
     public function destroy(ClubType $clubType)
     {
-        //TODO
+        $clubType->delete();
+
+        return redirect()->route('club-type.index')->with('global', '社團類型已刪除');
     }
 }

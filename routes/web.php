@@ -91,7 +91,11 @@ Route::group(['middleware' => ['auth', 'email']], function () {
     //社團類型管理
     //權限：club-type.manage
     Route::group(['middleware' => 'permission:club-type.manage'], function () {
-        Route::resource('club-type', 'ClubTypeController');
+        Route::resource('club-type', 'ClubTypeController', [
+            'except' => [
+                'show',
+            ],
+        ]);
     });
     //社團管理
     //權限：club.manage
