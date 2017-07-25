@@ -88,6 +88,11 @@ Route::group(['middleware' => ['auth', 'email']], function () {
     Route::group(['middleware' => 'permission:booth.manage'], function () {
         Route::resource('booth', 'BoothController');
     });
+    //社團類型管理
+    //權限：club-type.manage
+    Route::group(['middleware' => 'permission:club-type.manage'], function () {
+        Route::resource('club-type', 'ClubTypeController');
+    });
     //社團管理
     //權限：club.manage
     Route::group(['middleware' => 'permission:club.manage'], function () {
