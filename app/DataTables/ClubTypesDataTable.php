@@ -17,8 +17,8 @@ class ClubTypesDataTable extends DataTable
         return $this->datatables
             ->eloquent($this->query())
             ->addColumn('action', 'club-type.datatables.action')
-            ->editColumn('name', 'club-type.datatables.name')
-            ->escapeColumns(['name']);
+            ->editColumn('name', 'club-type.datatables.name')->escapeColumns('name')
+            ->editColumn('is_counted', 'club-type.datatables.is_counted')->escapeColumns('is_counted');
     }
 
     /**

@@ -35,6 +35,10 @@ class ClubType extends Model
         'tag',
     ];
 
+    protected $casts = [
+        'is_counted' => 'boolean',
+    ];
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany|\Illuminate\Database\Eloquent\Builder
      */
