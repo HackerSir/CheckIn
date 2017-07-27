@@ -14,6 +14,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property \Carbon\Carbon|null $created_at
  * @property \Carbon\Carbon|null $updated_at
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Club[] $clubs
+ * @property-read string $tag
  * @method static \Illuminate\Database\Eloquent\Builder|\App\ClubType whereColor($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\ClubType whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\ClubType whereId($value)
@@ -52,6 +53,9 @@ class ClubType extends Model
         return $options;
     }
 
+    /**
+     * @return string
+     */
     public function getTagAttribute()
     {
         return "<span class='badge badge-default tag' style='background-color:{$this->color}'>{$this->name}</span>";
