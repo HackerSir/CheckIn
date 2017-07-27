@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $id
  * @property string $name 名稱
  * @property string $color 標籤顏色
- * @property int $is_counted 是否列入抽獎集點
+ * @property bool $is_counted 是否列入抽獎集點
  * @property \Carbon\Carbon|null $created_at
  * @property \Carbon\Carbon|null $updated_at
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Club[] $clubs
