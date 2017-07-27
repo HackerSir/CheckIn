@@ -12,7 +12,7 @@
                         {{ csrf_field() }}
 
                         <div class="form-group row{{ $errors->has('amount') ? ' has-danger' : '' }}">
-                            <label for="amount" class="col-md-2 col-form-label">數量</label>
+                            <label for="amount" class="col-md-2 col-form-label">QR碼數量</label>
 
                             <div class="col-md-10">
                                 <input id="amount" type="number"
