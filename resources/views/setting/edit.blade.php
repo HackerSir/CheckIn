@@ -43,6 +43,22 @@
                             </div>
                         </div>
 
+                        <div class="form-group row{{ $errors->has('target') ? ' has-danger' : '' }}">
+                            <label for="target" class="col-md-3 col-form-label">打卡目標數量</label>
+
+                            <div class="col-md-9">
+                                <input id="target" name="target" type="number" min="0"
+                                       class="form-control{{ $errors->has('target') ? ' form-control-danger' : '' }}"
+                                       required value="{{ Setting::get('target') }}">
+
+                                @if ($errors->has('target'))
+                                    <span class="form-control-feedback">
+                                        <strong>{{ $errors->first('target') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
 
                         <div class="form-group row">
                             <div class="col-md-9 offset-md-3">

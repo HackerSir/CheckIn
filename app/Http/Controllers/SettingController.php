@@ -23,10 +23,12 @@ class SettingController extends Controller
         $this->validate($request, [
             'start_at' => 'required|date',
             'end_at'   => 'required|date',
+            'target'   => 'required|integer|min:0',
         ]);
 
         \Setting::set('start_at', $request->get('start_at'));
         \Setting::set('end_at', $request->get('end_at'));
+        \Setting::set('target', $request->get('target'));
 
         \Setting::save();
 
