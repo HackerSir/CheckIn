@@ -8,64 +8,55 @@
             <h1>網站設定</h1>
             <div class="card">
                 <div class="card-block">
-                    <form role="form" method="POST" action="{{ route('setting.update') }}">
-                        {{ csrf_field() }}
+                    {{ Form::open(['route' => 'setting.update']) }}
+                    <div class="form-group row{{ $errors->has('start_at') ? ' has-danger' : '' }}">
+                        <label for="start_at" class="col-md-3 col-form-label">開始打卡時間</label>
 
-                        <div class="form-group row{{ $errors->has('start_at') ? ' has-danger' : '' }}">
-                            <label for="start_at" class="col-md-3 col-form-label">開始打卡時間</label>
+                        <div class="col-md-9">
+                            {{ Form::text('start_at', Setting::get('start_at'), ['class' => 'form-control', 'required']) }}
 
-                            <div class="col-md-9">
-                                <input id="start_at" name="start_at" type="text"
-                                       class="form-control{{ $errors->has('start_at') ? ' form-control-danger' : '' }}"
-                                       required value="{{ Setting::get('start_at') }}">
-
-                                @if ($errors->has('start_at'))
-                                    <span class="form-control-feedback">
-                                        <strong>{{ $errors->first('start_at') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
+                            @if ($errors->has('start_at'))
+                                <span class="form-control-feedback">
+                                    <strong>{{ $errors->first('start_at') }}</strong>
+                                </span>
+                            @endif
                         </div>
+                    </div>
 
-                        <div class="form-group row{{ $errors->has('end_at') ? ' has-danger' : '' }}">
-                            <label for="end_at" class="col-md-3 col-form-label">結束打卡時間</label>
+                    <div class="form-group row{{ $errors->has('end_at') ? ' has-danger' : '' }}">
+                        <label for="end_at" class="col-md-3 col-form-label">結束打卡時間</label>
 
-                            <div class="col-md-9">
-                                <input id="end_at" name="end_at" type="text"
-                                       class="form-control{{ $errors->has('end_at') ? ' form-control-danger' : '' }}"
-                                       required value="{{ Setting::get('end_at') }}">
+                        <div class="col-md-9">
+                            {{ Form::text('end_at', Setting::get('end_at'), ['class' => 'form-control', 'required']) }}
 
-                                @if ($errors->has('end_at'))
-                                    <span class="form-control-feedback">
-                                        <strong>{{ $errors->first('end_at') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
+                            @if ($errors->has('end_at'))
+                                <span class="form-control-feedback">
+                                    <strong>{{ $errors->first('end_at') }}</strong>
+                                </span>
+                            @endif
                         </div>
+                    </div>
 
-                        <div class="form-group row{{ $errors->has('target') ? ' has-danger' : '' }}">
-                            <label for="target" class="col-md-3 col-form-label">打卡目標數量</label>
+                    <div class="form-group row{{ $errors->has('target') ? ' has-danger' : '' }}">
+                        <label for="target" class="col-md-3 col-form-label">打卡目標數量</label>
 
-                            <div class="col-md-9">
-                                <input id="target" name="target" type="number" min="0"
-                                       class="form-control{{ $errors->has('target') ? ' form-control-danger' : '' }}"
-                                       required value="{{ Setting::get('target') }}">
+                        <div class="col-md-9">
+                            {{ Form::number('target', Setting::get('target'), ['class' => 'form-control', 'required', 'min' => 0]) }}
 
-                                @if ($errors->has('target'))
-                                    <span class="form-control-feedback">
-                                        <strong>{{ $errors->first('target') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
+                            @if ($errors->has('target'))
+                                <span class="form-control-feedback">
+                                    <strong>{{ $errors->first('target') }}</strong>
+                                </span>
+                            @endif
                         </div>
+                    </div>
 
-
-                        <div class="form-group row">
-                            <div class="col-md-9 offset-md-3">
-                                <button type="submit" class="btn btn-primary"> 更新設定</button>
-                            </div>
+                    <div class="form-group row">
+                        <div class="col-md-9 offset-md-3">
+                            <button type="submit" class="btn btn-primary"> 更新設定</button>
                         </div>
-                    </form>
+                    </div>
+                    {{ Form::close() }}
                 </div>
             </div>
         </div>
@@ -74,9 +65,9 @@
 
 @section('js')
     <script>
-        $(function(){
-            $('#start_at').datetimepicker();
-            $('#end_at').datetimepicker();
+        $(function () {
+            $('input[name=start_at]').datetimepicker();
+            $('input[name=end_at]').datetimepicker();
         });
     </script>
 @endsection
