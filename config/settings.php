@@ -3,7 +3,7 @@
 return [
     // which type of store to use.
     // valid options: 'json', 'database'
-    'store'       => 'json',
+    'store'       => 'database',
 
     // if the json store is used, give the full path to the .json file
     // that the store writes to.
