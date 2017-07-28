@@ -21,8 +21,8 @@ class SettingController extends Controller
     public function update(Request $request)
     {
         $this->validate($request, [
-            'start_at' => 'required|date',
-            'end_at'   => 'required|date',
+            'start_at' => 'required|date|before:end_at',
+            'end_at'   => 'required|date|after:start_at',
             'target'   => 'required|integer|min:0',
         ]);
 
