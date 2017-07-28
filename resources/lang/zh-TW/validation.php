@@ -148,6 +148,9 @@ return [
         'latitude'              => '緯度',
         'url'                   => '網址',
         'image_url'             => '圖片網址',
+        'start_at'              => '開始時間',
+        'end_at'                => '結束時間',
+        'target'                => '目標數量',
     ],
 
 ];
