@@ -4,13 +4,13 @@ use Illuminate\Database\Migrations\Migration;
 
 class AddDefaultTarget extends Migration
 {
-    protected $tablename;
+    protected $tableName;
     protected $keyColumn;
     protected $valueColumn;
 
     public function __construct()
     {
-        $this->tablename = Config::get('settings.table');
+        $this->tableName = Config::get('settings.table');
         $this->keyColumn = Config::get('settings.keyColumn');
         $this->valueColumn = Config::get('settings.valueColumn');
     }
@@ -22,7 +22,7 @@ class AddDefaultTarget extends Migration
      */
     public function up()
     {
-        DB::table($this->tablename)->updateOrInsert([
+        DB::table($this->tableName)->updateOrInsert([
             $this->keyColumn => 'target',
         ], [
             $this->valueColumn => 0,
@@ -36,6 +36,6 @@ class AddDefaultTarget extends Migration
      */
     public function down()
     {
-        DB::table($this->tablename)->where($this->keyColumn, 'target')->delete();
+        DB::table($this->tableName)->where($this->keyColumn, 'target')->delete();
     }
 }

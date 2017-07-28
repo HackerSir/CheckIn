@@ -5,13 +5,13 @@ use Illuminate\Database\Schema\Blueprint;
 
 class CreateSettingsTable extends Migration
 {
-    protected $tablename;
+    protected $tableName;
     protected $keyColumn;
     protected $valueColumn;
 
     public function __construct()
     {
-        $this->tablename = Config::get('settings.table');
+        $this->tableName = Config::get('settings.table');
         $this->keyColumn = Config::get('settings.keyColumn');
         $this->valueColumn = Config::get('settings.valueColumn');
     }
@@ -23,7 +23,7 @@ class CreateSettingsTable extends Migration
      */
     public function up()
     {
-        Schema::create($this->tablename, function (Blueprint $table) {
+        Schema::create($this->tableName, function (Blueprint $table) {
             $table->increments('id');
             $table->string($this->keyColumn)->index();
             $table->text($this->valueColumn);
@@ -37,6 +37,6 @@ class CreateSettingsTable extends Migration
      */
     public function down()
     {
-        Schema::drop($this->tablename);
+        Schema::drop($this->tableName);
     }
 }
