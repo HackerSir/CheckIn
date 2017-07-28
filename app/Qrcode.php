@@ -14,6 +14,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property \Carbon\Carbon|null $created_at
  * @property \Carbon\Carbon|null $updated_at
  * @property int|null $qrcode_set_id
+ * @property-read bool $is_last_one
  * @property-read string $scan_url
  * @property-read \App\QrcodeSet|null $qrcodeSet
  * @property-read \App\Student|null $student
@@ -63,5 +64,19 @@ class Qrcode extends Model
     public function getScanUrlAttribute()
     {
         return route('qrcode.scan', $this->code);
+    }
+
+    /**
+     * 是否為學生最後一組QR Code
+     *
+     * @return bool
+     */
+    public function getIsLastOneAttribute()
+    {
+        if (!$this->student) {
+            return false;
+        }
+
+        return $this->student->qrcode->id == $this->id;
     }
 }
