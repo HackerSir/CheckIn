@@ -5,7 +5,7 @@
                 aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <a class="navbar-brand" href="{{ url('/') }}">{{ config('app.name') }}</a>
+        <a class="navbar-brand" href="{{ url('/') }}">{{ config('app.cht_name') }}</a>
 
         {{-- Item 會由 LaravelMenu 生成 --}}
         <div class="collapse navbar-collapse" id="navbarResponsive">
