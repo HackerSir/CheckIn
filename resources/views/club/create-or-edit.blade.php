@@ -153,13 +153,17 @@
                     delay: 250,
                     data: function (params) {
                         return {
-                            q: params.term // search term
+                            q: params.term, // search term
+                            page: params.page
                         };
                     },
-                    processResults: function (data) {
+                    processResults: function (data, params) {
+                        params.page = params.page || 1;
                         return {
                             results: data.items,
-                            more: false
+                            pagination: {
+                                more: (params.page * 10) < data.total_count
+                            }
                         };
                     },
                     cache: true

@@ -23,8 +23,12 @@ class ApiController extends Controller
                     ->orWhere('email', 'like', $searchPattern);
             });
         }
-        //限制20筆
-        $usersQuery->limit(20);
+        //總數
+        $totalCount = $usersQuery->count();
+        //分頁
+        $page = $request->get('page', 1);
+        $perPage = 10;
+        $usersQuery->limit($perPage)->skip(($page - 1) * $perPage);
         //取得資料
         /** @var \Illuminate\Database\Eloquent\Collection $users */
         $users = $usersQuery->get();
@@ -40,7 +44,7 @@ class ApiController extends Controller
         }
         //建立JSON
         $json = [
-            'total_count' => $users->count(),
+            'total_count' => $totalCount,
             'items'       => $items,
         ];
 
