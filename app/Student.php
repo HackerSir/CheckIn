@@ -72,7 +72,7 @@ class Student extends Model
      */
     public function records()
     {
-        return $this->hasMany(Record::class);
+        return $this->hasMany(Record::class)->orderBy('created_at', 'desc');
     }
 
     /**
