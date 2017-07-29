@@ -49,7 +49,7 @@ class ClubController extends Controller
         $club = Club::create($request->all());
 
         //更新社團負責人
-        $attachUserIds = $request->get('user_id');
+        $attachUserIds = (array) $request->get('user_id');
         $attachUsers = User::whereIn('id', $attachUserIds)->get();
         $club->users()->saveMany($attachUsers);
 
@@ -98,8 +98,8 @@ class ClubController extends Controller
         $club->update($request->all());
 
         //更新社團負責人
-        $oldUserIds = $club->users->pluck('id')->toArray();
-        $newUserIds = $request->get('user_id');
+        $oldUserIds = (array) $club->users->pluck('id')->toArray();
+        $newUserIds = (array) $request->get('user_id');
         $detachUserIds = array_diff($oldUserIds, $newUserIds);
         $attachUserIds = array_diff($newUserIds, $oldUserIds);
 
