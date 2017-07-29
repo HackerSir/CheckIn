@@ -64,7 +64,7 @@ class ClubController extends Controller
      */
     public function show(Club $club)
     {
-        //TODO
+        return view('club.show', compact('club'));
     }
 
     /**
