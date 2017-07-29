@@ -28,6 +28,10 @@
                                     <td>{{ $qrcode->student->masked_display_name ?? '' }}</td>
                                 </tr>
                                 <tr>
+                                    <td class="text-md-right">進度：</td>
+                                    <td>{{ $qrcode->student->records->count() }} / {{ \Setting::get('target') }}</td>
+                                </tr>
+                                <tr>
                                     <td class="text-md-right">抽獎編號：</td>
                                     <td>{{ $qrcode->student->ticket->id ?? '尚未取得' }}</td>
                                 </tr>
