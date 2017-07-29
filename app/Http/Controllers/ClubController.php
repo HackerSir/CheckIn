@@ -47,6 +47,8 @@ class ClubController extends Controller
 
         $club = Club::create($request->all());
 
+        //TODO: 更新社團負責人
+
         return redirect()->route('club.show', $club)->with('global', '社團已新增');
     }
 
@@ -90,6 +92,8 @@ class ClubController extends Controller
         ]);
 
         $club->update($request->all());
+
+        //TODO: 更新社團負責人
 
         return redirect()->route('club.show', $club)->with('global', '社團已更新');
     }

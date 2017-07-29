@@ -117,6 +117,11 @@ Route::group(['middleware' => ['auth', 'email']], function () {
         Route::get('barcode/{code}', 'CodePictureController@barcode')->name('code-picture.barcode');
     });
 
+    //內部API
+    Route::group(['prefix' => 'api'], function () {
+        Route::post('/user-list', 'ApiController@userList')->name('api.user-list');
+    });
+
     //會員資料
     Route::group(['prefix' => 'profile'], function () {
         //查看會員資料

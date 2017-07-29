@@ -94,6 +94,19 @@
                         </div>
                     </div>
 
+                    <div class="form-group row{{ $errors->has('user_id') ? ' has-danger' : '' }}">
+                        <label for="user_id[]" class="col-md-2 col-form-label">社團負責人</label>
+                        <div class="col-md-10">
+                            {{-- TODO: 預選已存在的社團負責人 --}}
+                            {{ Form::select('user_id[]', [], null, ['id' => 'user_id', 'class' => 'form-control', 'multiple']) }}
+                            @if ($errors->has('user_id'))
+                                <span class="form-control-feedback">
+                                    <strong>{{ $errors->first('user_id') }}</strong>
+                                </span>
+                            @endif
+                        </div>
+                    </div>
+
                     <div class="form-group row">
                         <div class="col-md-10 offset-md-2">
                             <button type="submit" class="btn btn-primary"> 確認</button>
@@ -105,4 +118,59 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('js')
+    <script>
+        $(function () {
+            function formatTemplate(user) {
+                if (user.loading) return user.text;
+                if (!user.name) return null;
+
+                var markup = "<div class='container' style='width: 100%'><div class='row'>"
+                    + "<div class='col-md-1'><img src='" + user.gravatar + "' /></div>"
+                    + "<div class='col-md-11'>" + user.name + "<br/><small>" + user.email + "</small></div>"
+                    + "</div></div>";
+
+                return markup;
+            }
+
+            function formatTemplateSelection(user) {
+                return user.name || user.text;
+            }
+
+            $('#user_id').select2({
+                tags: true,
+                tokenSeparators: [',', ' '],
+                ajax: {
+                    url: "{{ route('api.user-list') }}",
+                    type: 'POST',
+                    headers: {
+                        'X-CSRF-Token': window.Laravel.csrfToken,
+                        "Accept": "application/json"
+                    },
+                    dataType: 'json',
+                    delay: 250,
+                    data: function (params) {
+                        return {
+                            q: params.term // search term
+                        };
+                    },
+                    processResults: function (data) {
+                        return {
+                            results: data.items,
+                            more: false
+                        };
+                    },
+                    cache: true
+                },
+                minimumInputLength: 0,
+                escapeMarkup: function (markup) {
+                    return markup;
+                }, // let our custom formatter work
+                templateResult: formatTemplate, // omitted for brevity, see the source of this page
+                templateSelection: formatTemplateSelection // omitted for brevity, see the source of this page
+            });
+        });
+    </script>
 @endsection
