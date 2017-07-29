@@ -61,7 +61,7 @@ class Club extends Model
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne|\Illuminate\Database\Eloquent\Builder
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany|\Illuminate\Database\Eloquent\Builder
      */
     public function booths()
     {
