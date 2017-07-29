@@ -21,6 +21,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Feedback[] $feedback
  * @property-read string $display_name
  * @property-read bool $is_freshman
+ * @property-read string $masked_display_name
  * @property-read \App\Qrcode $qrcode
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Record[] $records
  * @property-read \App\Ticket $ticket
@@ -97,6 +98,22 @@ class Student extends Model
     public function getDisplayNameAttribute()
     {
         return $this->nid . ' ' . $this->name;
+    }
+
+    /**
+     * @return string
+     */
+    public function getMaskedDisplayNameAttribute()
+    {
+        $nid = mb_substr($this->nid, 0, 3)
+            . str_repeat('▒', mb_strlen($this->nid) - 5)
+            . mb_substr($this->nid, -2);
+
+        $name = mb_substr($this->name, 0, 1)
+            . str_repeat('▒', max(mb_strlen($this->name) - 2, 1))
+            . mb_substr($this->name, -1);
+
+        return $nid . ' ' . $name;
     }
 
     /**

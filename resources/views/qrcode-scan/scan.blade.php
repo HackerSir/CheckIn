@@ -25,7 +25,7 @@
                             @if($qrcode->student)
                                 <tr>
                                     <td class="text-md-right">學生：</td>
-                                    <td>{{ $qrcode->student->display_name ?? '' }}</td>
+                                    <td>{{ $qrcode->student->masked_display_name ?? '' }}</td>
                                 </tr>
                                 <tr>
                                     <td class="text-md-right">抽獎編號：</td>
