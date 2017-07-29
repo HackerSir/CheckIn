@@ -74,6 +74,10 @@ class QrcodeScanController extends Controller
             'ip' => request()->getClientIp(),
         ]);
 
+        //重新取得資料
+        $qrcode = $qrcode->fresh();
+        view()->share(compact('qrcode'));
+
         return view('qrcode-scan.scan')->with('level', 'success')->with('message', "在「{$club->name}」打卡完成");
     }
 }
