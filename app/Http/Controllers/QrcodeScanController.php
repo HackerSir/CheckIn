@@ -18,26 +18,28 @@ class QrcodeScanController extends Controller
      */
     public function scan($code)
     {
+        view()->share(compact('code'));
         //找出 QR Code
         /** @var Qrcode $qrcode */
-        $qrcode = Qrcode::where('code', $code)->first();
+        $qrcode = Qrcode::where('code', $code)->with('student.records.club')->first();
         if (!$qrcode) {
-            dd('QR Code無效');
+            return view('qrcode-scan.scan')->with('level', 'danger')->with('message', 'QR Code無效');
         }
+        view()->share(compact('qrcode'));
 
         //檢查QR Code是否已經被學生綁定
         if (!$qrcode->student) {
-            dd('該QR Code不屬於任何學生');
+            return view('qrcode-scan.scan')->with('level', 'danger')->with('message', '該QR Code不屬於任何學生');
         }
 
         //檢查是否屬於活動時間
         $startAt = new Carbon(Setting::get('start_at'));
         if ($startAt->gte(Carbon::now())) {
-            dd('活動尚未開始');
+            return view('qrcode-scan.scan')->with('level', 'info')->with('message', '活動尚未開始');
         }
         $endAt = new Carbon(Setting::get('end_at'));
         if ($endAt->lte(Carbon::now())) {
-            dd('活動已經結束');
+            return view('qrcode-scan.scan')->with('level', 'info')->with('message', '活動已經結束');
         }
 
         //檢查掃描使用者是否為社團負責人
@@ -45,12 +47,13 @@ class QrcodeScanController extends Controller
         $user = auth()->user();
         $club = $user->club;
         if (!$club) {
-            dd('非社團負責人');
+            //非社團負責人，不顯示訊息
+            return view('qrcode-scan.scan');
         }
 
         //檢查QR Code最後一組QR Code
         if (!$qrcode->is_last_one) {
-            dd('非最後一組 QR Code');
+            return view('qrcode-scan.scan')->with('level', 'danger')->with('message', '非最後一組 QR Code');
         }
 
         //檢查是否在該攤位重複打卡
@@ -59,17 +62,18 @@ class QrcodeScanController extends Controller
             ->where('club_id', $club->id)
             ->first();
         if ($existRecord) {
-            dd('已於 ' . $existRecord->created_at . ' 打卡');
+            return view('qrcode-scan.scan')->with('level', 'warning')
+                ->with('message', "已於 {$existRecord->created_at} 在「{$club->name}」打卡");
         }
 
         //打卡
-        $record = Record::query()->firstOrCreate([
+        Record::query()->firstOrCreate([
             'student_id' => $qrcode->student->id,
             'club_id'    => $club->id,
         ], [
             'ip' => request()->getClientIp(),
         ]);
 
-        dd($code, $qrcode, $record);
+        return view('qrcode-scan.scan')->with('level', 'success')->with('message', "在「{$club->name}」打卡完成");
     }
 }
