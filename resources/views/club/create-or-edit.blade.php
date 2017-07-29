@@ -139,9 +139,17 @@
                 return user.name || user.text;
             }
 
-            $('#user_id').select2({
+            var $userSelect = $('#user_id');
+            var selected = {!!  $club->users->pluck('name','id')->toJson() !!};
+            var selectIds = {!!  $club->users->pluck('id')->toJson() !!};
+            var initials = [];
+            $.each(selected, function (key, val) {
+                initials.push({id: key, text: val});
+            });
+            $userSelect.select2({
                 tags: true,
                 tokenSeparators: [',', ' '],
+                data: initials,
                 ajax: {
                     url: "{{ route('api.user-list') }}",
                     type: 'POST',
@@ -175,6 +183,7 @@
                 templateResult: formatTemplate, // omitted for brevity, see the source of this page
                 templateSelection: formatTemplateSelection // omitted for brevity, see the source of this page
             });
+            $userSelect.val(selectIds).trigger('change');
         });
     </script>
 @endsection
