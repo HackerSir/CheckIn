@@ -58,7 +58,7 @@ class BoothController extends Controller
      */
     public function show(Booth $booth)
     {
-        //TODO
+        return view('booth.show', compact('booth'));
     }
 
     /**
