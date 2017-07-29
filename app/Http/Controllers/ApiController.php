@@ -18,7 +18,7 @@ class ApiController extends Controller
             $searchPattern = '%' . $request->input('q') . '%';
             //搜尋使用者名稱或信箱
             $usersQuery->where(function ($query) use ($searchPattern) {
-                /** @var Builder|User $query */
+                /* @var Builder|User $query */
                 $query->where('name', 'like', $searchPattern)
                     ->orWhere('email', 'like', $searchPattern);
             });
