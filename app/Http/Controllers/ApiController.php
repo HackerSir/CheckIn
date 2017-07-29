@@ -23,6 +23,8 @@ class ApiController extends Controller
                     ->orWhere('email', 'like', $searchPattern);
             });
         }
+        //限制20筆
+        $usersQuery->limit(20);
         //取得資料
         /** @var \Illuminate\Database\Eloquent\Collection $users */
         $users = $usersQuery->get();
