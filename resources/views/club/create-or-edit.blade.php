@@ -151,11 +151,11 @@
                 tokenSeparators: [',', ' '],
                 data: initials,
                 ajax: {
-                    url: "{{ route('api.user-list') }}",
+                    url: '{{ route('api.user-list') }}',
                     type: 'POST',
                     headers: {
                         'X-CSRF-Token': window.Laravel.csrfToken,
-                        "Accept": "application/json"
+                        'Accept': 'application/json'
                     },
                     dataType: 'json',
                     delay: 250,
