@@ -45,6 +45,14 @@
                                 @endif
                             </td>
                         </tr>
+                        <tr>
+                            <td class="text-md-right">負責人：</td>
+                            <td>
+                                @foreach($club->users as $user)
+                                    {{ $user->name }}<br/>
+                                @endforeach
+                            </td>
+                        </tr>
                     </table>
                 </div>
                 @if($club->description)
