@@ -50,7 +50,7 @@ class ClubController extends Controller
 
         //更新社團負責人
         $attachUserIds = (array) $request->get('user_id');
-        $attachUsers = User::whereIn('id', $attachUserIds)->get();
+        $attachUsers = User::whereDoesntHave('club')->whereIn('id', $attachUserIds)->get();
         $club->users()->saveMany($attachUsers);
 
         return redirect()->route('club.show', $club)->with('global', '社團已新增');
@@ -109,7 +109,7 @@ class ClubController extends Controller
             $detachUser->club()->dissociate();
             $detachUser->save();
         }
-        $attachUsers = User::whereIn('id', $attachUserIds)->get();
+        $attachUsers = User::whereDoesntHave('club')->whereIn('id', $attachUserIds)->get();
         $club->users()->saveMany($attachUsers);
 
         return redirect()->route('club.show', $club)->with('global', '社團已更新');

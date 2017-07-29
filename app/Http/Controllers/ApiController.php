@@ -30,16 +30,26 @@ class ApiController extends Controller
         $perPage = 10;
         $usersQuery->limit($perPage)->skip(($page - 1) * $perPage);
         //取得資料
-        /** @var \Illuminate\Database\Eloquent\Collection $users */
+        /** @var \Illuminate\Database\Eloquent\Collection|User[] $users */
         $users = $usersQuery->get();
         //轉換陣列內容
         $items = [];
+        $clubId = $request->get('club');
         foreach ($users as $user) {
+            //檢查是否為其他社團之負責人
+            if ($user->club && $user->club->id != $clubId) {
+                $name = $user->name . '（' . $user->club->name . '）';
+                $disabled = true;
+            } else {
+                $name = $user->name;
+                $disabled = false;
+            }
             $items[] = [
                 'id'       => $user->id,
-                'name'     => $user->name,
+                'name'     => $name,
                 'email'    => $user->email,
                 'gravatar' => Gravatar::src($user->email, 40),
+                'disabled' => $disabled,
             ];
         }
         //建立JSON
