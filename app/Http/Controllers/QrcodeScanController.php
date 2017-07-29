@@ -40,13 +40,13 @@ class QrcodeScanController extends Controller
             dd('活動已經結束');
         }
 
-        //TODO:檢查掃描使用者是否為攤位負責人
+        //TODO:檢查掃描使用者是否為社團負責人
         /** @var Club $club */
 //        $user = auth()->user();
 //        $club = $user->club;
         $club = Club::first();
         if (!$club) {
-            dd('非攤位負責人');
+            dd('非社團負責人');
         }
 
         //檢查QR Code最後一組QR Code
