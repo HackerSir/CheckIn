@@ -137,9 +137,9 @@ class RelationTest extends TestCase
         /** @var Booth $booth */
         $booth = $this->factoryWithoutObservers(Booth::class)->create();
 
-        $club->booth()->save($booth);
+        $club->booths()->save($booth);
 
-        $this->assertEquals($booth->id, $club->booth->id);
+        $this->assertContains($booth->id, $club->booths()->pluck('id'));
     }
 
     /**

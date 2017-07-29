@@ -17,7 +17,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string|null $image_url 圖片網址
  * @property \Carbon\Carbon|null $created_at
  * @property \Carbon\Carbon|null $updated_at
- * @property-read \App\Booth $booth
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Booth[] $booths
  * @property-read \App\ClubType|null $clubType
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Feedback[] $feedback
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Record[] $records
@@ -63,9 +63,9 @@ class Club extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne|\Illuminate\Database\Eloquent\Builder
      */
-    public function booth()
+    public function booths()
     {
-        return $this->hasOne(Booth::class);
+        return $this->hasMany(Booth::class);
     }
 
     /**
