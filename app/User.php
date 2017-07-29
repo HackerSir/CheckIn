@@ -23,12 +23,15 @@ use Laratrust\Traits\LaratrustUserTrait;
  * @property \Carbon\Carbon|null $created_at
  * @property \Carbon\Carbon|null $updated_at
  * @property string|null $google2fa_secret
+ * @property int|null $club_id 負責社團
+ * @property-read \App\Club|null $club
  * @property-read bool $is_confirmed
  * @property-read bool $is_local_account
  * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $notifications
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Permission[] $permissions
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Role[] $roles
  * @property-read \App\Student $student
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereClubId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereConfirmAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereConfirmCode($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereCreatedAt($value)
@@ -67,6 +70,7 @@ class User extends Authenticatable
         'last_login_at',
         'last_login_ip',
         'google2fa_secret',
+        'club_id',
     ];
 
     /**
@@ -110,5 +114,13 @@ class User extends Authenticatable
     public function student()
     {
         return $this->hasOne(Student::class);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo|\Illuminate\Database\Eloquent\Builder
+     */
+    public function club()
+    {
+        return $this->belongsTo(Club::class);
     }
 }

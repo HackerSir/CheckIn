@@ -21,6 +21,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property-read \App\ClubType|null $clubType
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Feedback[] $feedback
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Record[] $records
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\User[] $users
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Club whereClubTypeId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Club whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Club whereDescription($value)
@@ -81,6 +82,14 @@ class Club extends Model
     public function feedback()
     {
         return $this->hasMany(Feedback::class);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany|\Illuminate\Database\Eloquent\Builder
+     */
+    public function users()
+    {
+        return $this->hasMany(User::class);
     }
 
     /**
