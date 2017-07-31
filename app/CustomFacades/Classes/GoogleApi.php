@@ -25,7 +25,6 @@ class GoogleApi
             'total_count' => $apiKey->total_count + 1,
         ]);
 
-
         return $apiKey->api_key;
     }
 }
