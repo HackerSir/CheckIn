@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\ApiKey;
+use App\DataTables\ApiKeysDataTable;
 use Illuminate\Http\Request;
 
 class ApiKeyController extends Controller
@@ -10,11 +11,12 @@ class ApiKeyController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @param ApiKeysDataTable $dataTable
+     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\Response|\Illuminate\View\View
      */
-    public function index()
+    public function index(ApiKeysDataTable $dataTable)
     {
-        //TODO
+        return $dataTable->render('api-key.index');
     }
 
     /**
@@ -24,7 +26,7 @@ class ApiKeyController extends Controller
      */
     public function create()
     {
-        //TODO
+        return view('api-key.create');
     }
 
     /**
@@ -35,41 +37,13 @@ class ApiKeyController extends Controller
      */
     public function store(Request $request)
     {
-        //TODO
-    }
+        $this->validate($request, [
+            'api_key' => 'required',
+        ]);
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\ApiKey $apiKey
-     * @return \Illuminate\Http\Response
-     */
-    public function show(ApiKey $apiKey)
-    {
-        //TODO
-    }
+        ApiKey::create($request->all());
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\ApiKey $apiKey
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(ApiKey $apiKey)
-    {
-        //TODO
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request $request
-     * @param  \App\ApiKey $apiKey
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, ApiKey $apiKey)
-    {
-        //TODO
+        return redirect()->route('api-key.index')->with('global', 'ApiKey已新增');
     }
 
     /**
@@ -80,6 +54,8 @@ class ApiKeyController extends Controller
      */
     public function destroy(ApiKey $apiKey)
     {
-        //TODO
+        $apiKey->delete();
+
+        return redirect()->route('api-key.index')->with('global', 'ApiKey已刪除');
     }
 }

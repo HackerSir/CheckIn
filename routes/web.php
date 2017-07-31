@@ -111,7 +111,13 @@ Route::group(['middleware' => ['auth', 'email']], function () {
     //ApiKey管理
     //權限：api-key.manage
     Route::group(['middleware' => 'permission:api-key.manage'], function () {
-        Route::resource('api-key', 'ApiKeyController');
+        Route::resource('api-key', 'ApiKeyController', [
+            'except' => [
+                'show',
+                'edit',
+                'update',
+            ],
+        ]);
     });
 
     //QR Code 掃描
