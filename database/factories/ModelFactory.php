@@ -90,3 +90,14 @@ $factory->define(App\Feedback::class, function (Faker\Generator $faker) {
         'email' => $faker->email,
     ];
 });
+
+$factory->define(App\ApiKey::class, function (Faker\Generator $faker) {
+    $count = $faker->numberBetween(0, 25000);
+    $totalCount = $count + $faker->numberBetween(0, 25000);
+
+    return [
+        'api_key'     => str_random(),
+        'count'       => $count,
+        'total_count' => $totalCount,
+    ];
+});
