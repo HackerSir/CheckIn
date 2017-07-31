@@ -108,6 +108,11 @@ Route::group(['middleware' => ['auth', 'email']], function () {
         Route::get('/', 'SettingController@edit')->name('setting.edit');
         Route::post('update', 'SettingController@update')->name('setting.update');
     });
+    //ApiKey管理
+    //權限：api-key.manage
+    Route::group(['middleware' => 'permission:api-key.manage'], function () {
+        Route::resource('api-key', 'ApiKeyController');
+    });
 
     //QR Code 掃描
     Route::get('qr/{code}', 'QrcodeScanController@scan')->name('qrcode.scan');

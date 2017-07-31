@@ -76,6 +76,10 @@ class LaravelMenu
                         $adminMenu->add('角色管理', ['route' => 'role.index'])->active('role/*');
                     }
 
+                    if (Laratrust::can('api-key.manage')) {
+                        $adminMenu->add('ApiKey管理', ['route' => 'api-key.index'])->active('api-key/*');
+                    }
+
                     if (Laratrust::can('log-viewer.access')) {
                         $adminMenu->add(
                             '記錄檢視器 <i class="fa fa-external-link" aria-hidden="true"></i>',
