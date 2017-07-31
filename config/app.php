@@ -12,7 +12,7 @@ return [
     | any other location as required by the application or its packages.
     */
 
-    'name' => env('APP_NAME', 'Laravel'),
+    'name'     => env('APP_NAME', 'Laravel'),
 
     // 網站中文簡短名稱
     'cht_name' => '逢甲社博集點',
@@ -167,6 +167,11 @@ return [
         Illuminate\View\ViewServiceProvider::class,
 
         /*
+         * Project Service Provider
+         */
+        App\Providers\CustomFacadesProvider::class,
+
+        /*
          * Generator Service Provider
          */
         \Yish\Generators\GeneratorsServiceProvider::class,
@@ -258,6 +263,7 @@ return [
         'DNS1D'        => Milon\Barcode\Facades\DNS1DFacade::class,
         'DNS2D'        => Milon\Barcode\Facades\DNS2DFacade::class,
         'Setting'      => anlutro\LaravelSettings\Facade::class,
+        'GoogleApi'    => App\CustomFacades\Facades\GoogleApi::class,
     ],
 
 ];
