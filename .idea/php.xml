@@ -107,12 +107,18 @@
       <path value="$PROJECT_DIR$/vendor/doctrine/inflector" />
       <path value="$PROJECT_DIR$/vendor/doctrine/cache" />
       <path value="$PROJECT_DIR$/vendor/doctrine/common" />
+      <path value="$PROJECT_DIR$/vendor/zendframework/zend-validator" />
+      <path value="$PROJECT_DIR$/vendor/zendframework/zend-stdlib" />
+      <path value="$PROJECT_DIR$/vendor/zendframework/zend-escaper" />
+      <path value="$PROJECT_DIR$/vendor/pclzip/pclzip" />
+      <path value="$PROJECT_DIR$/vendor/phpoffice/common" />
+      <path value="$PROJECT_DIR$/vendor/phpoffice/phpword" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="7" />
   <component name="PhpUnit">
     <phpunit_settings>
-      <PhpUnitSettings load_method="CUSTOM_LOADER" custom_loader_path="$PROJECT_DIR$/vendor/autoload.php" />
+      <PhpUnitSettings load_method="CUSTOM_LOADER" custom_loader_path="D:/UwAmp/www/CheckIn2017/vendor/autoload.php" />
     </phpunit_settings>
   </component>
 </project>

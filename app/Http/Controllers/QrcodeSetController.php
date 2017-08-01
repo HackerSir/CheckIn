@@ -7,7 +7,10 @@ use App\DataTables\QrcodeSetsDataTable;
 use App\DataTables\Scopes\QrcodeQrcodeSetScope;
 use App\Qrcode;
 use App\QrcodeSet;
+use App\Services\FileService;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use PhpOffice\PhpWord\IOFactory;
 
 class QrcodeSetController extends Controller
 {
@@ -68,13 +71,26 @@ class QrcodeSetController extends Controller
     }
 
     /**
-     * 下載 QR Code PDF
+     * 下載 QR Code Word
      *
      * @param QrcodeSet $qrcodeSet
+     * @param FileService $fileService
      * @return \Illuminate\Http\Response
      */
-    public function download(QrcodeSet $qrcodeSet)
+    public function download(QrcodeSet $qrcodeSet, FileService $fileService)
     {
-        //TODO
+        //檔名
+        $fileName = 'QRCodeSet_' . $qrcodeSet->id . '.docx';
+        //建立檔案
+        $phpWord = $fileService->generateQRCodeDocFile($qrcodeSet);
+        //輸出檔案
+        $objWriter = IOFactory::createWriter($phpWord, 'Word2007');
+        //設定路徑（PHP暫存路徑）
+        $filePath = sys_get_temp_dir() . DIRECTORY_SEPARATOR . 'word_' . Carbon::now()->getTimestamp() . '.docx';
+        //建立暫存檔案
+        $objWriter->save($filePath);
+
+        //下載檔案
+        return response()->download($filePath, $fileName);
     }
 }

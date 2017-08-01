@@ -46,10 +46,13 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/nikic/php-parser" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/paragonie/constant_time_encoding" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/paragonie/random_compat" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/pclzip/pclzip" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/phpdocumentor/reflection-common" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/phpdocumentor/reflection-docblock" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/phpdocumentor/type-resolver" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/phpoffice/common" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/phpoffice/phpexcel" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/phpoffice/phpword" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/phpspec/prophecy" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/phpunit/php-code-coverage" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/phpunit/php-file-iterator" />
@@ -106,6 +109,9 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/yajra/laravel-datatables-buttons" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/yajra/laravel-datatables-html" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/yish/generators" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/zendframework/zend-escaper" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/zendframework/zend-stdlib" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/zendframework/zend-validator" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
@@ -154,10 +160,13 @@
           <root url="file://$MODULE_DIR$/vendor/nikic/php-parser" />
           <root url="file://$MODULE_DIR$/vendor/paragonie/constant_time_encoding" />
           <root url="file://$MODULE_DIR$/vendor/paragonie/random_compat" />
+          <root url="file://$MODULE_DIR$/vendor/pclzip/pclzip" />
           <root url="file://$MODULE_DIR$/vendor/phpdocumentor/reflection-common" />
           <root url="file://$MODULE_DIR$/vendor/phpdocumentor/reflection-docblock" />
           <root url="file://$MODULE_DIR$/vendor/phpdocumentor/type-resolver" />
+          <root url="file://$MODULE_DIR$/vendor/phpoffice/common" />
           <root url="file://$MODULE_DIR$/vendor/phpoffice/phpexcel" />
+          <root url="file://$MODULE_DIR$/vendor/phpoffice/phpword" />
           <root url="file://$MODULE_DIR$/vendor/phpspec/prophecy" />
           <root url="file://$MODULE_DIR$/vendor/phpunit/php-code-coverage" />
           <root url="file://$MODULE_DIR$/vendor/phpunit/php-file-iterator" />
@@ -214,6 +223,9 @@
           <root url="file://$MODULE_DIR$/vendor/yajra/laravel-datatables-buttons" />
           <root url="file://$MODULE_DIR$/vendor/yajra/laravel-datatables-html" />
           <root url="file://$MODULE_DIR$/vendor/yish/generators" />
+          <root url="file://$MODULE_DIR$/vendor/zendframework/zend-escaper" />
+          <root url="file://$MODULE_DIR$/vendor/zendframework/zend-stdlib" />
+          <root url="file://$MODULE_DIR$/vendor/zendframework/zend-validator" />
         </CLASSES>
         <SOURCES>
           <root url="file://$MODULE_DIR$/vendor/anlutro/l4-settings" />
@@ -258,10 +270,13 @@
           <root url="file://$MODULE_DIR$/vendor/nikic/php-parser" />
           <root url="file://$MODULE_DIR$/vendor/paragonie/constant_time_encoding" />
           <root url="file://$MODULE_DIR$/vendor/paragonie/random_compat" />
+          <root url="file://$MODULE_DIR$/vendor/pclzip/pclzip" />
           <root url="file://$MODULE_DIR$/vendor/phpdocumentor/reflection-common" />
           <root url="file://$MODULE_DIR$/vendor/phpdocumentor/reflection-docblock" />
           <root url="file://$MODULE_DIR$/vendor/phpdocumentor/type-resolver" />
+          <root url="file://$MODULE_DIR$/vendor/phpoffice/common" />
           <root url="file://$MODULE_DIR$/vendor/phpoffice/phpexcel" />
+          <root url="file://$MODULE_DIR$/vendor/phpoffice/phpword" />
           <root url="file://$MODULE_DIR$/vendor/phpspec/prophecy" />
           <root url="file://$MODULE_DIR$/vendor/phpunit/php-code-coverage" />
           <root url="file://$MODULE_DIR$/vendor/phpunit/php-file-iterator" />
@@ -318,6 +333,9 @@
           <root url="file://$MODULE_DIR$/vendor/yajra/laravel-datatables-buttons" />
           <root url="file://$MODULE_DIR$/vendor/yajra/laravel-datatables-html" />
           <root url="file://$MODULE_DIR$/vendor/yish/generators" />
+          <root url="file://$MODULE_DIR$/vendor/zendframework/zend-escaper" />
+          <root url="file://$MODULE_DIR$/vendor/zendframework/zend-stdlib" />
+          <root url="file://$MODULE_DIR$/vendor/zendframework/zend-validator" />
         </SOURCES>
       </library>
     </orderEntry>

@@ -28,7 +28,7 @@
             <div class="card-block text-center">
                 {{ Form::open(['route' => ['qrcode-set.download', $qrcodeSet]]) }}
                 <button type="submit" class="btn btn-primary">
-                    <i class="fa fa-file-pdf-o" aria-hidden="true"></i> 下載 QR Code 列印用 PDF
+                    <i class="fa fa-file-word-o" aria-hidden="true"></i> 下載 QR Code 列印用 Word 檔
                 </button>
                 {{ Form::close() }}
             </div>
