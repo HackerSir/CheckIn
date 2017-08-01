@@ -26,9 +26,11 @@
                 </table>
             </div>
             <div class="card-block text-center">
-                <a href="javascript:void(0)" class="btn btn-primary" onclick="alert('Coming soon...')">
+                {{ Form::open(['route' => ['qrcode-set.download', $qrcodeSet]]) }}
+                <button type="submit" class="btn btn-primary">
                     <i class="fa fa-file-pdf-o" aria-hidden="true"></i> 下載 QR Code 列印用 PDF
-                </a>
+                </button>
+                {{ Form::close() }}
             </div>
         </div>
         <div class="card mt-1">

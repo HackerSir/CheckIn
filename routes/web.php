@@ -74,6 +74,10 @@ Route::group(['middleware' => ['auth', 'email']], function () {
                 'show',
             ],
         ]);
+
+        //下載
+        Route::post('qrcode-set/{qrcode_set}/download', 'QrcodeSetController@download')->name('qrcode-set.download');
+
         Route::resource('qrcode-set', 'QrcodeSetController', [
             'only' => [
                 'index',

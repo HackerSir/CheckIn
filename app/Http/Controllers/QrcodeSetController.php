@@ -66,4 +66,15 @@ class QrcodeSetController extends Controller
 
         return $qrcodesDataTable->render('qrcode-set.show', compact('qrcodeSet'));
     }
+
+    /**
+     * 下載 QR Code PDF
+     *
+     * @param QrcodeSet $qrcodeSet
+     * @return \Illuminate\Http\Response
+     */
+    public function download(QrcodeSet $qrcodeSet)
+    {
+        //TODO
+    }
 }
