@@ -30,7 +30,7 @@
                                     <span class="input-group-btn">
                                         <button class="btn btn-secondary" type="button"
                                                 onclick="$('input#nid').val('');$('input#nid').focus()">
-                                            <i class="fa fa-trash-o" aria-hidden="true"></i>
+                                            <i class="fa fa-times" aria-hidden="true"></i>
                                         </button>
                                     </span>
                                 </div>
@@ -53,7 +53,7 @@
                                     <span class="input-group-btn">
                                         <button class="btn btn-secondary" type="button"
                                                 onclick="$('input#code').val('');$('input#code').focus()">
-                                            <i class="fa fa-trash-o" aria-hidden="true"></i>
+                                            <i class="fa fa-times" aria-hidden="true"></i>
                                         </button>
                                     </span>
                                 </div>
