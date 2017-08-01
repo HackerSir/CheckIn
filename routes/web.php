@@ -129,6 +129,16 @@ Route::group(['middleware' => ['auth', 'email']], function () {
         ]);
     });
 
+    //抽獎編號管理
+    //權限：ticket.manage
+    Route::group(['middleware' => 'permission:ticket.manage'], function () {
+        Route::resource('ticket', 'TicketController', [
+            'only' => [
+                'index',
+            ],
+        ]);
+    });
+
     //QR Code 掃描
     Route::get('qr/{code}', 'QrcodeScanController@scan')->name('qrcode.scan');
     //條碼圖

@@ -63,6 +63,10 @@ class LaravelMenu
                         $activityMenu->add('打卡紀錄管理', ['route' => 'record.index'])->active('record/*');
                     }
 
+                    if (Laratrust::can('ticket.manage')) {
+                        $activityMenu->add('抽獎編號管理', ['route' => 'ticket.index'])->active('ticket/*');
+                    }
+
                     if (Laratrust::can('setting.manage')) {
                         $activityMenu->add('網站設定', ['route' => 'setting.edit']);
                     }
