@@ -21,7 +21,7 @@ class QrcodeScanController extends Controller
         view()->share(compact('code'));
         //找出 QR Code
         /** @var Qrcode $qrcode */
-        $qrcode = Qrcode::where('code', $code)->with('student.records.club')->first();
+        $qrcode = Qrcode::where('code', $code)->with('student.records.club.clubType')->first();
         if (!$qrcode) {
             return view('qrcode-scan.scan')->with('level', 'danger')->with('message', 'QR Code無效');
         }
