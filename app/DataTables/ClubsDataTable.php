@@ -44,8 +44,8 @@ class ClubsDataTable extends DataTable
                         ->whereRaw('booths.name LIKE ?', ['%' . $keyword . '%']);
                 });
             })
-            ->escapeColumns(['club_type_id'])
-            ->editColumn('is_counted', 'club.datatables.is_counted')->escapeColumns('is_counted');
+            ->editColumn('is_counted', 'club.datatables.is_counted')
+            ->escapeColumns([]);
     }
 
     /**

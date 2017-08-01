@@ -31,7 +31,7 @@ class BoothsDataTable extends DataTable
                         ->whereRaw('clubs.name LIKE ?', ['%' . $keyword . '%']);
                 });
             })
-            ->escapeColumns(['club_id']);
+            ->escapeColumns([]);
     }
 
     /**

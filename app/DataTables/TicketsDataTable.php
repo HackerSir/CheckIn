@@ -30,8 +30,7 @@ class TicketsDataTable extends DataTable
                         ->whereRaw('students.name LIKE ?', ['%' . $keyword . '%'])
                         ->orWhereRaw('students.nid LIKE ?', ['%' . $keyword . '%']);
                 });
-            })
-            ->escapeColumns('student_id');
+            });
     }
 
     /**

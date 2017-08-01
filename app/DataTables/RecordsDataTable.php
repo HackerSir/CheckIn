@@ -31,7 +31,6 @@ class RecordsDataTable extends DataTable
                         ->orWhereRaw('students.nid LIKE ?', ['%' . $keyword . '%']);
                 });
             })
-            ->escapeColumns('student_id')
             ->editColumn('club_id', function ($record) {
                 return view('record.datatables.club', compact('record'))->render();
             })
@@ -45,7 +44,7 @@ class RecordsDataTable extends DataTable
                         ->whereRaw('clubs.name LIKE ?', ['%' . $keyword . '%']);
                 });
             })
-            ->escapeColumns('club_id');
+            ->escapeColumns([]);
     }
 
     /**
