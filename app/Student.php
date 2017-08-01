@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Query\Builder;
 
 /**
  * App\Student
@@ -18,6 +19,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $gender 性別
  * @property \Carbon\Carbon|null $created_at
  * @property \Carbon\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Record[] $countedRecords
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Feedback[] $feedback
  * @property-read string $display_name
  * @property-read bool $is_freshman
@@ -74,6 +76,24 @@ class Student extends Model
     public function records()
     {
         return $this->hasMany(Record::class)->orderBy('created_at', 'desc');
+    }
+
+    /**
+     * 有採計的打卡紀錄
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany|\Illuminate\Database\Eloquent\Builder
+     */
+    public function countedRecords()
+    {
+        return $this->hasMany(Record::class)
+            ->whereHas('club', function ($query) {
+                /** @var Builder|Club|$query */
+                $query->whereHas('clubType', function ($query) {
+                    /** @var Builder|ClubType|$query */
+                    $query->where('is_counted', true);
+                });
+            })
+            ->orderBy('created_at', 'desc');
     }
 
     /**
