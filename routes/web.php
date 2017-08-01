@@ -119,6 +119,15 @@ Route::group(['middleware' => ['auth', 'email']], function () {
             ],
         ]);
     });
+    //打卡紀錄管理
+    //權限：record.manage
+    Route::group(['middleware' => 'permission:record.manage'], function () {
+        Route::resource('record', 'RecordController', [
+            'only' => [
+                'index',
+            ],
+        ]);
+    });
 
     //QR Code 掃描
     Route::get('qr/{code}', 'QrcodeScanController@scan')->name('qrcode.scan');

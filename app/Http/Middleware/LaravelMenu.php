@@ -59,6 +59,10 @@ class LaravelMenu
                         $activityMenu->add('社團管理', ['route' => 'club.index'])->active('club/*');
                     }
 
+                    if (Laratrust::can('record.manage')) {
+                        $activityMenu->add('打卡紀錄管理', ['route' => 'record.index'])->active('record/*');
+                    }
+
                     if (Laratrust::can('setting.manage')) {
                         $activityMenu->add('網站設定', ['route' => 'setting.edit']);
                     }
