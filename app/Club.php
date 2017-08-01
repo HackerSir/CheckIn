@@ -53,6 +53,10 @@ class Club extends Model
         'image_url',
     ];
 
+    protected $appends = [
+        'is_counted',
+    ];
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo|\Illuminate\Database\Eloquent\Builder
      */
