@@ -91,7 +91,11 @@ class ClubsDataTable extends DataTable
             'number'       => ['title' => '編號'],
             'name'         => ['title' => '名稱'],
             'booth'        => ['title' => '攤位'],
-            'is_counted'   => ['title' => '集點'],
+            'is_counted'   => [
+                'orderable'  => false,
+                'searchable' => false,
+                'title'      => '集點',
+            ],
         ];
     }
 
