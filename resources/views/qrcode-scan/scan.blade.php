@@ -29,7 +29,7 @@
                                 </tr>
                                 <tr>
                                     <td class="text-md-right">進度：</td>
-                                    <td>{{ $qrcode->student->records->count() }} / {{ \Setting::get('target') }}</td>
+                                    <td>{{ $qrcode->student->countedRecords->count() }} / {{ \Setting::get('target') }}</td>
                                 </tr>
                                 <tr>
                                     <td class="text-md-right">抽獎編號：</td>
@@ -46,7 +46,12 @@
                     <ul class="list-group list-group-flush">
                         @foreach($qrcode->student->records as $record)
                             <li class="list-group-item">
-                                {{ $record->club->name }}<br/>
+                                {!! $record->club->clubType->tag ?? '' !!}
+                                {{ $record->club->name }}
+                                @if(!$record->club->is_counted)
+                                    <span class='badge badge-default tag'>不採計</span>
+                                @endif
+                                <br/>
                                 {{ $record->created_at }}
                                 （{{ (new \Carbon\Carbon($record->created_at))->diffForHumans() }}）
                             </li>

@@ -20,6 +20,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Booth[] $booths
  * @property-read \App\ClubType|null $clubType
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Feedback[] $feedback
+ * @property-read bool $is_counted
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Record[] $records
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\User[] $users
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Club whereClubTypeId($value)
@@ -90,6 +91,18 @@ class Club extends Model
     public function users()
     {
         return $this->hasMany(User::class);
+    }
+
+    /**
+     * @return bool
+     */
+    public function getIsCountedAttribute()
+    {
+        if (!$this->clubType) {
+            return false;
+        }
+
+        return $this->clubType->is_counted;
     }
 
     /**
