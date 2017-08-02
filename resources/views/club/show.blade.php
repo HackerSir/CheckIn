@@ -67,7 +67,7 @@
                 </div>
                 @if($club->description)
                     <div class="card-block">
-                        {{ $club->description }}
+                        {!! nl2br(e($club->description)) !!}
                     </div>
                 @endif
                 <div class="card-block text-center">
