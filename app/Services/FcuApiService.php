@@ -44,7 +44,6 @@ class FcuApiService extends Service
             $response = $e->getResponse();
         }
         //回應
-        $responseStatusCode = $response->getStatusCode();
         $responseJson = json_decode($response->getBody());
         //若無法轉成json，表示未順利連上API（API可能回應404，因此無法透過ResponseStatusCode判斷連線成功失敗）
         if (!$responseJson) {
@@ -90,7 +89,6 @@ class FcuApiService extends Service
             $response = $e->getResponse();
         }
         //回應
-        $responseStatusCode = $response->getStatusCode();
         $responseJson = json_decode($response->getBody());
         //若無法轉成json，表示未順利連上API（API可能回應404，因此無法透過ResponseStatusCode判斷連線成功失敗）
         if (!$responseJson) {
