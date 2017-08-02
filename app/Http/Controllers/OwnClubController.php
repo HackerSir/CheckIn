@@ -8,11 +8,11 @@ use Illuminate\Http\Request;
 class OwnClubController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display the specified resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function show()
     {
         $club = $this->getOwnClub();
 
