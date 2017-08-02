@@ -2,6 +2,14 @@
 
 @section('title', $club->name . ' - 社團')
 
+@section('css')
+    <style>
+        table tr td:first-child {
+            white-space: nowrap
+        }
+    </style>
+@endsection
+
 @section('content')
     <div class="row mt-3 pb-3">
         <div class="col-md-8 offset-md-2">
