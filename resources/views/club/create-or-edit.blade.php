@@ -144,8 +144,8 @@
             }
 
             var $userSelect = $('#user_id');
-            var selected = {!!  $club->users->pluck('name','id')->toJson() !!};
-            var selectIds = {!!  $club->users->pluck('id')->toJson() !!};
+            var selected = {!!  isset($club) ? $club->users->pluck('name','id')->toJson() : '{}' !!};
+            var selectIds = {!! isset($club) ? $club->users->pluck('id')->toJson() : '{}' !!};
             var initials = [];
             $.each(selected, function (key, val) {
                 initials.push({id: key, text: val});
@@ -167,7 +167,7 @@
                         return {
                             q: params.term, // search term
                             page: params.page,
-                            club: {{ $club->id }}
+                            club: {{ $club->id ?? 0 }}
                         };
                     },
                     processResults: function (data, params) {
