@@ -20,6 +20,8 @@ Route::group(['prefix' => 'oauth', 'namespace' => 'Auth'], function () {
     Route::any('login', 'OAuthController@login')->name('oauth.login');
 });
 
+Route::get('clubs', 'HomeController@clubs')->name('clubs');
+
 //服務條款(含隱私權跟免責)
 Route::get('terms', function () {
     return view('misc.terms');

@@ -20,9 +20,7 @@ class LaravelMenu
         //左側
         Menu::make('left', function ($menu) {
             /* @var \Lavary\Menu\Builder $menu */
-            //$menu->add('Home', ['route' => 'index']);
-            //$menu->add('About', 'javascript:void(0)');
-            //$menu->add('Contact', 'javascript:void(0)');
+            $menu->add('社團清單', ['route' => 'clubs']);
         });
         //右側
         Menu::make('right', function ($menu) {

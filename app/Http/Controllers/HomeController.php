@@ -8,4 +8,9 @@ class HomeController extends Controller
     {
         return view('index');
     }
+
+    public function clubs()
+    {
+        return view('clubs');
+    }
 }
