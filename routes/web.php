@@ -97,6 +97,7 @@ Route::group(['middleware' => ['auth', 'email']], function () {
     //社團類型管理
     //權限：club-type.manage
     Route::group(['middleware' => 'permission:club-type.manage'], function () {
+        Route::post('club-type/store-default', 'ClubTypeController@storeDefault')->name('club-type.store-default');
         Route::resource('club-type', 'ClubTypeController', [
             'except' => [
                 'show',

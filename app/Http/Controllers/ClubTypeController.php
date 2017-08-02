@@ -52,6 +52,36 @@ class ClubTypeController extends Controller
     }
 
     /**
+     * @return \Illuminate\Http\Response
+     */
+    public function storeDefault()
+    {
+        if (ClubType::count() > 0) {
+            return redirect()->route('club-type.index')->with('warning', '僅限不存在任何社團類型時使用');
+        }
+
+        $defaultClubTypes = [
+            ['學藝性', '#2185D0'],
+            ['服務性', '#21BA45'],
+            ['康樂性', '#FBBD08'],
+            ['聯誼性', '#DB2828'],
+            ['體能性', '#F2711C'],
+            ['志工隊', '#00B5AD'],
+            ['學生會', '#6435C9'],
+        ];
+
+        foreach ($defaultClubTypes as $clubType) {
+            ClubType::create([
+                'name'       => $clubType[0],
+                'color'      => $clubType[1],
+                'is_counted' => true,
+            ]);
+        }
+
+        return redirect()->route('club-type.index')->with('global', '預設社團類型已建立');
+    }
+
+    /**
      * Show the form for editing the specified resource.
      *
      * @param  \App\ClubType $clubType
