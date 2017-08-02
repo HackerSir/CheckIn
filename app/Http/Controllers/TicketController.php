@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\DataTables\TicketsDataTable;
+use App\Ticket;
+use Illuminate\Http\Request;
 
 class TicketController extends Controller
 {
@@ -15,5 +17,32 @@ class TicketController extends Controller
     public function index(TicketsDataTable $dataTable)
     {
         return $dataTable->render('ticket.index');
+    }
+
+    public function ticket()
+    {
+        return view('ticket.ticket');
+    }
+
+    public function ticketInfo(Request $request)
+    {
+        $id = $request->get('id');
+        $ticket = Ticket::find($id);
+        if (!$ticket) {
+            $json = [
+                'found' => false,
+                'id'    => $id,
+            ];
+
+            return response()->json($json);
+        }
+        $json = [
+            'found' => true,
+            'id'    => $ticket->id,
+            'name'  => $ticket->student->name,
+            'class' => $ticket->student->class,
+        ];
+
+        return response()->json($json);
     }
 }
