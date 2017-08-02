@@ -20,7 +20,7 @@ class LaravelMenu
         //左側
         Menu::make('left', function ($menu) {
             /* @var \Lavary\Menu\Builder $menu */
-            $menu->add('社團清單', ['route' => 'clubs']);
+            $menu->add('社團攤位', ['route' => 'clubs']);
         });
         //右側
         Menu::make('right', function ($menu) {
