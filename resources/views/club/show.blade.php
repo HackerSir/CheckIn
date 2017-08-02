@@ -27,7 +27,7 @@
                     <table class="table table-hover">
                         <tr>
                             <td class="text-md-right">類型：</td>
-                            <td>{{ $club->club_type->name ?? '' }}</td>
+                            <td>{{ $club->clubType->name ?? '' }}</td>
                         </tr>
                         <tr>
                             <td class="text-md-right">名稱：</td>
