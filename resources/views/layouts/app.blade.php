@@ -20,8 +20,6 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     {{-- CSS --}}
-    {{-- npm的bootstrap還未推出v4 --}}
-    {{--<link rel="stylesheet" href="{{ asset('css/app.css') }}">--}}
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"
           integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
     <link rel="stylesheet" href="//cdn.jsdelivr.net/alertifyjs/1.9.0/css/alertify.min.css"/>
@@ -94,7 +92,6 @@
         'csrfToken' => csrf_token(),
     ]); ?>
 </script>
-{{--<script src="{{ asset('js/app.js') }}"></script>--}}
 <script>
     $(function () {
         //AlertifyJS
