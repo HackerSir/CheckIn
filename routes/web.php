@@ -25,7 +25,7 @@ Route::get('terms', function () {
     return view('misc.terms');
 })->name('terms');
 
-//服務條款(含隱私權跟免責)
+//常見問題
 Route::get('faq', function () {
     return view('misc.faq');
 })->name('faq');
