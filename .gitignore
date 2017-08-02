@@ -323,3 +323,4 @@ _ide_helper.php
 .phpstorm.meta.php
 
 storage/settings.json
+.idea/remote-mappings.xml
