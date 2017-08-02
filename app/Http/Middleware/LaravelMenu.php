@@ -29,12 +29,13 @@ class LaravelMenu
             /* @var \Lavary\Menu\Builder $menu */
             //會員
             if (auth()->check()) {
-                if (!auth()->user()->is_confirmed) {
+                $user = auth()->user();
+                if (!$user->is_confirmed) {
                     $menu->add('尚未完成信箱驗證', ['route' => 'confirm-mail.resend'])
                         ->link->attr(['class' => 'text-danger']);
                 }
                 //活動選單
-                if (Laratrust::can('activity-menu.view') and auth()->user()->isConfirmed) {
+                if (Laratrust::can('activity-menu.view') and $user->isConfirmed) {
                     /** @var \Lavary\Menu\Builder $activityMenu */
                     $activityMenu = $menu->add('活動選單', 'javascript:void(0)');
 
@@ -72,7 +73,7 @@ class LaravelMenu
                     }
                 }
                 //管理員
-                if (Laratrust::can('menu.view') and auth()->user()->isConfirmed) {
+                if (Laratrust::can('menu.view') and $user->isConfirmed) {
                     /** @var \Lavary\Menu\Builder $adminMenu */
                     $adminMenu = $menu->add('管理選單', 'javascript:void(0)');
 
@@ -96,7 +97,7 @@ class LaravelMenu
                     }
                 }
                 /** @var \Lavary\Menu\Builder $userMenu */
-                $userMenu = $menu->add(auth()->user()->name, 'javascript:void(0)');
+                $userMenu = $menu->add($user->name, 'javascript:void(0)');
                 $userMenu->add('個人資料', ['route' => 'profile'])->active('profile/*');
                 $userMenu->add('登出', ['route' => 'logout']);
             } else {
