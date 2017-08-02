@@ -26,6 +26,16 @@
                             <td>{{ $club->name }}</td>
                         </tr>
                         <tr>
+                            <td class="text-md-right">集點：</td>
+                            <td>
+                                @if($club->is_counted)
+                                    <i class="fa fa-check fa-2x text-success" aria-hidden="true"></i>
+                                @else
+                                    <i class="fa fa-times fa-2x text-danger" aria-hidden="true"></i>
+                                @endif
+                            </td>
+                        </tr>
+                        <tr>
                             <td class="text-md-right">編號：</td>
                             <td>{{ $club->number }}</td>
                         </tr>
