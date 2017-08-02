@@ -57,9 +57,12 @@ class QrcodeSetsDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            'id'              => ['title' => '#'],
-            'qrcodes_count'   => ['title' => 'QR Code 數量'],
-            'created_at'      => ['title' => '建立時間'],
+            'id'            => ['title' => '#'],
+            'qrcodes_count' => [
+                'searchable' => false,
+                'title'      => 'QR Code 數量',
+            ],
+            'created_at'    => ['title' => '建立時間'],
         ];
     }
 
