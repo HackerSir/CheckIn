@@ -84,7 +84,7 @@ class LaravelMenu
                     }
 
                     if (Laratrust::can('api-key.manage')) {
-                        $adminMenu->add('ApiKey管理', ['route' => 'api-key.index'])->active('api-key/*');
+                        $adminMenu->add('API Key 管理', ['route' => 'api-key.index'])->active('api-key/*');
                     }
 
                     if (Laratrust::can('log-viewer.access')) {
