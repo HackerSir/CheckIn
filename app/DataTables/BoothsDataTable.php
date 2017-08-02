@@ -42,7 +42,7 @@ class BoothsDataTable extends DataTable
     public function query()
     {
         /** @var Booth|\Illuminate\Database\Eloquent\Builder $query */
-        $query = Booth::select(array_keys($this->getColumns()));
+        $query = Booth::with('club')->select(array_keys($this->getColumns()));
 
         return $this->applyScopes($query);
     }

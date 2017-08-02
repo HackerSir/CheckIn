@@ -55,7 +55,7 @@ class RecordsDataTable extends DataTable
     public function query()
     {
         /** @var Record|\Illuminate\Database\Eloquent\Builder $query */
-        $query = Record::select(array_keys($this->getColumns()));
+        $query = Record::with('student', 'club.clubType')->select(array_keys($this->getColumns()));
 
         return $this->applyScopes($query);
     }

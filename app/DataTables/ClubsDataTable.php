@@ -56,7 +56,7 @@ class ClubsDataTable extends DataTable
     public function query()
     {
         /** @var Club|\Illuminate\Database\Eloquent\Builder $query */
-        $query = Club::query();
+        $query = Club::with('clubType', 'booths');
 
         return $this->applyScopes($query);
     }
