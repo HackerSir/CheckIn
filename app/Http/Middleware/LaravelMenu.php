@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\User;
 use Closure;
 use Laratrust;
 use Menu;
@@ -27,11 +28,16 @@ class LaravelMenu
             /* @var \Lavary\Menu\Builder $menu */
             //會員
             if (auth()->check()) {
+                /** @var User $user */
                 $user = auth()->user();
                 if (!$user->is_confirmed) {
                     $menu->add('尚未完成信箱驗證', ['route' => 'confirm-mail.resend'])
                         ->link->attr(['class' => 'text-danger']);
                 } else {
+                    //負責的社團
+                    if ($user->club) {
+                        $menu->add($user->club->name, ['route' => 'own-club.show'])->active('own-club/*');
+                    }
                     //活動選單
                     if (Laratrust::can('activity-menu.view')) {
                         /** @var \Lavary\Menu\Builder $activityMenu */

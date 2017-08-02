@@ -16,7 +16,7 @@ class OwnClubController extends Controller
     {
         $club = $this->getOwnClub();
 
-        //TODO
+        return view('own-club.show', compact('club'));
     }
 
     /**
@@ -28,7 +28,7 @@ class OwnClubController extends Controller
     {
         $club = $this->getOwnClub();
 
-        //TODO
+        return view('own-club.edit', compact('club'));
     }
 
     /**
@@ -41,7 +41,14 @@ class OwnClubController extends Controller
     {
         $club = $this->getOwnClub();
 
-        //TODO
+        $this->validate($request, [
+            'url'       => 'nullable|url',
+            'image_url' => 'nullable|url',
+        ]);
+
+        $club->update($request->only(['description', 'url', 'image_url']));
+
+        return redirect()->route('own-club.show')->with('global', '社團已更新');
     }
 
     /**
