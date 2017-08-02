@@ -1,11 +1,11 @@
 @extends('layouts.app')
 
-@section('title', '網站設定')
+@section('title', '活動設定')
 
 @section('content')
     <div class="row mt-3">
         <div class="col-md-8 offset-md-2">
-            <h1>網站設定</h1>
+            <h1>活動設定</h1>
             <div class="card">
                 <div class="card-block">
                     {{ Form::open(['route' => 'setting.update']) }}

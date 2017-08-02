@@ -67,7 +67,7 @@ class LaravelMenu
                     }
 
                     if (Laratrust::can('setting.manage')) {
-                        $activityMenu->add('網站設定', ['route' => 'setting.edit']);
+                        $activityMenu->add('活動設定', ['route' => 'setting.edit']);
                     }
                 }
                 //管理員
