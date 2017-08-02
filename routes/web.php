@@ -143,6 +143,13 @@ Route::group(['middleware' => ['auth', 'email']], function () {
         ]);
     });
 
+    //自己的社團
+    Route::group(['prefix' => 'own-club'], function () {
+        Route::get('/', 'OwnClubController@index')->name('own-club.index');
+        Route::get('edit', 'OwnClubController@edit')->name('own-club.edit');
+        Route::patch('update', 'OwnClubController@update')->name('own-club.update');
+    });
+
     //QR Code 掃描
     Route::get('qr/{code}', 'QrcodeScanController@scan')->name('qrcode.scan');
     //條碼圖
