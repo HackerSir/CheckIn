@@ -40,30 +40,10 @@
                         @endif
                     </table>
                 </div>
-                @if(isset($qrcode->student))
-                    <div class="card-header">
-                        打卡紀錄
-                    </div>
-                    <ul class="list-group list-group-flush">
-                        @foreach($qrcode->student->records as $record)
-                            <li class="list-group-item">
-                                <div>
-                                    {!! $record->club->clubType->tag ?? '' !!}
-                                    {{ $record->club->name }}
-                                    @if(!$record->club->is_counted)
-                                        <span class='badge badge-default tag'>不採計</span>
-                                    @endif
-                                    <br/>
-                                    <small>
-                                        {{ $record->created_at }}
-                                        （{{ (new \Carbon\Carbon($record->created_at))->diffForHumans() }}）
-                                    </small>
-                                </div>
-                            </li>
-                        @endforeach
-                    </ul>
-                @endif
             </div>
+            @if(isset($qrcode->student))
+                @include('components.record-list', ['records' => $qrcode->student->records])
+            @endif
         </div>
     </div>
 @endsection
