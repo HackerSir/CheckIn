@@ -11,7 +11,10 @@ class HomeController extends Controller
         /** @var User $user */
         $user = auth()->user();
         if ($user && $user->student) {
-            return view('dashboard', ['student' => $user->student]);
+            $student = $user->student;
+            $student->load('records.club.clubType', 'qrcodes.student');
+
+            return view('dashboard', compact('student'));
         }
 
         return view('index');
