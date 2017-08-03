@@ -36,7 +36,7 @@
                         <div class="form-group row">
                             <div class="col-md-10 offset-md-2">
                                 <button type="submit" class="btn btn-primary">
-                                    發送密碼重設連結
+                                    發送重設密碼信件
                                 </button>
                             </div>
                         </div>
