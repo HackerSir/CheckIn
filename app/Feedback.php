@@ -15,12 +15,14 @@ use Illuminate\Database\Eloquent\Model;
  * @property string|null $email 聯絡信箱
  * @property \Carbon\Carbon|null $created_at
  * @property \Carbon\Carbon|null $updated_at
+ * @property string|null $message 附加訊息
  * @property-read \App\Club|null $club
  * @property-read \App\Student|null $student
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Feedback whereClubId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Feedback whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Feedback whereEmail($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Feedback whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Feedback whereMessage($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Feedback wherePhone($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Feedback whereStudentId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Feedback whereUpdatedAt($value)
@@ -35,11 +37,13 @@ class Feedback extends Model
         'club_id',
         'phone',
         'email',
+        'message',
     ];
 
     protected $nullable = [
         'phone',
         'email',
+        'message',
     ];
 
     /**
