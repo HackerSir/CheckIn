@@ -73,6 +73,14 @@ class Student extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany|\Illuminate\Database\Eloquent\Builder
      */
+    public function qrcodes()
+    {
+        return $this->hasMany(Qrcode::class)->orderBy('bind_at', 'desc');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany|\Illuminate\Database\Eloquent\Builder
+     */
     public function records()
     {
         return $this->hasMany(Record::class)->orderBy('created_at', 'desc');

@@ -94,6 +94,19 @@ class StudentController extends Controller
     }
 
     /**
+     * Display the specified resource.
+     *
+     * @param Student $student
+     * @return \Illuminate\Http\Response
+     */
+    public function show(Student $student)
+    {
+        $student->load('records.club.clubType', 'qrcodes.student');
+
+        return view('student.show', compact('student'));
+    }
+
+    /**
      * Update the specified resource in storage.
      *
      * @param  \App\Student $student
