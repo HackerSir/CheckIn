@@ -11,10 +11,10 @@
             <h1>{{ $qrcode->code }} - QR Code</h1>
             <div class="card">
                 <div class="card-block text-center">
-                    <img src="{{ route('code-picture.qrcode', $qrcode->code) }}">
+                    <img src="{{ route('code-picture.qrcode', $qrcode->code) }}" class="img-fluid">
                     <br/>
                     <br/>
-                    <img src="{{ route('code-picture.barcode', $qrcode->code) }}">
+                    <img src="{{ route('code-picture.barcode', $qrcode->code) }}" class="img-fluid">
                 </div>
                 <div class="card-block">
                     <table class="table table-hover">
