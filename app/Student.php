@@ -25,6 +25,7 @@ use Illuminate\Database\Query\Builder;
  * @property-read bool $is_freshman
  * @property-read string $masked_display_name
  * @property-read \App\Qrcode $qrcode
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Qrcode[] $qrcodes
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Record[] $records
  * @property-read \App\Ticket $ticket
  * @property-read \App\User|null $user
@@ -63,6 +64,8 @@ class Student extends Model
     }
 
     /**
+     * 最後一組 QR Code
+     *
      * @return \Illuminate\Database\Eloquent\Relations\HasOne|\Illuminate\Database\Eloquent\Builder
      */
     public function qrcode()
@@ -71,6 +74,8 @@ class Student extends Model
     }
 
     /**
+     * 所有 QR Code
+     *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany|\Illuminate\Database\Eloquent\Builder
      */
     public function qrcodes()
