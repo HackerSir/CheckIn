@@ -72,6 +72,10 @@ class LaravelMenu
                             $activityMenu->add('抽獎編號管理', ['route' => 'ticket.index'])->active('ticket/*');
                         }
 
+                        if (Laratrust::can('extra-ticket.manage')) {
+                            $activityMenu->add('額外抽獎編號管理', ['route' => 'extra-ticket.index'])->active('extra-ticket/*');
+                        }
+
                         if (Laratrust::can('setting.manage')) {
                             $activityMenu->add('活動設定', ['route' => 'setting.edit']);
                         }

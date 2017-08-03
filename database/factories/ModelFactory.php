@@ -101,3 +101,18 @@ $factory->define(App\ApiKey::class, function (Faker\Generator $faker) {
         'total_count' => $totalCount,
     ];
 });
+
+$factory->define(App\ExtraTicket::class, function (Faker\Generator $faker) {
+    $isTeacher = $faker->boolean();
+    $nid = $isTeacher
+        ? $faker->regexify('[DEPMV]([0-9]){7}')
+        : $faker->regexify('T[0-9]{5}');
+    $grade = $faker->randomElement(['一', '二', '三', '四', '五', '六']);
+    $class = $faker->randomElement(['甲', '乙', '丙', '丁', '戊', '己']);
+
+    return [
+        'nid'   => $nid,
+        'name'  => $faker->name,
+        'class' => "資訊工程學系{$grade}年級{$class}班",
+    ];
+});

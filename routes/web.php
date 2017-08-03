@@ -148,6 +148,17 @@ Route::group(['middleware' => ['auth', 'email']], function () {
             ],
         ]);
     });
+    //額外抽獎編號管理
+    //權限：extra-ticket.manage
+    Route::group(['middleware' => 'permission:extra-ticket.manage'], function () {
+        Route::get('extra-ticket/ticket', 'ExtraTicketController@ticket')->name('extra-ticket.ticket');
+        Route::get('extra-ticket/info', 'ExtraTicketController@ticketInfo')->name('extra-ticket.info');
+        Route::resource('extra-ticket', 'ExtraTicketController', [
+            'except' => [
+                'show',
+            ],
+        ]);
+    });
 
     //自己的社團
     Route::group(['prefix' => 'own-club'], function () {
