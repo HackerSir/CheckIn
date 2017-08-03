@@ -4,7 +4,7 @@
 
 @section('css')
     <style>
-        #main_jumbotron {
+        .jumbotron {
             word-break: break-all;
             margin-bottom: 0;
             border-radius: 20px;
@@ -23,7 +23,7 @@
     </style>
 @endsection
 @section('content')
-    <div id="main_jumbotron" class="jumbotron mt-3">
+    <div class="jumbotron mt-3">
         <h1>{{ config('app.cht_name') }}</h1>
         <h3>2017 逢甲社團博覽會集點打卡</h3>
         <a href="{{ route('oauth.index') }}" class="btn btn-primary btn-lg" title="Let's GO!!">GO!</a>
