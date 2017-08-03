@@ -97,7 +97,6 @@
                     <div class="form-group row{{ $errors->has('user_id') ? ' has-danger' : '' }}">
                         <label for="user_id[]" class="col-md-2 col-form-label">社團負責人</label>
                         <div class="col-md-10">
-                            {{-- TODO: 預選已存在的社團負責人 --}}
                             {{ Form::select('user_id[]', [], null, ['id' => 'user_id', 'class' => 'form-control', 'multiple']) }}
                             @if ($errors->has('user_id'))
                                 <span class="form-control-feedback">
