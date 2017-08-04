@@ -7,7 +7,6 @@ use GrahamCampbell\Throttle\Transformers\TransformerInterface;
 
 class CustomKeyTransformer implements TransformerInterface
 {
-
     /**
      * Transform the data into a new data instance.
      *

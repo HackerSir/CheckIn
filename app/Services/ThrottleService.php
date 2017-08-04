@@ -8,7 +8,6 @@ use GrahamCampbell\Throttle\Throttle;
 
 class ThrottleService
 {
-
     /**
      * Get a new throttler.
      *
