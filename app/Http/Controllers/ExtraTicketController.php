@@ -197,5 +197,4 @@ class ExtraTicketController extends Controller
 
         return response()->download($path);
     }
-
 }
