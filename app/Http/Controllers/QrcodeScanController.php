@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Club;
 use App\Qrcode;
 use App\Record;
+use App\User;
 use Carbon\Carbon;
 use Setting;
 
@@ -18,7 +19,16 @@ class QrcodeScanController extends Controller
      */
     public function scan($code)
     {
+        /** @var User $user */
+        $user = auth()->user();
+
         view()->share(compact('code'));
+        //檢查冷卻（每分鐘60次）
+        $throttle = \ExtendThrottle::get('qrcode scan ' . $user->id, 60, 1);
+        if (!$throttle->attempt()) {
+            return view('qrcode-scan.scan')->with('level', 'danger')->with('message', '掃描過於頻繁，請稍候重試');
+        }
+
         //找出 QR Code
         /** @var Qrcode $qrcode */
         $qrcode = Qrcode::where('code', $code)->with('student.records.club.clubType')->first();
@@ -44,7 +54,6 @@ class QrcodeScanController extends Controller
 
         //檢查掃描使用者是否為社團負責人
         /** @var Club $club */
-        $user = auth()->user();
         $club = $user->club;
         if (!$club) {
             //非社團負責人，不顯示訊息
