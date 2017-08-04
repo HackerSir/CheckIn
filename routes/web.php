@@ -157,6 +157,7 @@ Route::group(['middleware' => ['auth', 'email']], function () {
         Route::post('extra-ticket/import', 'ExtraTicketController@postImport')->name('extra-ticket.import');
         Route::get('extra-ticket/download-import-sample', 'ExtraTicketController@downloadImportSample')
             ->name('extra-ticket.download-import-sample');
+        Route::delete('extra-ticket/destroy-all', 'ExtraTicketController@destroyAll')->name('extra-ticket.destroy-all');
         Route::resource('extra-ticket', 'ExtraTicketController', [
             'except' => [
                 'show',

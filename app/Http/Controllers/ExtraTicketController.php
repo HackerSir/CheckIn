@@ -99,6 +99,13 @@ class ExtraTicketController extends Controller
         return redirect()->route('extra-ticket.index')->with('global', '額外抽獎編號已刪除');
     }
 
+    public function destroyAll()
+    {
+        ExtraTicket::query()->delete();
+
+        return redirect()->route('extra-ticket.index')->with('global', '額外抽獎編號已全數刪除');
+    }
+
     public function ticket()
     {
         return view('extra-ticket.ticket');
