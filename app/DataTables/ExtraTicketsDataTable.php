@@ -60,7 +60,7 @@ class ExtraTicketsDataTable extends DataTable
         return [
             'id'    => ['title' => '#'],
             'nid'   => ['title' => '學號'],
-            'name'  => ['title' => '名稱'],
+            'name'  => ['title' => '姓名'],
             'class' => ['title' => '系級'],
         ];
     }
