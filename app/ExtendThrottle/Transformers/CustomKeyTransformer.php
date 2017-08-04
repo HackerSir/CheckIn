@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Throttle\Transformers;
+namespace App\ExtendThrottle\Transformers;
 
 use GrahamCampbell\Throttle\Data;
 use GrahamCampbell\Throttle\Transformers\TransformerInterface;

@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Throttle\Factories;
+namespace App\ExtendThrottle\Factories;
 
-use App\Throttle\Transformers\CustomKeyTransformer;
+use App\ExtendThrottle\Transformers\CustomKeyTransformer;
 use GrahamCampbell\Throttle\Transformers\ArrayTransformer;
 use GrahamCampbell\Throttle\Transformers\RequestTransformer;
 use GrahamCampbell\Throttle\Transformers\TransformerFactory;

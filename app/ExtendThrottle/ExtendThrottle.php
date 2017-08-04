@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Services;
+namespace App\ExtendThrottle;
 
-use App\Throttle\Factories\ExtendTransformerFactory;
+use App\ExtendThrottle\Factories\ExtendTransformerFactory;
 use GrahamCampbell\Throttle\Factories\CacheFactory;
 use GrahamCampbell\Throttle\Throttle;
 
-class ThrottleService
+class ExtendThrottle
 {
     /**
      * Get a new throttler.
