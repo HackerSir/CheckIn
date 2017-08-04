@@ -153,6 +153,10 @@ Route::group(['middleware' => ['auth', 'email']], function () {
     Route::group(['middleware' => 'permission:extra-ticket.manage'], function () {
         Route::get('extra-ticket/ticket', 'ExtraTicketController@ticket')->name('extra-ticket.ticket');
         Route::get('extra-ticket/info', 'ExtraTicketController@ticketInfo')->name('extra-ticket.info');
+        Route::get('extra-ticket/import', 'ExtraTicketController@getImport')->name('extra-ticket.import');
+        Route::post('extra-ticket/import', 'ExtraTicketController@postImport')->name('extra-ticket.import');
+        Route::get('extra-ticket/download-import-sample', 'ExtraTicketController@downloadImportSample')
+            ->name('extra-ticket.download-import-sample');
         Route::resource('extra-ticket', 'ExtraTicketController', [
             'except' => [
                 'show',

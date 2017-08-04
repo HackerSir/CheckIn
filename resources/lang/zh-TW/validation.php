@@ -153,6 +153,7 @@ return [
         'target'                => '目標數量',
         'nid'                   => '學號',
         'class'                 => '系級',
+        'import_file'           => '匯入檔案',
     ],
 
 ];

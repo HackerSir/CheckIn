@@ -22,6 +22,7 @@
         "lavary/laravel-menu": "^1.6",
         "milon/barcode": "^5.3",
         "mojoblanco/domainos": "^1.1",
+        "phpoffice/phpspreadsheet": "dev-develop",
         "phpoffice/phpword": "dev-master",
         "pragmarx/google2fa-laravel": "^0.1.2",
         "predis/predis": "^1.1",

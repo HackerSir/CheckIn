@@ -6,6 +6,8 @@ use App\Qrcode;
 use App\QrcodeSet;
 use DNS1D;
 use DNS2D;
+use PhpOffice\PhpSpreadsheet\IOFactory;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpWord\PhpWord;
 use PhpOffice\PhpWord\SimpleType\Jc;
 use Yish\Generators\Foundation\Service\Service;
@@ -59,4 +61,23 @@ class FileService extends Service
 
         return $phpWord;
     }
+
+    /**
+     * 從檔案載入試算表
+     *
+     * @param $filePath
+     * @return null|Spreadsheet
+     */
+    public function loadSpreadsheet($filePath)
+    {
+        $spreadsheet = null;
+        try {
+            $spreadsheet = IOFactory::load($filePath);
+        } catch (\Exception $exception) {
+            return null;
+        }
+
+        return $spreadsheet;
+    }
+
 }
