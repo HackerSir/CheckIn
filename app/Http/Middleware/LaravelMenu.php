@@ -40,7 +40,7 @@ class LaravelMenu
                     }
                     //活動選單
                     if (Laratrust::can('activity-menu.view')) {
-                        /** @var \Lavary\Menu\Builder $activityMenu */
+                        /** @var \Lavary\Menu\Item $activityMenu */
                         $activityMenu = $menu->add('活動選單', 'javascript:void(0)');
 
                         if (Laratrust::can('student.manage')) {
@@ -82,7 +82,7 @@ class LaravelMenu
                     }
                     //管理員
                     if (Laratrust::can('menu.view')) {
-                        /** @var \Lavary\Menu\Builder $adminMenu */
+                        /** @var \Lavary\Menu\Item $adminMenu */
                         $adminMenu = $menu->add('管理選單', 'javascript:void(0)');
 
                         if (Laratrust::can(['user.manage', 'user.view'])) {
@@ -105,7 +105,7 @@ class LaravelMenu
                         }
                     }
                 }
-                /** @var \Lavary\Menu\Builder $userMenu */
+                /** @var \Lavary\Menu\Item $userMenu */
                 $userMenu = $menu->add($user->name, 'javascript:void(0)');
                 $userMenu->add('個人資料', ['route' => 'profile'])->active('profile/*');
                 $userMenu->add('登出', ['route' => 'logout']);
