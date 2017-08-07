@@ -45,6 +45,7 @@ class ClubController extends Controller
             'name'         => 'required',
             'club_type_id' => 'nullable|exists:club_types,id',
             'url'          => 'nullable|url',
+            'image_file'   => 'image',
         ]);
 
         $club = Club::create($request->all());
@@ -101,6 +102,7 @@ class ClubController extends Controller
             'name'         => 'required',
             'club_type_id' => 'nullable|exists:club_types,id',
             'url'          => 'nullable|url',
+            'image_file'   => 'image',
         ]);
 
         $club->update($request->all());

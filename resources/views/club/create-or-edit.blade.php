@@ -99,7 +99,7 @@
                     <div class="form-group row{{ $errors->has('image_file') ? ' has-danger' : '' }}">
                         <label for="image_file" class="col-md-2 col-form-label">圖片上傳</label>
                         <div class="col-md-10">
-                            {{ Form::file('image_file', ['class' => 'form-control']) }}
+                            {{ Form::file('image_file', ['class' => 'form-control', 'accept' => 'image/*']) }}
                             @if ($errors->has('image_file'))
                                 <span class="form-control-feedback">
                                     <strong>{{ $errors->first('image_file') }}</strong>
