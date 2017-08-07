@@ -16,7 +16,7 @@ class CreateSettingManagePermission extends Migration
         $permSettingManage = Permission::create([
             'name'         => 'setting.manage',
             'display_name' => '管理設定',
-            'description'  => '調整網站設定',
+            'description'  => '調整活動設定',
         ]);
 
         /* @var Role $admin */
