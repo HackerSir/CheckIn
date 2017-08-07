@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\ImgurImage;
+use App\Observers\ImgurImageObserver;
 use App\Observers\QrcodeObserver;
 use App\Observers\RecordObserver;
 use App\Observers\StudentObserver;
@@ -48,6 +50,7 @@ class AppServiceProvider extends ServiceProvider
         Qrcode::observe(QrcodeObserver::class);
         Student::observe(StudentObserver::class);
         Record::observe(RecordObserver::class);
+        ImgurImage::observe(ImgurImageObserver::class);
     }
 
     /**
