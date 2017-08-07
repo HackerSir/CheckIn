@@ -131,5 +131,4 @@ class LaravelMenu
             $lastItem->divide();
         }
     }
-
 }
