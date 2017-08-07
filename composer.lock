@@ -4,53 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "7e7082ccb5d169ebd1c465d39d0ba2a8",
+    "content-hash": "85923c996e87f0817e5c4251f4bb101c",
     "packages": [
-        {
-            "name": "adyg/php-imgur-api-client",
-            "version": "1.0.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/Adyg/php-imgur-api-client.git",
-                "reference": "9b617984faf66bde400d028289c3794529cbbc99"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/Adyg/php-imgur-api-client/zipball/9b617984faf66bde400d028289c3794529cbbc99",
-                "reference": "9b617984faf66bde400d028289c3794529cbbc99",
-                "shasum": ""
-            },
-            "require": {
-                "ext-curl": "*",
-                "guzzle/guzzle": ">=3.7",
-                "php": ">=5.3.2"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "Imgur\\": "lib/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Adrian Ghiuta",
-                    "email": "adrian.ghiuta@gmail.com",
-                    "homepage": "http://adyg.github.com"
-                }
-            ],
-            "description": "Imgur API v3 client",
-            "homepage": "https://github.com/Adyg/php-imgur-api-client",
-            "keywords": [
-                "api",
-                "imgur"
-            ],
-            "abandoned": "j0k3r/php-imgur-api-client",
-            "time": "2014-02-18T13:57:27+00:00"
-        },
         {
             "name": "anlutro/l4-settings",
             "version": "0.5.0",
@@ -341,6 +296,56 @@
                 }
             ],
             "time": "2016-06-13T19:28:20+00:00"
+        },
+        {
+            "name": "danny50610/imgur-laravel",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/danny50610/Imgur-Laravel.git",
+                "reference": "2e0ac686781ce00bd3b01f55ba279df6404e0839"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/danny50610/Imgur-Laravel/zipball/2e0ac686781ce00bd3b01f55ba279df6404e0839",
+                "reference": "2e0ac686781ce00bd3b01f55ba279df6404e0839",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "~5.0 || ~4.0",
+                "j0k3r/php-imgur-api-client": "^3.0.0",
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "^0.9.4",
+                "phpunit/phpunit": "~4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Redeman\\Imgur\\": "src/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Mark Redeman",
+                    "email": "markredeman@gmail.com"
+                }
+            ],
+            "description": "Laravel Package for Imgur API. Provides easy access to the adyg/php-imgur-api-client library.",
+            "keywords": [
+                "Laravel",
+                "api",
+                "imgur",
+                "wrapper"
+            ],
+            "support": {
+                "source": "https://github.com/danny50610/Imgur-Laravel/tree/master"
+            },
+            "time": "2017-08-07 07:54:49"
         },
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -949,99 +954,6 @@
             "time": "2017-01-01T13:34:57+00:00"
         },
         {
-            "name": "guzzle/guzzle",
-            "version": "v3.8.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/guzzle/guzzle.git",
-                "reference": "4de0618a01b34aa1c8c33a3f13f396dcd3882eba"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/4de0618a01b34aa1c8c33a3f13f396dcd3882eba",
-                "reference": "4de0618a01b34aa1c8c33a3f13f396dcd3882eba",
-                "shasum": ""
-            },
-            "require": {
-                "ext-curl": "*",
-                "php": ">=5.3.3",
-                "symfony/event-dispatcher": ">=2.1"
-            },
-            "replace": {
-                "guzzle/batch": "self.version",
-                "guzzle/cache": "self.version",
-                "guzzle/common": "self.version",
-                "guzzle/http": "self.version",
-                "guzzle/inflection": "self.version",
-                "guzzle/iterator": "self.version",
-                "guzzle/log": "self.version",
-                "guzzle/parser": "self.version",
-                "guzzle/plugin": "self.version",
-                "guzzle/plugin-async": "self.version",
-                "guzzle/plugin-backoff": "self.version",
-                "guzzle/plugin-cache": "self.version",
-                "guzzle/plugin-cookie": "self.version",
-                "guzzle/plugin-curlauth": "self.version",
-                "guzzle/plugin-error-response": "self.version",
-                "guzzle/plugin-history": "self.version",
-                "guzzle/plugin-log": "self.version",
-                "guzzle/plugin-md5": "self.version",
-                "guzzle/plugin-mock": "self.version",
-                "guzzle/plugin-oauth": "self.version",
-                "guzzle/service": "self.version",
-                "guzzle/stream": "self.version"
-            },
-            "require-dev": {
-                "doctrine/cache": "*",
-                "monolog/monolog": "1.*",
-                "phpunit/phpunit": "3.7.*",
-                "psr/log": "1.0.*",
-                "symfony/class-loader": "*",
-                "zendframework/zend-cache": "<2.3",
-                "zendframework/zend-log": "<2.3"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "3.8-dev"
-                }
-            },
-            "autoload": {
-                "psr-0": {
-                    "Guzzle": "src/",
-                    "Guzzle\\Tests": "tests/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Michael Dowling",
-                    "email": "mtdowling@gmail.com",
-                    "homepage": "https://github.com/mtdowling"
-                },
-                {
-                    "name": "Guzzle Community",
-                    "homepage": "https://github.com/guzzle/guzzle/contributors"
-                }
-            ],
-            "description": "Guzzle is a PHP HTTP client library and framework for building RESTful web service clients",
-            "homepage": "http://guzzlephp.org/",
-            "keywords": [
-                "client",
-                "curl",
-                "framework",
-                "http",
-                "http client",
-                "rest",
-                "web service"
-            ],
-            "abandoned": "guzzlehttp/guzzle",
-            "time": "2014-01-28T22:29:15+00:00"
-        },
-        {
             "name": "guzzlehttp/guzzle",
             "version": "6.3.0",
             "source": {
@@ -1263,6 +1175,66 @@
             ],
             "description": "This trait allows you to easily flag attributes that should be set as null when being persisted to the database using the Laravel PHP Framework.",
             "time": "2017-07-04T01:11:09+00:00"
+        },
+        {
+            "name": "j0k3r/php-imgur-api-client",
+            "version": "3.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/j0k3r/php-imgur-api-client.git",
+                "reference": "9b657f6b686301c3b3c3bac3f90842bb287ba616"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/j0k3r/php-imgur-api-client/zipball/9b657f6b686301c3b3c3bac3f90842bb287ba616",
+                "reference": "9b657f6b686301c3b3c3bac3f90842bb287ba616",
+                "shasum": ""
+            },
+            "require": {
+                "ext-curl": "*",
+                "guzzlehttp/guzzle": "^6.0",
+                "php": ">=5.5.0"
+            },
+            "replace": {
+                "adyg/php-imgur-api-client": "self.version"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "~1.9"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Imgur\\": "lib/Imgur/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Adrian Ghiuta",
+                    "email": "adrian.ghiuta@gmail.com",
+                    "homepage": "http://adyg.github.com"
+                },
+                {
+                    "name": "Jeremy Benoist",
+                    "email": "jeremy.benoist@gmail.com",
+                    "homepage": "http://www.j0k3r.net"
+                }
+            ],
+            "description": "Imgur API v3 client",
+            "homepage": "https://github.com/j0k3r/php-imgur-api-client",
+            "keywords": [
+                "api",
+                "imgur"
+            ],
+            "time": "2017-02-05T20:40:13+00:00"
         },
         {
             "name": "jakub-onderka/php-console-color",
@@ -2661,7 +2633,7 @@
                 "word",
                 "writer"
             ],
-            "time": "2017-07-11 00:20:05"
+            "time": "2017-07-11T00:20:05+00:00"
         },
         {
             "name": "pragmarx/google2fa",
@@ -3266,54 +3238,6 @@
             "time": "2017-06-19T18:06:50+00:00"
         },
         {
-            "name": "redeman/imgur-laravel",
-            "version": "1.0.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/MarkRedeman/Imgur-Laravel.git",
-                "reference": "dafa66aba0252e367357d3200fa7f7ce9d74ff24"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/MarkRedeman/Imgur-Laravel/zipball/dafa66aba0252e367357d3200fa7f7ce9d74ff24",
-                "reference": "dafa66aba0252e367357d3200fa7f7ce9d74ff24",
-                "shasum": ""
-            },
-            "require": {
-                "adyg/php-imgur-api-client": "~1.0.0",
-                "illuminate/support": "~5.0 || ~4.0",
-                "php": ">=5.4.0"
-            },
-            "require-dev": {
-                "mockery/mockery": "^0.9.4",
-                "phpunit/phpunit": "~4.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Redeman\\Imgur\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Mark Redeman",
-                    "email": "markredeman@gmail.com"
-                }
-            ],
-            "description": "Laravel Package for Imgur API. Provides easy access to the adyg/php-imgur-api-client library.",
-            "keywords": [
-                "api",
-                "imgur",
-                "laravel",
-                "wrapper"
-            ],
-            "time": "2015-12-23T15:04:13+00:00"
-        },
-        {
             "name": "santigarcor/laratrust",
             "version": "3.2.4",
             "source": {
@@ -3682,7 +3606,7 @@
         },
         {
             "name": "symfony/event-dispatcher",
-            "version": "v3.3.5",
+            "version": "v3.3.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/event-dispatcher.git",
@@ -6593,7 +6517,8 @@
     "minimum-stability": "stable",
     "stability-flags": {
         "phpoffice/phpspreadsheet": 20,
-        "phpoffice/phpword": 20
+        "phpoffice/phpword": 20,
+        "danny50610/imgur-laravel": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

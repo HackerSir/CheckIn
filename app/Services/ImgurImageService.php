@@ -32,8 +32,7 @@ class ImgurImageService
         ];
         /** @var \Imgur\Api\Image $imageClient */
         $imageClient = $client->api('image');
-        $basic = $imageClient->upload($imageData);
-        $data = $basic->getData();
+        $data = $imageClient->upload($imageData);
         //圖檔原始名稱
         $fileOriginalName = $uploadedFile->getClientOriginalName();
         //額外記錄圖片資料（Imgur ID與Delete Hash）
