@@ -7,6 +7,6 @@ sudo -k
 set -x
 # 自動更新專案
 sudo git pull
-sudo composer install
+sudo composer install --no-dev
 sudo php artisan migrate
 sudo chown www-data:www-data -R .
