@@ -20,7 +20,7 @@
             <div class="card">
                 @if($club->imgurImage)
                     <div class="card-block text-center">
-                        <img src="{{ $club->imgurImage->url }}" class="img-fluid">
+                        <img src="{{ $club->imgurImage->thumbnail('h') }}" class="img-fluid">
                     </div>
                 @endif
                 <div class="card-block">

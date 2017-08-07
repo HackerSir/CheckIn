@@ -79,13 +79,27 @@
                         </div>
                     </div>
 
+                    @if($isEditMode && $club->imgurImage)
+                        <div class="form-group row">
+                            <label for="image_file" class="col-md-2 col-form-label">圖片</label>
+                            <div class="col-md-10">
+                                <p class="form-control-static">
+                                    <img src="{{ $club->imgurImage->thumbnail('t') }}">
+                                    <a href="{{ $club->imgurImage->url }}" target="_blank">
+                                        {{ $club->imgurImage->file_name }}
+                                    </a>
+                                </p>
+                                <small class="form-text text-muted">
+                                    若不更換圖片，下欄請留空
+                                </small>
+                            </div>
+                        </div>
+                    @endif
+
                     <div class="form-group row{{ $errors->has('image_file') ? ' has-danger' : '' }}">
                         <label for="image_file" class="col-md-2 col-form-label">圖片上傳</label>
                         <div class="col-md-10">
                             {{ Form::file('image_file', ['class' => 'form-control']) }}
-                            <small class="form-text text-muted">
-                                若不更換圖片，此欄請留空
-                            </small>
                             @if ($errors->has('image_file'))
                                 <span class="form-control-feedback">
                                     <strong>{{ $errors->first('image_file') }}</strong>

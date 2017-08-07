@@ -54,4 +54,13 @@ class ImgurImage extends Model
     {
         return 'https://i.imgur.com/' . $this->imgur_id . '.' . $this->extension;
     }
+
+    public function thumbnail($suffix = null)
+    {
+        if (!empty($suffix) && !in_array($suffix, ['s', 'b', 't', 'm', 'l', 'h'])) {
+            return null;
+        }
+
+        return 'https://i.imgur.com/' . $this->imgur_id . $suffix . '.' . $this->extension;
+    }
 }
