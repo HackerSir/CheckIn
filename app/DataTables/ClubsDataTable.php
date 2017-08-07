@@ -31,6 +31,9 @@ class ClubsDataTable extends DataTable
                         ->whereRaw('club_types.name LIKE ?', ['%' . $keyword . '%']);
                 });
             })
+            ->editColumn('name', function ($club) {
+                return view('club.datatables.name', compact('club'))->render();
+            })
             ->addColumn('booth', function ($club) {
                 return view('club.datatables.booth', compact('club'))->render();
             })
@@ -56,7 +59,7 @@ class ClubsDataTable extends DataTable
     public function query()
     {
         /** @var Club|\Illuminate\Database\Eloquent\Builder $query */
-        $query = Club::with('clubType', 'booths');
+        $query = Club::with('clubType', 'booths', 'imgurImage');
 
         return $this->applyScopes($query);
     }
