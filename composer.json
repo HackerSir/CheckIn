@@ -27,6 +27,7 @@
         "pragmarx/google2fa-laravel": "^0.1.2",
         "predis/predis": "^1.1",
         "recca0120/laravel-tracy": "^1.8",
+        "redeman/imgur-laravel": "^1.0",
         "santigarcor/laratrust": "^3.2",
         "thomaswelton/laravel-gravatar": "^1.1",
         "yajra/laravel-datatables-buttons": "^1.3",

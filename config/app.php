@@ -196,6 +196,7 @@ return [
         Mojoblanco\Domainos\DomainosServiceProvider::class,
         Milon\Barcode\BarcodeServiceProvider::class,
         anlutro\LaravelSettings\ServiceProvider::class,
+        Redeman\Imgur\ImgurServiceProvider::class,
 
         /*
          * Application Service Providers...
