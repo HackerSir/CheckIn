@@ -14,7 +14,6 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $name 名稱
  * @property string|null $description 簡介
  * @property string|null $url 網址
- * @property string|null $image_url 圖片網址
  * @property \Carbon\Carbon|null $created_at
  * @property \Carbon\Carbon|null $updated_at
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Booth[] $booths
@@ -28,7 +27,6 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Club whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Club whereDescription($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Club whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Club whereImageUrl($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Club whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Club whereNumber($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Club whereUpdatedAt($value)
@@ -45,13 +43,11 @@ class Club extends Model
         'club_type_id',
         'description',
         'url',
-        'image_url',
     ];
 
     protected $nullable = [
         'description',
         'url',
-        'image_url',
     ];
 
     protected $appends = [

@@ -8,7 +8,7 @@
             <h1>{{ $club->name }} - 編輯社團</h1>
             <div class="card">
                 <div class="card-block">
-                    {{ Form::model($club, ['route' => 'own-club.update', 'method' => 'patch']) }}
+                    {{ Form::model($club, ['route' => 'own-club.update', 'method' => 'patch', 'files' => true]) }}
 
                     <div class="form-group row">
                         <label for="number" class="col-md-2 col-form-label">社團編號</label>
@@ -55,16 +55,16 @@
                         </div>
                     </div>
 
-                    <div class="form-group row{{ $errors->has('image_url') ? ' has-danger' : '' }}">
-                        <label for="image_url" class="col-md-2 col-form-label">圖片網址</label>
+                    <div class="form-group row{{ $errors->has('image_file') ? ' has-danger' : '' }}">
+                        <label for="image_file" class="col-md-2 col-form-label">圖片上傳</label>
                         <div class="col-md-10">
-                            {{ Form::url('image_url', null, ['class' => 'form-control']) }}
+                            {{ Form::file('image_file', ['class' => 'form-control']) }}
                             <small class="form-text text-muted">
-                                圖片可上傳至 <a href="https://imgur.com/" target="_blank">Imgur</a> 圖片空間
+                                若不更換圖片，此欄請留空
                             </small>
-                            @if ($errors->has('image_url'))
+                            @if ($errors->has('image_file'))
                                 <span class="form-control-feedback">
-                                    <strong>{{ $errors->first('image_url') }}</strong>
+                                    <strong>{{ $errors->first('image_file') }}</strong>
                                 </span>
                             @endif
                         </div>

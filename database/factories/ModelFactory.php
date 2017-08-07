@@ -52,7 +52,6 @@ $factory->define(App\Club::class, function (Faker\Generator $faker) {
         'name'        => $faker->company,
         'description' => $faker->sentence,
         'url'         => $faker->url,
-        'image_url'   => $faker->imageUrl(640, 480, 'cats'),
     ];
 });
 

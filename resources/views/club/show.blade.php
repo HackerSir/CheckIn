@@ -18,9 +18,9 @@
             </a>
             <h1>{{ $club->name }} - 社團</h1>
             <div class="card">
-                @if($club->image_url)
+                @if($club->imgurImage)
                     <div class="card-block text-center">
-                        <img src="{{ $club->image_url }}" class="img-fluid">
+                        <img src="{{ $club->imgurImage->url }}" class="img-fluid">
                     </div>
                 @endif
                 <div class="card-block">

@@ -79,20 +79,6 @@
                         </div>
                     </div>
 
-                    <div class="form-group row{{ $errors->has('image_url') ? ' has-danger' : '' }}">
-                        <label for="image_url" class="col-md-2 col-form-label">圖片網址</label>
-                        <div class="col-md-10">
-                            {{ Form::url('image_url', null, ['class' => 'form-control']) }}
-                            <small class="form-text text-muted">
-                                圖片可上傳至 <a href="https://imgur.com/" target="_blank">Imgur</a> 圖片空間
-                            </small>
-                            @if ($errors->has('image_url'))
-                                <span class="form-control-feedback">
-                                    <strong>{{ $errors->first('image_url') }}</strong>
-                                </span>
-                            @endif
-                        </div>
-                    </div>
                     <div class="form-group row{{ $errors->has('image_file') ? ' has-danger' : '' }}">
                         <label for="image_file" class="col-md-2 col-form-label">圖片上傳</label>
                         <div class="col-md-10">
