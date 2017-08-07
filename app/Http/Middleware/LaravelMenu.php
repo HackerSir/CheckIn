@@ -52,6 +52,8 @@ class LaravelMenu
                             $activityMenu->add('QR Code 集', ['route' => 'qrcode-set.index'])->active('qrcode-set/*');
                         }
 
+                        $this->addDivider($activityMenu);
+
                         if (Laratrust::can('booth.manage')) {
                             $activityMenu->add('攤位管理', ['route' => 'booth.index'])->active('booth/*');
                         }
@@ -68,6 +70,8 @@ class LaravelMenu
                             $activityMenu->add('打卡紀錄管理', ['route' => 'record.index'])->active('record/*');
                         }
 
+                        $this->addDivider($activityMenu);
+
                         if (Laratrust::can('ticket.manage')) {
                             $activityMenu->add('抽獎編號管理', ['route' => 'ticket.index'])->active('ticket/*');
                         }
@@ -75,6 +79,8 @@ class LaravelMenu
                         if (Laratrust::can('extra-ticket.manage')) {
                             $activityMenu->add('額外抽獎編號管理', ['route' => 'extra-ticket.index'])->active('extra-ticket/*');
                         }
+
+                        $this->addDivider($activityMenu);
 
                         if (Laratrust::can('setting.manage')) {
                             $activityMenu->add('活動設定', ['route' => 'setting.edit']);
@@ -117,4 +123,13 @@ class LaravelMenu
 
         return $next($request);
     }
+
+    protected function addDivider(\Lavary\Menu\Item $subMenu)
+    {
+        $lastItem = $subMenu->children()->last();
+        if ($lastItem) {
+            $lastItem->divide();
+        }
+    }
+
 }
