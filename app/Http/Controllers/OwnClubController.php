@@ -52,6 +52,11 @@ class OwnClubController extends Controller
         //上傳圖片
         $uploadedFile = $request->file('image_file');
         if ($uploadedFile) {
+            //刪除舊圖
+            if ($club->imgurImage) {
+                $club->imgurImage->delete();
+            }
+            //上傳新圖
             $imgurImage = $imgurImageService->upload($uploadedFile);
             $club->imgurImage()->save($imgurImage);
         }
