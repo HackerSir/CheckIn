@@ -11,7 +11,8 @@
                     <ul>
                         <li>檔案須為xls或xlsx</li>
                         <li>第一列為標題列，<u>不會</u>作為資料匯入</li>
-                        <li>欄位自左起依序為<code>學號(NID)</code>、<code>姓名</code>、<code>系級</code>
+                        <li>欄位自左起依序為<code>學號(NID)</code>、<code>姓名</code>、<code>系級</code></li>
+                        <li>上述三欄皆須填寫，若有留空則該筆資料<u>不會</u>匯入</li>
                         <li><code>學號(NID)</code>不得重複，重複則以最後一次出現為有效資料</li>
                         <li>匯入名單時，將根據<code>學號(NID)</code>覆寫現有資料</li>
                         <li>
