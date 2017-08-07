@@ -62,6 +62,6 @@ class ClubType extends Model
      */
     public function getTagAttribute()
     {
-        return "<span class='badge badge-default tag' style='background-color:{$this->color}'>{$this->name}</span>";
+        return "<span class='badge badge-default tag' style='background-color:{$this->color}; font-size: 24px;'>{$this->name}</span>";
     }
 }
