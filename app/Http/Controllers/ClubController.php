@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Club;
 use App\DataTables\ClubsDataTable;
+use App\Services\ImgurImageService;
 use App\User;
 use Illuminate\Http\Request;
 
@@ -34,9 +35,10 @@ class ClubController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request $request
+     * @param ImgurImageService $imgurImageService
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, ImgurImageService $imgurImageService)
     {
         $this->validate($request, [
             'number'       => 'nullable',
@@ -47,6 +49,13 @@ class ClubController extends Controller
         ]);
 
         $club = Club::create($request->all());
+
+        //上傳圖片
+        $uploadedFile = $request->file('image_file');
+        if ($uploadedFile) {
+            $imgurImage = $imgurImageService->upload($uploadedFile);
+            $club->imgurImage()->save($imgurImage);
+        }
 
         //更新社團負責人
         $attachUserIds = (array) $request->get('user_id');
@@ -83,9 +92,10 @@ class ClubController extends Controller
      *
      * @param  \Illuminate\Http\Request $request
      * @param  \App\Club $club
+     * @param ImgurImageService $imgurImageService
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Club $club)
+    public function update(Request $request, Club $club, ImgurImageService $imgurImageService)
     {
         $this->validate($request, [
             'number'       => 'nullable',
@@ -96,6 +106,13 @@ class ClubController extends Controller
         ]);
 
         $club->update($request->all());
+
+        //上傳圖片
+        $uploadedFile = $request->file('image_file');
+        if ($uploadedFile) {
+            $imgurImage = $imgurImageService->upload($uploadedFile);
+            $club->imgurImage()->save($imgurImage);
+        }
 
         //更新社團負責人
         $oldUserIds = (array) $club->users->pluck('id')->toArray();

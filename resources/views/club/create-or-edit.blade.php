@@ -14,9 +14,9 @@
             <div class="card">
                 <div class="card-block">
                     @if($isEditMode)
-                        {{ Form::model($club, ['route' => ['club.update', $club], 'method' => 'patch']) }}
+                        {{ Form::model($club, ['route' => ['club.update', $club], 'method' => 'patch', 'files' => true]) }}
                     @else
-                        {{ Form::open(['route' => 'club.store']) }}
+                        {{ Form::open(['route' => 'club.store', 'files' => true]) }}
                     @endif
 
                     <div class="form-group row{{ $errors->has('number') ? ' has-danger' : '' }}">
@@ -89,6 +89,20 @@
                             @if ($errors->has('image_url'))
                                 <span class="form-control-feedback">
                                     <strong>{{ $errors->first('image_url') }}</strong>
+                                </span>
+                            @endif
+                        </div>
+                    </div>
+                    <div class="form-group row{{ $errors->has('image_file') ? ' has-danger' : '' }}">
+                        <label for="image_file" class="col-md-2 col-form-label">圖片上傳</label>
+                        <div class="col-md-10">
+                            {{ Form::file('image_file', ['class' => 'form-control']) }}
+                            <small class="form-text text-muted">
+                                若不更換圖片，此欄請留空
+                            </small>
+                            @if ($errors->has('image_file'))
+                                <span class="form-control-feedback">
+                                    <strong>{{ $errors->first('image_file') }}</strong>
                                 </span>
                             @endif
                         </div>
