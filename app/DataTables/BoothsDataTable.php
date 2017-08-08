@@ -73,7 +73,7 @@ class BoothsDataTable extends DataTable
     {
         return [
             'id'        => ['title' => '#'],
-            'name'      => ['title' => '名稱'],
+            'name'      => ['title' => '攤位編號'],
             'club_id'   => ['title' => '社團'],
             'longitude' => ['title' => '經度'],
             'latitude'  => ['title' => '緯度'],

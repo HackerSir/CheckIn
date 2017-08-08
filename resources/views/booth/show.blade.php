@@ -13,7 +13,7 @@
                 <div class="card-block">
                     <table class="table table-hover">
                         <tr>
-                            <td class="text-md-right">名稱：</td>
+                            <td class="text-md-right">攤位編號：</td>
                             <td>{{ $booth->name }}</td>
                         </tr>
                         <tr>

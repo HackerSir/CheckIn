@@ -20,7 +20,7 @@
                     @endif
 
                     <div class="form-group row{{ $errors->has('name') ? ' has-danger' : '' }}">
-                        <label for="name" class="col-md-2 col-form-label">名稱</label>
+                        <label for="name" class="col-md-2 col-form-label">攤位編號</label>
                         <div class="col-md-10">
                             {{ Form::text('name', null, ['class' => 'form-control', 'placeholder' => '如：A01']) }}
                             @if ($errors->has('name'))
