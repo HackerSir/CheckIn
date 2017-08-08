@@ -19,12 +19,14 @@ before_script:
   - php artisan key:generate
   - mysql -e 'CREATE DATABASE travis_test DEFAULT CHARACTER SET utf8mb4 DEFAULT COLLATE utf8mb4_unicode_ci;'
   - php artisan migrate
+  - npm install
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)
 
 script:
   - phpdbg -qrr vendor/bin/phpunit
+  - npm run production
 
 notifications:
   email:
