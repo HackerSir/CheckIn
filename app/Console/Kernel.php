@@ -2,6 +2,7 @@
 
 namespace App\Console;
 
+use App\Console\Commands\BackupRun;
 use App\Console\Commands\ResetApiKeyCount;
 use App\Console\Commands\UserCreate;
 use Illuminate\Console\Scheduling\Schedule;
@@ -17,6 +18,7 @@ class Kernel extends ConsoleKernel
     protected $commands = [
         UserCreate::class,
         ResetApiKeyCount::class,
+        BackupRun::class,
     ];
 
     /**

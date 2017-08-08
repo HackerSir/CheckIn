@@ -197,6 +197,7 @@ return [
         Milon\Barcode\BarcodeServiceProvider::class,
         anlutro\LaravelSettings\ServiceProvider::class,
         Redeman\Imgur\ImgurServiceProvider::class,
+        BackupManager\Laravel\Laravel5ServiceProvider::class,
 
         /*
          * Application Service Providers...

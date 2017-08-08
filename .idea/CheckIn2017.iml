@@ -7,6 +7,8 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/anlutro/l4-settings" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/arcanedev/log-viewer" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/arcanedev/support" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/backup-manager/backup-manager" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/backup-manager/laravel" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/barryvdh/laravel-ide-helper" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/barryvdh/reflection-docblock" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/composer" />
@@ -125,6 +127,8 @@
           <root url="file://$MODULE_DIR$/vendor/anlutro/l4-settings" />
           <root url="file://$MODULE_DIR$/vendor/arcanedev/log-viewer" />
           <root url="file://$MODULE_DIR$/vendor/arcanedev/support" />
+          <root url="file://$MODULE_DIR$/vendor/backup-manager/backup-manager" />
+          <root url="file://$MODULE_DIR$/vendor/backup-manager/laravel" />
           <root url="file://$MODULE_DIR$/vendor/barryvdh/laravel-ide-helper" />
           <root url="file://$MODULE_DIR$/vendor/barryvdh/reflection-docblock" />
           <root url="file://$MODULE_DIR$/vendor/composer" />
@@ -239,6 +243,8 @@
           <root url="file://$MODULE_DIR$/vendor/anlutro/l4-settings" />
           <root url="file://$MODULE_DIR$/vendor/arcanedev/log-viewer" />
           <root url="file://$MODULE_DIR$/vendor/arcanedev/support" />
+          <root url="file://$MODULE_DIR$/vendor/backup-manager/backup-manager" />
+          <root url="file://$MODULE_DIR$/vendor/backup-manager/laravel" />
           <root url="file://$MODULE_DIR$/vendor/barryvdh/laravel-ide-helper" />
           <root url="file://$MODULE_DIR$/vendor/barryvdh/reflection-docblock" />
           <root url="file://$MODULE_DIR$/vendor/composer" />
