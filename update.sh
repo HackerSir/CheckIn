@@ -9,4 +9,6 @@ set -x
 sudo git pull
 sudo composer install --no-dev
 sudo php artisan migrate
+sudo npm install
+sudo npm run production
 sudo chown www-data:www-data -R .
