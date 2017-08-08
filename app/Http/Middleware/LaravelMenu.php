@@ -49,7 +49,6 @@ class LaravelMenu
 
                         if (Laratrust::can('qrcode.manage')) {
                             $activityMenu->add('QR Code', ['route' => 'qrcode.index'])->active('qrcode/*');
-                            $activityMenu->add('QR Code 集', ['route' => 'qrcode-set.index'])->active('qrcode-set/*');
                         }
 
                         $this->addDivider($activityMenu);
