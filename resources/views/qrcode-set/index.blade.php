@@ -10,11 +10,12 @@
         <h1>QR Code 集</h1>
         <div class="card mt-1">
             <div class="card-block">
-                <p>批次建立QR Code</p>
                 <a href="{{ route('qrcode-set.create') }}" class="btn btn-primary">
                     <i class="fa fa-plus-circle" aria-hidden="true"></i> 新增 QR Code 集
                 </a>
-                {!! $dataTable->table(['table' => 'mb-2']) !!}
+                <div class="mt-2">
+                    {!! $dataTable->table() !!}
+                </div>
             </div>
         </div>
     </div>
