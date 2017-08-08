@@ -56,7 +56,7 @@ class FeedbackDataTable extends DataTable
     public function query()
     {
         /** @var Feedback|\Illuminate\Database\Eloquent\Builder $query */
-        $query = Feedback::query();
+        $query = Feedback::with('student', 'club.clubType');
 
         return $this->applyScopes($query);
     }
