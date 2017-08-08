@@ -8,10 +8,8 @@ use App\Observers\ClubObserver;
 use App\Observers\ImgurImageObserver;
 use App\Observers\QrcodeObserver;
 use App\Observers\RecordObserver;
-use App\Observers\StudentObserver;
 use App\Qrcode;
 use App\Record;
-use App\Student;
 use Carbon\Carbon;
 use Illuminate\Support\ServiceProvider;
 use Monolog\Logger;
@@ -50,7 +48,6 @@ class AppServiceProvider extends ServiceProvider
 
         //Observers
         Qrcode::observe(QrcodeObserver::class);
-        Student::observe(StudentObserver::class);
         Record::observe(RecordObserver::class);
         ImgurImage::observe(ImgurImageObserver::class);
         Club::observe(ClubObserver::class);

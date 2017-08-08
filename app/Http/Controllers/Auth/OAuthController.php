@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Qrcode;
 use App\Services\FcuApiService;
 use App\Student;
 use App\User;
@@ -103,6 +104,8 @@ class OAuthController extends Controller
                     'in_year'   => $stuInfo['in_year'],
                     'gender'    => $stuInfo['stu_sex'],
                 ]);
+                //自動綁定QRCode
+                $student->qrcode()->save(Qrcode::create());
             }
             //綁定學生
             $user->student()->save($student);
