@@ -324,3 +324,6 @@ _ide_helper.php
 
 storage/settings.json
 .idea/remote-mappings.xml
+
+public/build-js
+public/mix-manifest.json
