@@ -7,7 +7,7 @@
         <div class="card">
             <div class="card-block">
                 <h1>社團攤位</h1>
-                社團分類：
+                社團分類
                 <select id="type_select" class="custom-select">
                     <option @if(!$type)selected @endif>全部</option>
                     @foreach($clubTypes as $clubType)
@@ -17,23 +17,26 @@
                         </option>
                     @endforeach
                 </select>
+                <div class="float-sm-right mt-1">
+                    搜尋
+                    <input type="text" >
+                </div>
                 <div class="row mt-1">
                     @foreach($clubs as $club)
                         <div class="col-12 col-lg-6 mt-1">
                             <div class="card">
                                 <div class="card-block">
-                                    <div class="row">
+                                    <div class="row" style="min-height: 139px">
                                         <div class="col-4" style="padding: 0">
                                             @if($club->imgurImage)
                                                 <img src="{{ $club->imgurImage->thumbnail('b') }}" class="img-fluid">
                                             @else
-                                                <img src="holder.js/160x160?random=yes&auto=yes" class="img-fluid">
+                                                <img src="holder.js/160x160?random=yes&auto=yes&text=沒有圖片" class="img-fluid">
                                             @endif
                                         </div>
                                         <div class="col-8">
                                             <h3 class="card-title">{{ $club->name }}</h3>
-                                            <p class="card-text">With supporting text below as a natural lead-in to
-                                                additional content.</p>
+                                            <p class="card-text">{{ $club->description }}</p>
                                         </div>
                                     </div>
                                 </div>
