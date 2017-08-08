@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Club;
 use App\Feedback;
 use Illuminate\Http\Request;
 
@@ -23,12 +24,12 @@ class FeedbackController extends Controller
     /**
      * Show the form for creating a new resource.
      *
+     * @param Club $club
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Club $club)
     {
         //TODO 檢查是否為學生帳號
-        //TODO 檢查指定社團是否存在
         //TODO 檢查是否填寫過回饋給該社團
         //TODO 顯示表單
     }

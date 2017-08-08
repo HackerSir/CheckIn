@@ -166,10 +166,10 @@ Route::group(['middleware' => ['auth', 'email']], function () {
     });
 
     //Feedback
+    Route::get('feedback/create/{club}', 'FeedbackController@create')->name('feedback.create');
     Route::resource('feedback', 'FeedbackController', [
         'only' => [
             'index',
-            'create',
             'store',
             'show',
         ],
