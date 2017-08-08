@@ -32,6 +32,10 @@ class FeedbackDataTable extends DataTable
                         ->orWhereRaw('students.nid LIKE ?', ['%' . $keyword . '%']);
                 });
             })
+            ->addColumn('is_freshman', function ($feedback) {
+                /** @var Feedback $feedback */
+                return view('feedback.datatables.is_freshman', compact('feedback'))->render();
+            })
             ->editColumn('club_id', function ($feedback) {
                 return view('feedback.datatables.club', compact('feedback'))->render();
             })
@@ -86,11 +90,16 @@ class FeedbackDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            'id'         => ['title' => '#'],
-            'student_id' => ['title' => '學生'],
-            'club_id'    => ['title' => '社團'],
-            'phone'      => ['title' => '電話'],
-            'email'      => ['title' => '信箱'],
+            'id'          => ['title' => '#'],
+            'student_id'  => ['title' => '學生'],
+            'is_freshman' => [
+                'searchable' => false,
+                'orderable'  => false,
+                'title'      => '新生',
+            ],
+            'club_id'     => ['title' => '社團'],
+            'phone'       => ['title' => '電話'],
+            'email'       => ['title' => '信箱'],
         ];
     }
 

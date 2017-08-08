@@ -6,6 +6,7 @@ use App\Club;
 use App\DataTables\FeedbackDataTable;
 use App\DataTables\Scopes\FeedbackFilterScope;
 use App\Feedback;
+use App\Record;
 use App\User;
 use Illuminate\Http\Request;
 
@@ -70,6 +71,20 @@ class FeedbackController extends Controller
      */
     public function show(Feedback $feedback)
     {
-        //TODO 根據權限與身分檢查是否能看到
+        //根據權限與身分檢查是否能看到
+        if (!\Laratrust::can('feedback.manage')) {
+            /** @var User $user */
+            $user = auth()->user();
+            if (($user->club_id != $feedback->club_id)
+                && (!$user->student || $user->student->id != $feedback->student_id)) {
+                abort(403);
+            }
+        }
+        //打卡紀錄
+        $record = Record::whereClubId($feedback->club_id)
+            ->whereStudentId($feedback->student_id)
+            ->first();
+
+        return view('feedback.show', compact('feedback', 'record'));
     }
 }
