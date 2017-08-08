@@ -10,7 +10,7 @@
         </a>
         @if(\App\ClubType::count() == 0)
             {{ Form::open(['route' => 'club-type.store-default', 'style' => 'display: inline-block']) }}
-            <button type="submit" class="btn btn-primary">
+            <button type="submit" class="btn btn-success">
                 <i class="fa fa-plus-circle" aria-hidden="true"></i> 建立預設社團類型
             </button>
             {{ Form::close() }}
