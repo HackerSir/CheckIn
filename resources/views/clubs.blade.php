@@ -2,25 +2,13 @@
 
 @section('title', '社團清單')
 
-@section('css')
-    <style>
-        .card-img-left {
-            border-bottom-left-radius: calc(.25rem - 1px);
-            border-top-left-radius: calc(.25rem - 1px);
-            float: left;
-            padding-right: 1em;
-            margin-bottom: -1.25em;
-        }
-    </style>
-@endsection
-
 @section('content')
     <div class="mt-3 pb-3">
         <div class="card">
             <div class="card-block">
                 <h1>社團攤位</h1>
-                社團分類：{{$type}}
-                <select class="custom-select">
+                社團分類：
+                <select id="type_select" class="custom-select">
                     <option @if(!$type)selected @endif>全部</option>
                     @foreach($clubTypes as $clubType)
                         <option type="button" class="btn btn-secondary" data-id="{{ $clubType->id }}"
@@ -36,7 +24,11 @@
                                 <div class="card-block">
                                     <div class="row">
                                         <div class="col-4" style="padding: 0">
-                                            <img src="holder.js/160x160?random=yes&auto=yes" class="img-fluid">
+                                            @if($club->imgurImage)
+                                                <img src="{{ $club->imgurImage->thumbnail('b') }}" class="img-fluid">
+                                            @else
+                                                <img src="holder.js/160x160?random=yes&auto=yes" class="img-fluid">
+                                            @endif
                                         </div>
                                         <div class="col-8">
                                             <h3 class="card-title">{{ $club->name }}</h3>
@@ -57,6 +49,15 @@
 @section('js')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/holder/2.9.4/holder.min.js"></script>
     <script>
-
+        $("#type_select").change(function () {
+            var id = $("#type_select option:selected").data('id');
+            console.log(id);
+            if (id) {
+                window.location.href = 'clubs?type=' + id;
+            }
+            else {
+                window.location.href = 'clubs';
+            }
+        });
     </script>
 @endsection

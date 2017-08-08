@@ -33,7 +33,7 @@ class HomeController extends Controller
 
         $clubTypes = ClubType::orderBy('id')->get();
 
-        $clubQuery = Club::orderBy('id')->getQuery();
+        $clubQuery = Club::orderBy('id');
         if ($type) {
             $clubs = $clubQuery->whereClubTypeId($type)->get();
         } else {
