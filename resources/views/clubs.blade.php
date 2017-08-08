@@ -36,7 +36,7 @@
                                         </div>
                                         <div class="col-8">
                                             <h3 class="card-title">{{ $club->name }}</h3>
-                                            <p class="card-text">{{ $club->description }}</p>
+                                            <p class="card-text text-justify">{{ mb_strimwidth($club->description, 0, 150, '...') }}</p>
                                         </div>
                                     </div>
                                 </div>
