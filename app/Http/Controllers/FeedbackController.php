@@ -54,9 +54,10 @@ class FeedbackController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request $request
+     * @param Club $club
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Club $club)
     {
         //TODO
     }
