@@ -58,12 +58,12 @@ class LaravelMenu
                             $activityMenu->add('攤位管理', ['route' => 'booth.index'])->active('booth/*');
                         }
 
-                        if (Laratrust::can('club-type.manage')) {
-                            $activityMenu->add('社團類型管理', ['route' => 'club-type.index'])->active('club-type/*');
-                        }
-
                         if (Laratrust::can('club.manage')) {
                             $activityMenu->add('社團管理', ['route' => 'club.index'])->active('club/*');
+                        }
+
+                        if (Laratrust::can('club-type.manage')) {
+                            $activityMenu->add('社團類型管理', ['route' => 'club-type.index'])->active('club-type/*');
                         }
 
                         if (Laratrust::can('record.manage')) {
