@@ -165,6 +165,16 @@ Route::group(['middleware' => ['auth', 'email']], function () {
         ]);
     });
 
+    //Feedback
+    Route::resource('feedback', 'FeedbackController', [
+        'only' => [
+            'index',
+            'create',
+            'store',
+            'show',
+        ],
+    ]);
+
     //自己的社團
     Route::group(['prefix' => 'own-club'], function () {
         Route::get('/', 'OwnClubController@show')->name('own-club.show');

@@ -81,6 +81,12 @@ class LaravelMenu
 
                         $this->addDivider($activityMenu);
 
+                        if (Laratrust::can('feedback.manage')) {
+                            $activityMenu->add('回饋資料管理', ['route' => 'feedback.index'])->active('feedback/*');
+                        }
+
+                        $this->addDivider($activityMenu);
+
                         if (Laratrust::can('setting.manage')) {
                             $activityMenu->add('活動設定', ['route' => 'setting.edit']);
                         }
