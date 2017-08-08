@@ -64,7 +64,7 @@
 @include('components.navbar')
 
 {{-- Content --}}
-<div class="container" id="app">
+<div class="container" id="vue-app">
     @yield('content')
 </div>
 

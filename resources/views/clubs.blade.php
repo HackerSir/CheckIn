@@ -6,6 +6,7 @@
     <div class="mt-3 pb-3">
         <div class="card">
             <div class="card-block">
+                <example></example>
                 <h1>社團攤位</h1>
                 社團分類
                 <select id="type_select" class="custom-select">
@@ -31,7 +32,7 @@
                                             @if($club->imgurImage)
                                                 <img src="{{ $club->imgurImage->thumbnail('b') }}" class="img-fluid">
                                             @else
-                                                <img src="holder.js/160x160?random=yes&auto=yes&text=沒有圖片" class="img-fluid">
+                                                <img data-src="holder.js/160x160?random=yes&auto=yes&text=沒有圖片" class="img-fluid">
                                             @endif
                                         </div>
                                         <div class="col-8">
@@ -51,6 +52,7 @@
 
 @section('js')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/holder/2.9.4/holder.min.js"></script>
+    <script src="{{ mix('/build-js/vue.js') }}"></script>
     <script>
         $("#type_select").change(function () {
             var id = $("#type_select option:selected").data('id');
