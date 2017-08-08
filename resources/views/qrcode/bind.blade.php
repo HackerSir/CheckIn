@@ -69,8 +69,8 @@
 
                         <div class="form-group row">
                             <div class="col-md-10 offset-md-2">
-                                <button type="submit" class="btn btn-primary"> 綁定 QR Code</button>
-                                <a href="{{ route('qrcode.index') }}" class="btn btn-secondary">返回 QR Code 管理</a>
+                                <button type="submit" class="btn btn-primary">綁定 QR Code</button>
+                                <a href="{{ route('qrcode.index') }}" class="btn btn-secondary">返回</a>
                             </div>
                         </div>
                     </form>
