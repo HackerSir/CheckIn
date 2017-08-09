@@ -29,7 +29,7 @@
     {{--<link rel="stylesheet" href="//cdn.datatables.net/buttons/1.3.1/css/buttons.dataTables.min.css">--}}
     <link rel="stylesheet" href="//cdn.datatables.net/responsive/2.1.1/css/responsive.dataTables.min.css">
     <link rel="stylesheet" href="{{ asset('css/jquery.datetimepicker.min.css') }}">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet"/>
     <style>
         {{-- https://github.com/twbs/bootstrap/issues/21590 --}}
         @media (max-width: 576px) {
@@ -90,6 +90,7 @@
     //CSRF Token
     window.Laravel = <?php echo json_encode([
         'csrfToken' => csrf_token(),
+        'baseUrl'   => url('/'),
     ]); ?>
 </script>
 <script>
@@ -137,10 +138,10 @@
             }
         };
         @if(session('global'))
-            alertify.notify('{{ session('global') }}', 'success', 5);
+        alertify.notify('{{ session('global') }}', 'success', 5);
         @endif
         @if(session('warning'))
-            alertify.notify('{{ session('warning') }}', 'warning', 5);
+        alertify.notify('{{ session('warning') }}', 'warning', 5);
         @endif
         // Tooltip
         $('[title]:not(#tracy-debug *[title])').each(function () {
@@ -155,8 +156,8 @@
         (function (i, s, o, g, r, a, m) {
             i['GoogleAnalyticsObject'] = r;
             i[r] = i[r] || function () {
-                    (i[r].q = i[r].q || []).push(arguments)
-                }, i[r].l = 1 * new Date();
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date();
             a = s.createElement(o),
                 m = s.getElementsByTagName(o)[0];
             a.async = 1;

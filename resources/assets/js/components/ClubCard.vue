@@ -17,7 +17,7 @@
                         </span>
                     </h3>
                     <p class="card-text text-justify">{{ club.excerpt }}</p>
-                    <a href="#" class="card-link">了解更多</a>
+                    <a :href="club_url" class="card-link">了解更多</a>
                 </div>
             </div>
         </div>
@@ -28,6 +28,11 @@
     export default {
         props: [
             'club'
-        ]
+        ],
+        computed: {
+            club_url: function () {
+                return Laravel.baseUrl + '/club/' + this.club.id;
+            }
+        }
     }
 </script>
