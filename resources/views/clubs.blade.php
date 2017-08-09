@@ -8,7 +8,7 @@
             <div class="card-block">
                 <example></example>
                 <h1>社團攤位</h1>
-                社團分類
+                類型
                 <select id="type_select" class="custom-select">
                     <option @if(!$type)selected @endif>全部</option>
                     @foreach($clubTypes as $clubType)
