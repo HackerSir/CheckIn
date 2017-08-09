@@ -193,8 +193,7 @@ Route::group(['middleware' => ['auth', 'email']], function () {
     //內部API
     Route::group(['prefix' => 'api'], function () {
         Route::post('/user-list', 'ApiController@userList')->name('api.user-list');
-        //FIXME: 改回POST only
-        Route::any('/club-list', 'ApiController@clubList')->name('api.club-list');
+        Route::post('/club-list', 'ApiController@clubList')->name('api.club-list');
     });
 
     //會員資料
