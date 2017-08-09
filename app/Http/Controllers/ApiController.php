@@ -9,7 +9,6 @@ use Illuminate\Http\Request;
 
 class ApiController extends Controller
 {
-
     /**
      * ApiController constructor.
      */
