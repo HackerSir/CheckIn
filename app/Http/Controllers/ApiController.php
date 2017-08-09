@@ -82,7 +82,7 @@ class ApiController extends Controller
     public function clubList()
     {
         /** @var Club|\Illuminate\Database\Eloquent\Builder $clubs */
-        $clubQuery = Club::query()->orderBy('id');
+        $clubQuery = Club::with('clubType', 'imgurImage')->orderBy('id');
         //過濾
         /** @var ClubType $clubType */
         $clubType = ClubType::query()->find(request()->get('clubType'));
