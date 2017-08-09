@@ -20,27 +20,11 @@
         },
         methods: {
             fetch: function () {
-                this.clubs = [
-                    {
-                        id: 1,
-                        name: 'name',
-                        image: 'https://i.imgur.com/jlrCn72b.jpg',
-                        tag: {
-                            name: 'tag name',
-                            color: 'red'
-                        },
-                        excerpt: 'excerpt'
-                    }, {
-                        id: 2,
-                        name: 'name2',
-                        image: '',
-                        tag: {
-                            name: 'tag2',
-                            color: 'blue'
-                        },
-                        excerpt: 'test test test'
-                    },
-                ];
+                let self = this;
+                let api_url = Laravel.baseUrl + '/api/club-list';
+                axios.post(api_url).then(function (response) {
+                    self.clubs = response.data;
+                });
             },
         }
     }

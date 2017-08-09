@@ -6,7 +6,6 @@
     <div class="mt-3 pb-3">
         <div class="card">
             <div class="card-block">
-                <example></example>
                 <h1>社團攤位</h1>
                 類型
                 <select id="type_select" class="custom-select">
@@ -23,34 +22,6 @@
                     <input type="text">
                 </div>
                 <club-cards></club-cards>
-                <div class="row mt-1">
-                    @foreach($clubs as $club)
-                        <div class="col-12 col-lg-6 mt-1">
-                            <div class="card">
-                                <div class="card-block">
-                                    <div class="row" style="min-height: 139px">
-                                        <div class="col-4" style="padding: 0">
-                                            <div class="text-center">
-                                                @if($club->imgurImage)
-                                                    <img src="{{ $club->imgurImage->thumbnail('b') }}"
-                                                         class="img-fluid">
-                                                @else
-                                                    <img data-src="holder.js/160x160?random=yes&auto=yes&text=沒有圖片"
-                                                         class="img-fluid">
-                                                @endif
-                                            </div>
-                                        </div>
-                                        <div class="col-8">
-                                            <h3 class="card-title">{{ $club->name }} {!! $club->clubType->tag ?? '' !!}</h3>
-                                            <p class="card-text text-justify">{{ str_limit($club->description, 150, '...') }}</p>
-                                            <a href="#" class="card-link">了解更多</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    @endforeach
-                </div>
             </div>
         </div>
     </div>

@@ -75,16 +75,17 @@ class ApiController extends Controller
     public function clubList()
     {
         /** @var Club[]|Collection $clubs */
-        $clubs = Club::all();
+        $clubs = Club::query()->orderBy('id')->get();
         $result = [];
 
         foreach ($clubs as $club) {
             $result[] = [
                 'id'      => $club->id,
                 'name'    => $club->name,
+                'image'   => $club->imgurImage ? $club->imgurImage->thumbnail('b') : null,
                 'tag'     => [
-                    'name'  => $club->clubType->name ?? '',
-                    'color' => $club->clubType->color ?? '',
+                    'name'  => $club->clubType ? $club->clubType->name : null,
+                    'color' => $club->clubType ? $club->clubType->color : null,
                 ],
                 'excerpt' => str_limit($club->description, 100, '...'),
             ];
