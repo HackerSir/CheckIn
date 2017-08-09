@@ -22,6 +22,7 @@
                     搜尋
                     <input type="text">
                 </div>
+                <club-cards></club-cards>
                 <div class="row mt-1">
                     @foreach($clubs as $club)
                         <div class="col-12 col-lg-6 mt-1">
@@ -40,7 +41,7 @@
                                             </div>
                                         </div>
                                         <div class="col-8">
-                                            <h3 class="card-title">{{ $club->name }} {!! $club->clubType->tag !!}</h3>
+                                            <h3 class="card-title">{{ $club->name }} {!! $club->clubType->tag ?? '' !!}</h3>
                                             <p class="card-text text-justify">{{ str_limit($club->description, 150, '...') }}</p>
                                             <a href="#" class="card-link">了解更多</a>
                                         </div>
