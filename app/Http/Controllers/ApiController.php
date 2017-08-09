@@ -9,6 +9,15 @@ use Illuminate\Http\Request;
 
 class ApiController extends Controller
 {
+
+    /**
+     * ApiController constructor.
+     */
+    public function __construct()
+    {
+        $this->middleware('permission:club.manage')->only(['userList']);
+    }
+
     public function userList(Request $request)
     {
         /** @var Builder|User $usersQuery */
