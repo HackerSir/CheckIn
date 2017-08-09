@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Club;
+use App\ClubType;
 use App\User;
 use Gravatar;
 use Illuminate\Database\Eloquent\Collection;
@@ -70,6 +71,13 @@ class ApiController extends Controller
         ];
 
         return response()->json($json);
+    }
+
+    public function clubTypeList()
+    {
+        $clubTypes = ClubType::query()->orderBy('id')->pluck('name', 'id');
+
+        return $clubTypes;
     }
 
     public function clubList()
