@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Club;
 use App\User;
 use Gravatar;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Http\Request;
 
@@ -68,5 +70,26 @@ class ApiController extends Controller
         ];
 
         return response()->json($json);
+    }
+
+    public function clubList()
+    {
+        /** @var Club[]|Collection $clubs */
+        $clubs = Club::all();
+        $result = [];
+
+        foreach ($clubs as $club) {
+            $result[] = [
+                'id'      => $club->id,
+                'name'    => $club->name,
+                'tag'     => [
+                    'name'  => $club->clubType->name ?? '',
+                    'color' => $club->clubType->color ?? '',
+                ],
+                'excerpt' => str_limit($club->description, 100, '...'),
+            ];
+        }
+
+        return $result;
     }
 }
