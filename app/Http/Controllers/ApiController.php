@@ -81,10 +81,24 @@ class ApiController extends Controller
 
     public function clubList()
     {
-        /** @var Club[]|Collection $clubs */
-        $clubs = Club::query()->orderBy('id')->get();
-        $result = [];
+        /** @var Club|\Illuminate\Database\Eloquent\Builder $clubs */
+        $clubQuery = Club::query()->orderBy('id');
+        //過濾
+        /** @var ClubType $clubType */
+        $clubType = ClubType::query()->find(request()->get('clubType'));
+        if ($clubType) {
+            $clubQuery->where('club_type_id', $clubType->id);
+        }
+        $keyword = request()->get('keyword');
+        if ($keyword) {
+            $clubQuery->where('name', 'like', "%{$keyword}%");
+        }
 
+        //取得社團
+        /** @var Club[]|Collection $clubs */
+        $clubs = $clubQuery->get();
+        //整理資料
+        $result = [];
         foreach ($clubs as $club) {
             $result[] = [
                 'id'      => $club->id,

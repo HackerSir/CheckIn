@@ -1,15 +1,13 @@
 <template>
     <div>
         類型
-        <select id="type_select" class="custom-select" v-model="selectedClubType">
-            <option value="0">全部</option>
+        <select id="type_select" class="custom-select" v-model="selectedClubType" @change="onSelectChange">
+            <option :value="null">全部</option>
             <option :value="id" v-for="(name, id) in clubTypes">{{ name }}</option>
         </select>
-        selected: {{ selectedClubType }}
         <div class="float-sm-right mt-1">
             搜尋
-            <input type="text" v-model="searchKeyword">
-            searchKeyword: {{ searchKeyword }}
+            <input type="text" v-model="searchKeyword" @input="onKeywordChange">
         </div>
         <div class="row mt-1">
             <div class="col-12 col-lg-6 mt-1" v-for="club in clubs">
@@ -28,7 +26,7 @@
         },
         data: function () {
             return {
-                selectedClubType: 0,
+                selectedClubType: null,
                 searchKeyword: '',
                 clubTypes: [],
                 clubs: [],
@@ -37,15 +35,26 @@
         methods: {
             fetch: function () {
                 let self = this;
+                //社團類型
                 let club_type_list_url = Laravel.baseUrl + '/api/club-type-list';
                 axios.post(club_type_list_url).then(function (response) {
                     self.clubTypes = response.data;
                 });
+                //社團清單
                 let club_list_url = Laravel.baseUrl + '/api/club-list';
-                axios.post(club_list_url).then(function (response) {
+                axios.post(club_list_url, {
+                    clubType: this.selectedClubType,
+                    keyword: this.searchKeyword
+                }).then(function (response) {
                     self.clubs = response.data;
                 });
             },
+            onSelectChange: function () {
+                this.fetch();
+            },
+            onKeywordChange: _.debounce(function () {
+                this.fetch();
+            }, 500)
         }
     }
 </script>
