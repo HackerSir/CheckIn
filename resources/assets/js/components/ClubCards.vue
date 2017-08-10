@@ -53,7 +53,7 @@
         computed: {
             searchIndicator: function () {
                 if (this.isFetching) {
-                    return '<i class="fa fa-spinner fa-pulse fa-fw"></i>';
+                    return '<i class="fa fa-spinner fa-pulse fa-fw" aria-hidden="true"></i>';
                 } else if (this.isTypingKeyword) {
                     return '<i class="fa fa-pencil fa-fw" aria-hidden="true"></i>';
                 } else {
