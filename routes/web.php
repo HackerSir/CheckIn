@@ -190,13 +190,6 @@ Route::group(['middleware' => ['auth', 'email']], function () {
         Route::get('barcode/{code}', 'CodePictureController@barcode')->name('code-picture.barcode');
     });
 
-    //內部API
-    Route::group(['prefix' => 'api'], function () {
-        Route::post('/user-list', 'ApiController@userList')->name('api.user-list');
-        Route::post('/club-type-list', 'ApiController@clubTypeList')->name('api.club-type-list');
-        Route::post('/club-list', 'ApiController@clubList')->name('api.club-list');
-    });
-
     //會員資料
     Route::group(['prefix' => 'profile'], function () {
         //查看會員資料
@@ -212,6 +205,13 @@ Route::group(['middleware' => ['auth', 'email']], function () {
             });
         });
     });
+});
+
+//內部API
+Route::group(['prefix' => 'api'], function () {
+    Route::post('/user-list', 'ApiController@userList')->name('api.user-list');
+    Route::post('/club-type-list', 'ApiController@clubTypeList')->name('api.club-type-list');
+    Route::post('/club-list', 'ApiController@clubList')->name('api.club-list');
 });
 
 //會員系統
