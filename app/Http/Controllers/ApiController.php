@@ -95,9 +95,13 @@ class ApiController extends Controller
         if ($keyword) {
             //模糊搜索
             $searchResultIds = Searchy::clubs(['name', 'description'])->query($keyword)->get()->pluck('id')->toArray();
-            //過濾並根據搜尋結果排序
-            $idsOrdered = implode(',', $searchResultIds);
-            $clubQuery->whereIn('id', $searchResultIds)->orderByRaw(DB::raw("FIELD(id, $idsOrdered)"));
+            //過濾
+            $clubQuery->whereIn('id', $searchResultIds);
+            //根據搜尋結果排序
+            if (count($searchResultIds)) {
+                $idsOrdered = implode(',', $searchResultIds);
+                $clubQuery->orderByRaw(DB::raw("FIELD(id, $idsOrdered)"));
+            }
         }
 
         $clubQuery->orderBy('id');
