@@ -6,7 +6,7 @@
             <option :value="id" v-for="(name, id) in clubTypes">{{ name }}</option>
         </select>
         <div class="float-sm-right mt-1">
-            搜尋
+            <span v-html="searchIndicator"></span> 搜尋
             <input type="text" v-model="searchKeyword" @input="onKeywordChange">
         </div>
         <div class="row mt-1">
@@ -45,12 +45,26 @@
                 searchKeyword: '',
                 clubTypes: [],
                 clubs: [],
-                requireRenderHolderImages: false
+                requireRenderHolderImages: false,
+                isTypingKeyword: false,
+                isFetching: false
+            }
+        },
+        computed: {
+            searchIndicator: function () {
+                if (this.isFetching) {
+                    return '<i class="fa fa-spinner fa-pulse fa-fw"></i>';
+                } else if (this.isTypingKeyword) {
+                    return '<i class="fa fa-pencil fa-fw" aria-hidden="true"></i>';
+                } else {
+                    return '<i class="fa fa-search fa-fw" aria-hidden="true"></i>';
+                }
             }
         },
         methods: {
             fetch: function () {
                 let self = this;
+                this.isFetching = true;
                 //社團類型
                 let club_type_list_url = Laravel.baseUrl + '/api/club-type-list';
                 axios.post(club_type_list_url).then(function (response) {
@@ -63,12 +77,18 @@
                     keyword: this.searchKeyword
                 }).then(function (response) {
                     self.clubs = response.data;
+                    self.isFetching = false;
                 });
             },
             onSelectChange: function () {
                 this.fetch();
             },
-            onKeywordChange: _.debounce(function () {
+            onKeywordChange: function () {
+                this.isTypingKeyword = true;
+                this.delayFetch();
+            },
+            delayFetch: _.debounce(function () {
+                this.isTypingKeyword = false;
                 this.fetch();
             }, 1000),
             renderHolderImages: function () {
