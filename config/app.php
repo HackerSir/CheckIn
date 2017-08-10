@@ -198,6 +198,7 @@ return [
         anlutro\LaravelSettings\ServiceProvider::class,
         Redeman\Imgur\ImgurServiceProvider::class,
         BackupManager\Laravel\Laravel5ServiceProvider::class,
+        TomLingham\Searchy\SearchyServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -268,6 +269,7 @@ return [
         'Setting'        => anlutro\LaravelSettings\Facade::class,
         'GoogleApi'      => App\CustomFacades\Facades\GoogleApi::class,
         'ExtendThrottle' => App\ExtendThrottle\Facades\ExtendThrottle::class,
+        'Searchy'        => TomLingham\Searchy\Facades\Searchy::class,
     ],
 
 ];

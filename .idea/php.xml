@@ -119,6 +119,7 @@
       <path value="$PROJECT_DIR$/vendor/j0k3r/php-imgur-api-client" />
       <path value="$PROJECT_DIR$/vendor/backup-manager/backup-manager" />
       <path value="$PROJECT_DIR$/vendor/backup-manager/laravel" />
+      <path value="$PROJECT_DIR$/vendor/tom-lingham/searchy" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="7" />

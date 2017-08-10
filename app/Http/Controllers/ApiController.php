@@ -5,10 +5,12 @@ namespace App\Http\Controllers;
 use App\Club;
 use App\ClubType;
 use App\User;
+use DB;
 use Gravatar;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Http\Request;
+use Searchy;
 
 class ApiController extends Controller
 {
@@ -82,7 +84,7 @@ class ApiController extends Controller
     public function clubList()
     {
         /** @var Club|\Illuminate\Database\Eloquent\Builder $clubs */
-        $clubQuery = Club::with('clubType', 'imgurImage')->orderBy('id');
+        $clubQuery = Club::with('clubType', 'imgurImage');
         //過濾
         /** @var ClubType $clubType */
         $clubType = ClubType::query()->find(request()->get('clubType'));
@@ -91,8 +93,14 @@ class ApiController extends Controller
         }
         $keyword = request()->get('keyword');
         if ($keyword) {
-            $clubQuery->where('name', 'like', "%{$keyword}%");
+            //模糊搜索
+            $searchResultIds = Searchy::clubs(['name', 'description'])->query($keyword)->get()->pluck('id')->toArray();
+            //過濾並根據搜尋結果排序
+            $idsOrdered = implode(',', $searchResultIds);
+            $clubQuery->whereIn('id', $searchResultIds)->orderByRaw(DB::raw("FIELD(id, $idsOrdered)"));
         }
+
+        $clubQuery->orderBy('id');
 
         //取得社團
         /** @var Club[]|Collection $clubs */
