@@ -18,7 +18,7 @@
                     <div class="card-block">
                         <blockquote class="card-blockquote">
                             <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
-                            找不到相關社團
+                            <span v-if="selectedClubType">在「{{ clubTypes[selectedClubType] }}」類型中</span>找不到相關社團
                         </blockquote>
                     </div>
                 </div>
