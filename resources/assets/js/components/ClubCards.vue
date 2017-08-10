@@ -13,6 +13,16 @@
             <div class="col-12 col-lg-6 mt-1" v-for="club in clubs">
                 <club-card :club="club"></club-card>
             </div>
+            <div class="col-12 mt-1" v-if="(selectedClubType || searchKeyword) && clubs.length == 0">
+                <div class="card card-inverse card-warning">
+                    <div class="card-block">
+                        <blockquote class="card-blockquote">
+                            <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                            找不到相關社團
+                        </blockquote>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </template>
