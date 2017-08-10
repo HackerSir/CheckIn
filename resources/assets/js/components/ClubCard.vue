@@ -5,8 +5,7 @@
                 <div class="col-4" style="padding: 0">
                     <div class="text-center">
                         <img :src="club.image" class="img-fluid" v-if="club.image">
-                        <img data-src="holder.js/160x160?random=yes&auto=yes&text=沒有圖片" class="img-fluid"
-                             :id="'club-img-' + club.id"
+                        <img data-src="holder.js/160x160?random=yes&auto=yes&text=沒有圖片" class="img-fluid holder"
                              v-else>
                     </div>
                 </div>
@@ -14,7 +13,7 @@
                     <h3 class="card-title">{{ club.name }}
                         <span class='badge badge-default align-middle'
                               :style="{'background-color':club.tag.color, 'font-size': '20px'}"
-                        v-if="club.tag.name">
+                              v-if="club.tag.name">
                             {{ club.tag.name }}
                         </span>
                     </h3>
@@ -35,14 +34,6 @@
             club_url: function () {
                 return Laravel.baseUrl + '/club/' + this.club.id;
             }
-        },
-        mounted () {
-            this.$nextTick(function () {
-                console.log('club-img-' + this.club.id);
-                Holder.run({
-                    images: document.getElementById('club-img-' + this.club.id)
-                });
-            });
-        },
+        }
     }
 </script>
