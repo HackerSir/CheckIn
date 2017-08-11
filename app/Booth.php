@@ -15,6 +15,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property \Carbon\Carbon|null $created_at
  * @property \Carbon\Carbon|null $updated_at
  * @property-read \App\Club|null $club
+ * @property-read string $embed_map_url
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Booth whereClubId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Booth whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Booth whereId($value)
@@ -39,5 +40,23 @@ class Booth extends Model
     public function club()
     {
         return $this->belongsTo(Club::class);
+    }
+
+    /**
+     * 內嵌地圖網址
+     *
+     * @return string
+     */
+    public function getEmbedMapUrlAttribute()
+    {
+        $url = 'https://www.google.com/maps/embed/v1/place';
+        $queryParameters = [
+            'key'  => env('GOOGLE_MAP_EMBED_KEY'),
+            'q'    => $this->latitude . ',' . $this->longitude,
+            'zoom' => 18,
+        ];
+        $fullUrl = $url . '?' . urldecode(http_build_query($queryParameters));
+
+        return $fullUrl;
     }
 }

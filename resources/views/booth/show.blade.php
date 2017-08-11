@@ -29,8 +29,7 @@
                     <div class="embed-responsive embed-responsive-16by9">
                         <iframe class="embed-responsive-item"
                                 frameborder="0" style="border:0"
-                                {{-- TODO: URL Builder --}}
-                                src="https://www.google.com/maps/embed/v1/place?key={{ env('GOOGLE_MAP_EMBED_KEY') }}&q={{ $booth->latitude }},{{ $booth->longitude }}&zoom=18"
+                                src="{{ $booth->embed_map_url }}"
                                 allowfullscreen>
                         </iframe>
                     </div>
