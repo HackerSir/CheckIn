@@ -25,6 +25,15 @@
                         <dt class="col-sm-3">經緯度</dt>
                         <dd class="col-sm-9">{{ $booth->latitude }}, {{ $booth->longitude }}</dd>
                     </dl>
+
+                    <div class="embed-responsive embed-responsive-16by9">
+                        <iframe class="embed-responsive-item"
+                                frameborder="0" style="border:0"
+                                {{-- TODO: URL Builder --}}
+                                src="https://www.google.com/maps/embed/v1/place?key={{ env('GOOGLE_MAP_EMBED_KEY') }}&q={{ $booth->latitude }},{{ $booth->longitude }}&zoom=18"
+                                allowfullscreen>
+                        </iframe>
+                    </div>
                 </div>
                 <div class="card-block">
                     <a href="{{ route('booth.edit', $booth) }}" class="btn btn-primary">編輯資料</a>
