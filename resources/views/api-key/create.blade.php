@@ -13,7 +13,7 @@
                     <div class="form-group row{{ $errors->has('api_key') ? ' has-danger' : '' }}">
                         <label for="api_key" class="col-md-2 col-form-label">API Key</label>
                         <div class="col-md-10">
-                            {{ Form::text('api_key', null, ['class' => 'form-control', 'required']) }}
+                            {{ Form::text('api_key', null, ['class' => 'form-control', 'required', 'autocomplete' => 'off']) }}
                             @if ($errors->has('api_key'))
                                 <span class="form-control-feedback">
                                     <strong>{{ $errors->first('api_key') }}</strong>
