@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'ApiKey管理')
+@section('title', 'API Key管理')
 
 @section('content')
     <div class="mt-3 pb-3">

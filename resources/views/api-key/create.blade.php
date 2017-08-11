@@ -11,7 +11,7 @@
                     {{ Form::open(['route' => 'api-key.store']) }}
 
                     <div class="form-group row{{ $errors->has('api_key') ? ' has-danger' : '' }}">
-                        <label for="api_key" class="col-md-2 col-form-label">ApiKey</label>
+                        <label for="api_key" class="col-md-2 col-form-label">API Key</label>
                         <div class="col-md-10">
                             {{ Form::text('api_key', null, ['class' => 'form-control', 'required']) }}
                             @if ($errors->has('api_key'))
@@ -24,7 +24,7 @@
 
                     <div class="form-group row">
                         <div class="col-md-10 offset-md-2">
-                            <button type="submit" class="btn btn-primary"> 確認</button>
+                            <button type="submit" class="btn btn-primary">確認</button>
                             <a href="{{ route('api-key.index') }}" class="btn btn-secondary">返回列表</a>
                         </div>
                     </div>
