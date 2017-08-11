@@ -58,7 +58,7 @@ class ApiKeysDataTable extends DataTable
     {
         return [
             'id'          => ['title' => '#'],
-            'api_key'     => ['title' => 'ApiKey'],
+            'api_key'     => ['title' => 'API Key'],
             'count'       => ['title' => '使用次數'],
             'total_count' => ['title' => '總使用次數'],
         ];
