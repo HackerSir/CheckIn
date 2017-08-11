@@ -43,18 +43,6 @@
                         </div>
                     </div>
 
-                    <div class="form-group row{{ $errors->has('longitude') ? ' has-danger' : '' }}">
-                        <label for="longitude" class="col-md-2 col-form-label">經度</label>
-                        <div class="col-md-10">
-                            {{ Form::text('longitude', null, ['class' => 'form-control']) }}
-                            @if ($errors->has('longitude'))
-                                <span class="form-control-feedback">
-                                    <strong>{{ $errors->first('longitude') }}</strong>
-                                </span>
-                            @endif
-                        </div>
-                    </div>
-
                     <div class="form-group row{{ $errors->has('latitude') ? ' has-danger' : '' }}">
                         <label for="latitude" class="col-md-2 col-form-label">緯度</label>
                         <div class="col-md-10">
@@ -62,6 +50,18 @@
                             @if ($errors->has('latitude'))
                                 <span class="form-control-feedback">
                                     <strong>{{ $errors->first('latitude') }}</strong>
+                                </span>
+                            @endif
+                        </div>
+                    </div>
+
+                    <div class="form-group row{{ $errors->has('longitude') ? ' has-danger' : '' }}">
+                        <label for="longitude" class="col-md-2 col-form-label">經度</label>
+                        <div class="col-md-10">
+                            {{ Form::text('longitude', null, ['class' => 'form-control']) }}
+                            @if ($errors->has('longitude'))
+                                <span class="form-control-feedback">
+                                    <strong>{{ $errors->first('longitude') }}</strong>
                                 </span>
                             @endif
                         </div>

@@ -11,26 +11,22 @@
             <h1>{{ $booth->name }} - 攤位</h1>
             <div class="card">
                 <div class="card-block">
-                    <table class="table table-hover">
-                        <tr>
-                            <td class="text-md-right">攤位編號：</td>
-                            <td>{{ $booth->name }}</td>
-                        </tr>
-                        <tr>
-                            <td class="text-md-right">社團：</td>
-                            <td>
-                                @if($booth->club)
-                                    {{ link_to_route('club.show', $booth->club->name, $booth->club) }}
-                                @endif
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="text-md-right">經緯度：</td>
-                            <td>{{ $booth->longitude }} / {{ $booth->latitude }}</td>
-                        </tr>
-                    </table>
+                    <dl class="row" style="font-size: 120%">
+                        <dt class="col-sm-3">攤位編號</dt>
+                        <dd class="col-sm-9">{{ $booth->name }}</dd>
+
+                        <dt class="col-sm-3">社團</dt>
+                        <dd class="col-sm-9">
+                            @if($booth->club)
+                                {{ link_to_route('club.show', $booth->club->name, $booth->club) }}
+                            @endif
+                        </dd>
+
+                        <dt class="col-sm-3">經緯度</dt>
+                        <dd class="col-sm-9">{{ $booth->latitude }}, {{ $booth->longitude }}</dd>
+                    </dl>
                 </div>
-                <div class="card-block text-center">
+                <div class="card-block">
                     <a href="{{ route('booth.edit', $booth) }}" class="btn btn-primary">編輯資料</a>
                     {!! Form::open(['route' => ['booth.destroy', $booth], 'style' => 'display: inline', 'method' => 'DELETE', 'onSubmit' => "return confirm('確定要刪除嗎？');"]) !!}
                     <button type="submit" class="btn btn-danger">刪除攤位</button>
