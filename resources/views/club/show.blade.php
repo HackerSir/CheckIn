@@ -1,14 +1,6 @@
 @extends('layouts.app')
 
-@section('title', $club->name . ' - 社團')
-
-@section('css')
-    <style>
-        table tr td:first-child {
-            white-space: nowrap
-        }
-    </style>
-@endsection
+@section('title', $club->name)
 
 @section('content')
     <div class="mt-3 pb-3">
