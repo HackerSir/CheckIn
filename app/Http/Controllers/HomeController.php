@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Club;
 use App\User;
 
 class HomeController extends Controller
@@ -23,5 +24,10 @@ class HomeController extends Controller
     public function clubs()
     {
         return view('clubs');
+    }
+
+    public function clubsShow(Club $club)
+    {
+        return view('club.show', compact('club'));
     }
 }

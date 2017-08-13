@@ -32,7 +32,7 @@
         ],
         computed: {
             club_url: function () {
-                return Laravel.baseUrl + '/club/' + this.club.id;
+                return Laravel.baseUrl + '/clubs/' + this.club.id;
             }
         }
     }
