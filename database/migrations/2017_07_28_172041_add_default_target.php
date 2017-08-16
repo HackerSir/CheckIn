@@ -25,7 +25,7 @@ class AddDefaultTarget extends Migration
         DB::table($this->tableName)->updateOrInsert([
             $this->keyColumn => 'target',
         ], [
-            $this->valueColumn => 0,
+            $this->valueColumn => 10,
         ]);
     }
 
