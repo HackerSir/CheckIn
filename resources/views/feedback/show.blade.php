@@ -19,13 +19,37 @@
             <h1>給{{ $feedback->club->name }}的回饋資料</h1>
             <div class="card">
                 <div class="card-header">
-                    基本資料
+                    學生資料
                 </div>
                 <div class="card-block">
                     <table class="table table-hover">
                         <tr>
-                            <td class="text-md-right">學生：</td>
-                            <td>{{ $feedback->student->display_name }}</td>
+                            <td class="text-md-right">NID：</td>
+                            <td>{{ $feedback->student->nid }}</td>
+                        </tr>
+                        <tr>
+                            <td class="text-md-right">姓名：</td>
+                            <td>{{ $feedback->student->name }}</td>
+                        </tr>
+                        <tr>
+                            <td class="text-md-right">班級：</td>
+                            <td>{{ $feedback->student->class }}</td>
+                        </tr>
+                        <tr>
+                            <td class="text-md-right">科系：</td>
+                            <td>{{ $feedback->student->unit_name }}</td>
+                        </tr>
+                        <tr>
+                            <td class="text-md-right">學院：</td>
+                            <td>{{ $feedback->student->dept_name }}</td>
+                        </tr>
+                        <tr>
+                            <td class="text-md-right">入學年度：</td>
+                            <td>{{ $feedback->student->in_year }}</td>
+                        </tr>
+                        <tr>
+                            <td class="text-md-right">性別：</td>
+                            <td>{{ $feedback->student->gender }}</td>
                         </tr>
                         <tr>
                             <td class="text-md-right">新生：</td>
@@ -37,6 +61,15 @@
                                 @endif
                             </td>
                         </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    社團資料
+                </div>
+                <div class="card-block">
+                    <table class="table table-hover">
                         <tr>
                             <td class="text-md-right">社團：</td>
                             <td>
@@ -59,6 +92,8 @@
                         </tr>
                     </table>
                 </div>
+            </div>
+            <div class="card">
                 <div class="card-header">
                     回饋資料
                 </div>

@@ -12,7 +12,7 @@
                     <ul>
                         <li>僅能於每個社團填寫一次</li>
                         <li>填寫後，無法修改或刪除</li>
-                        <li>填寫後，該社團將取得您的<code>學號</code>、<code>姓名</code>，
+                        <li>填寫後，該社團將取得您的<code>學號</code>、<code>姓名</code>、<code>班級</code>、<code>科系</code>、<code>學院</code>、<code>入學年度</code>、<code>性別</code>，
                             以及您所填寫的<code>電話</code>、<code>信箱</code>、<code>訊息</code></li>
                         <li>在不同社團，可填寫不同聯絡資訊</li>
                         <li><code>電話</code>與<code>信箱</code>將預先填入上次所填之內容，可於送出前修改</li>
