@@ -24,6 +24,7 @@ use Illuminate\Database\Eloquent\Model;
 class ExtraTicket extends Model
 {
     protected $fillable = [
+        'id',
         'nid',
         'name',
         'class',

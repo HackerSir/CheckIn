@@ -41,6 +41,7 @@ class ExtraTicketController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
+            'id'    => 'nullable|integer|min:1|unique:extra_tickets,id',
             'nid'   => 'required|unique:extra_tickets,nid',
             'name'  => 'required',
             'class' => 'required',
@@ -79,7 +80,7 @@ class ExtraTicketController extends Controller
             'class' => 'required',
         ]);
 
-        $extraTicket->update(array_merge($request->all(), [
+        $extraTicket->update(array_merge($request->only('name', 'class'), [
             'nid' => strtoupper($request->get('nid')),
         ]));
 

@@ -19,6 +19,22 @@
                         {{ Form::open(['route' => 'extra-ticket.store']) }}
                     @endif
 
+                    <div class="form-group row{{ $errors->has('id') ? ' has-danger' : '' }}">
+                        <label for="id" class="col-md-2 col-form-label">抽獎編號</label>
+                        <div class="col-md-10">
+                            @if($isEditMode)
+                                {{ Form::number('id', null, ['class' => 'form-control', 'disabled']) }}
+                            @else
+                                {{ Form::number('id', null, ['class' => 'form-control', 'min' => '1', 'placeholder' => '如：1']) }}
+                                @if ($errors->has('id'))
+                                    <span class="form-control-feedback">
+                                        <strong>{{ $errors->first('id') }}</strong>
+                                    </span>
+                                @endif
+                            @endif
+                        </div>
+                    </div>
+
                     <div class="form-group row{{ $errors->has('nid') ? ' has-danger' : '' }}">
                         <label for="nid" class="col-md-2 col-form-label">學號</label>
                         <div class="col-md-10">
