@@ -162,7 +162,7 @@ class ExtraTicketController extends Controller
                 }
                 //該列資料
                 $rowData = [];
-                for ($col = 0; $col < 3; $col++) {
+                for ($col = 0; $col < 4; $col++) {
                     $cell = $sheet->getCellByColumnAndRow($col, $row->getRowIndex());
                     $colData = $cell->getValue();
                     if (!($colData instanceof RichText)) {
@@ -171,9 +171,14 @@ class ExtraTicketController extends Controller
                     $rowData[] = $colData;
                 }
                 //資料
-                $nid = strtoupper($rowData[0]);
-                $name = $rowData[1];
-                $class = $rowData[2];
+                $id = $rowData[0];
+                //ID僅接受正整數
+                if (!filter_var($id, FILTER_VALIDATE_INT) || $id <= 0) {
+                    $id = null;
+                }
+                $nid = strtoupper($rowData[1]);
+                $name = $rowData[2];
+                $class = $rowData[3];
                 //資料必須齊全
                 if (empty($nid) || empty($name) || empty($class)) {
                     $skipCount++;
@@ -181,9 +186,12 @@ class ExtraTicketController extends Controller
                 }
                 //建立資料
                 try {
-                    ExtraTicket::query()->updateOrCreate([
-                        'nid' => $nid,
-                    ], [
+                    //刪除相同ID或NID的紀錄
+                    ExtraTicket::query()->where('id', $id)->orWhere('nid', $nid)->delete();
+                    //新增紀錄
+                    ExtraTicket::query()->create([
+                        'id'    => $id,
+                        'nid'   => $nid,
                         'name'  => $name,
                         'class' => $class,
                     ]);
