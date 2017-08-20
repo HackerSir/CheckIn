@@ -57,7 +57,7 @@ class ClubController extends Controller
             $club->imgurImage()->save($imgurImage);
         }
 
-        //更新社團負責人
+        //更新攤位負責人
         $attachUserIds = (array) $request->get('user_id');
         $attachUsers = User::whereDoesntHave('club')->whereIn('id', $attachUserIds)->get();
         $club->users()->saveMany($attachUsers);
@@ -119,7 +119,7 @@ class ClubController extends Controller
             $club->imgurImage()->save($imgurImage);
         }
 
-        //更新社團負責人
+        //更新攤位負責人
         $oldUserIds = (array) $club->users->pluck('id')->toArray();
         $newUserIds = (array) $request->get('user_id');
         $detachUserIds = array_diff($oldUserIds, $newUserIds);

@@ -109,7 +109,7 @@
                     </div>
 
                     <div class="form-group row{{ $errors->has('user_id') ? ' has-danger' : '' }}">
-                        <label for="user_id[]" class="col-md-2 col-form-label">社團負責人</label>
+                        <label for="user_id[]" class="col-md-2 col-form-label">攤位負責人</label>
                         <div class="col-md-10">
                             {{ Form::select('user_id[]', [], null, ['id' => 'user_id', 'class' => 'form-control', 'multiple']) }}
                             @if ($errors->has('user_id'))

@@ -52,11 +52,11 @@ class QrcodeScanController extends Controller
             return view('qrcode-scan.scan')->with('level', 'info')->with('message', '活動已經結束');
         }
 
-        //檢查掃描使用者是否為社團負責人
+        //檢查掃描使用者是否為攤位負責人
         /** @var Club $club */
         $club = $user->club;
         if (!$club) {
-            //非社團負責人，不顯示訊息
+            //非攤位負責人，不顯示訊息
             return view('qrcode-scan.scan');
         }
 

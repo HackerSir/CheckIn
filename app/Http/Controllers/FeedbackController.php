@@ -26,7 +26,7 @@ class FeedbackController extends Controller
             /** @var User $user */
             $user = auth()->user();
             if ($user->club || $user->student) {
-                //社團負責人看到自己社團的
+                //攤位負責人看到自己社團的
                 //學生看自己填過的
                 $dataTable->addScope(new FeedbackFilterScope($user->club, $user->student));
             } else {
