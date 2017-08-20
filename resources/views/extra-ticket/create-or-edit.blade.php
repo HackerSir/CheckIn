@@ -5,12 +5,12 @@
     $methodText = $isEditMode ? '編輯' : '新增';
 @endphp
 
-@section('title', $methodText . '額外抽獎編號')
+@section('title', $methodText . '隊輔抽獎編號')
 
 @section('content')
     <div class="mt-3 pb-3">
         <div class="col-md-8 offset-md-2">
-            <h1>{{ $methodText }}額外抽獎編號</h1>
+            <h1>{{ $methodText }}隊輔抽獎編號</h1>
             <div class="card">
                 <div class="card-block">
                     @if($isEditMode)

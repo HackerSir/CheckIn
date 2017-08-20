@@ -1,11 +1,11 @@
 @extends('layouts.app')
 
-@section('title', '匯入額外抽獎編號')
+@section('title', '匯入隊輔抽獎編號')
 
 @section('content')
     <div class="mt-3 pb-3">
         <div class="col-md-8 offset-md-2">
-            <h1>匯入額外抽獎編號</h1>
+            <h1>匯入隊輔抽獎編號</h1>
             <div class="card">
                 <div class="card-block">
                     <ul>

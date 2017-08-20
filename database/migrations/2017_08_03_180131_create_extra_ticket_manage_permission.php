@@ -15,8 +15,8 @@ class CreateExtraTicketManagePermission extends Migration
     {
         $permExtraTicketManage = Permission::create([
             'name'         => 'extra-ticket.manage',
-            'display_name' => '管理額外抽獎編號',
-            'description'  => '檢視、管理額外抽獎編號',
+            'display_name' => '管理隊輔抽獎編號',
+            'description'  => '檢視、管理隊輔抽獎編號',
         ]);
 
         /* @var Role $admin */

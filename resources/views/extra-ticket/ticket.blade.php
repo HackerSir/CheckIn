@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', '額外抽獎編號')
+@section('title', '隊輔抽獎編號')
 
 @section('css')
     <style>
@@ -29,11 +29,11 @@
 
 @section('content')
     <div class="mt-3 pb-3">
-        <h1>額外抽獎編號</h1>
+        <h1>隊輔抽獎編號</h1>
         <div class="card mt-1">
             <div class="card-block">
                 {{ Form::open(['method' => 'get', 'id' => 'ticket_search_form']) }}
-                <input type="text" placeholder="額外抽獎編號" id="ticket_search_id">
+                <input type="text" placeholder="隊輔抽獎編號" id="ticket_search_id">
                 <button type="submit" class="btn btn-primary">
                     <i class="fa fa-search" aria-hidden="true"></i> 查詢
                 </button>
@@ -77,7 +77,7 @@
                 if ($.isNumeric(searchId) === false) {
                     $cat.show();
                     $ticketNumber.text('#' + searchId);
-                    $ticketName.html('<span style="color: red">額外抽獎編號是...數字</span>');
+                    $ticketName.html('<span style="color: red">隊輔抽獎編號是...數字</span>');
                     return false;
                 }
                 //Loading
@@ -98,7 +98,7 @@
                             $ticketName.text(response.name);
                             $ticketClass.text(response.class);
                         } else {
-                            $ticketName.html('<span style="color: red">查無此額外抽獎編號</span>');
+                            $ticketName.html('<span style="color: red">查無此隊輔抽獎編號</span>');
                             $ticketClass.text('');
                         }
                     },
