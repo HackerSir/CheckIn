@@ -44,8 +44,9 @@ class OwnClubController extends Controller
         $club = $this->getOwnClub();
 
         $this->validate($request, [
-            'url'        => 'nullable|url',
-            'image_file' => 'image',
+            'description' => 'nullable|max:300',
+            'url'         => 'nullable|url',
+            'image_file'  => 'image',
         ]);
 
         $club->update($request->only(['description', 'url']));
