@@ -8,6 +8,9 @@
         <a href="{{ route('booth.create') }}" class="btn btn-primary">
             <i class="fa fa-plus-circle" aria-hidden="true"></i> 新增攤位
         </a>
+        <a href="{{ route('booth.import') }}" class="btn btn-primary">
+            <i class="fa fa-upload" aria-hidden="true"></i> 匯入
+        </a>
         <div class="card mt-1">
             <div class="card-block">
                 {!! $dataTable->table() !!}

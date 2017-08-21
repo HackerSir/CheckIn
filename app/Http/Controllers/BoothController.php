@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Booth;
 use App\DataTables\BoothsDataTable;
+use App\Services\FileService;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use PhpOffice\PhpSpreadsheet\RichText;
 
 class BoothController extends Controller
 {
@@ -104,5 +106,78 @@ class BoothController extends Controller
         $booth->delete();
 
         return redirect()->route('booth.index')->with('global', '攤位已刪除');
+    }
+
+    public function getImport()
+    {
+        return view('booth.import');
+    }
+
+    public function postImport(Request $request, FileService $fileService)
+    {
+        //檢查匯入檔案格式為xls或xlsx
+        $this->validate($request, [
+            'import_file' => 'required|mimes:xls,xlsx',
+        ]);
+
+        $uploadedFile = $request->file('import_file');
+        $uploadedFilePath = $uploadedFile->getPathname();
+        $spreadsheet = $fileService->loadSpreadsheet($uploadedFilePath);
+        if (!$spreadsheet) {
+            return redirect()->back()->withErrors(['importFile' => '檔案格式限xls或xlsx']);
+        }
+        $successCount = 0;
+        $skipCount = 0;
+        foreach ($spreadsheet->getAllSheets() as $sheetId => $sheet) {
+            foreach ($sheet->getRowIterator() as $rowNumber => $row) {
+                //忽略第一列
+                if ($rowNumber == 1) {
+                    continue;
+                }
+                //該列資料
+                $rowData = [];
+                for ($col = 0; $col < 3; $col++) {
+                    $cell = $sheet->getCellByColumnAndRow($col, $row->getRowIndex());
+                    $colData = $cell->getValue();
+                    if (!($colData instanceof RichText)) {
+                        $colData = trim($cell->getFormattedValue());
+                    }
+                    $rowData[] = $colData;
+                }
+                //資料
+                $name = $rowData[0];
+                $latitude = filter_var($rowData[1], FILTER_VALIDATE_FLOAT);
+                if ($latitude < -90 || $latitude > 90) {
+                    $latitude = null;
+                }
+                $longitude = filter_var($rowData[2], FILTER_VALIDATE_FLOAT);
+                if ($longitude < -180 || $longitude > 180) {
+                    $longitude = null;
+                }
+                //資料必須齊全
+                if (empty($name) || empty($latitude) || empty($longitude)) {
+                    $skipCount++;
+                    continue;
+                }
+                //建立資料
+                Booth::query()->updateOrCreate([
+                    'name' => $name,
+                ], [
+                    'latitude'  => $latitude,
+                    'longitude' => $longitude,
+                ]);
+
+                $successCount++;
+            }
+        }
+
+        return redirect()->route('booth.index')->with('global', "匯入完成(成功:{$successCount}/跳過:{$skipCount})");
+    }
+
+    public function downloadImportSample()
+    {
+        $path = resource_path('sample/booth_import_sample.xlsx');
+
+        return response()->download($path);
     }
 }

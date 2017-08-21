@@ -94,6 +94,10 @@ Route::group(['middleware' => ['auth', 'email']], function () {
     //攤位管理
     //權限：booth.manage
     Route::group(['middleware' => 'permission:booth.manage'], function () {
+        Route::get('booth/import', 'BoothController@getImport')->name('booth.import');
+        Route::post('booth/import', 'BoothController@postImport')->name('booth.import');
+        Route::get('booth/download-import-sample', 'BoothController@downloadImportSample')
+            ->name('booth.download-import-sample');
         Route::resource('booth', 'BoothController');
     });
     //社團類型管理
