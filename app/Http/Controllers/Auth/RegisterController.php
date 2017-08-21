@@ -89,8 +89,7 @@ class RegisterController extends Controller
     }
 
     /**
-     * 重新�
-     * 裝註冊方法，以寄送驗證信件
+     * 重新包裝註冊方法，以寄送驗證信件
      *
      * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response

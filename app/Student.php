@@ -9,15 +9,13 @@ use Illuminate\Database\Query\Builder;
  * App\Student
  *
  * @property int $id
- * @property int|null $user_id 對應使用�
- *
+ * @property int|null $user_id 對應使用者
  * @property string $nid 學號
  * @property string $name 姓名
  * @property string $class 班級
  * @property string $unit_name 科系
  * @property string $dept_name 學院
- * @property int $in_year �
- * �學學年度
+ * @property int $in_year 入學學年度
  * @property string $gender 性別
  * @property \Carbon\Carbon|null $created_at
  * @property \Carbon\Carbon|null $updated_at

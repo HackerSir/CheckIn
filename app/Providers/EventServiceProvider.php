@@ -18,8 +18,7 @@ class EventServiceProvider extends ServiceProvider
     ];
 
     /**
-     * 訂閱�
-     * 類別進行註冊。
+     * 訂閱者類別進行註冊。
      *
      * @var array
      */

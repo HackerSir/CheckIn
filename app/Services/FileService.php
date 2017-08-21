@@ -18,8 +18,7 @@ class FileService extends Service
      * 產生檔案，doc
      *
      * @link https://github.com/PHPOffice/PHPWord 套件專案
-     * @link http://phpword.readthedocs.org/ 開發�
-     * 文件
+     * @link http://phpword.readthedocs.org/ 開發者文件
      *
      * @param QrcodeSet $qrcodeSet
      * @return PhpWord
@@ -64,8 +63,7 @@ class FileService extends Service
     }
 
     /**
-     * 從檔案載�
-     * �試算表
+     * 從檔案載入試算表
      *
      * @param $filePath
      * @return null|Spreadsheet

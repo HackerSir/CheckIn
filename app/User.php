@@ -99,8 +99,7 @@ class User extends Authenticatable
     }
 
     /**
-     * 是否為本地帳號（非NID登�
-     * �）
+     * 是否為本地帳號（非NID登入）
      *
      * @return bool
      */

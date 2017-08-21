@@ -22,8 +22,7 @@ class AuthListener
     }
 
     /**
-     * 註冊監聽器的訂閱�
-     * 。
+     * 註冊監聽器的訂閱者。
      *
      * @param  \Illuminate\Events\Dispatcher $events
      */
@@ -41,9 +40,7 @@ class AuthListener
     }
 
     /**
-     * 使用�
-     * 登�
-     * �
+     * 使用者登入
      *
      * @param Login $event
      */
@@ -70,8 +67,7 @@ class AuthListener
     }
 
     /**
-     * 使用�
-     * 登出
+     * 使用者登出
      *
      * @param Logout $event
      */
