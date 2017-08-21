@@ -113,6 +113,10 @@ Route::group(['middleware' => ['auth', 'email']], function () {
     //社團管理
     //權限：club.manage
     Route::group(['middleware' => 'permission:club.manage'], function () {
+        Route::get('club/import', 'ClubController@getImport')->name('club.import');
+        Route::post('club/import', 'ClubController@postImport')->name('club.import');
+        Route::get('club/download-import-sample', 'ClubController@downloadImportSample')
+            ->name('club.download-import-sample');
         Route::resource('club', 'ClubController');
     });
     //網站設定

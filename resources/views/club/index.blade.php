@@ -8,6 +8,9 @@
         <a href="{{ route('club.create') }}" class="btn btn-primary">
             <i class="fa fa-plus-circle" aria-hidden="true"></i> 新增社團
         </a>
+        <a href="{{ route('club.import') }}" class="btn btn-primary">
+            <i class="fa fa-upload" aria-hidden="true"></i> 匯入
+        </a>
         <div class="card mt-1">
             <div class="card-block">
                 {!! $dataTable->table() !!}
