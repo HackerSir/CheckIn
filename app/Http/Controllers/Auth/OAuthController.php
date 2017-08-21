@@ -104,11 +104,14 @@ class OAuthController extends Controller
                     'in_year'   => $stuInfo['in_year'],
                     'gender'    => $stuInfo['stu_sex'],
                 ]);
-                //自動綁定QRCode
-                $student->qrcode()->save(Qrcode::create());
             }
             //綁定學生
             $user->student()->save($student);
+        }
+        //若學生沒有QR Code
+        if (!$student->qrcode) {
+            //綁定QRCode
+            $student->qrcode()->save(Qrcode::create());
         }
         //更新名稱
         $user->update(['name' => $stuInfo['stu_name']]);

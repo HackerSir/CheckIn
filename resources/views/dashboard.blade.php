@@ -11,8 +11,14 @@
                 </div>
                 <div class="card-block text-center">
                     <p>於攤位打卡時，請出示此條碼</p>
-                    <img src="{{ route('code-picture.qrcode', $student->qrcode->code) }}" class="img-fluid">
-                    <p>{{ $student->qrcode->code }}</p>
+                    @if($student->qrcode)
+                        <img src="{{ route('code-picture.qrcode', $student->qrcode->code) }}" class="img-fluid">
+                        <p>{{ $student->qrcode->code }}</p>
+                    @else
+                        <div class="alert alert-danger" role="alert">
+                            未擁有 QR Code，請重新登入，使系統自動綁定 QR Code
+                        </div>
+                    @endif
                 </div>
             </div>
             <div class="card">
