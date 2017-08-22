@@ -8,9 +8,13 @@
             <a href="{{ route('club.index') }}" class="btn btn-secondary">
                 <i class="fa fa-arrow-left" aria-hidden="true"></i> 社團管理
             </a>
-            <a href="{{ route('club.edit', $club) }}" class="btn btn-primary">編輯資料</a>
+            <a href="{{ route('club.edit', $club) }}" class="btn btn-primary">
+                <i class="fa fa-pencil-square-o" aria-hidden="true"></i> 編輯資料
+            </a>
             {!! Form::open(['route' => ['club.destroy', $club], 'style' => 'display: inline', 'method' => 'DELETE', 'onSubmit' => "return confirm('確定要刪除嗎？');"]) !!}
-            <button type="submit" class="btn btn-danger">刪除社團</button>
+            <button type="submit" class="btn btn-danger">
+                <i class="fa fa-trash" aria-hidden="true"></i> 刪除社團
+            </button>
             {!! Form::close() !!}
         </div>
         <div class="card">
@@ -20,6 +24,8 @@
                     <div class="col-12 col-lg-5 mt-1">
                         @if($club->imgurImage)
                             <img src="{{ $club->imgurImage->thumbnail('l') }}" class="img-fluid">
+                        @else
+                            <img data-src="holder.js/400x300?random=yes&auto=yes&text=沒有圖片" class="img-fluid">
                         @endif
                     </div>
                     <div class="col-12 col-lg-7 mt-1">
@@ -62,7 +68,7 @@
                         </dl>
                     </div>
                 </div>
-                <div class="mt-1">
+                <div class="mt-2">
                     <h2>簡介</h2>
                     <p style="font-size: 120%">{!! nl2br(e($club->description)) !!}</p>
                 </div>
@@ -70,4 +76,8 @@
 
         </div>
     </div>
+@endsection
+
+@section('js')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/holder/2.9.4/holder.min.js"></script>
 @endsection
