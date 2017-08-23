@@ -7,8 +7,8 @@
 @endsection
 
 @section('club-basic-info')
-    <dt class="col-sm-3">負責人</dt>
-    <dd class="col-sm-9">
+    <dt class="col-4 col-sm-3">負責人</dt>
+    <dd class="col-8 col-sm-9">
         @foreach($club->users as $user)
             {{ $user->name }}<br/>
         @endforeach
