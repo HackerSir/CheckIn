@@ -55,7 +55,12 @@
                     <div class="row">
                         @foreach($club->booths as $booth)
                             <div class="col-md">
-                                <h3>{{ $booth->name }}</h3>
+                                @if(\Laratrust::can('booth.manage'))
+                                    <h3>{{ link_to_route('booth.show', $booth->name, $booth) }}</h3>
+                                @else
+                                    <h3>{{ $booth->name }}</h3>
+                                @endif
+
                                 <div class="embed-responsive embed-responsive-16by9">
                                     <iframe class="embed-responsive-item"
                                             frameborder="0" style="border:0"
