@@ -5,7 +5,23 @@
 @section('content')
     <div class="mt-3 pb-3">
         <div class="mb-2">
-            @yield('club-controls')
+            @if(\Laratrust::can('club.manage'))
+                <a href="{{ route('club.index') }}" class="btn btn-secondary">
+                    <i class="fa fa-arrow-left" aria-hidden="true"></i> 社團管理
+                </a>
+                <a href="{{ route('club.edit', $club) }}" class="btn btn-primary">
+                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i> 編輯資料
+                </a>
+                {!! Form::open(['route' => ['club.destroy', $club], 'style' => 'display: inline', 'method' => 'DELETE', 'onSubmit' => "return confirm('確定要刪除嗎？');"]) !!}
+                <button type="submit" class="btn btn-danger">
+                    <i class="fa fa-trash" aria-hidden="true"></i> 刪除社團
+                </button>
+                {!! Form::close() !!}
+            @elseif(isset(Auth::user()->club) && Auth::user()->club->id == $club->id)
+                <a href="{{ route('own-club.edit') }}" class="btn btn-primary">
+                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i> 編輯資料
+                </a>
+            @endif
         </div>
         <div class="card">
             <div class="card-block">
