@@ -23,11 +23,11 @@ class HomeController extends Controller
 
     public function clubs()
     {
-        return view('clubs');
+        return view('clubs.index');
     }
 
     public function clubsShow(Club $club)
     {
-        return view('club.show', compact('club'));
+        return view('clubs.show', compact('club'));
     }
 }
