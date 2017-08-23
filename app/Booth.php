@@ -43,7 +43,8 @@ class Booth extends Model
     }
 
     /**
-     * 內嵌地圖網址
+     * �
+     * �嵌地圖網址
      *
      * @return string
      */
