@@ -42,7 +42,14 @@
                                 @endif
                             </dd>
 
-                            @yield('club-basic-info')
+                            @if(\Laratrust::can('club.manage') || (isset(Auth::user()->club) && Auth::user()->club->id == $club->id))
+                                <dt class="col-4 col-sm-3">負責人</dt>
+                                <dd class="col-8 col-sm-9">
+                                    @foreach($club->users as $user)
+                                        {{ $user->name }}<br/>
+                                    @endforeach
+                                </dd>
+                            @endif
                         </dl>
                     </div>
                 </div>
