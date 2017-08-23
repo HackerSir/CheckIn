@@ -1,84 +1,16 @@
-@extends('layouts.app')
+@extends('layouts.club.show')
 
-@section('title', $club->name . ' - 社團')
-
-@section('css')
-    <style>
-        table tr td:first-child {
-            white-space: nowrap
-        }
-    </style>
+@section('club-controls')
+    <a href="{{ route('own-club.edit') }}" class="btn btn-primary">
+        <i class="fa fa-pencil-square-o" aria-hidden="true"></i> 編輯資料
+    </a>
 @endsection
 
-@section('content')
-    <div class="row mt-3 pb-3">
-        <div class="col-md-8 offset-md-2">
-            <h1>{{ $club->name }} - 社團</h1>
-            <div class="card">
-                @if($club->imgurImage)
-                    <div class="card-block text-center">
-                        <img src="{{ $club->imgurImage->thumbnail('h') }}" class="img-fluid">
-                    </div>
-                @endif
-                <div class="card-block">
-                    <table class="table table-hover">
-                        <tr>
-                            <td class="text-md-right">類型：</td>
-                            <td>{{ $club->clubType->name ?? '' }}</td>
-                        </tr>
-                        <tr>
-                            <td class="text-md-right">名稱：</td>
-                            <td>{{ $club->name }}</td>
-                        </tr>
-                        <tr>
-                            <td class="text-md-right">集點：</td>
-                            <td>
-                                @if($club->is_counted)
-                                    <i class="fa fa-check-square-o fa-2x" aria-hidden="true"></i>
-                                @else
-                                    <i class="fa fa-square-o fa-2x" aria-hidden="true"></i>
-                                @endif
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="text-md-right">編號：</td>
-                            <td>{{ $club->number }}</td>
-                        </tr>
-                        <tr>
-                            <td class="text-md-right">攤位：</td>
-                            <td>
-                                @foreach($club->booths as $booth)
-                                    {{ $booth->name }}<br/>
-                                @endforeach
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="text-md-right">網址：</td>
-                            <td>
-                                @if($club->url)
-                                    {{ link_to($club->url, $club->url, ['target' => '_blank']) }}
-                                @endif
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="text-md-right">負責人：</td>
-                            <td>
-                                @foreach($club->users as $user)
-                                    {{ $user->name }}<br/>
-                                @endforeach
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-                @if($club->description)
-                    <div class="card-block">
-                        {!! nl2br(e($club->description)) !!}
-                    </div>
-                @endif
-                <div class="card-block text-center">
-                    <a href="{{ route('own-club.edit') }}" class="btn btn-primary">編輯資料</a>
-                </div>
-            </div>
-        </div>
-    </div>
+@section('club-basic-info')
+    <dt class="col-sm-3">負責人</dt>
+    <dd class="col-sm-9">
+        @foreach($club->users as $user)
+            {{ $user->name }}<br/>
+        @endforeach
+    </dd>
 @endsection

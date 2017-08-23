@@ -35,12 +35,12 @@
                                 @endif
                             </dd>
 
-                            <dt class="col-sm-3">攤位</dt>
-                            <dd class="col-sm-9">
-                                @foreach($club->booths as $booth)
-                                    {{ link_to_route('booth.show', $booth->name, $booth) }}<br/>
-                                @endforeach
-                            </dd>
+                            {{--<dt class="col-sm-3">攤位</dt>--}}
+                            {{--<dd class="col-sm-9">--}}
+                                {{--@foreach($club->booths as $booth)--}}
+                                    {{--{{ link_to_route('booth.show', $booth->name, $booth) }}<br/>--}}
+                                {{--@endforeach--}}
+                            {{--</dd>--}}
 
                             <dt class="col-sm-3">網站</dt>
                             <dd class="col-sm-9">
@@ -49,12 +49,7 @@
                                 @endif
                             </dd>
 
-                            <dt class="col-sm-3">負責人</dt>
-                            <dd class="col-sm-9">
-                                @foreach($club->users as $user)
-                                    {{ $user->name }}<br/>
-                                @endforeach
-                            </dd>
+                            @yield('club-basic-info')
                         </dl>
                     </div>
                 </div>
