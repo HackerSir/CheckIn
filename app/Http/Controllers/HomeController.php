@@ -28,6 +28,6 @@ class HomeController extends Controller
 
     public function clubsShow(Club $club)
     {
-        return view('clubs.show', compact('club'));
+        return view('club.show', compact('club'));
     }
 }

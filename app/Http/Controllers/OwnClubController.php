@@ -17,7 +17,7 @@ class OwnClubController extends Controller
     {
         $club = $this->getOwnClub();
 
-        return view('own-club.show', compact('club'));
+        return view('club.show', compact('club'));
     }
 
     /**
