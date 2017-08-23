@@ -2,52 +2,72 @@
 
 @section('title', $student->name . ' - 學生')
 
+@section('css')
+    <style>
+        .badge {
+            font-size: 75% !important;
+        }
+    </style>
+@endsection
+
 @section('content')
-    <div class="row mt-3 pb-3">
-        <div class="col-md-8 offset-md-2">
-            <div class="card">
-                <div class="card-header">
-                    QR Code
-                </div>
-                <div class="card-block text-center">
-                    <p>於攤位打卡時，請出示此條碼</p>
+    <div class="mt-3 pb-3">
+        <div class="card">
+            <div class="card-block">
+                <h1>QR Code</h1>
+                <div class="text-center">
                     @if($student->qrcode)
+                        <p class="text-warning">請在攤位出示此 QR Code 來進行打卡</p>
                         <img src="{{ route('code-picture.qrcode', $student->qrcode->code) }}" class="img-fluid">
-                        <p>{{ $student->qrcode->code }}</p>
                     @else
                         <div class="alert alert-danger" role="alert">
-                            未擁有 QR Code，請重新登入，使系統自動綁定 QR Code
+                            o_O 沒有 QR Code？<br/>
+                            請嘗試重新登入，讓系統產生新的 QR Code
                         </div>
                     @endif
                 </div>
-            </div>
-            <div class="card">
-                <div class="card-header">
-                    基本資料
+
+                <hr/>
+
+                <h1>集點任務</h1>
+                <p>進度：{{ $student->countedRecords->count() }} / {{ \Setting::get('target') }}</p>
+                <div class="progress w-80">
+                    @php
+                        $progress = ($student->countedRecords->count() / \Setting::get('target')) * 100
+                    @endphp
+                    <div class="progress-bar d-flex align-items-center justify-content-center" role="progressbar"
+                         style="width: {{ $progress }}%;" aria-valuenow="{{ $progress }}" aria-valuemin="0"
+                         aria-valuemax="100">
+                        <div>{{ $progress }}%</div>
+                    </div>
                 </div>
-                <div class="card-block">
-                    <table class="table table-hover">
-                        <tr>
-                            <td class="text-md-right">NID：</td>
-                            <td>{{ $student->nid }}</td>
-                        </tr>
-                        <tr>
-                            <td class="text-md-right">姓名：</td>
-                            <td>{{ $student->name }}</td>
-                        </tr>
-                        <tr>
-                            <td class="text-md-right">進度：</td>
-                            <td>{{ $student->countedRecords->count() }}
-                                / {{ \Setting::get('target') }}</td>
-                        </tr>
-                        <tr>
-                            <td class="text-md-right">抽獎編號：</td>
-                            <td>{{ $student->ticket->id ?? '尚未取得' }}</td>
-                        </tr>
-                    </table>
+
+                <hr/>
+
+                <h1>抽獎編號</h1>
+                <div class="text-center">
+                    @if(isset($student->ticket))
+                        <h3 class="text-danger">{{ sprintf("%04d", $student->ticket->id) }}</h3>
+                    @else
+                        <h3 class="text-danger">集點任務尚未完成</h3>
+                    @endif
                 </div>
+
+                <hr/>
+
+                @include('components.record-list', ['records' => $student->records])
+
+                <hr/>
+
+                <h1>個人資料</h1>
+                <dl class="row" style="font-size: 120%">
+                    <dt class="col-4 col-md-2">學號</dt>
+                    <dd class="col-8 col-md-10">{{ $student->nid }}</dd>
+
+                    <dt class="col-4 col-md-2">姓名</dt>
+                    <dd class="col-8 col-md-10">{{ $student->name }}</dd>
+                </dl>
             </div>
-            @include('components.record-list', ['records' => $student->records])
         </div>
     </div>
 @endsection
