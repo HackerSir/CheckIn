@@ -85,9 +85,16 @@ $factory->define(App\Ticket::class, function (Faker\Generator $faker) {
 });
 
 $factory->define(App\Feedback::class, function (Faker\Generator $faker) {
+    $studentIds = \App\Student::query()->pluck('id')->toArray();
+    $clubIds = \App\Club::query()->pluck('id')->toArray();
+    $option = $faker->numberBetween(1, 7);
+
     return [
-        'phone' => $faker->phoneNumber,
-        'email' => $faker->email,
+        'student_id' => $faker->randomElement($studentIds),
+        'club_id'    => $faker->randomElement($clubIds),
+        'phone'      => $option & 1 ? $faker->phoneNumber : null,
+        'email'      => $option & 2 ? $faker->email : null,
+        'message'    => $option & 4 ? $faker->paragraph : null,
     ];
 });
 
