@@ -9,15 +9,15 @@ use Illuminate\Database\Eloquent\Model;
  * App\Feedback
  *
  * @property int $id
- * @property int|null $student_id 對應學生
- * @property int|null $club_id 對應社團
+ * @property int $student_id 對應學生
+ * @property int $club_id 對應社團
  * @property string|null $phone 聯絡電話
  * @property string|null $email 聯絡信箱
  * @property \Carbon\Carbon|null $created_at
  * @property \Carbon\Carbon|null $updated_at
  * @property string|null $message 附加訊息
- * @property-read \App\Club|null $club
- * @property-read \App\Student|null $student
+ * @property-read \App\Club $club
+ * @property-read \App\Student $student
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Feedback whereClubId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Feedback whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Feedback whereEmail($value)
