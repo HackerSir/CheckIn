@@ -33,23 +33,23 @@ class QrcodeScanController extends Controller
         /** @var Qrcode $qrcode */
         $qrcode = Qrcode::where('code', $code)->with('student.records.club.clubType')->first();
         if (!$qrcode) {
-            return view('qrcode-scan.scan')->with('level', 'danger')->with('message', 'QR Code無效');
+            return view('qrcode-scan.scan')->with('level', 'danger')->with('message', '無效的 QR Code');
         }
         view()->share(compact('qrcode'));
 
         //檢查QR Code是否已經被學生綁定
         if (!$qrcode->student) {
-            return view('qrcode-scan.scan')->with('level', 'danger')->with('message', '該QR Code不屬於任何學生');
+            return view('qrcode-scan.scan')->with('level', 'danger')->with('message', 'QR Code 尚未綁定，請聯絡課外活動組');
         }
 
         //檢查是否屬於活動時間
         $startAt = new Carbon(Setting::get('start_at'));
         if ($startAt->gte(Carbon::now())) {
-            return view('qrcode-scan.scan')->with('level', 'info')->with('message', '活動尚未開始');
+            return view('qrcode-scan.scan')->with('level', 'info')->with('message', '集點活動尚未開始，預計在' . $startAt . '開始');
         }
         $endAt = new Carbon(Setting::get('end_at'));
         if ($endAt->lte(Carbon::now())) {
-            return view('qrcode-scan.scan')->with('level', 'info')->with('message', '活動已經結束');
+            return view('qrcode-scan.scan')->with('level', 'info')->with('message', '集點活動已在' . $endAt . '結束');
         }
 
         //檢查掃描使用者是否為攤位負責人
