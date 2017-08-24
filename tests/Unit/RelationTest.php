@@ -24,7 +24,7 @@ class RelationTest extends TestCase
     public function testStudentUserRelation()
     {
         /** @var Student $student */
-        $student = $this->factoryWithoutObservers(Student::class)->create();
+        $student = $this->factoryWithoutObservers(Student::class)->make();
         /** @var User $user */
         $user = $this->factoryWithoutObservers(User::class)->create();
 
@@ -55,7 +55,7 @@ class RelationTest extends TestCase
     public function testQrcodeStudentRelation()
     {
         /** @var Qrcode $qrcode */
-        $qrcode = $this->factoryWithoutObservers(Qrcode::class)->create();
+        $qrcode = $this->factoryWithoutObservers(Qrcode::class)->make();
         /** @var Student $student */
         $student = $this->factoryWithoutObservers(Student::class)->create();
 
@@ -86,7 +86,7 @@ class RelationTest extends TestCase
     public function testClubClubTypeRelation()
     {
         /** @var Club $club */
-        $club = $this->factoryWithoutObservers(Club::class)->create();
+        $club = $this->factoryWithoutObservers(Club::class)->make();
         /** @var ClubType $clubType */
         $clubType = $this->factoryWithoutObservers(ClubType::class)->create();
 
@@ -117,7 +117,7 @@ class RelationTest extends TestCase
     public function testBoothClubRelation()
     {
         /** @var Booth $booth */
-        $booth = $this->factoryWithoutObservers(Booth::class)->create();
+        $booth = $this->factoryWithoutObservers(Booth::class)->make();
         /** @var Club $club */
         $club = $this->factoryWithoutObservers(Club::class)->create();
 
@@ -148,7 +148,7 @@ class RelationTest extends TestCase
     public function testRecordClubStudentRelation()
     {
         /** @var Record $record */
-        $record = $this->factoryWithoutObservers(Record::class)->create();
+        $record = $this->factoryWithoutObservers(Record::class)->make();
         /** @var Club $club */
         $club = $this->factoryWithoutObservers(Club::class)->create();
         /** @var Student $student */
@@ -170,7 +170,7 @@ class RelationTest extends TestCase
     public function testTicketStudentRelation()
     {
         /** @var Ticket $ticket */
-        $ticket = $this->factoryWithoutObservers(Ticket::class)->create();
+        $ticket = $this->factoryWithoutObservers(Ticket::class)->make();
         /** @var Student $student */
         $student = $this->factoryWithoutObservers(Student::class)->create();
 
@@ -201,7 +201,7 @@ class RelationTest extends TestCase
     public function testFeedbackClubStudentRelation()
     {
         /** @var Feedback $feedback */
-        $feedback = $this->factoryWithoutObservers(Feedback::class)->create();
+        $feedback = $this->factoryWithoutObservers(Feedback::class)->make();
         /** @var Club $club */
         $club = $this->factoryWithoutObservers(Club::class)->create();
         /** @var Student $student */
