@@ -24,11 +24,24 @@
                         </tr>
                         <tr>
                             <td class="text-md-right">學生：</td>
-                            <td>{{ $qrcode->student->display_name ?? '' }}</td>
+                            <td>
+                                @if($qrcode->student)
+                                    @if(Laratrust::can('student.manage'))
+                                        {{ link_to_route('student.show', $qrcode->student->display_name, $qrcode->student) }}
+                                    @else
+                                        {{ $qrcode->student->display_name }}
+                                    @endif
+                                @else
+                                    尚未綁定
+                                @endif
+                            </td>
                         </tr>
                         <tr>
                             <td class="text-md-right">綁定時間：</td>
-                            <td>{{ $qrcode->bind_at }}</td>
+                            <td>
+                                {{ $qrcode->bind_at }}
+                                （{{ $qrcode->bind_at->diffForHumans() }}）
+                            </td>
                         </tr>
                     </table>
                 </div>

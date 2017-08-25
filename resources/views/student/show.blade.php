@@ -80,7 +80,11 @@
                         @forelse($student->qrcodes as $qrcode)
                             <tr>
                                 <td>
-                                    {{ $qrcode->code }}
+                                    @if(Laratrust::can('qrcode.manage'))
+                                        {{ link_to_route('qrcode.show', $qrcode->code, $qrcode) }}
+                                    @else
+                                        {{ $qrcode->code }}
+                                    @endif
                                     @if($qrcode->is_last_one)
                                         <i class="fa fa-check text-success" aria-hidden="true" title="最後一組"></i>
                                     @endif
