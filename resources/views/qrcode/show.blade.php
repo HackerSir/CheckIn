@@ -20,7 +20,12 @@
                     <table class="table table-hover">
                         <tr>
                             <td class="text-md-right">代號：</td>
-                            <td>{{ $qrcode->code }}</td>
+                            <td>
+                                {{ $qrcode->code }}
+                                @if($qrcode->is_last_one)
+                                    <i class="fa fa-check text-success" aria-hidden="true" title="最後一組"></i>
+                                @endif
+                            </td>
                         </tr>
                         <tr>
                             <td class="text-md-right">學生：</td>
