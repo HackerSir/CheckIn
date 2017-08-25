@@ -26,7 +26,7 @@ class StudentsDataTable extends DataTable
      */
     public function query()
     {
-        $query = Student::query()->select(array_keys($this->getColumns()));
+        $query = Student::query()->withCount('records');
 
         return $this->applyScopes($query);
     }
@@ -56,14 +56,18 @@ class StudentsDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            'id'        => ['title' => '#'],
-            'nid'       => ['title' => 'NID'],
-            'name'      => ['title' => '姓名'],
-            'class'     => ['title' => '班級'],
-            'unit_name' => ['title' => '科系'],
-            'dept_name' => ['title' => '學院'],
-            'in_year'   => ['title' => '入學年度'],
-            'gender'    => ['title' => '性別'],
+            'id'            => ['title' => '#'],
+            'nid'           => ['title' => 'NID'],
+            'name'          => ['title' => '姓名'],
+            'class'         => ['title' => '班級'],
+            'unit_name'     => ['title' => '科系'],
+            'dept_name'     => ['title' => '學院'],
+            'in_year'       => ['title' => '入學年度'],
+            'gender'        => ['title' => '性別'],
+            'records_count' => [
+                'searchable' => false,
+                'title'      => '打卡',
+            ],
         ];
     }
 
