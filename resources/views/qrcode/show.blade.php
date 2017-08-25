@@ -44,8 +44,12 @@
                         <tr>
                             <td class="text-md-right">綁定時間：</td>
                             <td>
-                                {{ $qrcode->bind_at }}
-                                （{{ $qrcode->bind_at->diffForHumans() }}）
+                                @if($qrcode->bind_at)
+                                    {{ $qrcode->bind_at }}
+                                    （{{ $qrcode->bind_at->diffForHumans() }}）
+                                @else
+                                    尚未綁定
+                                @endif
                             </td>
                         </tr>
                     </table>
