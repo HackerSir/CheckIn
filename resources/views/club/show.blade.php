@@ -66,6 +66,25 @@
                                     @endforeach
                                 </dd>
                             @endif
+
+                            <dt class="col-4 col-sm-3">回饋資料</dt>
+                            <dd class="col-8 col-sm-9">
+                                @if(Auth::user()->student)
+                                    @if(\App\Feedback::whereClubId($club->id)->whereStudentId(Auth::user()->student->id)->count() == 0)
+                                        <a href="{{ route('feedback.create', $club) }}" class="btn btn-primary btn-lg">
+                                            <i class="fa fa-pencil" aria-hidden="true"></i> 按此填寫
+                                        </a>
+                                    @else
+                                        <a href="{{ route('feedback.create', $club) }}" class="btn btn-success btn-lg">
+                                            <i class="fa fa-check" aria-hidden="true"></i> 已填寫完成
+                                        </a>
+                                    @endif
+                                @else
+                                    <a href="javascript:void(0)" class="btn btn-primary btn-lg disabled">
+                                        <i class="fa fa-times" aria-hidden="true"></i> 限學生帳號使用
+                                    </a>
+                                @endif
+                            </dd>
                         </dl>
                     </div>
                 </div>
