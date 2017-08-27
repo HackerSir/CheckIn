@@ -91,20 +91,17 @@ class OAuthController extends Controller
         $student = $user->student;
         //若學生不存在
         if (!$student) {
-            //試著找出現有學生，並綁定
-            $student = Student::find($nid);
-            if (!$student) {
-                //學生不存在，建立學生
-                $student = Student::create([
-                    'nid'       => $stuInfo['stu_id'],
-                    'name'      => $stuInfo['stu_name'],
-                    'class'     => $stuInfo['stu_class'],
-                    'unit_name' => $stuInfo['unit_name'],
-                    'dept_name' => $stuInfo['dept_name'],
-                    'in_year'   => $stuInfo['in_year'],
-                    'gender'    => $stuInfo['stu_sex'],
-                ]);
-            }
+            //找出或建立學生
+            $student = Student::query()->firstOrCreate([
+                'nid' => $stuInfo['stu_id'],
+            ], [
+                'name'      => $stuInfo['stu_name'],
+                'class'     => $stuInfo['stu_class'],
+                'unit_name' => $stuInfo['unit_name'],
+                'dept_name' => $stuInfo['dept_name'],
+                'in_year'   => $stuInfo['in_year'],
+                'gender'    => $stuInfo['stu_sex'],
+            ]);
             //綁定學生
             $user->student()->save($student);
         }
