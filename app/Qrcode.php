@@ -77,6 +77,9 @@ class Qrcode extends Model
             return false;
         }
 
-        return $this->student->qrcode->id == $this->id;
+        $lastQrcode = static::where('student_id', $this->student_id)
+            ->orderBy('bind_at', 'desc')->first();
+
+        return $lastQrcode->id == $this->id;
     }
 }
