@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Club;
+use App\Feedback;
 use App\Record;
 use App\Student;
+use App\User;
+use Illuminate\Database\Eloquent\Collection;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Worksheet;
@@ -119,8 +122,81 @@ class ExportController extends Controller
         ];
 
         $sheet->getStyleByColumnAndRow(8, 1, 8, $sheet->getHighestRow())->applyFromArray($styleArray);
+        $sheet->getStyleByColumnAndRow(11, 1, 11, $sheet->getHighestRow())->applyFromArray($styleArray);
 
         //下載
         return $this->downloadSpreadsheet($spreadsheet, '打卡紀錄.xlsx');
+    }
+
+    /**
+     * 回饋資料
+     *
+     * @return \Symfony\Component\HttpFoundation\BinaryFileResponse
+     */
+    public function feedback()
+    {
+        $feedbackQuery = Feedback::query();
+        //若有管理權限，直接顯示全部
+        if (!\Laratrust::can('feedback.manage')) {
+            //若無管理權限
+            /** @var User $user */
+            $user = auth()->user();
+            if ($user->club) {
+                //攤位負責人看到自己社團的
+                $feedbackQuery->where('club_id', $user->club->id);
+            } else {
+                //沒有權限
+                abort(403);
+            }
+        }
+        /** @var Feedback[]|Collection $feedback */
+        $feedback = $feedbackQuery->get();
+
+        //建立
+        $spreadsheet = new Spreadsheet();
+        $sheet = $spreadsheet->getActiveSheet();
+        //建立匯出資料
+        $this->setTitleRow(
+            $sheet,
+            ['#', 'NID', '姓名', '班級', '科系', '學院', '入學年度', '性別', '新生', '社團編號', '社團類型', '社團名稱', '電話', '信箱', '附加訊息']
+        );
+        foreach ($feedback as $feedbackItem) {
+            /** @var Student $student */
+            $student = $feedbackItem->student;
+            /** @var Club $club */
+            $club = $feedbackItem->club;
+            $this->appendRow($sheet, [
+                $feedbackItem->id,
+                $student->nid,
+                $student->name,
+                $student->class,
+                $student->unit_name,
+                $student->dept_name,
+                $student->in_year,
+                $student->gender,
+                $student->is_freshman,
+                $club->number,
+                $club->clubType->name ?? '',
+                $club->name,
+                $feedbackItem->phone,
+                $feedbackItem->email,
+                $feedbackItem->message,
+            ]);
+        }
+        //調整格式
+        $styleArray = [
+            'borders' => [
+                'right' => [
+                    'style' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THICK,
+                    'color' => ['argb' => '00000000'],
+                ],
+            ],
+        ];
+
+        $sheet->getStyleByColumnAndRow(8, 1, 8, $sheet->getHighestRow())->applyFromArray($styleArray);
+        $sheet->getStyleByColumnAndRow(11, 1, 11, $sheet->getHighestRow())->applyFromArray($styleArray);
+
+        //下載
+        return $this->downloadSpreadsheet($spreadsheet, '回饋資料.xlsx');
     }
 }

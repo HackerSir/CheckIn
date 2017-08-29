@@ -178,6 +178,7 @@ Route::group(['middleware' => ['auth', 'email']], function () {
     //Feedback
     Route::get('feedback/create/{club}', 'FeedbackController@create')->name('feedback.create');
     Route::post('feedback/{club}', 'FeedbackController@store')->name('feedback.store');
+    Route::post('export/feedback', 'ExportController@feedback')->name('export.feedback');
     Route::resource('feedback', 'FeedbackController', [
         'only' => [
             'index',
