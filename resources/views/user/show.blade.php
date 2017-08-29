@@ -58,9 +58,13 @@
                     </dl>
                 </div>
                 <div class="card-block text-center">
-                    <a href="{{ route('user.edit', $user) }}" class="btn btn-primary">編輯資料</a>
+                    <a href="{{ route('user.edit', $user) }}" class="btn btn-primary">
+                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i> 編輯資料
+                    </a>
                     {!! Form::open(['route' => ['user.destroy', $user], 'style' => 'display: inline', 'method' => 'DELETE', 'onSubmit' => "return confirm('確定要刪除此會員嗎？');"]) !!}
-                    <button type="submit" class="btn btn-danger">刪除會員</button>
+                    <button type="submit" class="btn btn-danger">
+                        <i class="fa fa-trash" aria-hidden="true"></i> 刪除會員
+                    </button>
                     {!! Form::close() !!}
                 </div>
             </div>

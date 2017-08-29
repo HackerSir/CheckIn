@@ -60,7 +60,7 @@
                         <div class="form-group row">
                             <div class="col-md-10 offset-md-2">
                                 <button type="submit" class="btn btn-primary">
-                                    登入
+                                    <i class="fa fa-check" aria-hidden="true"></i> 登入
                                 </button>
 
                                 <a class="btn btn-link" href="{{ route('register') }}">

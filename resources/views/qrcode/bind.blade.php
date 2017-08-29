@@ -13,6 +13,9 @@
 @section('content')
     <div class="row mt-3">
         <div class="col-md-8">
+            <a href="{{ route('qrcode.index') }}" class="btn btn-secondary mb-2">
+                <i class="fa fa-arrow-left" aria-hidden="true"></i> QR Code
+            </a>
             <h1>綁定 QR Code</h1>
             <div class="card">
                 <div class="card-block">
@@ -69,8 +72,9 @@
 
                         <div class="form-group row">
                             <div class="col-md-10 offset-md-2">
-                                <button type="submit" class="btn btn-primary">綁定 QR Code</button>
-                                <a href="{{ route('qrcode.index') }}" class="btn btn-secondary">返回</a>
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fa fa-check" aria-hidden="true"></i> 綁定 QR Code
+                                </button>
                             </div>
                         </div>
                     </form>

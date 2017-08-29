@@ -24,8 +24,8 @@
 
                                 @if ($errors->has('email'))
                                     <span class="form-control-feedback">
-                                <strong>{{ $errors->first('email') }}</strong>
-                            </span>
+                                        <strong>{{ $errors->first('email') }}</strong>
+                                    </span>
                                 @endif
                             </div>
                         </div>
@@ -40,8 +40,8 @@
 
                                 @if ($errors->has('password'))
                                     <span class="form-control-feedback">
-                                <strong>{{ $errors->first('password') }}</strong>
-                            </span>
+                                        <strong>{{ $errors->first('password') }}</strong>
+                                    </span>
                                 @endif
                             </div>
                         </div>
@@ -56,8 +56,8 @@
 
                                 @if ($errors->has('password_confirmation'))
                                     <span class="form-control-feedback">
-                                <strong>{{ $errors->first('password_confirmation') }}</strong>
-                            </span>
+                                        <strong>{{ $errors->first('password_confirmation') }}</strong>
+                                    </span>
                                 @endif
                             </div>
                         </div>
@@ -65,7 +65,7 @@
                         <div class="form-group row">
                             <div class="col-md-10 offset-md-2">
                                 <button type="submit" class="btn btn-primary">
-                                    重設密碼
+                                    <i class="fa fa-check" aria-hidden="true"></i> 重設密碼
                                 </button>
                             </div>
                         </div>

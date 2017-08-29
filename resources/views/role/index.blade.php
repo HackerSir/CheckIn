@@ -8,7 +8,9 @@
         <div class="card">
             <div class="card-block">
                 <h2>角色清單</h2>
-                <a href="{{ route('role.create') }}" class="btn btn-primary">新增角色</a>
+                <a href="{{ route('role.create') }}" class="btn btn-primary">
+                    <i class="fa fa-plus-circle" aria-hidden="true"></i> 新增角色
+                </a>
                 <div class="table-responsive mt-1">
                     <table class="table table-bordered table-hover">
                         <thead>
@@ -34,7 +36,9 @@
                                     @endif
                                 </td>
                                 <td>
-                                    <a href="{{ route('role.edit', $role) }}" class="btn btn-primary">編輯角色</a>
+                                    <a href="{{ route('role.edit', $role) }}" class="btn btn-primary">
+                                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i> 編輯角色
+                                    </a>
                                     @unless($role->protection)
                                         {!! Form::open([
                                             'method' => 'DELETE',

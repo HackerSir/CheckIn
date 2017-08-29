@@ -53,7 +53,9 @@
 
                     <div class="form-group row">
                         <div class="col-md-9 offset-md-3">
-                            <button type="submit" class="btn btn-primary"> 更新設定</button>
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fa fa-check" aria-hidden="true"></i> 更新設定
+                            </button>
                         </div>
                     </div>
                     {{ Form::close() }}

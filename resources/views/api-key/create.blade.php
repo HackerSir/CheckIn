@@ -1,10 +1,13 @@
 @extends('layouts.app')
 
-@section('title', '新增ApiKey')
+@section('title', '新增API Key')
 
 @section('content')
     <div class="mt-3 pb-3">
         <div class="col-md-8 offset-md-2">
+            <a href="{{ route('api-key.index') }}" class="btn btn-secondary">
+                <i class="fa fa-arrow-left" aria-hidden="true"></i> API Key管理
+            </a>
             <h1>新增API Key</h1>
             <div class="card">
                 <div class="card-block">
@@ -24,8 +27,9 @@
 
                     <div class="form-group row">
                         <div class="col-md-10 offset-md-2">
-                            <button type="submit" class="btn btn-primary">確認</button>
-                            <a href="{{ route('api-key.index') }}" class="btn btn-secondary">返回列表</a>
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fa fa-check" aria-hidden="true"></i> 確認
+                            </button>
                         </div>
                     </div>
                     {{ Form::close() }}

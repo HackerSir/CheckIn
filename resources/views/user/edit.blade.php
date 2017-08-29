@@ -5,6 +5,9 @@
 @section('content')
     <div class="row mt-3">
         <div class="col-md-8 offset-md-2">
+            <a href="{{ route('user.show', $user) }}" class="btn btn-secondary">
+                <i class="fa fa-arrow-left" aria-hidden="true"></i> 會員資料
+            </a>
             <h1>{{ $user->name }} - 編輯會員資料</h1>
             <div class="card">
                 <div class="card-block">
@@ -77,8 +80,9 @@
 
                         <div class="form-group row">
                             <div class="col-md-10 offset-md-2">
-                                <button type="submit" class="btn btn-primary"> 更新會員資料</button>
-                                <a href="{{ route('user.show', $user) }}" class="btn btn-secondary">返回會員資料</a>
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fa fa-check" aria-hidden="true"></i> 更新會員資料
+                                </button>
                             </div>
                         </div>
                     </form>

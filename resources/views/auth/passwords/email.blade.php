@@ -27,8 +27,8 @@
 
                                 @if ($errors->has('email'))
                                     <span class="form-control-feedback">
-                                <strong>{{ $errors->first('email') }}</strong>
-                            </span>
+                                        <strong>{{ $errors->first('email') }}</strong>
+                                    </span>
                                 @endif
                             </div>
                         </div>
@@ -36,7 +36,7 @@
                         <div class="form-group row">
                             <div class="col-md-10 offset-md-2">
                                 <button type="submit" class="btn btn-primary">
-                                    發送重設密碼信件
+                                    <i class="fa fa-envelope-o" aria-hidden="true"></i> 發送重設密碼信件
                                 </button>
                             </div>
                         </div>

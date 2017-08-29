@@ -5,6 +5,9 @@
 @section('content')
     <div class="row mt-3">
         <div class="col-md-8 offset-md-2">
+            <a href="{{ route('profile') }}" class="btn btn-secondary">
+                <i class="fa fa-arrow-left" aria-hidden="true"></i> 個人資料
+            </a>
             <h1>兩步驟驗證</h1>
             <div class="card">
                 <div class="card-block">
@@ -59,13 +62,15 @@
                         <div class="form-group row">
                             <div class="col-md-10 offset-md-2">
                                 @if($user->google2fa_secret)
-                                    <button type="submit" class="btn btn-danger">停用</button>
+                                    <button type="submit" class="btn btn-danger">
+                                        <i class="fa fa-toggle-off" aria-hidden="true"></i> 停用
+                                    </button>
                                 @else
                                     {{ Form::hidden('toggle', 'on') }}
-                                    <button type="submit" class="btn btn-primary">啟用</button>
+                                    <button type="submit" class="btn btn-primary">
+                                        <i class="fa fa-toggle-on" aria-hidden="true"></i> 啟用
+                                    </button>
                                 @endif
-
-                                <a href="{{ route('profile') }}" class="btn btn-secondary">返回個人資料</a>
                             </div>
                         </div>
                     </form>

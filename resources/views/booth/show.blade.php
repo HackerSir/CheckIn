@@ -35,9 +35,13 @@
                     </div>
                 </div>
                 <div class="card-block">
-                    <a href="{{ route('booth.edit', $booth) }}" class="btn btn-primary">編輯資料</a>
+                    <a href="{{ route('booth.edit', $booth) }}" class="btn btn-primary">
+                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i> 編輯資料
+                    </a>
                     {!! Form::open(['route' => ['booth.destroy', $booth], 'style' => 'display: inline', 'method' => 'DELETE', 'onSubmit' => "return confirm('確定要刪除嗎？');"]) !!}
-                    <button type="submit" class="btn btn-danger">刪除攤位</button>
+                    <button type="submit" class="btn btn-danger">
+                        <i class="fa fa-times" aria-hidden="true"></i> 刪除攤位
+                    </button>
                     {!! Form::close() !!}
                 </div>
             </div>

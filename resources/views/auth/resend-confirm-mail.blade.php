@@ -31,7 +31,9 @@
 
                         <div class="form-group row">
                             <div class="col-md-10 offset-md-2">
-                                <button type="submit" class="btn btn-primary">發送驗證信件</button>
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fa fa-envelope-o" aria-hidden="true"></i> 發送驗證信件
+                                </button>
                             </div>
                         </div>
                     </form>
