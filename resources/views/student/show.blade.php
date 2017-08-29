@@ -10,70 +10,75 @@
             </a>
             <h1>{{ $student->name }} - 學生</h1>
             <div class="card">
-                <div class="card-header">
-                    基本資料
-                </div>
                 <div class="card-block">
-                    <table class="table table-hover">
-                        <tr>
-                            <td class="text-md-right">NID：</td>
-                            <td>{{ $student->nid }}</td>
-                        </tr>
-                        <tr>
-                            <td class="text-md-right">姓名：</td>
-                            <td>{{ $student->name }}</td>
-                        </tr>
-                        <tr>
-                            <td class="text-md-right">班級：</td>
-                            <td>{{ $student->class }}</td>
-                        </tr>
-                        <tr>
-                            <td class="text-md-right">科系：</td>
-                            <td>{{ $student->unit_name }}</td>
-                        </tr>
-                        <tr>
-                            <td class="text-md-right">學院：</td>
-                            <td>{{ $student->dept_name }}</td>
-                        </tr>
-                        <tr>
-                            <td class="text-md-right">入學年度：</td>
-                            <td>{{ $student->in_year }}</td>
-                        </tr>
-                        <tr>
-                            <td class="text-md-right">性別：</td>
-                            <td>{{ $student->gender }}</td>
-                        </tr>
-                    </table>
-                </div>
-            </div>
-            <div class="card">
-                <div class="card-header">
-                    打卡進度
-                </div>
-                <div class="card-block">
-                    <table class="table table-hover">
-                        <tr>
-                            <td class="text-md-right">打卡次數：</td>
-                            <td>{{ $student->records->count() }}</td>
-                        </tr>
-                        <tr>
-                            <td class="text-md-right">進度：</td>
-                            <td>{{ $student->countedRecords->count() }}
-                                / {{ \Setting::get('target') }}</td>
-                        </tr>
-                        <tr>
-                            <td class="text-md-right">抽獎編號：</td>
-                            <td>{{ $student->ticket->id ?? '尚未取得' }}</td>
-                        </tr>
-                    </table>
-                </div>
-            </div>
-            <div class="card">
-                <div class="card-header">
-                    QR Code
-                </div>
-                <div class="card-block">
-                    <table class="table table-hover">
+                    <h1>基本資料</h1>
+                    <dl class="row" style="font-size: 120%">
+                        <dt class="col-4 col-md-2">學號(NID)</dt>
+                        <dd class="col-8 col-md-10">{{ $student->nid }}</dd>
+
+                        <dt class="col-4 col-md-2">姓名</dt>
+                        <dd class="col-8 col-md-10">{{ $student->name }}</dd>
+
+                        <dt class="col-4 col-md-2">班級</dt>
+                        <dd class="col-8 col-md-10">{{ $student->class }}</dd>
+
+
+                        <dt class="col-4 col-md-2">科系</dt>
+                        <dd class="col-8 col-md-10">{{ $student->unit_name }}</dd>
+
+
+                        <dt class="col-4 col-md-2">學院</dt>
+                        <dd class="col-8 col-md-10">{{ $student->dept_name }}</dd>
+
+
+                        <dt class="col-4 col-md-2">入學年度</dt>
+                        <dd class="col-8 col-md-10">{{ $student->in_year }}</dd>
+
+
+                        <dt class="col-4 col-md-2">性別</dt>
+                        <dd class="col-8 col-md-10">{{ $student->gender }}</dd>
+                    </dl>
+
+                    <hr/>
+
+                    <h1>集點任務</h1>
+                    <dl class="row" style="font-size: 120%">
+                        <dt class="col-4 col-md-2">打卡次數</dt>
+                        <dd class="col-8 col-md-10">{{ $student->records->count() }}</dd>
+
+                        <dt class="col-4 col-md-2">進度</dt>
+                        <dd class="col-8 col-md-10">{{ $student->countedRecords->count() }}
+                            / {{ \Setting::get('target') }}</dd>
+                    </dl>
+                    <div class="progress w-80">
+                        @php
+                            $progress = ($student->countedRecords->count() / \Setting::get('target')) * 100;
+                            $progress = round($progress, 2);
+                        @endphp
+                        <div class="progress-bar d-flex align-items-center justify-content-center"
+                             role="progressbar"
+                             style="width: {{ $progress }}%;" aria-valuenow="{{ $progress }}" aria-valuemin="0"
+                             aria-valuemax="100">
+                            <div>{{ $progress }}%</div>
+                        </div>
+                    </div>
+
+                    <hr/>
+
+                    <h1>抽獎編號</h1>
+                    <div class="text-center">
+                        @if(isset($student->ticket))
+                            <h3 class="text-danger">{{ sprintf("%04d", $student->ticket->id) }}</h3>
+                        @else
+                            <h3 class="text-danger">集點任務尚未完成</h3>
+                        @endif
+                    </div>
+
+                    <hr/>
+
+                    <h1>QR Code</h1>
+
+                    <table class="table table-hover table-bordered">
                         <thead>
                         <tr>
                             <th>代碼</th>
@@ -107,9 +112,13 @@
                         @endforelse
                         </tbody>
                     </table>
+
+                    <hr/>
+
+                    <h1>打卡紀錄</h1>
+                    @include('components.record-list', ['records' => $student->records])
                 </div>
             </div>
-            @include('components.record-list', ['records' => $student->records])
         </div>
     </div>
 @endsection
