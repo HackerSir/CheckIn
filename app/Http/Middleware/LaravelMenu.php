@@ -38,6 +38,9 @@ class LaravelMenu
                     if ($user->club) {
                         $menu->add($user->club->name, ['route' => 'own-club.show'])->active('own-club/*');
                     }
+                    if ($user->student || $user->club) {
+                        $menu->add('回饋資料', ['route' => 'feedback.index'])->active('feedback/*');
+                    }
                     //活動選單
                     if (Laratrust::can('activity-menu.view')) {
                         /** @var \Lavary\Menu\Item $activityMenu */
