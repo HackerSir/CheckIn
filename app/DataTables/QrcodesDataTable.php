@@ -45,7 +45,7 @@ class QrcodesDataTable extends DataTable
      */
     public function query()
     {
-        $query = Qrcode::with('student');
+        $query = Qrcode::with('student.qrcode');
 
         return $this->applyScopes($query);
     }

@@ -77,13 +77,10 @@ class Qrcode extends Model
      */
     public function getIsLastOneAttribute()
     {
-        if (!$this->student_id) {
+        if (!$this->student) {
             return false;
         }
 
-        $lastQrcode = static::where('student_id', $this->student_id)
-            ->orderBy('bind_at', 'desc')->first();
-
-        return $lastQrcode->id == $this->id;
+        return $this->student->qrcode->setAppends([])->id == $this->id;
     }
 }
