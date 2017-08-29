@@ -45,11 +45,16 @@ class QrcodeScanController extends Controller
         //檢查是否屬於活動時間
         $startAt = new Carbon(Setting::get('start_at'));
         if ($startAt->gte(Carbon::now())) {
-            return view('qrcode-scan.scan')->with('level', 'info')->with('message', '集點活動尚未開始，預計在' . $startAt . '開始');
+            $startAtText = $startAt . '（' . $startAt->diffForHumans() . '）';
+
+            return view('qrcode-scan.scan')->with('level', 'info')
+                ->with('message', '集點活動尚未開始，預計在 ' . $startAtText . ' 開始');
         }
         $endAt = new Carbon(Setting::get('end_at'));
         if ($endAt->lte(Carbon::now())) {
-            return view('qrcode-scan.scan')->with('level', 'info')->with('message', '集點活動已在' . $endAt . '結束');
+            $endAtText = $endAt . '（' . $endAt->diffForHumans() . '）';
+
+            return view('qrcode-scan.scan')->with('level', 'info')->with('message', '集點活動已在 ' . $endAtText . ' 結束');
         }
 
         //檢查掃描使用者是否為攤位負責人
