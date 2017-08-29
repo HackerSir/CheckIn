@@ -31,7 +31,11 @@ class QrcodesDataTable extends DataTable
                         ->whereRaw('students.name LIKE ?', ['%' . $keyword . '%'])
                         ->orWhereRaw('students.nid LIKE ?', ['%' . $keyword . '%']);
                 });
-            });
+            })
+            ->editColumn('is_last_one', function ($qrcode) {
+                return view('qrcode.datatables.is_last_one', compact('qrcode'))->render();
+            })
+            ->escapeColumns([]);
     }
 
     /**
@@ -41,7 +45,7 @@ class QrcodesDataTable extends DataTable
      */
     public function query()
     {
-        $query = Qrcode::with('student')->select(array_keys($this->getColumns()));
+        $query = Qrcode::with('student');
 
         return $this->applyScopes($query);
     }
@@ -71,10 +75,15 @@ class QrcodesDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            'id'         => ['title' => '#'],
-            'code'       => ['title' => '代碼'],
-            'student_id' => ['title' => '學生'],
-            'bind_at'    => ['title' => '綁定時間'],
+            'id'          => ['title' => '#'],
+            'code'        => ['title' => '代碼'],
+            'student_id'  => ['title' => '學生'],
+            'bind_at'     => ['title' => '綁定時間'],
+            'is_last_one' => [
+                'searchable' => false,
+                'orderable'  => false,
+                'title'      => '最後一組',
+            ],
         ];
     }
 

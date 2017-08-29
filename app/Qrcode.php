@@ -40,6 +40,10 @@ class Qrcode extends Model
         'bind_at',
     ];
 
+    protected $appends = [
+        'is_last_one',
+    ];
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo|\Illuminate\Database\Eloquent\Builder
      */
@@ -73,7 +77,7 @@ class Qrcode extends Model
      */
     public function getIsLastOneAttribute()
     {
-        if (!$this->student) {
+        if (!$this->student_id) {
             return false;
         }
 
