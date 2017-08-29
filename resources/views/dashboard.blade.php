@@ -31,6 +31,7 @@
                     <hr/>
 
                     <h1>集點任務</h1>
+                    <p>打卡次數：{{ $student->records->count() }}</p>
                     <p>進度：{{ $student->countedRecords->count() }} / {{ \Setting::get('target') }}</p>
                     <div class="progress w-80">
                         @php

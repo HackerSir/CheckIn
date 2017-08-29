@@ -12,42 +12,56 @@
                 </div>
             @endif
             <div class="card">
-                <div class="card-header">
-                    基本資訊
-                </div>
                 <div class="card-block">
-                    <table class="table table-hover">
-                        <tr>
-                            <td class="text-md-right">條碼：</td>
-                            <td>{{ $code }}</td>
-                        </tr>
+                    <h1>QR Code</h1>
+                    <dl class="row" style="font-size: 120%">
+                        <dt class="col-4 col-md-2">條碼</dt>
+                        <dd class="col-8 col-md-10">{{ $code }}</dd>
+
                         @if(isset($qrcode))
                             @if($qrcode->student)
-                                <tr>
-                                    <td class="text-md-right">學生：</td>
-                                    <td>{{ $qrcode->student->masked_display_name ?? '' }}</td>
-                                </tr>
-                                <tr>
-                                    <td class="text-md-right">打卡次數：</td>
-                                    <td>{{ $qrcode->student->records->count() }}</td>
-                                </tr>
-                                <tr>
-                                    <td class="text-md-right">進度：</td>
-                                    <td>{{ $qrcode->student->countedRecords->count() }}
-                                        / {{ \Setting::get('target') }}</td>
-                                </tr>
-                                <tr>
-                                    <td class="text-md-right">抽獎編號：</td>
-                                    <td>{{ $qrcode->student->ticket->id ?? '尚未取得' }}</td>
-                                </tr>
+                                <dt class="col-4 col-md-2">學生</dt>
+                                <dd class="col-8 col-md-10">{{ $qrcode->student->masked_display_name }}</dd>
                             @endif
                         @endif
-                    </table>
+                    </dl>
+                    @if(isset($qrcode) && $qrcode->student)
+                        <hr/>
+
+                        <h1>集點任務</h1>
+                        <p>打卡次數：{{ $qrcode->student->records->count() }}</p>
+                        <p>進度：{{ $qrcode->student->countedRecords->count() }} / {{ \Setting::get('target') }}</p>
+                        <div class="progress w-80">
+                            @php
+                                $progress = ($qrcode->student->countedRecords->count() / \Setting::get('target')) * 100;
+                                $progress = round($progress, 2);
+                            @endphp
+                            <div class="progress-bar d-flex align-items-center justify-content-center"
+                                 role="progressbar"
+                                 style="width: {{ $progress }}%;" aria-valuenow="{{ $progress }}" aria-valuemin="0"
+                                 aria-valuemax="100">
+                                <div>{{ $progress }}%</div>
+                            </div>
+                        </div>
+
+                        <hr/>
+
+                        <h1>抽獎編號</h1>
+                        <div class="text-center">
+                            @if(isset($qrcode->student->ticket))
+                                <h3 class="text-danger">{{ sprintf("%04d", $qrcode->student->ticket->id) }}</h3>
+                            @else
+                                <h3 class="text-danger">集點任務尚未完成</h3>
+                            @endif
+                        </div>
+
+                        <hr/>
+
+                        <h1>打卡紀錄</h1>
+                        @include('components.record-list', ['records' => $qrcode->student->records])
+                    @endif
                 </div>
             </div>
-            @if(isset($qrcode->student))
-                @include('components.record-list', ['records' => $qrcode->student->records])
-            @endif
         </div>
     </div>
 @endsection
