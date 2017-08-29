@@ -29,8 +29,13 @@
                         <hr/>
 
                         <h1>集點任務</h1>
-                        <p>打卡次數：{{ $qrcode->student->records->count() }}</p>
-                        <p>進度：{{ $qrcode->student->countedRecords->count() }} / {{ \Setting::get('target') }}</p>
+                        <dl class="row" style="font-size: 120%">
+                            <dt class="col-4 col-md-2">打卡次數</dt>
+                            <dd class="col-8 col-md-10">{{ $qrcode->student->records->count() }}</dd>
+
+                            <dt class="col-4 col-md-2">進度</dt>
+                            <dd class="col-8 col-md-10">{{ $qrcode->student->countedRecords->count() }} / {{ \Setting::get('target') }}</dd>
+                        </dl>
                         <div class="progress w-80">
                             @php
                                 $progress = ($qrcode->student->countedRecords->count() / \Setting::get('target')) * 100;
