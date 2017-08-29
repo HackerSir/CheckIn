@@ -18,100 +18,76 @@
             </a>
             <h1>給{{ $feedback->club->name }}的回饋資料</h1>
             <div class="card">
-                <div class="card-header">
-                    學生資料
-                </div>
                 <div class="card-block">
-                    <table class="table table-hover">
-                        <tr>
-                            <td class="text-md-right">NID：</td>
-                            <td>{{ $feedback->student->nid }}</td>
-                        </tr>
-                        <tr>
-                            <td class="text-md-right">姓名：</td>
-                            <td>{{ $feedback->student->name }}</td>
-                        </tr>
-                        <tr>
-                            <td class="text-md-right">班級：</td>
-                            <td>{{ $feedback->student->class }}</td>
-                        </tr>
-                        <tr>
-                            <td class="text-md-right">科系：</td>
-                            <td>{{ $feedback->student->unit_name }}</td>
-                        </tr>
-                        <tr>
-                            <td class="text-md-right">學院：</td>
-                            <td>{{ $feedback->student->dept_name }}</td>
-                        </tr>
-                        <tr>
-                            <td class="text-md-right">入學年度：</td>
-                            <td>{{ $feedback->student->in_year }}</td>
-                        </tr>
-                        <tr>
-                            <td class="text-md-right">性別：</td>
-                            <td>{{ $feedback->student->gender }}</td>
-                        </tr>
-                        <tr>
-                            <td class="text-md-right">新生：</td>
-                            <td>
-                                @if($feedback->student->is_freshman)
-                                    <i class="fa fa-check fa-fw fa-2x text-success" aria-hidden="true"></i>
-                                @else
-                                    <i class="fa fa-times fa-fw fa-2x text-danger" aria-hidden="true"></i>
-                                @endif
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-            </div>
-            <div class="card">
-                <div class="card-header">
-                    社團資料
-                </div>
-                <div class="card-block">
-                    <table class="table table-hover">
-                        <tr>
-                            <td class="text-md-right">社團：</td>
-                            <td>
-                                {!! $feedback->club->clubType->tag ?? '' !!}
-                                {{ $feedback->club->name }}
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="text-md-right">打卡時間：</td>
-                            <td>
-                                @if($record)
-                                    <i class="fa fa-check fa-fw fa-2x text-success" aria-hidden="true"></i>
-                                    {{ $record->created_at }}
-                                    （{{ $record->created_at->diffForHumans() }}）
-                                @else
-                                    <i class="fa fa-times fa-fw fa-2x text-danger" aria-hidden="true"></i>
-                                    尚未打卡
-                                @endif
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-            </div>
-            <div class="card">
-                <div class="card-header">
-                    回饋資料
-                </div>
-                <div class="card-block">
-                    <table class="table table-hover">
-                        <tr>
-                            <td class="text-md-right">電話：</td>
-                            <td>{{ $feedback->phone }}</td>
-                        </tr>
-                        <tr>
-                            <td class="text-md-right">信箱：</td>
-                            <td>{{ $feedback->email }}</td>
-                        </tr>
-                        <tr>
-                            <td class="text-md-right">訊息：</td>
-                            <td>{{ $feedback->message }}</td>
-                        </tr>
-                    </table>
+                    <h1>學生資料</h1>
+                    <dl class="row" style="font-size: 120%">
+                        <dt class="col-4 col-md-2">學號(NID)</dt>
+                        <dd class="col-8 col-md-10">{{ $feedback->student->nid }}</dd>
+
+                        <dt class="col-4 col-md-2">姓名</dt>
+                        <dd class="col-8 col-md-10">{{ $feedback->student->name }}</dd>
+
+                        <dt class="col-4 col-md-2">班級</dt>
+                        <dd class="col-8 col-md-10">{{ $feedback->student->class }}</dd>
+
+                        <dt class="col-4 col-md-2">科系</dt>
+                        <dd class="col-8 col-md-10">{{ $feedback->student->unit_name }}</dd>
+
+                        <dt class="col-4 col-md-2">學院</dt>
+                        <dd class="col-8 col-md-10">{{ $feedback->student->dept_name }}</dd>
+
+                        <dt class="col-4 col-md-2">入學年度</dt>
+                        <dd class="col-8 col-md-10">{{ $feedback->student->in_year }}</dd>
+
+                        <dt class="col-4 col-md-2">性別</dt>
+                        <dd class="col-8 col-md-10">{{ $feedback->student->gender }}</dd>
+
+                        <dt class="col-4 col-md-2">新生</dt>
+                        <dd class="col-8 col-md-10">
+                            @if($feedback->student->is_freshman)
+                                <i class="fa fa-check fa-2x text-success" aria-hidden="true"></i>
+                            @else
+                                <i class="fa fa-times fa-2x text-danger" aria-hidden="true"></i>
+                            @endif
+                        </dd>
+                    </dl>
+
+                    <hr/>
+
+                    <h1>社團資料</h1>
+                    <dl class="row" style="font-size: 120%">
+                        <dt class="col-4 col-md-2">社團</dt>
+                        <dd class="col-8 col-md-10">
+                            {!! $feedback->club->clubType->tag ?? '' !!}
+                            {{ $feedback->club->name }}
+                        </dd>
+
+                        <dt class="col-4 col-md-2">打卡時間</dt>
+                        <dd class="col-8 col-md-10">
+                            @if($record)
+                                <i class="fa fa-check fa-fw fa-2x text-success" aria-hidden="true"></i>
+                                {{ $record->created_at }}
+                                （{{ $record->created_at->diffForHumans() }}）
+                            @else
+                                <i class="fa fa-times fa-fw fa-2x text-danger" aria-hidden="true"></i>
+                                尚未打卡
+                            @endif
+                        </dd>
+                    </dl>
+
+                    <hr/>
+
+                    <h1>回饋資料</h1>
+                    <dl class="row" style="font-size: 120%">
+                        <dt class="col-4 col-md-2">電話</dt>
+                        <dd class="col-8 col-md-10">{{ $feedback->phone }}</dd>
+
+                        <dt class="col-4 col-md-2">信箱</dt>
+                        <dd class="col-8 col-md-10">{{ $feedback->email }}</dd>
+
+                        <dt class="col-4 col-md-2">訊息</dt>
+                        <dd class="col-8 col-md-10">{{ $feedback->message }}</dd>
+                    </dl>
                 </div>
             </div>
         </div>

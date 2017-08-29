@@ -22,21 +22,26 @@
                         <dt class="col-4 col-md-2">班級</dt>
                         <dd class="col-8 col-md-10">{{ $student->class }}</dd>
 
-
                         <dt class="col-4 col-md-2">科系</dt>
                         <dd class="col-8 col-md-10">{{ $student->unit_name }}</dd>
-
 
                         <dt class="col-4 col-md-2">學院</dt>
                         <dd class="col-8 col-md-10">{{ $student->dept_name }}</dd>
 
-
                         <dt class="col-4 col-md-2">入學年度</dt>
                         <dd class="col-8 col-md-10">{{ $student->in_year }}</dd>
 
-
                         <dt class="col-4 col-md-2">性別</dt>
                         <dd class="col-8 col-md-10">{{ $student->gender }}</dd>
+
+                        <dt class="col-4 col-md-2">新生</dt>
+                        <dd class="col-8 col-md-10">
+                            @if($student->is_freshman)
+                                <i class="fa fa-check fa-2x text-success" aria-hidden="true"></i>
+                            @else
+                                <i class="fa fa-times fa-2x text-danger" aria-hidden="true"></i>
+                            @endif
+                        </dd>
                     </dl>
 
                     <hr/>

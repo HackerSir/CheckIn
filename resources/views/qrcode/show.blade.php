@@ -11,48 +11,42 @@
             <h1>{{ $qrcode->code }} - QR Code</h1>
             <div class="card">
                 <div class="card-block text-center">
-                    <img src="{{ route('code-picture.qrcode', $qrcode->code) }}" class="img-fluid">
-                    <br/>
-                    <br/>
-                    <img src="{{ route('code-picture.barcode', $qrcode->code) }}" class="img-fluid">
+                    <img src="{{ route('code-picture.qrcode', $qrcode->code) }}" class="img-fluid m-2">
+                    <img src="{{ route('code-picture.barcode', $qrcode->code) }}" class="img-fluid m-2">
                 </div>
                 <div class="card-block">
-                    <table class="table table-hover">
-                        <tr>
-                            <td class="text-md-right">代號：</td>
-                            <td>
-                                {{ $qrcode->code }}
-                                @if($qrcode->is_last_one)
-                                    <i class="fa fa-check text-success" aria-hidden="true" title="最後一組"></i>
-                                @endif
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="text-md-right">學生：</td>
-                            <td>
-                                @if($qrcode->student)
-                                    @if(Laratrust::can('student.manage'))
-                                        {{ link_to_route('student.show', $qrcode->student->display_name, $qrcode->student) }}
-                                    @else
-                                        {{ $qrcode->student->display_name }}
-                                    @endif
+                    <dl class="row" style="font-size: 120%">
+                        <dt class="col-4 col-md-2">代號</dt>
+                        <dd class="col-8 col-md-10">
+                            {{ $qrcode->code }}
+                            @if($qrcode->is_last_one)
+                                <i class="fa fa-check text-success" aria-hidden="true" title="最後一組"></i>
+                            @endif
+                        </dd>
+
+                        <dt class="col-4 col-md-2">學生</dt>
+                        <dd class="col-8 col-md-10">
+                            @if($qrcode->student)
+                                @if(Laratrust::can('student.manage'))
+                                    {{ link_to_route('student.show', $qrcode->student->display_name, $qrcode->student) }}
                                 @else
-                                    尚未綁定
+                                    {{ $qrcode->student->display_name }}
                                 @endif
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="text-md-right">綁定時間：</td>
-                            <td>
-                                @if($qrcode->bind_at)
-                                    {{ $qrcode->bind_at }}
-                                    （{{ $qrcode->bind_at->diffForHumans() }}）
-                                @else
-                                    尚未綁定
-                                @endif
-                            </td>
-                        </tr>
-                    </table>
+                            @else
+                                尚未綁定
+                            @endif
+                        </dd>
+
+                        <dt class="col-4 col-md-2">綁定時間</dt>
+                        <dd class="col-8 col-md-10">
+                            @if($qrcode->bind_at)
+                                {{ $qrcode->bind_at }}
+                                （{{ $qrcode->bind_at->diffForHumans() }}）
+                            @else
+                                尚未綁定
+                            @endif
+                        </dd>
+                    </dl>
                 </div>
             </div>
         </div>
