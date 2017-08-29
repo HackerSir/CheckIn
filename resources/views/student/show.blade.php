@@ -42,6 +42,13 @@
                                 <i class="fa fa-times fa-2x text-danger" aria-hidden="true"></i>
                             @endif
                         </dd>
+
+                        @if($student->user && Laratrust::can('user.manage'))
+                            <dt class="col-4 col-md-2">使用者</dt>
+                            <dd class="col-8 col-md-10">
+                                {{ link_to_route('user.show', $student->user->name, $student->user) }}
+                            </dd>
+                        @endif
                     </dl>
 
                     <hr/>

@@ -55,6 +55,13 @@
 
                         <dt class="col-4 col-md-3">最後登入IP</dt>
                         <dd class="col-8 col-md-9">{{ $user->last_login_ip }}</dd>
+
+                        @if($user->student && Laratrust::can('student.manage'))
+                            <dt class="col-4 col-md-3">學生</dt>
+                            <dd class="col-8 col-md-9">
+                                {{ link_to_route('student.show', $user->student->display_name, $user->student) }}
+                            </dd>
+                        @endif
                     </dl>
                 </div>
                 <div class="card-block text-center">
