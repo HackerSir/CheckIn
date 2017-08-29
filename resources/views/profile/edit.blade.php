@@ -35,8 +35,8 @@
 
                                 @if ($errors->has('name'))
                                     <span class="form-control-feedback">
-                                <strong>{{ $errors->first('name') }}</strong>
-                            </span>
+                                        <strong>{{ $errors->first('name') }}</strong>
+                                    </span>
                                 @endif
                             </div>
                         </div>

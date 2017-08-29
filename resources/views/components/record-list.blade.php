@@ -1,4 +1,3 @@
-
 <ul class="list-group">
     @forelse($records as $record)
         <li class="list-group-item">

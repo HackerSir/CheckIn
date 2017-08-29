@@ -25,8 +25,8 @@
 
                                 @if ($errors->has('password'))
                                     <span class="form-control-feedback">
-                                <strong>{{ $errors->first('password') }}</strong>
-                            </span>
+                                        <strong>{{ $errors->first('password') }}</strong>
+                                    </span>
                                 @endif
                             </div>
                         </div>
@@ -41,8 +41,8 @@
 
                                 @if ($errors->has('new_password'))
                                     <span class="form-control-feedback">
-                                <strong>{{ $errors->first('new_password') }}</strong>
-                            </span>
+                                        <strong>{{ $errors->first('new_password') }}</strong>
+                                    </span>
                                 @endif
                             </div>
                         </div>
@@ -57,8 +57,8 @@
 
                                 @if ($errors->has('new_password_confirmation'))
                                     <span class="form-control-feedback">
-                                <strong>{{ $errors->first('new_password_confirmation') }}</strong>
-                            </span>
+                                        <strong>{{ $errors->first('new_password_confirmation') }}</strong>
+                                    </span>
                                 @endif
                             </div>
                         </div>

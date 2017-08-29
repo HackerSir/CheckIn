@@ -35,8 +35,8 @@
 
                                 @if ($errors->has('name'))
                                     <span class="form-control-feedback">
-                                <strong>{{ $errors->first('name') }}</strong>
-                            </span>
+                                        <strong>{{ $errors->first('name') }}</strong>
+                                    </span>
                                 @endif
                             </div>
                         </div>
@@ -44,37 +44,37 @@
                         <div class="form-group row{{ $errors->has('role') ? ' has-danger' : '' }}">
                             <label class="col-md-2 col-form-label">角色</label>
                             <div class="col-md-10" style="padding-top: calc(.5rem - 1px * 2);">
-                                    @foreach($roles as $role)
-                                        @if($user->id == Auth::user()->id && $role->name == 'Admin')
-                                            <label class="custom-control custom-checkbox">
-                                                <input type="checkbox" name="role[]" value="{{ $role->id }}"
-                                                       class="custom-control-input" @if($user->hasRole($role->name))
-                                                       checked disabled @endif>
-                                                <span class="custom-control-indicator"></span>
-                                                <span class="custom-control-description">
-                                                    {{ $role->display_name }}（{{ $role->description }}）
-                                                    <i class="fa fa-exclamation-triangle text-danger" aria-hidden="true"
-                                                       title="禁止解除自己的管理員職務"></i>
-                                                </span>
-                                            </label>
-                                        @else
-                                            <label class="custom-control custom-checkbox">
-                                                <input type="checkbox" name="role[]" value="{{ $role->id }}"
-                                                       class="custom-control-input"
-                                                       @if($user->hasRole($role->name)) checked @endif>
-                                                <span class="custom-control-indicator"></span>
-                                                <span class="custom-control-description">
-                                                    {{ $role->display_name }}（{{ $role->description }}）
-                                                </span>
-                                            </label>
-                                        @endif
-                                        <br/>
-                                    @endforeach
-                                    @if ($errors->has('role'))
-                                        <span class="form-control-feedback">
-                                            <strong>{{ $errors->first('role') }}</strong>
-                                        </span>
+                                @foreach($roles as $role)
+                                    @if($user->id == Auth::user()->id && $role->name == 'Admin')
+                                        <label class="custom-control custom-checkbox">
+                                            <input type="checkbox" name="role[]" value="{{ $role->id }}"
+                                                   class="custom-control-input" @if($user->hasRole($role->name))
+                                                   checked disabled @endif>
+                                            <span class="custom-control-indicator"></span>
+                                            <span class="custom-control-description">
+                                                {{ $role->display_name }}（{{ $role->description }}）
+                                                <i class="fa fa-exclamation-triangle text-danger" aria-hidden="true"
+                                                   title="禁止解除自己的管理員職務"></i>
+                                            </span>
+                                        </label>
+                                    @else
+                                        <label class="custom-control custom-checkbox">
+                                            <input type="checkbox" name="role[]" value="{{ $role->id }}"
+                                                   class="custom-control-input"
+                                                   @if($user->hasRole($role->name)) checked @endif>
+                                            <span class="custom-control-indicator"></span>
+                                            <span class="custom-control-description">
+                                                {{ $role->display_name }}（{{ $role->description }}）
+                                            </span>
+                                        </label>
                                     @endif
+                                    <br/>
+                                @endforeach
+                                @if ($errors->has('role'))
+                                    <span class="form-control-feedback">
+                                        <strong>{{ $errors->first('role') }}</strong>
+                                    </span>
+                                @endif
                             </div>
                         </div>
 

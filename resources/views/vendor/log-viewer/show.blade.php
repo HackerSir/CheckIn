@@ -24,30 +24,30 @@
                 <div class="table-responsive">
                     <table class="table table-condensed">
                         <thead>
-                            <tr>
-                                <td>File path :</td>
-                                <td colspan="5">{{ $log->getPath() }}</td>
-                            </tr>
+                        <tr>
+                            <td>File path :</td>
+                            <td colspan="5">{{ $log->getPath() }}</td>
+                        </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>Log entries : </td>
-                                <td>
-                                    <span class="label label-primary">{{ $entries->total() }}</span>
-                                </td>
-                                <td>Size :</td>
-                                <td>
-                                    <span class="label label-primary">{{ $log->size() }}</span>
-                                </td>
-                                <td>Created at :</td>
-                                <td>
-                                    <span class="label label-primary">{{ $log->createdAt() }}</span>
-                                </td>
-                                <td>Updated at :</td>
-                                <td>
-                                    <span class="label label-primary">{{ $log->updatedAt() }}</span>
-                                </td>
-                            </tr>
+                        <tr>
+                            <td>Log entries :</td>
+                            <td>
+                                <span class="label label-primary">{{ $entries->total() }}</span>
+                            </td>
+                            <td>Size :</td>
+                            <td>
+                                <span class="label label-primary">{{ $log->size() }}</span>
+                            </td>
+                            <td>Created at :</td>
+                            <td>
+                                <span class="label label-primary">{{ $log->createdAt() }}</span>
+                            </td>
+                            <td>Updated at :</td>
+                            <td>
+                                <span class="label label-primary">{{ $log->updatedAt() }}</span>
+                            </td>
+                        </tr>
                         </tbody>
                     </table>
                 </div>
@@ -67,51 +67,53 @@
                 <div class="table-responsive">
                     <table id="entries" class="table table-condensed">
                         <thead>
-                            <tr>
-                                <th>ENV</th>
-                                <th style="width: 120px;">Level</th>
-                                <th style="width: 65px;">Time</th>
-                                <th>Header</th>
-                                <th class="text-right">Actions</th>
-                            </tr>
+                        <tr>
+                            <th>ENV</th>
+                            <th style="width: 120px;">Level</th>
+                            <th style="width: 65px;">Time</th>
+                            <th>Header</th>
+                            <th class="text-right">Actions</th>
+                        </tr>
                         </thead>
                         <tbody>
-                            @foreach($entries as $key => $entry)
+                        @foreach($entries as $key => $entry)
+                            <tr>
+                                <td>
+                                    <span class="label label-env">{{ $entry->env }}</span>
+                                </td>
+                                <td>
+                                    <span class="level level-{{ $entry->level }}">
+                                        {!! $entry->level() !!}
+                                    </span>
+                                </td>
+                                <td>
+                                    <span class="label label-default">
+                                        {{ $entry->datetime->format('H:i:s') }}
+                                    </span>
+                                </td>
+                                <td>
+                                    <p>{{ $entry->header }}</p>
+                                </td>
+                                <td class="text-right">
+                                    @if ($entry->hasStack())
+                                        <a class="btn btn-xs btn-default" role="button" data-toggle="collapse"
+                                           href="#log-stack-{{ $key }}" aria-expanded="false"
+                                           aria-controls="log-stack-{{ $key }}">
+                                            <i class="fa fa-toggle-on"></i> Stack
+                                        </a>
+                                    @endif
+                                </td>
+                            </tr>
+                            @if ($entry->hasStack())
                                 <tr>
-                                    <td>
-                                        <span class="label label-env">{{ $entry->env }}</span>
-                                    </td>
-                                    <td>
-                                        <span class="level level-{{ $entry->level }}">
-                                            {!! $entry->level() !!}
-                                        </span>
-                                    </td>
-                                    <td>
-                                        <span class="label label-default">
-                                            {{ $entry->datetime->format('H:i:s') }}
-                                        </span>
-                                    </td>
-                                    <td>
-                                        <p>{{ $entry->header }}</p>
-                                    </td>
-                                    <td class="text-right">
-                                        @if ($entry->hasStack())
-                                            <a class="btn btn-xs btn-default" role="button" data-toggle="collapse" href="#log-stack-{{ $key }}" aria-expanded="false" aria-controls="log-stack-{{ $key }}">
-                                                <i class="fa fa-toggle-on"></i> Stack
-                                            </a>
-                                        @endif
+                                    <td colspan="5" class="stack">
+                                        <div class="stack-content collapse" id="log-stack-{{ $key }}">
+                                            {!! $entry->stack() !!}
+                                        </div>
                                     </td>
                                 </tr>
-                                @if ($entry->hasStack())
-                                    <tr>
-                                        <td colspan="5" class="stack">
-                                            <div class="stack-content collapse" id="log-stack-{{ $key }}">
-                                                {!! $entry->stack() !!}
-                                            </div>
-                                        </td>
-                                    </tr>
-                                @endif
-                            @endforeach
+                            @endif
+                        @endforeach
                         </tbody>
                     </table>
                 </div>
@@ -146,11 +148,15 @@
                         <h4 class="modal-title">DELETE LOG FILE</h4>
                     </div>
                     <div class="modal-body">
-                        <p>Are you sure you want to <span class="label label-danger">DELETE</span> this log file <span class="label label-primary">{{ $log->date }}</span> ?</p>
+                        <p>Are you sure you want to <span class="label label-danger">DELETE</span> this log file <span
+                                class="label label-primary">{{ $log->date }}</span> ?</p>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-sm btn-default pull-left" data-dismiss="modal">Cancel</button>
-                        <button type="submit" class="btn btn-sm btn-danger" data-loading-text="Loading&hellip;">DELETE FILE</button>
+                        <button type="button" class="btn btn-sm btn-default pull-left" data-dismiss="modal">Cancel
+                        </button>
+                        <button type="submit" class="btn btn-sm btn-danger" data-loading-text="Loading&hellip;">DELETE
+                            FILE
+                        </button>
                     </div>
                 </div>
             </form>
@@ -162,19 +168,19 @@
     <script>
         $(function () {
             var deleteLogModal = $('div#delete-log-modal'),
-                deleteLogForm  = $('form#delete-log-form'),
-                submitBtn      = deleteLogForm.find('button[type=submit]');
+                deleteLogForm = $('form#delete-log-form'),
+                submitBtn = deleteLogForm.find('button[type=submit]');
 
-            deleteLogForm.on('submit', function(event) {
+            deleteLogForm.on('submit', function (event) {
                 event.preventDefault();
                 submitBtn.button('loading');
 
                 $.ajax({
-                    url:      $(this).attr('action'),
-                    type:     $(this).attr('method'),
+                    url: $(this).attr('action'),
+                    type: $(this).attr('method'),
                     dataType: 'json',
-                    data:     $(this).serialize(),
-                    success: function(data) {
+                    data: $(this).serialize(),
+                    success: function (data) {
                         submitBtn.button('reset');
                         if (data.result === 'success') {
                             deleteLogModal.modal('hide');
@@ -184,7 +190,7 @@
                             alert('OOPS ! This is a lack of coffee exception !')
                         }
                     },
-                    error: function(xhr, textStatus, errorThrown) {
+                    error: function (xhr, textStatus, errorThrown) {
                         alert('AJAX ERROR ! Check the console !');
                         console.error(errorThrown);
                         submitBtn.button('reset');

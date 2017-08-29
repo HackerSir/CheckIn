@@ -7,19 +7,24 @@
         h1 {
             font-size: 72px;
         }
+
         #ticket_info {
             padding-top: 30px;
             padding-bottom: 50px;
         }
+
         #ticket_info p {
             line-height: 50px;
         }
+
         p#ticket_number {
             font-size: 96px;
         }
+
         p#ticket_name {
             font-size: 120px;
         }
+
         p#ticket_class {
             font-size: 72px;
             line-height: normal;
