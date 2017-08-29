@@ -139,6 +139,7 @@ Route::group(['middleware' => ['auth', 'email']], function () {
     //打卡紀錄管理
     //權限：record.manage
     Route::group(['middleware' => 'permission:record.manage'], function () {
+        Route::post('export/record', 'ExportController@record')->name('export.record');
         Route::resource('record', 'RecordController', [
             'only' => [
                 'index',
