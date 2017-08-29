@@ -82,7 +82,10 @@ class ExportController extends Controller
         $spreadsheet = new Spreadsheet();
         $sheet = $spreadsheet->getActiveSheet();
         //建立匯出資料
-        $this->setTitleRow($sheet, ['#', 'NID', '姓名', '班級', '科系', '學院', '入學年度', '性別', '社團編號', '社團類型', '社團名稱', '打卡時間']);
+        $this->setTitleRow(
+            $sheet,
+            ['#', 'NID', '姓名', '班級', '科系', '學院', '入學年度', '性別', '新生', '社團編號', '社團類型', '社團名稱', '打卡時間']
+        );
         $records = Record::with('student', 'club.clubType')->orderBy('created_at')->get();
         foreach ($records as $record) {
             /** @var Student $student */
@@ -98,6 +101,7 @@ class ExportController extends Controller
                 $student->dept_name,
                 $student->in_year,
                 $student->gender,
+                $student->is_freshman,
                 $club->number,
                 $club->clubType->name ?? '',
                 $club->name,
@@ -114,7 +118,7 @@ class ExportController extends Controller
             ],
         ];
 
-        $sheet->getStyleByColumnAndRow(7, 1, 7, $sheet->getHighestRow())->applyFromArray($styleArray);
+        $sheet->getStyleByColumnAndRow(8, 1, 8, $sheet->getHighestRow())->applyFromArray($styleArray);
 
         //下載
         return $this->downloadSpreadsheet($spreadsheet, '打卡紀錄.xlsx');
