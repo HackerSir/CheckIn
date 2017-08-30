@@ -31,14 +31,14 @@ class TicketController extends Controller
         if (!$ticket) {
             $json = [
                 'found' => false,
-                'id'    => sprintf("%04d", $id),
+                'id'    => sprintf('%04d', $id),
             ];
 
             return response()->json($json);
         }
         $json = [
             'found' => true,
-            'id'    => sprintf("%04d", $ticket->id),
+            'id'    => sprintf('%04d', $ticket->id),
             'name'  => $ticket->student->name,
             'class' => $ticket->student->class,
         ];
