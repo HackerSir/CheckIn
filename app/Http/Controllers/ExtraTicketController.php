@@ -119,14 +119,14 @@ class ExtraTicketController extends Controller
         if (!$extraTicket) {
             $json = [
                 'found' => false,
-                'id'    => $id,
+                'id'    => sprintf("%04d", $id),
             ];
 
             return response()->json($json);
         }
         $json = [
             'found' => true,
-            'id'    => $extraTicket->id,
+            'id'    => sprintf("%04d", $extraTicket->id),
             'name'  => $extraTicket->name,
             'class' => $extraTicket->class,
         ];
