@@ -2,53 +2,23 @@
 
 @section('title', '抽獎編號')
 
-@section('css')
-    <style>
-        h1 {
-            font-size: 72px;
-        }
-
-        #ticket_info {
-            padding-top: 30px;
-            padding-bottom: 50px;
-        }
-
-        #ticket_info p {
-            line-height: 50px;
-        }
-
-        p#ticket_number {
-            font-size: 96px;
-        }
-
-        p#ticket_name {
-            font-size: 120px;
-        }
-
-        p#ticket_class {
-            font-size: 72px;
-            line-height: normal;
-        }
-    </style>
-@endsection
-
 @section('content')
     <div class="mt-3 pb-3">
-        <h1>抽獎編號</h1>
-        <div class="card mt-1">
+        <div class="card">
             <div class="card-block">
-                {{ Form::open(['method' => 'get', 'id' => 'ticket_search_form']) }}
-                <input type="text" placeholder="抽獎編號" id="ticket_search_id">
+                <h1 class="display-3">抽獎編號查詢</h1>
+                {{ Form::open(['method' => 'get', 'id' => 'ticket_search_form', 'class' => 'form-inline']) }}
+                <input type="text" placeholder="抽獎編號" id="ticket_search_id" class="form-control mr-sm-2"
+                       autocomplete="off">
                 <button type="submit" class="btn btn-primary">
                     <i class="fa fa-search" aria-hidden="true"></i> 查詢
                 </button>
                 {{ Form::close() }}
-            </div>
-            <div class="card-block">
-                <p id="ticket_number"></p>
-                <img src="{{ asset('img/cat.jpg') }}" id="cat" style="display:none;">
-                <p id="ticket_name"></p>
-                <p id="ticket_class"></p>
+                <div class="jumbotron text-center mt-3">
+                    <h1 class="display-3" id="ticket_number"></h1>
+                    <h1 class="display-3" id="ticket_name"></h1>
+                    <h1 class="display-3" id="ticket_class"></h1>
+                </div>
             </div>
         </div>
     </div>
@@ -82,7 +52,7 @@
                 if ($.isNumeric(searchId) === false) {
                     $cat.show();
                     $ticketNumber.text('#' + searchId);
-                    $ticketName.html('<span style="color: red">抽獎編號是...數字</span>');
+                    $ticketName.html('<span style="color: red">抽獎編號是...數字( ﾟ Дﾟ）</span>');
                     return false;
                 }
                 //Loading
