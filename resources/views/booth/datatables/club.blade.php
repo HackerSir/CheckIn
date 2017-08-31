@@ -1,2 +1,1 @@
-{!! $booth->club->clubType->tag ?? '' !!}
-{{ $booth->club->name ?? '' }}
+{!! $booth->club->display_name ?? '' !!}

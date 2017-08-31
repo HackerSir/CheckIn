@@ -38,8 +38,7 @@
                         <label class="col-md-2 col-form-label">社團</label>
                         <div class="col-md-10">
                             <p class="form-control-static">
-                                {!! $club->clubType->tag ?? '' !!}
-                                {{ $club->name }}
+                                {!! $club->display_name ?? '' !!}
                             </p>
                         </div>
                     </div>

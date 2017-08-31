@@ -58,8 +58,7 @@
                     <dl class="row" style="font-size: 120%">
                         <dt class="col-4 col-md-2">社團</dt>
                         <dd class="col-8 col-md-10">
-                            {!! $feedback->club->clubType->tag ?? '' !!}
-                            {{ $feedback->club->name }}
+                            {!! $feedback->club->display_name !!}
                         </dd>
 
                         <dt class="col-4 col-md-2">打卡時間</dt>

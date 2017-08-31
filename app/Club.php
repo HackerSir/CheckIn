@@ -19,6 +19,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Booth[] $booths
  * @property-read \App\ClubType|null $clubType
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Feedback[] $feedback
+ * @property-read string $display_name
  * @property-read bool $is_counted
  * @property-read \App\ImgurImage $imgurImage
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Record[] $records
@@ -112,6 +113,20 @@ class Club extends Model
         }
 
         return $this->clubType->is_counted;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDisplayNameAttribute()
+    {
+        $html = '';
+        if ($this->clubType) {
+            $html .= $this->clubType->tag . ' ';
+        }
+        $html .= $this->name;
+
+        return $html;
     }
 
     /**

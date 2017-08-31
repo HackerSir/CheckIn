@@ -68,16 +68,10 @@
                             <dd class="col-8 col-md-9">
                                 @if(Laratrust::can('club.manage'))
                                     <a href="{{ route('club.show', $user->club) }}">
-                                        @if($user->club->clubType)
-                                            {!! $user->club->clubType->tag !!}
-                                        @endif
-                                        {{ $user->club->name }}
+                                        {!! $user->club->display_name !!}
                                     </a>
                                 @else
-                                    @if($user->club->clubType)
-                                        {!! $user->club->clubType->tag !!}
-                                    @endif
-                                    {{ $user->club->name }}
+                                    {!! $user->club->display_name !!}
                                 @endif
                             </dd>
                         @endif

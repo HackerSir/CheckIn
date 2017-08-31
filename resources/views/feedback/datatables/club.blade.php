@@ -1,2 +1,1 @@
-{!! $feedback->club->clubType->tag ?? '' !!}
-{{ $feedback->club->name ?? '' }}
+{!! $feedback->club->display_name ?? '' !!}
