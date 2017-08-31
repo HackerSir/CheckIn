@@ -62,6 +62,25 @@
                                 {{ link_to_route('student.show', $user->student->display_name, $user->student) }}
                             </dd>
                         @endif
+
+                        @if($user->club)
+                            <dt class="col-4 col-md-3">負責社團</dt>
+                            <dd class="col-8 col-md-9">
+                                @if(Laratrust::can('club.manage'))
+                                    <a href="{{ route('club.show', $user->club) }}">
+                                        @if($user->club->clubType)
+                                            {!! $user->club->clubType->tag !!}
+                                        @endif
+                                        {{ $user->club->name }}
+                                    </a>
+                                @else
+                                    @if($user->club->clubType)
+                                        {!! $user->club->clubType->tag !!}
+                                    @endif
+                                    {{ $user->club->name }}
+                                @endif
+                            </dd>
+                        @endif
                     </dl>
                 </div>
                 <div class="card-block text-center">

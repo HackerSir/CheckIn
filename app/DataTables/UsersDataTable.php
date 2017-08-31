@@ -20,6 +20,19 @@ class UsersDataTable extends DataTable
             ->addColumn('action', 'user.datatables.action')
             ->editColumn('name', 'user.datatables.name')
             ->editColumn('email', 'user.datatables.email')
+            ->editColumn('club_id', function ($booth) {
+                return view('booth.datatables.club', compact('booth'))->render();
+            })
+            ->filterColumn('club_id', function ($query, $keyword) {
+                /* @var Builder|User $query */
+                $query->whereIn('club_id', function ($query) use ($keyword) {
+                    /* @var Builder $query */
+                    $query->select('clubs.id')
+                        ->from('clubs')
+                        ->join('users', 'clubs.id', '=', 'club_id')
+                        ->whereRaw('clubs.name LIKE ?', ['%' . $keyword . '%']);
+                });
+            })
             ->escapeColumns([])
             ->make(true);
     }
@@ -63,9 +76,10 @@ class UsersDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            'id'    => ['title' => '#'],
-            'name'  => ['title' => '使用者'],
-            'email' => ['title' => '信箱'],
+            'id'      => ['title' => '#'],
+            'name'    => ['title' => '使用者'],
+            'email'   => ['title' => '信箱'],
+            'club_id' => ['title' => '負責社團'],
         ];
     }
 
