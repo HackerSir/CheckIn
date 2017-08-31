@@ -30,4 +30,9 @@ class HomeController extends Controller
     {
         return view('club.show', compact('club'));
     }
+
+    public function clubsMap()
+    {
+        return view('map');
+    }
 }

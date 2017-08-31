@@ -22,6 +22,7 @@ Route::group(['prefix' => 'oauth', 'namespace' => 'Auth'], function () {
 
 Route::get('clubs', 'HomeController@clubs')->name('clubs.index');
 Route::get('clubs/{club}', 'HomeController@clubsShow')->name('clubs.show');
+Route::get('map', 'HomeController@clubsMap')->name('clubs.map');
 
 //服務條款(含隱私權跟免責)
 Route::get('terms', function () {
