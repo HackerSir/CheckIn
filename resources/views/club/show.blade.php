@@ -40,14 +40,24 @@
                             <dd class="col-8 col-sm-9">{{ $club->number }}</dd>
 
                             <dt class="col-4 col-sm-3">社團類型</dt>
-                            <dd class="col-8 col-sm-9">{!! $club->clubType->tag ?? '' !!}</dd>
+                            <dd class="col-8 col-sm-9">
+                                @if($club->clubType)
+                                    {!! $club->clubType->tag !!}
+                                @else
+                                    <span class="text-muted">（其他／未分類）</span>
+                                @endif
+                            </dd>
 
                             <dt class="col-4 col-sm-3">可否集點</dt>
                             <dd class="col-8 col-sm-9">
                                 @if($club->is_counted)
-                                    <i class="fa fa-check-square-o" aria-hidden="true"></i>
+                                    <span class="text-success">
+                                        <i class="fa fa-check-square-o" aria-hidden="true"></i> 列入集點
+                                    </span>
                                 @else
-                                    <i class="fa fa-square-o" aria-hidden="true"></i>
+                                    <span class="text-danger">
+                                        <i class="fa fa-square-o" aria-hidden="true"></i> 不列入集點
+                                    </span>
                                 @endif
                             </dd>
 
@@ -55,15 +65,19 @@
                             <dd class="col-sm-9">
                                 @if($club->url)
                                     {{ link_to($club->url, $club->url, ['target' => '_blank']) }}
+                                @else
+                                    <span class="text-muted">（無）</span>
                                 @endif
                             </dd>
 
                             @if(\Laratrust::can('club.manage') || (isset(Auth::user()->club) && Auth::user()->club->id == $club->id))
                                 <dt class="col-4 col-sm-3">負責人</dt>
                                 <dd class="col-8 col-sm-9">
-                                    @foreach($club->users as $user)
+                                    @forelse($club->users as $user)
                                         {{ $user->name }}<br/>
-                                    @endforeach
+                                    @empty
+                                        <span class="text-muted">（無）</span>
+                                    @endforelse
                                 </dd>
                             @endif
 
@@ -90,12 +104,18 @@
                 </div>
                 <div class="mt-2">
                     <h2>簡介</h2>
-                    <p style="font-size: 120%">{!! nl2br(e($club->description)) !!}</p>
+                    <p style="font-size: 120%">
+                        @if($club->description)
+                            {!! nl2br(e($club->description)) !!}
+                        @else
+                            <span class="text-muted">（未提供簡介）</span>
+                        @endif
+                    </p>
                 </div>
                 <div class="mt-2">
                     <h2>攤位</h2>
                     <div class="row">
-                        @foreach($club->booths as $booth)
+                        @forelse($club->booths as $booth)
                             <div class="col-md">
                                 @if(\Laratrust::can('booth.manage'))
                                     <h3>{{ link_to_route('booth.show', $booth->name, $booth) }}</h3>
@@ -119,7 +139,11 @@
                             @if ($loop->last && $loop->count > 2 && $loop->count % 2 != 0)
                                 <div class="col-md"></div>
                             @endif
-                        @endforeach
+                        @empty
+                            <div class="col-md">
+                                <span class="text-muted">（無）</span>
+                            </div>
+                        @endforelse
                     </div>
                 </div>
             </div>
