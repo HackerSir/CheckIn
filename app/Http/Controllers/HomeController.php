@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Club;
 use App\User;
+use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
@@ -31,8 +32,14 @@ class HomeController extends Controller
         return view('club.show', compact('club'));
     }
 
-    public function clubsMap()
+    public function clubsMap(Request $request)
     {
-        return view('map');
+        $type = $request->input('type') ?: 'static';
+
+        if (!in_array($type, ['static', 'google'])) {
+            $type = 'static';
+        }
+
+        return view('map', compact('type'));
     }
 }

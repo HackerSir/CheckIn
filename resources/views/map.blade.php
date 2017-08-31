@@ -23,16 +23,22 @@
 @endsection
 
 @section('content')
-    <div class="btn-group mt-2" role="group">
-        <a class="btn btn-secondary">靜態地圖</a>
-        <a class="btn btn-secondary">Google Map</a>
+    <div class="mt-2 pb-2">
+        <div class="btn-group" role="group">
+            <a href="{{ route('clubs.map', ['type' => 'static']) }}" class="btn btn-secondary @if ($type == 'static') active @endif">靜態地圖</a>
+            <a href="{{ route('clubs.map', ['type' => 'google']) }}" class="btn btn-secondary @if ($type == 'google') active @endif">Google Map</a>
+        </div>
+        @if ($type == 'static')
+            <div class="mt-2">
+                <!--          Test code
+                 https://forum.gamer.com.tw/C.php?page=1&bsn=26742&snA=35764  -->
+                <img src="http://i.imgur.com/9pHQGun.jpg" class="img-fluid" style="width: 100%">
+            </div>
+        @endif
+        @if ($type == 'google')
+            <div class="mt-2" id="map"></div>
+        @endif
     </div>
-    <div class="mt-2">
-        <!--          Test code
-         https://forum.gamer.com.tw/C.php?page=1&bsn=26742&snA=35764  -->
-        <img src="http://i.imgur.com/9pHQGun.jpg" class="img-fluid" style="width: 100%">
-    </div>
-    <div class="mt-2" id="map"></div>
 @endsection
 
 @section('js')
