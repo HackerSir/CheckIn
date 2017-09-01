@@ -23,6 +23,11 @@
     </style>
 @endsection
 @section('content')
+    @if(auth()->user() && !auth()->user()->is_local_account && !auth()->user()->student)
+        <div class="alert alert-warning mt-3" role="alert">
+            <strong>抱歉！</strong>雖然您已使用NID順利登入，但由於您並非本學期在校生，因此無法參與集點活動。
+        </div>
+    @endif
     <div class="jumbotron mt-3">
         <h1>{{ config('app.cht_name') }}</h1>
         <h3>2017 逢甲社團博覽會集點打卡</h3>
