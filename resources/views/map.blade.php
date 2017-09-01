@@ -25,14 +25,16 @@
 @section('content')
     <div class="mt-2 pb-2">
         <div class="btn-group" role="group">
-            <a href="{{ route('clubs.map', ['type' => 'static']) }}" class="btn btn-secondary @if ($type == 'static') active @endif">靜態地圖</a>
-            <a href="{{ route('clubs.map', ['type' => 'google']) }}" class="btn btn-secondary @if ($type == 'google') active @endif">Google Map</a>
+            <a href="{{ route('clubs.map', ['type' => 'static']) }}"
+               class="btn btn-secondary @if ($type == 'static') active @endif">靜態地圖</a>
+            <a href="{{ route('clubs.map', ['type' => 'google']) }}"
+               class="btn btn-secondary @if ($type == 'google') active @endif">Google Map</a>
         </div>
         @if ($type == 'static')
             <div class="mt-2">
-                <!--          Test code
-                 https://forum.gamer.com.tw/C.php?page=1&bsn=26742&snA=35764  -->
-                <img src="http://i.imgur.com/9pHQGun.jpg" class="img-fluid" style="width: 100%">
+                <a href="http://i.imgur.com/7ixRhyQ.jpg" target="_blank">
+                    <img src="http://i.imgur.com/7ixRhyQ.jpg" class="img-fluid" style="width: 100%">
+                </a>
             </div>
         @endif
         @if ($type == 'google')
@@ -52,18 +54,18 @@
             var myloc = new google.maps.Marker({
                 clickable: false,
                 icon: new google.maps.MarkerImage('//maps.gstatic.com/mapfiles/mobile/mobileimgs2.png',
-                    new google.maps.Size(22,22),
-                    new google.maps.Point(0,18),
-                    new google.maps.Point(11,11)),
+                    new google.maps.Size(22, 22),
+                    new google.maps.Point(0, 18),
+                    new google.maps.Point(11, 11)),
                 shadow: null,
                 zIndex: 999,
-                map: map// your google.maps.Map object
+                map: map
             });
 
-            if (navigator.geolocation) navigator.geolocation.getCurrentPosition(function(pos) {
+            if (navigator.geolocation) navigator.geolocation.getCurrentPosition(function (pos) {
                 var me = new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude);
                 myloc.setPosition(me);
-            }, function(error) {
+            }, function (error) {
                 // ...
             });
 
@@ -80,6 +82,10 @@
                     east: 120.648279 + 0.00002,
                     west: 120.648279 - 0.00002
                 }
+            });
+
+            rectangle.addListener('click', function () {
+                window.open('https://www.google.com', '_blank');
             });
         }
     </script>
