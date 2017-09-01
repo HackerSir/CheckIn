@@ -58,7 +58,13 @@
                         @if(isset($student->ticket))
                             <h3 class="text-danger">{{ sprintf("%04d", $student->ticket->id) }}</h3>
                         @else
-                            <h3 class="text-danger">集點任務尚未完成</h3>
+                            @if(!$student->is_freshman)
+                                <p class="text-danger">
+                                    未具備抽獎資格，即使完成任務，也無法參加抽獎（抽獎活動限新生參加）
+                                </p>
+                            @else
+                                <h3 class="text-danger">集點任務尚未完成</h3>
+                            @endif
                         @endif
                     </div>
 

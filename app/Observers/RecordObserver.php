@@ -15,6 +15,11 @@ class RecordObserver
             //目標非正，視為未啟用此機制
             return;
         }
+        //是否為新生
+        if (!$record->student->is_freshman) {
+            //非新生無法抽獎
+            return;
+        }
         //是否已有抽獎編號
         if ($record->student->ticket) {
             //已有抽獎編號
