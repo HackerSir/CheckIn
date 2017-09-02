@@ -80,10 +80,10 @@ class QrcodeScanController extends Controller
             ->where('club_id', $club->id)
             ->first();
         if ($existRecord) {
-            $createdAtForHumans = (new Carbon($existRecord->created_at))->diffForHumans();
+            $createdAtText = $existRecord->created_at . '（' . $existRecord->created_at->diffForHumans() . '）';
 
             return view('qrcode-scan.scan')->with('level', 'warning')
-                ->with('message', "已於 {$existRecord->created_at}（{$createdAtForHumans}） 在「{$club->name}」打卡");
+                ->with('message', "已於 {$createdAtText} 在「{$club->name}」打卡");
         }
 
         //打卡
