@@ -71,7 +71,7 @@ class QrcodeScanController extends Controller
             $lastBindingTimeText = $lastBindingTime . '（' . $lastBindingTime->diffForHumans() . '）';
 
             return view('qrcode-scan.scan')->with('level', 'danger')
-                ->with('message', "非最後一組 QR Code，請使用於 {$lastBindingTimeText} 綁定之 QR Code");
+                ->with('message', '非最後一組 QR Code，請使用於 ' . $lastBindingTimeText . ' 綁定之 QR Code');
         }
 
         //檢查是否在該攤位重複打卡
