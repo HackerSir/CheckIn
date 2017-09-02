@@ -54,31 +54,33 @@
         },
         {
             "name": "arcanedev/log-viewer",
-            "version": "4.3.8",
+            "version": "4.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ARCANEDEV/LogViewer.git",
-                "reference": "5981067142321751389683f66a4edf4f75c33923"
+                "reference": "5aacb3db635db4225efad9acba65c76fe40f73da"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ARCANEDEV/LogViewer/zipball/5981067142321751389683f66a4edf4f75c33923",
-                "reference": "5981067142321751389683f66a4edf4f75c33923",
+                "url": "https://api.github.com/repos/ARCANEDEV/LogViewer/zipball/5aacb3db635db4225efad9acba65c76fe40f73da",
+                "reference": "5aacb3db635db4225efad9acba65c76fe40f73da",
                 "shasum": ""
             },
             "require": {
                 "arcanedev/support": "~4.1",
-                "php": ">=5.6",
+                "php": ">=7.0",
                 "psr/log": "~1.0"
             },
             "require-dev": {
-                "phpunit/phpcov": "~3.0",
-                "phpunit/phpunit": "~5.0"
+                "phpunit/phpcov": "~4.0",
+                "phpunit/phpunit": "~6.0"
             },
             "type": "library",
             "extra": {
-                "branch-alias": {
-                    "dev-master": "4.3.x-dev"
+                "laravel": {
+                    "providers": [
+                        "Arcanedev\\LogViewer\\LogViewerServiceProvider"
+                    ]
                 }
             },
             "autoload": {
@@ -113,7 +115,7 @@
                 "log-viewer",
                 "logviewer"
             ],
-            "time": "2017-06-07T23:30:00+00:00"
+            "time": "2017-08-31T16:18:24+00:00"
         },
         {
             "name": "arcanedev/support",
@@ -1258,16 +1260,16 @@
         },
         {
             "name": "iatstuti/laravel-nullable-fields",
-            "version": "1.4.1",
+            "version": "1.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/michaeldyrynda/laravel-nullable-fields.git",
-                "reference": "f47354d7f70953bc58f18a88e4419a36dfb4b812"
+                "reference": "c41aaf8f826af74f7f1439848ff1800aa6f754a0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/michaeldyrynda/laravel-nullable-fields/zipball/f47354d7f70953bc58f18a88e4419a36dfb4b812",
-                "reference": "f47354d7f70953bc58f18a88e4419a36dfb4b812",
+                "url": "https://api.github.com/repos/michaeldyrynda/laravel-nullable-fields/zipball/c41aaf8f826af74f7f1439848ff1800aa6f754a0",
+                "reference": "c41aaf8f826af74f7f1439848ff1800aa6f754a0",
                 "shasum": ""
             },
             "require": {
@@ -1296,7 +1298,7 @@
                 }
             ],
             "description": "This trait allows you to easily flag attributes that should be set as null when being persisted to the database using the Laravel PHP Framework.",
-            "time": "2017-07-04T01:11:09+00:00"
+            "time": "2017-08-31T01:07:54+00:00"
         },
         {
             "name": "j0k3r/php-imgur-api-client",
@@ -1505,16 +1507,16 @@
         },
         {
             "name": "kkszymanowski/traitor",
-            "version": "0.2.3",
+            "version": "0.2.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/KKSzymanowski/Traitor.git",
-                "reference": "0f3ed8ca01f35d7576d3ad0a43e013825d738909"
+                "reference": "05462468d0592545448f1a2877d045f5048abea1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/KKSzymanowski/Traitor/zipball/0f3ed8ca01f35d7576d3ad0a43e013825d738909",
-                "reference": "0f3ed8ca01f35d7576d3ad0a43e013825d738909",
+                "url": "https://api.github.com/repos/KKSzymanowski/Traitor/zipball/05462468d0592545448f1a2877d045f5048abea1",
+                "reference": "05462468d0592545448f1a2877d045f5048abea1",
                 "shasum": ""
             },
             "require": {
@@ -1546,20 +1548,20 @@
                 "php",
                 "trait"
             ],
-            "time": "2016-12-18T21:34:36+00:00"
+            "time": "2017-08-28T11:34:42+00:00"
         },
         {
             "name": "laravel/framework",
-            "version": "v5.4.33",
+            "version": "v5.4.36",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "e53a81a2bf406f501cdf818ad949f8d6c8dabfc0"
+                "reference": "1062a22232071c3e8636487c86ec1ae75681bbf9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/e53a81a2bf406f501cdf818ad949f8d6c8dabfc0",
-                "reference": "e53a81a2bf406f501cdf818ad949f8d6c8dabfc0",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/1062a22232071c3e8636487c86ec1ae75681bbf9",
+                "reference": "1062a22232071c3e8636487c86ec1ae75681bbf9",
                 "shasum": ""
             },
             "require": {
@@ -1675,7 +1677,7 @@
                 "framework",
                 "laravel"
             ],
-            "time": "2017-08-14T20:17:41+00:00"
+            "time": "2017-08-30T09:26:16+00:00"
         },
         {
             "name": "laravel/tinker",
@@ -1742,16 +1744,16 @@
         },
         {
             "name": "laravelcollective/html",
-            "version": "v5.4.8",
+            "version": "v5.4.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/LaravelCollective/html.git",
-                "reference": "9b8f51e7a2368911c896f5d42757886bae0717b5"
+                "reference": "f04965dc688254f4c77f684ab0b42264f9eb9634"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/LaravelCollective/html/zipball/9b8f51e7a2368911c896f5d42757886bae0717b5",
-                "reference": "9b8f51e7a2368911c896f5d42757886bae0717b5",
+                "url": "https://api.github.com/repos/LaravelCollective/html/zipball/f04965dc688254f4c77f684ab0b42264f9eb9634",
+                "reference": "f04965dc688254f4c77f684ab0b42264f9eb9634",
                 "shasum": ""
             },
             "require": {
@@ -1792,7 +1794,7 @@
             ],
             "description": "HTML and Form Builders for the Laravel Framework",
             "homepage": "http://laravelcollective.com",
-            "time": "2017-05-22T06:35:07+00:00"
+            "time": "2017-08-12T15:52:38+00:00"
         },
         {
             "name": "lavary/laravel-menu",
@@ -1921,23 +1923,23 @@
         },
         {
             "name": "maatwebsite/excel",
-            "version": "2.1.20",
+            "version": "2.1.22",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Maatwebsite/Laravel-Excel.git",
-                "reference": "a8baf7de1030d261318f90fa5c273a47ef616b59"
+                "reference": "bb7b3d9a72f56ddab974e6a629e4f5e51cd945a2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Maatwebsite/Laravel-Excel/zipball/a8baf7de1030d261318f90fa5c273a47ef616b59",
-                "reference": "a8baf7de1030d261318f90fa5c273a47ef616b59",
+                "url": "https://api.github.com/repos/Maatwebsite/Laravel-Excel/zipball/bb7b3d9a72f56ddab974e6a629e4f5e51cd945a2",
+                "reference": "bb7b3d9a72f56ddab974e6a629e4f5e51cd945a2",
                 "shasum": ""
             },
             "require": {
-                "illuminate/cache": "5.0.*|5.1.*|5.2.*|5.3.*|5.4.*",
-                "illuminate/config": "5.0.*|5.1.*|5.2.*|5.3.*|5.4.*",
-                "illuminate/filesystem": "5.0.*|5.1.*|5.2.*|5.3.*|5.4.*",
-                "illuminate/support": "5.0.*|5.1.*|5.2.*|5.3.*|5.4.*",
+                "illuminate/cache": "5.0.*|5.1.*|5.2.*|5.3.*|5.4.*|5.5.*",
+                "illuminate/config": "5.0.*|5.1.*|5.2.*|5.3.*|5.4.*|5.5.*",
+                "illuminate/filesystem": "5.0.*|5.1.*|5.2.*|5.3.*|5.4.*|5.5.*",
+                "illuminate/support": "5.0.*|5.1.*|5.2.*|5.3.*|5.4.*|5.5.*",
                 "jeremeamia/superclosure": "^2.3",
                 "nesbot/carbon": "~1.0",
                 "php": ">=5.5",
@@ -1951,10 +1953,10 @@
                 "phpunit/phpunit": "~4.0"
             },
             "suggest": {
-                "illuminate/http": "5.0.*|5.1.*|5.2.*|5.3.*|5.4.*",
-                "illuminate/queue": "5.0.*|5.1.*|5.2.*|5.3.*|5.4.*",
-                "illuminate/routing": "5.0.*|5.1.*|5.2.*|5.3.*|5.4.*",
-                "illuminate/view": "5.0.*|5.1.*|5.2.*|5.3.*|5.4.*"
+                "illuminate/http": "5.0.*|5.1.*|5.2.*|5.3.*|5.4.*|5.5.*",
+                "illuminate/queue": "5.0.*|5.1.*|5.2.*|5.3.*|5.4.*|5.5.*",
+                "illuminate/routing": "5.0.*|5.1.*|5.2.*|5.3.*|5.4.*|5.5.*",
+                "illuminate/view": "5.0.*|5.1.*|5.2.*|5.3.*|5.4.*|5.5.*"
             },
             "type": "library",
             "extra": {
@@ -1995,7 +1997,7 @@
                 "import",
                 "laravel"
             ],
-            "time": "2017-07-26T18:04:04+00:00"
+            "time": "2017-08-31T14:52:24+00:00"
         },
         {
             "name": "milon/barcode",
@@ -2755,7 +2757,7 @@
                 "word",
                 "writer"
             ],
-            "time": "2017-07-11T00:20:05+00:00"
+            "time": "2017-07-11 00:20:05"
         },
         {
             "name": "pragmarx/google2fa",
@@ -4577,28 +4579,40 @@
         },
         {
             "name": "tom-lingham/searchy",
-            "version": "2.0.16",
+            "version": "2.0.17",
             "source": {
                 "type": "git",
                 "url": "https://github.com/TomLingham/Laravel-Searchy.git",
-                "reference": "b275da4aeb61ac9ada12d424f181ce4b1ceccfba"
+                "reference": "d2f6fbce970f4c4034d6c1829e74eb70ed2843e1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/TomLingham/Laravel-Searchy/zipball/b275da4aeb61ac9ada12d424f181ce4b1ceccfba",
-                "reference": "b275da4aeb61ac9ada12d424f181ce4b1ceccfba",
+                "url": "https://api.github.com/repos/TomLingham/Laravel-Searchy/zipball/d2f6fbce970f4c4034d6c1829e74eb70ed2843e1",
+                "reference": "d2f6fbce970f4c4034d6c1829e74eb70ed2843e1",
                 "shasum": ""
             },
             "require": {
-                "illuminate/support": "5.1.* || 5.2.* || 5.3.* || 5.4.*",
-                "php": "^5.5.9 || >=7.0"
+                "illuminate/support": "5.1.* || 5.2.* || 5.3.* || 5.4.* || 5.5.*",
+                "php": "^5.5.9 || ^7.0"
             },
             "require-dev": {
-                "graham-campbell/testbench": "^3.1",
-                "mockery/mockery": "^0.9.4",
-                "phpunit/phpunit": "^4.8 || ^5.0"
+                "graham-campbell/testbench": "^3.4 || ^4.0",
+                "phpunit/phpunit": "^4.8 || ^5.7 || ^6.3"
             },
             "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.0-dev"
+                },
+                "laravel": {
+                    "providers": [
+                        "TomLingham\\Searchy\\SearchyServiceProvider"
+                    ],
+                    "aliases": {
+                        "Searchy": "TomLingham\\Searchy\\Facades\\Searchy"
+                    }
+                }
+            },
             "autoload": {
                 "psr-4": {
                     "TomLingham\\Searchy\\": "src/"
@@ -4620,7 +4634,7 @@
                 "laravel",
                 "search"
             ],
-            "time": "2017-04-27T10:58:08+00:00"
+            "time": "2017-08-30T12:31:50+00:00"
         },
         {
             "name": "tracy/tracy",
@@ -4997,16 +5011,16 @@
         },
         {
             "name": "yajra/laravel-datatables-oracle",
-            "version": "v7.9.9",
+            "version": "v7.10.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/yajra/laravel-datatables.git",
-                "reference": "ad6a456ebb018ba1485ed19c064b95742ebe5758"
+                "reference": "8e217bf1be307c8e7e52fa6a5071b985568bc04c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yajra/laravel-datatables/zipball/ad6a456ebb018ba1485ed19c064b95742ebe5758",
-                "reference": "ad6a456ebb018ba1485ed19c064b95742ebe5758",
+                "url": "https://api.github.com/repos/yajra/laravel-datatables/zipball/8e217bf1be307c8e7e52fa6a5071b985568bc04c",
+                "reference": "8e217bf1be307c8e7e52fa6a5071b985568bc04c",
                 "shasum": ""
             },
             "require": {
@@ -5054,7 +5068,7 @@
                 "jquery",
                 "laravel"
             ],
-            "time": "2017-08-01T14:50:42+00:00"
+            "time": "2017-08-31T01:27:45+00:00"
         },
         {
             "name": "yish/generators",
@@ -5586,22 +5600,22 @@
         },
         {
             "name": "phpdocumentor/reflection-docblock",
-            "version": "3.2.2",
+            "version": "3.2.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpDocumentor/ReflectionDocBlock.git",
-                "reference": "4aada1f93c72c35e22fb1383b47fee43b8f1d157"
+                "reference": "86e24012a3139b42a7b71155cfaa325389f00f1f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpDocumentor/ReflectionDocBlock/zipball/4aada1f93c72c35e22fb1383b47fee43b8f1d157",
-                "reference": "4aada1f93c72c35e22fb1383b47fee43b8f1d157",
+                "url": "https://api.github.com/repos/phpDocumentor/ReflectionDocBlock/zipball/86e24012a3139b42a7b71155cfaa325389f00f1f",
+                "reference": "86e24012a3139b42a7b71155cfaa325389f00f1f",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.5",
+                "php": "^7.0",
                 "phpdocumentor/reflection-common": "^1.0@dev",
-                "phpdocumentor/type-resolver": "^0.3.0",
+                "phpdocumentor/type-resolver": "^0.4.0",
                 "webmozart/assert": "^1.0"
             },
             "require-dev": {
@@ -5627,20 +5641,20 @@
                 }
             ],
             "description": "With this component, a library can provide support for annotations via DocBlocks or otherwise retrieve information that is embedded in a DocBlock.",
-            "time": "2017-08-08T06:39:58+00:00"
+            "time": "2017-08-29T19:37:41+00:00"
         },
         {
             "name": "phpdocumentor/type-resolver",
-            "version": "0.3.0",
+            "version": "0.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpDocumentor/TypeResolver.git",
-                "reference": "fb3933512008d8162b3cdf9e18dba9309b7c3773"
+                "reference": "9c977708995954784726e25d0cd1dddf4e65b0f7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpDocumentor/TypeResolver/zipball/fb3933512008d8162b3cdf9e18dba9309b7c3773",
-                "reference": "fb3933512008d8162b3cdf9e18dba9309b7c3773",
+                "url": "https://api.github.com/repos/phpDocumentor/TypeResolver/zipball/9c977708995954784726e25d0cd1dddf4e65b0f7",
+                "reference": "9c977708995954784726e25d0cd1dddf4e65b0f7",
                 "shasum": ""
             },
             "require": {
@@ -5674,7 +5688,7 @@
                     "email": "me@mikevanriel.com"
                 }
             ],
-            "time": "2017-06-03T08:32:36+00:00"
+            "time": "2017-07-14T14:27:02+00:00"
         },
         {
             "name": "phpspec/prophecy",
