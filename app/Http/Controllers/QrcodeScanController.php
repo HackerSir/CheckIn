@@ -68,8 +68,10 @@ class QrcodeScanController extends Controller
         //檢查QR Code為最後一組QR Code
         if (!$qrcode->is_last_one) {
             $lastBindingTime = $qrcode->student->qrcode->bind_at;
+            $lastBindingTimeText = $lastBindingTime . '（' . $lastBindingTime->diffForHumans() . '）';
+
             return view('qrcode-scan.scan')->with('level', 'danger')
-                ->with('message', "非最後一組 QR Code，請使用於 {$lastBindingTime}（{$lastBindingTime->diffForHumans()}）綁定之 QR Code");
+                ->with('message', "非最後一組 QR Code，請使用於 {$lastBindingTimeText} 綁定之 QR Code");
         }
 
         //檢查是否在該攤位重複打卡
