@@ -88,7 +88,11 @@
 
                             <dt class="col-4 col-sm-3">回饋資料</dt>
                             <dd class="col-8 col-sm-9">
-                                @if(Auth::user()->student)
+                                @if(!Auth::check())
+                                    <a href="javascript:void(0)" class="btn btn-primary btn-lg disabled">
+                                        <i class="fa fa-times" aria-hidden="true"></i> 登入後即可填寫
+                                    </a>
+                                @elseif(Auth::user()->student)
                                     @if(\App\Feedback::whereClubId($club->id)->whereStudentId(Auth::user()->student->id)->count() == 0)
                                         <a href="{{ route('feedback.create', $club) }}" class="btn btn-primary btn-lg">
                                             <i class="fa fa-pencil" aria-hidden="true"></i> 按此填寫
