@@ -31,6 +31,6 @@ class CreateApiKeyManagePermission extends Migration
      */
     public function down()
     {
-        Permission::where('name', 'club-type.manage')->delete();
+        Permission::where('name', 'api-key.manage')->delete();
     }
 }
