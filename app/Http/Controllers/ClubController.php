@@ -222,7 +222,8 @@ class ClubController extends Controller
 
                 //建立社團
                 $club = Club::query()->updateOrCreate([
-                    'name'         => $name,
+                    'name' => $name,
+                ], [
                     'number'       => $number,
                     'club_type_id' => isset($clubType) ? $clubType->id : null,
                 ]);
