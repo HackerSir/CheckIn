@@ -49,7 +49,8 @@
             function initMap() {
                 var map = new google.maps.Map(document.getElementById('map'), {
                     zoom: 19,
-                    center: {lat: 24.179976, lng: 120.648279}
+                    center: {lat: 24.179976, lng: 120.648279},
+                    streetViewControl: false
                 });
 
                 var myloc = new google.maps.Marker({
