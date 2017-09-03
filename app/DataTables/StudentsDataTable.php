@@ -3,6 +3,7 @@
 namespace App\DataTables;
 
 use App\Student;
+use Illuminate\Database\Query\Builder;
 use Yajra\Datatables\Services\DataTable;
 
 class StudentsDataTable extends DataTable
@@ -16,7 +17,20 @@ class StudentsDataTable extends DataTable
     {
         return $this->datatables
             ->eloquent($this->query())
-            ->addColumn('action', 'student.datatables.action');
+            ->addColumn('action', 'student.datatables.action')
+            ->editColumn('class', function ($student) {
+                return view('student.datatables.class', compact('student'))->render();
+            })
+            ->filterColumn('class', function ($query, $keyword) {
+                /* @var Builder|Student $query */
+                $query->where(function ($query) use ($keyword) {
+                    /* @var Builder|Student $query */
+                    $query->where('class', 'like', '%' . $keyword . '%')
+                        ->orWhere('unit_name', 'like', '%' . $keyword . '%')
+                        ->orWhere('dept_name', 'like', '%' . $keyword . '%');
+                });
+            })
+            ->escapeColumns([]);
     }
 
     /**
@@ -59,9 +73,7 @@ class StudentsDataTable extends DataTable
             'id'            => ['title' => '#'],
             'nid'           => ['title' => 'NID'],
             'name'          => ['title' => '姓名'],
-            'class'         => ['title' => '班級'],
-            'unit_name'     => ['title' => '科系'],
-            'dept_name'     => ['title' => '學院'],
+            'class'         => ['title' => '院系班級'],
             'in_year'       => ['title' => '入學年度'],
             'gender'        => ['title' => '性別'],
             'records_count' => [
