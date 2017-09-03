@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'default' => 'fuzzy',
+    'default' => 'ufuzzy',
 
     'fieldName' => 'relevance',
 
