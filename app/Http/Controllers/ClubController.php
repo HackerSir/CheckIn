@@ -261,6 +261,7 @@ class ClubController extends Controller
                     $user = $student->user;
                     if (!$user) {
                         $email = $ownerNID . '@fcu.edu.tw';
+                        /** @var User $user */
                         $user = User::query()->updateOrCreate([
                             'email' => $email,
                         ], [
@@ -271,6 +272,7 @@ class ClubController extends Controller
                             'register_at' => Carbon::now(),
                             'register_ip' => \Request::getClientIp(),
                         ]);
+                        $user->student()->save($student);
                     }
                     //設定為負責人
                     $user->club()->associate($club);
