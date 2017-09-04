@@ -71,7 +71,21 @@
                     // ...
                 });
 
-                var rectangle = new google.maps.Rectangle({
+                var rectangle = genRectangle(map, 24.179976, 120.648279);
+
+                rectangle.addListener('click', function () {
+                    window.open('https://www.google.com', '_blank');
+                });
+            }
+
+            /**
+             * @param map google.maps.Map
+             * @param longitude 緯度
+             * @param latitude 經度
+             */
+            function genRectangle(map, longitude, latitude) {
+                var radius = 0.00002;
+                return new google.maps.Rectangle({
                     strokeColor: '#0000FF',
                     strokeOpacity: 0.8,
                     strokeWeight: 2,
@@ -79,17 +93,14 @@
                     fillOpacity: 0.35,
                     map: map,
                     bounds: {
-                        north: 24.179976 + 0.00002,
-                        south: 24.179976 - 0.00002,
-                        east: 120.648279 + 0.00002,
-                        west: 120.648279 - 0.00002
+                        north: longitude + radius,
+                        south: longitude - radius,
+                        east: latitude + radius,
+                        west: latitude - radius
                     }
                 });
-
-                rectangle.addListener('click', function () {
-                    window.open('https://www.google.com', '_blank');
-                });
             }
+
         </script>
         <script async defer
                 src="https://maps.googleapis.com/maps/api/js?key={{ GoogleApi::getKey() }}&callback=initMap">
