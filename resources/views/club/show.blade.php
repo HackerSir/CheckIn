@@ -86,8 +86,8 @@
                                 </dd>
                             @endif
 
-                            <dt class="col-4 col-sm-3">回饋資料</dt>
-                            <dd class="col-8 col-sm-9">
+                            <dt class="col-sm-3">回饋資料</dt>
+                            <dd class="col-sm-9">
                                 @if(!Auth::check())
                                     <a href="javascript:void(0)" class="btn btn-primary btn-lg disabled">
                                         <i class="fa fa-times" aria-hidden="true"></i> 登入後即可填寫

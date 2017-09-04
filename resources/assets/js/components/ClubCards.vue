@@ -5,9 +5,9 @@
             <option :value="null">全部</option>
             <option :value="id" v-for="(name, id) in clubTypes">{{ name }}</option>
         </select>
-        <div class="float-sm-right mt-1">
+        <div class="float-sm-right mt-1 form-inline">
             <span v-html="searchIndicator"></span> 搜尋
-            <input type="text" v-model="searchKeyword" @input="onKeywordChange">
+            <input type="text" class="form-control" v-model="searchKeyword" @input="onKeywordChange">
         </div>
         <div class="row mt-1">
             <div class="col-12 col-lg-6 mt-1" v-for="club in clubs">
