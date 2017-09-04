@@ -83,6 +83,7 @@
                         map: map,
                         fontSize: 15,
                         align: 'center',
+                        strokeWeight: 0,
                     });
 
                     var rectangle = genRectangle(map, booth['latitude'], booth['longitude'], booth['fillColor']);
