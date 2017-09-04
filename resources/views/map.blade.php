@@ -45,6 +45,8 @@
 
 @section('js')
     @if ($type == 'google')
+        <script src="https://maps.googleapis.com/maps/api/js?key={{ GoogleApi::getKey() }}"></script>
+        <script src="{{ asset('js/maplabel-compiled.js') }}"></script>
         <script>
             var boothData = {!! json_encode($boothData) !!}
         </script>
@@ -75,6 +77,14 @@
                 });
 
                 boothData.forEach(function(booth) {
+                    var mapLabel = new MapLabel({
+                        text: booth['name'],
+                        position: new google.maps.LatLng(booth['latitude'], booth['longitude']),
+                        map: map,
+                        fontSize: 15,
+                        align: 'center',
+                    });
+
                     var rectangle = genRectangle(map, booth['latitude'], booth['longitude'], booth['fillColor']);
 
                     if (booth['url'] !== 'javascript:void(0);') {
@@ -108,9 +118,7 @@
                 });
             }
 
-        </script>
-        <script async defer
-                src="https://maps.googleapis.com/maps/api/js?key={{ GoogleApi::getKey() }}&callback=initMap">
+            google.maps.event.addDomListener(window, 'load', initMap);
         </script>
     @endif
 @endsection
