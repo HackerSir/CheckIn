@@ -46,6 +46,9 @@
 @section('js')
     @if ($type == 'google')
         <script>
+            var boothData = {!! json_encode($boothData) !!}
+        </script>
+        <script>
             function initMap() {
                 var map = new google.maps.Map(document.getElementById('map'), {
                     zoom: 19,
@@ -71,10 +74,14 @@
                     // ...
                 });
 
-                var rectangle = genRectangle(map, 24.179976, 120.648279);
+                boothData.forEach(function(booth) {
+                    var rectangle = genRectangle(map, booth['latitude'], booth['longitude']);
 
-                rectangle.addListener('click', function () {
-                    window.open('https://www.google.com', '_blank');
+                    if (booth['url'] !== 'javascript:void(0);') {
+                        rectangle.addListener('click', function () {
+                            window.open(booth['url'], '_blank');
+                        });
+                    }
                 });
             }
 

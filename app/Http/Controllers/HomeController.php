@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Booth;
 use App\Club;
 use App\User;
 use Illuminate\Http\Request;
@@ -40,6 +41,22 @@ class HomeController extends Controller
             $type = 'static';
         }
 
-        return view('map', compact('type'));
+        $boothData = [];
+        if ($type == 'google') {
+            $booths = Booth::all();
+            /** @var Booth $booth */
+            foreach ($booths as $booth) {
+                $boothData[] = [
+                    'name'      => $booth->name,
+                    'longitude' => $booth->longitude,
+                    'latitude'  => $booth->latitude,
+                    'club_name' => $booth->club->name ?? null,
+                    'url'       =>
+                        is_null($booth->club) ? 'javascript:void(0);' : route('clubs.show', $booth->club->id),
+                ];
+            }
+        }
+
+        return view('map', compact('type', 'boothData'));
     }
 }
