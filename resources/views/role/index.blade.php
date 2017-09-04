@@ -46,7 +46,9 @@
                                             'style' => 'display: inline',
                                             'onSubmit' => "return confirm('確定要刪除此角色嗎？');"
                                         ]) !!}
-                                        <button type="submit" class="btn btn-danger">刪除角色</button>
+                                        <button type="submit" class="btn btn-danger">
+                                            <i class="fa fa-trash" aria-hidden="true"></i> 刪除角色
+                                        </button>
                                         {!! Form::close() !!}
                                     @endunless
                                 </td>
