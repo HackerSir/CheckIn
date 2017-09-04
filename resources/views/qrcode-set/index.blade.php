@@ -4,9 +4,11 @@
 
 @section('content')
     <div class="mt-3 pb-3">
-        <a href="{{ route('qrcode.index') }}" class="btn btn-secondary mb-2">
-            <i class="fa fa-arrow-left" aria-hidden="true"></i> QR Code
-        </a>
+        @if(Laratrust::can('qrcode.manage'))
+            <a href="{{ route('qrcode.index') }}" class="btn btn-secondary mb-2">
+                <i class="fa fa-arrow-left" aria-hidden="true"></i> QR Code
+            </a>
+        @endif
         <h1>QR Code 集</h1>
         <div class="card mt-1">
             <div class="card-block">

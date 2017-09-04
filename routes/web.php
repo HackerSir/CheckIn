@@ -79,7 +79,10 @@ Route::group(['middleware' => ['auth', 'email']], function () {
                 'show',
             ],
         ]);
-
+    });
+    //QR Code集管理
+    //權限：qrcode-set.manage
+    Route::group(['middleware' => 'permission:qrcode-set.manage'], function () {
         //下載
         Route::post('qrcode-set/{qrcode_set}/download', 'QrcodeSetController@download')->name('qrcode-set.download');
 
