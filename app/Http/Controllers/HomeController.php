@@ -51,6 +51,7 @@ class HomeController extends Controller
                     'longitude' => $booth->longitude,
                     'latitude'  => $booth->latitude,
                     'club_name' => $booth->club->name ?? null,
+                    'fillColor' => $booth->club->clubType->color ?? '#00DD00',
                     'url'       =>
                         is_null($booth->club) ? 'javascript:void(0);' : route('clubs.show', $booth->club->id),
                 ];

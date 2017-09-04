@@ -75,7 +75,7 @@
                 });
 
                 boothData.forEach(function(booth) {
-                    var rectangle = genRectangle(map, booth['latitude'], booth['longitude']);
+                    var rectangle = genRectangle(map, booth['latitude'], booth['longitude'], booth['fillColor']);
 
                     if (booth['url'] !== 'javascript:void(0);') {
                         rectangle.addListener('click', function () {
@@ -90,14 +90,14 @@
              * @param longitude 緯度
              * @param latitude 經度
              */
-            function genRectangle(map, longitude, latitude) {
+            function genRectangle(map, longitude, latitude, fillColor) {
                 var radius = 0.00002;
                 return new google.maps.Rectangle({
-                    strokeColor: '#0000FF',
+                    strokeColor: fillColor,
                     strokeOpacity: 0.8,
                     strokeWeight: 2,
-                    fillColor: '#0000FF',
-                    fillOpacity: 0.35,
+                    fillColor: fillColor,
+                    fillOpacity: 0.5,
                     map: map,
                     bounds: {
                         north: longitude + radius,
