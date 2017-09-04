@@ -55,7 +55,9 @@ class ClubController extends Controller
             'image_file'   => 'image',
         ]);
 
-        $club = Club::create($request->all());
+        $club = Club::create(array_merge($request->all(), [
+            'number' => strtoupper($request->get('number')),
+        ]));
 
         //上傳圖片
         $uploadedFile = $request->file('image_file');
@@ -113,7 +115,9 @@ class ClubController extends Controller
             'image_file'   => 'image',
         ]);
 
-        $club->update($request->all());
+        $club->update(array_merge($request->all(), [
+            'number' => strtoupper($request->get('number')),
+        ]));
 
         //上傳圖片
         $uploadedFile = $request->file('image_file');
@@ -197,7 +201,7 @@ class ClubController extends Controller
                 }
                 //資料
                 $name = $rowData[0];
-                $number = $rowData[1];
+                $number = strtoupper($rowData[1]);
                 $clubTypeName = $rowData[2];
                 $ownerNIDs = [];
                 for ($i = 0; $i < 5; $i++) {
