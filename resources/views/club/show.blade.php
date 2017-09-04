@@ -36,11 +36,11 @@
                     </div>
                     <div class="col-12 col-lg-7 mt-1">
                         <dl class="row" style="font-size: 120%">
-                            <dt class="col-4 col-sm-3">社團編號</dt>
-                            <dd class="col-8 col-sm-9">{{ $club->number }}</dd>
+                            <dt class="col-6 col-sm-3">社團編號</dt>
+                            <dd class="col-6 col-sm-9">{{ $club->number }}</dd>
 
-                            <dt class="col-4 col-sm-3">社團類型</dt>
-                            <dd class="col-8 col-sm-9">
+                            <dt class="col-6 col-sm-3">社團類型</dt>
+                            <dd class="col-6 col-sm-9">
                                 @if($club->clubType)
                                     {!! $club->clubType->tag !!}
                                 @else
@@ -48,8 +48,8 @@
                                 @endif
                             </dd>
 
-                            <dt class="col-4 col-sm-3">可否集點</dt>
-                            <dd class="col-8 col-sm-9">
+                            <dt class="col-6 col-sm-3">可否集點</dt>
+                            <dd class="col-6 col-sm-9">
                                 @if($club->is_counted)
                                     <span class="text-success">
                                         <i class="fa fa-check-square-o" aria-hidden="true"></i> 列入集點
@@ -64,15 +64,17 @@
                             <dt class="col-sm-3">網站</dt>
                             <dd class="col-sm-9">
                                 @if($club->url)
-                                    {{ link_to($club->url, $club->url, ['target' => '_blank']) }}
+                                    <p style="word-break: break-all;">
+                                        {{ link_to($club->url, $club->url, ['target' => '_blank']) }}
+                                    </p>
                                 @else
                                     <span class="text-muted">（無）</span>
                                 @endif
                             </dd>
 
                             @if(\Laratrust::can('club.manage') || (isset(Auth::user()->club) && Auth::user()->club->id == $club->id))
-                                <dt class="col-4 col-sm-3">負責人</dt>
-                                <dd class="col-8 col-sm-9">
+                                <dt class="col-6 col-sm-3">負責人</dt>
+                                <dd class="col-6 col-sm-9">
                                     @forelse($club->users as $user)
                                         @if(Laratrust::can('user.manage'))
                                             {{ link_to_route('user.show', $user->name, $user) }}
