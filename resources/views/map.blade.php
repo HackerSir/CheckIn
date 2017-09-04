@@ -104,7 +104,7 @@
              * @param latitude 經度
              */
             function genRectangle(map, longitude, latitude, fillColor) {
-                var radius = 0.00002;
+                var radius = 0.000017;
                 return new google.maps.Rectangle({
                     strokeColor: fillColor,
                     strokeOpacity: 0.8,
