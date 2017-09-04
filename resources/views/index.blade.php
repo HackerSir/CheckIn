@@ -25,7 +25,7 @@
 @section('content')
     @if(auth()->user() && !auth()->user()->is_local_account && !auth()->user()->student)
         <div class="alert alert-warning mt-3" role="alert">
-            <strong>抱歉！</strong>雖然您已使用NID順利登入，但由於您並非本學期大學部在校生，因此無法參與集點活動。
+            <strong>抱歉！</strong>雖然您已使用NID順利登入，但由於您並非本學期在校生，因此無法參與集點活動。
         </div>
     @endif
     <div class="jumbotron mt-3">
