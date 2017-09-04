@@ -76,23 +76,25 @@
                     // ...
                 });
 
-                boothData.forEach(function(booth) {
+                var infoWindow = new google.maps.InfoWindow();
+                boothData.forEach(function (booth) {
                     var mapLabel = new MapLabel({
                         text: booth['name'],
                         position: new google.maps.LatLng(booth['latitude'], booth['longitude']),
                         map: map,
-                        fontSize: 15,
                         align: 'center',
                         strokeWeight: 0,
                     });
 
                     var rectangle = genRectangle(map, booth['latitude'], booth['longitude'], booth['fillColor']);
 
-                    if (booth['url'] !== 'javascript:void(0);') {
-                        rectangle.addListener('click', function () {
-                            window.open(booth['url'], '_blank');
-                        });
-                    }
+                    rectangle.addListener('click', (function (infoWindow) {
+                        return function () {
+                            infoWindow.setContent(booth['club_name'] + '<br>' + '<a href="' + booth['url'] + '" target="_blank">了解更多...</a>');
+                            infoWindow.setPosition({lat: booth['latitude'], lng:  booth['longitude']});
+                            infoWindow.open(map);
+                        };
+                    })(infoWindow));
                 });
             }
 
