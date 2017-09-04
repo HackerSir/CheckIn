@@ -18,7 +18,9 @@
                         <dt class="col-sm-3">社團</dt>
                         <dd class="col-sm-9">
                             @if($booth->club)
-                                {{ link_to_route('club.show', $booth->club->name, $booth->club) }}
+                                <a href="{{ route('club.show', $booth->club) }}">
+                                    {!! $booth->club->display_name !!}
+                                </a>
                             @endif
                         </dd>
 
