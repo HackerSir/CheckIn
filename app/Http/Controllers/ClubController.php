@@ -266,7 +266,6 @@ class ClubController extends Controller
                             'email' => $email,
                         ], [
                             'name'        => $student->name,
-                            'email'       => $email,
                             'password'    => '',
                             'confirm_at'  => Carbon::now(),
                             'register_at' => Carbon::now(),
