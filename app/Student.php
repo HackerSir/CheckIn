@@ -156,6 +156,10 @@ class Student extends Model
      */
     public function getIsFreshmanAttribute()
     {
+        //研究所不算新生
+        if (starts_with($this->nid, 'M')) {
+            return false;
+        }
         //檢查入學年度
         if ($this->in_year == 106) {
             return true;
