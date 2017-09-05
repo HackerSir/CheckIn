@@ -10,6 +10,7 @@
     <meta property="og:url" content="{{ URL::current() }}">
     <meta property="og:image" content="{{ asset('img/hacker.png') }}">
     <meta property="og:description" content="2017 逢甲社團博覽會集點打卡">
+    <meta property="og:type" content="website">
 
     <link rel="icon" type="image/svg+xml" href="{{ asset('favicon.svg') }}">
     <link rel="icon" type="image/ico" href="{{ asset('favicon.ico') }}">
