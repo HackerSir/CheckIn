@@ -32,8 +32,13 @@
         </div>
         @if ($type == 'static')
             <div class="mt-2">
-                <a href="https://i.imgur.com/ApFAAK9.jpg" target="_blank">
-                    <img src="https://i.imgur.com/ApFAAK9.jpg" class="img-fluid" style="width: 100%">
+                <a href="https://i.imgur.com/PHKhyiI.jpg" target="_blank">
+                    <img src="https://i.imgur.com/PHKhyiI.jpg" class="img-fluid" style="width: 100%">
+                </a>
+            </div>
+            <div class="mt-2">
+                <a href="https://i.imgur.com/cNFhz8K.jpg" target="_blank">
+                    <img src="https://i.imgur.com/cNFhz8K.jpg" class="img-fluid" style="width: 100%">
                 </a>
             </div>
         @endif
