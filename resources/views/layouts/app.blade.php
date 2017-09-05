@@ -9,7 +9,7 @@
     <meta property="og:title" content="@yield('title')::{{ config('app.name') }}">
     <meta property="og:url" content="{{ URL::current() }}">
     <meta property="og:image" content="{{ asset('img/hacker.png') }}">
-    <meta property="og:description" content="{{ config('app.name') }}">
+    <meta property="og:description" content="2017 逢甲社團博覽會集點打卡">
 
     <link rel="icon" type="image/svg+xml" href="{{ asset('favicon.svg') }}">
     <link rel="icon" type="image/ico" href="{{ asset('favicon.ico') }}">
