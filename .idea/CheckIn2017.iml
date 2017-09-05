@@ -76,6 +76,7 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/ramsey/uuid" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/recca0120/laravel-tracy" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/recca0120/terminal" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/roumen/sitemap" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/santigarcor/laratrust" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/sebastian/code-unit-reverse-lookup" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/sebastian/comparator" />
@@ -197,6 +198,7 @@
           <root url="file://$MODULE_DIR$/vendor/ramsey/uuid" />
           <root url="file://$MODULE_DIR$/vendor/recca0120/laravel-tracy" />
           <root url="file://$MODULE_DIR$/vendor/recca0120/terminal" />
+          <root url="file://$MODULE_DIR$/vendor/roumen/sitemap" />
           <root url="file://$MODULE_DIR$/vendor/santigarcor/laratrust" />
           <root url="file://$MODULE_DIR$/vendor/sebastian/code-unit-reverse-lookup" />
           <root url="file://$MODULE_DIR$/vendor/sebastian/comparator" />
@@ -314,6 +316,7 @@
           <root url="file://$MODULE_DIR$/vendor/ramsey/uuid" />
           <root url="file://$MODULE_DIR$/vendor/recca0120/laravel-tracy" />
           <root url="file://$MODULE_DIR$/vendor/recca0120/terminal" />
+          <root url="file://$MODULE_DIR$/vendor/roumen/sitemap" />
           <root url="file://$MODULE_DIR$/vendor/santigarcor/laratrust" />
           <root url="file://$MODULE_DIR$/vendor/sebastian/code-unit-reverse-lookup" />
           <root url="file://$MODULE_DIR$/vendor/sebastian/comparator" />
@@ -361,5 +364,15 @@
       </library>
     </orderEntry>
     <orderEntry type="library" name="holder" level="application" />
+    <orderEntry type="module-library">
+      <library name="PHARS">
+        <CLASSES>
+          <root url="phar://$MODULE_DIR$/vendor/phpunit/phpunit/tests/_files/phpunit-example-extension/tools/phpunit.d/phpunit-example-extension-1.0.0.phar/" />
+        </CLASSES>
+        <SOURCES>
+          <root url="phar://$MODULE_DIR$/vendor/phpunit/phpunit/tests/_files/phpunit-example-extension/tools/phpunit.d/phpunit-example-extension-1.0.0.phar/" />
+        </SOURCES>
+      </library>
+    </orderEntry>
   </component>
 </module>

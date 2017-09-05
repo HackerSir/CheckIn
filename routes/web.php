@@ -11,6 +11,9 @@
 |
 */
 
+//Sitemap
+Route::get('sitemap.xml', 'SitemapController@sitemap')->name('sitemap');
+
 //首頁
 Route::get('/', 'HomeController@index')->name('index');
 

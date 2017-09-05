@@ -199,6 +199,7 @@ return [
         Redeman\Imgur\ImgurServiceProvider::class,
         BackupManager\Laravel\Laravel5ServiceProvider::class,
         TomLingham\Searchy\SearchyServiceProvider::class,
+        Roumen\Sitemap\SitemapServiceProvider::class,
 
         /*
          * Application Service Providers...

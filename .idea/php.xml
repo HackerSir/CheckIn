@@ -120,6 +120,7 @@
       <path value="$PROJECT_DIR$/vendor/backup-manager/backup-manager" />
       <path value="$PROJECT_DIR$/vendor/backup-manager/laravel" />
       <path value="$PROJECT_DIR$/vendor/tom-lingham/searchy" />
+      <path value="$PROJECT_DIR$/vendor/roumen/sitemap" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="7" />
