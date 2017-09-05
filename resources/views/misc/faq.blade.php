@@ -9,7 +9,7 @@
         <div class="card">
             <div class="card-block">
                 <h3>如何進行集點？</h3>
-                <p>在本站登入NID後，即可於首頁看到自己專屬的QR Code，持手機至各攤位出示QR Code，攤位人員將會為您掃描進行打卡集點動作。</p>
+                <p>使用NID在本站登入後，即可於首頁看到自己專屬的QR Code，持手機至各攤位出示QR Code，攤位人員將會為您掃描進行打卡集點動作。</p>
             </div>
             <div class="card-block">
                 <h3>沒有智慧型手機或沒有網路，該如何集點？</h3>
