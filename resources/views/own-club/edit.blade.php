@@ -81,6 +81,10 @@
                                     <strong>{{ $errors->first('image_file') }}</strong>
                                 </span>
                             @endif
+                            <small class="form-text text-muted">
+                                檔案大小限制：
+                                {{ app(\App\Services\FileService::class)->imgurUploadMaxSize() }}
+                            </small>
                         </div>
                     </div>
 

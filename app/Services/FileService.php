@@ -79,4 +79,61 @@ class FileService extends Service
 
         return $spreadsheet;
     }
+
+    public function imgurUploadMaxSize()
+    {
+        $maxBytes = min($this->fileUploadMaxBytes(), $this->parseSize('20MB'));
+
+        return $this->formatBytes($maxBytes);
+    }
+
+    public function fileUploadMaxSize()
+    {
+        return $this->formatBytes($this->fileUploadMaxBytes());
+    }
+
+    public function fileUploadMaxBytes()
+    {
+        static $max_size = -1;
+
+        if ($max_size < 0) {
+            // Start with post_max_size.
+            $max_size = $this->parseSize(ini_get('post_max_size'));
+
+            // If upload_max_size is less, then reduce. Except if upload_max_size is
+            // zero, which indicates no limit.
+            $upload_max = $this->parseSize(ini_get('upload_max_filesize'));
+            if ($upload_max > 0 && $upload_max < $max_size) {
+                $max_size = $upload_max;
+            }
+        }
+
+        return $max_size;
+    }
+
+    public function parseSize($size)
+    {
+        $unit = preg_replace('/[^bkmgtpezy]/i', '', $size); // Remove the non-unit characters from the size.
+        $size = preg_replace('/[^0-9\.]/', '', $size); // Remove the non-numeric characters from the size.
+        if ($unit) {
+            return round($size * pow(1024, stripos('bkmgtpezy', $unit[0])));
+        } else {
+            return round($size);
+        }
+    }
+
+    public function formatBytes($bytes, $precision = 2)
+    {
+        $units = ['B', 'KB', 'MB', 'GB', 'TB'];
+
+        $bytes = max($bytes, 0);
+        $pow = floor(($bytes ? log($bytes) : 0) / log(1024));
+        $pow = min($pow, count($units) - 1);
+
+        // Uncomment one of the following alternatives
+        // $bytes /= (1 << (10 * $pow));
+        $bytes /= pow(1024, $pow);
+
+        return round($bytes, $precision) . ' ' . $units[$pow];
+    }
 }
