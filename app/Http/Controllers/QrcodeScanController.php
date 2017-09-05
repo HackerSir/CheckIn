@@ -39,7 +39,7 @@ class QrcodeScanController extends Controller
 
         //檢查QR Code是否已經被學生綁定
         if (!$qrcode->student) {
-            return view('qrcode-scan.scan')->with('level', 'danger')->with('message', 'QR Code 尚未綁定，請聯絡課外活動組');
+            return view('qrcode-scan.scan')->with('level', 'danger')->with('message', 'QR Code 尚未綁定，請聯絡服務台');
         }
 
         //檢查是否屬於活動時間
