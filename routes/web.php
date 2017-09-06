@@ -199,7 +199,6 @@ Route::group(['middleware' => ['auth', 'email']], function () {
         Route::get('stats', 'StatsController@index')->name('stats.index');
     });
 
-
     //自己的社團
     Route::group(['prefix' => 'own-club'], function () {
         Route::get('/', 'OwnClubController@show')->name('own-club.show');
