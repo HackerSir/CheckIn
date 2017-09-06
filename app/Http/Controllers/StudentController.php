@@ -6,6 +6,8 @@ use App\DataTables\StudentsDataTable;
 use App\Services\FcuApiService;
 use App\Services\LogService;
 use App\Student;
+use App\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class StudentController extends Controller
@@ -81,6 +83,22 @@ class StudentController extends Controller
             'in_year'   => $stuInfo['in_year'],
             'gender'    => $stuInfo['stu_sex'],
         ]);
+
+        //使用者
+        if (!$student->user) {
+            $email = $stuInfo['stu_id'] . '@fcu.edu.tw';
+            /** @var User $user */
+            $user = User::query()->updateOrCreate([
+                'email' => $email,
+            ], [
+                'name'        => $student->name,
+                'password'    => '',
+                'confirm_at'  => Carbon::now(),
+                'register_at' => Carbon::now(),
+                'register_ip' => \Request::getClientIp(),
+            ]);
+            $user->student()->save($student);
+        }
 
         //Log
         $operator = auth()->user();
