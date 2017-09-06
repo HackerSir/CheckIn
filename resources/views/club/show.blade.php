@@ -90,6 +90,9 @@
 
                             <dt class="col-sm-3">回饋資料</dt>
                             <dd class="col-sm-9">
+                                <small class="form-text text-muted">
+                                    若對此社團感興趣，歡迎填寫回饋資料
+                                </small>
                                 @if(!Auth::check())
                                     <a href="javascript:void(0)" class="btn btn-primary btn-lg disabled">
                                         <i class="fa fa-times" aria-hidden="true"></i> 登入後即可填寫
@@ -113,7 +116,8 @@
                                     $feedbackCreateExpiredAt = new \Carbon\Carbon(Setting::get('feedback_create_expired_at'));
                                 @endphp
                                 <small class="form-text text-muted">
-                                    填寫截止時間：{{ $feedbackCreateExpiredAt }}（{{ $feedbackCreateExpiredAt->diffForHumans() }}）
+                                    填寫截止時間：
+                                    {{ $feedbackCreateExpiredAt }}（{{ $feedbackCreateExpiredAt->diffForHumans() }}）
                                 </small>
                             </dd>
                         </dl>
