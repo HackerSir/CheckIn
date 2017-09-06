@@ -3,6 +3,7 @@
 namespace App\CustomFacades\Classes;
 
 use App\ApiKey;
+use Log;
 
 class GoogleApi
 {
@@ -13,10 +14,13 @@ class GoogleApi
      */
     public function getKey()
     {
-        //取得目前使用最少次的ApiKey
+        // 取得目前使用最少次的ApiKey
+        // 24000 是免費上限 25000 - 1000
+        // https://developers.google.com/maps/documentation/javascript/usage?hl=zh-tw
         /** @var ApiKey $apiKey */
-        $apiKey = ApiKey::query()->orderBy('count')->first();
+        $apiKey = ApiKey::query()->where('count', '<', 24000)->orderBy('count')->first();
         if (!$apiKey) {
+            Log::error('No Google api key can be used.');
             return 'No ApiKey exists';
         }
         //更新使用次數
