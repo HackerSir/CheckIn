@@ -43,7 +43,7 @@ class HomeController extends Controller
 
         $boothData = [];
         if ($type == 'google') {
-            $booths = Booth::with(['club'])->get();
+            $booths = Booth::with('club.clubType')->get();
             /** @var Booth $booth */
             foreach ($booths as $booth) {
                 $boothData[] = [
