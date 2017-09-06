@@ -22,6 +22,7 @@ class CreateQrcodeSetManagePermission extends Migration
         /* @var Role $admin */
         $admin = Role::where('name', 'Admin')->first();
         $admin->attachPermission($permQrcodeManage);
+        /* @var Role $eas */
         $eas = Role::where('name', 'EAS')->first();
         $eas->attachPermission($permQrcodeManage);
     }
