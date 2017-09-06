@@ -12,7 +12,7 @@
                     <p style="font-size: 120%">{{ number_format($count['total']) }}</p>
                 </div>
                 <div class="card-block">
-                    <h3>參與人數</h3>
+                    <h3>參與人數（打卡至少一次）</h3>
                     <dl class="row" style="font-size: 120%">
                         <dt class="col-4 col-md-2">新生</dt>
                         <dd class="col-8 col-md-10">{{ number_format($count['play']['freshman']) }}</dd>
