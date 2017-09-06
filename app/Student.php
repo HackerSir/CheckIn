@@ -29,6 +29,8 @@ use Illuminate\Database\Query\Builder;
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Record[] $records
  * @property-read \App\Ticket $ticket
  * @property-read \App\User|null $user
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Student freshman()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Student nonFreshman()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Student whereClass($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Student whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Student whereDeptName($value)
@@ -156,8 +158,8 @@ class Student extends Model
      */
     public function getIsFreshmanAttribute()
     {
-        //研究所不算新生
-        if (starts_with($this->nid, 'M')) {
+        //研究所與教職員不算新生
+        if (starts_with($this->nid, 'M') || starts_with($this->nid, 'T')) {
             return false;
         }
         //檢查入學年度
@@ -170,5 +172,33 @@ class Student extends Model
         }
 
         return false;
+    }
+
+    /**
+     * @param Builder|static $query
+     */
+    public function scopeFreshman($query)
+    {
+        $query->where('nid', 'not like', 'M%')
+            ->where('nid', 'not like', 'T%')
+            ->where(function ($query) {
+                /** @var Builder|static $query */
+                $query->where('in_year', 106)
+                    ->orWhere('class', 'like', '%一年級%');
+            });
+    }
+
+    /**
+     * @param Builder|static $query
+     */
+    public function scopeNonFreshman($query)
+    {
+        $query->where('nid', 'like', 'M%')
+            ->orWhere('nid', 'like', 'T%')
+            ->orWhere(function ($query) {
+                /** @var Builder|static $query */
+                $query->where('in_year', '<>', 106)
+                    ->where('class', 'not like', '%一年級%');
+            });
     }
 }
