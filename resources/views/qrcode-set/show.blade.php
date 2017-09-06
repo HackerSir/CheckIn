@@ -10,20 +10,16 @@
         <h1>{{ $qrcodeSet->id }} - QR Code 集</h1>
         <div class="card">
             <div class="card-block">
-                <table class="table table-hover">
-                    <tr>
-                        <td class="text-md-right">編號：</td>
-                        <td>{{ $qrcodeSet->id }}</td>
-                    </tr>
-                    <tr>
-                        <td class="text-md-right">數量：</td>
-                        <td>{{ $qrcodeSet->qrcodes()->count() }}</td>
-                    </tr>
-                    <tr>
-                        <td class="text-md-right">建立時間：</td>
-                        <td>{{ $qrcodeSet->created_at }}</td>
-                    </tr>
-                </table>
+                <dl class="row" style="font-size: 120%">
+                    <dt class="col-4 col-md-3">編號</dt>
+                    <dd class="col-8 col-md-9">{{ $qrcodeSet->id }}</dd>
+
+                    <dt class="col-4 col-md-3">數量</dt>
+                    <dd class="col-8 col-md-9">{{ $qrcodeSet->qrcodes()->count() }}</dd>
+
+                    <dt class="col-4 col-md-3">建立時間</dt>
+                    <dd class="col-8 col-md-9">{{ $qrcodeSet->created_at }}</dd>
+                </dl>
             </div>
             <div class="card-block text-center">
                 {{ Form::open(['route' => ['qrcode-set.download', $qrcodeSet]]) }}
