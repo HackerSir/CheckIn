@@ -59,11 +59,18 @@ class FeedbackController extends Controller
         if (!$user->student) {
             return back()->with('warning', '此功能限學生帳號使用');
         }
+
         //檢查是否填寫過回饋給該社團
         $feedback = Feedback::whereClubId($club->id)->whereStudentId($user->student->id)->first();
         if ($feedback) {
             return redirect()->route('feedback.show', $feedback)
                 ->with('warning', '已填寫過給該社團的回饋資料');
+        }
+
+        //檢查填寫期限
+        $feedbackCreateExpiredAt = new Carbon(Setting::get('feedback_create_expired_at'));
+        if (Carbon::now()->gt($feedbackCreateExpiredAt)) {
+            return back()->with('warning', '回饋資料填寫已截止');
         }
 
         $lastFeedback = $user->student->feedback()->orderBy('created_at', 'desc')->first();
