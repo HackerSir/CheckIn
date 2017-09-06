@@ -95,8 +95,9 @@
 
                     rectangle.addListener('click', (function (infoWindow) {
                         return function () {
-                            infoWindow.setContent(booth['club_name'] + '<br>' + '<a href="' + booth['url'] + '" target="_blank">了解更多...</a>');
-                            infoWindow.setPosition({lat: booth['latitude'], lng:  booth['longitude']});
+                            var linkText = booth['url'] ? '<br/>' + '<a href="' + booth['url'] + '" target="_blank">了解更多...</a>' : '';
+                            infoWindow.setContent(booth['club_name'] + linkText);
+                            infoWindow.setPosition({lat: booth['latitude'], lng: booth['longitude']});
                             infoWindow.open(map);
                         };
                     })(infoWindow));

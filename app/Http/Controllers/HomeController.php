@@ -50,11 +50,9 @@ class HomeController extends Controller
                     'name'      => $booth->name,
                     'longitude' => $booth->longitude,
                     'latitude'  => $booth->latitude,
-                    'club_name' => $booth->club->name ?? null,
+                    'club_name' => $booth->club->name ?? '（空攤位）',
                     'fillColor' => $booth->club->clubType->color ?? '#00DD00',
-                    'url'       => is_null($booth->club)
-                        ? 'javascript:void(0);'
-                        : route('clubs.show', $booth->club->id),
+                    'url'       => is_null($booth->club) ? null : route('clubs.show', $booth->club->id),
                 ];
             }
         }
