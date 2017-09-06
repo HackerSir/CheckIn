@@ -21,6 +21,7 @@ class GoogleApi
         $apiKey = ApiKey::query()->where('count', '<', 24000)->orderBy('count')->first();
         if (!$apiKey) {
             Log::error('No Google api key can be used.');
+
             return 'No ApiKey exists';
         }
         //更新使用次數
