@@ -61,7 +61,7 @@
                                 @endif
                             </dd>
 
-                            <dt class="col-sm-3">網站</dt>
+                            <dt class="col-sm-3">網址</dt>
                             <dd class="col-sm-9">
                                 @if($club->url)
                                     <p style="word-break: break-all;">
