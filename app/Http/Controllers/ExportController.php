@@ -7,10 +7,12 @@ use App\Feedback;
 use App\Record;
 use App\Student;
 use App\User;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Worksheet;
+use Setting;
 
 class ExportController extends Controller
 {
@@ -142,6 +144,11 @@ class ExportController extends Controller
             /** @var User $user */
             $user = auth()->user();
             if ($user->club) {
+                //檢查檢視與下載期限
+                $feedbackDownloadExpiredAt = new \Carbon\Carbon(Setting::get('feedback_download_expired_at'));
+                if (Carbon::now()->gt($feedbackDownloadExpiredAt)) {
+                    return back()->with('warning', '已超過檢視期限，若需查看資料，請聯繫各委會輔導老師');
+                }
                 //攤位負責人看到自己社團的
                 $feedbackQuery->where('club_id', $user->club->id);
             } else {

@@ -8,7 +8,9 @@ use App\DataTables\Scopes\FeedbackFilterScope;
 use App\Feedback;
 use App\Record;
 use App\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Setting;
 
 class FeedbackController extends Controller
 {
@@ -26,6 +28,11 @@ class FeedbackController extends Controller
             /** @var User $user */
             $user = auth()->user();
             if ($user->club || $user->student) {
+                //檢查檢視與下載期限
+                $feedbackDownloadExpiredAt = new \Carbon\Carbon(Setting::get('feedback_download_expired_at'));
+                if (Carbon::now()->gt($feedbackDownloadExpiredAt)) {
+                    return back()->with('warning', '已超過檢視期限，若需查看資料，請聯繫各委會輔導老師');
+                }
                 //攤位負責人看到自己社團的
                 //學生看自己填過的
                 $dataTable->addScope(new FeedbackFilterScope($user->club, $user->student));
@@ -79,11 +86,18 @@ class FeedbackController extends Controller
         if (!$user->student) {
             return back()->with('warning', '此功能限學生帳號使用');
         }
+
         //檢查是否填寫過回饋給該社團
         $existFeedback = Feedback::whereClubId($club->id)->whereStudentId($user->student->id)->first();
         if ($existFeedback) {
             return redirect()->route('feedback.show', $existFeedback)
                 ->with('warning', '已填寫過給該社團的回饋資料');
+        }
+
+        //檢查填寫期限
+        $feedbackCreateExpiredAt = new Carbon(Setting::get('feedback_create_expired_at'));
+        if (Carbon::now()->gt($feedbackCreateExpiredAt)) {
+            return back()->with('warning', '回饋資料填寫已截止');
         }
 
         $this->validate($request, [
@@ -121,6 +135,11 @@ class FeedbackController extends Controller
             if (($user->club_id != $feedback->club_id)
                 && (!$user->student || $user->student->id != $feedback->student_id)) {
                 abort(403);
+            }
+            //檢查檢視與下載期限
+            $feedbackDownloadExpiredAt = new \Carbon\Carbon(Setting::get('feedback_download_expired_at'));
+            if (Carbon::now()->gt($feedbackDownloadExpiredAt)) {
+                return back()->with('warning', '已超過檢視期限，若需查看資料，請聯繫各委會輔導老師');
             }
         }
         //打卡紀錄

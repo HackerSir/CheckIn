@@ -109,6 +109,12 @@
                                         <i class="fa fa-times" aria-hidden="true"></i> 限學生帳號使用
                                     </a>
                                 @endif
+                                @php
+                                    $feedbackCreateExpiredAt = new \Carbon\Carbon(Setting::get('feedback_create_expired_at'));
+                                @endphp
+                                <small class="form-text text-muted">
+                                    填寫截止時間：{{ $feedbackCreateExpiredAt }}（{{ $feedbackCreateExpiredAt->diffForHumans() }}）
+                                </small>
                             </dd>
                         </dl>
                     </div>

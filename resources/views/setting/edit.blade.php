@@ -51,6 +51,34 @@
                         </div>
                     </div>
 
+                    <div class="form-group row{{ $errors->has('feedback_create_expired_at') ? ' has-danger' : '' }}">
+                        <label for="feedback_create_expired_at" class="col-md-3 col-form-label">回饋資料填寫期限</label>
+
+                        <div class="col-md-9">
+                            {{ Form::text('feedback_create_expired_at', Setting::get('feedback_create_expired_at'), ['class' => 'form-control', 'required']) }}
+
+                            @if ($errors->has('feedback_create_expired_at'))
+                                <span class="form-control-feedback">
+                                    <strong>{{ $errors->first('feedback_create_expired_at') }}</strong>
+                                </span>
+                            @endif
+                        </div>
+                    </div>
+
+                    <div class="form-group row{{ $errors->has('feedback_download_expired_at') ? ' has-danger' : '' }}">
+                        <label for="feedback_download_expired_at" class="col-md-3 col-form-label">回饋資料檢視與下載期限</label>
+
+                        <div class="col-md-9">
+                            {{ Form::text('feedback_download_expired_at', Setting::get('feedback_download_expired_at'), ['class' => 'form-control', 'required']) }}
+
+                            @if ($errors->has('feedback_download_expired_at'))
+                                <span class="form-control-feedback">
+                                    <strong>{{ $errors->first('feedback_download_expired_at') }}</strong>
+                                </span>
+                            @endif
+                        </div>
+                    </div>
+
                     <div class="form-group row">
                         <div class="col-md-9 offset-md-3">
                             <button type="submit" class="btn btn-primary">
@@ -70,6 +98,8 @@
         $(function () {
             $('input[name=start_at]').datetimepicker();
             $('input[name=end_at]').datetimepicker();
+            $('input[name=feedback_create_expired_at]').datetimepicker();
+            $('input[name=feedback_download_expired_at]').datetimepicker();
         });
     </script>
 @endsection
