@@ -34,7 +34,7 @@
         <a href="{{ route('oauth.index') }}" class="btn btn-primary btn-lg" title="Let's GO!!">GO!</a>
     </div>
     <div class="row mt-3 pb-3">
-        <div class="col">
+        <div class="col-md-4">
             <div class="card text-center">
                 <div class="card-block">
                     <i class="fa fa-qrcode fa-10x mb-1" aria-hidden="true"></i>
@@ -43,7 +43,7 @@
                 </div>
             </div>
         </div>
-        <div class="col">
+        <div class="col-md-4">
             <div class="card text-center">
                 <div class="card-block">
                     <i class="fa fa-th-large fa-10x mb-1" aria-hidden="true"></i>
@@ -52,7 +52,7 @@
                 </div>
             </div>
         </div>
-        <div class="col">
+        <div class="col-md-4">
             <div class="card text-center">
                 <div class="card-block">
                     <i class="fa fa-users fa-10x mb-1" aria-hidden="true"></i>
