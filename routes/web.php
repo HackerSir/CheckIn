@@ -193,6 +193,13 @@ Route::group(['middleware' => ['auth', 'email']], function () {
         ],
     ]);
 
+    //統計
+    //權限：stats.access
+    Route::group(['middleware' => 'permission:stats.access'], function () {
+        Route::get('stats', 'StatsController@index')->name('stats.index');
+    });
+
+
     //自己的社團
     Route::group(['prefix' => 'own-club'], function () {
         Route::get('/', 'OwnClubController@show')->name('own-club.show');

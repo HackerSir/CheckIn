@@ -56,6 +56,10 @@ class LaravelMenu
                             $activityMenu->add('QR Code', ['route' => 'qrcode.index'])->active('qrcode/*');
                         }
 
+                        if (Laratrust::can('stats.access')) {
+                            $activityMenu->add('統計', ['route' => 'stats.index'])->active('stats/*');
+                        }
+
                         $this->addDivider($activityMenu);
 
                         if (Laratrust::can('booth.manage')) {
