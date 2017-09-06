@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use App\ApiKey;
 use Illuminate\Console\Command;
+use Log;
 
 class ResetApiKeyCount extends Command
 {
@@ -36,5 +37,7 @@ class ResetApiKeyCount extends Command
     {
         ApiKey::query()->update(['count' => 0]);
         $this->info('Counts of all ApiKey have been reset.');
+
+        Log::debug('Counts of all ApiKey have been reset.');
     }
 }
