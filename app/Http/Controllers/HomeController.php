@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Booth;
 use App\Club;
 use App\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Setting;
 
 class HomeController extends Controller
 {
@@ -17,7 +19,10 @@ class HomeController extends Controller
             $student = $user->student;
             $student->load('records.club.clubType', 'qrcodes.student');
 
-            return view('dashboard', compact('student'));
+            $startAt = new Carbon(Setting::get('start_at'));
+            $endAt = new Carbon(Setting::get('end_at'));
+
+            return view('dashboard', compact('student', 'startAt', 'endAt'));
         }
 
         return view('index');

@@ -26,6 +26,7 @@
                                 請嘗試重新登入，讓系統產生新的 QR Code
                             </div>
                         @endif
+                        <p class="mt-1">集點時間：<span>{{ $startAt }}</span> ~ <span>{{ $endAt }}</span></p>
                     </div>
 
                     <hr/>
