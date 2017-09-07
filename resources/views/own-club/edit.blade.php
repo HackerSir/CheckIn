@@ -91,7 +91,7 @@
                     <div class="form-group row">
                         <div class="col-md-10 offset-md-2">
                             <button type="submit" class="btn btn-primary"> 確認</button>
-                            <a href="{{ route('own-club.show') }}" class="btn btn-secondary">返回</a>
+                            <a href="{{ route('clubs.show', $club) }}" class="btn btn-secondary">返回</a>
                         </div>
                     </div>
                     {{ Form::close() }}

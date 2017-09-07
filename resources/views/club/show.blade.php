@@ -9,6 +9,9 @@
 @section('content')
     <div class="mt-3 pb-3">
         <div class="mb-2">
+            <a href="{{ route('clubs.index') }}" class="btn btn-secondary">
+                <i class="fa fa-arrow-left" aria-hidden="true"></i> 社團攤位
+            </a>
             @if(\Laratrust::can('club.manage'))
                 <a href="{{ route('club.index') }}" class="btn btn-secondary">
                     <i class="fa fa-arrow-left" aria-hidden="true"></i> 社團管理

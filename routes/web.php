@@ -201,7 +201,6 @@ Route::group(['middleware' => ['auth', 'email']], function () {
 
     //自己的社團
     Route::group(['prefix' => 'own-club'], function () {
-        Route::get('/', 'OwnClubController@show')->name('own-club.show');
         Route::get('edit', 'OwnClubController@edit')->name('own-club.edit');
         Route::patch('update', 'OwnClubController@update')->name('own-club.update');
     });

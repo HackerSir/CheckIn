@@ -9,18 +9,6 @@ use Illuminate\Http\Request;
 class OwnClubController extends Controller
 {
     /**
-     * Display the specified resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function show()
-    {
-        $club = $this->getOwnClub();
-
-        return view('club.show', compact('club'));
-    }
-
-    /**
      * Show the form for editing the specified resource.
      *
      * @return \Illuminate\Http\Response
@@ -63,7 +51,7 @@ class OwnClubController extends Controller
             $club->imgurImage()->save($imgurImage);
         }
 
-        return redirect()->route('own-club.show')->with('global', '社團已更新');
+        return redirect()->route('clubs.show', $club)->with('global', '社團已更新');
     }
 
     /**

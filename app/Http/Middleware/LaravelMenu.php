@@ -38,7 +38,7 @@ class LaravelMenu
                 } else {
                     //負責的社團
                     if ($user->club) {
-                        $menu->add($user->club->name, ['route' => 'own-club.show'])->active('own-club/*');
+                        $menu->add($user->club->name, ['route' => ['clubs.show', $user->club]]);
                     }
                     if ($user->student || $user->club) {
                         $menu->add('回饋資料', ['route' => 'feedback.index'])->active('feedback/*');
