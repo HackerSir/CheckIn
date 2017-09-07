@@ -41,7 +41,7 @@
                     <div class="form-group row{{ $errors->has('nid') ? ' has-danger' : '' }}">
                         <label for="nid" class="col-md-2 col-form-label">學號</label>
                         <div class="col-md-10">
-                            {{ Form::text('nid', null, ['class' => 'form-control', 'placeholder' => '如：M0402935']) }}
+                            {{ Form::text('nid', null, ['class' => 'form-control', 'placeholder' => '如：M0402935', 'required']) }}
                             @if ($errors->has('nid'))
                                 <span class="form-control-feedback">
                                     <strong>{{ $errors->first('nid') }}</strong>
@@ -53,7 +53,7 @@
                     <div class="form-group row{{ $errors->has('name') ? ' has-danger' : '' }}">
                         <label for="name" class="col-md-2 col-form-label">姓名</label>
                         <div class="col-md-10">
-                            {{ Form::text('name', null, ['class' => 'form-control', 'placeholder' => '如：許展源']) }}
+                            {{ Form::text('name', null, ['class' => 'form-control', 'placeholder' => '如：許展源', 'required']) }}
                             @if ($errors->has('name'))
                                 <span class="form-control-feedback">
                                     <strong>{{ $errors->first('name') }}</strong>
@@ -65,7 +65,7 @@
                     <div class="form-group row{{ $errors->has('class') ? ' has-danger' : '' }}">
                         <label for="class" class="col-md-2 col-form-label">系級</label>
                         <div class="col-md-10">
-                            {{ Form::text('class', null, ['class' => 'form-control', 'placeholder' => '如：資訊碩二']) }}
+                            {{ Form::text('class', null, ['class' => 'form-control', 'placeholder' => '如：資訊碩二', 'required']) }}
                             @if ($errors->has('class'))
                                 <span class="form-control-feedback">
                                     <strong>{{ $errors->first('class') }}</strong>
