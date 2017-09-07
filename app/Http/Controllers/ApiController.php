@@ -93,6 +93,8 @@ class ApiController extends Controller
         }
         $keyword = request()->get('keyword');
         if ($keyword) {
+            //消滅關鍵字中的特殊字元
+            $keyword = str_replace(["\\", "\x00", "\n", "\r", "'", '"', "\x1a"], '', $keyword);
             //模糊搜索
             $searchResultIds = Searchy::clubs(['name', 'description'])->query($keyword)->get()->pluck('id')->toArray();
             //過濾
