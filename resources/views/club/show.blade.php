@@ -3,7 +3,7 @@
 @section('title', $club->name)
 
 @if($club->imgurImage)
-    @section('og_image', $club->imgurImage->url)
+    @section('og_image', $club->imgurImage->thumbnail('l'))
 @endif
 
 @section('content')
