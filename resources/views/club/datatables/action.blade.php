@@ -1,4 +1,4 @@
-<a href="{{ route('club.show', $id) }}" class="btn btn-primary" title="社團資料">
+<a href="{{ route('clubs.show', $id) }}" class="btn btn-primary" title="社團資料">
     <i class="fa fa-search" aria-hidden="true"></i>
 </a>
 <a href="{{ route('club.edit', $id) }}" class="btn btn-primary" title="編輯社團">

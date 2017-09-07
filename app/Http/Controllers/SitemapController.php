@@ -36,7 +36,7 @@ class SitemapController extends Controller
             $images = null;
         }
         $sitemap->add(
-            route('club.show', $hackersir),
+            route('clubs.show', $hackersir),
             $hackersir->updated_at,
             0.9,
             'hourly',
@@ -55,7 +55,7 @@ class SitemapController extends Controller
                 $images = null;
             }
             $sitemap->add(
-                route('club.show', $club),
+                route('clubs.show', $club),
                 $club->updated_at,
                 0.5,
                 'hourly',

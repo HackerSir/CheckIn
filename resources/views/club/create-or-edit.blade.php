@@ -11,7 +11,7 @@
     <div class="mt-3 pb-3">
         <div class="col-md-8 offset-md-2">
             @if($isEditMode)
-                <a href="{{ route('club.show', $club) }}" class="btn btn-secondary">
+                <a href="{{ route('clubs.show', $club) }}" class="btn btn-secondary">
                     <i class="fa fa-arrow-left" aria-hidden="true"></i> 返回
                 </a>
             @else

@@ -66,13 +66,9 @@
                         @if($user->club)
                             <dt class="col-4 col-md-3">負責社團</dt>
                             <dd class="col-8 col-md-9">
-                                @if(Laratrust::can('club.manage'))
-                                    <a href="{{ route('club.show', $user->club) }}">
-                                        {!! $user->club->display_name !!}
-                                    </a>
-                                @else
+                                <a href="{{ route('clubs.show', $user->club) }}">
                                     {!! $user->club->display_name !!}
-                                @endif
+                                </a>
                             </dd>
                         @endif
                     </dl>

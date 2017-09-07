@@ -1,9 +1,5 @@
 @if($record->club)
-    @if(Laratrust::can('club.manage'))
-        <a href="{{ route('club.show', $record->club) }}">
-            {!! $record->club->display_name !!}
-        </a>
-    @else
+    <a href="{{ route('clubs.show', $record->club) }}">
         {!! $record->club->display_name !!}
-    @endif
+    </a>
 @endif

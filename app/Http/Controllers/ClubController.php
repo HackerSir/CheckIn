@@ -71,18 +71,7 @@ class ClubController extends Controller
         $attachUsers = User::whereDoesntHave('club')->whereIn('id', $attachUserIds)->get();
         $club->users()->saveMany($attachUsers);
 
-        return redirect()->route('club.show', $club)->with('global', '社團已新增');
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Club $club
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Club $club)
-    {
-        return view('club.show', compact('club'));
+        return redirect()->route('clubs.show', $club)->with('global', '社團已新增');
     }
 
     /**
@@ -146,7 +135,7 @@ class ClubController extends Controller
         $attachUsers = User::whereDoesntHave('club')->whereIn('id', $attachUserIds)->get();
         $club->users()->saveMany($attachUsers);
 
-        return redirect()->route('club.show', $club)->with('global', '社團已更新');
+        return redirect()->route('clubs.show', $club)->with('global', '社團已更新');
     }
 
     /**

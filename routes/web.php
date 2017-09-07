@@ -124,7 +124,11 @@ Route::group(['middleware' => ['auth', 'email']], function () {
         Route::post('club/import', 'ClubController@postImport')->name('club.import');
         Route::get('club/download-import-sample', 'ClubController@downloadImportSample')
             ->name('club.download-import-sample');
-        Route::resource('club', 'ClubController');
+        Route::resource('club', 'ClubController', [
+            'except' => [
+                'show',
+            ],
+        ]);
     });
     //網站設定
     //權限：setting.manage
