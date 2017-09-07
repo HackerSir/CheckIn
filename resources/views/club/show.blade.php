@@ -2,6 +2,10 @@
 
 @section('title', $club->name)
 
+@if($club->imgurImage)
+    @section('og_image', $club->imgurImage->url)
+@endif
+
 @section('content')
     <div class="mt-3 pb-3">
         <div class="mb-2">
