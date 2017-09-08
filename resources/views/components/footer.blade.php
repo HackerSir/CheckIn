@@ -1,6 +1,10 @@
 <footer class="footer bg-inverse">
     <div class="container" style="padding: 15px 10px">
-        <p class="text-muted" style="margin-bottom: 8px">©2017 HackerSir. All rights reserved.</p>
+        <p class="text-muted" style="margin-bottom: 8px">
+            ©2017
+            <a href="https://www.facebook.com/HackerSir.tw" target="_blank" style="color: #636c72;">HackerSir</a>.
+            All rights reserved.
+        </p>
         <ol class="breadcrumb" style="padding: 0; margin-bottom: 0; background-color: #292b2c;">
             <li class="breadcrumb-item" style="color: #636c72">
                 {!! link_to_route('faq', '常見問題', [], [
