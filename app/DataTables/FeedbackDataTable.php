@@ -77,7 +77,7 @@ class FeedbackDataTable extends DataTable
             ->minifiedAjax('')
             ->addAction(['title' => '操作'])
             ->parameters([
-                'order'      => [[0, 'asc']],
+                'order'      => [[0, 'desc']],
                 'pageLength' => 50,
             ]);
     }
