@@ -57,6 +57,11 @@
         .alertify-notifier.ajs-top {
             top: 60px;
         }
+
+        .code {
+            font-family: Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+            font-size: 120%;
+        }
     </style>
     @yield('css')
 </head>

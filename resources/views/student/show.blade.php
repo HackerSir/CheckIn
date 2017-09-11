@@ -108,9 +108,9 @@
                             <tr>
                                 <td>
                                     @if(Laratrust::can('qrcode.manage'))
-                                        {{ link_to_route('qrcode.show', $qrcode->code, $qrcode) }}
+                                        {{ link_to_route('qrcode.show', $qrcode->code, $qrcode, ['class' => 'code']) }}
                                     @else
-                                        {{ $qrcode->code }}
+                                        <span class="code">{{ $qrcode->code }}</span>
                                     @endif
                                     @if($qrcode->is_last_one)
                                         <i class="fa fa-check text-success" aria-hidden="true" title="最後一組"></i>

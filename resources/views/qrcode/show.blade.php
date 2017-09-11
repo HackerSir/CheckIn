@@ -18,7 +18,7 @@
                     <dl class="row" style="font-size: 120%">
                         <dt class="col-4 col-md-2">代號</dt>
                         <dd class="col-8 col-md-10">
-                            {{ $qrcode->code }}
+                            <span class="code">{{ $qrcode->code }}</span>
                             @if($qrcode->is_last_one)
                                 <i class="fa fa-check text-success" aria-hidden="true" title="最後一組"></i>
                             @endif

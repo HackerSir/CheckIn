@@ -18,6 +18,9 @@ class QrcodesDataTable extends DataTable
         return $this->datatables
             ->eloquent($this->query())
             ->addColumn('action', 'qrcode.datatables.action')
+            ->editColumn('code', function ($qrcode) {
+                return view('qrcode.datatables.code', compact('qrcode'))->render();
+            })
             ->editColumn('student_id', function ($qrcode) {
                 return view('qrcode.datatables.student', compact('qrcode'))->render();
             })
