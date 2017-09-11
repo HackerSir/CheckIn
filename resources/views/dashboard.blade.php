@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', $student->name . ' - 學生')
+@section('title', $student->name)
 
 @section('css')
     <style>
