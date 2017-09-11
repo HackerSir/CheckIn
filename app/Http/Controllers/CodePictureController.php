@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Qrcode;
 use DNS1D;
 use DNS2D;
 use File;
@@ -16,6 +17,10 @@ class CodePictureController extends Controller
      */
     public function qrcode($code)
     {
+        $qrcode = Qrcode::whereCode($code)->first();
+        if (!$qrcode) {
+            abort(404);
+        }
         $scanUrl = route('qrcode.scan', $code);
 
         $path = DNS2D::getBarcodePNGPath($scanUrl, 'QRCODE', 12, 12);
@@ -38,6 +43,10 @@ class CodePictureController extends Controller
      */
     public function barcode($code)
     {
+        $qrcode = Qrcode::whereCode($code)->first();
+        if (!$qrcode) {
+            abort(404);
+        }
         $path = DNS1D::getBarcodePNGPath($code, 'C128B', 3, 90);
         $file = File::get($path);
 
