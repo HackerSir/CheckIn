@@ -42,7 +42,7 @@ class TicketsDataTable extends DataTable
     public function query()
     {
         /** @var Ticket|\Illuminate\Database\Eloquent\Builder $query */
-        $query = Ticket::select(array_keys($this->getColumns()));
+        $query = Ticket::with('student')->select(array_keys($this->getColumns()));
 
         return $this->applyScopes($query);
     }
