@@ -34,7 +34,7 @@
                                 <div class="progress w-80">
                                     <div class="progress-bar d-flex align-items-center justify-content-center"
                                          role="progressbar"
-                                         style="width: {{ $value['play_percent'] }}%;"
+                                         style="width: {{ $value['play_percent'] }}%; min-width: 3rem;"
                                          aria-valuenow="{{ $value['play_percent'] }}" aria-valuemin="0"
                                          aria-valuemax="100">
                                         <div>{{ $value['play_percent'] }}%</div>
@@ -51,7 +51,7 @@
                                     <div
                                         class="progress-bar bg-success d-flex align-items-center justify-content-center"
                                         role="progressbar"
-                                        style="width: {{ $value['finish_percent'] }}%;"
+                                        style="width: {{ $value['finish_percent'] }}%; min-width: 3rem;"
                                         aria-valuenow="{{ $value['finish_percent'] }}" aria-valuemin="0"
                                         aria-valuemax="100">
                                         <div>{{ $value['finish_percent'] }}%</div>
@@ -65,7 +65,7 @@
                                 <div class="progress w-80">
                                     <div class="progress-bar d-flex align-items-center justify-content-center"
                                          role="progressbar"
-                                         style="width: {{ $value['finish_play_percent'] }}%;"
+                                         style="width: {{ $value['finish_play_percent'] }}%; min-width: 3rem;"
                                          aria-valuenow="{{ $value['finish_play_percent'] }}" aria-valuemin="0"
                                          aria-valuemax="100">
                                         <div>{{ $value['finish_play_percent'] }}%</div>
