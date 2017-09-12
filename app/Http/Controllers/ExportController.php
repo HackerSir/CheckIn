@@ -172,6 +172,11 @@ class ExportController extends Controller
             $student = $feedbackItem->student;
             /** @var Club $club */
             $club = $feedbackItem->club;
+            $message = $feedbackItem->message;
+            if (starts_with($message, '=')) {
+                $message = "'" . $message;
+            }
+
             $this->appendRow($sheet, [
                 $feedbackItem->id,
                 $student->nid,
@@ -187,7 +192,7 @@ class ExportController extends Controller
                 $club->name,
                 $feedbackItem->phone,
                 $feedbackItem->email,
-                $feedbackItem->message,
+                $message,
             ]);
         }
         //調整格式
