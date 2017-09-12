@@ -9,7 +9,14 @@
             <div class="card">
                 <div class="card-block">
                     <h3>總人數</h3>
-                    <p style="font-size: 120%">{{ number_format($count['total']) }}</p>
+                    <dl class="row" style="font-size: 120%">
+                        <dt class="col-4 col-md-2">新生</dt>
+                        <dd class="col-8 col-md-10">{{ number_format($count['total']['freshman']) }}</dd>
+                        <dt class="col-4 col-md-2">非新生</dt>
+                        <dd class="col-8 col-md-10">{{ number_format($count['total']['non_freshman']) }}</dd>
+                        <dt class="col-4 col-md-2">總計</dt>
+                        <dd class="col-8 col-md-10">{{ number_format($count['total']['total']) }}</dd>
+                    </dl>
                 </div>
                 <div class="card-block">
                     <h3>參與人數（打卡至少一次）</h3>
@@ -18,15 +25,37 @@
                         <dd class="col-8 col-md-10">{{ number_format($count['play']['freshman']) }}</dd>
                         <dt class="col-4 col-md-2">非新生</dt>
                         <dd class="col-8 col-md-10">{{ number_format($count['play']['non_freshman']) }}</dd>
+                        <dt class="col-4 col-md-2">總計</dt>
+                        <dd class="col-8 col-md-10">{{ number_format($count['play']['total']) }}</dd>
                     </dl>
                 </div>
                 <div class="card-block">
                     <h3>任務完成人數</h3>
                     <dl class="row" style="font-size: 120%">
                         <dt class="col-4 col-md-2">新生</dt>
-                        <dd class="col-8 col-md-10">{{ number_format($count['finish']['freshman']) }}</dd>
+                        <dd class="col-8 col-md-10">
+                            {{ number_format($count['finish']['freshman']) }}
+                            @if($count['play']['freshman'] > 0)
+                                （{{ number_format($count['finish']['freshman'] / $count['play']['freshman'] * 100, 2) }}
+                                %）
+                            @endif
+                        </dd>
                         <dt class="col-4 col-md-2">非新生</dt>
-                        <dd class="col-8 col-md-10">{{ number_format($count['finish']['non_freshman']) }}</dd>
+                        <dd class="col-8 col-md-10">
+                            {{ number_format($count['finish']['non_freshman']) }}
+                            @if($count['play']['non_freshman'] > 0)
+                                （{{ number_format($count['finish']['non_freshman'] / $count['play']['non_freshman'] * 100, 2) }}
+                                %）
+                            @endif
+                        </dd>
+                        <dt class="col-4 col-md-2">總計</dt>
+                        <dd class="col-8 col-md-10">
+                            {{ number_format($count['finish']['total']) }}
+                            @if($count['play']['total'] > 0)
+                                （{{ number_format($count['finish']['total'] / $count['play']['total'] * 100, 2) }}
+                                %）
+                            @endif
+                        </dd>
                     </dl>
                 </div>
             </div>
