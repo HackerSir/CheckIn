@@ -11,8 +11,8 @@
                     <div class="card-block">
                         <h3>{{ $value['name'] }}</h3>
                         <dl class="row" style="font-size: 120%">
-                            <dt class="col-4 col-md-2">總人數</dt>
-                            <dd class="col-8 col-md-10">
+                            <dt class="col-4 col-md-3">總人數</dt>
+                            <dd class="col-8 col-md-9">
                                 {{ number_format($value['total']) }}
                                 <div class="progress w-80">
                                     <div
@@ -25,9 +25,12 @@
                                     </div>
                                 </div>
                             </dd>
-                            <dt class="col-4 col-md-2">參與人數</dt>
-                            <dd class="col-8 col-md-10">
-                                {{ number_format($value['play']) }}
+                            <dt class="col-4 col-md-3">參與人數</dt>
+                            <dd class="col-8 col-md-9">{{ number_format($value['play']) }}</dd>
+                            <dt class="col-4 col-md-3 text-right text-muted">
+                                <small>佔總人數：</small>
+                            </dt>
+                            <dd class="col-8 col-md-9">
                                 <div class="progress w-80">
                                     <div class="progress-bar d-flex align-items-center justify-content-center"
                                          role="progressbar"
@@ -38,9 +41,12 @@
                                     </div>
                                 </div>
                             </dd>
-                            <dt class="col-4 col-md-2">完成任務</dt>
-                            <dd class="col-8 col-md-10">
-                                {{ number_format($value['finish']) }}
+                            <dt class="col-4 col-md-3">完成任務</dt>
+                            <dd class="col-8 col-md-9">{{ number_format($value['finish']) }}</dd>
+                            <dt class="col-4 col-md-3 text-right text-muted">
+                                <small>佔總人數：</small>
+                            </dt>
+                            <dd class="col-8 col-md-9">
                                 <div class="progress w-80">
                                     <div
                                         class="progress-bar bg-success d-flex align-items-center justify-content-center"
@@ -51,6 +57,11 @@
                                         <div>{{ $value['finish_percent'] }}%</div>
                                     </div>
                                 </div>
+                            </dd>
+                            <dt class="col-4 col-md-3 text-right text-muted">
+                                <small>佔參與人數：</small>
+                            </dt>
+                            <dd class="col-8 col-md-9">
                                 <div class="progress w-80">
                                     <div class="progress-bar d-flex align-items-center justify-content-center"
                                          role="progressbar"
