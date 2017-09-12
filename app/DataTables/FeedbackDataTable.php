@@ -49,6 +49,9 @@ class FeedbackDataTable extends DataTable
                         ->whereRaw('clubs.name LIKE ?', ['%' . $keyword . '%']);
                 });
             })
+            ->editColumn('message', function ($feedback) {
+                return view('feedback.datatables.message', compact('feedback'))->render();
+            })
             ->escapeColumns([]);
     }
 
@@ -100,6 +103,11 @@ class FeedbackDataTable extends DataTable
             'club_id'     => ['title' => '社團'],
             'phone'       => ['title' => '電話'],
             'email'       => ['title' => '信箱'],
+            'message'     => [
+                'searchable' => false,
+                'orderable'  => false,
+                'title'      => '訊息',
+            ],
         ];
     }
 
