@@ -7,57 +7,63 @@
         <div class="col-md-8 offset-md-2">
             <h1>統計</h1>
             <div class="card">
-                <div class="card-block">
-                    <h3>總人數</h3>
-                    <dl class="row" style="font-size: 120%">
-                        <dt class="col-4 col-md-2">新生</dt>
-                        <dd class="col-8 col-md-10">{{ number_format($count['total']['freshman']) }}</dd>
-                        <dt class="col-4 col-md-2">非新生</dt>
-                        <dd class="col-8 col-md-10">{{ number_format($count['total']['non_freshman']) }}</dd>
-                        <dt class="col-4 col-md-2">總計</dt>
-                        <dd class="col-8 col-md-10">{{ number_format($count['total']['total']) }}</dd>
-                    </dl>
-                </div>
-                <div class="card-block">
-                    <h3>參與人數（打卡至少一次）</h3>
-                    <dl class="row" style="font-size: 120%">
-                        <dt class="col-4 col-md-2">新生</dt>
-                        <dd class="col-8 col-md-10">{{ number_format($count['play']['freshman']) }}</dd>
-                        <dt class="col-4 col-md-2">非新生</dt>
-                        <dd class="col-8 col-md-10">{{ number_format($count['play']['non_freshman']) }}</dd>
-                        <dt class="col-4 col-md-2">總計</dt>
-                        <dd class="col-8 col-md-10">{{ number_format($count['play']['total']) }}</dd>
-                    </dl>
-                </div>
-                <div class="card-block">
-                    <h3>任務完成人數</h3>
-                    <dl class="row" style="font-size: 120%">
-                        <dt class="col-4 col-md-2">新生</dt>
-                        <dd class="col-8 col-md-10">
-                            {{ number_format($count['finish']['freshman']) }}
-                            @if($count['play']['freshman'] > 0)
-                                （{{ number_format($count['finish']['freshman'] / $count['play']['freshman'] * 100, 2) }}
-                                %）
-                            @endif
-                        </dd>
-                        <dt class="col-4 col-md-2">非新生</dt>
-                        <dd class="col-8 col-md-10">
-                            {{ number_format($count['finish']['non_freshman']) }}
-                            @if($count['play']['non_freshman'] > 0)
-                                （{{ number_format($count['finish']['non_freshman'] / $count['play']['non_freshman'] * 100, 2) }}
-                                %）
-                            @endif
-                        </dd>
-                        <dt class="col-4 col-md-2">總計</dt>
-                        <dd class="col-8 col-md-10">
-                            {{ number_format($count['finish']['total']) }}
-                            @if($count['play']['total'] > 0)
-                                （{{ number_format($count['finish']['total'] / $count['play']['total'] * 100, 2) }}
-                                %）
-                            @endif
-                        </dd>
-                    </dl>
-                </div>
+                @foreach($data as $value)
+                    <div class="card-block">
+                        <h3>{{ $value['name'] }}</h3>
+                        <dl class="row" style="font-size: 120%">
+                            <dt class="col-4 col-md-2">總人數</dt>
+                            <dd class="col-8 col-md-10">
+                                {{ number_format($value['total']) }}
+                                <div class="progress w-80">
+                                    <div
+                                        class="progress-bar bg-success d-flex align-items-center justify-content-center"
+                                        role="progressbar"
+                                        style="width: 100%;"
+                                        aria-valuenow="100" aria-valuemin="0"
+                                        aria-valuemax="100">
+                                        <div>100%</div>
+                                    </div>
+                                </div>
+                            </dd>
+                            <dt class="col-4 col-md-2">參與人數</dt>
+                            <dd class="col-8 col-md-10">
+                                {{ number_format($value['play']) }}
+                                <div class="progress w-80">
+                                    <div class="progress-bar d-flex align-items-center justify-content-center"
+                                         role="progressbar"
+                                         style="width: {{ $value['play_percent'] }}%;"
+                                         aria-valuenow="{{ $value['play_percent'] }}" aria-valuemin="0"
+                                         aria-valuemax="100">
+                                        <div>{{ $value['play_percent'] }}%</div>
+                                    </div>
+                                </div>
+                            </dd>
+                            <dt class="col-4 col-md-2">完成任務</dt>
+                            <dd class="col-8 col-md-10">
+                                {{ number_format($value['finish']) }}
+                                <div class="progress w-80">
+                                    <div
+                                        class="progress-bar bg-success d-flex align-items-center justify-content-center"
+                                        role="progressbar"
+                                        style="width: {{ $value['finish_percent'] }}%;"
+                                        aria-valuenow="{{ $value['finish_percent'] }}" aria-valuemin="0"
+                                        aria-valuemax="100">
+                                        <div>{{ $value['finish_percent'] }}%</div>
+                                    </div>
+                                </div>
+                                <div class="progress w-80">
+                                    <div class="progress-bar d-flex align-items-center justify-content-center"
+                                         role="progressbar"
+                                         style="width: {{ $value['finish_play_percent'] }}%;"
+                                         aria-valuenow="{{ $value['finish_play_percent'] }}" aria-valuemin="0"
+                                         aria-valuemax="100">
+                                        <div>{{ $value['finish_play_percent'] }}%</div>
+                                    </div>
+                                </div>
+                            </dd>
+                        </dl>
+                    </div>
+                @endforeach
             </div>
         </div>
     </div>
