@@ -169,7 +169,7 @@ Route::group(['middleware' => ['auth', 'email']], function () {
             ],
         ]);
     });
-    //隊輔抽獎編號管理
+    //工作人員抽獎編號管理
     //權限：extra-ticket.manage
     Route::group(['middleware' => 'permission:extra-ticket.manage'], function () {
         Route::get('extra-ticket/ticket', 'ExtraTicketController@ticket')->name('extra-ticket.ticket');

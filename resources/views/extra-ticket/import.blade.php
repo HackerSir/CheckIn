@@ -1,14 +1,14 @@
 @extends('layouts.app')
 
-@section('title', '匯入隊輔抽獎編號')
+@section('title', '匯入工作人員抽獎編號')
 
 @section('content')
     <div class="mt-3 pb-3">
         <div class="col-md-8 offset-md-2">
             <a href="{{ route('extra-ticket.index') }}" class="btn btn-secondary">
-                <i class="fa fa-arrow-left" aria-hidden="true"></i> 隊輔抽獎編號管理
+                <i class="fa fa-arrow-left" aria-hidden="true"></i> 工作人員抽獎編號管理
             </a>
-            <h1>匯入隊輔抽獎編號</h1>
+            <h1>匯入工作人員抽獎編號</h1>
             <div class="card">
                 <div class="card-block">
                     <ul>

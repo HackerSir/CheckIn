@@ -1,14 +1,14 @@
 @extends('layouts.app')
 
-@section('title', '隊輔抽獎編號')
+@section('title', '工作人員抽獎編號')
 
 @section('content')
     <div class="mt-3 pb-3">
         <div class="card">
             <div class="card-block">
-                <h1 class="display-3">隊輔抽獎編號查詢</h1>
+                <h1 class="display-3">工作人員抽獎編號查詢</h1>
                 {{ Form::open(['method' => 'get', 'id' => 'ticket_search_form', 'class' => 'form-inline']) }}
-                <input type="text" placeholder="隊輔抽獎編號" id="ticket_search_id" class="form-control mr-sm-2"
+                <input type="text" placeholder="工作人員抽獎編號" id="ticket_search_id" class="form-control mr-sm-2"
                        autocomplete="off">
                 <button type="submit" class="btn btn-primary">
                     <i class="fa fa-search" aria-hidden="true"></i> 查詢
@@ -73,7 +73,7 @@
                             $ticketName.text(response.name);
                             $ticketClass.text(response.class);
                         } else {
-                            $ticketName.html('<span style="color: red">查無此隊輔抽獎編號</span>');
+                            $ticketName.html('<span style="color: red">查無此工作人員抽獎編號</span>');
                             $ticketClass.text('');
                         }
                     },
