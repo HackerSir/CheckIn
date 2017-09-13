@@ -41,16 +41,14 @@
                             $progress = ($qrcode->student->countedRecords->count() / \Setting::get('target')) * 100;
                             $progress = round($progress, 2);
                         @endphp
-                        @if(floor($progress / 100) > 0)
-                            @foreach(range(1, floor($progress / 100)) as $i)
-                                <div class="progress w-80 mb-2">
-                                    <div class="progress-bar d-flex align-items-center justify-content-center"
-                                         role="progressbar" style="width: 100%;">
-                                        <div>{{ $progress }}%</div>
-                                    </div>
+                        @for($i = 0; $i < floor($progress / 100); $i++)
+                            <div class="progress w-80 mb-2">
+                                <div class="progress-bar d-flex align-items-center justify-content-center"
+                                     role="progressbar" style="width: 100%;">
+                                    <div>{{ $progress }}%</div>
                                 </div>
-                            @endforeach
-                        @endif
+                            </div>
+                        @endfor
                         <div class="progress w-80">
                             <div class="progress-bar d-flex align-items-center justify-content-center"
                                  role="progressbar"
