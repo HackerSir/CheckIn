@@ -52,14 +52,16 @@
                             </div>
                         </div>
                     @endfor
-                    <div class="progress w-80">
-                        <div class="progress-bar d-flex align-items-center justify-content-center"
-                             role="progressbar"
-                             style="width: {{ $progress % 100 }}%; min-width: 3rem;"
-                             aria-valuenow="{{ $progress % 100 }}" aria-valuemin="0" aria-valuemax="100">
-                            <div>{{ $progress }}%</div>
+                    @if($progress % 100 > 0)
+                        <div class="progress w-80">
+                            <div class="progress-bar d-flex align-items-center justify-content-center"
+                                 role="progressbar"
+                                 style="width: {{ $progress % 100 }}%; min-width: 3rem;"
+                                 aria-valuenow="{{ $progress % 100 }}" aria-valuemin="0" aria-valuemax="100">
+                                <div>{{ $progress }}%</div>
+                            </div>
                         </div>
-                    </div>
+                    @endif
 
                     <hr/>
 
