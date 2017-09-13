@@ -198,7 +198,8 @@
                     geodesic: true,
                     strokeColor: '#0000FF',
                     strokeOpacity: 1.0,
-                    strokeWeight: 3
+                    strokeWeight: 3,
+                    zIndex: 999,
                 });
 
                 for (var i = 0; i < polyline.getPath().getLength(); i++) {
