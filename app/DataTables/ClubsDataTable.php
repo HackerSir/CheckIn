@@ -59,7 +59,7 @@ class ClubsDataTable extends DataTable
     public function query()
     {
         /** @var Club|\Illuminate\Database\Eloquent\Builder $query */
-        $query = Club::with('clubType', 'booths', 'imgurImage')->withCount('records');
+        $query = Club::with('clubType', 'booths', 'imgurImage')->withCount('records', 'feedback');
 
         return $this->applyScopes($query);
     }
@@ -89,19 +89,23 @@ class ClubsDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            'id'            => ['title' => '#'],
-            'club_type_id'  => ['title' => '類型'],
-            'number'        => ['title' => '編號'],
-            'name'          => ['title' => '名稱'],
-            'booth'         => ['title' => '攤位'],
-            'is_counted'    => [
+            'id'             => ['title' => '#'],
+            'club_type_id'   => ['title' => '類型'],
+            'number'         => ['title' => '編號'],
+            'name'           => ['title' => '名稱'],
+            'booth'          => ['title' => '攤位'],
+            'is_counted'     => [
                 'orderable'  => false,
                 'searchable' => false,
                 'title'      => '集點',
             ],
-            'records_count' => [
+            'records_count'  => [
                 'searchable' => false,
-                'title'      => '打卡人數',
+                'title'      => '打卡',
+            ],
+            'feedback_count' => [
+                'searchable' => false,
+                'title'      => '回饋',
             ],
         ];
     }
