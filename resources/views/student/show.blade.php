@@ -207,9 +207,9 @@
                         clickable: false,
                         icon: {
                             // use whatever icon you want for the "dots"
-                            url: "//maps.gstatic.com/intl/en_us/mapfiles/markers2/measle_blue.png",
-                            size: new google.maps.Size(7, 7),
-                            anchor: new google.maps.Point(4, 4)
+                            url: "//labs.google.com/ridefinder/images/mm_20_white.png",
+                            size: new google.maps.Size(12, 20),
+                            anchor: new google.maps.Point(6, 20)
                         },
                         position: polyline.getPath().getAt(i),
                         map: map
