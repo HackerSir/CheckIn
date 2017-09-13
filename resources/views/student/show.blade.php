@@ -197,9 +197,18 @@
                     path: coordinates,
                     geodesic: true,
                     strokeColor: '#0000FF',
-                    strokeOpacity: 1.0,
-                    strokeWeight: 3,
+                    strokeOpacity: 0,
+                    //strokeWeight: 3,
                     zIndex: 999,
+                    icons: [{
+                        icon: {
+                            path: 'M 0,-2 0,2',
+                            strokeOpacity: 1,
+                            scale: 4
+                        },
+                        offset: '0',
+                        repeat: '24px'
+                    }]
                 });
 
                 for (var i = 0; i < polyline.getPath().getLength(); i++) {
@@ -217,6 +226,25 @@
                 }
 
                 polyline.setMap(map);
+
+                animateLine(polyline);
+            }
+
+            /**
+             * @see https://googlemaps.github.io/js-samples/symbols/polyline-symbols.html
+             */
+            function animateLine(line) {
+                var count = 0;
+                window.setInterval(function () {
+                    if (count > 23) {
+                        count = 0;
+                    } else {
+                        count += 2;
+                    }
+                    var icons = line.get('icons');
+                    icons[0].offset = count + 'px';
+                    line.set('icons', icons);
+                }, 50);
             }
 
             /**

@@ -138,7 +138,8 @@ class StudentController extends Controller
             }
 
             $path = [];
-            foreach ($student->records as $record) {
+            $records = $student->records->reverse();
+            foreach ($records as $record) {
                 if ($record->club->booths->count()) {
                     /** @var Booth $booth */
                     $booth = $record->club->booths->first();
