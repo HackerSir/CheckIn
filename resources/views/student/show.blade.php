@@ -207,7 +207,7 @@
                         clickable: false,
                         icon: {
                             // use whatever icon you want for the "dots"
-                            url: "http://labs.google.com/ridefinder/images/mm_20_white.png",
+                            url: "//maps.gstatic.com/mapfiles/ridefinder-images/mm_20_white.png",
                             size: new google.maps.Size(12, 20),
                             anchor: new google.maps.Point(6, 20)
                         },
