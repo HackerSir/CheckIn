@@ -40,14 +40,25 @@
                         <dd class="col-8 col-md-10">{{ $student->countedRecords->count() }}
                             / {{ \Setting::get('target') }}</dd>
                     </dl>
+                    @php
+                        $progress = ($student->countedRecords->count() / \Setting::get('target')) * 100;
+                        $progress = round($progress, 2);
+                    @endphp
+                    @if(floor($progress / 100) > 0)
+                        @foreach(range(1, floor($progress / 100)) as $i)
+                            <div class="progress w-80 mb-2">
+                                <div class="progress-bar d-flex align-items-center justify-content-center"
+                                     role="progressbar" style="width: 100%;">
+                                    <div>{{ $progress }}%</div>
+                                </div>
+                            </div>
+                        @endforeach
+                    @endif
                     <div class="progress w-80">
-                        @php
-                            $progress = ($student->countedRecords->count() / \Setting::get('target')) * 100;
-                            $progress = round($progress, 2);
-                        @endphp
-                        <div class="progress-bar d-flex align-items-center justify-content-center" role="progressbar"
-                             style="width: {{ $progress }}%;" aria-valuenow="{{ $progress }}" aria-valuemin="0"
-                             aria-valuemax="100">
+                        <div class="progress-bar d-flex align-items-center justify-content-center"
+                             role="progressbar"
+                             style="width: {{ $progress % 100 }}%; min-width: 3rem;"
+                             aria-valuenow="{{ $progress % 100 }}" aria-valuemin="0" aria-valuemax="100">
                             <div>{{ $progress }}%</div>
                         </div>
                     </div>
