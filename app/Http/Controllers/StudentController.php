@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Booth;
 use App\DataTables\StudentsDataTable;
 use App\Services\FcuApiService;
 use App\Services\LogService;
@@ -121,7 +122,35 @@ class StudentController extends Controller
     {
         $student->load('records.club.clubType', 'qrcodes.student');
 
-        return view('student.show', compact('student'));
+        if (\Laratrust::can('student-path.view') && request()->exists('path')) {
+            $boothData = [];
+            $booths = Booth::with('club.clubType')->get();
+            /** @var Booth $booth */
+            foreach ($booths as $booth) {
+                $boothData[] = [
+                    'name'      => $booth->name,
+                    'longitude' => $booth->longitude,
+                    'latitude'  => $booth->latitude,
+                    'club_name' => $booth->club->name ?? '（空攤位）',
+                    'fillColor' => $booth->club->clubType->color ?? '#00DD00',
+                    'url'       => is_null($booth->club) ? null : route('clubs.show', $booth->club->id),
+                ];
+            }
+
+            $path = [];
+            foreach ($student->records as $record) {
+                if ($record->club->booths->count()) {
+                    /** @var Booth $booth */
+                    $booth = $record->club->booths->first();
+                    $path[] = [
+                        'lat' => $booth->latitude,
+                        'lng' => $booth->longitude,
+                    ];
+                }
+            }
+        }
+
+        return view('student.show', compact('student', 'boothData', 'path'));
     }
 
     /**

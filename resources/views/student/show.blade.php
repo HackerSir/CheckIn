@@ -2,6 +2,15 @@
 
 @section('title', $student->name . ' - 學生')
 
+@section('css')
+    <style>
+        #map {
+            width: 100%;
+            height: 70vh;
+        }
+    </style>
+@endsection
+
 @section('content')
     <div class="row mt-3 pb-3">
         <div class="col-md-8 offset-md-2">
@@ -124,6 +133,17 @@
                         </tbody>
                     </table>
 
+                    @if(\Laratrust::can('student-path.view'))
+                        <hr/>
+
+                        <h1>移動路徑</h1>
+                        @if(request()->exists('path'))
+                            <div class="mt-2" id="map"></div>
+                        @else
+                            <a href="?path" class="btn btn-secondary">顯示移動路徑</a>
+                        @endif
+                    @endif
+
                     <hr/>
 
                     <h1>打卡紀錄</h1>
@@ -132,4 +152,96 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('js')
+    @if(\Laratrust::can('student-path.view') && request()->exists('path'))
+        <script src="https://maps.googleapis.com/maps/api/js?key={{ GoogleApi::getKey() }}"></script>
+        <script src="{{ asset('js/maplabel-compiled.js') }}"></script>
+        <script>
+            var boothData = {!! json_encode($boothData) !!};
+            var coordinates = {!! json_encode($path) !!};
+        </script>
+        <script>
+            function initMap() {
+                var map = new google.maps.Map(document.getElementById('map'), {
+                    zoom: 18,
+                    center: {lat: 24.179976, lng: 120.648279},
+                    streetViewControl: false
+                });
+
+                var infoWindow = new google.maps.InfoWindow();
+                boothData.forEach(function (booth) {
+                    var mapLabel = new MapLabel({
+                        text: booth['name'],
+                        position: new google.maps.LatLng(booth['latitude'], booth['longitude']),
+                        map: map,
+                        align: 'center',
+                        strokeWeight: 0,
+                    });
+
+                    var rectangle = genRectangle(map, booth['latitude'], booth['longitude'], booth['fillColor']);
+
+                    rectangle.addListener('click', (function (infoWindow) {
+                        return function () {
+                            var linkText = booth['url'] ? '<br/>' + '<a href="' + booth['url'] + '" target="_blank">了解更多...</a>' : '';
+                            infoWindow.setContent(booth['club_name'] + linkText);
+                            infoWindow.setPosition({lat: booth['latitude'], lng: booth['longitude']});
+                            infoWindow.open(map);
+                        };
+                    })(infoWindow));
+                });
+
+                var polyline = new google.maps.Polyline({
+                    clickable: false,
+                    path: coordinates,
+                    geodesic: true,
+                    strokeColor: '#0000FF',
+                    strokeOpacity: 1.0,
+                    strokeWeight: 3
+                });
+
+                for (var i = 0; i < polyline.getPath().getLength(); i++) {
+                    var marker = new google.maps.Marker({
+                        clickable: false,
+                        icon: {
+                            // use whatever icon you want for the "dots"
+                            url: "//maps.gstatic.com/intl/en_us/mapfiles/markers2/measle_blue.png",
+                            size: new google.maps.Size(7, 7),
+                            anchor: new google.maps.Point(4, 4)
+                        },
+                        position: polyline.getPath().getAt(i),
+                        map: map
+                    });
+                }
+
+                polyline.setMap(map);
+            }
+
+            /**
+             * @param map google.maps.Map
+             * @param longitude 緯度
+             * @param latitude 經度
+             */
+            function genRectangle(map, longitude, latitude, fillColor) {
+                var radius = 0.000017;
+                return new google.maps.Rectangle({
+                    strokeColor: fillColor,
+                    strokeOpacity: 0.8,
+                    strokeWeight: 2,
+                    fillColor: fillColor,
+                    fillOpacity: 0.5,
+                    map: map,
+                    bounds: {
+                        north: longitude + radius,
+                        south: longitude - radius,
+                        east: latitude + radius,
+                        west: latitude - radius
+                    }
+                });
+            }
+
+            google.maps.event.addDomListener(window, 'load', initMap);
+        </script>
+    @endif
 @endsection
