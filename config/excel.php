@@ -58,15 +58,15 @@ return [
     ],
 
     'properties' => [
-        'creator'        => 'Maatwebsite',
-        'lastModifiedBy' => 'Maatwebsite',
+        'creator'        => 'Hackersir',
+        'lastModifiedBy' => 'Hackersir',
         'title'          => 'Spreadsheet',
         'description'    => 'Default spreadsheet export',
         'subject'        => 'Spreadsheet export',
-        'keywords'       => 'maatwebsite, excel, export',
+        'keywords'       => 'Hackersir, excel, export',
         'category'       => 'Excel',
-        'manager'        => 'Maatwebsite',
-        'company'        => 'Maatwebsite',
+        'manager'        => 'Hackersir',
+        'company'        => 'Hackersir',
     ],
 
     /*
@@ -106,7 +106,7 @@ return [
     |
     */
 
-    'creator' => 'Maatwebsite',
+    'creator' => 'Hackersir',
 
     'csv' => [
         /*
