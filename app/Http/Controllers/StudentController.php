@@ -120,7 +120,7 @@ class StudentController extends Controller
      */
     public function show(Student $student)
     {
-        $student->load('records.club.clubType', 'qrcodes.student');
+        $student->load('records.club.clubType', 'records.club.booths', 'qrcodes.student');
 
         if (\Laratrust::can('student-path.view') && request()->exists('path')) {
             $boothData = [];
