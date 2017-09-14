@@ -25,7 +25,15 @@
                         <dd class="col-8 col-md-10">{{ $feedback->student->nid }}</dd>
 
                         <dt class="col-4 col-md-2">姓名</dt>
-                        <dd class="col-8 col-md-10">{{ $feedback->student->name }}</dd>
+                        <dd class="col-8 col-md-10">
+                            @if(Laratrust::can('student.manage'))
+                                <a href="{{ route('student.show', $feedback->student) }}">
+                                    {!! $feedback->student->name !!}
+                                </a>
+                            @else
+                                {{ $feedback->student->name }}
+                            @endif
+                        </dd>
 
                         <dt class="col-4 col-md-2">班級</dt>
                         <dd class="col-8 col-md-10">{{ $feedback->student->class }}</dd>
