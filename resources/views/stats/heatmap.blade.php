@@ -30,10 +30,12 @@
 @endsection
 
 @section('js')
-    <script src="https://maps.googleapis.com/maps/api/js?key={{ GoogleApi::getKey() }}&libraries=visualization"></script>
+    <script
+        src="https://maps.googleapis.com/maps/api/js?key={{ GoogleApi::getKey() }}&libraries=visualization"></script>
     <script src="{{ asset('js/maplabel-compiled.js') }}"></script>
     <script>
-        var boothData = {!! json_encode($boothData) !!}
+        var boothData =
+            {!! json_encode($boothData) !!}
         var heatMapData = <?php echo $heatDataJson ?>
     </script>
     <script>
@@ -76,8 +78,9 @@
 
                 rectangle.addListener('click', (function (infoWindow) {
                     return function () {
+                        var recordCount = '<br/>打卡：' + booth['recordCount'];
                         var linkText = booth['url'] ? '<br/>' + '<a href="' + booth['url'] + '" target="_blank">了解更多...</a>' : '';
-                        infoWindow.setContent(booth['club_name'] + linkText);
+                        infoWindow.setContent(booth['club_name'] + recordCount + linkText);
                         infoWindow.setPosition({lat: booth['latitude'], lng: booth['longitude']});
                         infoWindow.open(map);
                     };

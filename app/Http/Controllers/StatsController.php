@@ -50,14 +50,7 @@ class StatsController extends Controller
         $booths = Booth::with('club.clubType')->get();
         /** @var Booth $booth */
         foreach ($booths as $booth) {
-            $boothData[] = [
-                'name'      => $booth->name,
-                'longitude' => $booth->longitude,
-                'latitude'  => $booth->latitude,
-                'club_name' => $booth->club->name ?? '（空攤位）',
-                'fillColor' => $booth->club->clubType->color ?? '#00DD00',
-                'url'       => is_null($booth->club) ? null : route('clubs.show', $booth->club->id),
-            ];
+            $recordCount = 0;
             if ($booth->club) {
                 $recordCount = $booth->club->records()->count();
                 if ($recordCount > 0) {
@@ -65,6 +58,15 @@ class StatsController extends Controller
                         . $booth->latitude . ', ' . $booth->longitude . '), weight: ' . $recordCount . '}';
                 }
             }
+            $boothData[] = [
+                'name'        => $booth->name,
+                'longitude'   => $booth->longitude,
+                'latitude'    => $booth->latitude,
+                'club_name'   => $booth->club->name ?? '（空攤位）',
+                'fillColor'   => $booth->club->clubType->color ?? '#00DD00',
+                'url'         => is_null($booth->club) ? null : route('clubs.show', $booth->club->id),
+                'recordCount' => $recordCount,
+            ];
         }
         $heatDataJson = '[' . implode(',', $heatData) . ']';
 
