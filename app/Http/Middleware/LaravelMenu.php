@@ -56,10 +56,6 @@ class LaravelMenu
                             $activityMenu->add('QR Code', ['route' => 'qrcode.index'])->active('qrcode/*');
                         }
 
-                        if (Laratrust::can('stats.access')) {
-                            $activityMenu->add('統計', ['route' => 'stats.index'])->active('stats/*');
-                        }
-
                         $this->addDivider($activityMenu);
 
                         if (Laratrust::can('booth.manage')) {
@@ -100,6 +96,15 @@ class LaravelMenu
                             $activityMenu->add('活動設定', ['route' => 'setting.edit']);
                         }
                     }
+
+                    //統計
+                    if (Laratrust::can('stats.access')) {
+                        /** @var \Lavary\Menu\Item $statsMenu */
+                        $statsMenu = $menu->add('統計', 'javascript:void(0)')->active('stats/*');
+                        $statsMenu->add('統計', ['route' => 'stats.index']);
+                        $statsMenu->add('熱度地圖', ['route' => 'stats.heatmap']);
+                    }
+
                     //管理員
                     if (Laratrust::can('menu.view')) {
                         /** @var \Lavary\Menu\Item $adminMenu */

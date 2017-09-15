@@ -201,6 +201,7 @@ Route::group(['middleware' => ['auth', 'email']], function () {
     //權限：stats.access
     Route::group(['middleware' => 'permission:stats.access'], function () {
         Route::get('stats', 'StatsController@index')->name('stats.index');
+        Route::get('stats/heatmap', 'StatsController@heatmap')->name('stats.heatmap');
     });
 
     //自己的社團
