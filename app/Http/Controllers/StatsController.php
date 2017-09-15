@@ -34,7 +34,7 @@ class StatsController extends Controller
                     ? round($count['play'][$type] / $count['total'][$type] * 100, 2) : 0,
                 'finish_percent'      => $count['total'][$type] > 0
                     ? round($count['finish'][$type] / $count['total'][$type] * 100, 2) : 0,
-                'finish_play_percent' => $count['total'][$type] > 0
+                'finish_play_percent' => $count['play'][$type] > 0
                     ? round($count['finish'][$type] / $count['play'][$type] * 100, 2) : 0,
             ];
         }
