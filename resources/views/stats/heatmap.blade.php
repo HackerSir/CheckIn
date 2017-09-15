@@ -87,7 +87,7 @@
             var heatmap = new google.maps.visualization.HeatmapLayer({
                 data: heatMapData,
                 opacity: 1,
-                radius: 20,
+                radius: 40,
             });
             heatmap.setMap(map);
         }
