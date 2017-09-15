@@ -85,7 +85,9 @@
             });
 
             var heatmap = new google.maps.visualization.HeatmapLayer({
-                data: heatMapData
+                data: heatMapData,
+                opacity: 1,
+                radius: 20,
             });
             heatmap.setMap(map);
         }
