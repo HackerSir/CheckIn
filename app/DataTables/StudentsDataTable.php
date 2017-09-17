@@ -40,7 +40,7 @@ class StudentsDataTable extends DataTable
      */
     public function query()
     {
-        $query = Student::query()->withCount('records');
+        $query = Student::query()->withCount('records', 'feedback');
 
         return $this->applyScopes($query);
     }
@@ -70,15 +70,19 @@ class StudentsDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            'id'            => ['title' => '#'],
-            'nid'           => ['title' => 'NID'],
-            'name'          => ['title' => '姓名'],
-            'class'         => ['title' => '院系班級'],
-            'in_year'       => ['title' => '入學年度'],
-            'gender'        => ['title' => '性別'],
-            'records_count' => [
+            'id'             => ['title' => '#'],
+            'nid'            => ['title' => 'NID'],
+            'name'           => ['title' => '姓名'],
+            'class'          => ['title' => '院系班級'],
+            'in_year'        => ['title' => '入學年度'],
+            'gender'         => ['title' => '性別'],
+            'records_count'  => [
                 'searchable' => false,
                 'title'      => '打卡',
+            ],
+            'feedback_count' => [
+                'searchable' => false,
+                'title'      => '回饋',
             ],
         ];
     }
