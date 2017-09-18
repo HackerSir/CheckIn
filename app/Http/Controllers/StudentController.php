@@ -89,7 +89,7 @@ class StudentController extends Controller
         if (!$student->user) {
             $email = $stuInfo['stu_id'] . '@fcu.edu.tw';
             /** @var User $user */
-            $user = User::query()->updateOrCreate([
+            $user = User::query()->firstOrCreate([
                 'email' => $email,
             ], [
                 'name'        => $student->name,

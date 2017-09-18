@@ -255,7 +255,7 @@ class ClubController extends Controller
                     if (!$user) {
                         $email = $ownerNID . '@fcu.edu.tw';
                         /** @var User $user */
-                        $user = User::query()->updateOrCreate([
+                        $user = User::query()->firstOrCreate([
                             'email' => $email,
                         ], [
                             'name'        => $student->name,
