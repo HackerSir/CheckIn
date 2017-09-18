@@ -237,6 +237,7 @@ Route::group(['middleware' => ['auth', 'email']], function () {
 
 //內部API
 Route::group(['prefix' => 'api'], function () {
+    Route::post('/booth-list', 'ApiController@boothList')->name('api.booth-list');
     Route::post('/user-list', 'ApiController@userList')->name('api.user-list');
     Route::post('/club-type-list', 'ApiController@clubTypeList')->name('api.club-type-list');
     Route::post('/club-list', 'ApiController@clubList')->name('api.club-list');

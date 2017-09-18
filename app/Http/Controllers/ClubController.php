@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Booth;
 use App\Club;
 use App\ClubType;
 use App\DataTables\ClubsDataTable;
@@ -66,6 +67,11 @@ class ClubController extends Controller
             $club->imgurImage()->save($imgurImage);
         }
 
+        //更新攤位
+        $attachBoothIds = (array) $request->get('booth_id');
+        $attachBooths = Booth::whereDoesntHave('club')->whereIn('id', $attachBoothIds)->get();
+        $club->booths()->saveMany($attachBooths);
+
         //更新攤位負責人
         $attachUserIds = (array) $request->get('user_id');
         $attachUsers = User::whereDoesntHave('club')->whereIn('id', $attachUserIds)->get();
@@ -119,6 +125,21 @@ class ClubController extends Controller
             $imgurImage = $imgurImageService->upload($uploadedFile);
             $club->imgurImage()->save($imgurImage);
         }
+
+        //更新攤位
+        $oldBoothIds = (array) $club->booths->pluck('id')->toArray();
+        $newBoothIds = (array) $request->get('booth_id');
+        $detachBoothIds = array_diff($oldBoothIds, $newBoothIds);
+        $attachBoothIds = array_diff($newBoothIds, $oldBoothIds);
+
+        /** @var User[] $detachUsers */
+        $detachBooths = Booth::whereIn('id', $detachBoothIds)->get();
+        foreach ($detachBooths as $detachBooth) {
+            $detachBooth->club()->dissociate();
+            $detachBooth->save();
+        }
+        $attachBooths = Booth::whereDoesntHave('club')->whereIn('id', $attachBoothIds)->get();
+        $club->booths()->saveMany($attachBooths);
 
         //更新攤位負責人
         $oldUserIds = (array) $club->users->pluck('id')->toArray();

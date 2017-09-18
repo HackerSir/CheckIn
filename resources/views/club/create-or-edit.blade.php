@@ -121,6 +121,18 @@
                         </div>
                     </div>
 
+                    <div class="form-group row{{ $errors->has('booth_id') ? ' has-danger' : '' }}">
+                        <label for="booth_id[]" class="col-md-2 col-form-label">攤位</label>
+                        <div class="col-md-10">
+                            {{ Form::select('booth_id[]', [], null, ['id' => 'booth_id', 'class' => 'form-control', 'multiple']) }}
+                            @if ($errors->has('booth_id'))
+                                <span class="form-control-feedback">
+                                    <strong>{{ $errors->first('booth_id') }}</strong>
+                                </span>
+                            @endif
+                        </div>
+                    </div>
+
                     <div class="form-group row{{ $errors->has('user_id') ? ' has-danger' : '' }}">
                         <label for="user_id[]" class="col-md-2 col-form-label">攤位負責人</label>
                         <div class="col-md-10">
@@ -150,7 +162,17 @@
 @section('js')
     <script>
         $(function () {
-            function formatTemplate(user) {
+            function formatTemplateBooth(booth) {
+                if (booth.loading) return booth.text;
+                if (!booth.name) return null;
+
+                var markup = "<div class='container' style='width: 100%'><div class='row'>"
+                    + "<div class='col-md-12'>" + booth.name + "<br/></div>"
+                    + "</div></div>";
+
+                return markup;
+            }
+            function formatTemplateUser(user) {
                 if (user.loading) return user.text;
                 if (!user.name) return null;
 
@@ -162,21 +184,68 @@
                 return markup;
             }
 
-            function formatTemplateSelection(user) {
-                return user.name || user.text;
+            function formatTemplateSelection(item) {
+                return item.name || item.text;
             }
 
+            var $boothSelect = $('#booth_id');
+            var selectedBooth = {!! isset($club) ? $club->booths->pluck('name','id')->toJson() : '{}' !!};
+            var selectedBoothIds = {!! isset($club) ? $club->booths->pluck('id')->toJson() : '{}' !!};
+            var initialBooths = [];
+            $.each(selectedBooth, function (key, val) {
+                initialBooths.push({id: key, text: val});
+            });
+            $boothSelect.select2({
+                tags: true,
+                tokenSeparators: [',', ' '],
+                data: initialBooths,
+                ajax: {
+                    url: '{{ route('api.booth-list') }}',
+                    type: 'POST',
+                    headers: {
+                        'X-CSRF-Token': window.Laravel.csrfToken,
+                        'Accept': 'application/json'
+                    },
+                    dataType: 'json',
+                    delay: 250,
+                    data: function (params) {
+                        return {
+                            q: params.term, // search term
+                            page: params.page,
+                            club: {{ $club->id ?? 0 }}
+                        };
+                    },
+                    processResults: function (data, params) {
+                        params.page = params.page || 1;
+                        return {
+                            results: data.items,
+                            pagination: {
+                                more: (params.page * 10) < data.total_count
+                            }
+                        };
+                    },
+                    cache: true
+                },
+                minimumInputLength: 0,
+                escapeMarkup: function (markup) {
+                    return markup;
+                }, // let our custom formatter work
+                templateResult: formatTemplateBooth, // omitted for brevity, see the source of this page
+                templateSelection: formatTemplateSelection // omitted for brevity, see the source of this page
+            });
+            $boothSelect.val(selectedBoothIds).trigger('change');
+
             var $userSelect = $('#user_id');
-            var selected = {!!  isset($club) ? $club->users->pluck('name','id')->toJson() : '{}' !!};
-            var selectIds = {!! isset($club) ? $club->users->pluck('id')->toJson() : '{}' !!};
-            var initials = [];
-            $.each(selected, function (key, val) {
-                initials.push({id: key, text: val});
+            var selectedUser = {!! isset($club) ? $club->users->pluck('name','id')->toJson() : '{}' !!};
+            var selectedUserIds = {!! isset($club) ? $club->users->pluck('id')->toJson() : '{}' !!};
+            var initialUsers = [];
+            $.each(selectedUser, function (key, val) {
+                initialUsers.push({id: key, text: val});
             });
             $userSelect.select2({
                 tags: true,
                 tokenSeparators: [',', ' '],
-                data: initials,
+                data: initialUsers,
                 ajax: {
                     url: '{{ route('api.user-list') }}',
                     type: 'POST',
@@ -208,10 +277,10 @@
                 escapeMarkup: function (markup) {
                     return markup;
                 }, // let our custom formatter work
-                templateResult: formatTemplate, // omitted for brevity, see the source of this page
+                templateResult: formatTemplateUser, // omitted for brevity, see the source of this page
                 templateSelection: formatTemplateSelection // omitted for brevity, see the source of this page
             });
-            $userSelect.val(selectIds).trigger('change');
+            $userSelect.val(selectedUserIds).trigger('change');
         });
     </script>
 @endsection

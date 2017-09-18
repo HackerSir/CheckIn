@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Booth;
 use App\Club;
 use App\ClubType;
 use App\User;
@@ -20,6 +21,55 @@ class ApiController extends Controller
     public function __construct()
     {
         $this->middleware('permission:club.manage')->only(['userList']);
+    }
+
+    public function boothList(Request $request)
+    {
+        /** @var Builder|Booth $BoothsQuery */
+        $BoothsQuery = Booth::query();
+        //搜尋關鍵字
+        if ($request->has('q')) {
+            $searchPattern = '%' . $request->input('q') . '%';
+            //搜尋攤位名稱
+            $BoothsQuery->where(function ($query) use ($searchPattern) {
+                /** @var Builder|Booth $query */
+                $query->where('name', 'like', $searchPattern);
+            });
+        }
+        //總數
+        $totalCount = $BoothsQuery->count();
+        //分頁
+        $page = $request->get('page', 1);
+        $perPage = 10;
+        $BoothsQuery->limit($perPage)->skip(($page - 1) * $perPage);
+        //取得資料
+        /** @var \Illuminate\Database\Eloquent\Collection|User[] $booths */
+        $booths = $BoothsQuery->get();
+        //轉換陣列內容
+        $items = [];
+        $clubId = $request->get('club');
+        foreach ($booths as $booth) {
+            //檢查是否為其他社團之攤位
+            if ($booth->club && $booth->club->id != $clubId) {
+                $name = $booth->name . '（' . $booth->club->name . '）';
+                $disabled = true;
+            } else {
+                $name = $booth->name;
+                $disabled = false;
+            }
+            $items[] = [
+                'id'       => $booth->id,
+                'name'     => $name,
+                'disabled' => $disabled,
+            ];
+        }
+        //建立JSON
+        $json = [
+            'total_count' => $totalCount,
+            'items'       => $items,
+        ];
+
+        return response()->json($json);
     }
 
     public function userList(Request $request)
