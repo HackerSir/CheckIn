@@ -76,6 +76,16 @@
                     </div>
                 @endforeach
             </div>
+            <div class="card mt-2">
+                <div class="card-block">
+                    註：
+                    <ul>
+                        <li>總人數：曾登入此系統，或NID曾出現於此系統之人數。</li>
+                        <li>參與人數：打卡至少一次之人數。</li>
+                        <li>完成任務：打卡次數達到目標（也就是{{ Setting::get('target') }}次(含)以上）的人數</li>
+                    </ul>
+                </div>
+            </div>
         </div>
     </div>
 @endsection
