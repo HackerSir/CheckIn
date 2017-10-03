@@ -89,9 +89,9 @@ class ExportController extends Controller
         //建立匯出資料
         $this->setTitleRow(
             $sheet,
-            ['#', 'NID', '姓名', '班級', '科系', '學院', '入學年度', '性別', '新生', '社團編號', '社團類型', '社團名稱', '打卡時間']
+            ['#', 'NID', '姓名', '班級', '科系', '學院', '入學年度', '性別', '新生', '攤位負責人', '社團編號', '社團類型', '社團名稱', '打卡時間']
         );
-        $records = Record::with('student', 'club.clubType')->orderBy('created_at')->get();
+        $records = Record::with('student.user', 'club.clubType')->orderBy('created_at')->get();
         foreach ($records as $record) {
             /** @var Student $student */
             $student = $record->student;
@@ -107,6 +107,7 @@ class ExportController extends Controller
                 $student->in_year,
                 $student->gender,
                 $student->is_freshman,
+                $student->is_staff,
                 $club->number,
                 $club->clubType->name ?? '',
                 $club->name,
@@ -123,8 +124,8 @@ class ExportController extends Controller
             ],
         ];
 
-        $sheet->getStyleByColumnAndRow(8, 1, 8, $sheet->getHighestRow())->applyFromArray($styleArray);
-        $sheet->getStyleByColumnAndRow(11, 1, 11, $sheet->getHighestRow())->applyFromArray($styleArray);
+        $sheet->getStyleByColumnAndRow(9, 1, 9, $sheet->getHighestRow())->applyFromArray($styleArray);
+        $sheet->getStyleByColumnAndRow(12, 1, 12, $sheet->getHighestRow())->applyFromArray($styleArray);
 
         //下載
         return $this->downloadSpreadsheet($spreadsheet, '打卡紀錄.xlsx');
@@ -137,7 +138,7 @@ class ExportController extends Controller
      */
     public function feedback()
     {
-        $feedbackQuery = Feedback::query();
+        $feedbackQuery = Feedback::with('student.user', 'club.clubType');
         //若有管理權限，直接顯示全部
         if (!\Laratrust::can('feedback.manage')) {
             //若無管理權限
@@ -165,7 +166,8 @@ class ExportController extends Controller
         //建立匯出資料
         $this->setTitleRow(
             $sheet,
-            ['#', 'NID', '姓名', '班級', '科系', '學院', '入學年度', '性別', '新生', '社團編號', '社團類型', '社團名稱', '電話', '信箱', '附加訊息']
+            ['#', 'NID', '姓名', '班級', '科系', '學院', '入學年度', '性別', '新生', '攤位負責人',
+                '社團編號', '社團類型', '社團名稱', '電話', '信箱', '附加訊息']
         );
         foreach ($feedback as $feedbackItem) {
             /** @var Student $student */
@@ -187,6 +189,7 @@ class ExportController extends Controller
                 $student->in_year,
                 $student->gender,
                 $student->is_freshman,
+                $student->is_staff,
                 $club->number,
                 $club->clubType->name ?? '',
                 $club->name,
@@ -205,8 +208,8 @@ class ExportController extends Controller
             ],
         ];
 
-        $sheet->getStyleByColumnAndRow(8, 1, 8, $sheet->getHighestRow())->applyFromArray($styleArray);
-        $sheet->getStyleByColumnAndRow(11, 1, 11, $sheet->getHighestRow())->applyFromArray($styleArray);
+        $sheet->getStyleByColumnAndRow(9, 1, 9, $sheet->getHighestRow())->applyFromArray($styleArray);
+        $sheet->getStyleByColumnAndRow(12, 1, 12, $sheet->getHighestRow())->applyFromArray($styleArray);
 
         //下載
         return $this->downloadSpreadsheet($spreadsheet, '回饋資料.xlsx');

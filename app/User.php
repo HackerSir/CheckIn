@@ -27,6 +27,7 @@ use Laratrust\Traits\LaratrustUserTrait;
  * @property-read \App\Club|null $club
  * @property-read bool $is_confirmed
  * @property-read bool $is_local_account
+ * @property-read bool $is_staff
  * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $notifications
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Permission[] $permissions
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Role[] $roles
@@ -122,5 +123,15 @@ class User extends Authenticatable
     public function club()
     {
         return $this->belongsTo(Club::class);
+    }
+
+    /**
+     * 是否為攤位負責人
+     *
+     * @return bool
+     */
+    public function getIsStaffAttribute()
+    {
+        return !is_null($this->club_id);
     }
 }

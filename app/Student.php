@@ -23,6 +23,7 @@ use Illuminate\Database\Query\Builder;
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Feedback[] $feedback
  * @property-read string $display_name
  * @property-read bool $is_freshman
+ * @property-read bool $is_staff
  * @property-read string $masked_display_name
  * @property-read \App\Qrcode $qrcode
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Qrcode[] $qrcodes
@@ -172,6 +173,21 @@ class Student extends Model
         }
 
         return false;
+    }
+
+    /**
+     * 是否為攤位負責人
+     *
+     * @return bool
+     */
+    public function getIsStaffAttribute()
+    {
+        //無對應使用者
+        if (!$this->user_id) {
+            return false;
+        }
+
+        return $this->user->is_staff;
     }
 
     /**
