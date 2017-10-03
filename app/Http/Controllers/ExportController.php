@@ -167,7 +167,7 @@ class ExportController extends Controller
         $this->setTitleRow(
             $sheet,
             ['#', 'NID', '姓名', '班級', '科系', '學院', '入學年度', '性別', '新生', '攤位負責人',
-                '社團編號', '社團類型', '社團名稱', '電話', '信箱', '附加訊息']
+                '社團編號', '社團類型', '社團名稱', '電話', '信箱', '附加訊息', ]
         );
         foreach ($feedback as $feedbackItem) {
             /** @var Student $student */
