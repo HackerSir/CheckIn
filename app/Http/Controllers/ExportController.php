@@ -214,4 +214,55 @@ class ExportController extends Controller
         //下載
         return $this->downloadSpreadsheet($spreadsheet, '回饋資料.xlsx');
     }
+
+    /**
+     * 攤位負責人（僅匯出有對應學生之使用者名單）
+     *
+     * @return \Symfony\Component\HttpFoundation\BinaryFileResponse
+     */
+    public function clubStaff()
+    {
+        //建立
+        $spreadsheet = new Spreadsheet();
+        $sheet = $spreadsheet->getActiveSheet();
+        //建立匯出資料
+        $this->setTitleRow(
+            $sheet,
+            ['NID', '姓名', '班級', '科系', '學院', '入學年度', '性別', '新生', '社團編號', '社團類型', '社團名稱']
+        );
+        $users = User::with('student', 'club.clubType')->has('student')->has('club')->orderBy('club_id')->get();
+        foreach ($users as $user) {
+            /** @var Student $student */
+            $student = $user->student;
+            /** @var Club $club */
+            $club = $user->club;
+            $this->appendRow($sheet, [
+                $student->nid,
+                $student->name,
+                $student->class,
+                $student->unit_name,
+                $student->dept_name,
+                $student->in_year,
+                $student->gender,
+                $student->is_freshman,
+                $club->number,
+                $club->clubType->name ?? '',
+                $club->name,
+            ]);
+        }
+        //調整格式
+        $styleArray = [
+            'borders' => [
+                'right' => [
+                    'style' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THICK,
+                    'color' => ['argb' => '00000000'],
+                ],
+            ],
+        ];
+
+        $sheet->getStyleByColumnAndRow(7, 1, 7, $sheet->getHighestRow())->applyFromArray($styleArray);
+
+        //下載
+        return $this->downloadSpreadsheet($spreadsheet, '攤位負責人.xlsx');
+    }
 }

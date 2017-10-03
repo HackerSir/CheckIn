@@ -124,6 +124,7 @@ Route::group(['middleware' => ['auth', 'email']], function () {
         Route::post('club/import', 'ClubController@postImport')->name('club.import');
         Route::get('club/download-import-sample', 'ClubController@downloadImportSample')
             ->name('club.download-import-sample');
+        Route::post('export/club-staff', 'ExportController@clubStaff')->name('export.club-staff');
         Route::resource('club', 'ClubController', [
             'except' => [
                 'show',

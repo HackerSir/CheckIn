@@ -11,6 +11,11 @@
         <a href="{{ route('club.import') }}" class="btn btn-primary">
             <i class="fa fa-upload" aria-hidden="true"></i> 匯入
         </a>
+        {!! Form::open(['route' => ['export.club-staff'], 'style' => 'display: inline']) !!}
+        <button type="submit" class="btn btn-primary">
+            <i class="fa fa-download" aria-hidden="true"></i> 匯出攤位負責人
+        </button>
+        {!! Form::close() !!}
         <div class="card mt-1">
             <div class="card-block">
                 {!! $dataTable->table() !!}
