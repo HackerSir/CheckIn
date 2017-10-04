@@ -167,7 +167,7 @@ class ExportController extends Controller
         $this->setTitleRow(
             $sheet,
             ['#', 'NID', '姓名', '班級', '科系', '學院', '入學年度', '性別', '新生', '攤位負責人',
-                '社團編號', '社團類型', '社團名稱', '電話', '信箱', '附加訊息', ]
+                '社團編號', '社團類型', '社團名稱', '電話', '信箱', '附加訊息',]
         );
         foreach ($feedback as $feedbackItem) {
             /** @var Student $student */
@@ -210,6 +210,14 @@ class ExportController extends Controller
 
         $sheet->getStyleByColumnAndRow(9, 1, 9, $sheet->getHighestRow())->applyFromArray($styleArray);
         $sheet->getStyleByColumnAndRow(12, 1, 12, $sheet->getHighestRow())->applyFromArray($styleArray);
+
+        //若無管理權限
+        if (!\Laratrust::can('feedback.manage')) {
+            //移除「攤位負責人」欄位
+            $sheet->removeColumn('J');
+            //補回被移除的分隔線
+            $sheet->getStyleByColumnAndRow(8, 1, 8, $sheet->getHighestRow())->applyFromArray($styleArray);
+        }
 
         //下載
         return $this->downloadSpreadsheet($spreadsheet, '回饋資料.xlsx');
