@@ -47,7 +47,7 @@ class UsersDataTable extends DataTable
      */
     public function query(User $model)
     {
-        return $model->newQuery()->with('roles');
+        return $model->newQuery()->with('roles', 'club.clubType');
     }
 
     /**
