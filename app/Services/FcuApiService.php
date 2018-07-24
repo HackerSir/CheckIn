@@ -40,7 +40,7 @@ class FcuApiService extends Service
         try {
             //送出請求並取得結果
             $response = $client->request('GET', $apiUrl, $option);
-        } catch (ClientException|GuzzleException $e) {
+        } catch (ClientException | GuzzleException $e) {
             //忽略例外
             $response = $e->getResponse();
         }
@@ -85,7 +85,7 @@ class FcuApiService extends Service
         try {
             //送出請求並取得結果
             $response = $client->request('GET', $apiUrl, $option);
-        } catch (ClientException|GuzzleException $e) {
+        } catch (ClientException | GuzzleException $e) {
             //忽略例外
             $response = $e->getResponse();
         }
