@@ -1,7 +1,7 @@
 # CheckIn2017
 [![StyleCI](https://github.styleci.io/repos/96743786/shield?branch=2017)](https://github.styleci.io/repos/96743786?branch=2017)
-[![codecov](https://codecov.io/gh/HackerSir/CheckIn/branch/master/graph/badge.svg)](https://codecov.io/gh/HackerSir/CheckIn)
-[![Build Status](https://travis-ci.org/HackerSir/CheckIn.svg)](https://travis-ci.org/HackerSir/CheckIn)
+[![codecov](https://codecov.io/gh/HackerSir/CheckIn/branch/2017/graph/badge.svg)](https://codecov.io/gh/HackerSir/CheckIn/branch/2017)
+[![Build Status](https://api.travis-ci.org/HackerSir/CheckIn.svg?branch=2017)](https://travis-ci.org/HackerSir/CheckIn)
 [![License](https://img.shields.io/github/license/HackerSir/CheckIn.svg)](https://raw.githubusercontent.com/HackerSir/CheckIn/master/LICENSE)
 
 2017 學生社團博覽會 打卡集點抽獎
