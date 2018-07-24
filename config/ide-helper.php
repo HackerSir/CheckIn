@@ -14,6 +14,8 @@ return [
     'filename' => '_ide_helper',
     'format'   => 'php',
 
+    'meta_filename' => '.phpstorm.meta.php',
+
     /*
     |--------------------------------------------------------------------------
     | Fluent helpers
@@ -103,7 +105,7 @@ return [
     |
     */
 
-    'interfaces' => [
+    'interfaces'                  => [
 
     ],
 
@@ -133,8 +135,7 @@ return [
     |  ),
     |
     */
-
-    'custom_db_types' => [
+    'custom_db_types'             => [
 
     ],
 
@@ -162,7 +163,6 @@ return [
      | Note, it is currently an all-or-nothing option.
      |
      */
-
     'model_camel_case_properties' => false,
 
     /*
@@ -173,8 +173,7 @@ return [
     | Cast the given "real type" to the given "type".
     |
     */
-
-    'type_overrides' => [
+    'type_overrides'              => [
         'integer' => 'int',
         'boolean' => 'bool',
     ],
