@@ -5,9 +5,9 @@ namespace App\DataTables\Scopes;
 use App\Club;
 use App\Feedback;
 use App\Student;
-use Yajra\DataTables\Contracts\DataTableScopeContract;
+use Yajra\DataTables\Contracts\DataTableScope;
 
-class FeedbackFilterScope implements DataTableScopeContract
+class FeedbackFilterScope implements DataTableScope
 {
     /**
      * @var Club
