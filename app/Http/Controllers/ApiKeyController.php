@@ -51,6 +51,7 @@ class ApiKeyController extends Controller
      *
      * @param  \App\ApiKey $apiKey
      * @return \Illuminate\Http\Response
+     * @throws \Exception
      */
     public function destroy(ApiKey $apiKey)
     {

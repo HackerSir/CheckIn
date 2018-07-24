@@ -5,7 +5,7 @@
                 <div class="col-4" style="padding: 0">
                     <div class="text-center">
                         <img :src="club.image" class="img-fluid" v-if="club.image">
-                        <img data-src="holder.js/160x160?random=yes&auto=yes&text=沒有圖片" class="img-fluid holder"
+                        <img src="" data-src="holder.js/160x160?random=yes&auto=yes&text=沒有圖片" class="img-fluid holder"
                              v-else>
                     </div>
                 </div>

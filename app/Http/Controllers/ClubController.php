@@ -13,7 +13,7 @@ use App\Student;
 use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-use PhpOffice\PhpSpreadsheet\RichText;
+use PhpOffice\PhpSpreadsheet\RichText\RichText;
 
 class ClubController extends Controller
 {
@@ -44,6 +44,7 @@ class ClubController extends Controller
      * @param  \Illuminate\Http\Request $request
      * @param ImgurImageService $imgurImageService
      * @return \Illuminate\Http\Response
+     * @throws \Exception
      */
     public function store(Request $request, ImgurImageService $imgurImageService)
     {
@@ -98,6 +99,7 @@ class ClubController extends Controller
      * @param  \App\Club $club
      * @param ImgurImageService $imgurImageService
      * @return \Illuminate\Http\Response
+     * @throws \Exception
      */
     public function update(Request $request, Club $club, ImgurImageService $imgurImageService)
     {
@@ -164,6 +166,7 @@ class ClubController extends Controller
      *
      * @param  \App\Club $club
      * @return \Illuminate\Http\Response
+     * @throws \Exception
      */
     public function destroy(Club $club)
     {

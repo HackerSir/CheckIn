@@ -7,7 +7,7 @@ use App\ExtraTicket;
 use App\Services\FileService;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
-use PhpOffice\PhpSpreadsheet\RichText;
+use PhpOffice\PhpSpreadsheet\RichText\RichText;
 
 class ExtraTicketController extends Controller
 {
@@ -92,6 +92,7 @@ class ExtraTicketController extends Controller
      *
      * @param  \App\ExtraTicket $extraTicket
      * @return \Illuminate\Http\Response
+     * @throws \Exception
      */
     public function destroy(ExtraTicket $extraTicket)
     {

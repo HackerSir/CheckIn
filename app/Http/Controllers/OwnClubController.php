@@ -26,6 +26,7 @@ class OwnClubController extends Controller
      * @param  \Illuminate\Http\Request $request
      * @param ImgurImageService $imgurImageService
      * @return \Illuminate\Http\Response
+     * @throws \Exception
      */
     public function update(Request $request, ImgurImageService $imgurImageService)
     {

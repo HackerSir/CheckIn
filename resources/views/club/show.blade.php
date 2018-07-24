@@ -38,7 +38,7 @@
                         @if($club->imgurImage)
                             <img src="{{ $club->imgurImage->thumbnail('l') }}" class="img-fluid">
                         @else
-                            <img data-src="holder.js/400x300?random=yes&auto=yes&text=沒有圖片" class="img-fluid">
+                            <img src="" data-src="holder.js/400x300?random=yes&auto=yes&text=沒有圖片" class="img-fluid">
                         @endif
                     </div>
                     <div class="col-12 col-lg-7 mt-1">

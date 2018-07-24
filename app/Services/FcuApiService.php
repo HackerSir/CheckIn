@@ -5,6 +5,7 @@ namespace App\Services;
 use Exception;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ClientException;
+use GuzzleHttp\Exception\GuzzleException;
 use Yish\Generators\Foundation\Service\Service;
 
 class FcuApiService extends Service
@@ -39,7 +40,7 @@ class FcuApiService extends Service
         try {
             //送出請求並取得結果
             $response = $client->request('GET', $apiUrl, $option);
-        } catch (ClientException $e) {
+        } catch (ClientException|GuzzleException $e) {
             //忽略例外
             $response = $e->getResponse();
         }
@@ -84,7 +85,7 @@ class FcuApiService extends Service
         try {
             //送出請求並取得結果
             $response = $client->request('GET', $apiUrl, $option);
-        } catch (ClientException $e) {
+        } catch (ClientException|GuzzleException $e) {
             //忽略例外
             $response = $e->getResponse();
         }

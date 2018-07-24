@@ -109,6 +109,7 @@ class RoleController extends Controller
      *
      * @param Role $role
      * @return \Illuminate\Http\Response
+     * @throws \Exception
      */
     public function destroy(Role $role)
     {

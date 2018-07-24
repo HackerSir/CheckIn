@@ -76,6 +76,7 @@ class QrcodeSetController extends Controller
      * @param QrcodeSet $qrcodeSet
      * @param FileService $fileService
      * @return \Illuminate\Http\Response
+     * @throws \PhpOffice\PhpWord\Exception\Exception
      */
     public function download(QrcodeSet $qrcodeSet, FileService $fileService)
     {

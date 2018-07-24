@@ -8,6 +8,10 @@ use App\User;
 
 class ClubObserver
 {
+    /**
+     * @param Club $club
+     * @throws \Exception
+     */
     public function deleting(Club $club)
     {
         //刪除圖片

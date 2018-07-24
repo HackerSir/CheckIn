@@ -102,6 +102,7 @@ class UserController extends Controller
      *
      * @param User $user
      * @return \Illuminate\Http\Response
+     * @throws \Exception
      */
     public function destroy(User $user)
     {

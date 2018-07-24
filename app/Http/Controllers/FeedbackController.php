@@ -29,7 +29,7 @@ class FeedbackController extends Controller
             $user = auth()->user();
             if ($user->club || $user->student) {
                 //檢查檢視與下載期限
-                $feedbackDownloadExpiredAt = new \Carbon\Carbon(Setting::get('feedback_download_expired_at'));
+                $feedbackDownloadExpiredAt = new Carbon(Setting::get('feedback_download_expired_at'));
                 if (Carbon::now()->gt($feedbackDownloadExpiredAt)) {
                     return back()->with('warning', '已超過檢視期限，若需查看資料，請聯繫各委會輔導老師');
                 }
@@ -144,7 +144,7 @@ class FeedbackController extends Controller
                 abort(403);
             }
             //檢查檢視與下載期限
-            $feedbackDownloadExpiredAt = new \Carbon\Carbon(Setting::get('feedback_download_expired_at'));
+            $feedbackDownloadExpiredAt = new Carbon(Setting::get('feedback_download_expired_at'));
             if (Carbon::now()->gt($feedbackDownloadExpiredAt)) {
                 return back()->with('warning', '已超過檢視期限，若需查看資料，請聯繫各委會輔導老師');
             }

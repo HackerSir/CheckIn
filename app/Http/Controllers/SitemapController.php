@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Club;
-use Doctrine\Common\Collections\Collection;
+use Illuminate\Support\Collection;
 
 class SitemapController extends Controller
 {

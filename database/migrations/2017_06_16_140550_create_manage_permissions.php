@@ -62,6 +62,11 @@ class CreateManagePermissions extends Migration
      * Reverse the migrations.
      *
      * @return void
+     * @throws Exception
+     * @throws Exception
+     * @throws Exception
+     * @throws Exception
+     * @throws Exception
      */
     public function down()
     {

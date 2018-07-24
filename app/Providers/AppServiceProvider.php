@@ -21,6 +21,7 @@ class AppServiceProvider extends ServiceProvider
      * Bootstrap any application services.
      *
      * @return void
+     * @throws \Monolog\Handler\MissingExtensionException
      */
     public function boot()
     {

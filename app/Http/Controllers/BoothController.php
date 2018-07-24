@@ -7,7 +7,7 @@ use App\DataTables\BoothsDataTable;
 use App\Services\FileService;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
-use PhpOffice\PhpSpreadsheet\RichText;
+use PhpOffice\PhpSpreadsheet\RichText\RichText;
 
 class BoothController extends Controller
 {
@@ -100,6 +100,7 @@ class BoothController extends Controller
      *
      * @param  \App\Booth $booth
      * @return \Illuminate\Http\Response
+     * @throws \Exception
      */
     public function destroy(Booth $booth)
     {

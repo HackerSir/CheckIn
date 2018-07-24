@@ -81,7 +81,8 @@ class LaravelMenu
                         }
 
                         if (Laratrust::can('extra-ticket.manage')) {
-                            $activityMenu->add('工作人員抽獎編號管理', ['route' => 'extra-ticket.index'])->active('extra-ticket/*');
+                            $activityMenu->add('工作人員抽獎編號管理', ['route' => 'extra-ticket.index'])
+                                ->active('extra-ticket/*');
                         }
 
                         $this->addDivider($activityMenu);

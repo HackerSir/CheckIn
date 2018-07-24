@@ -11,7 +11,7 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
-use PhpOffice\PhpSpreadsheet\Worksheet;
+use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 use Setting;
 
 class ExportController extends Controller
@@ -21,6 +21,7 @@ class ExportController extends Controller
      * @param Spreadsheet $spreadsheet 欲下載的Spreadsheet
      * @param string|null $fileName 檔名
      * @return \Symfony\Component\HttpFoundation\BinaryFileResponse
+     * @throws \PhpOffice\PhpSpreadsheet\Exception
      */
     private function downloadSpreadsheet(Spreadsheet $spreadsheet, $fileName = null)
     {
@@ -80,6 +81,7 @@ class ExportController extends Controller
      * 打卡紀錄
      *
      * @return \Symfony\Component\HttpFoundation\BinaryFileResponse
+     * @throws \PhpOffice\PhpSpreadsheet\Exception
      */
     public function record()
     {
@@ -135,6 +137,7 @@ class ExportController extends Controller
      * 回饋資料
      *
      * @return \Symfony\Component\HttpFoundation\BinaryFileResponse
+     * @throws \PhpOffice\PhpSpreadsheet\Exception
      */
     public function feedback()
     {
@@ -146,7 +149,7 @@ class ExportController extends Controller
             $user = auth()->user();
             if ($user->club) {
                 //檢查檢視與下載期限
-                $feedbackDownloadExpiredAt = new \Carbon\Carbon(Setting::get('feedback_download_expired_at'));
+                $feedbackDownloadExpiredAt = new Carbon(Setting::get('feedback_download_expired_at'));
                 if (Carbon::now()->gt($feedbackDownloadExpiredAt)) {
                     return back()->with('warning', '已超過檢視期限，若需查看資料，請聯繫各委會輔導老師');
                 }
@@ -227,6 +230,7 @@ class ExportController extends Controller
      * 攤位負責人（僅匯出有對應學生之使用者名單）
      *
      * @return \Symfony\Component\HttpFoundation\BinaryFileResponse
+     * @throws \PhpOffice\PhpSpreadsheet\Exception
      */
     public function clubStaff()
     {

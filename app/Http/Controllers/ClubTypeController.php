@@ -119,6 +119,7 @@ class ClubTypeController extends Controller
      *
      * @param  \App\ClubType $clubType
      * @return \Illuminate\Http\Response
+     * @throws \Exception
      */
     public function destroy(ClubType $clubType)
     {
