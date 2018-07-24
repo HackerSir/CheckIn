@@ -2,7 +2,7 @@
 
 namespace App\DataTables\Scopes;
 
-use Yajra\Datatables\Contracts\DataTableScopeContract;
+use Yajra\DataTables\Contracts\DataTableScopeContract;
 
 class QrcodeQrcodeSetScope implements DataTableScopeContract
 {

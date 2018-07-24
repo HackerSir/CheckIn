@@ -4,19 +4,22 @@ namespace App\DataTables;
 
 use App\User;
 use Illuminate\Database\Eloquent\Builder;
-use Yajra\Datatables\Services\DataTable;
+use Yajra\DataTables\EloquentDataTable;
+use Yajra\DataTables\Services\DataTable;
 
 class UsersDataTable extends DataTable
 {
     /**
-     * Display ajax response.
+     * Build DataTable class.
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @param mixed $query Results from query() method.
+     * @return \Yajra\DataTables\DataTableAbstract
      */
-    public function ajax()
+    public function dataTable($query)
     {
-        return $this->datatables
-            ->eloquent($this->query())
+        $dataTable = new EloquentDataTable($query);
+
+        return $dataTable
             ->addColumn('action', 'user.datatables.action')
             ->editColumn('name', 'user.datatables.name')
             ->editColumn('email', 'user.datatables.email')
@@ -33,27 +36,24 @@ class UsersDataTable extends DataTable
                         ->whereRaw('clubs.name LIKE ?', ['%' . $keyword . '%']);
                 });
             })
-            ->escapeColumns([])
-            ->make(true);
+            ->escapeColumns([]);
     }
 
     /**
      * Get the query object to be processed by dataTables.
      *
+     * @param User $model
      * @return \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Query\Builder|\Illuminate\Support\Collection
      */
-    public function query()
+    public function query(User $model)
     {
-        /* @var Builder $query */
-        $query = User::with('roles');
-
-        return $this->applyScopes($query);
+        return $model->newQuery()->with('roles');
     }
 
     /**
      * Optional method if you want to use html builder.
      *
-     * @return \Yajra\Datatables\Html\Builder
+     * @return \Yajra\DataTables\Html\Builder
      */
     public function html()
     {

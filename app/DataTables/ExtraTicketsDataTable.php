@@ -3,19 +3,22 @@
 namespace App\DataTables;
 
 use App\ExtraTicket;
-use Yajra\Datatables\Services\DataTable;
+use Yajra\DataTables\EloquentDataTable;
+use Yajra\DataTables\Services\DataTable;
 
 class ExtraTicketsDataTable extends DataTable
 {
     /**
      * Build DataTable class.
      *
-     * @return \Yajra\Datatables\Engines\BaseEngine
+     * @param mixed $query Results from query() method.
+     * @return \Yajra\DataTables\DataTableAbstract
      */
-    public function dataTable()
+    public function dataTable($query)
     {
-        return $this->datatables
-            ->eloquent($this->query())
+        $dataTable = new EloquentDataTable($query);
+
+        return $dataTable
             ->addColumn('action', 'extra-ticket.datatables.action')
             ->escapeColumns([]);
     }
@@ -23,20 +26,18 @@ class ExtraTicketsDataTable extends DataTable
     /**
      * Get the query object to be processed by dataTables.
      *
+     * @param ExtraTicket $model
      * @return \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Query\Builder|\Illuminate\Support\Collection
      */
-    public function query()
+    public function query(ExtraTicket $model)
     {
-        /** @var ExtraTicket|\Illuminate\Database\Eloquent\Builder $query */
-        $query = ExtraTicket::query()->select(array_keys($this->getColumns()));
-
-        return $this->applyScopes($query);
+        return $model->newQuery()->select(array_keys($this->getColumns()));
     }
 
     /**
      * Optional method if you want to use html builder.
      *
-     * @return \Yajra\Datatables\Html\Builder
+     * @return \Yajra\DataTables\Html\Builder
      */
     public function html()
     {

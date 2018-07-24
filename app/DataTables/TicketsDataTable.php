@@ -4,19 +4,22 @@ namespace App\DataTables;
 
 use App\Ticket;
 use Illuminate\Database\Query\Builder;
-use Yajra\Datatables\Services\DataTable;
+use Yajra\DataTables\EloquentDataTable;
+use Yajra\DataTables\Services\DataTable;
 
 class TicketsDataTable extends DataTable
 {
     /**
      * Build DataTable class.
      *
-     * @return \Yajra\Datatables\Engines\BaseEngine
+     * @param mixed $query Results from query() method.
+     * @return \Yajra\DataTables\DataTableAbstract
      */
-    public function dataTable()
+    public function dataTable($query)
     {
-        return $this->datatables
-            ->eloquent($this->query())
+        $dataTable = new EloquentDataTable($query);
+
+        return $dataTable
             ->editColumn('student_id', function ($ticket) {
                 return view('ticket.datatables.student', compact('ticket'))->render();
             })
@@ -37,20 +40,18 @@ class TicketsDataTable extends DataTable
     /**
      * Get the query object to be processed by dataTables.
      *
+     * @param Ticket $model
      * @return \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Query\Builder|\Illuminate\Support\Collection
      */
-    public function query()
+    public function query(Ticket $model)
     {
-        /** @var Ticket|\Illuminate\Database\Eloquent\Builder $query */
-        $query = Ticket::with('student')->select(array_keys($this->getColumns()));
-
-        return $this->applyScopes($query);
+        return $model->newQuery()->with('student')->select(array_keys($this->getColumns()));
     }
 
     /**
      * Optional method if you want to use html builder.
      *
-     * @return \Yajra\Datatables\Html\Builder
+     * @return \Yajra\DataTables\Html\Builder
      */
     public function html()
     {

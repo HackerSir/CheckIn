@@ -182,26 +182,8 @@ return [
         /*
          * Package Service Providers...
          */
-        Laravel\Tinker\TinkerServiceProvider::class,
-        Collective\Html\HtmlServiceProvider::class,
-        Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
-        Thomaswelton\LaravelGravatar\LaravelGravatarServiceProvider::class,
-        GrahamCampbell\Throttle\ThrottleServiceProvider::class,
-        Lavary\Menu\ServiceProvider::class,
-        Arcanedev\LogViewer\LogViewerServiceProvider::class,
-        Yajra\Datatables\DatatablesServiceProvider::class,
-        Yajra\Datatables\HtmlServiceProvider::class,
-        Yajra\Datatables\ButtonsServiceProvider::class,
-        Recca0120\LaravelTracy\LaravelTracyServiceProvider::class,
-        Laratrust\LaratrustServiceProvider::class,
-        PragmaRX\Google2FALaravel\ServiceProvider::class,
-        Mojoblanco\Domainos\DomainosServiceProvider::class,
         Milon\Barcode\BarcodeServiceProvider::class,
-        anlutro\LaravelSettings\ServiceProvider::class,
         Redeman\Imgur\ImgurServiceProvider::class,
-        BackupManager\Laravel\Laravel5ServiceProvider::class,
-        TomLingham\Searchy\SearchyServiceProvider::class,
-        Roumen\Sitemap\SitemapServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -260,19 +242,11 @@ return [
         'URL'            => Illuminate\Support\Facades\URL::class,
         'Validator'      => Illuminate\Support\Facades\Validator::class,
         'View'           => Illuminate\Support\Facades\View::class,
-        'Form'           => Collective\Html\FormFacade::class,
-        'Html'           => Collective\Html\HtmlFacade::class,
-        'Gravatar'       => Thomaswelton\LaravelGravatar\Facades\Gravatar::class,
         'Throttle'       => GrahamCampbell\Throttle\Facades\Throttle::class,
-        'Menu'           => Lavary\Menu\Facade::class,
-        'Laratrust'      => Laratrust\LaratrustFacade::class,
-        'Google2FA'      => PragmaRX\Google2FALaravel\Facade::class,
         'DNS1D'          => Milon\Barcode\Facades\DNS1DFacade::class,
         'DNS2D'          => Milon\Barcode\Facades\DNS2DFacade::class,
-        'Setting'        => anlutro\LaravelSettings\Facade::class,
         'GoogleApi'      => App\CustomFacades\Facades\GoogleApi::class,
         'ExtendThrottle' => App\ExtendThrottle\Facades\ExtendThrottle::class,
-        'Searchy'        => TomLingham\Searchy\Facades\Searchy::class,
     ],
 
 ];

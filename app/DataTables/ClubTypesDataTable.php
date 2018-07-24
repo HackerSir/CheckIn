@@ -3,19 +3,22 @@
 namespace App\DataTables;
 
 use App\ClubType;
-use Yajra\Datatables\Services\DataTable;
+use Yajra\DataTables\EloquentDataTable;
+use Yajra\DataTables\Services\DataTable;
 
 class ClubTypesDataTable extends DataTable
 {
     /**
      * Build DataTable class.
      *
-     * @return \Yajra\Datatables\Engines\BaseEngine
+     * @param mixed $query Results from query() method.
+     * @return \Yajra\DataTables\DataTableAbstract
      */
-    public function dataTable()
+    public function dataTable($query)
     {
-        return $this->datatables
-            ->eloquent($this->query())
+        $dataTable = new EloquentDataTable($query);
+
+        return $dataTable
             ->addColumn('action', 'club-type.datatables.action')
             ->editColumn('name', 'club-type.datatables.name')
             ->editColumn('is_counted', 'club-type.datatables.is_counted')
@@ -25,20 +28,18 @@ class ClubTypesDataTable extends DataTable
     /**
      * Get the query object to be processed by dataTables.
      *
+     * @param ClubType $model
      * @return \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Query\Builder|\Illuminate\Support\Collection
      */
-    public function query()
+    public function query(ClubType $model)
     {
-        /** @var ClubType|\Illuminate\Database\Eloquent\Builder $query */
-        $query = ClubType::query();
-
-        return $this->applyScopes($query);
+        return $model->newQuery();
     }
 
     /**
      * Optional method if you want to use html builder.
      *
-     * @return \Yajra\Datatables\Html\Builder
+     * @return \Yajra\DataTables\Html\Builder
      */
     public function html()
     {

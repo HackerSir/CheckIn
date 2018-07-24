@@ -3,39 +3,40 @@
 namespace App\DataTables;
 
 use App\ApiKey;
-use Yajra\Datatables\Services\DataTable;
+use Yajra\DataTables\EloquentDataTable;
+use Yajra\DataTables\Services\DataTable;
 
 class ApiKeysDataTable extends DataTable
 {
     /**
      * Build DataTable class.
      *
-     * @return \Yajra\Datatables\Engines\BaseEngine
+     * @param mixed $query Results from query() method.
+     * @return \Yajra\DataTables\DataTableAbstract
      */
-    public function dataTable()
+    public function dataTable($query)
     {
-        return $this->datatables
-            ->eloquent($this->query())
+        $dataTable = new EloquentDataTable($query);
+
+        return $dataTable
             ->addColumn('action', 'api-key.datatables.action');
     }
 
     /**
      * Get the query object to be processed by dataTables.
      *
+     * @param ApiKey $model
      * @return \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Query\Builder|\Illuminate\Support\Collection
      */
-    public function query()
+    public function query(ApiKey $model)
     {
-        /** @var ApiKey|\Illuminate\Database\Eloquent\Builder $query */
-        $query = ApiKey::select(array_keys($this->getColumns()));
-
-        return $this->applyScopes($query);
+        return $model->newQuery()->select(array_keys($this->getColumns()));
     }
 
     /**
      * Optional method if you want to use html builder.
      *
-     * @return \Yajra\Datatables\Html\Builder
+     * @return \Yajra\DataTables\Html\Builder
      */
     public function html()
     {

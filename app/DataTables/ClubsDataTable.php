@@ -4,19 +4,22 @@ namespace App\DataTables;
 
 use App\Club;
 use Illuminate\Database\Query\Builder;
-use Yajra\Datatables\Services\DataTable;
+use Yajra\DataTables\EloquentDataTable;
+use Yajra\DataTables\Services\DataTable;
 
 class ClubsDataTable extends DataTable
 {
     /**
      * Build DataTable class.
      *
-     * @return \Yajra\Datatables\Engines\BaseEngine
+     * @param mixed $query Results from query() method.
+     * @return \Yajra\DataTables\DataTableAbstract
      */
-    public function dataTable()
+    public function dataTable($query)
     {
-        return $this->datatables
-            ->eloquent($this->query())
+        $dataTable = new EloquentDataTable($query);
+
+        return $dataTable
             ->addColumn('action', 'club.datatables.action')
             ->editColumn('club_type_id', function ($club) {
                 return view('club.datatables.club-type', compact('club'))->render();
@@ -54,20 +57,18 @@ class ClubsDataTable extends DataTable
     /**
      * Get the query object to be processed by dataTables.
      *
+     * @param Club $model
      * @return \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Query\Builder|\Illuminate\Support\Collection
      */
-    public function query()
+    public function query(Club $model)
     {
-        /** @var Club|\Illuminate\Database\Eloquent\Builder $query */
-        $query = Club::with('clubType', 'booths', 'imgurImage')->withCount('records', 'feedback');
-
-        return $this->applyScopes($query);
+        return $model->newQuery()->with('clubType', 'booths', 'imgurImage')->withCount('records', 'feedback');
     }
 
     /**
      * Optional method if you want to use html builder.
      *
-     * @return \Yajra\Datatables\Html\Builder
+     * @return \Yajra\DataTables\Html\Builder
      */
     public function html()
     {

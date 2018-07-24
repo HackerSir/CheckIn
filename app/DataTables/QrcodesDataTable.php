@@ -4,19 +4,22 @@ namespace App\DataTables;
 
 use App\Qrcode;
 use Illuminate\Database\Query\Builder;
-use Yajra\Datatables\Services\DataTable;
+use Yajra\DataTables\EloquentDataTable;
+use Yajra\DataTables\Services\DataTable;
 
 class QrcodesDataTable extends DataTable
 {
     /**
      * Build DataTable class.
      *
-     * @return \Yajra\Datatables\Engines\BaseEngine
+     * @param mixed $query Results from query() method.
+     * @return \Yajra\DataTables\DataTableAbstract
      */
-    public function dataTable()
+    public function dataTable($query)
     {
-        return $this->datatables
-            ->eloquent($this->query())
+        $dataTable = new EloquentDataTable($query);
+
+        return $dataTable
             ->addColumn('action', 'qrcode.datatables.action')
             ->editColumn('code', function ($qrcode) {
                 return view('qrcode.datatables.code', compact('qrcode'))->render();
@@ -44,19 +47,18 @@ class QrcodesDataTable extends DataTable
     /**
      * Get the query object to be processed by dataTables.
      *
+     * @param Qrcode $model
      * @return \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Query\Builder|\Illuminate\Support\Collection
      */
-    public function query()
+    public function query(Qrcode $model)
     {
-        $query = Qrcode::with('student.qrcode');
-
-        return $this->applyScopes($query);
+        return $model->newQuery()->with('student.qrcode');
     }
 
     /**
      * Optional method if you want to use html builder.
      *
-     * @return \Yajra\Datatables\Html\Builder
+     * @return \Yajra\DataTables\Html\Builder
      */
     public function html()
     {
