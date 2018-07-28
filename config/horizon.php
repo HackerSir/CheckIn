@@ -74,20 +74,20 @@ return [
         'production' => [
             'supervisor-1' => [
                 'connection' => 'redis',
-                'queue' => ['default'],
-                'balance' => 'simple',
-                'processes' => 2,
-                'tries' => 3,
+                'queue'      => ['default'],
+                'balance'    => 'simple',
+                'processes'  => 2,
+                'tries'      => 3,
             ],
         ],
 
         'local' => [
             'supervisor-1' => [
                 'connection' => 'redis',
-                'queue' => ['default'],
-                'balance' => 'simple',
-                'processes' => 1,
-                'tries' => 3,
+                'queue'      => ['default'],
+                'balance'    => 'simple',
+                'processes'  => 1,
+                'tries'      => 3,
             ],
         ],
     ],
@@ -102,5 +102,5 @@ return [
     |
     */
 
-    'middleware' => ['web', 'permission:horizon.manage']
+    'middleware' => ['web', 'permission:horizon.manage'],
 ];
