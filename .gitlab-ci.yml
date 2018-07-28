@@ -1,0 +1,107 @@
+stages:
+  - test
+  - sonarqube
+  - deploy
+
+variables:
+  # .env Settings
+  ## DB Connection
+  DB_DATABASE: homestead
+  DB_USERNAME: homestead
+  DB_PASSWORD: secret
+
+  ## Other
+  CACHE_DRIVER: array
+  SESSION_DRIVER: array
+  MAIL_DRIVER: log
+
+  # MySQL Service
+  MYSQL_ROOT_PASSWORD: root_password
+  MYSQL_DATABASE: $DB_DATABASE
+  MYSQL_USER: $DB_USERNAME
+  MYSQL_PASSWORD: $DB_PASSWORD
+
+  # Postgres Service
+  POSTGRES_DB: $DB_DATABASE
+  POSTGRES_USER: $DB_USERNAME
+  POSTGRES_PASSWORD: $DB_PASSWORD
+
+.job_template: &job_template
+  stage: test
+  services:
+    - mysql:5.7
+  variables:
+    DB_CONNECTION: mysql
+    DB_HOST: mysql
+    DB_PORT: '3306'
+  cache: # Speed up builds
+    key: $CI_BUILD_REF_NAME
+    paths:
+      - vendor
+      - node_modules
+  script:
+    # Config php
+    - echo "short_open_tag = Off" | sudo tee /usr/local/etc/php/php.ini
+    # Install
+    - composer install --prefer-dist --no-ansi --no-interaction --no-progress --no-scripts --no-suggest
+    - yarn install
+    - yarn run dev
+    - cp .env.example .env
+    - php artisan key:generate
+    - php artisan config:clear
+    - php artisan migrate:refresh
+    # Test
+    - ./vendor/phpunit/phpunit/phpunit
+          --coverage-text
+          --coverage-html=coverage
+          --coverage-clover phpunit.coverage.xml
+          --log-junit phpunit.report.xml
+          --stderr --colors=never
+  artifacts:
+    paths:
+      - coverage/
+      - phpunit.report.xml
+      - phpunit.coverage.xml
+      - storage/logs # for debugging
+    expire_in: 7 days
+    when: always
+
+php7.2:mysql:5.7:
+  <<: *job_template
+  image: edbizarro/gitlab-ci-pipeline-php:7.2
+
+sonarqube:
+  stage: sonarqube
+  image: danny50610/sonar-scanner
+  dependencies: ['php7.2:mysql:5.7']
+  cache:
+    key: $CI_COMMIT_REF_NAME
+    paths:
+      - .sonar
+  script:
+    - export SONAR_USER_HOME=$PWD/.sonar
+    - sonar-scanner -Dsonar.projectKey=$sonar_project_key
+                    -Dsonar.organization=$sonar_organization
+                    -Dsonar.host.url=$sonar_host_url
+                    -Dsonar.login=$sonar_login
+
+#deploy_production:
+#  tags:
+#    - deploy
+#  stage: deploy
+#  image: danny50610/gitlab-ci-laravel-deploy
+#  dependencies: []
+#  script:
+#    - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )'
+#    - eval $(ssh-agent -s)
+#    - ssh-add <(echo "$SSH_PRIVATE_KEY")
+#    - mkdir -p ~/.ssh
+#    - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
+#
+#    - ~/.composer/vendor/bin/envoy run deploy
+#  environment:
+#    name: production
+#    url: https://illya.tw
+#  when: manual
+#  only:
+#    - master
