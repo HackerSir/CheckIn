@@ -123,6 +123,13 @@ class LaravelMenu
                             $adminMenu->add('API Key 管理', ['route' => 'api-key.index'])->active('api-key/*');
                         }
 
+                        if (Laratrust::can('horizon.manage')) {
+                            $adminMenu->add(
+                                'Horizon <i class="fa fa-external-link" aria-hidden="true"></i>',
+                                ['route' => 'horizon.index']
+                            )->link->attr('target', '_blank');
+                        }
+
                         if (Laratrust::can('log-viewer.access')) {
                             $adminMenu->add(
                                 '記錄檢視器 <i class="fa fa-external-link" aria-hidden="true"></i>',
