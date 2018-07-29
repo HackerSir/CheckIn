@@ -327,3 +327,5 @@ storage/settings.json
 
 public/build-js
 public/mix-manifest.json
+
+laravel-echo-server.json

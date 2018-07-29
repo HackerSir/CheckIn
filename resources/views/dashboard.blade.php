@@ -83,3 +83,7 @@
         </div>
     </div>
 @endsection
+
+@section('js')
+    <script src="{{ asset(mix('/build-js/checkin.js')) }}"></script>
+@endsection
