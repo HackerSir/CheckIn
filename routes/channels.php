@@ -11,6 +11,9 @@
 |
 */
 
-Broadcast::channel('App.User.{id}', function ($user, $id) {
-    return (int) $user->id === (int) $id;
+use App\Student;
+use App\User;
+
+Broadcast::channel('student.{student}', function (User $user, Student $student) {
+    return $user->id == $student->user_id;
 });

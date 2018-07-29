@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Club;
+use App\Events\CheckInSuccess;
 use App\Qrcode;
 use App\Record;
 use App\User;
@@ -87,7 +88,7 @@ class QrcodeScanController extends Controller
         }
 
         //打卡
-        Record::query()->firstOrCreate([
+        $record = Record::query()->firstOrCreate([
             'student_id' => $qrcode->student->id,
             'club_id'    => $club->id,
         ], [
@@ -97,6 +98,8 @@ class QrcodeScanController extends Controller
         //重新取得資料
         $qrcode = $qrcode->fresh();
         view()->share(compact('qrcode'));
+
+        event(new CheckInSuccess($record));
 
         return view('qrcode-scan.scan')->with('level', 'success')->with('message', "在「{$club->name}」打卡完成");
     }
