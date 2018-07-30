@@ -164,7 +164,7 @@ class Student extends Model
             return false;
         }
         //檢查入學年度
-        if ($this->in_year == 106) {
+        if ($this->in_year == 107) {
             return true;
         }
         //檢查年級
