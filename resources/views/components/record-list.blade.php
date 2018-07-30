@@ -5,7 +5,7 @@
                 <h4>{{ link_to_route('clubs.show', $record->club->name, $record->club) }}
                     {!! $record->club->clubType->tag ?? '' !!}
                     @if(!$record->club->is_counted)
-                        <span class='badge badge-default'>不列入集點</span>
+                        <span class='badge badge-secondary'>不列入集點</span>
                     @endif
                 </h4>
                 <small>

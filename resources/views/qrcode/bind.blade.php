@@ -88,7 +88,7 @@
                     <ul>
                         @foreach($qrcodes as $qrcode)
                             <li>
-                                <span class="badge badge-default code">{{ $qrcode->code }}</span>
+                                <span class="badge badge-secondary code">{{ $qrcode->code }}</span>
                                 {{ $qrcode->student->display_name }}
                                 <br/>
                                 <small class="text-muted">
