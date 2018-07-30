@@ -96,7 +96,7 @@ class QrcodeScanController extends Controller
         ]);
 
         //重新取得資料
-        $qrcode = $qrcode->fresh();
+        $qrcode = Qrcode::with('student.records.club.clubType')->find($qrcode->id);
         view()->share(compact('qrcode'));
 
         event(new CheckInSuccess($record));
