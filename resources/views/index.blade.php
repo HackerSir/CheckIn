@@ -30,7 +30,7 @@
     @endif
     <div class="jumbotron mt-3">
         <h1>{{ config('app.cht_name') }}</h1>
-        <h3>2017 逢甲社團博覽會集點打卡</h3>
+        <h3>2018 逢甲社團博覽會集點打卡</h3>
         <a href="{{ route('oauth.index') }}" class="btn btn-primary btn-lg" title="Let's GO!!">GO!</a>
     </div>
     <div class="row mt-3 pb-3">
