@@ -11,7 +11,7 @@
                 </div>
                 <div class="col-8">
                     <h3 class="card-title">{{ club.name }}
-                        <span class='badge badge-default align-middle'
+                        <span class='badge badge-secondary align-middle'
                               :style="{'background-color':club.tag.color, 'font-size': '20px'}"
                               v-if="club.tag.name">
                             {{ club.tag.name }}
