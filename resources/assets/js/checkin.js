@@ -9,7 +9,7 @@ window.Echo = new Echo({
     host: process.env.MIX_ECHO_HOST
 });
 
-window.Echo.private('student.1')
+window.Echo.private('student.' + window.Laravel.student)
     .listen('CheckInSuccess', (e) => {
         console.log(e);
     });
