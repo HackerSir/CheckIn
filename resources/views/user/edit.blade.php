@@ -46,27 +46,26 @@
                             <div class="col-md-10" style="padding-top: calc(.5rem - 1px * 2);">
                                 @foreach($roles as $role)
                                     @if($user->id == Auth::user()->id && $role->name == 'Admin')
-                                        <label class="custom-control custom-checkbox">
+                                        <div class="custom-control custom-checkbox">
                                             <input type="checkbox" name="role[]" value="{{ $role->id }}"
-                                                   class="custom-control-input" @if($user->hasRole($role->name))
-                                                   checked disabled @endif>
-                                            <span class="custom-control-indicator"></span>
-                                            <span class="custom-control-description">
+                                                   class="custom-control-input" id="roleCheck{{ $role->id }}"
+                                                   @if($user->hasRole($role->name)) checked disabled @endif>
+                                            <label class="custom-control-label" for="roleCheck{{ $role->id }}">
                                                 {{ $role->display_name }}（{{ $role->description }}）
                                                 <i class="fa fa-exclamation-triangle text-danger" aria-hidden="true"
                                                    title="禁止解除自己的管理員職務"></i>
-                                            </span>
-                                        </label>
+                                            </label>
+                                        </div>
                                     @else
-                                        <label class="custom-control custom-checkbox">
+                                        <div class="custom-control custom-checkbox">
                                             <input type="checkbox" name="role[]" value="{{ $role->id }}"
-                                                   class="custom-control-input"
+                                                   class="custom-control-input" id="roleCheck{{ $role->id }}"
                                                    @if($user->hasRole($role->name)) checked @endif>
                                             <span class="custom-control-indicator"></span>
-                                            <span class="custom-control-description">
+                                            <label class="custom-control-label" for="roleCheck{{ $role->id }}">
                                                 {{ $role->display_name }}（{{ $role->description }}）
-                                            </span>
-                                        </label>
+                                            </label>
+                                        </div>
                                     @endif
                                     <br/>
                                 @endforeach

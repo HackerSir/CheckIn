@@ -49,13 +49,12 @@
                     <div class="form-group row{{ $errors->has('is_counted') ? ' has-danger' : '' }}">
                         <label for="is_counted" class="col-md-2 col-form-label"></label>
                         <div class="col-md-10">
-                            <label class="custom-control custom-checkbox">
-                                {{ Form::checkbox('is_counted', true, null, ['class' => 'custom-control-input']) }}
-                                <span class="custom-control-indicator"></span>
-                                <span class="custom-control-description">
+                            <div class="custom-control custom-checkbox">
+                                {{ Form::checkbox('is_counted', true, null, ['id' => 'is_counted', 'class' => 'custom-control-input']) }}
+                                <label class="custom-control-label" for="is_counted">
                                     列入抽獎集點
-                                </span>
-                            </label>
+                                </label>
+                            </div>
                         </div>
                     </div>
 

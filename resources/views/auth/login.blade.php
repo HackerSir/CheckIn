@@ -49,11 +49,12 @@
 
                         <div class="form-group row">
                             <div class="col-md-10 offset-md-2">
-                                <label class="custom-control custom-checkbox">
-                                    <input type="checkbox" name="remember" class="custom-control-input">
-                                    <span class="custom-control-indicator"></span>
-                                    <span class="custom-control-description">記住我</span>
-                                </label>
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" id="remember" name="remember" class="custom-control-input">
+                                    <label class="custom-control-label" for="remember">
+                                        記住我
+                                    </label>
+                                </div>
                             </div>
                         </div>
 
