@@ -2,7 +2,9 @@
 
 namespace App\DataTables;
 
+use App\Club;
 use App\Record;
+use App\Student;
 use Illuminate\Database\Query\Builder;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Services\DataTable;
@@ -25,13 +27,10 @@ class RecordsDataTable extends DataTable
             })
             ->filterColumn('student_id', function ($query, $keyword) {
                 /* @var Builder|Record $query */
-                $query->whereIn('student_id', function ($query) use ($keyword) {
-                    /* @var Builder $query */
-                    $query->select('students.id')
-                        ->from('students')
-                        ->join('records', 'students.id', '=', 'student_id')
-                        ->whereRaw('students.name LIKE ?', ['%' . $keyword . '%'])
-                        ->orWhereRaw('students.nid LIKE ?', ['%' . $keyword . '%']);
+                $query->whereHas('student', function ($query) use ($keyword) {
+                    /* @var Builder|Student $query */
+                    $query->where('name', 'like', '%' . $keyword . '%')
+                        ->orWhere('nid', 'like', '%' . $keyword . '%');
                 });
             })
             ->editColumn('club_id', function ($record) {
@@ -39,12 +38,9 @@ class RecordsDataTable extends DataTable
             })
             ->filterColumn('club_id', function ($query, $keyword) {
                 /* @var Builder|Record $query */
-                $query->whereIn('club_id', function ($query) use ($keyword) {
-                    /* @var Builder $query */
-                    $query->select('clubs.id')
-                        ->from('clubs')
-                        ->join('records', 'clubs.id', '=', 'club_id')
-                        ->whereRaw('clubs.name LIKE ?', ['%' . $keyword . '%']);
+                $query->whereHas('club', function ($query) use ($keyword) {
+                    /* @var Builder|Club $query */
+                    $query->where('name', 'like', '%' . $keyword . '%');
                 });
             })
             ->escapeColumns([]);

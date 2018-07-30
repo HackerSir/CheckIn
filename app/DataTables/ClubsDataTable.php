@@ -2,7 +2,9 @@
 
 namespace App\DataTables;
 
+use App\Booth;
 use App\Club;
+use App\ClubType;
 use Illuminate\Database\Query\Builder;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Services\DataTable;
@@ -26,12 +28,9 @@ class ClubsDataTable extends DataTable
             })
             ->filterColumn('club_type_id', function ($query, $keyword) {
                 /* @var Builder|Club $query */
-                $query->whereIn('club_type_id', function ($query) use ($keyword) {
-                    /* @var Builder $query */
-                    $query->select('club_types.id')
-                        ->from('club_types')
-                        ->join('clubs', 'club_types.id', '=', 'club_type_id')
-                        ->whereRaw('club_types.name LIKE ?', ['%' . $keyword . '%']);
+                $query->whereHas('clubType', function ($query) use ($keyword) {
+                    /* @var Builder|ClubType $query */
+                    $query->where('name', 'like', '%' . $keyword . '%');
                 });
             })
             ->editColumn('name', function ($club) {
@@ -42,12 +41,9 @@ class ClubsDataTable extends DataTable
             })
             ->filterColumn('booth', function ($query, $keyword) {
                 /* @var Builder|Club $query */
-                $query->whereIn('id', function ($query) use ($keyword) {
-                    /* @var Builder $query */
-                    $query->select('club_id')
-                        ->from('booths')
-                        ->join('clubs', 'clubs.id', '=', 'booths.club_id')
-                        ->whereRaw('booths.name LIKE ?', ['%' . $keyword . '%']);
+                $query->whereHas('booths', function ($query) use ($keyword) {
+                    /* @var Builder|Booth $query */
+                    $query->where('name', 'like', '%' . $keyword . '%');
                 });
             })
             ->editColumn('is_counted', 'club.datatables.is_counted')

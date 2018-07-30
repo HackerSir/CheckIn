@@ -2,7 +2,9 @@
 
 namespace App\DataTables;
 
+use App\Club;
 use App\Feedback;
+use App\Student;
 use Illuminate\Database\Query\Builder;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Services\DataTable;
@@ -26,13 +28,10 @@ class FeedbackDataTable extends DataTable
             })
             ->filterColumn('student_id', function ($query, $keyword) {
                 /* @var Builder|Feedback $query */
-                $query->whereIn('student_id', function ($query) use ($keyword) {
-                    /* @var Builder $query */
-                    $query->select('students.id')
-                        ->from('students')
-                        ->join('feedback', 'students.id', '=', 'student_id')
-                        ->whereRaw('students.name LIKE ?', ['%' . $keyword . '%'])
-                        ->orWhereRaw('students.nid LIKE ?', ['%' . $keyword . '%']);
+                $query->whereHas('student', function ($query) use ($keyword) {
+                    /* @var Builder|Student $query */
+                    $query->where('name', 'like', '%' . $keyword . '%')
+                        ->orWhere('nid', 'like', '%' . $keyword . '%');
                 });
             })
             ->addColumn('is_freshman', function ($feedback) {
@@ -44,12 +43,9 @@ class FeedbackDataTable extends DataTable
             })
             ->filterColumn('club_id', function ($query, $keyword) {
                 /* @var Builder|Feedback $query */
-                $query->whereIn('club_id', function ($query) use ($keyword) {
-                    /* @var Builder $query */
-                    $query->select('clubs.id')
-                        ->from('clubs')
-                        ->join('feedback', 'clubs.id', '=', 'club_id')
-                        ->whereRaw('clubs.name LIKE ?', ['%' . $keyword . '%']);
+                $query->whereHas('club', function ($query) use ($keyword) {
+                    /* @var Builder|Club $query */
+                    $query->where('name', 'like', '%' . $keyword . '%');
                 });
             })
             ->editColumn('message', function ($feedback) {

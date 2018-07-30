@@ -3,6 +3,7 @@
 namespace App\DataTables;
 
 use App\Qrcode;
+use App\Student;
 use Illuminate\Database\Query\Builder;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Services\DataTable;
@@ -29,13 +30,10 @@ class QrcodesDataTable extends DataTable
             })
             ->filterColumn('student_id', function ($query, $keyword) {
                 /* @var Builder|Qrcode $query */
-                $query->whereIn('student_id', function ($query) use ($keyword) {
-                    /* @var Builder $query */
-                    $query->select('students.id')
-                        ->from('students')
-                        ->join('qrcodes', 'students.id', '=', 'student_id')
-                        ->whereRaw('students.name LIKE ?', ['%' . $keyword . '%'])
-                        ->orWhereRaw('students.nid LIKE ?', ['%' . $keyword . '%']);
+                $query->whereHas('student', function ($query) use ($keyword) {
+                    /* @var Builder|Student $query */
+                    $query->where('name', 'like', '%' . $keyword . '%')
+                        ->orWhere('nid', 'like', '%' . $keyword . '%');
                 });
             })
             ->editColumn('is_last_one', function ($qrcode) {

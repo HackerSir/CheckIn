@@ -2,6 +2,7 @@
 
 namespace App\DataTables;
 
+use App\Club;
 use App\User;
 use Illuminate\Database\Eloquent\Builder;
 use Yajra\DataTables\EloquentDataTable;
@@ -28,12 +29,9 @@ class UsersDataTable extends DataTable
             })
             ->filterColumn('club_id', function ($query, $keyword) {
                 /* @var Builder|User $query */
-                $query->whereIn('club_id', function ($query) use ($keyword) {
-                    /* @var Builder $query */
-                    $query->select('clubs.id')
-                        ->from('clubs')
-                        ->join('users', 'clubs.id', '=', 'club_id')
-                        ->whereRaw('clubs.name LIKE ?', ['%' . $keyword . '%']);
+                $query->whereHas('club', function ($query) use ($keyword) {
+                    /* @var Builder|Club $query */
+                    $query->where('name', 'like', '%' . $keyword . '%');
                 });
             })
             ->escapeColumns([]);

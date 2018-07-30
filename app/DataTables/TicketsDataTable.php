@@ -2,6 +2,7 @@
 
 namespace App\DataTables;
 
+use App\Student;
 use App\Ticket;
 use Illuminate\Database\Query\Builder;
 use Yajra\DataTables\EloquentDataTable;
@@ -25,13 +26,10 @@ class TicketsDataTable extends DataTable
             })
             ->filterColumn('student_id', function ($query, $keyword) {
                 /* @var Builder|Ticket $query */
-                $query->whereIn('student_id', function ($query) use ($keyword) {
-                    /* @var Builder $query */
-                    $query->select('students.id')
-                        ->from('students')
-                        ->join('tickets', 'students.id', '=', 'student_id')
-                        ->whereRaw('students.name LIKE ?', ['%' . $keyword . '%'])
-                        ->orWhereRaw('students.nid LIKE ?', ['%' . $keyword . '%']);
+                $query->whereHas('student', function ($query) use ($keyword) {
+                    /* @var Builder|Student $query */
+                    $query->where('name', 'like', '%' . $keyword . '%')
+                        ->orWhere('nid', 'like', '%' . $keyword . '%');
                 });
             })
             ->escapeColumns([]);
