@@ -17,3 +17,7 @@ use App\User;
 Broadcast::channel('student.{student}', function (User $user, Student $student) {
     return $user->id == $student->user_id;
 });
+
+Broadcast::channel('admin.test', function (User $user) {
+    return $user->can('broadcast.manage');
+});
