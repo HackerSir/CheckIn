@@ -18,7 +18,7 @@
             </a>
             <h1>給{{ $feedback->club->name }}的回饋資料</h1>
             <div class="card">
-                <div class="card-block">
+                <div class="card-body">
                     <h1>學生資料</h1>
                     <dl class="row" style="font-size: 120%">
                         <dt class="col-4 col-md-2">學號(NID)</dt>

@@ -15,13 +15,13 @@
         <div class="col-md-8 offset-md-2">
             <h1>個人資料</h1>
             <div class="card">
-                <div class="card-block text-center">
+                <div class="card-body text-center">
                     {{-- Gravatar大頭貼 --}}
                     <a href="https://zh-tw.gravatar.com/" target="_blank" title="透過Gravatar更換照片">
                         <img src="{{ Gravatar::src($user->email, 200) }}" class="img-thumbnail" id="gravatar"/>
                     </a>
                 </div>
-                <div class="card-block">
+                <div class="card-body">
                     <dl class="row" style="font-size: 120%">
                         <dt class="col-4 col-md-3">名稱</dt>
                         <dd class="col-8 col-md-9">{{ $user->name }}</dd>
@@ -70,7 +70,7 @@
                     </dl>
                 </div>
                 @if($user->is_local_account)
-                    <div class="card-block text-center">
+                    <div class="card-body text-center">
                         <a href="{{ route('profile.edit') }}" class="btn btn-primary">
                             <i class="fa fa-pencil-square-o" aria-hidden="true"></i> 編輯資料
                         </a>

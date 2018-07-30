@@ -15,7 +15,7 @@
             </div>
             <div class="col-12 mt-1" v-if="(selectedClubType || searchKeyword) && clubs.length == 0">
                 <div class="card card-inverse card-warning">
-                    <div class="card-block">
+                    <div class="card-body">
                         <blockquote class="card-blockquote">
                             <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
                             <span v-if="selectedClubType">在「{{ clubTypes[selectedClubType] }}」類型中</span>找不到相關社團

@@ -36,7 +36,7 @@
     <div class="row mt-3 pb-3">
         <div class="col-md-4">
             <div class="card text-center">
-                <div class="card-block">
+                <div class="card-body">
                     <i class="fa fa-qrcode fa-10x mb-1" aria-hidden="true"></i>
                     <h4 class="card-title">快速打卡</h4>
                     <p class="card-text">使用 QR Code 加快打卡</p>
@@ -45,7 +45,7 @@
         </div>
         <div class="col-md-4">
             <div class="card text-center">
-                <div class="card-block">
+                <div class="card-body">
                     <i class="fa fa-th-large fa-10x mb-1" aria-hidden="true"></i>
                     <h4 class="card-title">即時集點進度</h4>
                     <p class="card-text">隨時查詢進度</p>
@@ -54,7 +54,7 @@
         </div>
         <div class="col-md-4">
             <div class="card text-center">
-                <div class="card-block">
+                <div class="card-body">
                     <i class="fa fa-users fa-10x mb-1" aria-hidden="true"></i>
                     <h4 class="card-title">尋找社團</h4>
                     <p class="card-text">尋找你感興趣的社團</p>

@@ -10,7 +10,7 @@
             </a>
             <h1>新增API Key</h1>
             <div class="card">
-                <div class="card-block">
+                <div class="card-body">
                     {{ Form::open(['route' => 'api-key.store']) }}
 
                     <div class="form-group row{{ $errors->has('api_key') ? ' has-danger' : '' }}">

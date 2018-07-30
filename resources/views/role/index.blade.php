@@ -6,7 +6,7 @@
     <div class="mt-3 pb-3">
         <h1>角色管理</h1>
         <div class="card">
-            <div class="card-block">
+            <div class="card-body">
                 <h2>角色清單</h2>
                 <a href="{{ route('role.create') }}" class="btn btn-primary">
                     <i class="fa fa-plus-circle" aria-hidden="true"></i> 新增角色

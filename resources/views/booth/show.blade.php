@@ -10,7 +10,7 @@
             </a>
             <h1>{{ $booth->name }} - 攤位</h1>
             <div class="card">
-                <div class="card-block">
+                <div class="card-body">
                     <dl class="row" style="font-size: 120%">
                         <dt class="col-sm-3">攤位編號</dt>
                         <dd class="col-sm-9">{{ $booth->name }}</dd>
@@ -36,7 +36,7 @@
                         </iframe>
                     </div>
                 </div>
-                <div class="card-block">
+                <div class="card-body">
                     <a href="{{ route('booth.edit', $booth) }}" class="btn btn-primary">
                         <i class="fa fa-pencil-square-o" aria-hidden="true"></i> 編輯資料
                     </a>

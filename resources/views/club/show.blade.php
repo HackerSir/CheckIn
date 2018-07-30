@@ -31,7 +31,7 @@
             @endif
         </div>
         <div class="card">
-            <div class="card-block">
+            <div class="card-body">
                 <h1>{{ $club->name }}</h1>
                 <div class="row">
                     <div class="col-12 col-lg-5 mt-1">

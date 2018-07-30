@@ -7,7 +7,7 @@
         <div class="col-md-8 offset-md-2">
             <h1>管理員登入</h1>
             <div class="card">
-                <div class="card-block">
+                <div class="card-body">
                     <div class="alert alert-warning" role="alert">
                         <strong>警告！</strong>學生請使用<a href="{{ route('oauth.index') }}" class="alert-link">NID登入</a>
                     </div>

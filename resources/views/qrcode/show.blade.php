@@ -10,11 +10,11 @@
             </a>
             <h1>{{ $qrcode->code }} - QR Code</h1>
             <div class="card">
-                <div class="card-block text-center">
+                <div class="card-body text-center">
                     <img src="{{ route('code-picture.qrcode', $qrcode->code) }}" class="img-fluid m-2">
                     <img src="{{ route('code-picture.barcode', $qrcode->code) }}" class="img-fluid m-2">
                 </div>
-                <div class="card-block">
+                <div class="card-body">
                     <dl class="row" style="font-size: 120%">
                         <dt class="col-4 col-md-2">代號</dt>
                         <dd class="col-8 col-md-10">

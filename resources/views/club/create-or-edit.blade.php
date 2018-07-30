@@ -21,7 +21,7 @@
             @endif
             <h1>{{ $methodText }}社團</h1>
             <div class="card">
-                <div class="card-block">
+                <div class="card-body">
                     @if($isEditMode)
                         {{ Form::model($club, ['route' => ['club.update', $club], 'method' => 'patch', 'files' => true]) }}
                     @else

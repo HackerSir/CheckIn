@@ -9,7 +9,7 @@
             <i class="fa fa-external-link" aria-hidden="true"></i> 抽獎編號展示
         </a>
         <div class="card mt-1">
-            <div class="card-block">
+            <div class="card-body">
                 {!! $dataTable->table() !!}
             </div>
         </div>

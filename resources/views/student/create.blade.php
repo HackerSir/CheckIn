@@ -10,7 +10,7 @@
             </a>
             <h1>新增學生</h1>
             <div class="card">
-                <div class="card-block">
+                <div class="card-body">
                     <form role="form" method="POST" action="{{ route('student.store') }}">
                         {{ csrf_field() }}
 

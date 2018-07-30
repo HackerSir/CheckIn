@@ -15,7 +15,7 @@
             </a>
             <h1>{{ $methodText }}角色</h1>
             <div class="card">
-                <div class="card-block">
+                <div class="card-body">
                     <form role="form" method="POST"
                           action="{{ $isEditMode ? route('role.update', $role) : route('role.store') }}">
                         @if($isEditMode)

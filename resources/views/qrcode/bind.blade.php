@@ -18,7 +18,7 @@
             </a>
             <h1>綁定 QR Code</h1>
             <div class="card">
-                <div class="card-block">
+                <div class="card-body">
                     <form role="form" method="POST" action="{{ route('qrcode.bind') }}">
                         {{ csrf_field() }}
 
@@ -84,7 +84,7 @@
         <div class="col-md-4">
             <h1>綁定紀錄</h1>
             <div class="card">
-                <div class="card-block">
+                <div class="card-body">
                     <ul>
                         @foreach($qrcodes as $qrcode)
                             <li>

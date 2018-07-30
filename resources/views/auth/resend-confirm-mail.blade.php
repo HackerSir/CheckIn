@@ -7,7 +7,7 @@
         <div class="col-md-8 offset-md-2">
             <h1>重新發送驗證信件</h1>
             <div class="card">
-                <div class="card-block">
+                <div class="card-body">
                     <form role="form" method="POST" action="{{ route('confirm-mail.resend') }}">
                         {{ csrf_field() }}
 

@@ -5,7 +5,7 @@
 @section('content')
     <div class="mt-3 pb-3">
         <div class="card">
-            <div class="card-block">
+            <div class="card-body">
                 <h1>社團攤位</h1>
                 <club-cards></club-cards>
             </div>

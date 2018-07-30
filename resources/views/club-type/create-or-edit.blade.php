@@ -15,7 +15,7 @@
             </a>
             <h1>{{ $methodText }}社團類型</h1>
             <div class="card">
-                <div class="card-block">
+                <div class="card-body">
                     @if($isEditMode)
                         {{ Form::model($clubType, ['route' => ['club-type.update', $clubType], 'method' => 'patch']) }}
                     @else

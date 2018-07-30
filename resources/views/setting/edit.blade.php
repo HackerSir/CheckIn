@@ -7,7 +7,7 @@
         <div class="col-md-8 offset-md-2">
             <h1>活動設定</h1>
             <div class="card">
-                <div class="card-block">
+                <div class="card-body">
                     {{ Form::open(['route' => 'setting.update']) }}
                     <div class="form-group row{{ $errors->has('start_at') ? ' has-danger' : '' }}">
                         <label for="start_at" class="col-md-3 col-form-label">開始打卡時間</label>

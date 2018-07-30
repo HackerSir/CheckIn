@@ -9,7 +9,7 @@
             <i class="fa fa-plus-circle" aria-hidden="true"></i> 新增API Key
         </a>
         <div class="card mt-1">
-            <div class="card-block">
+            <div class="card-body">
                 {!! $dataTable->table() !!}
             </div>
         </div>

@@ -14,7 +14,7 @@
     <div class="row mt-3 pb-3">
         <div class="col-md-8 offset-md-2">
             <div class="card">
-                <div class="card-block">
+                <div class="card-body">
                     <h1>QR Code</h1>
                     <div class="text-center">
                         @if($student->qrcode)

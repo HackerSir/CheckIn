@@ -10,7 +10,7 @@
             </a>
             <h1>兩步驟驗證</h1>
             <div class="card">
-                <div class="card-block">
+                <div class="card-body">
                     <form role="form" method="POST" action="{{ route('profile.2fa.toggle') }}"
                           @if($user->google2fa_secret)onsubmit="return confirm('確定停用？')"@endif>
                         {{ csrf_field() }}

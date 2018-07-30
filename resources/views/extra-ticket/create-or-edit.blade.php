@@ -15,7 +15,7 @@
             </a>
             <h1>{{ $methodText }}工作人員抽獎編號</h1>
             <div class="card">
-                <div class="card-block">
+                <div class="card-body">
                     @if($isEditMode)
                         {{ Form::model($extraTicket, ['route' => ['extra-ticket.update', $extraTicket], 'method' => 'patch']) }}
                     @else

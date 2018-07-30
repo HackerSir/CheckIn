@@ -16,7 +16,7 @@
             {{ Form::close() }}
         @endif
         <div class="card mt-1">
-            <div class="card-block">
+            <div class="card-body">
                 {!! $dataTable->table() !!}
             </div>
         </div>

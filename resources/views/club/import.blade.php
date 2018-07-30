@@ -10,7 +10,7 @@
             </a>
             <h1>匯入社團</h1>
             <div class="card">
-                <div class="card-block">
+                <div class="card-body">
                     <ul>
                         <li>檔案須為xls或xlsx</li>
                         <li>第一列為標題列，<u>不會</u>作為資料匯入</li>
@@ -30,7 +30,7 @@
                 </div>
             </div>
             <div class="card mt-1">
-                <div class="card-block">
+                <div class="card-body">
                     {{ Form::open(['route' => 'club.import', 'files' => true]) }}
 
                     <div class="form-group row{{ $errors->has('import_file') ? ' has-danger' : '' }}">

@@ -8,7 +8,7 @@
             <h1>統計</h1>
             <div class="card">
                 @foreach($data as $value)
-                    <div class="card-block">
+                    <div class="card-body">
                         <h3>{{ $value['name'] }}</h3>
                         <dl class="row" style="font-size: 120%">
                             <dt class="col-4 col-md-3">總人數</dt>
@@ -77,7 +77,7 @@
                 @endforeach
             </div>
             <div class="card mt-2">
-                <div class="card-block">
+                <div class="card-body">
                     註：
                     <ul>
                         <li>總人數：曾登入此系統，或NID曾出現於此系統之人數。</li>

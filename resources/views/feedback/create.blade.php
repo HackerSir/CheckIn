@@ -10,7 +10,7 @@
             </a>
             <h1>新增回饋資料</h1>
             <div class="card">
-                <div class="card-block">
+                <div class="card-body">
                     請注意：
                     <ul>
                         <li>僅能於每個社團填寫一次</li>
@@ -23,7 +23,7 @@
                 </div>
             </div>
             <div class="card mt-1">
-                <div class="card-block">
+                <div class="card-body">
                     {{ Form::open(['route' => ['feedback.store', $club]]) }}
 
                     <div class="form-group row">

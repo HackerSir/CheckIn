@@ -1,6 +1,6 @@
 <template>
     <div class="card">
-        <div class="card-block">
+        <div class="card-body">
             <div class="row" style="min-height: 139px">
                 <div class="col-4" style="padding: 0">
                     <div class="text-center">

@@ -5,7 +5,7 @@
 @section('content')
     <div class="mt-3 pb-3">
         <div class="card">
-            <div class="card-block">
+            <div class="card-body">
                 <h1 class="display-3">抽獎編號查詢</h1>
                 {{ Form::open(['method' => 'get', 'id' => 'ticket_search_form', 'class' => 'form-inline']) }}
                 <input type="text" placeholder="抽獎編號" id="ticket_search_id" class="form-control mr-sm-2"

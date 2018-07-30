@@ -10,7 +10,7 @@
             </a>
             <h1>{{ $user->name }} - 編輯會員資料</h1>
             <div class="card">
-                <div class="card-block">
+                <div class="card-body">
                     <form role="form" method="POST" action="{{ route('user.update', $user) }}">
                         {{ csrf_field() }}
                         {{ method_field('patch') }}

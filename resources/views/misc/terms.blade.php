@@ -7,7 +7,7 @@
         <h1>服務條款 Terms of Service</h1>
         <p class="text-right">修訂日期：2017年08月16日</p>
         <div class="card">
-            <div class="card-block">
+            <div class="card-body">
                 <h2 class="card-title">歡迎使用{{ config('site.name') }}</h2>
                 <p>
                     歡迎各位參加社團博覽會打卡集點抽獎活動網站（以下簡稱「本站」），本站由逢甲大學課外活動組（以下簡稱「課外組」）委託逢甲大學黑客社（以下簡稱「本社」）開發及管理，只要您使用了本站，即表示您同意了本條款，故還請冗詳閱。</p>

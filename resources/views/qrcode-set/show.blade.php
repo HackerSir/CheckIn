@@ -9,7 +9,7 @@
         </a>
         <h1>{{ $qrcodeSet->id }} - QR Code 集</h1>
         <div class="card">
-            <div class="card-block">
+            <div class="card-body">
                 <dl class="row" style="font-size: 120%">
                     <dt class="col-4 col-md-3">編號</dt>
                     <dd class="col-8 col-md-9">{{ $qrcodeSet->id }}</dd>
@@ -21,7 +21,7 @@
                     <dd class="col-8 col-md-9">{{ $qrcodeSet->created_at }}</dd>
                 </dl>
             </div>
-            <div class="card-block text-center">
+            <div class="card-body text-center">
                 {{ Form::open(['route' => ['qrcode-set.download', $qrcodeSet]]) }}
                 <button type="submit" class="btn btn-primary">
                     <i class="fa fa-file-word-o" aria-hidden="true"></i> 下載 QR Code 列印用 Word 檔
@@ -30,7 +30,7 @@
             </div>
         </div>
         <div class="card mt-1">
-            <div class="card-block">
+            <div class="card-body">
                 {!! $dataTable->table() !!}
             </div>
         </div>

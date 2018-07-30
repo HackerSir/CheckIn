@@ -11,7 +11,7 @@
         @endif
         <h1>QR Code 集</h1>
         <div class="card mt-1">
-            <div class="card-block">
+            <div class="card-body">
                 <a href="{{ route('qrcode-set.create') }}" class="btn btn-primary">
                     <i class="fa fa-plus-circle" aria-hidden="true"></i> 新增 QR Code 集
                 </a>

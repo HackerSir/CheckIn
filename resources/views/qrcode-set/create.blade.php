@@ -10,7 +10,7 @@
             </a>
             <h1>新增 QR Code 集</h1>
             <div class="card">
-                <div class="card-block">
+                <div class="card-body">
                     <form role="form" method="POST" action="{{ route('qrcode-set.store') }}">
                         {{ csrf_field() }}
 

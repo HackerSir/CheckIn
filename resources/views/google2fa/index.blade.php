@@ -7,7 +7,7 @@
         <div class="card-header">
             兩步驟驗證
         </div>
-        <div class="card-block">
+        <div class="card-body">
             <form role="form" method="POST" action="{{ route('login.2fa') }}">
                 {{ csrf_field() }}
 

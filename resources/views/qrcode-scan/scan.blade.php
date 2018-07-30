@@ -12,7 +12,7 @@
                 </div>
             @endif
             <div class="card">
-                <div class="card-block">
+                <div class="card-body">
                     <h1>QR Code</h1>
                     <dl class="row" style="font-size: 120%">
                         <dt class="col-4 col-md-2">條碼</dt>

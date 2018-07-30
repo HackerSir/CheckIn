@@ -21,7 +21,7 @@
             @endif
             <h1>{{ $methodText }}攤位</h1>
             <div class="card">
-                <div class="card-block">
+                <div class="card-body">
                     @if($isEditMode)
                         {{ Form::model($booth, ['route' => ['booth.update', $booth], 'method' => 'patch']) }}
                     @else

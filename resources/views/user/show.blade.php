@@ -18,12 +18,12 @@
             </a>
             <h1>{{ $user->name }} - 會員資料</h1>
             <div class="card">
-                <div class="card-block text-center">
+                <div class="card-body text-center">
                     {{-- Gravatar大頭貼 --}}
                     <img src="{{ Gravatar::src($user->email, 200) }}" class="img-thumbnail" id="gravatar"
                          title="Gravatar大頭貼"/>
                 </div>
-                <div class="card-block">
+                <div class="card-body">
                     <dl class="row" style="font-size: 120%">
                         <dt class="col-4 col-md-3">名稱</dt>
                         <dd class="col-8 col-md-9">{{ $user->name }}</dd>
@@ -73,7 +73,7 @@
                         @endif
                     </dl>
                 </div>
-                <div class="card-block text-center">
+                <div class="card-body text-center">
                     <a href="{{ route('user.edit', $user) }}" class="btn btn-primary">
                         <i class="fa fa-pencil-square-o" aria-hidden="true"></i> 編輯資料
                     </a>

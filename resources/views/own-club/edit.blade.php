@@ -7,7 +7,7 @@
         <div class="col-md-8 offset-md-2">
             <h1>{{ $club->name }} - 編輯社團</h1>
             <div class="card">
-                <div class="card-block">
+                <div class="card-body">
                     {{ Form::model($club, ['route' => 'own-club.update', 'method' => 'patch', 'files' => true]) }}
 
                     <div class="form-group row">
