@@ -47,6 +47,7 @@ use Illuminate\Database\Query\Builder;
  */
 class Student extends Model
 {
+    private static $freshmanInYear = 107;
     protected $fillable = [
         'nid',
         'user_id',
@@ -164,7 +165,7 @@ class Student extends Model
             return false;
         }
         //檢查入學年度
-        if ($this->in_year == 107) {
+        if ($this->in_year == static::$freshmanInYear) {
             return true;
         }
         //檢查年級
@@ -199,7 +200,7 @@ class Student extends Model
             ->where('nid', 'not like', 'T%')
             ->where(function ($query) {
                 /** @var Builder|static $query */
-                $query->where('in_year', 106)
+                $query->where('in_year', static::$freshmanInYear)
                     ->orWhere('class', 'like', '%一年級%');
             });
     }
@@ -213,7 +214,7 @@ class Student extends Model
             ->orWhere('nid', 'like', 'T%')
             ->orWhere(function ($query) {
                 /** @var Builder|static $query */
-                $query->where('in_year', '<>', 106)
+                $query->where('in_year', '<>', static::$freshmanInYear)
                     ->where('class', 'not like', '%一年級%');
             });
     }
