@@ -44,7 +44,7 @@
                                     <span class="text-danger">未啟用</span>
                                 @endif
                                 <a href="{{ route('profile.2fa.index') }}">
-                                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                    <i class="fa fa-edit" aria-hidden="true"></i>
                                 </a>
                             </dd>
                         @endif
@@ -72,7 +72,7 @@
                 @if($user->is_local_account)
                     <div class="card-body text-center">
                         <a href="{{ route('profile.edit') }}" class="btn btn-primary">
-                            <i class="fa fa-pencil-square-o" aria-hidden="true"></i> 編輯資料
+                            <i class="fa fa-edit" aria-hidden="true"></i> 編輯資料
                         </a>
                         <a href="{{ route('password.change') }}" class="btn btn-primary">
                             <i class="fa fa-key" aria-hidden="true"></i> 修改密碼

@@ -75,7 +75,7 @@
                 </div>
                 <div class="card-body text-center">
                     <a href="{{ route('user.edit', $user) }}" class="btn btn-primary">
-                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i> 編輯資料
+                        <i class="fa fa-edit" aria-hidden="true"></i> 編輯資料
                     </a>
                     {!! Form::open(['route' => ['user.destroy', $user], 'style' => 'display: inline', 'method' => 'DELETE', 'onSubmit' => "return confirm('確定要刪除此會員嗎？');"]) !!}
                     <button type="submit" class="btn btn-danger">

@@ -38,7 +38,7 @@
                 </div>
                 <div class="card-body">
                     <a href="{{ route('booth.edit', $booth) }}" class="btn btn-primary">
-                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i> 編輯資料
+                        <i class="fa fa-edit" aria-hidden="true"></i> 編輯資料
                     </a>
                     {!! Form::open(['route' => ['booth.destroy', $booth], 'style' => 'display: inline', 'method' => 'DELETE', 'onSubmit' => "return confirm('確定要刪除嗎？');"]) !!}
                     <button type="submit" class="btn btn-danger">

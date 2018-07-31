@@ -18,7 +18,7 @@
         {!! Form::close() !!}
 
         <a href="{{ route('extra-ticket.ticket') }}" class="btn btn-primary" target="_blank">
-            <i class="fa fa-external-link" aria-hidden="true"></i> 工作人員抽獎編號展示
+            <i class="fa fa-external-link-alt" aria-hidden="true"></i> 工作人員抽獎編號展示
         </a>
         <div class="card mt-1">
             <div class="card-body">

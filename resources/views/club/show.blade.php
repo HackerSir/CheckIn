@@ -17,7 +17,7 @@
                     <i class="fa fa-arrow-left" aria-hidden="true"></i> 社團管理
                 </a>
                 <a href="{{ route('club.edit', $club) }}" class="btn btn-primary">
-                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i> 編輯資料
+                    <i class="fa fa-edit" aria-hidden="true"></i> 編輯資料
                 </a>
                 {!! Form::open(['route' => ['club.destroy', $club], 'style' => 'display: inline', 'method' => 'DELETE', 'onSubmit' => "return confirm('確定要刪除嗎？');"]) !!}
                 <button type="submit" class="btn btn-danger">
@@ -26,7 +26,7 @@
                 {!! Form::close() !!}
             @elseif(isset(Auth::user()->club) && Auth::user()->club->id == $club->id)
                 <a href="{{ route('own-club.edit') }}" class="btn btn-primary">
-                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i> 編輯資料
+                    <i class="fa fa-edit" aria-hidden="true"></i> 編輯資料
                 </a>
             @endif
         </div>

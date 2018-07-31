@@ -37,7 +37,7 @@
                                 </td>
                                 <td>
                                     <a href="{{ route('role.edit', $role) }}" class="btn btn-primary">
-                                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i> 編輯角色
+                                        <i class="fa fa-edit" aria-hidden="true"></i> 編輯角色
                                     </a>
                                     @unless($role->protection)
                                         {!! Form::open([
