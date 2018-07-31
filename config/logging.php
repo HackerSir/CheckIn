@@ -56,7 +56,7 @@ return [
             'url'      => env('LOG_SLACK_WEBHOOK_URL'),
             'username' => 'Monolog',
             'emoji'    => ':boom:',
-            'level'    => 'critical',
+            'level'    => 'warning',
         ],
 
         'daily_and_slack' => [
