@@ -30,12 +30,12 @@
                                     <input id="nid" type="text" value="{{ old('nid') }}"
                                            class="upper form-control{{ $errors->has('nid') ? ' form-control-danger' : '' }}"
                                            name="nid" required autofocus>
-                                    <span class="input-group-btn">
+                                    <div class="input-group-append">
                                         <button class="btn btn-secondary" type="button"
                                                 onclick="$('input#nid').val('');$('input#nid').focus()">
                                             <i class="fa fa-times" aria-hidden="true"></i>
                                         </button>
-                                    </span>
+                                    </div>
                                 </div>
                                 @if ($errors->has('nid'))
                                     <span class="form-control-feedback">
@@ -53,12 +53,12 @@
                                     <input id="code" type="text" value="{{ old('code') }}"
                                            class="upper form-control{{ $errors->has('code') ? ' form-control-danger' : '' }}"
                                            name="code" required>
-                                    <span class="input-group-btn">
+                                    <div class="input-group-append">
                                         <button class="btn btn-secondary" type="button"
                                                 onclick="$('input#code').val('');$('input#code').focus()">
                                             <i class="fa fa-times" aria-hidden="true"></i>
                                         </button>
-                                    </span>
+                                    </div>
                                 </div>
 
                                 @if ($errors->has('code'))
