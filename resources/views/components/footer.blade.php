@@ -1,7 +1,7 @@
 <footer class="footer" style="background-color: #292b2c;">
     <div class="container" style="padding: 15px 10px">
         <p class="text-muted" style="margin-bottom: 8px">
-            ©2017
+            ©2017-{{ \Carbon\Carbon::now()->year }}
             <a href="https://www.facebook.com/HackerSir.tw" target="_blank" style="color: #636c72;">HackerSir</a>.
             All rights reserved.
         </p>

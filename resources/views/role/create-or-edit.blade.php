@@ -85,35 +85,37 @@
                             <div class="col-md-10" style="padding-top: calc(.5rem - 1px * 2);">
                                 @foreach($permissions as $permission)
                                     @if(isset($role) && $role->protection)
-                                        <label class="custom-control custom-checkbox">
+                                        <div class="custom-control custom-checkbox">
                                             <input type="checkbox" name="permissions[]" value="{{ $permission->id }}"
                                                    class="custom-control-input"
+                                                   id="permissionCheck{{ $permission->id }}"
                                                    @if(isset($role) && $role->permissions->contains($permission)) checked
                                                    @endif
                                                    disabled>
-                                            <span class="custom-control-indicator"></span>
-                                            <span class="custom-control-description">
-                                                {{ $permission->display_name }}（{{ $permission->name }}）<br/>
-                                                <small>
-                                                    <i class="fa fa-angle-double-right"
-                                                       aria-hidden="true"></i> {{ $permission->description}}
-                                                </small>
-                                            </span>
-                                        </label>
-                                    @else
-                                        <label class="custom-control custom-checkbox">
-                                            <input type="checkbox" name="permissions[]" value="{{ $permission->id }}"
-                                                   class="custom-control-input"
-                                                   @if(isset($role) && $role->permissions->contains($permission)) checked @endif>
-                                            <span class="custom-control-indicator"></span>
-                                            <span class="custom-control-description">
+                                            <label class="custom-control-label"
+                                                   for="permissionCheck{{ $permission->id }}">
                                                 {{ $permission->display_name }}（{{ $permission->name }}）<br/>
                                                 <small>
                                                     <i class="fa fa-angle-double-right"
                                                        aria-hidden="true"></i> {{ $permission->description }}
                                                 </small>
-                                            </span>
-                                        </label>
+                                            </label>
+                                        </div>
+                                    @else
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" name="permissions[]" value="{{ $permission->id }}"
+                                                   class="custom-control-input"
+                                                   id="permissionCheck{{ $permission->id }}"
+                                                   @if(isset($role) && $role->permissions->contains($permission)) checked @endif>
+                                            <label class="custom-control-label"
+                                                   for="permissionCheck{{ $permission->id }}">
+                                                {{ $permission->display_name }}（{{ $permission->name }}）<br/>
+                                                <small>
+                                                    <i class="fa fa-angle-double-right"
+                                                       aria-hidden="true"></i> {{ $permission->description }}
+                                                </small>
+                                            </label>
+                                        </div>
                                     @endif
                                     <br/>
                                 @endforeach
