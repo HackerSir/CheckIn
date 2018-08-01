@@ -123,6 +123,10 @@ class LaravelMenu
                             $adminMenu->add('API Key 管理', ['route' => 'api-key.index'])->active('api-key/*');
                         }
 
+                        if (Laratrust::can('broadcast.manage')) {
+                            $adminMenu->add('Broadcast', ['route' => 'broadcast'])->active('broadcast/*');
+                        }
+
                         if (Laratrust::can('horizon.manage')) {
                             $adminMenu->add(
                                 'Horizon <i class="fa fa-external-link-alt" aria-hidden="true"></i>',

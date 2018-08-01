@@ -56,6 +56,11 @@ Route::group(['middleware' => ['auth', 'email']], function () {
             ],
         ]);
     });
+    //Broadcast
+    //權限：broadcast.manage
+    Route::group(['middleware' => 'permission:broadcast.manage'], function () {
+        Route::view('broadcast', 'misc.broadcast')->name('broadcast');
+    });
     //學生管理
     //權限：student.manage
     Route::group(['middleware' => 'permission:student.manage'], function () {
