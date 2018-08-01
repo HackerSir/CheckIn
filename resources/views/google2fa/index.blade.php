@@ -1,12 +1,9 @@
-@extends('layouts.app')
+@extends('layouts.base')
 
 @section('title', '兩步驟驗證')
 
 @section('content')
     <div class="card">
-        <div class="card-header">
-            兩步驟驗證
-        </div>
         <div class="card-body">
             <form role="form" method="POST" action="{{ route('login.2fa') }}">
                 {{ csrf_field() }}
@@ -31,8 +28,10 @@
                 </div>
 
                 <div class="form-group row">
-                    <div class="col-md-8 offset-md-4">
-                        <button type="submit" class="btn btn-primary">確認</button>
+                    <div class="mx-auto">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fa fa-check" aria-hidden="true"></i> 確認
+                        </button>
                     </div>
                 </div>
             </form>

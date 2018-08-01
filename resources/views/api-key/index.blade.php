@@ -1,17 +1,17 @@
-@extends('layouts.app')
+@extends('layouts.base')
 
-@section('title', 'API Key管理')
+@section('title', 'API Key 管理')
 
-@section('content')
-    <div class="mt-3 pb-3">
-        <h1>API Key管理</h1>
-        <a href="{{ route('api-key.create') }}" class="btn btn-primary">
-            <i class="fa fa-plus-circle" aria-hidden="true"></i> 新增API Key
-        </a>
-        <div class="card mt-1">
-            <div class="card-body">
-                {!! $dataTable->table() !!}
-            </div>
+@section('buttons')
+    <a href="{{ route('api-key.create') }}" class="btn btn-primary">
+        <i class="fa fa-plus-circle" aria-hidden="true"></i> 新增 API Key
+    </a>
+@endsection
+
+@section('main_content')
+    <div class="card">
+        <div class="card-body">
+            {!! $dataTable->table() !!}
         </div>
     </div>
 @endsection

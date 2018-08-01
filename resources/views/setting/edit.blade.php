@@ -1,94 +1,89 @@
-@extends('layouts.app')
+@extends('layouts.base')
 
 @section('title', '活動設定')
 
-@section('content')
-    <div class="row mt-3">
-        <div class="col-md-8 offset-md-2">
-            <h1>活動設定</h1>
-            <div class="card">
-                <div class="card-body">
-                    {{ Form::open(['route' => 'setting.update']) }}
-                    <div class="form-group row{{ $errors->has('start_at') ? ' has-danger' : '' }}">
-                        <label for="start_at" class="col-md-3 col-form-label">開始打卡時間</label>
+@section('main_content')
+    <div class="card">
+        <div class="card-body">
+            {{ Form::open(['route' => 'setting.update']) }}
+            <div class="form-group row{{ $errors->has('start_at') ? ' has-danger' : '' }}">
+                <label for="start_at" class="col-md-3 col-form-label">開始打卡時間</label>
 
-                        <div class="col-md-9">
-                            {{ Form::text('start_at', Setting::get('start_at'), ['class' => 'form-control', 'required']) }}
+                <div class="col-md-9">
+                    {{ Form::text('start_at', Setting::get('start_at'), ['class' => 'form-control', 'required']) }}
 
-                            @if ($errors->has('start_at'))
-                                <span class="form-control-feedback">
-                                    <strong>{{ $errors->first('start_at') }}</strong>
-                                </span>
-                            @endif
-                        </div>
-                    </div>
-
-                    <div class="form-group row{{ $errors->has('end_at') ? ' has-danger' : '' }}">
-                        <label for="end_at" class="col-md-3 col-form-label">結束打卡時間</label>
-
-                        <div class="col-md-9">
-                            {{ Form::text('end_at', Setting::get('end_at'), ['class' => 'form-control', 'required']) }}
-
-                            @if ($errors->has('end_at'))
-                                <span class="form-control-feedback">
-                                    <strong>{{ $errors->first('end_at') }}</strong>
-                                </span>
-                            @endif
-                        </div>
-                    </div>
-
-                    <div class="form-group row{{ $errors->has('target') ? ' has-danger' : '' }}">
-                        <label for="target" class="col-md-3 col-form-label">打卡目標數量</label>
-
-                        <div class="col-md-9">
-                            {{ Form::number('target', Setting::get('target'), ['class' => 'form-control', 'required', 'min' => 0]) }}
-
-                            @if ($errors->has('target'))
-                                <span class="form-control-feedback">
-                                    <strong>{{ $errors->first('target') }}</strong>
-                                </span>
-                            @endif
-                        </div>
-                    </div>
-
-                    <div class="form-group row{{ $errors->has('feedback_create_expired_at') ? ' has-danger' : '' }}">
-                        <label for="feedback_create_expired_at" class="col-md-3 col-form-label">回饋資料填寫期限</label>
-
-                        <div class="col-md-9">
-                            {{ Form::text('feedback_create_expired_at', Setting::get('feedback_create_expired_at'), ['class' => 'form-control', 'required']) }}
-
-                            @if ($errors->has('feedback_create_expired_at'))
-                                <span class="form-control-feedback">
-                                    <strong>{{ $errors->first('feedback_create_expired_at') }}</strong>
-                                </span>
-                            @endif
-                        </div>
-                    </div>
-
-                    <div class="form-group row{{ $errors->has('feedback_download_expired_at') ? ' has-danger' : '' }}">
-                        <label for="feedback_download_expired_at" class="col-md-3 col-form-label">回饋資料檢視與下載期限</label>
-
-                        <div class="col-md-9">
-                            {{ Form::text('feedback_download_expired_at', Setting::get('feedback_download_expired_at'), ['class' => 'form-control', 'required']) }}
-
-                            @if ($errors->has('feedback_download_expired_at'))
-                                <span class="form-control-feedback">
-                                    <strong>{{ $errors->first('feedback_download_expired_at') }}</strong>
-                                </span>
-                            @endif
-                        </div>
-                    </div>
-
-                    <div class="form-group row">
-                        <div class="col-md-9 offset-md-3">
-                            <button type="submit" class="btn btn-primary">
-                                <i class="fa fa-check" aria-hidden="true"></i> 更新設定
-                            </button>
-                        </div>
-                    </div>
-                    {{ Form::close() }}
+                    @if ($errors->has('start_at'))
+                        <span class="form-control-feedback">
+                            <strong>{{ $errors->first('start_at') }}</strong>
+                        </span>
+                    @endif
                 </div>
             </div>
+
+            <div class="form-group row{{ $errors->has('end_at') ? ' has-danger' : '' }}">
+                <label for="end_at" class="col-md-3 col-form-label">結束打卡時間</label>
+
+                <div class="col-md-9">
+                    {{ Form::text('end_at', Setting::get('end_at'), ['class' => 'form-control', 'required']) }}
+
+                    @if ($errors->has('end_at'))
+                        <span class="form-control-feedback">
+                            <strong>{{ $errors->first('end_at') }}</strong>
+                        </span>
+                    @endif
+                </div>
+            </div>
+
+            <div class="form-group row{{ $errors->has('target') ? ' has-danger' : '' }}">
+                <label for="target" class="col-md-3 col-form-label">打卡目標數量</label>
+
+                <div class="col-md-9">
+                    {{ Form::number('target', Setting::get('target'), ['class' => 'form-control', 'required', 'min' => 0]) }}
+
+                    @if ($errors->has('target'))
+                        <span class="form-control-feedback">
+                            <strong>{{ $errors->first('target') }}</strong>
+                        </span>
+                    @endif
+                </div>
+            </div>
+
+            <div class="form-group row{{ $errors->has('feedback_create_expired_at') ? ' has-danger' : '' }}">
+                <label for="feedback_create_expired_at" class="col-md-3 col-form-label">回饋資料填寫期限</label>
+
+                <div class="col-md-9">
+                    {{ Form::text('feedback_create_expired_at', Setting::get('feedback_create_expired_at'), ['class' => 'form-control', 'required']) }}
+
+                    @if ($errors->has('feedback_create_expired_at'))
+                        <span class="form-control-feedback">
+                            <strong>{{ $errors->first('feedback_create_expired_at') }}</strong>
+                        </span>
+                    @endif
+                </div>
+            </div>
+
+            <div class="form-group row{{ $errors->has('feedback_download_expired_at') ? ' has-danger' : '' }}">
+                <label for="feedback_download_expired_at" class="col-md-3 col-form-label">回饋資料檢視與下載期限</label>
+
+                <div class="col-md-9">
+                    {{ Form::text('feedback_download_expired_at', Setting::get('feedback_download_expired_at'), ['class' => 'form-control', 'required']) }}
+
+                    @if ($errors->has('feedback_download_expired_at'))
+                        <span class="form-control-feedback">
+                            <strong>{{ $errors->first('feedback_download_expired_at') }}</strong>
+                        </span>
+                    @endif
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="mx-auto ">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fa fa-check" aria-hidden="true"></i> 更新設定
+                    </button>
+                </div>
+            </div>
+            {{ Form::close() }}
         </div>
     </div>
 @endsection

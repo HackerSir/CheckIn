@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.base')
 
 @section('title', '熱度地圖')
 
@@ -22,11 +22,8 @@
     </style>
 @endsection
 
-@section('content')
-    <div class="mt-3 pb-3">
-        <h1>熱度地圖</h1>
-        <div class="mt-2" id="map"></div>
-    </div>
+@section('main_content')
+    <div class="mt-2" id="map"></div>
 @endsection
 
 @section('js')

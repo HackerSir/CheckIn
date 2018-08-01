@@ -1,24 +1,22 @@
-@extends('layouts.app')
+@extends('layouts.base')
 
 @section('title', 'QR Code 集')
 
-@section('content')
-    <div class="mt-3 pb-3">
-        @if(Laratrust::can('qrcode.manage'))
-            <a href="{{ route('qrcode.index') }}" class="btn btn-secondary mb-2">
-                <i class="fa fa-arrow-left" aria-hidden="true"></i> QR Code
-            </a>
-        @endif
-        <h1>QR Code 集</h1>
-        <div class="card mt-1">
-            <div class="card-body">
-                <a href="{{ route('qrcode-set.create') }}" class="btn btn-primary">
-                    <i class="fa fa-plus-circle" aria-hidden="true"></i> 新增 QR Code 集
-                </a>
-                <div class="mt-2">
-                    {!! $dataTable->table() !!}
-                </div>
-            </div>
+@section('buttons')
+    @if(Laratrust::can('qrcode.manage'))
+        <a href="{{ route('qrcode.index') }}" class="btn btn-secondary">
+            <i class="fa fa-arrow-left" aria-hidden="true"></i> QR Code
+        </a>
+    @endif
+    <a href="{{ route('qrcode-set.create') }}" class="btn btn-primary">
+        <i class="fa fa-plus-circle" aria-hidden="true"></i> 新增 QR Code 集
+    </a>
+@endsection
+
+@section('main_content')
+    <div class="card">
+        <div class="card-body">
+            {!! $dataTable->table() !!}
         </div>
     </div>
 @endsection

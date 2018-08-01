@@ -1,14 +1,11 @@
-@extends('layouts.app')
+@extends('layouts.base')
 
-@section('title', '社團清單')
+@section('title', '社團攤位')
 
-@section('content')
-    <div class="mt-3 pb-3">
-        <div class="card">
-            <div class="card-body">
-                <h1>社團攤位</h1>
-                <club-cards></club-cards>
-            </div>
+@section('main_content')
+    <div class="card">
+        <div class="card-body">
+            <club-cards></club-cards>
         </div>
     </div>
 @endsection

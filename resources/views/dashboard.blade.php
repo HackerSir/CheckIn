@@ -11,8 +11,8 @@
 @endsection
 
 @section('content')
-    <div class="row mt-3 pb-3">
-        <div class="col-md-8 offset-md-2">
+    <div class="mt-3 pb-3">
+        <div class="mt-1 mb-3">
             <div class="card">
                 <div class="card-body">
                     <h1>QR Code</h1>

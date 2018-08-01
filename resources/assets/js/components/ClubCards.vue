@@ -60,7 +60,7 @@
                 if (this.isFetching) {
                     return '<i class="fa fa-spinner fa-pulse fa-fw" aria-hidden="true"></i>';
                 } else if (this.isTypingKeyword) {
-                    return '<i class="fa fa-pencil fa-fw" aria-hidden="true"></i>';
+                    return '<i class="fa fa-pencil-alt fa-fw" aria-hidden="true"></i>';
                 } else {
                     return '<i class="fa fa-search fa-fw" aria-hidden="true"></i>';
                 }

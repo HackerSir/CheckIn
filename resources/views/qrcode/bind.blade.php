@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.base')
 
 @section('title', '綁定 QR Code')
 
@@ -10,13 +10,15 @@
     </style>
 @endsection
 
-@section('content')
-    <div class="row mt-3">
+@section('buttons')
+    <a href="{{ route('qrcode.index') }}" class="btn btn-secondary mb-2">
+        <i class="fa fa-arrow-left" aria-hidden="true"></i> QR Code
+    </a>
+@endsection
+
+@section('main_content')
+    <div class="row">
         <div class="col-md-8">
-            <a href="{{ route('qrcode.index') }}" class="btn btn-secondary mb-2">
-                <i class="fa fa-arrow-left" aria-hidden="true"></i> QR Code
-            </a>
-            <h1>綁定 QR Code</h1>
             <div class="card">
                 <div class="card-body">
                     <form role="form" method="POST" action="{{ route('qrcode.bind') }}">
@@ -82,8 +84,8 @@
             </div>
         </div>
         <div class="col-md-4">
-            <h1>綁定紀錄</h1>
             <div class="card">
+                <div class="card-header">綁定紀錄</div>
                 <div class="card-body">
                     <ul>
                         @foreach($qrcodes as $qrcode)

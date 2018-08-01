@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.base')
 
 @section('title', '攤位地圖')
 
@@ -22,30 +22,30 @@
     </style>
 @endsection
 
-@section('content')
-    <div class="mt-2 pb-2">
-        <div class="btn-group" role="group">
-            <a href="{{ route('clubs.map', ['type' => 'static']) }}"
-               class="btn btn-secondary @if ($type == 'static') active @endif">靜態地圖</a>
-            <a href="{{ route('clubs.map', ['type' => 'google']) }}"
-               class="btn btn-secondary @if ($type == 'google') active @endif">Google Map</a>
-        </div>
-        @if ($type == 'static')
-            <div class="mt-2">
-                <a href="https://i.imgur.com/PHKhyiI.jpg" target="_blank">
-                    <img src="https://i.imgur.com/PHKhyiI.jpg" class="img-fluid" style="width: 100%">
-                </a>
-            </div>
-            <div class="mt-2">
-                <a href="https://i.imgur.com/pO5Fave.jpg" target="_blank">
-                    <img src="https://i.imgur.com/pO5Fave.jpg" class="img-fluid" style="width: 100%">
-                </a>
-            </div>
-        @endif
-        @if ($type == 'google')
-            <div class="mt-2" id="map"></div>
-        @endif
+@section('buttons')
+    <div class="btn-group" role="group">
+        <a href="{{ route('clubs.map', ['type' => 'static']) }}"
+           class="btn btn-secondary @if ($type == 'static') active @endif">靜態地圖</a>
+        <a href="{{ route('clubs.map', ['type' => 'google']) }}"
+           class="btn btn-secondary @if ($type == 'google') active @endif">Google Map</a>
     </div>
+@endsection
+
+@section('main_content')
+    @if ($type == 'static')
+        <div class="mt-2">
+            <a href="https://i.imgur.com/PHKhyiI.jpg" target="_blank">
+                <img src="https://i.imgur.com/PHKhyiI.jpg" class="img-fluid" style="width: 100%">
+            </a>
+        </div>
+        <div class="mt-2">
+            <a href="https://i.imgur.com/pO5Fave.jpg" target="_blank">
+                <img src="https://i.imgur.com/pO5Fave.jpg" class="img-fluid" style="width: 100%">
+            </a>
+        </div>
+    @elseif ($type == 'google')
+        <div class="mt-2" id="map"></div>
+    @endif
 @endsection
 
 @section('js')
