@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "1d40a87d1936294c0a31396771a31537",
+    "content-hash": "6d9e164276dfea47eb01e7bfac8b9a9c",
     "packages": [
         {
             "name": "anlutro/l4-settings",
@@ -64,6 +64,61 @@
             ],
             "description": "Persistent settings in Laravel.",
             "time": "2018-04-12T13:20:18+00:00"
+        },
+        {
+            "name": "appstract/laravel-blade-directives",
+            "version": "1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/appstract/laravel-blade-directives.git",
+                "reference": "c162d367ff2eedb003eda480ad8b6502446f2cf7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/appstract/laravel-blade-directives/zipball/c162d367ff2eedb003eda480ad8b6502446f2cf7",
+                "reference": "c162d367ff2eedb003eda480ad8b6502446f2cf7",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/framework": "^5.5",
+                "php": ">=5.6"
+            },
+            "require-dev": {
+                "orchestra/testbench": "~3.5",
+                "phpunit/phpunit": "^7.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Appstract\\BladeDirectives\\BladeDirectivesServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Appstract\\BladeDirectives\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Gijs Jorissen",
+                    "email": "hello@appstract.team",
+                    "homepage": "https://appstract.team",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Handy Blade directives",
+            "homepage": "https://github.com/appstract/laravel-blade-directives",
+            "keywords": [
+                "appstract",
+                "laravel-blade-directives"
+            ],
+            "time": "2018-05-31T10:37:07+00:00"
         },
         {
             "name": "arcanedev/log-viewer",
@@ -2224,6 +2279,71 @@
             "time": "2018-05-09T14:34:18+00:00"
         },
         {
+            "name": "marvinlabs/laravel-html-bootstrap-4",
+            "version": "v1.6.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/marvinlabs/laravel-html-bootstrap-4.git",
+                "reference": "c2f16336fb502d3316a64cb7955a7efe0b75bc14"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/marvinlabs/laravel-html-bootstrap-4/zipball/c2f16336fb502d3316a64cb7955a7efe0b75bc14",
+                "reference": "c2f16336fb502d3316a64cb7955a7efe0b75bc14",
+                "shasum": ""
+            },
+            "require": {
+                "appstract/laravel-blade-directives": "^1.1.0",
+                "illuminate/support": "^5.6.0",
+                "php": "^7.0",
+                "spatie/laravel-html": "^2.19.0"
+            },
+            "require-dev": {
+                "orchestra/testbench": "^3.6",
+                "phpunit/phpunit": "^7.0",
+                "symfony/dom-crawler": "^4.1"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "MarvinLabs\\Html\\Bootstrap\\BootstrapServiceProvider"
+                    ],
+                    "aliases": {
+                        "BS": "MarvinLabs\\Html\\Bootstrap\\Facades\\Bootstrap"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "MarvinLabs\\Html\\Bootstrap\\": "src/Bootstrap"
+                },
+                "files": [
+                    "src/helpers.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Vincent Mimoun-Prat",
+                    "email": "contact@vincentprat.info",
+                    "homepage": "https://vincentprat.info",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A fluent html builder for Bootstrap 4 components",
+            "homepage": "https://github.com/marvinlabs/laravel-html-bootstrap-4",
+            "keywords": [
+                "bootstrap-4",
+                "html",
+                "marvinlabs"
+            ],
+            "time": "2018-06-27T13:54:12+00:00"
+        },
+        {
             "name": "milon/barcode",
             "version": "5.3.6",
             "source": {
@@ -3754,6 +3874,74 @@
                 "roles"
             ],
             "time": "2018-03-05T13:21:52+00:00"
+        },
+        {
+            "name": "spatie/laravel-html",
+            "version": "2.19.7",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spatie/laravel-html.git",
+                "reference": "32ae895f65f89d474430ef1fe4b6c54f65327938"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spatie/laravel-html/zipball/32ae895f65f89d474430ef1fe4b6c54f65327938",
+                "reference": "32ae895f65f89d474430ef1fe4b6c54f65327938",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/http": "~5.4.0|~5.5.0|~5.6.0",
+                "illuminate/support": "~5.4.0|~5.5.0|~5.6.0",
+                "php": "^7.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "^1.0",
+                "phpunit/phpunit": "^6.0|^7.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Spatie\\Html\\HtmlServiceProvider"
+                    ],
+                    "aliases": {
+                        "Html": "Spatie\\Html\\Facades\\Html"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Spatie\\Html\\": "src"
+                },
+                "files": [
+                    "src/helpers.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Sebastian De Deyne",
+                    "email": "sebastian@spatie.be",
+                    "homepage": "https://spatie.be",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Freek Van der Herten",
+                    "email": "freek@spatie.be",
+                    "homepage": "https://spatie.be",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A fluent html builder",
+            "homepage": "https://github.com/spatie/laravel-html",
+            "keywords": [
+                "html",
+                "spatie"
+            ],
+            "time": "2018-04-30T09:18:18+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",

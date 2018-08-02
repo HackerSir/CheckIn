@@ -24,6 +24,7 @@
         "laravel/tinker": "^1.0",
         "laravelcollective/html": "^5.6",
         "lavary/laravel-menu": "^1.7",
+        "marvinlabs/laravel-html-bootstrap-4": "^1.6",
         "milon/barcode": "^5.3",
         "mojoblanco/domainos": "^1.1",
         "phpoffice/phpspreadsheet": "^1.3",
