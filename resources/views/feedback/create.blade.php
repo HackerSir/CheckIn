@@ -24,7 +24,7 @@
     </div>
     <div class="card mt-1">
         <div class="card-body">
-            {{ Form::open(['route' => ['feedback.store', $club]]) }}
+            {{ bs()->openForm('post', route('feedback.store', $club)) }}
 
             <div class="form-group row">
                 <label class="col-md-2 col-form-label">學生</label>
@@ -43,50 +43,16 @@
                 </div>
             </div>
 
-            <div class="form-group row{{ $errors->has('phone') ? ' has-danger' : '' }}">
-                <label for="phone" class="col-md-2 col-form-label">電話</label>
-                <div class="col-md-10">
-                    {{ Form::text('phone', ($lastFeedback->phone ?? null), ['class' => 'form-control']) }}
-                    @if ($errors->has('phone'))
-                        <span class="form-control-feedback">
-                            <strong>{{ $errors->first('phone') }}</strong>
-                        </span>
-                    @endif
-                </div>
-            </div>
+            {{ bs()->formGroup(bs()->text('phone', $lastFeedback->phone ?? null))->label('電話')->showAsRow() }}
+            {{ bs()->formGroup(bs()->text('email', $lastFeedback->email ?? null))->label('信箱')->showAsRow() }}
+            {{ bs()->formGroup(bs()->text('message'))->label('附加訊息')->showAsRow() }}
 
-            <div class="form-group row{{ $errors->has('email') ? ' has-danger' : '' }}">
-                <label for="email" class="col-md-2 col-form-label">信箱</label>
-                <div class="col-md-10">
-                    {{ Form::email('email', ($lastFeedback->email ?? null), ['class' => 'form-control']) }}
-                    @if ($errors->has('email'))
-                        <span class="form-control-feedback">
-                            <strong>{{ $errors->first('email') }}</strong>
-                        </span>
-                    @endif
-                </div>
-            </div>
-
-            <div class="form-group row{{ $errors->has('message') ? ' has-danger' : '' }}">
-                <label for="message" class="col-md-2 col-form-label">附加訊息</label>
-                <div class="col-md-10">
-                    {{ Form::text('message', null, ['class' => 'form-control']) }}
-                    @if ($errors->has('message'))
-                        <span class="form-control-feedback">
-                            <strong>{{ $errors->first('message') }}</strong>
-                        </span>
-                    @endif
-                </div>
-            </div>
-
-            <div class="form-group row">
+            <div class="row">
                 <div class="mx-auto">
-                    <button type="submit" class="btn btn-primary">
-                        <i class="fa fa-check" aria-hidden="true"></i> 確認
-                    </button>
+                    {{ bs()->submit('確認', 'primary')->prependChildren(fa()->icon('check')->addClass('mr-2')) }}
                 </div>
             </div>
-            {{ Form::close() }}
+            {{ bs()->closeForm() }}
         </div>
     </div>
 @endsection

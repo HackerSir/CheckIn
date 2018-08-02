@@ -35,7 +35,7 @@ class ClubController extends Controller
      */
     public function create()
     {
-        return view('club.create-or-edit');
+        return view('club.create');
     }
 
     /**
@@ -89,7 +89,7 @@ class ClubController extends Controller
      */
     public function edit(Club $club)
     {
-        return view('club.create-or-edit', compact('club'));
+        return view('club.edit', compact('club'));
     }
 
     /**

@@ -11,27 +11,15 @@
 @section('main_content')
     <div class="card">
         <div class="card-body">
-            {{ Form::open(['route' => 'api-key.store']) }}
-
-            <div class="form-group row{{ $errors->has('api_key') ? ' has-danger' : '' }}">
-                <label for="api_key" class="col-md-2 col-form-label">API Key</label>
-                <div class="col-md-10">
-                    {{ Form::text('api_key', null, ['class' => 'form-control', 'required', 'autocomplete' => 'off']) }}
-                    @if ($errors->has('api_key'))
-                        <span class="form-control-feedback">
-                            <strong>{{ $errors->first('api_key') }}</strong>
-                        </span>
-                    @endif
-                </div>
-            </div>
-
-            <div class="form-group row">
+            {{ bs()->openForm('post', route('api-key.store')) }}
+            {{ bs()->formGroup(bs()->text('api_key')->required()->attribute('autocomplete', 'off'))->label('API Key')->showAsRow() }}
+            <div class="row">
                 <div class="mx-auto">
-                    <button type="submit" class="btn btn-primary">
-                        <i class="fa fa-check" aria-hidden="true"></i> 確認
-                    </button>
+                    {{ bs()->submit('確認', 'primary')->prependChildren(fa()->icon('check')->addClass('mr-2')) }}
                 </div>
             </div>
+            {{ bs()->closeForm() }}
+            {{ Form::open(['route' => 'api-key.store']) }}
             {{ Form::close() }}
         </div>
     </div>

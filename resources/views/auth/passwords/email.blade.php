@@ -16,34 +16,14 @@
                     {{ session('status') }}
                 </div>
             @endif
-            <form role="form" method="POST" action="{{ route('password.email') }}">
-                {{ csrf_field() }}
-
-                <div class="form-group row{{ $errors->has('email') ? ' has-danger' : '' }}">
-                    <label for="email" class="col-md-2 col-form-label">信箱</label>
-
-                    <div class="col-md-10">
-                        <input id="email" type="email"
-                               class="form-control{{ $errors->has('email') ? ' form-control-danger' : '' }}"
-                               name="email" value="{{ old('email') }}"
-                               required>
-
-                        @if ($errors->has('email'))
-                            <span class="form-control-feedback">
-                                <strong>{{ $errors->first('email') }}</strong>
-                            </span>
-                        @endif
-                    </div>
+            {{ bs()->openForm('post', route('password.email')) }}
+            {{ bs()->formGroup(bs()->email('email')->required())->label('信箱')->showAsRow() }}
+            <div class="row">
+                <div class="mx-auto">
+                    {{ bs()->submit('發送重設密碼信件', 'primary')->prependChildren(fa()->icon('check')->addClass('mr-2')) }}
                 </div>
-
-                <div class="form-group row">
-                    <div class="mx-auto">
-                        <button type="submit" class="btn btn-primary">
-                            <i class="fa fa-envelope" aria-hidden="true"></i> 發送重設密碼信件
-                        </button>
-                    </div>
-                </div>
-            </form>
+            </div>
+            {{ bs()->closeForm() }}
         </div>
     </div>
 @endsection

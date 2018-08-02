@@ -28,28 +28,14 @@
     </div>
     <div class="card mt-1">
         <div class="card-body">
-            {{ Form::open(['route' => 'booth.import', 'files' => true]) }}
-
-            <div class="form-group row{{ $errors->has('import_file') ? ' has-danger' : '' }}">
-                <label for="import_file" class="col-md-2 col-form-label">檔案</label>
-                <div class="col-md-10">
-                    {{ Form::file('import_file', ['class' => 'form-control', 'required', 'accept' => '.xls,.xlsx']) }}
-                    @if ($errors->has('import_file'))
-                        <span class="form-control-feedback">
-                            <strong>{{ $errors->first('import_file') }}</strong>
-                        </span>
-                    @endif
-                </div>
-            </div>
-
-            <div class="form-group row">
+            {{ bs()->openForm('post', route('booth.import'), ['files' => true]) }}
+            {{ bs()->formGroup(bs()->simpleFile('import_file')->required()->accept('.xls,.xlsx'))->label('檔案')->showAsRow() }}
+            <div class="row">
                 <div class="mx-auto">
-                    <button type="submit" class="btn btn-primary">
-                        <i class="fa fa-check" aria-hidden="true"></i> 確認
-                    </button>
+                    {{ bs()->submit('確認', 'primary')->prependChildren(fa()->icon('check')->addClass('mr-2')) }}
                 </div>
             </div>
-            {{ Form::close() }}
+            {{ bs()->closeForm() }}
         </div>
     </div>
 @endsection

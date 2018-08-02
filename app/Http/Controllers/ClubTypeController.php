@@ -27,7 +27,7 @@ class ClubTypeController extends Controller
      */
     public function create()
     {
-        return view('club-type.create-or-edit');
+        return view('club-type.create');
     }
 
     /**
@@ -89,7 +89,7 @@ class ClubTypeController extends Controller
      */
     public function edit(ClubType $clubType)
     {
-        return view('club-type.create-or-edit', compact('clubType'));
+        return view('club-type.edit', compact('clubType'));
     }
 
     /**

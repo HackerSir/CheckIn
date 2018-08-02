@@ -30,7 +30,7 @@ class RoleController extends Controller
     {
         $permissions = Permission::all();
 
-        return view('role.create-or-edit', compact('permissions'));
+        return view('role.create', compact('permissions'));
     }
 
     /**
@@ -69,7 +69,7 @@ class RoleController extends Controller
     {
         $permissions = Permission::all();
 
-        return view('role.create-or-edit', compact('role', 'permissions'));
+        return view('role.edit', compact('role', 'permissions'));
     }
 
     /**

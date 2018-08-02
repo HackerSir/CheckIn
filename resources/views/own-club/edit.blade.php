@@ -10,52 +10,12 @@
 @section('main_content')
     <div class="card">
         <div class="card-body">
-            {{ Form::model($club, ['route' => 'own-club.update', 'method' => 'patch', 'files' => true]) }}
-
-            <div class="form-group row">
-                <label for="number" class="col-md-2 col-form-label">社團編號</label>
-                <div class="col-md-10">
-                    {{ Form::text('number', null, ['class' => 'form-control', 'disabled']) }}
-                </div>
-            </div>
-
-            <div class="form-group row">
-                <label for="name" class="col-md-2 col-form-label">名稱</label>
-                <div class="col-md-10">
-                    {{ Form::text('name', null, ['class' => 'form-control', 'disabled']) }}
-                </div>
-            </div>
-
-            <div class="form-group row">
-                <label for="club_type_id" class="col-md-2 col-form-label">社團類型</label>
-                <div class="col-md-10">
-                    {{ Form::select('club_type_id', \App\ClubType::selectOptions(), null, ['class' => 'form-control', 'disabled']) }}
-                </div>
-            </div>
-
-            <div class="form-group row{{ $errors->has('description') ? ' has-danger' : '' }}">
-                <label for="description" class="col-md-2 col-form-label">描述</label>
-                <div class="col-md-10">
-                    {{ Form::textarea('description', null, ['class' => 'form-control']) }}
-                    @if ($errors->has('description'))
-                        <span class="form-control-feedback">
-                            <strong>{{ $errors->first('description') }}</strong>
-                        </span>
-                    @endif
-                </div>
-            </div>
-
-            <div class="form-group row{{ $errors->has('url') ? ' has-danger' : '' }}">
-                <label for="url" class="col-md-2 col-form-label">網址</label>
-                <div class="col-md-10">
-                    {{ Form::url('url', null, ['class' => 'form-control', 'placeholder' => '網站、粉絲專頁等']) }}
-                    @if ($errors->has('url'))
-                        <span class="form-control-feedback">
-                            <strong>{{ $errors->first('url') }}</strong>
-                        </span>
-                    @endif
-                </div>
-            </div>
+            {{ bs()->openForm('patch', route('own-club.update'), ['model' => $club, 'files' => true]) }}
+            {{ bs()->formGroup(bs()->text('number')->disabled())->label('社團編號')->showAsRow() }}
+            {{ bs()->formGroup(bs()->text('name')->disabled())->label('名稱')->showAsRow() }}
+            {{ bs()->formGroup(bs()->select('club_type_id')->options(\App\ClubType::selectOptions())->disabled())->label('社團類型')->showAsRow() }}
+            {{ bs()->formGroup(bs()->textarea('description')->attribute('rows', 10))->label('描述')->showAsRow() }}
+            {{ bs()->formGroup(bs()->input('url', 'url')->placeholder('網站、粉絲專頁等'))->label('網址')->showAsRow() }}
 
             @if($club->imgurImage)
                 <div class="form-group row">
@@ -74,30 +34,15 @@
                 </div>
             @endif
 
-            <div class="form-group row{{ $errors->has('image_file') ? ' has-danger' : '' }}">
-                <label for="image_file" class="col-md-2 col-form-label">圖片上傳</label>
-                <div class="col-md-10">
-                    {{ Form::file('image_file', ['class' => 'form-control', 'accept' => 'image/*']) }}
-                    @if ($errors->has('image_file'))
-                        <span class="form-control-feedback">
-                            <strong>{{ $errors->first('image_file') }}</strong>
-                        </span>
-                    @endif
-                    <small class="form-text text-muted">
-                        檔案大小限制：
-                        {{ app(\App\Services\FileService::class)->imgurUploadMaxSize() }}
-                    </small>
-                </div>
-            </div>
+            {{ bs()->formGroup(bs()->simpleFile('image_file')->acceptImage())->label('圖片上傳')
+            ->helpText('檔案大小限制：'. app(\App\Services\FileService::class)->imgurUploadMaxSize())->showAsRow() }}
 
-            <div class="form-group row">
+            <div class="row">
                 <div class="mx-auto">
-                    <button type="submit" class="btn btn-primary">
-                        <i class="fa fa-check" aria-hidden="true"></i> 確認
-                    </button>
+                    {{ bs()->submit('確認', 'primary')->prependChildren(fa()->icon('check')->addClass('mr-2')) }}
                 </div>
             </div>
-            {{ Form::close() }}
+            {{ bs()->closeForm() }}
         </div>
     </div>
 @endsection

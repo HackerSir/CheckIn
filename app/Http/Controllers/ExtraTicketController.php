@@ -29,7 +29,7 @@ class ExtraTicketController extends Controller
      */
     public function create()
     {
-        return view('extra-ticket.create-or-edit');
+        return view('extra-ticket.create');
     }
 
     /**
@@ -62,7 +62,7 @@ class ExtraTicketController extends Controller
      */
     public function edit(ExtraTicket $extraTicket)
     {
-        return view('extra-ticket.create-or-edit', compact('extraTicket'));
+        return view('extra-ticket.edit', compact('extraTicket'));
     }
 
     /**

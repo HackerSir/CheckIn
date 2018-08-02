@@ -29,7 +29,7 @@ class BoothController extends Controller
      */
     public function create()
     {
-        return view('booth.create-or-edit');
+        return view('booth.create');
     }
 
     /**
@@ -71,7 +71,7 @@ class BoothController extends Controller
      */
     public function edit(Booth $booth)
     {
-        return view('booth.create-or-edit', compact('booth'));
+        return view('booth.edit', compact('booth'));
     }
 
     /**

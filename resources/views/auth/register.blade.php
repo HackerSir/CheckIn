@@ -5,81 +5,18 @@
 @section('main_content')
     <div class="card">
         <div class="card-body">
-            <form role="form" method="POST" action="{{ route('register') }}">
-                {{ csrf_field() }}
-
-                <div class="form-group row{{ $errors->has('name') ? ' has-danger' : '' }}">
-                    <label for="name" class="col-md-2 col-form-label">名稱</label>
-
-                    <div class="col-md-10">
-                        <input id="name" type="text"
-                               class="form-control{{ $errors->has('name') ? ' form-control-danger' : '' }}"
-                               name="name"
-                               value="{{ old('name') }}" required
-                               autofocus>
-
-                        @if ($errors->has('name'))
-                            <span class="form-control-feedback">
-                                <strong>{{ $errors->first('name') }}</strong>
-                            </span>
-                        @endif
-                    </div>
+            {{ bs()->openForm('post',route('register')) }}
+            {{ bs()->formGroup(bs()->text('name')->required())->label('名稱')->showAsRow() }}
+            {{ bs()->formGroup(bs()->email('email')->required())->label('信箱')->showAsRow() }}
+            {{ bs()->formGroup(bs()->password('password')->required())->label('密碼')->showAsRow() }}
+            {{ bs()->formGroup(bs()->password('password_confirmation')->required())->label('確認密碼')->showAsRow() }}
+            <div class="row">
+                <div class="mx-auto">
+                    {{ bs()->submit('註冊', 'primary')->prependChildren(fa()->icon('check')->addClass('mr-2')) }}
+                    {{ bs()->a(route('login'), '登入')->asButton('light')->prependChildren(fa()->icon('sign-in-alt')->addClass('mr-2')) }}
                 </div>
-
-                <div class="form-group row{{ $errors->has('email') ? ' has-danger' : '' }}">
-                    <label for="email" class="col-md-2 col-form-label">信箱</label>
-
-                    <div class="col-md-10">
-                        <input id="email" type="email"
-                               class="form-control{{ $errors->has('email') ? ' form-control-danger' : '' }}"
-                               name="email" value="{{ old('email') }}"
-                               required>
-
-                        @if ($errors->has('email'))
-                            <span class="form-control-feedback">
-                                <strong>{{ $errors->first('email') }}</strong>
-                            </span>
-                        @endif
-                    </div>
-                </div>
-
-                <div class="form-group row{{ $errors->has('password') ? ' has-danger' : '' }}">
-                    <label for="password" class="col-md-2 col-form-label">密碼</label>
-
-                    <div class="col-md-10">
-                        <input id="password" type="password"
-                               class="form-control{{ $errors->has('password') ? ' form-control-danger' : '' }}"
-                               name="password" required>
-
-                        @if ($errors->has('password'))
-                            <span class="form-control-feedback">
-                                <strong>{{ $errors->first('password') }}</strong>
-                            </span>
-                        @endif
-                    </div>
-                </div>
-
-                <div class="form-group row">
-                    <label for="password-confirm" class="col-md-2 col-form-label">確認密碼</label>
-
-                    <div class="col-md-10">
-                        <input id="password-confirm" type="password" class="form-control"
-                               name="password_confirmation"
-                               required>
-                    </div>
-                </div>
-
-                <div class="form-group row">
-                    <div class="mx-auto">
-                        <button type="submit" class="btn btn-primary">
-                            <i class="fa fa-check" aria-hidden="true"></i> 註冊
-                        </button>
-                        <a class="btn btn-link" href="{{ route('login') }}">
-                            登入
-                        </a>
-                    </div>
-                </div>
-            </form>
+            </div>
+            {{ bs()->closeForm() }}
         </div>
     </div>
 @endsection

@@ -11,34 +11,15 @@
 @section('main_content')
     <div class="card">
         <div class="card-body">
-            <form role="form" method="POST" action="{{ route('qrcode-set.store') }}">
-                {{ csrf_field() }}
+            {{ bs()->openForm('post', route('qrcode-set.store')) }}
+            {{ bs()->formGroup(bs()->input('number', 'amount', 1)->required()->autofocus()->attributes(['min' => 1]))->label('QR碼數量')->showAsRow() }}
 
-                <div class="form-group row{{ $errors->has('amount') ? ' has-danger' : '' }}">
-                    <label for="amount" class="col-md-2 col-form-label">QR碼數量</label>
-
-                    <div class="col-md-10">
-                        <input id="amount" type="number"
-                               class="form-control{{ $errors->has('amount') ? ' form-control-danger' : '' }}"
-                               name="amount" required autofocus min="1" value="1">
-
-                        @if ($errors->has('amount'))
-                            <span class="form-control-feedback">
-                                <strong>{{ $errors->first('amount') }}</strong>
-                            </span>
-                        @endif
-                    </div>
+            <div class="row">
+                <div class="mx-auto">
+                    {{ bs()->submit('新增 QR Code 集', 'primary')->prependChildren(fa()->icon('check')->addClass('mr-2')) }}
                 </div>
-
-
-                <div class="form-group row">
-                    <div class="mx-auto">
-                        <button type="submit" class="btn btn-primary">
-                            <i class="fa fa-check" aria-hidden="true"></i> 新增 QR Code 集
-                        </button>
-                    </div>
-                </div>
-            </form>
+            </div>
+            {{ bs()->closeForm() }}
         </div>
     </div>
 @endsection

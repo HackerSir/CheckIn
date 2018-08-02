@@ -11,44 +11,16 @@
 @section('main_content')
     <div class="card">
         <div class="card-body">
-            <form role="form" method="POST" action="{{ route('profile.update') }}">
-                {{ csrf_field() }}
-                {{ method_field('put') }}
-
-                <div class="form-group row">
-                    <label for="email" class="col-md-2 col-form-label">信箱</label>
-
-                    <div class="col-md-10">
-                        <input id="email" type="email" class="form-control" value="{{ $user->email }}" readonly>
-                        <small class="form-text text-muted">信箱作為帳號使用，故無法修改</small>
-                    </div>
+            {{ bs()->openForm('put', route('profile.update'), ['model' => $user]) }}
+            {{ bs()->formGroup(bs()->email('email')->readOnly())->label('信箱')
+             ->helpText('信箱作為帳號使用，故無法修改')->showAsRow() }}
+            {{ bs()->formGroup(bs()->text('name')->required())->label('名稱')->showAsRow() }}
+            <div class="row">
+                <div class="mx-auto">
+                    {{ bs()->submit('確認', 'primary')->prependChildren(fa()->icon('check')->addClass('mr-2')) }}
                 </div>
-
-                <div class="form-group row{{ $errors->has('name') ? ' has-danger' : '' }}">
-                    <label for="name" class="col-md-2 col-form-label">名稱</label>
-
-                    <div class="col-md-10">
-                        <input id="name" type="text"
-                               class="form-control{{ $errors->has('name') ? ' form-control-danger' : '' }}"
-                               name="name"
-                               value="{{ $user->name }}" required autofocus>
-
-                        @if ($errors->has('name'))
-                            <span class="form-control-feedback">
-                                <strong>{{ $errors->first('name') }}</strong>
-                            </span>
-                        @endif
-                    </div>
-                </div>
-
-                <div class="form-group row">
-                    <div class="mx-auto">
-                        <button type="submit" class="btn btn-primary">
-                            <i class="fa fa-check" aria-hidden="true"></i> 確認
-                        </button>
-                    </div>
-                </div>
-            </form>
+            </div>
+            {{ bs()->closeForm() }}
         </div>
     </div>
 @endsection

@@ -21,65 +21,18 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-body">
-                    <form role="form" method="POST" action="{{ route('qrcode.bind') }}">
-                        {{ csrf_field() }}
+                    {{ bs()->openForm('post', route('qrcode.bind')) }}
+                    {{ bs()->formGroup(bs()->inputGroup(bs()->text('nid')->required()->autofocus())
+                    ->suffix(bs()->button(fa()->times())->attributes(['onclick' => "$('input#nid').val('');$('input#nid').focus();return false;"]), false))->label('學號')->showAsRow() }}
+                    {{ bs()->formGroup(bs()->inputGroup(bs()->text('code')->required()->autofocus())
+                    ->suffix(bs()->button(fa()->times())->attributes(['onclick' => "$('input#code').val('');$('input#code').focus();return false;"]), false))->label('代號')->showAsRow() }}
 
-                        <div class="form-group row{{ $errors->has('nid') ? ' has-danger' : '' }}">
-                            <label for="nid" class="col-md-2 col-form-label">學號</label>
-
-                            <div class="col-md-10">
-                                <div class="input-group">
-                                    <input id="nid" type="text" value="{{ old('nid') }}"
-                                           class="upper form-control{{ $errors->has('nid') ? ' form-control-danger' : '' }}"
-                                           name="nid" required autofocus>
-                                    <div class="input-group-append">
-                                        <button class="btn btn-secondary" type="button"
-                                                onclick="$('input#nid').val('');$('input#nid').focus()">
-                                            <i class="fa fa-times" aria-hidden="true"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                                @if ($errors->has('nid'))
-                                    <span class="form-control-feedback">
-                                        <strong>{{ $errors->first('nid') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
+                    <div class="row">
+                        <div class="mx-auto">
+                            {{ bs()->submit('綁定 QR Code', 'primary')->prependChildren(fa()->icon('check')->addClass('mr-2')) }}
                         </div>
-
-                        <div class="form-group row{{ $errors->has('code') ? ' has-danger' : '' }}">
-                            <label for="code" class="col-md-2 col-form-label">代號</label>
-
-                            <div class="col-md-10">
-                                <div class="input-group">
-                                    <input id="code" type="text" value="{{ old('code') }}"
-                                           class="upper form-control{{ $errors->has('code') ? ' form-control-danger' : '' }}"
-                                           name="code" required>
-                                    <div class="input-group-append">
-                                        <button class="btn btn-secondary" type="button"
-                                                onclick="$('input#code').val('');$('input#code').focus()">
-                                            <i class="fa fa-times" aria-hidden="true"></i>
-                                        </button>
-                                    </div>
-                                </div>
-
-                                @if ($errors->has('code'))
-                                    <span class="form-control-feedback">
-                                        <strong>{{ $errors->first('code') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-
-                        <div class="form-group row">
-                            <div class="col-md-10 offset-md-2">
-                                <button type="submit" class="btn btn-primary">
-                                    <i class="fa fa-check" aria-hidden="true"></i> 綁定 QR Code
-                                </button>
-                            </div>
-                        </div>
-                    </form>
+                    </div>
+                    {{ bs()->closeForm() }}
                 </div>
             </div>
         </div>
