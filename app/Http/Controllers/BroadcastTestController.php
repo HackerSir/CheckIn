@@ -18,7 +18,7 @@ class BroadcastTestController extends Controller
         }
 
         $request->validate([
-            'message' => 'required|string'
+            'message' => 'required|string',
         ]);
 
         event(new AdminTest(auth()->user(), $request->get('message')));
