@@ -19,15 +19,29 @@
 <script>
     export default {
         name: "BroadcastTest",
-        data () {
+        data() {
             return {
                 message: '',
                 messages: []
             }
         },
+        mounted() {
+            window.Echo.private('admin.test')
+                .listen('AdminTest', (e) => {
+                    this.messages.push({
+                        user: e.username,
+                        message: e.message
+                    })
+                });
+        },
         methods: {
             sendMessage: function () {
-
+                axios.post(window.Laravel.api.message, {message: this.message})
+                    .then((response) => {
+                        if (response.status === 200) {
+                            this.message = '';
+                        }
+                    });
             }
         }
     }

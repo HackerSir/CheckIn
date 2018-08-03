@@ -60,6 +60,7 @@ Route::group(['middleware' => ['auth', 'email']], function () {
     //權限：broadcast.manage
     Route::group(['middleware' => 'permission:broadcast.manage'], function () {
         Route::view('broadcast-test', 'misc.broadcast-test')->name('broadcast-test');
+        Route::post('message', 'BroadcastTestController@postMessage')->name('broadcast-test.message');
     });
     //學生管理
     //權限：student.manage

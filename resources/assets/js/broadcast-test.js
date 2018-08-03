@@ -14,8 +14,3 @@ Vue.component('broadcast-test', require('./components/BroadcastTest.vue'));
 const app = new Vue({
     el: '#vue-app'
 });
-
-// window.Echo.private('admin.test')
-//     .listen('CheckInSuccess', (e) => {
-//         console.log(e);
-//     });
