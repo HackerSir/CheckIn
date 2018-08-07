@@ -24,8 +24,8 @@ class UsersDataTable extends DataTable
             ->addColumn('action', 'user.datatables.action')
             ->editColumn('name', 'user.datatables.name')
             ->editColumn('email', 'user.datatables.email')
-            ->editColumn('club_id', function ($booth) {
-                return view('booth.datatables.club', compact('booth'))->render();
+            ->editColumn('club_id', function ($user) {
+                return view('user.datatables.club', compact('user'))->render();
             })
             ->filterColumn('club_id', function ($query, $keyword) {
                 /* @var Builder|User $query */
