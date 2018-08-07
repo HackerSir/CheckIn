@@ -131,6 +131,16 @@ Route::group(['middleware' => ['auth', 'email']], function () {
         Route::get('club/download-import-sample', 'ClubController@downloadImportSample')
             ->name('club.download-import-sample');
         Route::post('export/club-staff', 'ExportController@clubStaff')->name('export.club-staff');
+        Route::group(['prefix' => 'club'], function () {
+            Route::resource('data-update-request', 'DataUpdateRequestController', [
+                'only' => [
+                    'index',
+                    'create',
+                    'store',
+                    'show',
+                ],
+            ]);
+        });
         Route::resource('club', 'ClubController', [
             'except' => [
                 'show',

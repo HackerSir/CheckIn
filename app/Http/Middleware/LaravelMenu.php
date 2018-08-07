@@ -64,6 +64,8 @@ class LaravelMenu
 
                         if (Laratrust::can('club.manage')) {
                             $activityMenu->add('社團管理', ['route' => 'club.index'])->active('club/*');
+                            $activityMenu->add('社團資料更新請求管理', ['route' => 'data-update-request.index'])
+                                ->active('club/data-update-request/*');
                         }
 
                         if (Laratrust::can('club-type.manage')) {
