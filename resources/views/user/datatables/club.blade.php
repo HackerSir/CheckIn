@@ -1,1 +1,1 @@
-{!! $user->club->display_name ?? ''!!}
+{!! $user->club->display_name ?? '' !!}
