@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Club;
 use App\DataTables\DataUpdateRequestDataTable;
+use App\DataTables\Scopes\DataUpdateRequestClubScope;
+use App\DataTables\Scopes\DataUpdateRequestResultScope;
 use App\DataUpdateRequest;
 use App\User;
 use Carbon\Carbon;
@@ -18,6 +21,15 @@ class DataUpdateRequestController extends Controller
      */
     public function index(DataUpdateRequestDataTable $dataTable)
     {
+        $filterByClub = Club::find(\request('club_id'));
+        if ($filterByClub) {
+            $dataTable->addScope(new DataUpdateRequestClubScope($filterByClub));
+        }
+        $filterByResult = \request('result');
+        if ($filterByResult) {
+            $dataTable->addScope(new DataUpdateRequestResultScope($filterByResult));
+        }
+
         return $dataTable->render('club.data-update-request.index');
     }
 
