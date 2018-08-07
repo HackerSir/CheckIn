@@ -37,6 +37,7 @@ class DataUpdateRequestResultScope implements DataTableScope
         if ($this->result == 'fail') {
             return $query->where('review_result', false);
         }
+
         return $query;
     }
 }
