@@ -1,10 +1,10 @@
 @extends('layouts.base')
 
-@section('title', '社團資料更新請求管理')
+@section('title', '社團資料修改申請管理')
 
 @section('buttons')
     <a href="{{ route('data-update-request.index') }}" class="btn btn-secondary">
-        <i class="fa fa-arrow-left" aria-hidden="true"></i> 社團資料更新請求管理
+        <i class="fa fa-arrow-left" aria-hidden="true"></i> 社團資料修改申請管理
     </a>
 @endsection
 

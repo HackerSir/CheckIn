@@ -26,6 +26,7 @@ class SettingController extends Controller
             'target'                       => 'required|integer|min:0',
             'feedback_create_expired_at'   => 'required|date',
             'feedback_download_expired_at' => 'required|date',
+            'club_edit_deadline'           => 'required|date',
         ]);
 
         \Setting::set('start_at', $request->get('start_at'));
@@ -33,6 +34,7 @@ class SettingController extends Controller
         \Setting::set('target', $request->get('target'));
         \Setting::set('feedback_create_expired_at', $request->get('feedback_create_expired_at'));
         \Setting::set('feedback_download_expired_at', $request->get('feedback_download_expired_at'));
+        \Setting::set('club_edit_deadline', $request->get('club_edit_deadline'));
 
         \Setting::save();
 

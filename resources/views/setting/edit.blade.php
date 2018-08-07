@@ -11,6 +11,7 @@
             {{ bs()->formGroup(bs()->input('number', 'target', Setting::get('target'))->required()->attributes(['min' => 0]))->label('打卡目標數量')->showAsRow() }}
             {{ bs()->formGroup(bs()->text('feedback_create_expired_at', Setting::get('feedback_create_expired_at'))->required())->label('回饋資料填寫期限')->showAsRow() }}
             {{ bs()->formGroup(bs()->text('feedback_download_expired_at', Setting::get('feedback_download_expired_at'))->required())->label('回饋資料檢視與下載期限')->showAsRow() }}
+            {{ bs()->formGroup(bs()->text('club_edit_deadline', Setting::get('club_edit_deadline'))->required())->label('社團資料編輯期限')->showAsRow() }}
 
             <div class="row">
                 <div class="mx-auto">
@@ -29,6 +30,7 @@
             $('input[name=end_at]').datetimepicker();
             $('input[name=feedback_create_expired_at]').datetimepicker();
             $('input[name=feedback_download_expired_at]').datetimepicker();
+            $('input[name=club_edit_deadline]').datetimepicker();
         });
     </script>
 @endsection

@@ -23,12 +23,18 @@
         </button>
         {!! Form::close() !!}
     @elseif(isset(Auth::user()->club) && Auth::user()->club->id == $club->id)
-        <a href="{{ route('own-club.edit') }}" class="btn btn-primary">
-            <i class="fa fa-edit" aria-hidden="true"></i> 編輯資料
-        </a>
-        <a href="{{ route('own-club.data-update-request.index') }}" class="btn btn-primary">
-            <i class="fa fa-edit" aria-hidden="true"></i> 社團資料更新申請
-        </a>
+        @if(Carbon\Carbon::now()->lte(new Carbon\Carbon(Setting::get('club_edit_deadline'))))
+            <a href="{{ route('own-club.edit') }}" class="btn btn-primary">
+                <i class="fa fa-edit" aria-hidden="true"></i> 編輯資料
+            </a>
+        @else
+            <button class="btn btn-primary disabled" onclick="alert('已超過資料編輯期限，請提交社團資料修改申請')">
+                <i class="fa fa-edit" aria-hidden="true"></i> 編輯資料
+            </button>
+            <a href="{{ route('own-club.data-update-request.index') }}" class="btn btn-primary">
+                <i class="fa fa-edit" aria-hidden="true"></i> 社團資料修改申請
+            </a>
+        @endif
     @endif
 @endsection
 

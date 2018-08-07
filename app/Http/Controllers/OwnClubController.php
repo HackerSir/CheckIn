@@ -8,6 +8,7 @@ use App\Services\ImgurImageService;
 use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Setting;
 
 class OwnClubController extends Controller
 {
@@ -19,6 +20,13 @@ class OwnClubController extends Controller
     public function edit()
     {
         $club = $this->getOwnClub();
+
+        //檢查資料編輯期限
+        $clubEditDeadline = new Carbon(Setting::get('club_edit_deadline'));
+        if (Carbon::now()->gt($clubEditDeadline)) {
+            return redirect()->route('own-club.data-update-request.create')
+                ->with('warning', '已超過資料編輯期限，請透過此介面提交資料修改申請');
+        }
 
         return view('own-club.edit', compact('club'));
     }
@@ -34,6 +42,13 @@ class OwnClubController extends Controller
     public function update(Request $request, ImgurImageService $imgurImageService)
     {
         $club = $this->getOwnClub();
+
+        //檢查資料編輯期限
+        $clubEditDeadline = new Carbon(Setting::get('club_edit_deadline'));
+        if (Carbon::now()->gt($clubEditDeadline)) {
+            return redirect()->route('own-club.data-update-request.create')
+                ->with('warning', '已超過資料編輯期限，請透過此介面提交資料修改申請');
+        }
 
         $this->validate($request, [
             'description' => 'nullable|max:300',
@@ -64,6 +79,14 @@ class OwnClubController extends Controller
     public function dataUpdateRequestPanel()
     {
         $club = $this->getOwnClub();
+
+        //檢查資料編輯期限
+        $clubEditDeadline = new Carbon(Setting::get('club_edit_deadline'));
+        if (Carbon::now()->lte($clubEditDeadline)) {
+            return redirect()->route('own-club.edit')
+                ->with('warning', '目前仍可自由編輯資料，無須提出申請');
+        }
+
         $club->load(
             'dataUpdateRequests.club.clubType',
             'dataUpdateRequests.user.student',
@@ -82,6 +105,13 @@ class OwnClubController extends Controller
         $user = auth()->user();
         $club = $this->getOwnClub();
 
+        //檢查資料編輯期限
+        $clubEditDeadline = new Carbon(Setting::get('club_edit_deadline'));
+        if (Carbon::now()->lte($clubEditDeadline)) {
+            return redirect()->route('own-club.edit')
+                ->with('warning', '目前仍可自由編輯資料，無須提出申請');
+        }
+
         return view('own-club.create_data_update_request', compact('user', 'club'));
     }
 
@@ -95,6 +125,13 @@ class OwnClubController extends Controller
         /** @var User $user */
         $user = auth()->user();
         $club = $this->getOwnClub();
+
+        //檢查資料編輯期限
+        $clubEditDeadline = new Carbon(Setting::get('club_edit_deadline'));
+        if (Carbon::now()->lte($clubEditDeadline)) {
+            return redirect()->route('own-club.edit')
+                ->with('warning', '目前仍可自由編輯資料，無須提出申請');
+        }
 
         $this->validate($request, [
             'reason'      => 'required|max:255',

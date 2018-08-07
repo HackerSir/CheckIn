@@ -1,6 +1,6 @@
 @extends('layouts.base')
 
-@section('title', '社團資料更新請求管理')
+@section('title', '社團資料修改申請管理')
 
 @section('buttons')
     {{ bs()->openForm('get', route('data-update-request.index'), ['inline' => true]) }}

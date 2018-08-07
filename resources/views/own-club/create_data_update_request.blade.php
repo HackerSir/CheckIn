@@ -1,6 +1,6 @@
 @extends('layouts.base')
 
-@section('title', '申請更新社團資料')
+@section('title', '申請修改社團資料')
 
 @section('buttons')
     <a href="{{ route('own-club.data-update-request.index') }}" class="btn btn-secondary">

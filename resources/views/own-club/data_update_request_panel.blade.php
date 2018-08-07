@@ -1,6 +1,6 @@
 @extends('layouts.base')
 
-@section('title', '社團資料更新申請')
+@section('title', '社團資料修改申請')
 
 @section('buttons')
     <a href="{{ route('clubs.show', $club) }}" class="btn btn-secondary">
@@ -11,6 +11,9 @@
     </a>
 @endsection
 @section('main_content')
+    <div class="alert alert-danger">
+        由於已超過資料編輯期限，如欲修改社團資料，請透過此介面提交資料修改申請
+    </div>
     <div class="card">
         <div class="card-body">
             @foreach($club->dataUpdateRequests as $dataUpdateRequest)
