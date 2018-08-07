@@ -81,12 +81,12 @@ class DataUpdateRequest extends Model
     public function getShowResultAttribute()
     {
         if (is_null($this->review_result)) {
-            return '<span class="text-info"><i class="fas fa-question"></i> 等待審核</span>';
+            return '<span class="text-info"><i class="fas fa-fw fa-question"></i> 等待審核</span>';
         }
         if ($this->review_result) {
-            return '<span class="text-success"><i class="fas fa-check"></i> 通過</span>';
+            return '<span class="text-success"><i class="fas fa-fw fa-check"></i> 通過</span>';
         }
 
-        return '<span class="text-danger"><i class="fas fa-times"></i> 拒絕</span>';
+        return '<span class="text-danger"><i class="fas fa-fw fa-times"></i> 拒絕</span>';
     }
 }
