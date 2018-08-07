@@ -11,6 +11,7 @@ use App\Observers\RecordObserver;
 use App\Qrcode;
 use App\Record;
 use Carbon\Carbon;
+use Horizon;
 use Illuminate\Support\ServiceProvider;
 use Monolog\Logger;
 use Schema;
@@ -52,6 +53,10 @@ class AppServiceProvider extends ServiceProvider
         Record::observe(RecordObserver::class);
         ImgurImage::observe(ImgurImageObserver::class);
         Club::observe(ClubObserver::class);
+
+        Horizon::auth(function ($request) {
+            return \Laratrust::can('horizon.manage');
+        });
     }
 
     /**
