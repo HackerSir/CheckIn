@@ -33,6 +33,7 @@
     <link rel="stylesheet" href="//cdn.datatables.net/responsive/2.1.1/css/responsive.dataTables.min.css">
     <link rel="stylesheet" href="{{ asset('css/jquery.datetimepicker.min.css') }}">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="{{ asset(mix('/build-css/select2-bootstrap4.min.css')) }}">
     <style>
         {{-- https://github.com/twbs/bootstrap/issues/21590 --}}
         @media (max-width: 576px) {
@@ -212,6 +213,8 @@
             }
         });
     })(jQuery, jQuery.fn.dataTable);
+    // select2 預設設定
+    $.fn.select2.defaults.set( "theme", "bootstrap4");
 </script>
 @yield('js')
 

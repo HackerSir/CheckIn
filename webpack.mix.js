@@ -10,9 +10,13 @@ const {mix} = require('laravel-mix');
  | file for the application as well as bundling up all the JS files.
  |
  */
-let buildPath = 'public/build-js';
+let buildJsPath = 'public/build-js';
+let buildCssPath = 'public/build-css';
 
-mix.js('resources/assets/js/vue.js', buildPath)
-    .js('resources/assets/js/checkin.js', buildPath)
-    .js('resources/assets/js/broadcast-test.js', buildPath)
+mix.js('resources/assets/js/vue.js', buildJsPath)
+    .js('resources/assets/js/checkin.js', buildJsPath)
+    .js('resources/assets/js/broadcast-test.js', buildJsPath)
+    .version();
+
+mix.copy('node_modules/select2-bootstrap4-theme/dist/select2-bootstrap4.min.css', buildCssPath)
     .version();

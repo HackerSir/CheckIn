@@ -326,6 +326,7 @@ storage/settings.json
 .idea/remote-mappings.xml
 
 public/build-js
+public/build-css
 public/mix-manifest.json
 
 laravel-echo-server.json
