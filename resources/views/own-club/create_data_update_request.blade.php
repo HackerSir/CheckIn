@@ -11,6 +11,11 @@
     <div class="card">
         <div class="card-body">
             {{ bs()->openForm('post', route('own-club.data-update-request.store'), ['model' => $club, 'files' => true]) }}
+            @if($previousDataUpdateRequest = $club->dataUpdateRequests()->whereNull('review_at')->first())
+                @component('bs::alert', ['type' => 'danger'])
+                    仍有申請正等待審核中，若重新提交申請，將自動撤銷前一次的申請
+                @endcomponent
+            @endif
             @component('bs::alert', ['type' => 'info'])
                 請確實填寫申請原因，以利審核流程進行
             @endcomponent
