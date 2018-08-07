@@ -103,7 +103,7 @@ class OwnClubController extends Controller
         ]);
 
         //試著刪除之前送出但為審核的申請
-        $club->dataUpdateRequests()->whereNull('review_at')->delete();
+        $club->dataUpdateRequests()->whereNull('review_result')->delete();
         //建立新的審核申請
         DataUpdateRequest::create([
             'user_id'              => $user->id,
