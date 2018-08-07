@@ -87,6 +87,6 @@ class DataUpdateRequest extends Model
             return '<span class="text-success"><i class="fas fa-fw fa-check"></i> 通過</span>';
         }
 
-        return '<span class="text-danger"><i class="fas fa-fw fa-times"></i> 拒絕</span>';
+        return '<span class="text-danger"><i class="fas fa-fw fa-times"></i> 不通過</span>';
     }
 }

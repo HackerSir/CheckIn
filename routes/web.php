@@ -135,9 +135,8 @@ Route::group(['middleware' => ['auth', 'email']], function () {
             Route::resource('data-update-request', 'DataUpdateRequestController', [
                 'only' => [
                     'index',
-                    'create',
-                    'store',
                     'show',
+                    'update',
                 ],
             ]);
         });
