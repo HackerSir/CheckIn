@@ -25,6 +25,8 @@ use Laratrust\Traits\LaratrustUserTrait;
  * @property string|null $google2fa_secret
  * @property int|null $club_id 負責社團
  * @property-read \App\Club|null $club
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\DataUpdateRequest[] $dataUpdateRequests
+ * @property-read string $display_name
  * @property-read bool $is_confirmed
  * @property-read bool $is_local_account
  * @property-read bool $is_staff
@@ -43,6 +45,7 @@ use Laratrust\Traits\LaratrustUserTrait;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereLastLoginIp($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\User wherePassword($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User wherePermissionIs($permission = '')
  * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereRegisterAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereRegisterIp($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereRememberToken($value)
@@ -126,6 +129,14 @@ class User extends Authenticatable
     }
 
     /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany|\Illuminate\Database\Eloquent\Builder
+     */
+    public function dataUpdateRequests()
+    {
+        return $this->hasMany(DataUpdateRequest::class);
+    }
+
+    /**
      * 是否為攤位負責人
      *
      * @return bool
@@ -133,5 +144,13 @@ class User extends Authenticatable
     public function getIsStaffAttribute()
     {
         return !is_null($this->club_id);
+    }
+
+    /**
+     * @return string
+     */
+    public function getDisplayNameAttribute()
+    {
+        return $this->student->display_name ?? $this->name;
     }
 }

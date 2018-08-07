@@ -225,6 +225,12 @@ Route::group(['middleware' => ['auth', 'email']], function () {
     Route::group(['prefix' => 'own-club'], function () {
         Route::get('edit', 'OwnClubController@edit')->name('own-club.edit');
         Route::patch('update', 'OwnClubController@update')->name('own-club.update');
+        Route::get('data-update-request', 'OwnClubController@dataUpdateRequestPanel')
+            ->name('own-club.data-update-request.index');
+        Route::get('data-update-request/create', 'OwnClubController@createDataUpdateRequest')
+            ->name('own-club.data-update-request.create');
+        Route::post('data-update-request', 'OwnClubController@storeDataUpdateRequest')
+            ->name('own-club.data-update-request.store');
     });
 
     //QR Code 掃描

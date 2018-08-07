@@ -26,11 +26,9 @@ class CreateDataUpdateRequestsTable extends Migration
             //原資料
             $table->text('original_description')->nullable()->comment('原簡介');
             $table->string('original_url')->nullable()->comment('原網址');
-            $table->string('original_image_url')->nullable()->comment('原圖片網址');
             //新資料
             $table->text('description')->nullable()->comment('簡介');
             $table->string('url')->nullable()->comment('網址');
-            $table->string('image_url')->nullable()->comment('圖片網址');
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')

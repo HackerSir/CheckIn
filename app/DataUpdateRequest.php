@@ -18,22 +18,19 @@ use Illuminate\Database\Eloquent\Model;
  * @property string|null $review_comment 審核評語
  * @property string|null $original_description 原簡介
  * @property string|null $original_url 原網址
- * @property string|null $original_image_url 原圖片網址
  * @property string|null $description 簡介
  * @property string|null $url 網址
- * @property string|null $image_url 圖片網址
  * @property \Carbon\Carbon|null $created_at
  * @property \Carbon\Carbon|null $updated_at
  * @property-read \App\Club $club
+ * @property-read mixed $show_result
  * @property-read \App\User|null $reviewer
  * @property-read \App\User|null $user
  * @method static \Illuminate\Database\Eloquent\Builder|\App\DataUpdateRequest whereClubId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\DataUpdateRequest whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\DataUpdateRequest whereDescription($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\DataUpdateRequest whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\DataUpdateRequest whereImageUrl($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\DataUpdateRequest whereOriginalDescription($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\DataUpdateRequest whereOriginalImageUrl($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\DataUpdateRequest whereOriginalUrl($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\DataUpdateRequest whereReason($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\DataUpdateRequest whereReviewAt($value)
@@ -59,10 +56,8 @@ class DataUpdateRequest extends Model
         'review_comment',
         'original_description',
         'original_url',
-        'original_image_url',
         'description',
         'url',
-        'image_url',
     ];
 
     public function user()
@@ -78,5 +73,17 @@ class DataUpdateRequest extends Model
     public function reviewer()
     {
         return $this->belongsTo(User::class, 'reviewer_id');
+    }
+
+    public function getShowResultAttribute()
+    {
+        if (is_null($this->review_result)) {
+            return '<span class="text-info"><i class="fas fa-question"></i> 等待審核</span>';
+        }
+        if ($this->review_result) {
+            return '<span class="text-success"><i class="fas fa-check"></i> 通過</span>';
+        }
+
+        return '<span class="text-danger"><i class="fas fa-times"></i> 拒絕</span>';
     }
 }

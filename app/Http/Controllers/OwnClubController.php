@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Club;
+use App\DataUpdateRequest;
 use App\Services\ImgurImageService;
+use App\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class OwnClubController extends Controller
@@ -53,6 +56,62 @@ class OwnClubController extends Controller
         }
 
         return redirect()->route('clubs.show', $club)->with('global', '社團已更新');
+    }
+
+    /**
+     * @return \Illuminate\Http\Response
+     */
+    public function dataUpdateRequestPanel()
+    {
+        $club = $this->getOwnClub();
+
+        return view('own-club.data_update_request_panel', compact('club'));
+    }
+
+    /**
+     * @return \Illuminate\Http\Response
+     */
+    public function createDataUpdateRequest()
+    {
+        /** @var User $user */
+        $user = auth()->user();
+        $club = $this->getOwnClub();
+
+        return view('own-club.create_data_update_request', compact('user', 'club'));
+    }
+
+    /**
+     * @param Request $request
+     * @throws \Exception
+     * @return \Illuminate\Http\Response
+     */
+    public function storeDataUpdateRequest(Request $request)
+    {
+        /** @var User $user */
+        $user = auth()->user();
+        $club = $this->getOwnClub();
+
+        $this->validate($request, [
+            'reason'      => 'required|max:255',
+            'description' => 'nullable|max:300',
+            'url'         => 'nullable|url',
+        ]);
+
+        //試著刪除之前送出但為審核的申請
+        $club->dataUpdateRequests()->whereNull('review_at')->delete();
+        //建立新的審核申請
+        DataUpdateRequest::create([
+            'user_id'              => $user->id,
+            'club_id'              => $club->id,
+            'reason'               => $request->get('reason'),
+            'submit_at'            => Carbon::now(),
+            'original_description' => $club->description,
+            'original_url'         => $club->url,
+            'description'          => $request->get('description'),
+            'url'                  => $request->get('url'),
+        ]);
+
+        return redirect()->route('clubs.show', $club)->with('global', '申請已送出');
     }
 
     /**

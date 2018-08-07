@@ -26,6 +26,9 @@
         <a href="{{ route('own-club.edit') }}" class="btn btn-primary">
             <i class="fa fa-edit" aria-hidden="true"></i> 編輯資料
         </a>
+        <a href="{{ route('own-club.data-update-request.index') }}" class="btn btn-primary">
+            <i class="fa fa-edit" aria-hidden="true"></i> 社團資料更新申請
+        </a>
     @endif
 @endsection
 

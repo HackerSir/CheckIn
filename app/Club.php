@@ -18,6 +18,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property \Carbon\Carbon|null $updated_at
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Booth[] $booths
  * @property-read \App\ClubType|null $clubType
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\DataUpdateRequest[] $dataUpdateRequests
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Feedback[] $feedback
  * @property-read string $display_name
  * @property-read bool $is_counted
@@ -101,6 +102,14 @@ class Club extends Model
     public function imgurImage()
     {
         return $this->hasOne(ImgurImage::class);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany|\Illuminate\Database\Eloquent\Builder
+     */
+    public function dataUpdateRequests()
+    {
+        return $this->hasMany(DataUpdateRequest::class)->orderByDesc('submit_at');
     }
 
     /**
