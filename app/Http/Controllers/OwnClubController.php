@@ -64,6 +64,11 @@ class OwnClubController extends Controller
     public function dataUpdateRequestPanel()
     {
         $club = $this->getOwnClub();
+        $club->load(
+            'dataUpdateRequests.club.clubType',
+            'dataUpdateRequests.user.student',
+            'dataUpdateRequests.reviewer.student'
+        );
 
         return view('own-club.data_update_request_panel', compact('club'));
     }
