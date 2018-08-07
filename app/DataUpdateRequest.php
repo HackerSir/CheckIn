@@ -23,7 +23,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property \Carbon\Carbon|null $created_at
  * @property \Carbon\Carbon|null $updated_at
  * @property-read \App\Club $club
- * @property-read mixed $show_result
+ * @property-read string $show_result
  * @property-read \App\User|null $reviewer
  * @property-read \App\User|null $user
  * @method static \Illuminate\Database\Eloquent\Builder|\App\DataUpdateRequest whereClubId($value)
@@ -75,6 +75,9 @@ class DataUpdateRequest extends Model
         return $this->belongsTo(User::class, 'reviewer_id');
     }
 
+    /**
+     * @return string
+     */
     public function getShowResultAttribute()
     {
         if (is_null($this->review_result)) {
