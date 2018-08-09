@@ -85,23 +85,23 @@ sonarqube:
                     -Dsonar.host.url=$sonar_host_url
                     -Dsonar.login=$sonar_login
 
-#deploy_production:
-#  tags:
-#    - deploy
-#  stage: deploy
-#  image: danny50610/gitlab-ci-laravel-deploy
-#  dependencies: []
-#  script:
-#    - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )'
-#    - eval $(ssh-agent -s)
-#    - ssh-add <(echo "$SSH_PRIVATE_KEY")
-#    - mkdir -p ~/.ssh
-#    - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
-#
-#    - ~/.composer/vendor/bin/envoy run deploy
-#  environment:
-#    name: production
-#    url: https://illya.tw
-#  when: manual
-#  only:
-#    - master
+deploy_production:
+  tags:
+    - deploy
+  stage: deploy
+  image: danny50610/gitlab-ci-laravel-deploy
+  dependencies: []
+  script:
+    - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )'
+    - eval $(ssh-agent -s)
+    - ssh-add <(echo "$SSH_PRIVATE_KEY")
+    - mkdir -p ~/.ssh
+    - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
+
+    - ~/.composer/vendor/bin/envoy run deploy --server=$production_server_ip
+  environment:
+    name: production
+    url: https://checkin.hackersir.org/
+  when: manual
+  only:
+    - 2018
