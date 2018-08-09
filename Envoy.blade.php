@@ -17,8 +17,8 @@
     update_symlink_env
     artisan_migrate
     update_symlinks_other
-    # cache_config_and_route
-    # restart_php_service
+    {{--cache_config_and_route--}}
+    {{--restart_php_service--}}
     keep_newest_3_releases
 @endstory
 
@@ -35,12 +35,6 @@
     composer install --no-dev --prefer-dist --no-progress -o
 @endtask
 
-@task('artisan_migrate')
-    echo "===== Starting migrate ====="
-    cd {{ $new_release_dir }}
-    php artisan migrate --force --no-interaction
-@endtask
-
 @task('yarn_install')
     echo "===== Yarn install ====="
     cd {{ $new_release_dir }}
@@ -53,10 +47,19 @@
     ln -nfs {{ $app_dir }}/shared/.env {{ $new_release_dir }}/.env
 @endtask
 
+@task('artisan_migrate')
+    echo "===== Starting migrate ====="
+    cd {{ $new_release_dir }}
+    php artisan migrate --force --no-interaction
+@endtask
+
 @task('update_symlinks_other')
     echo "===== Linking storage directory ====="
     rm -rf {{ $new_release_dir }}/storage
     ln -nfs {{ $app_dir }}/shared/storage {{ $new_release_dir }}/storage
+
+    echo "===== Linking laravel-echo-server.json ====="
+    ln -nfs {{ $app_dir }}/shared/laravel-echo-server.json {{ $new_release_dir }}/laravel-echo-server.json
 
     echo '===== Linking current release ====='
     ln -nfs {{ $new_release_dir }} {{ $app_dir }}/current
