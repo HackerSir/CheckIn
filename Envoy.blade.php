@@ -2,8 +2,8 @@
 
 @setup
     $repository = 'https://github.com/HackerSir/CheckIn.git';
-    $checkoutBranch = '2018'
-    $websiteName = 'CheckIn'
+    $checkoutBranch = '2018';
+    $websiteName = 'CheckIn';
     $releases_dir = '/var/www/' . $websiteName . '/releases';
     $app_dir = '/var/www/' . $websiteName;
     $release = date('YmdHis');
