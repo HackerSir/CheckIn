@@ -13,7 +13,6 @@ use App\Record;
 use Carbon\Carbon;
 use Horizon;
 use Illuminate\Support\ServiceProvider;
-use Monolog\Logger;
 use Schema;
 
 class AppServiceProvider extends ServiceProvider
