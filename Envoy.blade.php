@@ -18,7 +18,7 @@
     artisan_migrate
     update_symlinks_other
     {{--cache_config_and_route--}}
-    {{--restart_php_service--}}
+    restart_php_service
     keep_newest_3_releases
 @endstory
 
