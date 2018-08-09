@@ -87,7 +87,7 @@ sonarqube:
 
 deploy_production:
   tags:
-    - deploy
+    - FCU-IDC
   stage: deploy
   image: danny50610/gitlab-ci-laravel-deploy
   dependencies: []
