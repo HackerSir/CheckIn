@@ -28,14 +28,10 @@ Route::get('clubs/{club}', 'HomeController@clubsShow')->name('clubs.show');
 Route::get('map', 'HomeController@clubsMap')->name('clubs.map');
 
 //服務條款(含隱私權跟免責)
-Route::get('terms', function () {
-    return view('misc.terms');
-})->name('terms');
+Route::view('terms', 'misc.terms')->name('terms');
 
 //常見問題
-Route::get('faq', function () {
-    return view('misc.faq');
-})->name('faq');
+Route::view('faq', 'misc.faq')->name('faq');
 
 //會員（須完成信箱驗證）
 Route::group(['middleware' => ['auth', 'email']], function () {
