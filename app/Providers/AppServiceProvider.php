@@ -13,7 +13,6 @@ use App\Record;
 use Carbon\Carbon;
 use Horizon;
 use Illuminate\Support\ServiceProvider;
-use Monolog\Logger;
 use Schema;
 
 class AppServiceProvider extends ServiceProvider
@@ -29,24 +28,7 @@ class AppServiceProvider extends ServiceProvider
         Schema::defaultStringLength(191);
 
         //Carbon語系
-        Carbon::setLocale(env('APP_LOCALE', 'en'));
-
-        //Slack通知
-        $slackEnable = env('SLACK_ENABLE', false) === true;
-        $slackToken = env('SLACK_TOKEN');
-        $slackChannel = env('SLACK_CHANNEL');
-        if ($slackEnable && $slackToken && $slackChannel) {
-            $monolog = \Log::getMonolog();
-            $slackHandler = new \Monolog\Handler\SlackHandler(
-                $slackToken,
-                $slackChannel,
-                'Monolog',
-                true,
-                null,
-                Logger::WARNING
-            );
-            $monolog->pushHandler($slackHandler);
-        }
+        Carbon::setLocale(config('app.locale'));
 
         //Observers
         Qrcode::observe(QrcodeObserver::class);

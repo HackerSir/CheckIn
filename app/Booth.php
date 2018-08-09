@@ -51,7 +51,7 @@ class Booth extends Model
     {
         $url = 'https://www.google.com/maps/embed/v1/place';
         $queryParameters = [
-            'key'  => env('GOOGLE_MAP_EMBED_KEY'),
+            'key'  => config('services.google.map.embed_key'),
             'q'    => $this->latitude . ',' . $this->longitude,
             'zoom' => 18,
         ];

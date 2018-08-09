@@ -29,9 +29,9 @@ class OAuthController extends Controller
     public function index()
     {
         //檢查設定
-        $OAuthUrl = env('FCU_API_URL_OAUTH');
-        $clientId = env('FCU_API_CLIENT_ID');
-        $clientUrl = env('FCU_API_CLIENT_URL');
+        $OAuthUrl = config('services.fcu-api.url-oauth');
+        $clientId = config('services.fcu-api.client-id');
+        $clientUrl = config('services.fcu-api.client-url');
         if (!$OAuthUrl || !$clientId || !$clientUrl) {
             return back()->with('warning', '目前未開放');
         }

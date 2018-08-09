@@ -23,8 +23,8 @@ class FcuApiService extends Service
             return null;
         }
         //API資訊
-        $apiUrl = env('FCU_API_URL_GET_STU_INFO');
-        $apiClientId = env('FCU_API_CLIENT_ID');
+        $apiUrl = config('services.fcu-api.url-get-stu-info');
+        $apiClientId = config('services.fcu-api.client-id');
         if (!$apiUrl || !$apiClientId) {
             return null;
         }
@@ -68,8 +68,8 @@ class FcuApiService extends Service
             return null;
         }
         //API資訊
-        $apiUrl = env('FCU_API_URL_GET_LOGIN_USER');
-        $apiClientId = env('FCU_API_CLIENT_ID');
+        $apiUrl = config('services.fcu-api.url-get-stu-info');
+        $apiClientId = config('services.fcu-api.client-id');
         if (!$apiUrl || !$apiClientId) {
             return null;
         }

@@ -35,4 +35,20 @@ return [
         'secret' => env('STRIPE_SECRET'),
     ],
 
+    'fcu-api' => [
+        'url-oauth'        => env('FCU_API_URL_OAUTH'),
+        'url-get-stu-info' => env('FCU_API_URL_GET_STU_INFO'),
+        'client-id'        => env('FCU_API_CLIENT_ID'),
+        'client-url'       => env('FCU_API_CLIENT_URL'),
+    ],
+
+    'google' => [
+        'map'      => [
+            'embed_key' => env('GOOGLE_MAP_EMBED_KEY'),
+        ],
+        'analysis' => [
+            'id' => env('GOOGLE_ANALYSIS'),
+        ],
+    ],
+
 ];
