@@ -21,7 +21,7 @@ class ImgurImageService
         $fileContent = File::get($uploadedFile->getPathname());
         //將圖片上傳至Imgur
         //檢查Client ID和Client secret
-        if (empty(env('IMGUR_CLIENT_ID')) || empty(env('IMGUR_CLIENT_SECRET'))) {
+        if (empty(config('imgur.client_id')) || empty(config('imgur.client_secret'))) {
             throw new \Exception('Missing IMGUR_CLIENT_ID or IMGUR_CLIENT_SECRET in .env');
         }
         /** @var \Imgur\Client $client */

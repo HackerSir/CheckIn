@@ -17,6 +17,8 @@ return [
     // 網站中文簡短名稱
     'cht_name' => '逢甲社博集點',
 
+    'allow_register' => env('ALLOW_REGISTER', true),
+
     /*
     |--------------------------------------------------------------------------
     | Application Environment

@@ -29,7 +29,7 @@ class AppServiceProvider extends ServiceProvider
         Schema::defaultStringLength(191);
 
         //Carbon語系
-        Carbon::setLocale(env('APP_LOCALE', 'en'));
+        Carbon::setLocale(config('app.locale'));
 
         //Observers
         Qrcode::observe(QrcodeObserver::class);

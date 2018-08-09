@@ -15,7 +15,7 @@ class RegisterEnableToggle
      */
     public function handle($request, Closure $next)
     {
-        $allowRegister = env('ALLOW_REGISTER', true);
+        $allowRegister = config('app.allow_register');
         if (!$allowRegister) {
             return redirect()->back()->with('warning', '不開放註冊');
         }

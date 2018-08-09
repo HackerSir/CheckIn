@@ -36,7 +36,7 @@ class BackupRun extends Command
     {
         $filename = Carbon::now()->format('Ymd_His');
         $this->call('db:backup', [
-            '--database'        => env('DB_CONNECTION'),
+            '--database'        => config('database.default'),
             '--destination'     => 'local',
             '--destinationPath' => $filename,
             '--compression'     => 'gzip',

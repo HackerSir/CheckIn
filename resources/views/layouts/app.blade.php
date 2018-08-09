@@ -163,7 +163,7 @@
         //DataTimePicker
         $.datetimepicker.setLocale('zh-TW');
         // Google分析
-        @if(env('GOOGLE_ANALYSIS'))
+        @if(config('services.google.analysis.id'))
         (function (i, s, o, g, r, a, m) {
             i['GoogleAnalyticsObject'] = r;
             i[r] = i[r] || function () {
@@ -175,7 +175,7 @@
             a.src = g;
             m.parentNode.insertBefore(a, m)
         })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
-        ga('create', '{{ env('GOOGLE_ANALYSIS') }}', 'auto');
+        ga('create', '{{ config('services.google.analysis.id') }}', 'auto');
         ga('send', 'pageview');
         @endif
     });
