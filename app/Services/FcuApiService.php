@@ -68,7 +68,7 @@ class FcuApiService extends Service
             return null;
         }
         //API資訊
-        $apiUrl = config('services.fcu-api.url-get-stu-info');
+        $apiUrl = config('services.fcu-api.url-get-login-user');
         $apiClientId = config('services.fcu-api.client-id');
         if (!$apiUrl || !$apiClientId) {
             return null;
