@@ -26,8 +26,7 @@ class RecordObserver
             return;
         }
         //檢查打卡進度
-        $count = $record->student->countedRecords->count();
-        if ($count < $target) {
+        if (!$record->student->has_enough_counted_records) {
             //未完成
             return;
         }

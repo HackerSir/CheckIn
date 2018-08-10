@@ -22,6 +22,7 @@ use Illuminate\Database\Query\Builder;
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Record[] $countedRecords
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Feedback[] $feedback
  * @property-read string $display_name
+ * @property-read bool $has_enough_counted_records
  * @property-read bool $is_freshman
  * @property-read bool $is_staff
  * @property-read string $masked_display_name
@@ -198,6 +199,19 @@ class Student extends Model
         }
 
         return $this->user->is_staff;
+    }
+
+    /**
+     * @return bool
+     */
+    public function getHasEnoughCountedRecordsAttribute()
+    {
+        //打卡目標
+        $target = (int) \Setting::get('target');
+        //檢查打卡進度
+        $count = $this->countedRecords->count();
+
+        return $count >= $target;
     }
 
     /**

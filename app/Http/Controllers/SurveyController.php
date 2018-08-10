@@ -33,6 +33,9 @@ class SurveyController extends Controller
         if (!$user->student) {
             return redirect()->route('survey.index')->with('warning', '無法填寫此類型問卷');
         }
+        if (!$user->student->has_enough_counted_records) {
+            return redirect()->route('index')->with('warning', '請先完成集點任務');
+        }
         $studentSurvey = $user->student->studentSurvey;
 
         return view('survey.student-edit', compact('user', 'studentSurvey'));
@@ -50,6 +53,9 @@ class SurveyController extends Controller
         $user = auth()->user();
         if (!$user->student) {
             return redirect()->route('survey.index')->with('warning', '無法填寫此類型問卷');
+        }
+        if (!$user->student->has_enough_counted_records) {
+            return redirect()->route('index')->with('warning', '請先完成集點任務');
         }
 
         $this->validate($request, [
