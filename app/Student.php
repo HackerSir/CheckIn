@@ -28,6 +28,7 @@ use Illuminate\Database\Query\Builder;
  * @property-read \App\Qrcode $qrcode
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Qrcode[] $qrcodes
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Record[] $records
+ * @property-read \App\StudentSurvey $studentSurvey
  * @property-read \App\Ticket $ticket
  * @property-read \App\User|null $user
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Student freshman()
@@ -127,6 +128,14 @@ class Student extends Model
     public function feedback()
     {
         return $this->hasMany(Feedback::class);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function studentSurvey()
+    {
+        return $this->hasOne(StudentSurvey::class);
     }
 
     /**

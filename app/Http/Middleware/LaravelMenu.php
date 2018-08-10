@@ -92,6 +92,10 @@ class LaravelMenu
                         if (Laratrust::can('feedback.manage')) {
                             $activityMenu->add('回饋資料管理', ['route' => 'feedback.index'])->active('feedback/*');
                         }
+                        if (Laratrust::can('survey.manage')) {
+                            $activityMenu->add('學生問卷管理', ['route' => 'student-survey.index'])
+                                ->active('student-survey/*');
+                        }
 
                         $this->addDivider($activityMenu);
 

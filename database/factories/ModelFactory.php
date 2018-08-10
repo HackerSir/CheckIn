@@ -103,6 +103,16 @@ $factory->define(App\Feedback::class, function (Faker\Generator $faker) {
     ];
 });
 
+$factory->define(App\StudentSurvey::class, function (Faker\Generator $faker) {
+    $studentIds = \App\Student::query()->pluck('id')->toArray();
+
+    return [
+        'student_id' => $faker->randomElement($studentIds),
+        'rating'     => $faker->numberBetween(1, 5),
+        'comment'    => $faker->optional()->paragraph,
+    ];
+});
+
 $factory->define(App\ApiKey::class, function (Faker\Generator $faker) {
     $count = $faker->numberBetween(0, 25000);
     $totalCount = $count + $faker->numberBetween(0, 25000);
