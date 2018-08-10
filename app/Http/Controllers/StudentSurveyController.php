@@ -18,7 +18,6 @@ class StudentSurveyController extends Controller
         return $dataTable->render('student-survey.index');
     }
 
-
     /**
      * Display the specified resource.
      *
