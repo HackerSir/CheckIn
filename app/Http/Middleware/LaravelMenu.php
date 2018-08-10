@@ -36,6 +36,7 @@ class LaravelMenu
                     $menu->add('尚未完成信箱驗證', ['route' => 'confirm-mail.resend'])
                         ->link->attr(['class' => 'text-danger']);
                 } else {
+                    $menu->add('問卷', ['route' => 'survey.index'])->active('survey/*');
                     //負責的社團
                     if ($user->club) {
                         $menu->add($user->club->name, ['route' => ['clubs.show', $user->club]]);

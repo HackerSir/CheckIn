@@ -68,7 +68,7 @@
                 <dd class="col-8 col-md-10">{{ $studentSurvey->rating }}</dd>
 
                 <dt class="col-4 col-md-2">意見與建議</dt>
-                <dd class="col-8 col-md-10">{{ $studentSurvey->comment }}</dd>
+                <dd class="col-8 col-md-10">{!! nl2br(e($studentSurvey->comment)) !!}</dd>
             </dl>
         </div>
     </div>

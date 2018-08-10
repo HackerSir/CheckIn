@@ -13,6 +13,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string|null $comment 意見與建議
  * @property \Carbon\Carbon|null $created_at
  * @property \Carbon\Carbon|null $updated_at
+ * @property-read string $stars
  * @property-read \App\Student $student
  * @method static \Illuminate\Database\Eloquent\Builder|\App\StudentSurvey whereComment($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\StudentSurvey whereCreatedAt($value)
@@ -36,5 +37,13 @@ class StudentSurvey extends Model
     public function student()
     {
         return $this->belongsTo(Student::class);
+    }
+
+    /**
+     * @return string
+     */
+    public function getStarsAttribute()
+    {
+        return str_repeat('★', $this->rating) . str_repeat('☆', 5 - $this->rating);
     }
 }

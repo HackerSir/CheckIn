@@ -48,6 +48,19 @@
 
                     <hr/>
 
+                    <h1>問卷</h1>
+                    @if($student->studentSurvey)
+                        <a href="{{ route('survey.student.show') }}" class="btn btn-primary btn-lg btn-block">
+                            <i class="fa fa-search"></i> 檢視學生問卷
+                        </a>
+                    @else
+                        <a href="{{ route('survey.student.edit') }}" class="btn btn-primary btn-lg btn-block">
+                            <i class="fa fa-edit"></i> 填寫學生問卷
+                        </a>
+                    @endif
+
+                    <hr/>
+
                     <h1>抽獎編號</h1>
                     <div class="text-center">
                         @if(isset($student->ticket))

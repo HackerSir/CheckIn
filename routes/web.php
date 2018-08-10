@@ -225,6 +225,12 @@ Route::group(['middleware' => ['auth', 'email']], function () {
             ],
         ]);
     });
+    Route::group(['prefix' => 'survey'], function () {
+        Route::get('/', 'SurveyController@index')->name('survey.index');
+        Route::get('student/edit', 'SurveyController@createOrEditStudentSurvey')->name('survey.student.edit');
+        Route::post('student', 'SurveyController@storeStudentSurvey')->name('survey.student.store');
+        Route::get('student', 'SurveyController@showStudentSurvey')->name('survey.student.show');
+    });
 
     //自己的社團
     Route::group(['prefix' => 'own-club'], function () {
