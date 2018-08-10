@@ -46,3 +46,13 @@
         </div>
     @endif
 @endsection
+
+@section('js')
+    <script>
+        $(function () {
+            $('form').on('submit', function () {
+                return confirm('送出後將無法撤銷，確定要送出嗎？');
+            });
+        });
+    </script>
+@endsection
