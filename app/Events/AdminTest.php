@@ -23,6 +23,7 @@ class AdminTest implements ShouldBroadcast
      * Create a new event instance.
      *
      * @param User $user
+     * @param $message
      */
     public function __construct(User $user, $message)
     {

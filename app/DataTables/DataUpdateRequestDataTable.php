@@ -43,7 +43,7 @@ class DataUpdateRequestDataTable extends DataTable
     /**
      * Get the query object to be processed by dataTables.
      *
-     * @param User $model
+     * @param DataUpdateRequest $model
      * @return \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Query\Builder|\Illuminate\Support\Collection
      */
     public function query(DataUpdateRequest $model)

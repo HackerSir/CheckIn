@@ -131,7 +131,8 @@ class LaravelMenu
                         }
 
                         if (Laratrust::can('broadcast.manage')) {
-                            $adminMenu->add('Broadcast Test', ['route' => 'broadcast-test'])->active('broadcast-test/*');
+                            $adminMenu->add('Broadcast Test', ['route' => 'broadcast-test'])
+                                ->active('broadcast-test/*');
                         }
 
                         if (Laratrust::can('horizon.manage')) {

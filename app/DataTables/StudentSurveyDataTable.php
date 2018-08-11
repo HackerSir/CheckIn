@@ -47,7 +47,7 @@ class StudentSurveyDataTable extends DataTable
     /**
      * Get the query object to be processed by dataTables.
      *
-     * @param Feedback $model
+     * @param StudentSurvey $model
      * @return \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Query\Builder|\Illuminate\Support\Collection
      */
     public function query(StudentSurvey $model)
