@@ -101,7 +101,7 @@
     window.Laravel = <?php echo json_encode([
         'csrfToken' => csrf_token(),
         'baseUrl'   => url('/'),
-        'student'   => auth()->check() ? (is_null(auth()->user()->student) ? null : auth()->user()->student->id) : null
+        'student'   => auth()->user()->student->id ?? null
     ]); ?>
 </script>
 <script>
