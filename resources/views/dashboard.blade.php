@@ -53,17 +53,20 @@
                         <a href="{{ route('survey.student.show') }}" class="btn btn-primary btn-lg btn-block">
                             <i class="fa fa-search"></i> 檢視學生問卷
                         </a>
+                    @elseif(Carbon\Carbon::now()->gt(new Carbon\Carbon(Setting::get('end_at'))))
+                        <button type="button" class="btn btn-primary btn-lg btn-block disabled"
+                                onclick="alert('已超過填寫時間')">
+                            <i class="fa fa-edit"></i> 填寫學生問卷
+                        </button>
+                    @elseif(!$student->has_enough_counted_records)
+                        <button type="button" class="btn btn-primary btn-lg btn-block disabled"
+                                onclick="alert('請先完成集點任務')">
+                            <i class="fa fa-edit"></i> 填寫學生問卷
+                        </button>
                     @else
-                        @if($student->has_enough_counted_records)
-                            <a href="{{ route('survey.student.edit') }}" class="btn btn-primary btn-lg btn-block">
-                                <i class="fa fa-edit"></i> 填寫學生問卷
-                            </a>
-                        @else
-                            <button type="button" class="btn btn-primary btn-lg btn-block disabled"
-                                    onclick="alert('請先完成集點任務')">
-                                <i class="fa fa-edit"></i> 填寫學生問卷
-                            </button>
-                        @endif
+                        <a href="{{ route('survey.student.edit') }}" class="btn btn-primary btn-lg btn-block">
+                            <i class="fa fa-edit"></i> 填寫學生問卷
+                        </a>
                     @endif
 
                     <hr/>

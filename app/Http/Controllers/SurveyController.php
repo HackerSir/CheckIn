@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\StudentSurvey;
 use App\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class SurveyController extends Controller
@@ -33,6 +34,10 @@ class SurveyController extends Controller
         if (!$user->student) {
             return redirect()->route('survey.index')->with('warning', '無法填寫此類型問卷');
         }
+        $endAt = new Carbon(\Setting::get('end_at'));
+        if (Carbon::now()->gt($endAt)) {
+            return redirect()->back()->with('warning', '已超過填寫時間');
+        }
         if (!$user->student->has_enough_counted_records) {
             return redirect()->route('index')->with('warning', '請先完成集點任務');
         }
@@ -53,6 +58,10 @@ class SurveyController extends Controller
         $user = auth()->user();
         if (!$user->student) {
             return redirect()->route('survey.index')->with('warning', '無法填寫此類型問卷');
+        }
+        $endAt = new Carbon(\Setting::get('end_at'));
+        if (Carbon::now()->gt($endAt)) {
+            return redirect()->route('survey.index')->with('warning', '已超過填寫時間');
         }
         if (!$user->student->has_enough_counted_records) {
             return redirect()->route('index')->with('warning', '請先完成集點任務');
