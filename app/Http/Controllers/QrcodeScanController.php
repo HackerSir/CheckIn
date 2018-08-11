@@ -88,6 +88,7 @@ class QrcodeScanController extends Controller
         }
 
         //打卡
+        /** @var Record $record */
         $record = Record::query()->firstOrCreate([
             'student_id' => $qrcode->student->id,
             'club_id'    => $club->id,
