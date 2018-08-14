@@ -65,7 +65,7 @@
             <h1>問卷</h1>
             <dl class="row" style="font-size: 120%">
                 <dt class="col-4 col-md-2">星等評價</dt>
-                <dd class="col-8 col-md-10">{{ $studentSurvey->rating }}</dd>
+                <dd class="col-8 col-md-10">{{ $studentSurvey->stars }}</dd>
 
                 <dt class="col-4 col-md-2">意見與建議</dt>
                 <dd class="col-8 col-md-10">{!! nl2br(e($studentSurvey->comment)) !!}</dd>
