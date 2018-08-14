@@ -7,7 +7,7 @@ use App\StudentSurvey;
 
 class StudentSurveyObserver
 {
-    public function created(StudentSurvey $studentSurvey)
+    public function saved(StudentSurvey $studentSurvey)
     {
         $taskService = app(TaskService::class);
         $taskService->checkProgress($studentSurvey->student);
