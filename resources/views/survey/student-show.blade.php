@@ -27,7 +27,7 @@
                 <dd class="col-sm-8 col-md-10">
                     @if(Laratrust::can('student.manage'))
                         <a href="{{ route('student.show', $studentSurvey->student) }}">
-                            {!! $studentSurvey->student->display_name !!}
+                            {{ $studentSurvey->student->display_name }}
                         </a>
                     @else
                         {{ $studentSurvey->student->display_name }}
