@@ -30,6 +30,10 @@ class TaskService
             //未完成
             return;
         }
+        //檢查是否填寫學生問卷
+        if (!$student->studentSurvey) {
+            return;
+        }
         //給予抽獎編號
         $student->ticket()->save(new Ticket());
     }
