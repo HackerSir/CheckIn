@@ -57,7 +57,7 @@ class ClubSurveyDataTable extends DataTable
      */
     public function query(ClubSurvey $model)
     {
-        return $model->newQuery()->with('user');
+        return $model->newQuery()->with('user', 'club.clubType');
     }
 
     /**
