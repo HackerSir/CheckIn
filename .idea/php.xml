@@ -135,6 +135,7 @@
       <path value="$PROJECT_DIR$/vendor/appstract/laravel-blade-directives" />
       <path value="$PROJECT_DIR$/vendor/marvinlabs/laravel-html-bootstrap-4" />
       <path value="$PROJECT_DIR$/vendor/marvinlabs/laravel-html-font-awesome" />
+      <path value="$PROJECT_DIR$/vendor/markbaker/complex" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="7.1" />
