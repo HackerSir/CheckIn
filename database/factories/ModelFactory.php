@@ -113,6 +113,19 @@ $factory->define(App\StudentSurvey::class, function (Faker\Generator $faker) {
     ];
 });
 
+$factory->define(App\ClubSurvey::class, function (Faker\Generator $faker) {
+    $userIds = \App\User::query()->whereHas('club')->pluck('id')->toArray();
+    /** @var \App\User $user */
+    $user = \App\User::query()->find($faker->randomElement($userIds));
+
+    return [
+        'user_id' => $user->id,
+        'club_id' => $user->club->id,
+        'rating'  => $faker->numberBetween(1, 5),
+        'comment' => $faker->optional()->paragraph,
+    ];
+});
+
 $factory->define(App\ApiKey::class, function (Faker\Generator $faker) {
     $count = $faker->numberBetween(0, 25000);
     $totalCount = $count + $faker->numberBetween(0, 25000);

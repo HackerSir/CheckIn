@@ -96,6 +96,8 @@ class LaravelMenu
                         if (Laratrust::can('survey.manage')) {
                             $activityMenu->add('學生問卷管理', ['route' => 'student-survey.index'])
                                 ->active('student-survey/*');
+                            $activityMenu->add('社團問卷管理', ['route' => 'club-survey.index'])
+                                ->active('club-survey/*');
                         }
 
                         $this->addDivider($activityMenu);

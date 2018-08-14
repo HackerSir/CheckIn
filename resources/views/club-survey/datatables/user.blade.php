@@ -1,0 +1,1 @@
+{{ $clubSurvey->user->name ?? '' }}

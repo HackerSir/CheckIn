@@ -15,9 +15,9 @@
             @endif
             @if($user->club)
                 {{-- TODO: 修改網址 --}}
-                <a href="{{ route('survey.student.show') }}" class="btn btn-primary btn-lg btn-block">攤位問卷</a>
+                <a href="{{ route('survey.student.show') }}" class="btn btn-primary btn-lg btn-block">社團問卷</a>
             @else
-                <button type="button" class="btn btn-secondary btn-lg btn-block disabled">攤位問卷（限擺攤社團填寫）</button>
+                <button type="button" class="btn btn-secondary btn-lg btn-block disabled">社團問卷（限擺攤社團填寫）</button>
             @endif
         </div>
     </div>

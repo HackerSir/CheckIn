@@ -17,6 +17,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property \Carbon\Carbon|null $created_at
  * @property \Carbon\Carbon|null $updated_at
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Booth[] $booths
+ * @property-read \App\ClubSurvey $clubSurvey
  * @property-read \App\ClubType|null $clubType
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\DataUpdateRequest[] $dataUpdateRequests
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Feedback[] $feedback
@@ -110,6 +111,14 @@ class Club extends Model
     public function dataUpdateRequests()
     {
         return $this->hasMany(DataUpdateRequest::class)->orderByDesc('submit_at');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function clubSurvey()
+    {
+        return $this->hasOne(ClubSurvey::class);
     }
 
     /**

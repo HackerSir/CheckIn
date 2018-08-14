@@ -216,9 +216,17 @@ Route::group(['middleware' => ['auth', 'email']], function () {
         Route::get('stats/heatmap', 'StatsController@heatmap')->name('stats.heatmap');
     });
 
-    //學生問卷
+    //問卷
     Route::group(['middleware' => 'permission:survey.manage'], function () {
+        //學生問卷
         Route::resource('student-survey', 'StudentSurveyController', [
+            'only' => [
+                'index',
+                'show',
+            ],
+        ]);
+        //社團問卷
+        Route::resource('club-survey', 'ClubSurveyController', [
             'only' => [
                 'index',
                 'show',
