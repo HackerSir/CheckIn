@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\ClubSurvey;
 use App\StudentSurvey;
 use App\User;
 use Carbon\Carbon;
@@ -97,5 +98,77 @@ class SurveyController extends Controller
         }
 
         return view('survey.student-show', compact('studentSurvey'));
+    }
+
+    /**
+     * 建立或編輯社團問卷
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function createOrEditClubSurvey()
+    {
+        /** @var User $user */
+        $user = auth()->user();
+        if (!$user->club) {
+            return redirect()->route('survey.index')->with('warning', '無法填寫此類型問卷');
+        }
+        $endAt = new Carbon(\Setting::get('end_at'));
+        if (Carbon::now()->gt($endAt)) {
+            return redirect()->back()->with('warning', '已超過填寫時間');
+        }
+        $clubSurvey = $user->clubSurvey;
+
+        return view('survey.club-edit', compact('user', 'clubSurvey'));
+    }
+
+    /**
+     * 儲存學生問卷
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function storeClubSurvey(Request $request)
+    {
+        /** @var User $user */
+        $user = auth()->user();
+        if (!$user->club) {
+            return redirect()->route('survey.index')->with('warning', '無法填寫此類型問卷');
+        }
+        $endAt = new Carbon(\Setting::get('end_at'));
+        if (Carbon::now()->gt($endAt)) {
+            return redirect()->route('survey.index')->with('warning', '已超過填寫時間');
+        }
+
+        $this->validate($request, [
+            'rating' => 'required|integer|min:1|max:5',
+        ]);
+
+        ClubSurvey::updateOrCreate([
+            'user_id' => $user->id,
+            'club_id' => $user->club->id,
+        ], $request->all());
+
+        return redirect()->route('survey.club.show')->with('global', '問卷內容已更新');
+    }
+
+    /**
+     * 檢視學生問卷
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function showClubSurvey()
+    {
+        /** @var User $user */
+        $user = auth()->user();
+        if (!$user->club) {
+            return redirect()->route('survey.index')->with('warning', '無法填寫此類型問卷');
+        }
+        $clubSurvey = $user->clubSurvey;
+        //未填寫問卷
+        if (!$clubSurvey) {
+            return redirect()->route('survey.club.edit');
+        }
+
+        return view('survey.club-show', compact('clubSurvey'));
     }
 }

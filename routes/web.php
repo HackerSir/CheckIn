@@ -238,6 +238,9 @@ Route::group(['middleware' => ['auth', 'email']], function () {
         Route::get('student/edit', 'SurveyController@createOrEditStudentSurvey')->name('survey.student.edit');
         Route::post('student', 'SurveyController@storeStudentSurvey')->name('survey.student.store');
         Route::get('student', 'SurveyController@showStudentSurvey')->name('survey.student.show');
+        Route::get('club/edit', 'SurveyController@createOrEditClubSurvey')->name('survey.club.edit');
+        Route::post('club', 'SurveyController@storeClubSurvey')->name('survey.club.store');
+        Route::get('club', 'SurveyController@showClubSurvey')->name('survey.club.show');
     });
 
     //自己的社團
