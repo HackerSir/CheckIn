@@ -3,9 +3,8 @@
 namespace App\Services;
 
 use App\Student;
-use Yish\Generators\Foundation\Service\Service;
 
-class StudentService extends Service
+class StudentService
 {
     /**
      * @var FcuApiService

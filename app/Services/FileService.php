@@ -10,9 +10,8 @@ use PhpOffice\PhpSpreadsheet\IOFactory;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpWord\PhpWord;
 use PhpOffice\PhpWord\SimpleType\Jc;
-use Yish\Generators\Foundation\Service\Service;
 
-class FileService extends Service
+class FileService
 {
     /**
      * 產生檔案，doc
