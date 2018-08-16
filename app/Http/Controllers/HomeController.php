@@ -15,17 +15,16 @@ class HomeController extends Controller
     {
         /** @var User $user */
         $user = auth()->user();
-        if ($user && $user->student) {
-            $student = $user->student;
-            $student->load('records.club.clubType', 'qrcodes.student');
-
-            $startAt = new Carbon(Setting::get('start_at'));
-            $endAt = new Carbon(Setting::get('end_at'));
-
-            return view('dashboard', compact('student', 'startAt', 'endAt'));
+        if (!$user || !$user->student) {
+            return view('index');
         }
+        $student = $user->student;
+        $student->load('records.club.clubType', 'qrcodes.student');
 
-        return view('index');
+        $startAt = new Carbon(Setting::get('start_at'));
+        $endAt = new Carbon(Setting::get('end_at'));
+
+        return view('dashboard', compact('student', 'startAt', 'endAt'));
     }
 
     public function clubs()
