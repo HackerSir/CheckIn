@@ -21,7 +21,8 @@ class LaravelMenu
         //左側
         Menu::make('left', function ($menu) {
             /* @var \Lavary\Menu\Builder $menu */
-            $menu->add('社團攤位', ['route' => 'clubs.index'])->active('clubs');
+            $menu->add('社團介紹', ['route' => 'clubs.index'])->active('clubs');
+            $menu->add('搜尋社團及導航', ['route' => 'clubs.index'])->active('clubs');
 
             $menu->add('攤位地圖', ['route' => ['clubs.map', 'type' => 'static']])->active('map');
         });
