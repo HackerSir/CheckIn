@@ -1,5 +1,5 @@
 <ul class="list-group">
-    @forelse($records as $record)
+    @forelse($student->records as $record)
         <li class="list-group-item">
             <div>
                 <h4>{{ link_to_route('clubs.show', $record->club->name, $record->club) }}

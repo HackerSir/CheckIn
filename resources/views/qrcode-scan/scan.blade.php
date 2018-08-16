@@ -93,7 +93,7 @@
                 <hr/>
 
                 <h1>打卡紀錄</h1>
-                @include('components.record-list', ['records' => $qrcode->student->records])
+                @include('components.record-list', ['student' => $qrcode->student])
             @endif
         </div>
     </div>
