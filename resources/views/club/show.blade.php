@@ -67,11 +67,11 @@
                         <dd class="col-6 col-sm-9">
                             @if($club->is_counted)
                                 <span class="text-success">
-                                    <i class="fa fa-check-square-o" aria-hidden="true"></i> 列入集點
+                                    <i class="far fa-check-square" aria-hidden="true"></i> 列入集點
                                 </span>
                             @else
                                 <span class="text-danger">
-                                    <i class="fa fa-square-o" aria-hidden="true"></i> 不列入集點
+                                    <i class="far fa-square" aria-hidden="true"></i> 不列入集點
                                 </span>
                             @endif
                         </dd>
