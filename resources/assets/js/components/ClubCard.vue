@@ -19,6 +19,9 @@
                     </h3>
                     <p class="card-text text-justify">{{ club.excerpt }}</p>
                     <a :href="club_url" class="card-link">了解更多</a>
+                    <a :href="map_url" class="btn btn-outline-primary float-right" target="_blank" title="地圖" v-if="club.booth">
+                        <i class="fas fa-map-marked-alt"></i>
+                    </a>
                 </div>
             </div>
         </div>
@@ -33,6 +36,12 @@
         computed: {
             club_url: function () {
                 return Laravel.baseUrl + '/clubs/' + this.club.id;
+            },
+            map_url: function () {
+                if(this.club.booth == null){
+                    return '';
+                }
+                return 'https://maps.google.com/?q=' + this.club.booth.latitude + ',' + this.club.booth.longitude;
             }
         }
     }

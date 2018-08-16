@@ -134,7 +134,7 @@ class ApiController extends Controller
     public function clubList()
     {
         /** @var Club|\Illuminate\Database\Eloquent\Builder $clubs */
-        $clubQuery = Club::with('clubType', 'imgurImage');
+        $clubQuery = Club::with('clubType', 'imgurImage', 'booths');
         //過濾
         /** @var ClubType $clubType */
         $clubType = ClubType::query()->find(request()->get('clubType'));
@@ -164,6 +164,10 @@ class ApiController extends Controller
         //整理資料
         $result = [];
         foreach ($clubs as $club) {
+            //取得一個攤位
+            /** @var Booth $booth */
+            $booth = $club->booths->first();
+
             $result[] = [
                 'id'      => $club->id,
                 'name'    => $club->name,
@@ -173,6 +177,10 @@ class ApiController extends Controller
                     'color' => $club->clubType ? $club->clubType->color : null,
                 ],
                 'excerpt' => str_limit($club->description, 100, '...'),
+                'booth'   => $booth ? [
+                    'longitude' => $booth->longitude,
+                    'latitude'  => $booth->latitude,
+                ] : null,
             ];
         }
 
