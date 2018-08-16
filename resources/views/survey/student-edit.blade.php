@@ -2,6 +2,10 @@
 
 @section('title', '填寫學生問卷')
 
+@section('css')
+    <link rel="stylesheet" href="{{ asset('css/star-rating.css') }}" class="style">
+@endsection
+
 @section('buttons')
     @if($studentSurvey)
         <a href="{{ route('survey.student.show') }}" class="btn btn-secondary">
@@ -35,13 +39,19 @@
                 以下部分僅針對此平台，而非整個活動
             </div>
 
-            {{ bs()->formGroup(bs()->radioGroup('rating', [
-                1 => '★☆☆☆☆',
-                2 => '★★☆☆☆',
-                3 => '★★★☆☆',
-                4 => '★★★★☆',
-                5 => '★★★★★',
-            ]))->label('星等評價')->showAsRow() }}
+            <div class="form-group row">
+                <label class="col-md-2 col-form-label">星等評價</label>
+                <div class="col-md-10">
+                    <div class="starrating d-inline-flex justify-content-center flex-row-reverse">
+                        @foreach(range(5,1) as $i)
+                            <input type="radio" id="star{{ $i }}" name="rating" value="{{ $i }}"
+                                   @if(($studentSurvey->rating ?? null) == $i) checked @endif/><label
+                                for="star{{ $i }}">{{ $i }}</label>
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+
             {{ bs()->formGroup(bs()->textArea('comment')->attributes(['rows' => 10])->placeholder(''))->label('意見與建議')->showAsRow() }}
 
             <div class="row">
