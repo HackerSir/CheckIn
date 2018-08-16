@@ -12,6 +12,19 @@
                     {{ $record->created_at }}
                     （{{ (new \Carbon\Carbon($record->created_at))->diffForHumans() }}）
                 </small>
+                @if(1)
+                    <div class="float-md-right">
+                        <button type="button" class="btn btn-success">
+                            <i class="fa fa-search"></i> 檢視回饋資料
+                        </button>
+                    </div>
+                @else
+                    <div class="float-md-right">
+                        <button type="button" class="btn btn-primary">
+                            <i class="fa fa-edit"></i> 填寫回饋資料
+                        </button>
+                    </div>
+                @endif
             </div>
         </li>
     @empty
