@@ -12,18 +12,21 @@
                     {{ $record->created_at }}
                     （{{ (new \Carbon\Carbon($record->created_at))->diffForHumans() }}）
                 </small>
-                @if(1)
-                    <div class="float-md-right">
-                        <button type="button" class="btn btn-success">
-                            <i class="fa fa-search"></i> 檢視回饋資料
-                        </button>
-                    </div>
-                @else
-                    <div class="float-md-right">
-                        <button type="button" class="btn btn-primary">
-                            <i class="fa fa-edit"></i> 填寫回饋資料
-                        </button>
-                    </div>
+                @if($showFeedbackButton ?? false)
+                    @if($student->feedback->contains('club_id', $record->club->id))
+                        @php($feedback = $student->feedback->filter(function($item)use($record){return $item->club_id == $record->club->id;})->first())
+                        <div class="float-md-right">
+                            <a href="{{ route('feedback.show', $feedback) }}" class="btn btn-success">
+                                <i class="fa fa-search"></i> 檢視回饋資料
+                            </a>
+                        </div>
+                    @else
+                        <div class="float-md-right">
+                            <a href="{{ route('feedback.create', $record->club) }}" class="btn btn-primary">
+                                <i class="fa fa-edit"></i> 填寫回饋資料
+                            </a>
+                        </div>
+                    @endif
                 @endif
             </div>
         </li>
