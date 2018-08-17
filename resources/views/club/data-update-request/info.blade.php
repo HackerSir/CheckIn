@@ -32,38 +32,38 @@
     <div class="col">
         <b>原內容</b>
         <div>
-            社團簡介：<br/>
+            <div style="font-weight: bold; font-size: 1.2rem"><span class="badge badge-secondary">社團簡介</span></div>
             <blockquote>
-                {{ $dataUpdateRequest->original_description }}
+                {!! nl2br(e($dataUpdateRequest->original_description)) !!}
             </blockquote>
         </div>
         <div>
-            額外資訊：<br/>
+            <div style="font-weight: bold; font-size: 1.2rem"><span class="badge badge-secondary">額外資訊</span></div>
             <blockquote>
-                {{ $dataUpdateRequest->original_extra }}
+                {!! nl2br(e($dataUpdateRequest->original_extra)) !!}
             </blockquote>
         </div>
         <div>
-            社團網址：<br/>
+            <div style="font-weight: bold; font-size: 1.2rem"><span class="badge badge-secondary">社團網址</span></div>
             {{ link_to($dataUpdateRequest->original_url, $dataUpdateRequest->original_url, ['target' => '_blank']) }}
         </div>
     </div>
     <div class="col">
         <b>新內容</b>
         <div>
-            社團簡介：<br/>
+            <div style="font-weight: bold; font-size: 1.2rem"><span class="badge badge-secondary">社團簡介</span></div>
             <blockquote>
-                {{ $dataUpdateRequest->description }}
+                {!! nl2br(e($dataUpdateRequest->description)) !!}
             </blockquote>
         </div>
         <div>
-            額外資訊：<br/>
+            <div style="font-weight: bold; font-size: 1.2rem"><span class="badge badge-secondary">額外資訊</span></div>
             <blockquote>
-                {{ $dataUpdateRequest->extra }}
+                {!! nl2br(e($dataUpdateRequest->extra)) !!}
             </blockquote>
         </div>
         <div>
-            社團網址：<br/>
+            <div style="font-weight: bold; font-size: 1.2rem"><span class="badge badge-secondary">社團網址</span></div>
             {{ link_to($dataUpdateRequest->url, $dataUpdateRequest->url, ['target' => '_blank']) }}
         </div>
     </div>
