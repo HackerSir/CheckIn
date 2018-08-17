@@ -22,11 +22,13 @@ class FeedbackController extends Controller
      */
     public function index(FeedbackDataTable $dataTable)
     {
+        $feedbackQuery = Feedback::query();
+        $recordQuery = Record::query();
+        /** @var User $user */
+        $user = auth()->user();
         //若有管理權限，直接顯示全部
         if (!\Laratrust::can('feedback.manage')) {
             //若無管理權限
-            /** @var User $user */
-            $user = auth()->user();
             if ($user->club || $user->student) {
                 //檢查檢視與下載期限
                 $feedbackDownloadExpiredAt = new Carbon(Setting::get('feedback_download_expired_at'));
@@ -36,13 +38,21 @@ class FeedbackController extends Controller
                 //攤位負責人看到自己社團的
                 //學生看自己填過的
                 $dataTable->addScope(new FeedbackFilterScope($user->club, $user->student));
+                //社團統計資料
+                if ($user->club) {
+                    $feedbackQuery->where('club_id', $user->club->id);
+                    $recordQuery->where('club_id', $user->club->id);
+                }
             } else {
                 //沒有權限
                 abort(403);
             }
         }
+        $feedbackCount = $feedbackQuery->count();
+        $recordCount = $recordQuery->count();
+        $countProportion = $recordCount > 0 ? round($feedbackCount / $recordCount * 100, 2) : 0;
 
-        return $dataTable->render('feedback.index');
+        return $dataTable->render('feedback.index', compact('user', 'feedbackCount', 'recordCount', 'countProportion'));
     }
 
     /**
