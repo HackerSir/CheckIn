@@ -52,11 +52,12 @@ class OwnClubController extends Controller
 
         $this->validate($request, [
             'description' => 'nullable|max:300',
+            'extra_info'  => 'nullable|max:300',
             'url'         => 'nullable|url',
             'image_file'  => 'image',
         ]);
 
-        $club->update($request->only(['description', 'url']));
+        $club->update($request->only(['description', 'url', 'extra_info']));
 
         //上傳圖片
         $uploadedFile = $request->file('image_file');
@@ -136,6 +137,7 @@ class OwnClubController extends Controller
         $this->validate($request, [
             'reason'      => 'required|max:255',
             'description' => 'nullable|max:300',
+            'extra_info'  => 'nullable|max:300',
             'url'         => 'nullable|url',
         ]);
 
@@ -148,8 +150,10 @@ class OwnClubController extends Controller
             'reason'               => $request->get('reason'),
             'submit_at'            => Carbon::now(),
             'original_description' => $club->description,
+            'original_extra_info'  => $club->extra_info,
             'original_url'         => $club->url,
             'description'          => $request->get('description'),
+            'extra_info'           => $request->get('extra_info'),
             'url'                  => $request->get('url'),
         ]);
 

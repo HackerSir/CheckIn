@@ -38,6 +38,12 @@
             </blockquote>
         </div>
         <div>
+            額外資訊：<br/>
+            <blockquote>
+                {{ $dataUpdateRequest->original_extra }}
+            </blockquote>
+        </div>
+        <div>
             社團網址：<br/>
             {{ link_to($dataUpdateRequest->original_url, $dataUpdateRequest->original_url, ['target' => '_blank']) }}
         </div>
@@ -48,6 +54,12 @@
             社團簡介：<br/>
             <blockquote>
                 {{ $dataUpdateRequest->description }}
+            </blockquote>
+        </div>
+        <div>
+            額外資訊：<br/>
+            <blockquote>
+                {{ $dataUpdateRequest->extra }}
             </blockquote>
         </div>
         <div>

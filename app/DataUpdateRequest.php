@@ -22,6 +22,8 @@ use Illuminate\Database\Eloquent\Model;
  * @property string|null $url 網址
  * @property \Carbon\Carbon|null $created_at
  * @property \Carbon\Carbon|null $updated_at
+ * @property string|null $original_extra_info 原額外資訊
+ * @property string|null $extra_info 額外資訊
  * @property-read \App\Club $club
  * @property-read string $show_result
  * @property-read \App\User|null $reviewer
@@ -29,8 +31,10 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\DataUpdateRequest whereClubId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\DataUpdateRequest whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\DataUpdateRequest whereDescription($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\DataUpdateRequest whereExtraInfo($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\DataUpdateRequest whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\DataUpdateRequest whereOriginalDescription($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\DataUpdateRequest whereOriginalExtraInfo($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\DataUpdateRequest whereOriginalUrl($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\DataUpdateRequest whereReason($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\DataUpdateRequest whereReviewAt($value)
@@ -55,8 +59,10 @@ class DataUpdateRequest extends Model
         'review_result',
         'review_comment',
         'original_description',
+        'original_extra_info',
         'original_url',
         'description',
+        'extra_data',
         'url',
     ];
 
