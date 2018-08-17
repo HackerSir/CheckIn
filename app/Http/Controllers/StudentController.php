@@ -160,7 +160,7 @@ class StudentController extends Controller
      * @param  \App\Student $student
      * @return \Illuminate\Http\Response
      */
-    public function update(Student $student)
+    public function fetch(Student $student)
     {
         $stuInfo = $this->fcuApiService->getStuInfo($student->nid);
         if (!$stuInfo) {

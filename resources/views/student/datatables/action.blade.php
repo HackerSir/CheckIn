@@ -2,7 +2,7 @@
     <i class="fa fa-search" aria-hidden="true"></i>
 </a>
 
-{!! Form::open(['route' => ['student.update', $id], 'style' => 'display: inline', 'method' => 'PUT']) !!}
+{!! Form::open(['route' => ['student.fetch', $id], 'style' => 'display: inline', 'method' => 'PUT']) !!}
 <button type="submit" class="btn btn-primary" title="更新學生">
     <i class="fa fa-sync" aria-hidden="true"></i>
 </button>

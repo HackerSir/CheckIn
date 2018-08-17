@@ -61,13 +61,13 @@ Route::group(['middleware' => ['auth', 'email']], function () {
     //學生管理
     //權限：student.manage
     Route::group(['middleware' => 'permission:student.manage'], function () {
+        Route::put('fetch/{student}', 'StudentController@fetch')->name('student.fetch');
         Route::resource('student', 'StudentController', [
             'only' => [
                 'index',
                 'create',
                 'store',
                 'show',
-                'update',
             ],
         ]);
     });
