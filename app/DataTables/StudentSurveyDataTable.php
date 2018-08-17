@@ -2,7 +2,6 @@
 
 namespace App\DataTables;
 
-use App\Feedback;
 use App\Student;
 use App\StudentSurvey;
 use Illuminate\Database\Query\Builder;
@@ -27,7 +26,7 @@ class StudentSurveyDataTable extends DataTable
                 return view('student-survey.datatables.student', compact('studentSurvey'))->render();
             })
             ->filterColumn('student_id', function ($query, $keyword) {
-                /* @var Builder|Feedback $query */
+                /* @var Builder|StudentSurvey $query */
                 $query->whereHas('student', function ($query) use ($keyword) {
                     /* @var Builder|Student $query */
                     $query->where('name', 'like', '%' . $keyword . '%')
@@ -35,7 +34,7 @@ class StudentSurveyDataTable extends DataTable
                 });
             })
             ->addColumn('is_freshman', function ($studentSurvey) {
-                /** @var Feedback $studentSurvey */
+                /** @var StudentSurvey $studentSurvey */
                 return view('student-survey.datatables.is_freshman', compact('studentSurvey'))->render();
             })
             ->editColumn('comment', function ($studentSurvey) {
