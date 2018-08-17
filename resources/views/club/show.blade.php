@@ -145,7 +145,7 @@
                 </div>
             </div>
             <div class="mt-2">
-                <h2>簡介</h2>
+                <h2 class="border border-primary rounded">簡介</h2>
                 <p style="font-size: 120%">
                     @if($club->description)
                         {!! nl2br(e($club->description)) !!}
@@ -156,7 +156,7 @@
             </div>
             @if($club->extra_info)
                 <div class="mt-2">
-                    <h2>額外資訊</h2>
+                    <h2 class="border border-primary rounded">額外資訊</h2>
                     <p style="font-size: 120%">
                         @if(\Laratrust::can('club.manage') || isset(Auth::user()->club) && Auth::user()->club->id == $club->id || $feedback)
                             {!! $contentPresenter->showContent($club->extra_info) !!}
@@ -167,7 +167,7 @@
                 </div>
             @endif
             <div class="mt-2">
-                <h2>攤位</h2>
+                <h2 class="border border-primary rounded">攤位</h2>
                 <div class="row">
                     @forelse($club->booths as $booth)
                         <div class="col-md">
