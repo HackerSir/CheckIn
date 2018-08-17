@@ -68,6 +68,8 @@ Route::group(['middleware' => ['auth', 'email']], function () {
                 'create',
                 'store',
                 'show',
+                'edit',
+                'update',
             ],
         ]);
     });

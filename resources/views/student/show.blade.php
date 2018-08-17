@@ -15,6 +15,9 @@
     <a href="{{ route('student.index') }}" class="btn btn-secondary">
         <i class="fa fa-arrow-left" aria-hidden="true"></i> 學生管理
     </a>
+    <a href="{{ route('student.edit', $student) }}" class="btn btn-primary">
+        <i class="fa fa-edit" aria-hidden="true"></i> 編輯學生
+    </a>
 @endsection
 
 @section('main_content')
@@ -43,12 +46,21 @@
                 <dt class="col-4 col-md-2">性別</dt>
                 <dd class="col-8 col-md-10">{{ $student->gender }}</dd>
 
+                <dt class="col-4 col-md-2">視為新生</dt>
+                <dd class="col-8 col-md-10">
+                    @if($student->consider_as_freshman)
+                        <i class="fa fa-check fa-2x fa-fw text-success" aria-hidden="true"></i>
+                    @else
+                        <i class="fa fa-times fa-2x fa-fw text-danger" aria-hidden="true"></i>
+                    @endif
+                </dd>
+
                 <dt class="col-4 col-md-2">新生</dt>
                 <dd class="col-8 col-md-10">
                     @if($student->is_freshman)
-                        <i class="fa fa-check fa-2x text-success" aria-hidden="true"></i>
+                        <i class="fa fa-check fa-2x fa-fw text-success" aria-hidden="true"></i>
                     @else
-                        <i class="fa fa-times fa-2x text-danger" aria-hidden="true"></i>
+                        <i class="fa fa-times fa-2x fa-fw text-danger" aria-hidden="true"></i>
                     @endif
                 </dd>
 

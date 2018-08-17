@@ -177,6 +177,10 @@ class Student extends Model
      */
     public function getIsFreshmanAttribute()
     {
+        //強制視為新生
+        if ($this->consider_as_freshman) {
+            return true;
+        }
         //研究所與教職員不算新生
         if (starts_with($this->nid, 'M') || starts_with($this->nid, 'T')) {
             return false;
@@ -226,12 +230,16 @@ class Student extends Model
      */
     public function scopeFreshman($query)
     {
-        $query->where('nid', 'not like', 'M%')
-            ->where('nid', 'not like', 'T%')
-            ->where(function ($query) {
+        $query->where('consider_as_freshman', true)
+            ->orWhere(function ($query) {
                 /** @var Builder|static $query */
-                $query->where('in_year', static::$freshmanInYear)
-                    ->orWhere('class', 'like', '%一年級%');
+                $query->where('nid', 'not like', 'M%')
+                    ->where('nid', 'not like', 'T%')
+                    ->where(function ($query) {
+                        /** @var Builder|static $query */
+                        $query->where('in_year', static::$freshmanInYear)
+                            ->orWhere('class', 'like', '%一年級%');
+                    });
             });
     }
 
@@ -240,12 +248,16 @@ class Student extends Model
      */
     public function scopeNonFreshman($query)
     {
-        $query->where('nid', 'like', 'M%')
-            ->orWhere('nid', 'like', 'T%')
-            ->orWhere(function ($query) {
+        $query->where('consider_as_freshman', false)
+            ->where(function ($query) {
                 /** @var Builder|static $query */
-                $query->where('in_year', '<>', static::$freshmanInYear)
-                    ->where('class', 'not like', '%一年級%');
+                $query->where('nid', 'like', 'M%')
+                    ->orWhere('nid', 'like', 'T%')
+                    ->orWhere(function ($query) {
+                        /** @var Builder|static $query */
+                        $query->where('in_year', '<>', static::$freshmanInYear)
+                            ->where('class', 'not like', '%一年級%');
+                    });
             });
     }
 }
