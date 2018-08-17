@@ -21,6 +21,10 @@ class StudentsDataTable extends DataTable
 
         return $dataTable
             ->addColumn('action', 'student.datatables.action')
+            ->editColumn('nid', function ($student) {
+                /** @var Student $student */
+                return view('student.datatables.nid', compact('student'))->render();
+            })
             ->editColumn('class', function ($student) {
                 return view('student.datatables.class', compact('student'))->render();
             })
