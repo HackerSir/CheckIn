@@ -54,18 +54,12 @@
                 this.fetch();
             });
         },
-        updated() {
-            if (this.requireRenderHolderImages) {
-                this.renderHolderImages();
-            }
-        },
         data: function () {
             return {
                 selectedClubType: null,
                 searchKeyword: '',
                 clubTypes: [],
                 clubs: [],
-                requireRenderHolderImages: false,
                 isTypingKeyword: false,
                 isFetching: false
             }
@@ -110,19 +104,7 @@
             delayFetch: _.debounce(function () {
                 this.isTypingKeyword = false;
                 this.fetch();
-            }, 1000),
-            renderHolderImages: function () {
-                let imageElements = $('img.holder:not([src])').get();
-                Holder.run({
-                    images: imageElements
-                });
-                this.requireRenderHolderImages = false;
-            }
-        },
-        watch: {
-            clubs: function () {
-                this.requireRenderHolderImages = true;
-            }
+            }, 1000)
         }
     }
 </script>
