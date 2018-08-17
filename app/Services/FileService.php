@@ -49,11 +49,11 @@ class FileService
 
         //QR Code
         $scanUrl = route('qrcode.scan', $qrcode->code);
-        $qrcodePath = DNS2D::getBarcodePNGPath($scanUrl, 'QRCODE', 18, 18);
+        $qrcodePath = DNS2D::getBarcodePNGPath($scanUrl, 'QRCODE', 14, 14);
         $section->addImage($qrcodePath, ['alignment' => Jc::CENTER]);
         $section->addTextBreak(1, ['size' => 8], ['alignment' => Jc::CENTER]);
         //BarCode
-        $BarCodePath = DNS1D::getBarcodePNGPath($qrcode->code, 'C128B', 4, 90);
+        $BarCodePath = DNS1D::getBarcodePNGPath($qrcode->code, 'C128B', 3.5, 90);
         $section->addImage($BarCodePath, ['alignment' => Jc::CENTER]);
         //Code
         $section->addText($qrcode->code, ['size' => 66], ['alignment' => Jc::CENTER]);
