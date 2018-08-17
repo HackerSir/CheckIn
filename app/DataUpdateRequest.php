@@ -62,7 +62,7 @@ class DataUpdateRequest extends Model
         'original_extra_info',
         'original_url',
         'description',
-        'extra_data',
+        'extra_info',
         'url',
     ];
 

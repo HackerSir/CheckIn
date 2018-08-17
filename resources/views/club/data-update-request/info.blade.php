@@ -40,7 +40,7 @@
         <div>
             <div style="font-weight: bold; font-size: 1.2rem"><span class="badge badge-secondary">額外資訊</span></div>
             <blockquote>
-                {!! nl2br(e($dataUpdateRequest->original_extra)) !!}
+                {!! nl2br(e($dataUpdateRequest->original_extra_info)) !!}
             </blockquote>
         </div>
         <div>
@@ -59,7 +59,7 @@
         <div>
             <div style="font-weight: bold; font-size: 1.2rem"><span class="badge badge-secondary">額外資訊</span></div>
             <blockquote>
-                {!! nl2br(e($dataUpdateRequest->extra)) !!}
+                {!! nl2br(e($dataUpdateRequest->extra_info)) !!}
             </blockquote>
         </div>
         <div>
