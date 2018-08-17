@@ -2,6 +2,10 @@
 
 @section('title', $club->name)
 
+@php
+    $feedback = \App\Feedback::whereClubId($club->id)->whereStudentId(optional(Auth::user()->student)->id)->first();
+@endphp
+
 @if($club->imgurImage)
     @section('og_image', $club->imgurImage->thumbnail('l'))
 @endif
@@ -113,7 +117,7 @@
                                     <i class="fa fa-times" aria-hidden="true"></i> 登入後即可填寫
                                 </a>
                             @elseif(Auth::user()->student)
-                                @if(\App\Feedback::whereClubId($club->id)->whereStudentId(Auth::user()->student->id)->count() == 0)
+                                @if(!$feedback)
                                     <a href="{{ route('feedback.create', $club) }}" class="btn btn-primary btn-lg">
                                         <i class="fa fa-pencil-alt" aria-hidden="true"></i> 按此填寫
                                     </a>
@@ -148,6 +152,18 @@
                     @endif
                 </p>
             </div>
+            @if($club->extra_info)
+                <div class="mt-2">
+                    <h2>額外資訊</h2>
+                    <p style="font-size: 120%">
+                        @if(\Laratrust::can('club.manage') || isset(Auth::user()->club) && Auth::user()->club->id == $club->id || $feedback)
+                            {!! nl2br(e($club->extra_info)) !!}
+                        @else
+                            <div class="alert alert-warning">此社團有提供額外資訊給感興趣加入的學生，填寫回饋資料後即可檢視</div>
+                        @endif
+                    </p>
+                </div>
+            @endif
             <div class="mt-2">
                 <h2>攤位</h2>
                 <div class="row">
