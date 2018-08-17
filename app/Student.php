@@ -19,6 +19,7 @@ use Illuminate\Database\Query\Builder;
  * @property string $gender 性別
  * @property \Carbon\Carbon|null $created_at
  * @property \Carbon\Carbon|null $updated_at
+ * @property bool $consider_as_freshman 視為新生
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Record[] $countedRecords
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Feedback[] $feedback
  * @property-read string $display_name
@@ -35,6 +36,7 @@ use Illuminate\Database\Query\Builder;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Student freshman()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Student nonFreshman()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Student whereClass($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Student whereConsiderAsFreshman($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Student whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Student whereDeptName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Student whereGender($value)
@@ -59,6 +61,11 @@ class Student extends Model
         'dept_name',
         'in_year',
         'gender',
+        'consider_as_freshman',
+    ];
+
+    protected $casts = [
+        'consider_as_freshman' => 'boolean',
     ];
 
     /**
