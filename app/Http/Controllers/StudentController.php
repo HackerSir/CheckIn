@@ -155,12 +155,36 @@ class StudentController extends Controller
     }
 
     /**
+     * @param Student $student
+     * @return \Illuminate\Http\Response
+     */
+    public function edit(Student $student)
+    {
+        return view('student.edit', compact('student'));
+    }
+
+    /**
      * Update the specified resource in storage.
      *
      * @param  \App\Student $student
      * @return \Illuminate\Http\Response
      */
-    public function update(Student $student)
+    public function update(Student $student, Request $request)
+    {
+        $student->update([
+            'consider_as_freshman' => $request->exists('consider_as_freshman'),
+        ]);
+
+        return redirect()->route('student.show', $student)->with('global', '學生資料已更新');
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \App\Student $student
+     * @return \Illuminate\Http\Response
+     */
+    public function fetch(Student $student)
     {
         $stuInfo = $this->fcuApiService->getStuInfo($student->nid);
         if (!$stuInfo) {

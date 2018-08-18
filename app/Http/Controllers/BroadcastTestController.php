@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Events\AdminTest;
+use App\User;
 use Illuminate\Http\Request;
 
 class BroadcastTestController extends Controller
@@ -17,11 +18,13 @@ class BroadcastTestController extends Controller
             abort(400);
         }
 
-        $request->validate([
+        $this->validate($request, [
             'message' => 'required|string',
         ]);
 
-        event(new AdminTest(auth()->user(), $request->get('message')));
+        /** @var User $user */
+        $user = auth()->user();
+        event(new AdminTest($user, $request->get('message')));
 
         return response()->json(['success' => true]);
     }

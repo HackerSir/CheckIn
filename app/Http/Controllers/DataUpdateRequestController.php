@@ -73,6 +73,7 @@ class DataUpdateRequestController extends Controller
             $club = $dataUpdateRequest->club;
             $club->update([
                 'description' => $dataUpdateRequest->description,
+                'extra_info'  => $dataUpdateRequest->extra_info,
                 'url'         => $dataUpdateRequest->url,
             ]);
         }

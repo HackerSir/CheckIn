@@ -25,6 +25,7 @@ use Laratrust\Traits\LaratrustUserTrait;
  * @property string|null $google2fa_secret
  * @property int|null $club_id 負責社團
  * @property-read \App\Club|null $club
+ * @property-read \App\ClubSurvey $clubSurvey
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\DataUpdateRequest[] $dataUpdateRequests
  * @property-read string $display_name
  * @property-read bool $is_confirmed
@@ -134,6 +135,14 @@ class User extends Authenticatable
     public function dataUpdateRequests()
     {
         return $this->hasMany(DataUpdateRequest::class);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function clubSurvey()
+    {
+        return $this->hasOne(ClubSurvey::class);
     }
 
     /**

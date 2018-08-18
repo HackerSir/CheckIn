@@ -19,20 +19,24 @@ use Illuminate\Database\Query\Builder;
  * @property string $gender 性別
  * @property \Carbon\Carbon|null $created_at
  * @property \Carbon\Carbon|null $updated_at
+ * @property bool $consider_as_freshman 視為新生
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Record[] $countedRecords
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Feedback[] $feedback
  * @property-read string $display_name
+ * @property-read bool $has_enough_counted_records
  * @property-read bool $is_freshman
  * @property-read bool $is_staff
  * @property-read string $masked_display_name
  * @property-read \App\Qrcode $qrcode
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Qrcode[] $qrcodes
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Record[] $records
+ * @property-read \App\StudentSurvey $studentSurvey
  * @property-read \App\Ticket $ticket
  * @property-read \App\User|null $user
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Student freshman()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Student nonFreshman()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Student whereClass($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Student whereConsiderAsFreshman($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Student whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Student whereDeptName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Student whereGender($value)
@@ -57,6 +61,11 @@ class Student extends Model
         'dept_name',
         'in_year',
         'gender',
+        'consider_as_freshman',
+    ];
+
+    protected $casts = [
+        'consider_as_freshman' => 'boolean',
     ];
 
     /**
@@ -130,6 +139,14 @@ class Student extends Model
     }
 
     /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function studentSurvey()
+    {
+        return $this->hasOne(StudentSurvey::class);
+    }
+
+    /**
      * @return string
      */
     public function getDisplayNameAttribute()
@@ -160,6 +177,10 @@ class Student extends Model
      */
     public function getIsFreshmanAttribute()
     {
+        //強制視為新生
+        if ($this->consider_as_freshman) {
+            return true;
+        }
         //研究所與教職員不算新生
         if (starts_with($this->nid, 'M') || starts_with($this->nid, 'T')) {
             return false;
@@ -192,16 +213,33 @@ class Student extends Model
     }
 
     /**
+     * @return bool
+     */
+    public function getHasEnoughCountedRecordsAttribute()
+    {
+        //打卡目標
+        $target = (int) \Setting::get('target');
+        //檢查打卡進度
+        $count = $this->countedRecords->count();
+
+        return $count >= $target;
+    }
+
+    /**
      * @param Builder|static $query
      */
     public function scopeFreshman($query)
     {
-        $query->where('nid', 'not like', 'M%')
-            ->where('nid', 'not like', 'T%')
-            ->where(function ($query) {
+        $query->where('consider_as_freshman', true)
+            ->orWhere(function ($query) {
                 /** @var Builder|static $query */
-                $query->where('in_year', static::$freshmanInYear)
-                    ->orWhere('class', 'like', '%一年級%');
+                $query->where('nid', 'not like', 'M%')
+                    ->where('nid', 'not like', 'T%')
+                    ->where(function ($query) {
+                        /** @var Builder|static $query */
+                        $query->where('in_year', static::$freshmanInYear)
+                            ->orWhere('class', 'like', '%一年級%');
+                    });
             });
     }
 
@@ -210,12 +248,16 @@ class Student extends Model
      */
     public function scopeNonFreshman($query)
     {
-        $query->where('nid', 'like', 'M%')
-            ->orWhere('nid', 'like', 'T%')
-            ->orWhere(function ($query) {
+        $query->where('consider_as_freshman', false)
+            ->where(function ($query) {
                 /** @var Builder|static $query */
-                $query->where('in_year', '<>', static::$freshmanInYear)
-                    ->where('class', 'not like', '%一年級%');
+                $query->where('nid', 'like', 'M%')
+                    ->orWhere('nid', 'like', 'T%')
+                    ->orWhere(function ($query) {
+                        /** @var Builder|static $query */
+                        $query->where('in_year', '<>', static::$freshmanInYear)
+                            ->where('class', 'not like', '%一年級%');
+                    });
             });
     }
 }

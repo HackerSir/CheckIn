@@ -11,6 +11,5 @@
 @endsection
 
 @section('js')
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/holder/2.9.4/holder.min.js"></script>
     <script src="{{ asset(mix('/build-js/vue.js')) }}"></script>
 @endsection

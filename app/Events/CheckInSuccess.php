@@ -2,6 +2,7 @@
 
 namespace App\Events;
 
+use App\Feedback;
 use App\Record;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PrivateChannel;
@@ -43,7 +44,19 @@ class CheckInSuccess implements ShouldBroadcast
      */
     public function broadcastWith()
     {
-        // TODO: 設定要傳什麼 Data 給前端
-        return ['message' => 'illya'];
+        $club = $this->record->club;
+        $studentId = $this->record->student_id;
+
+        //是否曾對該社團留過回饋資料？
+        $feedbackExists = (bool) Feedback::whereClubId($club->id)->whereStudentId($studentId)->count();
+
+        //傳送給前端的資訊
+        $data = [
+            'club_name'        => $club->name,
+            'ask_for_feedback' => !$feedbackExists,
+            'feedback_url'     => route('feedback.create', $club),
+        ];
+
+        return $data;
     }
 }

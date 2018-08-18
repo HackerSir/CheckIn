@@ -36,10 +36,11 @@ return [
     ],
 
     'fcu-api' => [
-        'url-oauth'        => env('FCU_API_URL_OAUTH'),
-        'url-get-stu-info' => env('FCU_API_URL_GET_STU_INFO'),
-        'client-id'        => env('FCU_API_CLIENT_ID'),
-        'client-url'       => env('FCU_API_CLIENT_URL'),
+        'url-oauth'          => env('FCU_API_URL_OAUTH'),
+        'url-get-stu-info'   => env('FCU_API_URL_GET_STU_INFO'),
+        'url-get-login-user' => env('FCU_API_URL_GET_LOGIN_USER'),
+        'client-id'          => env('FCU_API_CLIENT_ID'),
+        'client-url'         => env('FCU_API_CLIENT_URL'),
     ],
 
     'google' => [

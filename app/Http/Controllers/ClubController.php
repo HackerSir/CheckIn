@@ -53,6 +53,7 @@ class ClubController extends Controller
             'name'         => 'required',
             'club_type_id' => 'nullable|exists:club_types,id',
             'description'  => 'nullable|max:300',
+            'extra_info'   => 'nullable|max:300',
             'url'          => 'nullable|url',
             'image_file'   => 'image',
         ]);
@@ -108,6 +109,7 @@ class ClubController extends Controller
             'name'         => 'required',
             'club_type_id' => 'nullable|exists:club_types,id',
             'description'  => 'nullable|max:300',
+            'extra_info'   => 'nullable|max:300',
             'url'          => 'nullable|url',
             'image_file'   => 'image',
         ]);

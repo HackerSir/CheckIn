@@ -4,6 +4,7 @@
     <content url="file://$MODULE_DIR$">
       <sourceFolder url="file://$MODULE_DIR$/tests" isTestSource="true" packagePrefix="Tests\" />
       <sourceFolder url="file://$MODULE_DIR$/app" isTestSource="false" packagePrefix="App\" />
+      <excludeFolder url="file://$MODULE_DIR$/node_modules" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/anlutro/l4-settings" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/appstract/laravel-blade-directives" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/arcanedev/log-viewer" />
@@ -46,6 +47,7 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/lavary/laravel-menu" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/league/flysystem" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/maatwebsite/excel" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/markbaker/complex" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/marvinlabs/laravel-html-bootstrap-4" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/marvinlabs/laravel-html-font-awesome" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/milon/barcode" />

@@ -6,12 +6,9 @@ use Exception;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Exception\GuzzleException;
-use Yish\Generators\Foundation\Service\Service;
 
-class FcuApiService extends Service
+class FcuApiService
 {
-    protected $repository;
-
     /**
      * @param string $nid
      * @return array|null
@@ -68,7 +65,7 @@ class FcuApiService extends Service
             return null;
         }
         //API資訊
-        $apiUrl = config('services.fcu-api.url-get-stu-info');
+        $apiUrl = config('services.fcu-api.url-get-login-user');
         $apiClientId = config('services.fcu-api.client-id');
         if (!$apiUrl || !$apiClientId) {
             return null;

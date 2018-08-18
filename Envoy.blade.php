@@ -13,12 +13,15 @@
 @story('deploy')
     clone_repository
     run_composer
-    yarn_install
+    stop_horizon
     update_symlink_env
+    yarn_install
     artisan_migrate
     update_symlinks_other
     cache_config_and_route
     restart_php_service
+    start_horizon
+    restart_echo_server
     keep_newest_3_releases
 @endstory
 
@@ -74,6 +77,18 @@
 
 @task('restart_php_service')
     sudo systemctl reload php7.2-fpm.service
+@endtask
+
+@task('stop_horizon')
+    sudo supervisorctl stop checkIn_horizon
+@endtask
+
+@task('start_horizon')
+    sudo supervisorctl start checkIn_horizon
+@endtask
+
+@task('restart_echo_server')
+    sudo supervisorctl restart checkIn_laravel_echo_server
 @endtask
 
 @task('keep_newest_3_releases')

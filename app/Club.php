@@ -16,7 +16,9 @@ use Illuminate\Database\Eloquent\Model;
  * @property string|null $url 網址
  * @property \Carbon\Carbon|null $created_at
  * @property \Carbon\Carbon|null $updated_at
+ * @property string|null $extra_info 額外資訊
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Booth[] $booths
+ * @property-read \App\ClubSurvey $clubSurvey
  * @property-read \App\ClubType|null $clubType
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\DataUpdateRequest[] $dataUpdateRequests
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Feedback[] $feedback
@@ -28,6 +30,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Club whereClubTypeId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Club whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Club whereDescription($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Club whereExtraInfo($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Club whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Club whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Club whereNumber($value)
@@ -44,6 +47,7 @@ class Club extends Model
         'number',
         'club_type_id',
         'description',
+        'extra_info',
         'url',
     ];
 
@@ -110,6 +114,14 @@ class Club extends Model
     public function dataUpdateRequests()
     {
         return $this->hasMany(DataUpdateRequest::class)->orderByDesc('submit_at');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function clubSurvey()
+    {
+        return $this->hasOne(ClubSurvey::class);
     }
 
     /**

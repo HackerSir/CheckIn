@@ -61,12 +61,14 @@ Route::group(['middleware' => ['auth', 'email']], function () {
     //學生管理
     //權限：student.manage
     Route::group(['middleware' => 'permission:student.manage'], function () {
+        Route::put('fetch/{student}', 'StudentController@fetch')->name('student.fetch');
         Route::resource('student', 'StudentController', [
             'only' => [
                 'index',
                 'create',
                 'store',
                 'show',
+                'edit',
                 'update',
             ],
         ]);
@@ -214,6 +216,33 @@ Route::group(['middleware' => ['auth', 'email']], function () {
     Route::group(['middleware' => 'permission:stats.access'], function () {
         Route::get('stats', 'StatsController@index')->name('stats.index');
         Route::get('stats/heatmap', 'StatsController@heatmap')->name('stats.heatmap');
+    });
+
+    //問卷
+    Route::group(['middleware' => 'permission:survey.manage'], function () {
+        //學生問卷
+        Route::resource('student-survey', 'StudentSurveyController', [
+            'only' => [
+                'index',
+                'show',
+            ],
+        ]);
+        //社團問卷
+        Route::resource('club-survey', 'ClubSurveyController', [
+            'only' => [
+                'index',
+                'show',
+            ],
+        ]);
+    });
+    Route::group(['prefix' => 'survey'], function () {
+        Route::get('/', 'SurveyController@index')->name('survey.index');
+        Route::get('student/edit', 'SurveyController@createOrEditStudentSurvey')->name('survey.student.edit');
+        Route::post('student', 'SurveyController@storeStudentSurvey')->name('survey.student.store');
+        Route::get('student', 'SurveyController@showStudentSurvey')->name('survey.student.show');
+        Route::get('club/edit', 'SurveyController@createOrEditClubSurvey')->name('survey.club.edit');
+        Route::post('club', 'SurveyController@storeClubSurvey')->name('survey.club.store');
+        Route::get('club', 'SurveyController@showClubSurvey')->name('survey.club.show');
     });
 
     //自己的社團

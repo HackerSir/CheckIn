@@ -37,6 +37,7 @@
                 </div>
             </div>
             {{ bs()->formGroup(bs()->textarea('description')->attribute('rows', 10))->label('描述')->showAsRow() }}
+            {{ bs()->formGroup(bs()->textarea('extra_info')->attribute('rows', 10))->label('額外資訊')->helpText('僅限對此社團填寫回饋資料的學生檢視，可放FB社團、LINE群網址等')->showAsRow() }}
             {{ bs()->formGroup(bs()->input('url', 'url')->placeholder('網站、粉絲專頁等'))->label('網址')->showAsRow() }}
 
             <div class="row">

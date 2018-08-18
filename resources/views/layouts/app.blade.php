@@ -6,7 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-    <meta property="og:title" content="@yield('title')::{{ config('app.name') }}">
+    @php
+        $title = '';
+        if(View::hasSection('title')) {
+            $title = View::yieldContent('title') . ' - ';
+        }
+        $title .= config('app.name');
+    @endphp
+
+    <meta property="og:title" content="{{ $title }}">
     <meta property="og:url" content="{{ URL::current() }}">
     <meta property="og:image" content="@yield('og_image', asset('img/hacker.png'))">
     <meta property="og:description" content="2018 逢甲社團博覽會集點打卡">
@@ -15,7 +23,7 @@
     <link rel="icon" type="image/svg+xml" href="{{ asset('favicon.svg') }}">
     <link rel="icon" type="image/ico" href="{{ asset('favicon.ico') }}">
 
-    <title>@yield('title')::{{ config('app.name') }}</title>
+    <title>{{ $title }}</title>
 
     {{-- CSRF Token --}}
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -101,7 +109,7 @@
     window.Laravel = <?php echo json_encode([
         'csrfToken' => csrf_token(),
         'baseUrl'   => url('/'),
-        'student'   => auth()->check() ? (is_null(auth()->user()->student) ? null : auth()->user()->student->id) : null
+        'student'   => auth()->user()->student->id ?? null
     ]); ?>
 </script>
 <script>
@@ -212,6 +220,7 @@
                 }
             }
         });
+        DataTable.ext.errMode = 'throw';
     })(jQuery, jQuery.fn.dataTable);
     // select2 預設設定
     $.fn.select2.defaults.set( "theme", "bootstrap4");

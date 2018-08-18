@@ -1,6 +1,12 @@
 @extends('layouts.base')
 
+@inject('contentPresenter', 'App\Presenters\ContentPresenter')
+
 @section('title', $club->name)
+
+@php
+    $feedback = \App\Feedback::whereClubId($club->id)->whereStudentId(Auth::user()->student->id ?? null)->first();
+@endphp
 
 @if($club->imgurImage)
     @section('og_image', $club->imgurImage->thumbnail('l'))
@@ -67,11 +73,11 @@
                         <dd class="col-6 col-sm-9">
                             @if($club->is_counted)
                                 <span class="text-success">
-                                    <i class="fa fa-check-square-o" aria-hidden="true"></i> 列入集點
+                                    <i class="far fa-check-square" aria-hidden="true"></i> 列入集點
                                 </span>
                             @else
                                 <span class="text-danger">
-                                    <i class="fa fa-square-o" aria-hidden="true"></i> 不列入集點
+                                    <i class="far fa-square" aria-hidden="true"></i> 不列入集點
                                 </span>
                             @endif
                         </dd>
@@ -113,7 +119,7 @@
                                     <i class="fa fa-times" aria-hidden="true"></i> 登入後即可填寫
                                 </a>
                             @elseif(Auth::user()->student)
-                                @if(\App\Feedback::whereClubId($club->id)->whereStudentId(Auth::user()->student->id)->count() == 0)
+                                @if(!$feedback)
                                     <a href="{{ route('feedback.create', $club) }}" class="btn btn-primary btn-lg">
                                         <i class="fa fa-pencil-alt" aria-hidden="true"></i> 按此填寫
                                     </a>
@@ -139,7 +145,7 @@
                 </div>
             </div>
             <div class="mt-2">
-                <h2>簡介</h2>
+                <h2 class="border border-primary rounded">簡介</h2>
                 <p style="font-size: 120%">
                     @if($club->description)
                         {!! nl2br(e($club->description)) !!}
@@ -148,8 +154,20 @@
                     @endif
                 </p>
             </div>
+            @if($club->extra_info)
+                <div class="mt-2">
+                    <h2 class="border border-primary rounded">額外資訊</h2>
+                    <p style="font-size: 120%">
+                        @if(\Laratrust::can('club.manage') || isset(Auth::user()->club) && Auth::user()->club->id == $club->id || $feedback)
+                            {!! $contentPresenter->showContent($club->extra_info) !!}
+                        @else
+                            <div class="alert alert-warning">此社團有提供額外資訊給感興趣加入的學生，填寫回饋資料後即可檢視</div>
+                        @endif
+                    </p>
+                </div>
+            @endif
             <div class="mt-2">
-                <h2>攤位</h2>
+                <h2 class="border border-primary rounded">攤位</h2>
                 <div class="row">
                     @forelse($club->booths as $booth)
                         <div class="col-md">

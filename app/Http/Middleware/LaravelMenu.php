@@ -21,7 +21,8 @@ class LaravelMenu
         //左側
         Menu::make('left', function ($menu) {
             /* @var \Lavary\Menu\Builder $menu */
-            $menu->add('社團攤位', ['route' => 'clubs.index'])->active('clubs');
+            $menu->add('社團介紹', ['route' => 'clubs.index'])->active('clubs');
+            $menu->add('搜尋社團及導航', ['route' => 'clubs.index'])->active('clubs');
 
             $menu->add('攤位地圖', ['route' => ['clubs.map', 'type' => 'static']])->active('map');
         });
@@ -36,6 +37,7 @@ class LaravelMenu
                     $menu->add('尚未完成信箱驗證', ['route' => 'confirm-mail.resend'])
                         ->link->attr(['class' => 'text-danger']);
                 } else {
+                    $menu->add('問卷', ['route' => 'survey.index'])->active('survey/*');
                     //負責的社團
                     if ($user->club) {
                         $menu->add($user->club->name, ['route' => ['clubs.show', $user->club]]);
@@ -92,6 +94,12 @@ class LaravelMenu
                         if (Laratrust::can('feedback.manage')) {
                             $activityMenu->add('回饋資料管理', ['route' => 'feedback.index'])->active('feedback/*');
                         }
+                        if (Laratrust::can('survey.manage')) {
+                            $activityMenu->add('學生問卷管理', ['route' => 'student-survey.index'])
+                                ->active('student-survey/*');
+                            $activityMenu->add('社團問卷管理', ['route' => 'club-survey.index'])
+                                ->active('club-survey/*');
+                        }
 
                         $this->addDivider($activityMenu);
 
@@ -126,7 +134,8 @@ class LaravelMenu
                         }
 
                         if (Laratrust::can('broadcast.manage')) {
-                            $adminMenu->add('Broadcast Test', ['route' => 'broadcast-test'])->active('broadcast-test/*');
+                            $adminMenu->add('Broadcast Test', ['route' => 'broadcast-test'])
+                                ->active('broadcast-test/*');
                         }
 
                         if (Laratrust::can('horizon.manage')) {
