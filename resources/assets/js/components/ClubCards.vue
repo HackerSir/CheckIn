@@ -73,21 +73,20 @@
         },
         methods: {
             fetch: function () {
-                let self = this;
                 this.isFetching = true;
                 //社團類型
                 let club_type_list_url = Laravel.baseUrl + '/api/club-type-list';
-                axios.post(club_type_list_url).then(function (response) {
-                    self.clubTypes = response.data;
+                axios.post(club_type_list_url).then(response => {
+                    this.clubTypes = response.data;
                 });
                 //社團清單
                 let club_list_url = Laravel.baseUrl + '/api/club-list';
                 axios.post(club_list_url, {
                     clubType: this.selectedClubType,
                     keyword: this.searchKeyword
-                }).then(function (response) {
-                    self.clubs = response.data;
-                    self.isFetching = false;
+                }).then(response => {
+                    this.clubs = response.data;
+                    this.isFetching = false;
                 });
             },
             onSelectChange: function () {
