@@ -4,7 +4,7 @@
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <a class="navbar-brand" style="margin-left: 1rem" href="{{ url('/') }}">
+        <a class="navbar-brand font-weight-bold" style="margin-left: 1rem" href="{{ url('/') }}">
             {{ config('app.cht_name') }}
         </a>
 
