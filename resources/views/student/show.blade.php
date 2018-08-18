@@ -92,8 +92,8 @@
                 @endif
             @endif
             <dl class="row" style="font-size: 120%">
-                <dt class="col-md-2">打卡集點</dt>
-                <dd class="col-md-10">
+                <dt class="col-md-3 col-lg-2">打卡集點</dt>
+                <dd class="col-md-7 col-lg-10">
                     @if($student->has_enough_counted_records)
                         <span class="text-success">
                             <i class="far fa-check-square"></i> 已完成
@@ -106,8 +106,8 @@
                             ）</span>
                     @endif
                 </dd>
-                <dt class="col-md-2">填寫平台問卷</dt>
-                <dd class="col-md-10">
+                <dt class="col-md-3 col-lg-2">填寫平台問卷</dt>
+                <dd class="col-md-7 col-lg-10">
                     @if($student->studentSurvey)
                         <span class="text-success">
                             <i class="far fa-check-square"></i> 已完成
