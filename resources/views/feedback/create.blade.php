@@ -9,6 +9,9 @@
 @endsection
 
 @section('main_content')
+    <div class="alert alert-info" role="alert">
+        填寫社團回饋資料，方便社團日後聯絡你
+    </div>
     <div class="alert alert-warning" role="alert">
         請注意：
         <ul style="padding-left: 20px">
@@ -31,7 +34,8 @@
                     <li>給社團的意見</li>
                 </ul>
             </li>
-            <li>不同社團的回饋資料可以填寫不同地聯絡資訊</li>
+            <li>請至少填寫一項資料再送出</li>
+            <li>不同社團的回饋資料可以填寫不同的聯絡資訊</li>
             <li>系統會自動填入之前填寫的<strong>電話</strong>與<strong>信箱</strong>，可於送出前修改</li>
         </ul>
     </div>
