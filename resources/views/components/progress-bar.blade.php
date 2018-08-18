@@ -7,7 +7,7 @@
     </div>
 @endfor
 @if($progress == 0 || $progress % 100 > 0)
-    <div class="progress w-80">
+    <div class="progress w-80 mb-2">
         <div class="progress-bar d-flex align-items-center justify-content-center"
              role="progressbar"
              style="width: {{ $progress % 100 }}%; min-width: 3rem;"

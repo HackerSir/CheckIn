@@ -11,8 +11,14 @@
 @endsection
 
 @section('buttons')
+    @php($user = auth()->user())
+    @if(!(!$user || !$user->student))
+        <a href="{{ route('index') }}" class="btn btn-secondary mb-2">
+            <i class="fa fa-arrow-left" aria-hidden="true"></i> QR Code
+        </a>
+    @endif
     <a href="{{ route('feedback.index') }}" class="btn btn-secondary mb-2">
-        <i class="fa fa-arrow-left" aria-hidden="true"></i> 回饋資料
+        <i class="fa fa-arrow-left" aria-hidden="true"></i> 回饋資料管理
     </a>
 @endsection
 
