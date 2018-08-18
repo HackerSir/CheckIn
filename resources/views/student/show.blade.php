@@ -76,7 +76,7 @@
 
             <h1>抽獎活動</h1>
             @if(isset($student->ticket))
-                <div class="alert alert-success">
+                <div class="alert alert-success text-center">
                     <i class="fas fa-ticket-alt"></i> 抽獎編號 <i class="fas fa-ticket-alt"></i>
                     <h3>{{ sprintf("%04d", $student->ticket->id) }}</h3>
                 </div>
