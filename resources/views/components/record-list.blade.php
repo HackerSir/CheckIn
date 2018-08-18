@@ -1,6 +1,6 @@
 <ul class="list-group">
     @forelse($student->records as $record)
-        <li class="list-group-item" >
+        <li class="list-group-item">
             <h4 class="mb-1">{{ link_to_route('clubs.show', $record->club->name, $record->club) }}
                 {!! $record->club->clubType->tag ?? '' !!}
                 @if(!$record->club->is_counted)
@@ -8,7 +8,9 @@
                 @endif
             </h4>
             <p>
-                <span title="{{ $record->created_at }}">{{ (new \Carbon\Carbon($record->created_at))->diffForHumans() }}</span>
+                <span title="{{ $record->created_at }}">
+                    {{ (new \Carbon\Carbon($record->created_at))->diffForHumans() }}
+                </span>
             </p>
             @if($showFeedbackButton ?? false)
                 @if($student->feedback->contains('club_id', $record->club->id))
