@@ -20,9 +20,7 @@
 
 @section('main_content')
     <div class="alert alert-info">
-        <ul style="padding-left: 20px">
-            <li>可於活動結束前（{{ new Carbon\Carbon(Setting::get('end_at')) }}）多次修改，結束後將無法填寫或修改</li>
-        </ul>
+        可於活動結束前（{{ new Carbon\Carbon(Setting::get('end_at')) }}）多次修改，結束後將無法填寫或修改
     </div>
     <div class="card">
         <div class="card-body">

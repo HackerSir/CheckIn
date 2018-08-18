@@ -4,7 +4,7 @@
 
 @section('main_content')
     <div class="alert alert-info">
-        {{ new Carbon\Carbon(Setting::get('end_at')) }} 活動結束前可多次修改，結束後將無法填寫或修改
+        可於活動結束前（{{ new Carbon\Carbon(Setting::get('end_at')) }}）多次修改，結束後將無法填寫或修改
     </div>
     <div class="card">
         <div class="card-body">
