@@ -23,8 +23,8 @@
     <div class="card">
         <div class="card-body">
             <dl class="row" style="font-size: 120%">
-                <dt class="col-md-2">基本資料</dt>
-                <dd class="col-md-10">
+                <dt class="col-md-4">基本資料</dt>
+                <dd class="col-md-8">
                     @if(Laratrust::can('student.manage'))
                         <a href="{{ route('student.show', $studentSurvey->student) }}">
                             {{ $studentSurvey->student->display_name }}
@@ -36,11 +36,11 @@
             </dl>
             <hr/>
             <dl class="row" style="font-size: 120%">
-                <dt class="col-md-2">星等評價</dt>
-                <dd class="col-md-10">{{ $studentSurvey->stars }}</dd>
+                <dt class="col-md-4">對於平台的滿意度</dt>
+                <dd class="col-md-8">{{ $studentSurvey->stars }}</dd>
 
-                <dt class="col-md-2">意見與建議</dt>
-                <dd class="col-md-10">{!! nl2br(e($studentSurvey->comment)) !!}</dd>
+                <dt class="col-md-4">對於平台意見與建議</dt>
+                <dd class="col-md-8">{!! nl2br(e($studentSurvey->comment)) !!}</dd>
             </dl>
         </div>
     </div>

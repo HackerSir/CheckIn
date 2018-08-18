@@ -21,11 +21,11 @@
         <div class="card-body">
             <h1>學生資料</h1>
             <dl class="row" style="font-size: 120%">
-                <dt class="col-4 col-md-2">學號(NID)</dt>
-                <dd class="col-8 col-md-10">{{ $studentSurvey->student->nid }}</dd>
+                <dt class="col-md-4">學號(NID)</dt>
+                <dd class="col-md-8">{{ $studentSurvey->student->nid }}</dd>
 
-                <dt class="col-4 col-md-2">姓名</dt>
-                <dd class="col-8 col-md-10">
+                <dt class="col-md-4">姓名</dt>
+                <dd class="col-md-8">
                     @if(Laratrust::can('student.manage'))
                         <a href="{{ route('student.show', $studentSurvey->student) }}">
                             {{ $studentSurvey->student->name }}
@@ -35,23 +35,23 @@
                     @endif
                 </dd>
 
-                <dt class="col-4 col-md-2">班級</dt>
-                <dd class="col-8 col-md-10">{{ $studentSurvey->student->class }}</dd>
+                <dt class="col-md-4">班級</dt>
+                <dd class="col-md-8">{{ $studentSurvey->student->class }}</dd>
 
-                <dt class="col-4 col-md-2">科系</dt>
-                <dd class="col-8 col-md-10">{{ $studentSurvey->student->unit_name }}</dd>
+                <dt class="col-md-4">科系</dt>
+                <dd class="col-md-8">{{ $studentSurvey->student->unit_name }}</dd>
 
-                <dt class="col-4 col-md-2">學院</dt>
-                <dd class="col-8 col-md-10">{{ $studentSurvey->student->dept_name }}</dd>
+                <dt class="col-md-4">學院</dt>
+                <dd class="col-md-8">{{ $studentSurvey->student->dept_name }}</dd>
 
-                <dt class="col-4 col-md-2">入學年度</dt>
-                <dd class="col-8 col-md-10">{{ $studentSurvey->student->in_year }}</dd>
+                <dt class="col-md-4">入學年度</dt>
+                <dd class="col-md-8">{{ $studentSurvey->student->in_year }}</dd>
 
-                <dt class="col-4 col-md-2">性別</dt>
-                <dd class="col-8 col-md-10">{{ $studentSurvey->student->gender }}</dd>
+                <dt class="col-md-4">性別</dt>
+                <dd class="col-md-8">{{ $studentSurvey->student->gender }}</dd>
 
-                <dt class="col-4 col-md-2">新生</dt>
-                <dd class="col-8 col-md-10">
+                <dt class="col-md-4">新生</dt>
+                <dd class="col-md-8">
                     @if($studentSurvey->student->is_freshman)
                         <i class="fa fa-check fa-2x text-success" aria-hidden="true"></i>
                     @else
@@ -64,11 +64,11 @@
 
             <h1>問卷</h1>
             <dl class="row" style="font-size: 120%">
-                <dt class="col-4 col-md-2">星等評價</dt>
-                <dd class="col-8 col-md-10">{{ $studentSurvey->stars }}</dd>
+                <dt class="col-md-4">對於平台的滿意度</dt>
+                <dd class="col-md-8">{{ $studentSurvey->stars }}</dd>
 
-                <dt class="col-4 col-md-2">意見與建議</dt>
-                <dd class="col-8 col-md-10">{!! nl2br(e($studentSurvey->comment)) !!}</dd>
+                <dt class="col-md-4">對於平台意見與建議</dt>
+                <dd class="col-md-8">{!! nl2br(e($studentSurvey->comment)) !!}</dd>
             </dl>
         </div>
     </div>
