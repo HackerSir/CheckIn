@@ -8,7 +8,7 @@
             </div>
             <div class="d-flex flex-column flex-grow-1" style="min-height: 160px">
                 <h3 class="card-title">
-                    <a :href="club_url">{{ club.name }}</a>
+                    <a :href="club_url" class="align-middle">{{ club.name }}</a>
                     <span class='badge badge-secondary align-middle'
                           :style="{'background-color':club.tag.color, 'font-size': '20px'}"
                           v-if="club.tag.name">
