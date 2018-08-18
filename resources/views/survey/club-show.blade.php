@@ -23,8 +23,8 @@
     <div class="card">
         <div class="card-body">
             <dl class="row" style="font-size: 120%">
-                <dt class="col-sm-4 col-md-2">使用者</dt>
-                <dd class="col-sm-8 col-md-10">
+                <dt class="col-md-4">使用者</dt>
+                <dd class="col-md-8">
                     @if(Laratrust::can('student.manage'))
                         <a href="{{ route('user.show', $clubSurvey->user) }}">
                             {{ $clubSurvey->user->name }}
@@ -33,8 +33,8 @@
                         {{ $clubSurvey->user->name }}
                     @endif
                 </dd>
-                <dt class="col-4 col-md-2">社團</dt>
-                <dd class="col-8 col-md-10">
+                <dt class="col-md-4">社團</dt>
+                <dd class="col-md-8">
                     @if(Laratrust::can('club.manage'))
                         <a href="{{ route('clubs.show', $clubSurvey->club) }}">
                             {!! $clubSurvey->club->display_name !!}
@@ -46,11 +46,11 @@
             </dl>
             <hr/>
             <dl class="row" style="font-size: 120%">
-                <dt class="col-sm-4 col-md-2">星等評價</dt>
-                <dd class="col-sm-8 col-md-10">{{ $clubSurvey->stars }}</dd>
+                <dt class="col-md-4">對於平台的滿意度</dt>
+                <dd class="col-md-8">{{ $clubSurvey->stars }}</dd>
 
-                <dt class="col-sm-4 col-md-2">意見與建議</dt>
-                <dd class="col-sm-8 col-md-10">{!! nl2br(e($clubSurvey->comment)) !!}</dd>
+                <dt class="col-md-4">對於平台意見與建議</dt>
+                <dd class="col-md-8">{!! nl2br(e($clubSurvey->comment)) !!}</dd>
             </dl>
         </div>
     </div>
