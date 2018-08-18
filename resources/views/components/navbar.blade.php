@@ -1,10 +1,12 @@
 <nav class="navbar navbar-expand-xl fixed-top navbar-light bg-light">
-    <div class="container">
+    <div class="container" style="justify-content: left">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <a class="navbar-brand" href="{{ url('/') }}">{{ config('app.cht_name') }}</a>
+        <a class="navbar-brand" style="margin-left: 1rem" href="{{ url('/') }}">
+            {{ config('app.cht_name') }}
+        </a>
 
         {{-- Item 會由 LaravelMenu 生成 --}}
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
