@@ -16,6 +16,11 @@
                         'style' => 'color: #636c72;',
                     ]) !!}
             </li>
+            <li class="breadcrumb-item" style="color: #636c72">
+                {!! link_to_route('development-team', '開發團隊', [], [
+                        'style' => 'color: #636c72;',
+                    ]) !!}
+            </li>
             @if(Auth::guest())
                 <li class="breadcrumb-item">
                     {!! link_to_route('login', '管理員登入', [], [

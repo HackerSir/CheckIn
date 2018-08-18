@@ -33,6 +33,9 @@ Route::view('terms', 'misc.terms')->name('terms');
 //常見問題
 Route::view('faq', 'misc.faq')->name('faq');
 
+//開發團隊
+Route::view('development-team', 'misc.development-team')->name('development-team');
+
 //會員（須完成信箱驗證）
 Route::group(['middleware' => ['auth', 'email']], function () {
     //會員管理
