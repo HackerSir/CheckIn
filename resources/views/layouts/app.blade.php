@@ -73,6 +73,13 @@
             font-family: Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
             font-size: 120%;
         }
+
+        @media (max-width: 1200px) {
+            .navbar-collapse {
+                max-height: calc(100vh - 56px);
+                overflow-y: auto;
+            }
+        }
     </style>
     @yield('css')
 </head>
@@ -223,7 +230,7 @@
         DataTable.ext.errMode = 'throw';
     })(jQuery, jQuery.fn.dataTable);
     // select2 預設設定
-    $.fn.select2.defaults.set( "theme", "bootstrap4");
+    $.fn.select2.defaults.set("theme", "bootstrap4");
 </script>
 @yield('js')
 
