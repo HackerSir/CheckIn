@@ -26,10 +26,10 @@
             <strong>抱歉！</strong>雖然您已使用NID順利登入，但由於您並非本學期在校生，因此無法參與集點活動。
         </div>
     @endif
-    <div class="jumbotron mt-3">
-        <h1>{{ config('app.cht_name') }}</h1>
+    <div class="jumbotron">
+        <h1 class="font-weight-bold">{{ config('app.cht_name') }}</h1>
         <h3>2018 逢甲社團博覽會集點打卡</h3>
-        <a href="{{ route('oauth.index') }}" class="btn btn-primary btn-lg" title="Let's GO!!">GO!</a>
+        <a href="{{ route('oauth.index') }}" class="btn btn-primary btn-lg">開始使用<i class="fas fa-arrow-alt-circle-right ml-1"></i></a>
     </div>
     <div class="row mt-3 pb-3">
         <div class="col-md-4">
