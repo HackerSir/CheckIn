@@ -6,24 +6,26 @@
 .starrating > label:before {
     content: "\f005"; /* Star */
     margin: 2px;
-    font-size: 8vw;
+    font-size: 3rem;
     font-family: 'Font Awesome 5 Free';
-    font-weight: 900;
+    font-weight: 200;
     display: inline-block;
 }
 
-.starrating > label {
-    color: #222222; /* Start color when not clicked */
-}
-
 /* Set yellow color when star checked */
-.starrating > input:checked ~ label {
+.starrating > input:checked ~ label:before {
+    content: "\f005"; /* Star */
     color: #ffca08;
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 900;
 }
 
 /* Set yellow color when star hover */
-.starrating > input:hover ~ label {
+.starrating > input:hover ~ label:before {
+    content: "\f005"; /* Star */
     color: #ffca08;
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 900;
 }
 
 
