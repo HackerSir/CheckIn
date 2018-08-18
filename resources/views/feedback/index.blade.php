@@ -13,28 +13,26 @@
 @endsection
 
 @section('main_content')
-    <div class="mt-3 pb-3">
-        @php
-            $feedbackCreateExpiredAt = new \Carbon\Carbon(Setting::get('feedback_create_expired_at'));
-            $feedbackDownloadExpiredAt = new \Carbon\Carbon(Setting::get('feedback_download_expired_at'));
-        @endphp
-        <div class="alert alert-warning">
-            填寫截止時間：{{ $feedbackCreateExpiredAt }}（{{ $feedbackCreateExpiredAt->diffForHumans() }}）<br/>
-            檢視截止時間：{{ $feedbackDownloadExpiredAt }}（{{ $feedbackDownloadExpiredAt->diffForHumans() }}）
+    @php
+        $feedbackCreateExpiredAt = new \Carbon\Carbon(Setting::get('feedback_create_expired_at'));
+        $feedbackDownloadExpiredAt = new \Carbon\Carbon(Setting::get('feedback_download_expired_at'));
+    @endphp
+    <div class="alert alert-warning my-1">
+        填寫截止時間：{{ $feedbackCreateExpiredAt }}（{{ $feedbackCreateExpiredAt->diffForHumans() }}）<br/>
+        檢視截止時間：{{ $feedbackDownloadExpiredAt }}（{{ $feedbackDownloadExpiredAt->diffForHumans() }}）
+    </div>
+    @if(\Laratrust::can('feedback.manage') || $user->club)
+        <div class="alert alert-info my-1">
+            {{ optional($user->club)->name }}
+            <ul class="mb-0">
+                <li>回饋資料：{{ $feedbackCount }}（約佔打卡人數 {{ $countProportion }}%）</li>
+                <li>打卡人數：{{ $recordCount }}</li>
+            </ul>
         </div>
-        @if(\Laratrust::can('feedback.manage') || $user->club)
-            <div class="alert alert-info">
-                {{ optional($user->club)->name }}
-                <ul>
-                    <li>回饋資料：{{ $feedbackCount }}（約佔打卡人數 {{ $countProportion }}%）</li>
-                    <li>打卡人數：{{ $recordCount }}</li>
-                </ul>
-            </div>
-        @endif
-        <div class="card mt-1">
-            <div class="card-body">
-                {!! $dataTable->table() !!}
-            </div>
+    @endif
+    <div class="card">
+        <div class="card-body">
+            {!! $dataTable->table() !!}
         </div>
     </div>
 @endsection
