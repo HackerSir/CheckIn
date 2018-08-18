@@ -220,6 +220,7 @@
                 }
             }
         });
+        DataTable.ext.errMode = 'throw';
     })(jQuery, jQuery.fn.dataTable);
     // select2 預設設定
     $.fn.select2.defaults.set( "theme", "bootstrap4");
