@@ -13,8 +13,8 @@
 @story('deploy')
     clone_repository
     run_composer
-    yarn_install
     update_symlink_env
+    yarn_install
     artisan_migrate
     update_symlinks_other
     cache_config_and_route
