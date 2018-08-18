@@ -106,7 +106,7 @@
                             ）</span>
                     @endif
                 </dd>
-                <dt class="col-md-2">填寫問卷</dt>
+                <dt class="col-md-2">填寫平台問卷</dt>
                 <dd class="col-md-10">
                     @if($student->studentSurvey)
                         <span class="text-success">
