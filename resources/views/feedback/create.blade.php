@@ -1,6 +1,6 @@
 @extends('layouts.base')
 
-@section('title', '新增回饋資料')
+@section('title', '填寫回饋資料')
 
 @section('buttons')
     <a href="{{ Url::previous() }}" class="btn btn-secondary">
@@ -9,25 +9,38 @@
 @endsection
 
 @section('main_content')
-    <div class="card">
-        <div class="card-body">
-            請注意：
-            <ul>
-                <li>僅能於每個社團填寫一次</li>
-                <li>填寫後，無法修改或刪除</li>
-                <li>填寫後，該社團將取得您的<code>學號</code>、<code>姓名</code>、<code>班級</code>、<code>科系</code>、<code>學院</code>、<code>入學年度</code>、<code>性別</code>，
-                    以及您所填寫的<code>電話</code>、<code>信箱</code>、<code>訊息</code></li>
-                <li>在不同社團，可填寫不同聯絡資訊</li>
-                <li><code>電話</code>與<code>信箱</code>將預先填入上次所填之內容，可於送出前修改</li>
-            </ul>
-        </div>
+    <div class="alert alert-warning" role="alert">
+        請注意：
+        <ul style="padding-left: 20px">
+            <li>每個社團只能填寫一次回饋資料，送出後無法修改或刪除</li>
+            <li>
+                送出回饋資料後，該社團可以取得您以下的資訊：
+                <ul>
+                    <li>學號</li>
+                    <li>姓名</li>
+                    <li>班級</li>
+                    <li>科系</li>
+                    <li>學院</li>
+                    <li>入學年度</li>
+                    <li>性別</li>
+                </ul>
+                以及您下方填寫的資料
+                <ul>
+                    <li>電話</li>
+                    <li>信箱</li>
+                    <li>給社團的意見</li>
+                </ul>
+            </li>
+            <li>不同社團的回饋資料可以填寫不同地聯絡資訊</li>
+            <li>系統會自動填入之前填寫的<strong>電話</strong>與<strong>信箱</strong>，可於送出前修改</li>
+        </ul>
     </div>
     <div class="card mt-1">
         <div class="card-body">
             {{ bs()->openForm('post', route('feedback.store', $club)) }}
 
             <div class="form-group row">
-                <label class="col-md-2 col-form-label">學生</label>
+                <label class="col-md-2 col-form-label">基本資料</label>
                 <div class="col-md-10">
                     <p class="form-control-plaintext">
                         {{ $user->student->display_name }}
@@ -45,11 +58,11 @@
 
             {{ bs()->formGroup(bs()->text('phone', $lastFeedback->phone ?? null))->label('電話')->showAsRow() }}
             {{ bs()->formGroup(bs()->text('email', $lastFeedback->email ?? null))->label('信箱')->showAsRow() }}
-            {{ bs()->formGroup(bs()->text('message'))->label('附加訊息')->showAsRow() }}
+            {{ bs()->formGroup(bs()->text('message'))->label('給社團的意見')->showAsRow() }}
 
             <div class="row">
                 <div class="mx-auto">
-                    {{ bs()->submit('確認', 'primary')->prependChildren(fa()->icon('check')->addClass('mr-2')) }}
+                    {{ bs()->submit('送出', 'primary')->prependChildren(fa()->icon('check')->addClass('mr-2')) }}
                 </div>
             </div>
             {{ bs()->closeForm() }}
