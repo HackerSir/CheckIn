@@ -1,6 +1,6 @@
 @extends('layouts.base')
 
-@section('title', '問卷')
+@section('title', '平台問卷')
 
 @section('main_content')
     <div class="alert alert-info">
