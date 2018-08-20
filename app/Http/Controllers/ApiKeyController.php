@@ -43,7 +43,7 @@ class ApiKeyController extends Controller
 
         ApiKey::create($request->all());
 
-        return redirect()->route('api-key.index')->with('global', 'API Key已新增');
+        return redirect()->route('api-key.index')->with('success', 'API Key已新增');
     }
 
     /**
@@ -57,6 +57,6 @@ class ApiKeyController extends Controller
     {
         $apiKey->delete();
 
-        return redirect()->route('api-key.index')->with('global', 'API Key已刪除');
+        return redirect()->route('api-key.index')->with('success', 'API Key已刪除');
     }
 }

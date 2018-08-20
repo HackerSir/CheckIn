@@ -52,6 +52,6 @@ class PasswordController extends Controller
             'password' => bcrypt($request->input('new_password')),
         ]);
 
-        return redirect()->route('profile')->with('global', '密碼修改完成。');
+        return redirect()->route('profile')->with('success', '密碼修改完成。');
     }
 }

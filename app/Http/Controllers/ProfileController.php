@@ -48,6 +48,6 @@ class ProfileController extends Controller
             'name' => $request->input('name'),
         ]);
 
-        return redirect()->route('profile')->with('global', '資料修改完成。');
+        return redirect()->route('profile')->with('success', '資料修改完成。');
     }
 }

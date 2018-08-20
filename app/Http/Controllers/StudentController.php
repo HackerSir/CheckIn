@@ -109,7 +109,7 @@ class StudentController extends Controller
             'student'  => $student,
         ]);
 
-        return redirect()->route('student.index')->with('global', '學生已新增');
+        return redirect()->route('student.index')->with('success', '學生已新增');
     }
 
     /**
@@ -175,7 +175,7 @@ class StudentController extends Controller
             'consider_as_freshman' => $request->exists('consider_as_freshman'),
         ]);
 
-        return redirect()->route('student.show', $student)->with('global', '學生資料已更新');
+        return redirect()->route('student.show', $student)->with('success', '學生資料已更新');
     }
 
     /**
@@ -200,6 +200,6 @@ class StudentController extends Controller
             'gender'    => $stuInfo['stu_sex'],
         ]);
 
-        return redirect()->route('student.index')->with('global', '學生已更新');
+        return redirect()->route('student.index')->with('success', '學生已更新');
     }
 }

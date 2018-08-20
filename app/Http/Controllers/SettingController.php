@@ -38,6 +38,6 @@ class SettingController extends Controller
 
         \Setting::save();
 
-        return redirect()->route('setting.edit')->with('global', '設定已更新');
+        return redirect()->route('setting.edit')->with('success', '設定已更新');
     }
 }

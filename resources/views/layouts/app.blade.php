@@ -163,8 +163,8 @@
                 cancel: 'ajs-cancel'
             }
         };
-        @if(session('global'))
-        alertify.notify('{{ session('global') }}', 'success', 5);
+        @if(session('success'))
+        alertify.notify('{{ session('success') }}', 'success', 5);
         @endif
         @if(session('warning'))
         alertify.notify('{{ session('warning') }}', 'warning', 5);

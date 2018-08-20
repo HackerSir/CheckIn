@@ -56,7 +56,7 @@ class RoleController extends Controller
         ]);
         $role->permissions()->sync($request->input('permissions') ?: []);
 
-        return redirect()->route('role.index')->with('global', '角色已建立');
+        return redirect()->route('role.index')->with('success', '角色已建立');
     }
 
     /**
@@ -101,7 +101,7 @@ class RoleController extends Controller
             $role->permissions()->sync($request->input('permissions') ?: []);
         }
 
-        return redirect()->route('role.index')->with('global', '角色已更新');
+        return redirect()->route('role.index')->with('success', '角色已更新');
     }
 
     /**
@@ -118,6 +118,6 @@ class RoleController extends Controller
         }
         $role->delete();
 
-        return redirect()->route('role.index')->with('global', '角色已刪除');
+        return redirect()->route('role.index')->with('success', '角色已刪除');
     }
 }

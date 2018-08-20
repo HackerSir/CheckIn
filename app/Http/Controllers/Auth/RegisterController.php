@@ -114,7 +114,7 @@ class RegisterController extends Controller
         $this->generateConfirmCodeAndSendConfirmMail($user);
 
         // 回傳結果
-        return $result->with('global', '註冊完成，請至信箱收取驗證信件。');
+        return $result->with('success', '註冊完成，請至信箱收取驗證信件。');
     }
 
     /**
@@ -136,7 +136,7 @@ class RegisterController extends Controller
             'confirm_at'   => Carbon::now(),
         ]);
 
-        return redirect()->route('index')->with('global', '信箱驗證完成。');
+        return redirect()->route('index')->with('success', '信箱驗證完成。');
     }
 
     /**
@@ -173,7 +173,7 @@ class RegisterController extends Controller
         // 發送驗證信件
         $this->generateConfirmCodeAndSendConfirmMail($user);
 
-        return redirect()->route('index')->with('global', '驗證信件已重新發送。');
+        return redirect()->route('index')->with('success', '驗證信件已重新發送。');
     }
 
     /**

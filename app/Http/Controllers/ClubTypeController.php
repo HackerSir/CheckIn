@@ -48,7 +48,7 @@ class ClubTypeController extends Controller
             'is_counted' => $request->has('is_counted'),
         ]));
 
-        return redirect()->route('club-type.index')->with('global', '社團類型已新增');
+        return redirect()->route('club-type.index')->with('success', '社團類型已新增');
     }
 
     /**
@@ -78,7 +78,7 @@ class ClubTypeController extends Controller
             ]);
         }
 
-        return redirect()->route('club-type.index')->with('global', '預設社團類型已建立');
+        return redirect()->route('club-type.index')->with('success', '預設社團類型已建立');
     }
 
     /**
@@ -111,7 +111,7 @@ class ClubTypeController extends Controller
             'is_counted' => $request->has('is_counted'),
         ]));
 
-        return redirect()->route('club-type.index')->with('global', '社團類型已更新');
+        return redirect()->route('club-type.index')->with('success', '社團類型已更新');
     }
 
     /**
@@ -125,6 +125,6 @@ class ClubTypeController extends Controller
     {
         $clubType->delete();
 
-        return redirect()->route('club-type.index')->with('global', '社團類型已刪除');
+        return redirect()->route('club-type.index')->with('success', '社團類型已刪除');
     }
 }

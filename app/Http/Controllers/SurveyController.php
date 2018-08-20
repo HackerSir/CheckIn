@@ -76,7 +76,7 @@ class SurveyController extends Controller
             'student_id' => $user->student->id,
         ], $request->all());
 
-        return redirect()->route('survey.student.show')->with('global', '問卷內容已更新');
+        return redirect()->route('survey.student.show')->with('success', '問卷內容已更新');
     }
 
     /**
@@ -148,7 +148,7 @@ class SurveyController extends Controller
             'club_id' => $user->club->id,
         ], $request->all());
 
-        return redirect()->route('survey.club.show')->with('global', '問卷內容已更新');
+        return redirect()->route('survey.club.show')->with('success', '問卷內容已更新');
     }
 
     /**

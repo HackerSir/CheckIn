@@ -49,7 +49,7 @@ class BoothController extends Controller
 
         $booth = Booth::create($request->all());
 
-        return redirect()->route('booth.show', $booth)->with('global', '攤位已新增');
+        return redirect()->route('booth.show', $booth)->with('success', '攤位已新增');
     }
 
     /**
@@ -92,7 +92,7 @@ class BoothController extends Controller
 
         $booth->update($request->all());
 
-        return redirect()->route('booth.show', $booth)->with('global', '攤位已更新');
+        return redirect()->route('booth.show', $booth)->with('success', '攤位已更新');
     }
 
     /**
@@ -106,7 +106,7 @@ class BoothController extends Controller
     {
         $booth->delete();
 
-        return redirect()->route('booth.index')->with('global', '攤位已刪除');
+        return redirect()->route('booth.index')->with('success', '攤位已刪除');
     }
 
     public function getImport()
@@ -172,7 +172,7 @@ class BoothController extends Controller
             }
         }
 
-        return redirect()->route('booth.index')->with('global', "匯入完成(成功:{$successCount}/跳過:{$skipCount})");
+        return redirect()->route('booth.index')->with('success', "匯入完成(成功:{$successCount}/跳過:{$skipCount})");
     }
 
     public function downloadImportSample()

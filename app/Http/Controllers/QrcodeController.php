@@ -82,6 +82,6 @@ class QrcodeController extends Controller
         //綁定
         $student->qrcode()->save($qrcode);
 
-        return back()->with('global', '已綁定');
+        return back()->with('success', '已綁定');
     }
 }
