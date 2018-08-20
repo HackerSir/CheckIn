@@ -30,7 +30,7 @@
                 <dt class="col-md-2">電話</dt>
                 <dd class="col-md-10">
                     @if(!$feedback->phone)
-                        <span class="text-muted">(未填寫)</span>
+                        <span class="text-muted">（未填寫）</span>
                     @else
                         {{ $feedback->phone }}
                     @endif
@@ -39,7 +39,7 @@
                 <dt class="col-md-2">信箱</dt>
                 <dd class="col-md-10">
                     @if(!$feedback->email)
-                        <span class="text-muted">(未填寫)</span>
+                        <span class="text-muted">（未填寫）</span>
                     @else
                         {{ $feedback->email }}
                     @endif
@@ -48,7 +48,7 @@
                 <dt class="col-md-2">給社團的意見</dt>
                 <dd class="col-md-10">
                     @if(!$feedback->message)
-                        <span class="text-muted">(未填寫)</span>
+                        <span class="text-muted">（未填寫）</span>
                     @else
                         {{ $feedback->message }}
                     @endif
