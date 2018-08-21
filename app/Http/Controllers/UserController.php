@@ -94,7 +94,7 @@ class UserController extends Controller
         }
 
         return redirect()->route('user.show', $user)
-            ->with('global', '資料修改完成。');
+            ->with('success', '資料修改完成。');
     }
 
     /**
@@ -113,6 +113,6 @@ class UserController extends Controller
         $user->delete();
 
         return redirect()->route('user.index')
-            ->with('global', '會員已刪除。');
+            ->with('success', '會員已刪除。');
     }
 }

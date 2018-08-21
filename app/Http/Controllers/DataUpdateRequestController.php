@@ -85,6 +85,6 @@ class DataUpdateRequestController extends Controller
             'review_comment' => $request->get('review_comment'),
         ]);
 
-        return redirect()->route('data-update-request.show', $dataUpdateRequest)->with('global', '審核完成');
+        return redirect()->route('data-update-request.show', $dataUpdateRequest)->with('success', '審核完成');
     }
 }

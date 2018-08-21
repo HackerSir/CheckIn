@@ -79,7 +79,7 @@ class ClubController extends Controller
         $attachUsers = User::whereDoesntHave('club')->whereIn('id', $attachUserIds)->get();
         $club->users()->saveMany($attachUsers);
 
-        return redirect()->route('clubs.show', $club)->with('global', '社團已新增');
+        return redirect()->route('clubs.show', $club)->with('success', '社團已新增');
     }
 
     /**
@@ -160,7 +160,7 @@ class ClubController extends Controller
         $attachUsers = User::whereDoesntHave('club')->whereIn('id', $attachUserIds)->get();
         $club->users()->saveMany($attachUsers);
 
-        return redirect()->route('clubs.show', $club)->with('global', '社團已更新');
+        return redirect()->route('clubs.show', $club)->with('success', '社團已更新');
     }
 
     /**
@@ -174,7 +174,7 @@ class ClubController extends Controller
     {
         $club->delete();
 
-        return redirect()->route('club.index')->with('global', '社團已刪除');
+        return redirect()->route('club.index')->with('success', '社團已刪除');
     }
 
     public function getImport()
@@ -302,7 +302,7 @@ class ClubController extends Controller
         }
 
         return redirect()->route('club.index')
-            ->with('global', "匯入完成(成功:{$successCount}/跳過:{$skipCount}/NID無效:{$invalidNidCount})");
+            ->with('success', "匯入完成(成功:{$successCount}/跳過:{$skipCount}/NID無效:{$invalidNidCount})");
     }
 
     public function downloadImportSample()

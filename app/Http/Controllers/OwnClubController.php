@@ -71,7 +71,7 @@ class OwnClubController extends Controller
             $club->imgurImage()->save($imgurImage);
         }
 
-        return redirect()->route('clubs.show', $club)->with('global', '社團已更新');
+        return redirect()->route('clubs.show', $club)->with('success', '社團已更新');
     }
 
     /**
@@ -157,7 +157,7 @@ class OwnClubController extends Controller
             'url'                  => $request->get('url'),
         ]);
 
-        return redirect()->route('clubs.show', $club)->with('global', '申請已送出');
+        return redirect()->route('clubs.show', $club)->with('success', '申請已送出');
     }
 
     /**

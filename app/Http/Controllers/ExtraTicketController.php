@@ -51,7 +51,7 @@ class ExtraTicketController extends Controller
             'nid' => strtoupper($request->get('nid')),
         ]));
 
-        return redirect()->route('extra-ticket.index')->with('global', '工作人員抽獎編號已新增');
+        return redirect()->route('extra-ticket.index')->with('success', '工作人員抽獎編號已新增');
     }
 
     /**
@@ -84,7 +84,7 @@ class ExtraTicketController extends Controller
             'nid' => strtoupper($request->get('nid')),
         ]));
 
-        return redirect()->route('extra-ticket.index')->with('global', '工作人員抽獎編號已更新');
+        return redirect()->route('extra-ticket.index')->with('success', '工作人員抽獎編號已更新');
     }
 
     /**
@@ -98,14 +98,14 @@ class ExtraTicketController extends Controller
     {
         $extraTicket->delete();
 
-        return redirect()->route('extra-ticket.index')->with('global', '工作人員抽獎編號已刪除');
+        return redirect()->route('extra-ticket.index')->with('success', '工作人員抽獎編號已刪除');
     }
 
     public function destroyAll()
     {
         ExtraTicket::query()->delete();
 
-        return redirect()->route('extra-ticket.index')->with('global', '工作人員抽獎編號已全數刪除');
+        return redirect()->route('extra-ticket.index')->with('success', '工作人員抽獎編號已全數刪除');
     }
 
     public function ticket()
@@ -205,7 +205,7 @@ class ExtraTicketController extends Controller
             }
         }
 
-        return redirect()->route('extra-ticket.index')->with('global', "匯入完成(成功:{$successCount}/跳過:{$skipCount})");
+        return redirect()->route('extra-ticket.index')->with('success', "匯入完成(成功:{$successCount}/跳過:{$skipCount})");
     }
 
     public function downloadImportSample()
