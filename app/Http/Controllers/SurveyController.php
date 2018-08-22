@@ -40,7 +40,7 @@ class SurveyController extends Controller
             return redirect()->back()->with('warning', '已超過填寫時間');
         }
         if (!$user->student->has_enough_counted_records) {
-            return redirect()->route('index')->with('warning', '請先完成集點任務');
+            return redirect()->route('index')->with('warning', '請先完成打卡集點');
         }
         $studentSurvey = $user->student->studentSurvey;
 
@@ -65,7 +65,7 @@ class SurveyController extends Controller
             return redirect()->route('survey.index')->with('warning', '已超過填寫時間');
         }
         if (!$user->student->has_enough_counted_records) {
-            return redirect()->route('index')->with('warning', '請先完成集點任務');
+            return redirect()->route('index')->with('warning', '請先完成打卡集點');
         }
 
         $this->validate($request, [
