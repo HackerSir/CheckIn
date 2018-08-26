@@ -34,15 +34,14 @@
             <div class="col-12 col-lg-6 mt-1" v-for="club in clubs">
                 <club-card :club="club"></club-card>
             </div>
-            <div class="col-12 mt-1" v-if="(selectedClubType || searchKeyword) && clubs.length === 0 && !isFetching">
+        </div>
+        <infinite-loading @infinite="infiniteHandler" ref="infiniteLoading">
+            <div slot="no-results">
                 <div class="alert alert-danger">
                     <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
                     <span v-if="selectedClubType">在「{{ clubTypes[selectedClubType] }}」類型中</span>找不到相關社團
                 </div>
             </div>
-        </div>
-        <infinite-loading @infinite="infiniteHandler" ref="infiniteLoading">
-            <span slot="no-results"></span>
             <span slot="no-more">
                 ヽ(ﾟ∀ﾟ*)ノ
             </span>
