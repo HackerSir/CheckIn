@@ -160,7 +160,7 @@ class ApiController extends Controller
 
         //取得社團
         /** @var Club[]|Collection $clubs */
-        $clubs = $clubQuery->get();
+        $clubs = $clubQuery->paginate(20);
         //整理資料
         $result = [];
         foreach ($clubs as $club) {

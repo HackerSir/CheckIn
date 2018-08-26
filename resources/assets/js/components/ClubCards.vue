@@ -8,7 +8,8 @@
                     <option :value="null">全部</option>
                     <option :value="id" v-for="(name, id) in clubTypes">{{ name }}</option>
                 </select>
-                <button class="btn btn-secondary" type="button" data-toggle="collapse" data-target="#clubTypeDescription" aria-expanded="false" aria-controls="collapseExample">
+                <button class="btn btn-secondary" type="button" data-toggle="collapse"
+                        data-target="#clubTypeDescription" aria-expanded="false" aria-controls="collapseExample">
                     <i class="fas fa-question"></i>
                 </button>
             </div>
@@ -33,17 +34,28 @@
             <div class="col-12 col-lg-6 mt-1" v-for="club in clubs">
                 <club-card :club="club"></club-card>
             </div>
-            <div class="col-12 mt-1" v-if="(selectedClubType || searchKeyword) && clubs.length === 0">
+            <div class="col-12 mt-1" v-if="(selectedClubType || searchKeyword) && clubs.length === 0 && !isFetching">
                 <div class="alert alert-danger">
                     <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
                     <span v-if="selectedClubType">在「{{ clubTypes[selectedClubType] }}」類型中</span>找不到相關社團
                 </div>
             </div>
         </div>
+        <infinite-loading @infinite="infiniteHandler" ref="infiniteLoading">
+            <span slot="no-results"></span>
+            <span slot="no-more">
+                ヽ(ﾟ∀ﾟ*)ノ
+            </span>
+            <span slot="spinner">
+                <i class="fa fa-spinner fa-pulse fa-fw fa-3x mt-3" aria-hidden="true"></i>
+            </span>
+        </infinite-loading>
     </div>
 </template>
 
 <script>
+    import InfiniteLoading from 'vue-infinite-loading';
+
     export default {
         mounted() {
             this.$nextTick(function () {
@@ -57,7 +69,8 @@
                 clubTypes: [],
                 clubs: [],
                 isTypingKeyword: false,
-                isFetching: false
+                isFetching: false,
+                itemPerPage: 20
             }
         },
         computed: {
@@ -72,6 +85,38 @@
             }
         },
         methods: {
+            infiniteHandler($state) {
+                setTimeout(() => {
+                    this.isFetching = true;
+                    let nextPage = Math.ceil(this.clubs.length / this.itemPerPage) + 1;
+                    //社團清單
+                    let club_list_url = Laravel.baseUrl + '/api/club-list?page=' + nextPage;
+                    axios.post(club_list_url, {
+                        clubType: this.selectedClubType,
+                        keyword: this.searchKeyword
+                    }).then(response => {
+                        if (response.data.length) {
+                            this.clubs = this.clubs.concat(response.data);
+                            $state.loaded();
+                            if (response.data.length < this.itemPerPage) {
+                                //該頁項目不滿一頁，表示沒下一頁
+                                $state.complete();
+                            }
+                        } else {
+                            //該頁無內容，表示已完成
+                            $state.complete();
+                        }
+                        this.isFetching = false;
+                    });
+                }, 200);
+            },
+            changeFilter() {
+                this.isFetching = true;
+                this.clubs = [];
+                this.$nextTick(() => {
+                    this.$refs.infiniteLoading.$emit('$InfiniteLoading:reset');
+                });
+            },
             fetch: function () {
                 this.isFetching = true;
                 //社團類型
@@ -79,18 +124,9 @@
                 axios.post(club_type_list_url).then(response => {
                     this.clubTypes = response.data;
                 });
-                //社團清單
-                let club_list_url = Laravel.baseUrl + '/api/club-list';
-                axios.post(club_list_url, {
-                    clubType: this.selectedClubType,
-                    keyword: this.searchKeyword
-                }).then(response => {
-                    this.clubs = response.data;
-                    this.isFetching = false;
-                });
             },
             onSelectChange: function () {
-                this.fetch();
+                this.changeFilter();
             },
             onKeywordChange: function () {
                 this.isTypingKeyword = true;
@@ -98,8 +134,11 @@
             },
             delayFetch: _.debounce(function () {
                 this.isTypingKeyword = false;
-                this.fetch();
+                this.changeFilter();
             }, 1000)
+        },
+        components: {
+            InfiniteLoading,
         }
     }
 </script>
