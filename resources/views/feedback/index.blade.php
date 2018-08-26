@@ -3,6 +3,11 @@
 @section('title', '回饋資料')
 
 @section('buttons')
+    @if($user->student)
+        <a href="{{ route('feedback.my') }}" class="btn btn-secondary">
+            <i class="far fa-comment"></i> 我的回饋資料
+        </a>
+    @endif
     @if(\Laratrust::can('feedback.manage') || $user->club)
         {!! Form::open(['route' => ['export.feedback'], 'style' => 'display: inline']) !!}
         <button type="submit" class="btn btn-primary">

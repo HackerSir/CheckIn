@@ -12,14 +12,19 @@
 
 @section('buttons')
     @php($user = auth()->user())
-    @if(!(!$user || !$user->student))
+    @if(optional($user)->student)
         <a href="{{ route('index') }}" class="btn btn-secondary mb-2">
             <i class="fa fa-arrow-left" aria-hidden="true"></i> QR Code
         </a>
+        <a href="{{ route('feedback.my') }}" class="btn btn-secondary mb-2">
+            <i class="fa fa-arrow-left" aria-hidden="true"></i> 我的回饋資料
+        </a>
     @endif
-    <a href="{{ route('feedback.index') }}" class="btn btn-secondary mb-2">
-        <i class="fa fa-arrow-left" aria-hidden="true"></i> 回饋資料管理
-    </a>
+    @if(Laratrust::can('feedback.manage') || optional($user)->club)
+        <a href="{{ route('feedback.index') }}" class="btn btn-secondary mb-2">
+            <i class="fa fa-arrow-left" aria-hidden="true"></i> 回饋資料管理
+        </a>
+    @endif
 @endsection
 
 @section('main_content')
