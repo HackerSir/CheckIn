@@ -94,11 +94,13 @@
                         clubType: this.selectedClubType,
                         keyword: this.searchKeyword
                     }).then(response => {
-                        if (response.data.length) {
-                            this.clubs = this.clubs.concat(response.data);
+                        let responseBody = response.data;
+                        let clubsData = responseBody.data;
+                        if (clubsData.length) {
+                            this.clubs = this.clubs.concat(clubsData);
                             $state.loaded();
-                            if (response.data.length < this.itemPerPage) {
-                                //該頁項目不滿一頁，表示沒下一頁
+                            if (responseBody.current_page >= responseBody.last_page) {
+                                //沒下一頁
                                 $state.complete();
                             }
                         } else {

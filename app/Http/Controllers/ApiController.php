@@ -162,16 +162,16 @@ class ApiController extends Controller
         $clubQuery->orderBy('id');
 
         //取得社團
-        /** @var Club[]|Collection $clubs */
+        /** @var LengthAwarePaginator|Club[]|Collection $clubs */
         $clubs = $clubQuery->paginate(20);
         //整理資料
-        $result = [];
+        $data = [];
         foreach ($clubs as $club) {
             //取得一個攤位
             /** @var Booth $booth */
             $booth = $club->booths->first();
 
-            $result[] = [
+            $data[] = [
                 'id'      => $club->id,
                 'name'    => $club->name,
                 'image'   => $club->imgurImage ? $club->imgurImage->thumbnail('b') : null,
@@ -186,6 +186,11 @@ class ApiController extends Controller
                 ] : null,
             ];
         }
+        $result = [
+            'current_page' => $clubs->currentPage(),
+            'last_page'    => $clubs->lastPage(),
+            'data'         => $data,
+        ];
 
         return $result;
     }
