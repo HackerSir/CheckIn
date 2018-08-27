@@ -23,7 +23,10 @@ class ApiController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('permission:club.manage')->only(['userList']);
+        $this->middleware('permission:club.manage')->only([
+            'boothList',
+            'userList',
+        ]);
     }
 
     public function boothList(Request $request)
