@@ -163,7 +163,7 @@ class ExtraTicketController extends Controller
                 }
                 //該列資料
                 $rowData = [];
-                for ($col = 0; $col < 4; $col++) {
+                for ($col = 1; $col <= 4; $col++) {
                     $cell = $sheet->getCellByColumnAndRow($col, $row->getRowIndex());
                     $colData = $cell->getValue();
                     if (!($colData instanceof RichText)) {
