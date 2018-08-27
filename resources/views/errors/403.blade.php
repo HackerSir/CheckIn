@@ -287,6 +287,7 @@
         <small>Error 403</small>
     </h1>
     <p class="lead">您的權限不足，無法存取此頁面</p>
+    <p><a href="javascript:history.back();">上一頁</a> | <a href="/">回到首頁</a></p>
 </div>
 
 <footer>

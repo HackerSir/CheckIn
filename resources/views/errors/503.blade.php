@@ -287,6 +287,7 @@
         <small>Error 503</small>
     </h1>
     <p class="lead">服務維修中，馬上回來</p>
+    <p><a href="javascript:history.back();">上一頁</a> | <a href="/">回到首頁</a></p>
 </div>
 
 <footer>

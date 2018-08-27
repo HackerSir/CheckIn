@@ -287,6 +287,7 @@
         <small>Error 502</small>
     </h1>
     <p class="lead">發生未知的錯誤，請稍後再嘗試</p>
+    <p><a href="javascript:history.back();">上一頁</a> | <a href="/">回到首頁</a></p>
 </div>
 
 <footer>
