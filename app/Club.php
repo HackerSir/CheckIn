@@ -60,6 +60,10 @@ class Club extends Model
         'is_counted',
     ];
 
+    protected $hidden = [
+        'extra_info',
+    ];
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo|\Illuminate\Database\Eloquent\Builder
      */

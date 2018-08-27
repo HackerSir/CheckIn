@@ -12,13 +12,9 @@
 
 @section('main_content')
     @include('feedback.time-range')
-    <div class="card">
-        <div class="card-body">
-            {!! $dataTable->table() !!}
-        </div>
-    </div>
+    <my-feedback-list></my-feedback-list>
 @endsection
 
 @section('js')
-    {!! $dataTable->scripts() !!}
+    <script src="{{ asset(mix('/build-js/vue.js')) }}"></script>
 @endsection

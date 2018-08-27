@@ -292,6 +292,7 @@ Route::group(['prefix' => 'api'], function () {
     Route::post('/user-list', 'ApiController@userList')->name('api.user-list');
     Route::post('/club-type-list', 'ApiController@clubTypeList')->name('api.club-type-list');
     Route::post('/club-list', 'ApiController@clubList')->name('api.club-list');
+    Route::post('/my-feedback-list', 'ApiController@myFeedbackList')->name('api.my-feedback-list');
 });
 
 //會員系統

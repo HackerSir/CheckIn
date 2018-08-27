@@ -5,12 +5,15 @@ namespace App\Http\Controllers;
 use App\Booth;
 use App\Club;
 use App\ClubType;
+use App\Feedback;
+use App\Presenters\ContentPresenter;
 use App\User;
 use DB;
 use Gravatar;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Http\Request;
+use Illuminate\Pagination\LengthAwarePaginator;
 use Searchy;
 
 class ApiController extends Controller
@@ -183,6 +186,44 @@ class ApiController extends Controller
                 ] : null,
             ];
         }
+
+        return $result;
+    }
+
+    public function myFeedbackList()
+    {
+        /** @var User $user */
+        $user = auth()->user();
+        $student = $user->student;
+        //非會員或無學生資料
+        if (!$user || !$student) {
+            abort(403);
+        }
+
+        $contentPresenter = app(ContentPresenter::class);
+        /** @var LengthAwarePaginator|Collection|Feedback[] $feedback */
+        $feedback = $student->feedback()->with('club.clubType')->paginate(10);
+        $data = [];
+        foreach ($feedback as $feedbackItem) {
+            $data[] = array_merge(
+                array_only($feedbackItem->toArray(), ['id', 'student_id', 'phone', 'email', 'message']),
+                [
+                    'club' => array_merge(
+                        array_only($feedbackItem->club->toArray(), ['id', 'name']),
+                        [
+                            'display_name' => $feedbackItem->club->display_name,
+                            'extra_info'   => $feedbackItem->club->extra_info
+                                ? $contentPresenter->showContent($feedbackItem->club->extra_info) : null,
+                        ]
+                    ),
+                ]
+            );
+        }
+        $result = [
+            'current_page' => $feedback->currentPage(),
+            'last_page'    => $feedback->lastPage(),
+            'data'         => $data,
+        ];
 
         return $result;
     }
