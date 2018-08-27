@@ -42,15 +42,11 @@ class ApiController extends Controller
                 $query->where('name', 'like', $searchPattern);
             });
         }
-        //總數
-        $totalCount = $BoothsQuery->count();
         //分頁
-        $page = $request->get('page', 1);
         $perPage = 10;
-        $BoothsQuery->limit($perPage)->skip(($page - 1) * $perPage);
         //取得資料
-        /** @var \Illuminate\Database\Eloquent\Collection|User[] $booths */
-        $booths = $BoothsQuery->get();
+        /** @var LengthAwarePaginator|Collection|Booth[] $booths */
+        $booths = $BoothsQuery->paginate($perPage);
         //轉換陣列內容
         $items = [];
         $clubId = $request->get('club');
@@ -71,8 +67,9 @@ class ApiController extends Controller
         }
         //建立JSON
         $json = [
-            'total_count' => $totalCount,
-            'items'       => $items,
+            'current_page' => $booths->currentPage(),
+            'last_page'    => $booths->lastPage(),
+            'items'        => $items,
         ];
 
         return response()->json($json);
@@ -92,15 +89,11 @@ class ApiController extends Controller
                     ->orWhere('email', 'like', $searchPattern);
             });
         }
-        //總數
-        $totalCount = $usersQuery->count();
         //分頁
-        $page = $request->get('page', 1);
         $perPage = 10;
-        $usersQuery->limit($perPage)->skip(($page - 1) * $perPage);
         //取得資料
-        /** @var \Illuminate\Database\Eloquent\Collection|User[] $users */
-        $users = $usersQuery->get();
+        /** @var LengthAwarePaginator|Collection|User[] $users */
+        $users = $usersQuery->paginate($perPage);
         //轉換陣列內容
         $items = [];
         $clubId = $request->get('club');
@@ -123,8 +116,9 @@ class ApiController extends Controller
         }
         //建立JSON
         $json = [
-            'total_count' => $totalCount,
-            'items'       => $items,
+            'current_page' => $users->currentPage(),
+            'last_page'    => $users->lastPage(),
+            'items'        => $items,
         ];
 
         return response()->json($json);

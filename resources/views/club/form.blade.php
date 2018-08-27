@@ -90,7 +90,7 @@
                         return {
                             results: data.items,
                             pagination: {
-                                more: (params.page * 10) < data.total_count
+                                more: params.page < data.last_page
                             }
                         };
                     },
@@ -137,7 +137,7 @@
                         return {
                             results: data.items,
                             pagination: {
-                                more: (params.page * 10) < data.total_count
+                                more: params.page < data.last_page
                             }
                         };
                     },
