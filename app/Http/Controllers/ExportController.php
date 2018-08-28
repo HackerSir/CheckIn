@@ -40,12 +40,12 @@ class ExportController extends Controller
      */
     private function setTitleRow(Worksheet $sheet, array $titles)
     {
-        $col = 0;
+        $col = 1;
         foreach ($titles as $title) {
             $sheet->setCellValueByColumnAndRow($col, 1, $title);
             $col++;
         }
-        $sheet->freezePaneByColumnAndRow(0, 2);
+        $sheet->freezePaneByColumnAndRow(1, 2);
         $styleArray = [
             'borders' => [
                 'bottom' => [
@@ -55,7 +55,7 @@ class ExportController extends Controller
             ],
         ];
 
-        $sheet->getStyleByColumnAndRow(0, 1, $col - 1, 1)->applyFromArray($styleArray);
+        $sheet->getStyleByColumnAndRow(1, 1, $col - 1, 1)->applyFromArray($styleArray);
 
         return $sheet;
     }
@@ -68,7 +68,7 @@ class ExportController extends Controller
     private function appendRow(Worksheet $sheet, array $data)
     {
         $row = $sheet->getHighestRow() + 1;
-        $col = 0;
+        $col = 1;
         foreach ($data as $datum) {
             $sheet->setCellValueByColumnAndRow($col, $row, $datum);
             $col++;
@@ -170,7 +170,7 @@ class ExportController extends Controller
         $this->setTitleRow(
             $sheet,
             ['#', 'NID', '姓名', '班級', '科系', '學院', '入學年度', '性別', '新生', '攤位負責人',
-                '社團編號', '社團類型', '社團名稱', '電話', '信箱', '附加訊息', ]
+                '社團編號', '社團類型', '社團名稱', '電話', '信箱', '附加訊息',]
         );
         foreach ($feedback as $feedbackItem) {
             /** @var Student $student */
