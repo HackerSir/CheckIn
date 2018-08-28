@@ -206,7 +206,7 @@ class ClubController extends Controller
                 }
                 //該列資料
                 $rowData = [];
-                for ($col = 1; $col <= 8; $col++) {
+                for ($col = 1; $col <= 9; $col++) {
                     $cell = $sheet->getCellByColumnAndRow($col, $row->getRowIndex());
                     $colData = $cell->getValue();
                     if (!($colData instanceof RichText)) {
@@ -218,9 +218,10 @@ class ClubController extends Controller
                 $name = $rowData[0];
                 $number = strtoupper($rowData[1]);
                 $clubTypeName = $rowData[2];
+                $boothName = strtoupper($rowData[3]);
                 $ownerNIDs = [];
                 for ($i = 0; $i < 5; $i++) {
-                    $ownerNIDs[$i] = strtoupper($rowData[$i + 3]);
+                    $ownerNIDs[$i] = strtoupper($rowData[$i + 4]);
                 }
 
                 //資料必須齊全
@@ -240,12 +241,20 @@ class ClubController extends Controller
                 }
 
                 //建立社團
+                /** @var Club $club */
                 $club = Club::query()->updateOrCreate([
                     'name' => $name,
                 ], [
                     'number'       => $number,
                     'club_type_id' => isset($clubType) ? $clubType->id : null,
                 ]);
+
+                //攤位
+                /** @var Booth $booth */
+                $booth = Booth::whereName($boothName)->first();
+                if ($booth) {
+                    $booth->update(['club_id' => $club->id]);
+                }
 
                 //攤位負責人
                 $ownerNIDs = array_filter($ownerNIDs);
