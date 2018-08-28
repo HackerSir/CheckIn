@@ -287,6 +287,7 @@
         <small>Error 404</small>
     </h1>
     <p class="lead">找不到您要求的頁面</p>
+    <p><a href="javascript:history.back();">上一頁</a> | <a href="/">回到首頁</a></p>
 </div>
 
 <footer>

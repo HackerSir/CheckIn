@@ -287,6 +287,7 @@
         <small>Error 400</small>
     </h1>
     <p class="lead">無法處理您的請求</p>
+    <p><a href="javascript:history.back();">上一頁</a> | <a href="/">回到首頁</a></p>
 </div>
 
 <footer>

@@ -65,10 +65,9 @@ class FeedbackController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @param FeedbackDataTable $dataTable
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\Response|\Illuminate\View\View
      */
-    public function my(FeedbackDataTable $dataTable)
+    public function my()
     {
         /** @var User $user */
         $user = auth()->user();
@@ -76,10 +75,8 @@ class FeedbackController extends Controller
         if (!$user->student) {
             return back()->with('warning', '此功能限學生帳號使用');
         }
-        //只能看自己填的
-        $dataTable->addScope(new FeedbackFilterScope(null, $user->student));
 
-        return $dataTable->render('feedback.my', compact('user'));
+        return view('feedback.my', compact('user'));
     }
 
     /**

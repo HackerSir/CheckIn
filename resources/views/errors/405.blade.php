@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
-    <title>Oops! 401 - Unauthorized</title>
+    <title>Oops! 405 - Method Not Allowed</title>
 
     <style type="text/css">/*! normalize.css v5.0.0 | MIT License | github.com/necolas/normalize.css */
         html {
@@ -283,10 +283,10 @@
 
 <body>
 <div class="cover">
-    <h1>Unauthorized
-        <small>Error 401</small>
+    <h1>Method Not Allowed
+        <small>Error 405</small>
     </h1>
-    <p class="lead">您要求的頁面需要身份驗證</p>
+    <p class="lead">Method Not Allowed</p>
     <p><a href="javascript:history.back();">上一頁</a> | <a href="/">回到首頁</a></p>
 </div>
 

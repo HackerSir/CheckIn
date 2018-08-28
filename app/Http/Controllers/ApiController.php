@@ -5,12 +5,15 @@ namespace App\Http\Controllers;
 use App\Booth;
 use App\Club;
 use App\ClubType;
+use App\Feedback;
+use App\Presenters\ContentPresenter;
 use App\User;
 use DB;
 use Gravatar;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Http\Request;
+use Illuminate\Pagination\LengthAwarePaginator;
 use Searchy;
 
 class ApiController extends Controller
@@ -20,7 +23,10 @@ class ApiController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('permission:club.manage')->only(['userList']);
+        $this->middleware('permission:club.manage')->only([
+            'boothList',
+            'userList',
+        ]);
     }
 
     public function boothList(Request $request)
@@ -36,15 +42,11 @@ class ApiController extends Controller
                 $query->where('name', 'like', $searchPattern);
             });
         }
-        //總數
-        $totalCount = $BoothsQuery->count();
         //分頁
-        $page = $request->get('page', 1);
         $perPage = 10;
-        $BoothsQuery->limit($perPage)->skip(($page - 1) * $perPage);
         //取得資料
-        /** @var \Illuminate\Database\Eloquent\Collection|User[] $booths */
-        $booths = $BoothsQuery->get();
+        /** @var LengthAwarePaginator|Collection|Booth[] $booths */
+        $booths = $BoothsQuery->paginate($perPage);
         //轉換陣列內容
         $items = [];
         $clubId = $request->get('club');
@@ -65,8 +67,9 @@ class ApiController extends Controller
         }
         //建立JSON
         $json = [
-            'total_count' => $totalCount,
-            'items'       => $items,
+            'current_page' => $booths->currentPage(),
+            'last_page'    => $booths->lastPage(),
+            'items'        => $items,
         ];
 
         return response()->json($json);
@@ -86,15 +89,11 @@ class ApiController extends Controller
                     ->orWhere('email', 'like', $searchPattern);
             });
         }
-        //總數
-        $totalCount = $usersQuery->count();
         //分頁
-        $page = $request->get('page', 1);
         $perPage = 10;
-        $usersQuery->limit($perPage)->skip(($page - 1) * $perPage);
         //取得資料
-        /** @var \Illuminate\Database\Eloquent\Collection|User[] $users */
-        $users = $usersQuery->get();
+        /** @var LengthAwarePaginator|Collection|User[] $users */
+        $users = $usersQuery->paginate($perPage);
         //轉換陣列內容
         $items = [];
         $clubId = $request->get('club');
@@ -117,8 +116,9 @@ class ApiController extends Controller
         }
         //建立JSON
         $json = [
-            'total_count' => $totalCount,
-            'items'       => $items,
+            'current_page' => $users->currentPage(),
+            'last_page'    => $users->lastPage(),
+            'items'        => $items,
         ];
 
         return response()->json($json);
@@ -159,16 +159,16 @@ class ApiController extends Controller
         $clubQuery->orderBy('id');
 
         //取得社團
-        /** @var Club[]|Collection $clubs */
+        /** @var LengthAwarePaginator|Club[]|Collection $clubs */
         $clubs = $clubQuery->paginate(20);
         //整理資料
-        $result = [];
+        $data = [];
         foreach ($clubs as $club) {
             //取得一個攤位
             /** @var Booth $booth */
             $booth = $club->booths->first();
 
-            $result[] = [
+            $data[] = [
                 'id'      => $club->id,
                 'name'    => $club->name,
                 'image'   => $club->imgurImage ? $club->imgurImage->thumbnail('b') : null,
@@ -183,6 +183,49 @@ class ApiController extends Controller
                 ] : null,
             ];
         }
+        $result = [
+            'current_page' => $clubs->currentPage(),
+            'last_page'    => $clubs->lastPage(),
+            'data'         => $data,
+        ];
+
+        return $result;
+    }
+
+    public function myFeedbackList()
+    {
+        /** @var User $user */
+        $user = auth()->user();
+        $student = $user->student;
+        //非會員或無學生資料
+        if (!$user || !$student) {
+            abort(403);
+        }
+
+        $contentPresenter = app(ContentPresenter::class);
+        /** @var LengthAwarePaginator|Collection|Feedback[] $feedback */
+        $feedback = $student->feedback()->with('club.clubType')->paginate(10);
+        $data = [];
+        foreach ($feedback as $feedbackItem) {
+            $data[] = array_merge(
+                array_only($feedbackItem->toArray(), ['id', 'student_id', 'phone', 'email', 'message']),
+                [
+                    'club' => array_merge(
+                        array_only($feedbackItem->club->toArray(), ['id', 'name']),
+                        [
+                            'display_name' => $feedbackItem->club->display_name,
+                            'extra_info'   => $feedbackItem->club->extra_info
+                                ? $contentPresenter->showContent($feedbackItem->club->extra_info) : null,
+                        ]
+                    ),
+                ]
+            );
+        }
+        $result = [
+            'current_page' => $feedback->currentPage(),
+            'last_page'    => $feedback->lastPage(),
+            'data'         => $data,
+        ];
 
         return $result;
     }
