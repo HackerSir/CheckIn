@@ -91,7 +91,22 @@ class ExportController extends Controller
         //建立匯出資料
         $this->setTitleRow(
             $sheet,
-            ['#', 'NID', '姓名', '班級', '科系', '學院', '入學年度', '性別', '新生', '攤位負責人', '社團編號', '社團類型', '社團名稱', '打卡時間']
+            [
+                '#',
+                'NID',
+                '姓名',
+                '班級',
+                '科系',
+                '學院',
+                '入學年度',
+                '性別',
+                '新生',
+                '攤位負責人',
+                '社團編號',
+                '社團類型',
+                '社團名稱',
+                '打卡時間',
+            ]
         );
         $records = Record::with('student.user', 'club.clubType')->orderBy('created_at')->get();
         foreach ($records as $record) {
@@ -169,8 +184,24 @@ class ExportController extends Controller
         //建立匯出資料
         $this->setTitleRow(
             $sheet,
-            ['#', 'NID', '姓名', '班級', '科系', '學院', '入學年度', '性別', '新生', '攤位負責人',
-                '社團編號', '社團類型', '社團名稱', '電話', '信箱', '附加訊息']
+            [
+                '#',
+                'NID',
+                '姓名',
+                '班級',
+                '科系',
+                '學院',
+                '入學年度',
+                '性別',
+                '新生',
+                '攤位負責人',
+                '社團編號',
+                '社團類型',
+                '社團名稱',
+                '電話',
+                '信箱',
+                '附加訊息',
+            ]
         );
         foreach ($feedback as $feedbackItem) {
             /** @var Student $student */
@@ -240,7 +271,19 @@ class ExportController extends Controller
         //建立匯出資料
         $this->setTitleRow(
             $sheet,
-            ['NID', '姓名', '班級', '科系', '學院', '入學年度', '性別', '新生', '社團編號', '社團類型', '社團名稱']
+            [
+                'NID',
+                '姓名',
+                '班級',
+                '科系',
+                '學院',
+                '入學年度',
+                '性別',
+                '新生',
+                '社團編號',
+                '社團類型',
+                '社團名稱',
+            ]
         );
         $users = User::with('student', 'club.clubType')->has('student')->has('club')->orderBy('club_id')->get();
         foreach ($users as $user) {
