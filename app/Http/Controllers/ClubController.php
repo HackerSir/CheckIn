@@ -218,7 +218,7 @@ class ClubController extends Controller
                 $name = $rowData[0];
                 $number = strtoupper($rowData[1]);
                 $clubTypeName = $rowData[2];
-                $boothName = strtoupper($rowData[3]);
+                $boothName = $rowData[3];
                 $ownerNIDs = [];
                 for ($i = 0; $i < 5; $i++) {
                     $ownerNIDs[$i] = strtoupper($rowData[$i + 4]);
