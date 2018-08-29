@@ -167,6 +167,7 @@ class StudentController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \App\Student $student
+     * @param Request $request
      * @return \Illuminate\Http\Response
      */
     public function update(Student $student, Request $request)
