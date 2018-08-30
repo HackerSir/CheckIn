@@ -2,9 +2,9 @@
     <div class="card">
         <div class="card-body d-inline-flex flex-column flex-sm-row" style="min-height: 160px">
             <div class="flex-shrink-0 p-0 mr-2 text-center">
-                <img :src="club.image" class="img-fluid" v-if="club.image">
+                <img :src="club.image" class="img-fluid" v-if="club.image" style="width: 160px; height: 160px">
                 <img v-holder="'img=160x160?random=yes&auto=yes&text=沒有圖片'" class="img-fluid holder d-none d-sm-block"
-                     v-else>
+                     style="width: 160px; height: 160px" v-else>
             </div>
             <div class="d-flex flex-column flex-grow-1" style="min-height: 160px">
                 <h3 class="card-title">
