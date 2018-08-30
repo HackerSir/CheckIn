@@ -61,6 +61,6 @@ class HomeController extends Controller
             }
         }
 
-        return view('map', compact('type', 'boothData'));
+        return view('map.index', compact('type', 'boothData'));
     }
 }
