@@ -42,7 +42,7 @@ class HomeController extends Controller
         $type = $request->input('type') ?: 'static';
 
         if (!in_array($type, ['static', 'google'])) {
-            $type = 'static';
+            return redirect()->route('clubs.map', ['type' => 'static']);
         }
 
         $boothData = [];
