@@ -1,7 +1,14 @@
 <template>
     <div class="card mb-1">
         <div class="card-body">
-            <h4 class="card-title">給 <a :href="club_url" v-html="feedback.club.display_name"></a> 的回饋資料</h4>
+            <div class="d-flex flex-column flex-md-row">
+                <h4 class="card-title">給 <a :href="club_url" v-html="feedback.club.display_name"></a> 的回饋資料</h4>
+                <div class="ml-md-auto">
+                    <a :href="feedback_edit_url" class="btn btn-primary">
+                        <i class="fa fa-edit" aria-hidden="true"></i> 編輯
+                    </a>
+                </div>
+            </div>
             <dl class="row" style="font-size: 120%">
                 <dt class="col-md-2">電話</dt>
                 <dd class="col-md-10">
@@ -38,6 +45,9 @@
         computed: {
             club_url: function () {
                 return Laravel.baseUrl + '/clubs/' + this.feedback.club.id;
+            },
+            feedback_edit_url: function () {
+                return Laravel.baseUrl + '/feedback/create/' + this.feedback.club.id;
             }
         }
     }
