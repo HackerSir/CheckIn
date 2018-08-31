@@ -26,7 +26,8 @@
                                 請嘗試重新登入，讓系統產生新的 QR Code
                             </div>
                         @endif
-                        <p class="mt-1">集點時間：<span style="white-space: pre;">{{ $startAt }}</span> ~ <span style="white-space: pre;">{{ $endAt }}</span></p>
+                        <p class="mt-1">集點時間：<span style="white-space: pre;">{{ $startAt }}</span> ~ <span
+                                style="white-space: pre;">{{ $endAt }}</span></p>
                     </div>
 
                     <hr/>
@@ -137,5 +138,7 @@
 @endsection
 
 @section('js')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"
+            integrity="sha256-CutOzxCRucUsn6C6TcEYsauvvYilEniTXldPa6/wu0k=" crossorigin="anonymous"></script>
     <script src="{{ asset(mix('/build-js/checkin.js')) }}"></script>
 @endsection

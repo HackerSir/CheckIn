@@ -4,6 +4,7 @@ namespace App\Events;
 
 use App\Feedback;
 use App\Record;
+use Carbon\Carbon;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
@@ -16,6 +17,8 @@ class CheckInSuccess implements ShouldBroadcast
 
     /** @var Record */
     private $record;
+    /** @var Carbon */
+    private $created_at;
 
     /**
      * Create a new CheckInSuccess event instance.
@@ -25,6 +28,7 @@ class CheckInSuccess implements ShouldBroadcast
     public function __construct(Record $record)
     {
         $this->record = $record;
+        $this->created_at = Carbon::now();
     }
 
     /**
@@ -55,6 +59,7 @@ class CheckInSuccess implements ShouldBroadcast
             'club_name'        => $club->name,
             'ask_for_feedback' => !$feedbackExists,
             'feedback_url'     => route('feedback.create', $club),
+            'created_at'       => $this->created_at->toIso8601String(),
         ];
 
         return $data;
