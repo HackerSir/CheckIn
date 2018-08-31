@@ -78,13 +78,3 @@
         </div>
     </div>
 @endsection
-
-@section('js')
-    <script>
-        $(function () {
-            $('form').on('submit', function () {
-                return confirm('送出後將無法修改或刪除，確定要送出嗎？');
-            });
-        });
-    </script>
-@endsection
