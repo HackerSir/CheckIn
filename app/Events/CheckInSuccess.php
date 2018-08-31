@@ -59,7 +59,7 @@ class CheckInSuccess implements ShouldBroadcast
             'club_name'        => $club->name,
             'ask_for_feedback' => !$feedbackExists,
             'feedback_url'     => route('feedback.create', $club),
-            'created_at'       => $this->created_at->toIso8601String(),
+            'diff'             => Carbon::now()->diffInSeconds($this->created_at),
         ];
 
         return $data;

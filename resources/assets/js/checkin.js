@@ -3,8 +3,7 @@ require('./bootstrap-echo');
 
 window.Echo.private('student.' + window.Laravel.student)
     .listen('CheckInSuccess', (data) => {
-        let createdAt = moment(data.created_at);
-        if (moment().diff(createdAt, 'seconds') >= 60) {
+        if (data.diff >= 60) {
             console.log('Skip "CheckInSuccess" broadcast:', data.club_name);
             return;
         }
