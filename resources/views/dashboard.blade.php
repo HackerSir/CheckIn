@@ -37,6 +37,7 @@
                         <div class="alert alert-success text-center">
                             <i class="fas fa-ticket-alt"></i> 抽獎編號 <i class="fas fa-ticket-alt"></i>
                             <h3>{{ sprintf("%04d", $student->ticket->id) }}</h3>
+                            <span class="text-danger">任務已完成，可至服務台兌換遊戲區代幣</span>
                         </div>
                     @else
                         @if(!$student->is_freshman)
