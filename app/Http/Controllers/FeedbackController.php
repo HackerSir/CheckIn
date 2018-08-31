@@ -85,7 +85,7 @@ class FeedbackController extends Controller
      * @param Club $club
      * @return \Illuminate\Http\Response
      */
-    public function create(Club $club)
+    public function createOrEdit(Club $club)
     {
         /** @var User $user */
         $user = auth()->user();
@@ -94,22 +94,23 @@ class FeedbackController extends Controller
             return back()->with('warning', '此功能限學生帳號使用');
         }
 
-        //檢查是否填寫過回饋給該社團
-        $feedback = Feedback::whereClubId($club->id)->whereStudentId($user->student->id)->first();
-        if ($feedback) {
-            return redirect()->route('feedback.show', $feedback)
-                ->with('warning', '已填寫過給該社團的回饋資料');
-        }
-
         //檢查填寫期限
         $feedbackCreateExpiredAt = new Carbon(Setting::get('feedback_create_expired_at'));
         if (Carbon::now()->gt($feedbackCreateExpiredAt)) {
             return back()->with('warning', '回饋資料填寫已截止');
         }
 
-        $lastFeedback = $user->student->feedback()->orderBy('created_at', 'desc')->first();
+        //曾給該社團的回饋資料
+        $feedback = Feedback::whereClubId($club->id)->whereStudentId($user->student->id)->first();
+        if (!$feedback) {
+            //自己最後一次填寫的回饋資料
+            $lastFeedback = $user->student->feedback()->orderBy('created_at', 'desc')->first();
+        }
 
-        return view('feedback.create', compact('user', 'club', 'lastFeedback'));
+        return view(
+            'feedback.create-or-edit',
+            compact('user', 'club', 'feedback', 'lastFeedback', 'feedbackCreateExpiredAt')
+        );
     }
 
     /**
@@ -126,13 +127,6 @@ class FeedbackController extends Controller
         //檢查是否為學生帳號
         if (!$user->student) {
             return back()->with('warning', '此功能限學生帳號使用');
-        }
-
-        //檢查是否填寫過回饋給該社團
-        $existFeedback = Feedback::whereClubId($club->id)->whereStudentId($user->student->id)->first();
-        if ($existFeedback) {
-            return redirect()->route('feedback.show', $existFeedback)
-                ->with('warning', '已填寫過給該社團的回饋資料');
         }
 
         //檢查填寫期限
@@ -152,13 +146,13 @@ class FeedbackController extends Controller
             'message' => 'nullable|required_without_all:email,phone|max:255',
         ]);
 
-        $feedback = Feedback::create(array_merge($request->only(['phone', 'email', 'message']), [
+        $feedback = Feedback::updateOrCreate([
             'club_id'    => $club->id,
             'student_id' => $user->student->id,
-        ]));
+        ], $request->only(['phone', 'email', 'message']));
 
         return redirect()->route('feedback.show', $feedback)
-            ->with('warning', '回饋資料已送出');
+            ->with('success', '回饋資料已送出');
     }
 
     /**

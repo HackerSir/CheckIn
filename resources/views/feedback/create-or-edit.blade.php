@@ -15,7 +15,7 @@
     <div class="alert alert-warning" role="alert">
         請注意：
         <ul style="padding-left: 20px">
-            <li>每個社團只能填寫一次回饋資料，送出後無法修改或刪除</li>
+            <li>對每個社團只能填寫一份回饋資料，送出後仍可於回饋資料填寫截止（{{ new Carbon\Carbon(Setting::get('end_at')) }}）之前多次修改，截止後將無法填寫或修改</li>
             <li>
                 送出回饋資料後，該社團可以取得您以下的資訊：
                 <ul>
@@ -41,7 +41,7 @@
     </div>
     <div class="card mt-1">
         <div class="card-body">
-            {{ bs()->openForm('post', route('feedback.store', $club)) }}
+            {{ bs()->openForm('post', route('feedback.store', $club), ['model' => $feedback]) }}
 
             <div class="form-group row">
                 <label class="col-md-2 col-form-label">基本資料</label>
@@ -60,8 +60,13 @@
                 </div>
             </div>
 
-            {{ bs()->formGroup(bs()->text('phone', $lastFeedback->phone ?? null))->label('電話')->showAsRow() }}
-            {{ bs()->formGroup(bs()->text('email', $lastFeedback->email ?? null))->label('信箱')->showAsRow() }}
+            @if(isset($feedback))
+                {{ bs()->formGroup(bs()->text('phone'))->label('電話')->showAsRow() }}
+                {{ bs()->formGroup(bs()->text('email'))->label('信箱')->showAsRow() }}
+            @else
+                {{ bs()->formGroup(bs()->text('phone', $lastFeedback->phone ?? null))->label('電話')->showAsRow() }}
+                {{ bs()->formGroup(bs()->text('email', $lastFeedback->email ?? null))->label('信箱')->showAsRow() }}
+            @endif
             {{ bs()->formGroup(bs()->text('message'))->label('給社團的意見')->showAsRow() }}
 
             <div class="row">
