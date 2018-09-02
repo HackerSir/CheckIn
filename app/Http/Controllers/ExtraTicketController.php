@@ -44,7 +44,7 @@ class ExtraTicketController extends Controller
             'id'    => 'nullable|integer|min:1|unique:extra_tickets,id',
             'nid'   => 'required|unique:extra_tickets,nid',
             'name'  => 'required',
-            'class' => 'required',
+            'class' => 'nullable',
         ]);
 
         ExtraTicket::create(array_merge($request->all(), [
@@ -77,7 +77,7 @@ class ExtraTicketController extends Controller
         $this->validate($request, [
             'nid'   => ['required', Rule::unique('extra_tickets', 'nid')->ignore($extraTicket->id)],
             'name'  => 'required',
-            'class' => 'required',
+            'class' => 'nullable',
         ]);
 
         $extraTicket->update(array_merge($request->only('name', 'class'), [
@@ -180,8 +180,8 @@ class ExtraTicketController extends Controller
                 $nid = strtoupper($rowData[1]);
                 $name = $rowData[2];
                 $class = $rowData[3];
-                //資料必須齊全
-                if (empty($nid) || empty($name) || empty($class)) {
+                //NID與姓名必須填寫
+                if (empty($nid) || empty($name)) {
                     $skipCount++;
                     continue;
                 }

@@ -15,7 +15,7 @@
                 <li>檔案須為xls或xlsx</li>
                 <li>第一列為標題列，<u>不會</u>作為資料匯入</li>
                 <li>欄位自左起依序為<code>抽獎編號</code>、<code>學號(NID)</code>、<code>姓名</code>、<code>系級</code></li>
-                <li>上述三欄皆須填寫，若有留空則該筆資料<u>不會</u>匯入</li>
+                <li><code>抽獎編號</code>、<code>學號(NID)</code>、<code>姓名</code>三欄皆須填寫，若有留空則該筆資料<u>不會</u>匯入</li>
                 <li><code>抽獎編號</code>必須為正整數，若留白或非正整數，將由系統自動分配</li>
                 <li><code>抽獎編號</code>與<code>學號(NID)</code>皆不得重複，重複則以最後一次出現為有效資料</li>
                 <li>匯入名單時，將根據<code>抽獎編號</code>與<code>學號(NID)</code>覆寫現有資料</li>

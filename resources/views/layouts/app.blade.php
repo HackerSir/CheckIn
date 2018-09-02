@@ -20,6 +20,8 @@
     <meta property="og:description" content="2018 逢甲社團博覽會集點打卡">
     <meta property="og:type" content="website">
 
+    <meta name="theme-color" content="#f8f9fa">
+
     <link rel="icon" type="image/svg+xml" href="{{ asset('favicon.svg') }}">
     <link rel="icon" type="image/ico" href="{{ asset('favicon.ico') }}">
 
