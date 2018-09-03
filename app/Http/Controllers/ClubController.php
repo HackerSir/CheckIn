@@ -9,9 +9,9 @@ use App\DataTables\ClubsDataTable;
 use App\Services\FileService;
 use App\Services\ImgurImageService;
 use App\Services\StudentService;
+use App\Services\UserService;
 use App\Student;
 use App\User;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
 use PhpOffice\PhpSpreadsheet\RichText\RichText;
 
@@ -182,8 +182,12 @@ class ClubController extends Controller
         return view('club.import');
     }
 
-    public function postImport(Request $request, FileService $fileService, StudentService $studentService)
-    {
+    public function postImport(
+        Request $request,
+        FileService $fileService,
+        StudentService $studentService,
+        UserService $userService
+    ) {
         //檢查匯入檔案格式為xls或xlsx
         $this->validate($request, [
             'import_file' => 'required|mimes:xls,xlsx',
@@ -268,21 +272,7 @@ class ClubController extends Controller
                         continue;
                     }
                     //找出使用者
-                    $user = $student->user;
-                    if (!$user) {
-                        $email = $ownerNID . '@fcu.edu.tw';
-                        /** @var User $user */
-                        $user = User::query()->firstOrCreate([
-                            'email' => $email,
-                        ], [
-                            'name'        => $student->name,
-                            'password'    => '',
-                            'confirm_at'  => Carbon::now(),
-                            'register_at' => Carbon::now(),
-                            'register_ip' => \Request::getClientIp(),
-                        ]);
-                        $user->student()->save($student);
-                    }
+                    $user = $userService->findOrCreateAndBind($student);
                     //設定為負責人
                     $user->club()->associate($club);
                     $user->save();

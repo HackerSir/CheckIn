@@ -4,12 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Booth;
 use App\DataTables\StudentsDataTable;
-use App\Services\FcuApiService;
 use App\Services\LogService;
 use App\Services\StudentService;
+use App\Services\UserService;
 use App\Student;
-use App\User;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class StudentController extends Controller
@@ -19,19 +17,24 @@ class StudentController extends Controller
      */
     private $studentService;
     /**
+     * @var UserService
+     */
+    private $userService;
+    /**
      * @var LogService
      */
     private $logService;
 
     /**
      * StudentController constructor.
-     * @param FcuApiService $fcuApiService
      * @param StudentService $studentService
+     * @param UserService $userService
      * @param LogService $logService
      */
-    public function __construct(StudentService $studentService, LogService $logService)
+    public function __construct(StudentService $studentService, UserService $userService, LogService $logService)
     {
         $this->studentService = $studentService;
+        $this->userService = $userService;
         $this->logService = $logService;
     }
 
@@ -78,20 +81,7 @@ class StudentController extends Controller
         }
 
         //使用者
-        if (!$student->user) {
-            $email = $student->nid . '@fcu.edu.tw';
-            /** @var User $user */
-            $user = User::query()->firstOrCreate([
-                'email' => $email,
-            ], [
-                'name'        => $student->name,
-                'password'    => '',
-                'confirm_at'  => Carbon::now(),
-                'register_at' => Carbon::now(),
-                'register_ip' => \Request::getClientIp(),
-            ]);
-            $user->student()->save($student);
-        }
+        $this->userService->findOrCreateAndBind($student);
 
         //Log
         $operator = auth()->user();

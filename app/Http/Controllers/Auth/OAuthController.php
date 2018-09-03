@@ -6,8 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Qrcode;
 use App\Services\FcuApiService;
 use App\Services\StudentService;
-use App\User;
-use Carbon\Carbon;
+use App\Services\UserService;
 
 class OAuthController extends Controller
 {
@@ -19,16 +18,22 @@ class OAuthController extends Controller
      * @var StudentService
      */
     private $studentService;
+    /**
+     * @var UserService
+     */
+    private $userService;
 
     /**
      * OAuthController constructor.
      * @param FcuApiService $fcuApiService
      * @param StudentService $studentService
+     * @param UserService $userService
      */
-    public function __construct(FcuApiService $fcuApiService, StudentService $studentService)
+    public function __construct(FcuApiService $fcuApiService, StudentService $studentService, UserService $userService)
     {
         $this->fcuApiService = $fcuApiService;
         $this->studentService = $studentService;
+        $this->userService = $userService;
         $this->middleware('guest');
     }
 
@@ -66,24 +71,8 @@ class OAuthController extends Controller
         }
         $nid = $userInfo['stu_id'];
 
-        //嘗試找出使用者
-        $email = $userInfo['stu_id'] . '@fcu.edu.tw';
-        $user = User::where('email', $email)->first();
-        //若使用者不存在
-        if (!$user) {
-            //先建立使用者
-            //使用updateOrCreate而非create防同時重送
-            $user = User::updateOrCreate([
-                'email' => $email,
-            ], [
-                'name'        => $nid,
-                'email'       => $email,
-                'password'    => '',
-                'confirm_at'  => Carbon::now(),
-                'register_at' => Carbon::now(),
-                'register_ip' => \Request::getClientIp(),
-            ]);
-        }
+        //找出使用者
+        $user = $this->userService->findOrCreateByNid($userInfo['stu_id']);
         //登入使用者
         auth()->login($user, true);
 
