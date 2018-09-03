@@ -8,7 +8,6 @@ use Carbon\Carbon;
 
 class UserService
 {
-
     /**
      * 尋找使用者，若找不到，則建立使用者並綁定
      *
