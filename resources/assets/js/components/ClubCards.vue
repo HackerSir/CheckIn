@@ -43,7 +43,7 @@
                 </div>
             </div>
             <span slot="no-more">
-                ヽ(ﾟ∀ﾟ*)ノ
+                沒有更多社團了 ヽ(ﾟ∀ﾟ*)ノ
             </span>
             <span slot="spinner">
                 <i class="fa fa-spinner fa-pulse fa-fw fa-3x mt-3" aria-hidden="true"></i>
