@@ -6,9 +6,9 @@ use App\Booth;
 use App\Club;
 use App\ClubType;
 use App\DataTables\ClubsDataTable;
-use App\Services\FcuApiService;
 use App\Services\FileService;
 use App\Services\ImgurImageService;
+use App\Services\StudentService;
 use App\Student;
 use App\User;
 use Carbon\Carbon;
@@ -182,7 +182,7 @@ class ClubController extends Controller
         return view('club.import');
     }
 
-    public function postImport(Request $request, FileService $fileService, FcuApiService $fcuApiService)
+    public function postImport(Request $request, FileService $fileService, StudentService $studentService)
     {
         //檢查匯入檔案格式為xls或xlsx
         $this->validate($request, [
@@ -261,25 +261,7 @@ class ClubController extends Controller
                 foreach ($ownerNIDs as $ownerNID) {
                     //試著找出學生
                     /** @var Student $student */
-                    $student = Student::whereNid($ownerNID)->first();
-                    if (!$student) {
-                        //若不存在，嘗試從API抓取
-                        //取得學生資料
-                        $stuInfo = $fcuApiService->getStuInfo($ownerNID);
-                        if (is_array($stuInfo) && isset($stuInfo['status']) && $stuInfo['status'] == 1) {
-                            //有學生資料
-                            $student = Student::query()->updateOrCreate([
-                                'nid' => $stuInfo['stu_id'],
-                            ], [
-                                'name'      => $stuInfo['stu_name'],
-                                'class'     => $stuInfo['stu_class'],
-                                'unit_name' => $stuInfo['unit_name'],
-                                'dept_name' => $stuInfo['dept_name'],
-                                'in_year'   => $stuInfo['in_year'],
-                                'gender'    => $stuInfo['stu_sex'],
-                            ]);
-                        }
-                    }
+                    $student = $studentService->findByNid($ownerNID);
                     if (!$student) {
                         //NID無效
                         $invalidNidCount++;

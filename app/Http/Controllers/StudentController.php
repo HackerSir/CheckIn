@@ -6,6 +6,7 @@ use App\Booth;
 use App\DataTables\StudentsDataTable;
 use App\Services\FcuApiService;
 use App\Services\LogService;
+use App\Services\StudentService;
 use App\Student;
 use App\User;
 use Carbon\Carbon;
@@ -14,9 +15,9 @@ use Illuminate\Http\Request;
 class StudentController extends Controller
 {
     /**
-     * @var FcuApiService
+     * @var StudentService
      */
-    private $fcuApiService;
+    private $studentService;
     /**
      * @var LogService
      */
@@ -25,11 +26,12 @@ class StudentController extends Controller
     /**
      * StudentController constructor.
      * @param FcuApiService $fcuApiService
+     * @param StudentService $studentService
      * @param LogService $logService
      */
-    public function __construct(FcuApiService $fcuApiService, LogService $logService)
+    public function __construct(StudentService $studentService, LogService $logService)
     {
-        $this->fcuApiService = $fcuApiService;
+        $this->studentService = $studentService;
         $this->logService = $logService;
     }
 
@@ -70,24 +72,14 @@ class StudentController extends Controller
             ],
         ]);
 
-        $stuInfo = $this->fcuApiService->getStuInfo($request->get('nid'));
-        if (!$stuInfo) {
+        $student = $this->studentService->updateOrCreate($request->get('nid'));
+        if (!$student) {
             return back()->with('warning', '查無此人');
         }
 
-        $student = Student::create([
-            'nid'       => $stuInfo['stu_id'],
-            'name'      => $stuInfo['stu_name'],
-            'class'     => $stuInfo['stu_class'],
-            'unit_name' => $stuInfo['unit_name'],
-            'dept_name' => $stuInfo['dept_name'],
-            'in_year'   => $stuInfo['in_year'],
-            'gender'    => $stuInfo['stu_sex'],
-        ]);
-
         //使用者
         if (!$student->user) {
-            $email = $stuInfo['stu_id'] . '@fcu.edu.tw';
+            $email = $student->nid . '@fcu.edu.tw';
             /** @var User $user */
             $user = User::query()->firstOrCreate([
                 'email' => $email,
@@ -187,19 +179,10 @@ class StudentController extends Controller
      */
     public function fetch(Student $student)
     {
-        $stuInfo = $this->fcuApiService->getStuInfo($student->nid);
-        if (!$stuInfo) {
+        $student = $this->studentService->updateOrCreate($student->nid);
+        if (!$student) {
             return back()->with('warning', '無法更新資料');
         }
-
-        $student->update([
-            'name'      => $stuInfo['stu_name'],
-            'class'     => $stuInfo['stu_class'],
-            'unit_name' => $stuInfo['unit_name'],
-            'dept_name' => $stuInfo['dept_name'],
-            'in_year'   => $stuInfo['in_year'],
-            'gender'    => $stuInfo['stu_sex'],
-        ]);
 
         return redirect()->route('student.index')->with('success', '學生已更新');
     }

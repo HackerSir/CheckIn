@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Qrcode;
 use App\Services\FcuApiService;
-use App\Student;
+use App\Services\StudentService;
 use App\User;
 use Carbon\Carbon;
 
@@ -15,14 +15,20 @@ class OAuthController extends Controller
      * @var FcuApiService
      */
     private $fcuApiService;
+    /**
+     * @var StudentService
+     */
+    private $studentService;
 
     /**
      * OAuthController constructor.
      * @param FcuApiService $fcuApiService
+     * @param StudentService $studentService
      */
-    public function __construct(FcuApiService $fcuApiService)
+    public function __construct(FcuApiService $fcuApiService, StudentService $studentService)
     {
         $this->fcuApiService = $fcuApiService;
+        $this->studentService = $studentService;
         $this->middleware('guest');
     }
 
@@ -82,26 +88,13 @@ class OAuthController extends Controller
         auth()->login($user, true);
 
         //取得學生資料
-        $stuInfo = $this->fcuApiService->getStuInfo($nid);
-        if (!is_array($stuInfo) || !isset($stuInfo['status']) || $stuInfo['status'] != 1) {
+        $student = $this->studentService->updateOrCreate($nid);
+        if (!$student) {
             //無學生資料，直接結束流程
             return redirect()->route('index');
         }
-        //嘗試取得學生
-        $student = $user->student;
-        //若學生不存在
-        if (!$student) {
-            //找出或建立學生
-            $student = Student::query()->firstOrCreate([
-                'nid' => $stuInfo['stu_id'],
-            ], [
-                'name'      => $stuInfo['stu_name'],
-                'class'     => $stuInfo['stu_class'],
-                'unit_name' => $stuInfo['unit_name'],
-                'dept_name' => $stuInfo['dept_name'],
-                'in_year'   => $stuInfo['in_year'],
-                'gender'    => $stuInfo['stu_sex'],
-            ]);
+        //使用者未綁定學生
+        if (!$user->student) {
             //綁定學生
             $user->student()->save($student);
         }
@@ -111,7 +104,7 @@ class OAuthController extends Controller
             $student->qrcode()->save(Qrcode::create());
         }
         //更新名稱
-        $user->update(['name' => $stuInfo['stu_name']]);
+        $user->update(['name' => $student->name]);
 
         return redirect()->intended();
     }
