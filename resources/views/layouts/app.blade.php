@@ -63,7 +63,7 @@
         }
 
         body {
-            background: url("{{ asset('img/background.jpg') }}") no-repeat fixed center !important;
+            background: url("{{ asset('img/background.jpg') }}") no-repeat fixed center / cover !important;
         }
 
         {{-- 讓 AlertifyJS 的 notify 往下一點，才不會擋到 navbar --}}
