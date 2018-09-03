@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $id
  * @property string $nid 學號
  * @property string $name 姓名
- * @property string $class 系級
+ * @property string|null $class 系級
  * @property \Carbon\Carbon|null $created_at
  * @property \Carbon\Carbon|null $updated_at
  * @method static \Illuminate\Database\Eloquent\Builder|\App\ExtraTicket whereClass($value)
