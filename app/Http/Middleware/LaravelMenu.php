@@ -89,6 +89,11 @@ class LaravelMenu
                                 ->active('extra-ticket/*');
                         }
 
+                        if (Laratrust::can('student-ticket.manage')) {
+                            $activityMenu->add('學生抽獎編號管理', ['route' => 'student-ticket.index'])
+                                ->active('student-ticket/*');
+                        }
+
                         $this->addDivider($activityMenu);
 
                         if (Laratrust::can('feedback.manage')) {

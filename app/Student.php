@@ -31,6 +31,7 @@ use Illuminate\Database\Query\Builder;
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Qrcode[] $qrcodes
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Record[] $records
  * @property-read \App\StudentSurvey $studentSurvey
+ * @property-read \App\StudentTicket $studentTicket
  * @property-read \App\Ticket $ticket
  * @property-read \App\User|null $user
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Student freshman()
@@ -128,6 +129,14 @@ class Student extends Model
     public function ticket()
     {
         return $this->hasOne(Ticket::class);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne|\Illuminate\Database\Eloquent\Builder
+     */
+    public function studentTicket()
+    {
+        return $this->hasOne(StudentTicket::class);
     }
 
     /**

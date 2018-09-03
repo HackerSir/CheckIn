@@ -202,6 +202,23 @@ Route::group(['middleware' => ['auth', 'email']], function () {
             ],
         ]);
     });
+    //學生抽獎編號管理
+    //權限：student-ticket.manage
+    Route::group(['middleware' => 'permission:student-ticket.manage'], function () {
+        Route::get('student-ticket/ticket', 'StudentTicketController@ticket')->name('student-ticket.ticket');
+        Route::get('student-ticket/info', 'StudentTicketController@ticketInfo')->name('student-ticket.info');
+        Route::get('student-ticket/import', 'StudentTicketController@getImport')->name('student-ticket.import');
+        Route::post('student-ticket/import', 'StudentTicketController@postImport')->name('student-ticket.import');
+        Route::get('student-ticket/download-import-sample', 'StudentTicketController@downloadImportSample')
+            ->name('student-ticket.download-import-sample');
+        Route::delete('student-ticket/destroy-all', 'StudentTicketController@destroyAll')
+            ->name('student-ticket.destroy-all');
+        Route::resource('student-ticket', 'StudentTicketController', [
+            'except' => [
+                'show',
+            ],
+        ]);
+    });
 
     //Feedback
     Route::get('my-feedback', 'FeedbackController@my')->name('feedback.my');
