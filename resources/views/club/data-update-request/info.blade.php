@@ -29,10 +29,12 @@
             <dd class="col-8 col-md-9">{!! $dataUpdateRequest->show_result !!}</dd>
             <dt class="col-4 col-md-3">審核者</dt>
             <dd class="col-8 col-md-9">
-                @if(Laratrust::can(['user.manage', 'user.view']))
-                    {{ link_to_route('user.show', $dataUpdateRequest->reviewer->display_name, $dataUpdateRequest->reviewer) }}
-                @else
-                    {{ $dataUpdateRequest->reviewer->display_name }}
+                @if($dataUpdateRequest->reviewer)
+                    @if(Laratrust::can(['user.manage', 'user.view']))
+                        {{ link_to_route('user.show', $dataUpdateRequest->reviewer->display_name, $dataUpdateRequest->reviewer) }}
+                    @else
+                        {{ $dataUpdateRequest->reviewer->display_name }}
+                    @endif
                 @endif
             </dd>
             <dt class="col-4 col-md-3">審核評語</dt>
