@@ -47,7 +47,9 @@
         </div>
         <div>
             <div style="font-weight: bold; font-size: 1.2rem"><span class="badge badge-secondary">社團網址</span></div>
-            {{ link_to($dataUpdateRequest->original_url, $dataUpdateRequest->original_url, ['target' => '_blank']) }}
+            @if($dataUpdateRequest->original_url)
+                {{ link_to($dataUpdateRequest->original_url, $dataUpdateRequest->original_url, ['target' => '_blank']) }}
+            @endif
         </div>
     </div>
     <div class="col">
@@ -66,7 +68,9 @@
         </div>
         <div>
             <div style="font-weight: bold; font-size: 1.2rem"><span class="badge badge-secondary">社團網址</span></div>
-            {{ link_to($dataUpdateRequest->url, $dataUpdateRequest->url, ['target' => '_blank']) }}
+            @if($dataUpdateRequest->url)
+                {{ link_to($dataUpdateRequest->url, $dataUpdateRequest->url, ['target' => '_blank']) }}
+            @endif
         </div>
     </div>
 </div>
