@@ -21,6 +21,9 @@
 @endsection
 
 @section('main_content')
+    <div class="alert alert-warning mb-2">
+        此功能僅作為社團博覽會無法順利舉行時之備案，正式的抽獎編號請至 {{ link_to_route('ticket.index', '抽獎編號管理') }}
+    </div>
     <div class="card">
         <div class="card-body">
             {!! $dataTable->table() !!}
