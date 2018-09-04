@@ -10,7 +10,13 @@
                 </a>
             </dd>
             <dt class="col-4 col-md-3">申請者</dt>
-            <dd class="col-8 col-md-9">{{ $dataUpdateRequest->user->display_name }}</dd>
+            <dd class="col-8 col-md-9">
+                @if(Laratrust::can(['user.manage', 'user.view']))
+                    {{ link_to_route('user.show', $dataUpdateRequest->user->display_name, $dataUpdateRequest->user) }}
+                @else
+                    {{ $dataUpdateRequest->user->display_name }}
+                @endif
+            </dd>
             <dt class="col-4 col-md-3">申請原因</dt>
             <dd class="col-8 col-md-9">{{ $dataUpdateRequest->reason }}</dd>
             <dt class="col-4 col-md-3">申請時間</dt>
@@ -22,7 +28,13 @@
             <dt class="col-4 col-md-3">審核結果</dt>
             <dd class="col-8 col-md-9">{!! $dataUpdateRequest->show_result !!}</dd>
             <dt class="col-4 col-md-3">審核者</dt>
-            <dd class="col-8 col-md-9">{{ optional($dataUpdateRequest->reviewer)->display_name }}</dd>
+            <dd class="col-8 col-md-9">
+                @if(Laratrust::can(['user.manage', 'user.view']))
+                    {{ link_to_route('user.show', $dataUpdateRequest->reviewer->display_name, $dataUpdateRequest->reviewer) }}
+                @else
+                    {{ $dataUpdateRequest->reviewer->display_name }}
+                @endif
+            </dd>
             <dt class="col-4 col-md-3">審核評語</dt>
             <dd class="col-8 col-md-9">{{ $dataUpdateRequest->review_comment }}</dd>
             <dt class="col-4 col-md-3">審核時間</dt>
