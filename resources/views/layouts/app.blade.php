@@ -91,7 +91,6 @@
 
 {{-- Content --}}
 <div class="container" id="vue-app">
-    {{ request()->header('User-Agent') }}
     @if($xRequestedWithMessage ?? false)
         <div class="alert alert-warning">
             <i class="fas fa-exclamation-triangle"></i>
