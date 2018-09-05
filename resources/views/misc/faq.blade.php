@@ -15,13 +15,25 @@
         </div>
         <div class="card-body">
             <h3>該如何掃描QR Code？</h3>
-            <p>可以使用LINE的條碼掃描器，或自行安裝QR Code掃描器使用。<br/>
-                Android：推薦使用 <a href="https://play.google.com/store/apps/details?id=com.google.zxing.client.android"
-                                target="_blank">條碼掃描器</a><br/>
-                iOS：推薦使用 <a
-                    href="https://itunes.apple.com/tw/app/quickmark-qrcode-%E6%8E%83%E6%8F%8F%E5%99%A8/id384883554?l=zh&mt=8"
-                    target="_blank">QuickMark - QRCode 掃描器</a>
-            </p>
+            <p>可以使用LINE的條碼掃描器，或自行安裝QR Code掃描器使用。</p>
+            <ul>
+                <li>Android：推薦使用 <a href="https://play.google.com/store/apps/details?id=com.google.zxing.client.android"
+                                    target="_blank">條碼掃描器</a></li>
+                <li>iOS：推薦使用 <a
+                        href="https://itunes.apple.com/tw/app/quickmark-qrcode-%E6%8E%83%E6%8F%8F%E5%99%A8/id384883554?l=zh&mt=8"
+                        target="_blank">QuickMark - QRCode 掃描器</a></li>
+            </ul>
+        </div>
+        <div class="card-body">
+            <h3>為什麼有些功能無法使用？</h3>
+            <p>您可能不是使用瀏覽器訪問此網站，受限於您所使用的軟體，有可能會導致<b>打卡通知</b>、<b>校內導航</b>等重要功能無法正確運作。<br/>
+                建議您使用功能較完善的瀏覽器訪問 {{ link_to('/', url('/')) }}。</p>
+            <ul>
+                <li>Android：推薦使用 <a href="https://play.google.com/store/apps/details?id=com.android.chrome"
+                                    target="_blank">Google Chrome：速度與安全兼具</a></li>
+                <li>iOS：推薦使用 <a href="https://itunes.apple.com/tw/app/google-chrome/id535886823?mt=8"
+                                target="_blank">Google Chrome</a></li>
+            </ul>
         </div>
         <div class="card-body">
             <h3>若有其他疑問，該如何求助？</h3>
