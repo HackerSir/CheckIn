@@ -33,6 +33,10 @@ class AppServiceProvider extends ServiceProvider
         //Carbon語系
         Carbon::setLocale(config('app.locale'));
 
+        //偵測 X-Requested-With
+        $xRequestedWithMessage = $this->detectXRequestedWith();
+        view()->share('xRequestedWithMessage', $xRequestedWithMessage);
+
         //Observers
         Qrcode::observe(QrcodeObserver::class);
         Record::observe(RecordObserver::class);
@@ -54,5 +58,36 @@ class AppServiceProvider extends ServiceProvider
     public function register()
     {
         //
+    }
+
+    /**
+     * 偵測 X-Requested-With，若非瀏覽器，回傳提示訊息
+     *
+     * @return null|string
+     */
+    private function detectXRequestedWith()
+    {
+        $xRequestedWith = request()->header('X-Requested-With');
+
+        if (!$xRequestedWith) {
+            return null;
+        }
+        $appName = null;
+        if ($xRequestedWith == 'com.facebook.orca') {
+            $appName = 'Messenger';
+        }
+        if ($xRequestedWith == 'com.facebook.katana') {
+            $appName = 'Facebook';
+        }
+
+        if ($appName) {
+            return "您似乎正在使用 {$appName} 瀏覽此網站";
+        }
+
+        if (starts_with($xRequestedWith, 'com.appspotr')) {
+            return '您似乎不是使用瀏覽器瀏覽此網站';
+        }
+
+        return null;
     }
 }
