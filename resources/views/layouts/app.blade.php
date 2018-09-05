@@ -91,6 +91,14 @@
 
 {{-- Content --}}
 <div class="container" id="vue-app">
+    {{ request()->header('User-Agent') }}
+    @if($xRequestedWithMessage ?? false)
+        <div class="alert alert-warning">
+            <i class="fas fa-exclamation-triangle"></i>
+            {{ $xRequestedWithMessage }}，這可能會使得<b>打卡通知</b>、<b>校內導航</b>等重要功能無法正確運作。<br/>
+            請使用瀏覽器（如：Google Chrome）瀏覽本網站，詳情請見 {{ link_to_route('faq', '常見問題') }}。
+        </div>
+    @endif
     @yield('content')
 </div>
 
