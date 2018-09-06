@@ -20,7 +20,7 @@
 
 @section('main_content')
     <div class="alert alert-info">
-        可於活動結束（{{ new Carbon\Carbon(Setting::get('end_at')) }}）之前多次修改，結束後將無法填寫或修改
+        可於回饋資料填寫期限（{{ new Carbon\Carbon(Setting::get('feedback_create_expired_at')) }}）之前多次修改，結束後將無法填寫或修改
     </div>
     <div class="card">
         <div class="card-body">
