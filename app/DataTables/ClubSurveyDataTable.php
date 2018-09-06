@@ -89,11 +89,7 @@ class ClubSurveyDataTable extends DataTable
             'user_id' => ['title' => '使用者'],
             'club_id' => ['title' => '社團'],
             'rating'  => ['title' => '評價'],
-            'comment' => [
-                'searchable' => false,
-                'orderable'  => false,
-                'title'      => '意見與建議',
-            ],
+            'comment' => ['title' => '意見與建議'],
         ];
     }
 
