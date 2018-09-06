@@ -7,6 +7,7 @@ use App\StudentSurvey;
 use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Setting;
 
 class SurveyController extends Controller
 {
@@ -20,7 +21,10 @@ class SurveyController extends Controller
         /** @var User $user */
         $user = auth()->user();
 
-        return view('survey.index', compact('user'));
+        $endAt = new Carbon(Setting::get('end_at'));
+        $feedbackCreateExpiredAt = new Carbon(Setting::get('feedback_create_expired_at'));
+
+        return view('survey.index', compact('user', 'endAt', 'feedbackCreateExpiredAt'));
     }
 
     /**
@@ -112,7 +116,7 @@ class SurveyController extends Controller
         if (!$user->club) {
             return redirect()->route('survey.index')->with('warning', '無法填寫此類型問卷');
         }
-        $endAt = new Carbon(\Setting::get('end_at'));
+        $endAt = new Carbon(\Setting::get('feedback_create_expired_at'));
         if (Carbon::now()->gt($endAt)) {
             return redirect()->back()->with('warning', '已超過填寫時間');
         }
@@ -134,7 +138,7 @@ class SurveyController extends Controller
         if (!$user->club) {
             return redirect()->route('survey.index')->with('warning', '無法填寫此類型問卷');
         }
-        $endAt = new Carbon(\Setting::get('end_at'));
+        $endAt = new Carbon(\Setting::get('feedback_create_expired_at'));
         if (Carbon::now()->gt($endAt)) {
             return redirect()->route('survey.index')->with('warning', '已超過填寫時間');
         }

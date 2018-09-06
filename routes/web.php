@@ -242,6 +242,7 @@ Route::group(['middleware' => ['auth', 'email']], function () {
     //問卷
     Route::group(['middleware' => 'permission:survey.manage'], function () {
         //學生問卷
+        Route::post('export/student-survey', 'ExportController@studentSurvey')->name('export.student-survey');
         Route::resource('student-survey', 'StudentSurveyController', [
             'only' => [
                 'index',
@@ -249,6 +250,7 @@ Route::group(['middleware' => ['auth', 'email']], function () {
             ],
         ]);
         //社團問卷
+        Route::post('export/club-survey', 'ExportController@clubSurvey')->name('export.club-survey');
         Route::resource('club-survey', 'ClubSurveyController', [
             'only' => [
                 'index',

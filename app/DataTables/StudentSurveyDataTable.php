@@ -87,11 +87,7 @@ class StudentSurveyDataTable extends DataTable
                 'title'      => '新生',
             ],
             'rating'      => ['title' => '評價'],
-            'comment'     => [
-                'searchable' => false,
-                'orderable'  => false,
-                'title'      => '意見與建議',
-            ],
+            'comment'     => ['title' => '意見與建議'],
         ];
     }
 

@@ -2,6 +2,14 @@
 
 @section('title', '社團問卷')
 
+@section('buttons')
+    {!! Form::open(['route' => ['export.club-survey'], 'style' => 'display: inline']) !!}
+    <button type="submit" class="btn btn-primary">
+        <i class="fa fa-download" aria-hidden="true"></i> 匯出
+    </button>
+    {!! Form::close() !!}
+@endsection
+
 @section('main_content')
     <div class="mt-3 pb-3">
         <div class="card mt-1">
