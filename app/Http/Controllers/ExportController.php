@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Club;
+use App\ClubSurvey;
 use App\Feedback;
 use App\Record;
 use App\Student;
@@ -389,5 +390,83 @@ class ExportController extends Controller
 
         //下載
         return $this->downloadSpreadsheet($spreadsheet, '學生問卷.xlsx');
+    }
+
+    /**
+     * 社團問卷
+     *
+     * @return \Symfony\Component\HttpFoundation\BinaryFileResponse
+     * @throws \PhpOffice\PhpSpreadsheet\Exception
+     */
+    public function clubSurvey()
+    {
+        $clubSurveys = ClubSurvey::with('user', 'club.clubType')->get();
+        //建立
+        $spreadsheet = new Spreadsheet();
+        $sheet = $spreadsheet->getActiveSheet();
+        //建立匯出資料
+        $this->setTitleRow(
+            $sheet,
+            [
+                '#',
+                'UID',
+                'NID',
+                '姓名',
+                '班級',
+                '科系',
+                '學院',
+                '入學年度',
+                '性別',
+                '新生',
+                '社團編號',
+                '社團類型',
+                '社團名稱',
+                '評價',
+                '意見與建議',
+            ]
+        );
+        foreach ($clubSurveys as $clubSurvey) {
+            /** @var Club $club */
+            $club = $clubSurvey->club;
+            /** @var User $user */
+            $user = $clubSurvey->user;
+            $student = $user->student;
+            $comment = $clubSurvey->comment;
+            if (starts_with($comment, '=')) {
+                $comment = "'" . $comment;
+            }
+
+            $this->appendRow($sheet, [
+                $clubSurvey->id,
+                $user->id,
+                $student->nid ?? null,
+                $student->name ?? $user->name,
+                $student->class ?? null,
+                $student->unit_name ?? null,
+                $student->dept_name ?? null,
+                $student->in_year ?? null,
+                $student->gender ?? null,
+                $student->is_freshman ?? null,
+                $club->number,
+                $club->clubType->name ?? null,
+                $club->name,
+                $clubSurvey->rating,
+                $comment,
+            ]);
+        }
+        //調整格式
+        $styleArray = [
+            'borders' => [
+                'right' => [
+                    'style' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THICK,
+                    'color' => ['argb' => '00000000'],
+                ],
+            ],
+        ];
+
+        $sheet->getStyleByColumnAndRow(9, 1, 9, $sheet->getHighestRow())->applyFromArray($styleArray);
+
+        //下載
+        return $this->downloadSpreadsheet($spreadsheet, '社團問卷.xlsx');
     }
 }
