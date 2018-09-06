@@ -6,6 +6,7 @@ use App\Club;
 use App\Feedback;
 use App\Record;
 use App\Student;
+use App\StudentSurvey;
 use App\User;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
@@ -319,5 +320,74 @@ class ExportController extends Controller
 
         //下載
         return $this->downloadSpreadsheet($spreadsheet, '攤位負責人.xlsx');
+    }
+
+    /**
+     * 學生問卷
+     *
+     * @return \Symfony\Component\HttpFoundation\BinaryFileResponse
+     * @throws \PhpOffice\PhpSpreadsheet\Exception
+     */
+    public function studentSurvey()
+    {
+        $studentSurveys = StudentSurvey::with('student.user')->get();
+        //建立
+        $spreadsheet = new Spreadsheet();
+        $sheet = $spreadsheet->getActiveSheet();
+        //建立匯出資料
+        $this->setTitleRow(
+            $sheet,
+            [
+                '#',
+                'NID',
+                '姓名',
+                '班級',
+                '科系',
+                '學院',
+                '入學年度',
+                '性別',
+                '新生',
+                '攤位負責人',
+                '評價',
+                '意見與建議',
+            ]
+        );
+        foreach ($studentSurveys as $studentSurvey) {
+            /** @var Student $student */
+            $student = $studentSurvey->student;
+            $comment = $studentSurvey->comment;
+            if (starts_with($comment, '=')) {
+                $comment = "'" . $comment;
+            }
+
+            $this->appendRow($sheet, [
+                $studentSurvey->id,
+                $student->nid,
+                $student->name,
+                $student->class,
+                $student->unit_name,
+                $student->dept_name,
+                $student->in_year,
+                $student->gender,
+                $student->is_freshman,
+                $student->is_staff,
+                $studentSurvey->rating,
+                $comment,
+            ]);
+        }
+        //調整格式
+        $styleArray = [
+            'borders' => [
+                'right' => [
+                    'style' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THICK,
+                    'color' => ['argb' => '00000000'],
+                ],
+            ],
+        ];
+
+        $sheet->getStyleByColumnAndRow(9, 1, 9, $sheet->getHighestRow())->applyFromArray($styleArray);
+
+        //下載
+        return $this->downloadSpreadsheet($spreadsheet, '學生問卷.xlsx');
     }
 }
