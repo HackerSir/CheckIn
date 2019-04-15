@@ -28,7 +28,7 @@
     @endif
     <div class="jumbotron">
         <h1 class="font-weight-bold">{{ config('app.cht_name') }}</h1>
-        <h3>2018 逢甲社團博覽會集點打卡</h3>
+        <h3>2019 逢甲社團博覽會集點打卡</h3>
         <a href="{{ route('oauth.index') }}" class="btn btn-primary btn-lg">開始使用<i class="fas fa-arrow-alt-circle-right ml-1"></i></a>
     </div>
     <div class="row mt-3 pb-3">
