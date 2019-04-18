@@ -11,9 +11,12 @@ use Laratrust\Models\LaratrustPermission;
  * @property string $name
  * @property string|null $display_name
  * @property string|null $description
- * @property \Carbon\Carbon|null $created_at
- * @property \Carbon\Carbon|null $updated_at
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Role[] $roles
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Permission newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Permission newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Permission query()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Permission whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Permission whereDescription($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Permission whereDisplayName($value)
