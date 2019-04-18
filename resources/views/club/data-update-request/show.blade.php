@@ -18,10 +18,10 @@
         <div class="card mt-2">
             <div class="card-header">審核</div>
             <div class="card-body">
-                @component('bs::alert', ['type' => 'info'])
+                <div class="alert alert-info">
                     若審核通過，社團簡介將立刻更新<br/>
                     對於每筆申請，僅能審核一次，送出後將無法撤銷
-                @endcomponent
+                </div>
                 {{ bs()->openForm('patch', route('data-update-request.update', $dataUpdateRequest)) }}
                 <div class="form-group row">
                     <label class="col-md-2 col-form-label">審核者</label>
