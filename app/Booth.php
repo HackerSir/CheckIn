@@ -12,10 +12,13 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $name 名稱
  * @property float|null $longitude 經度
  * @property float|null $latitude 緯度
- * @property \Carbon\Carbon|null $created_at
- * @property \Carbon\Carbon|null $updated_at
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \App\Club|null $club
  * @property-read string $embed_map_url
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Booth newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Booth newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Booth query()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Booth whereClubId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Booth whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Booth whereId($value)
