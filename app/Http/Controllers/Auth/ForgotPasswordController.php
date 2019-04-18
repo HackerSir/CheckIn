@@ -34,6 +34,7 @@ class ForgotPasswordController extends Controller
      *
      * @param \Illuminate\Http\Request $request
      * @return void
+     * @throws \Illuminate\Validation\ValidationException
      */
     protected function validateEmail(Request $request)
     {

@@ -6,7 +6,6 @@ use App\Services\LogService;
 use Carbon\Carbon;
 use Illuminate\Auth\Events\Login;
 use Illuminate\Auth\Events\Logout;
-use Request;
 
 class AuthListener
 {
@@ -24,7 +23,7 @@ class AuthListener
     /**
      * 註冊監聽器的訂閱者。
      *
-     * @param  \Illuminate\Events\Dispatcher $events
+     * @param \Illuminate\Events\Dispatcher $events
      */
     public function subscribe($events)
     {
@@ -48,7 +47,7 @@ class AuthListener
     {
         /* @var \App\User $user */
         $user = $event->user;
-        $ip = Request::getClientIp();
+        $ip = request()->getClientIp();
         //更新最後登入時間與IP
         $user->update([
             'last_login_at' => Carbon::now(),
@@ -78,7 +77,7 @@ class AuthListener
         if (!$user) {
             return;
         }
-        $ip = Request::getClientIp();
+        $ip = request()->getClientIp();
         //寫入紀錄
         $this->logService->info('[Auth][Logout] ' . $user->name . ' (' . $user->email . ')' . PHP_EOL, [
             'user' => [
