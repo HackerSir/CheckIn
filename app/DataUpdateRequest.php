@@ -20,14 +20,17 @@ use Illuminate\Database\Eloquent\Model;
  * @property string|null $original_url 原網址
  * @property string|null $description 簡介
  * @property string|null $url 網址
- * @property \Carbon\Carbon|null $created_at
- * @property \Carbon\Carbon|null $updated_at
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
  * @property string|null $original_extra_info 原額外資訊
  * @property string|null $extra_info 額外資訊
  * @property-read \App\Club $club
  * @property-read string $show_result
  * @property-read \App\User|null $reviewer
  * @property-read \App\User|null $user
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\DataUpdateRequest newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\DataUpdateRequest newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\DataUpdateRequest query()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\DataUpdateRequest whereClubId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\DataUpdateRequest whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\DataUpdateRequest whereDescription($value)

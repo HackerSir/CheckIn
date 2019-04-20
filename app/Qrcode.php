@@ -10,14 +10,17 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $id
  * @property string $code 代碼
  * @property int|null $student_id 對應學生
- * @property \Carbon\Carbon|null $bind_at 綁定時間
- * @property \Carbon\Carbon|null $created_at
- * @property \Carbon\Carbon|null $updated_at
+ * @property \Illuminate\Support\Carbon|null $bind_at 綁定時間
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
  * @property int|null $qrcode_set_id
  * @property-read bool $is_last_one
  * @property-read string $scan_url
  * @property-read \App\QrcodeSet|null $qrcodeSet
  * @property-read \App\Student|null $student
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Qrcode newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Qrcode newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Qrcode query()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Qrcode whereBindAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Qrcode whereCode($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Qrcode whereCreatedAt($value)

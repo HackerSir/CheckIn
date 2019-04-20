@@ -35,8 +35,9 @@ class ExtraTicketController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
+     * @throws \Illuminate\Validation\ValidationException
      */
     public function store(Request $request)
     {
@@ -68,9 +69,10 @@ class ExtraTicketController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
-     * @param  \App\ExtraTicket $extraTicket
+     * @param \Illuminate\Http\Request $request
+     * @param \App\ExtraTicket $extraTicket
      * @return \Illuminate\Http\Response
+     * @throws \Illuminate\Validation\ValidationException
      */
     public function update(Request $request, ExtraTicket $extraTicket)
     {
@@ -101,6 +103,10 @@ class ExtraTicketController extends Controller
         return redirect()->route('extra-ticket.index')->with('success', '工作人員抽獎編號已刪除');
     }
 
+    /**
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Exception
+     */
     public function destroyAll()
     {
         ExtraTicket::query()->delete();
@@ -140,6 +146,12 @@ class ExtraTicketController extends Controller
         return view('extra-ticket.import');
     }
 
+    /**
+     * @param Request $request
+     * @param FileService $fileService
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Illuminate\Validation\ValidationException
+     */
     public function postImport(Request $request, FileService $fileService)
     {
         //檢查匯入檔案格式為xls或xlsx

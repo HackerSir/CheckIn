@@ -14,8 +14,8 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $name 名稱
  * @property string|null $description 簡介
  * @property string|null $url 網址
- * @property \Carbon\Carbon|null $created_at
- * @property \Carbon\Carbon|null $updated_at
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
  * @property string|null $extra_info 額外資訊
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Booth[] $booths
  * @property-read \App\ClubSurvey $clubSurvey
@@ -27,6 +27,9 @@ use Illuminate\Database\Eloquent\Model;
  * @property-read \App\ImgurImage $imgurImage
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Record[] $records
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\User[] $users
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Club newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Club newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Club query()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Club whereClubTypeId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Club whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Club whereDescription($value)

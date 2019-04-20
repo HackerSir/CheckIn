@@ -70,10 +70,14 @@ php7.2:mysql:5.7:
   <<: *job_template
   image: edbizarro/gitlab-ci-pipeline-php:7.2
 
+php7.3:mysql:5.7:
+  <<: *job_template
+  image: edbizarro/gitlab-ci-pipeline-php:7.3
+
 sonarqube:
   stage: sonarqube
   image: danny50610/sonar-scanner
-  dependencies: ['php7.2:mysql:5.7']
+  dependencies: ['php7.3:mysql:5.7']
   cache:
     key: $CI_COMMIT_REF_NAME
     paths:

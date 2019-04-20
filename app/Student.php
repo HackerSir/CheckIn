@@ -17,8 +17,8 @@ use Illuminate\Database\Query\Builder;
  * @property string $dept_name 學院
  * @property int $in_year 入學學年度
  * @property string $gender 性別
- * @property \Carbon\Carbon|null $created_at
- * @property \Carbon\Carbon|null $updated_at
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
  * @property bool $consider_as_freshman 視為新生
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Record[] $countedRecords
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Feedback[] $feedback
@@ -35,7 +35,10 @@ use Illuminate\Database\Query\Builder;
  * @property-read \App\Ticket $ticket
  * @property-read \App\User|null $user
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Student freshman()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Student newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Student newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Student nonFreshman()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Student query()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Student whereClass($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Student whereConsiderAsFreshman($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Student whereCreatedAt($value)
