@@ -7,7 +7,7 @@
 2019 學生社團博覽會 打卡集點抽獎
 
 ## Framework
-- Laravel 5.6
+- Laravel 5.7
 - Bootstrap 4
 - Vue.js 2
 
