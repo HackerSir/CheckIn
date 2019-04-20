@@ -35,6 +35,11 @@ class Google2FAController extends Controller
         return view('profile.2fa.index', compact('user'));
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Illuminate\Validation\ValidationException
+     */
     public function toggle(Request $request)
     {
         $this->validate($request, [

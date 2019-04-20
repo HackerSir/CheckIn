@@ -58,7 +58,7 @@ class OAuthController extends Controller
 
     public function login()
     {
-        $userCode = \Request::get('user_code');
+        $userCode = request('user_code');
         if (!$userCode) {
             return redirect()->route('index')->with('warning', '登入失敗(c)');
         }

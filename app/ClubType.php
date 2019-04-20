@@ -11,10 +11,13 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $name 名稱
  * @property string $color 標籤顏色
  * @property bool $is_counted 是否列入抽獎集點
- * @property \Carbon\Carbon|null $created_at
- * @property \Carbon\Carbon|null $updated_at
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Club[] $clubs
  * @property-read string $tag
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\ClubType newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\ClubType newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\ClubType query()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\ClubType whereColor($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\ClubType whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\ClubType whereId($value)

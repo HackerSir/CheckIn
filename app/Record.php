@@ -11,10 +11,13 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $ip 打卡IP
  * @property int|null $student_id 對應學生
  * @property int|null $club_id 對應社團
- * @property \Carbon\Carbon|null $created_at
- * @property \Carbon\Carbon|null $updated_at
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \App\Club|null $club
  * @property-read \App\Student|null $student
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Record newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Record newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Record query()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Record whereClubId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Record whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Record whereId($value)

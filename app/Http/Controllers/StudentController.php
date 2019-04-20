@@ -62,8 +62,9 @@ class StudentController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
+     * @throws \Illuminate\Validation\ValidationException
      */
     public function store(Request $request)
     {
@@ -118,6 +119,7 @@ class StudentController extends Controller
                     'url'       => is_null($booth->club) ? null : route('clubs.show', $booth->club->id),
                 ];
             }
+            view()->share(compact('boothData'));
 
             $path = [];
             $records = $student->records->reverse();
@@ -131,9 +133,10 @@ class StudentController extends Controller
                     ];
                 }
             }
+            view()->share(compact('path'));
         }
 
-        return view('student.show', compact('student', 'boothData', 'path'));
+        return view('student.show', compact('student'));
     }
 
     /**

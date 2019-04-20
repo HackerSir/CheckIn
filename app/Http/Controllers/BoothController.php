@@ -35,8 +35,9 @@ class BoothController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
+     * @throws \Illuminate\Validation\ValidationException
      */
     public function store(Request $request)
     {
@@ -77,9 +78,10 @@ class BoothController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
-     * @param  \App\Booth $booth
+     * @param \Illuminate\Http\Request $request
+     * @param \App\Booth $booth
      * @return \Illuminate\Http\Response
+     * @throws \Illuminate\Validation\ValidationException
      */
     public function update(Request $request, Booth $booth)
     {
@@ -114,6 +116,12 @@ class BoothController extends Controller
         return view('booth.import');
     }
 
+    /**
+     * @param Request $request
+     * @param FileService $fileService
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Illuminate\Validation\ValidationException
+     */
     public function postImport(Request $request, FileService $fileService)
     {
         //檢查匯入檔案格式為xls或xlsx
