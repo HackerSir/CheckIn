@@ -1,5 +1,6 @@
 <?php
 
-foreach ($items as $item) {
-    echo $item['loc']."\n";
+foreach($items as $item)
+{
+	echo $item['loc'] . "\n";
 }

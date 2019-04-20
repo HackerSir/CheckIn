@@ -56,7 +56,6 @@ class SurveyController extends Controller
      *
      * @param Request $request
      * @return \Illuminate\Http\Response
-     * @throws \Illuminate\Validation\ValidationException
      */
     public function storeStudentSurvey(Request $request)
     {
@@ -131,7 +130,6 @@ class SurveyController extends Controller
      *
      * @param Request $request
      * @return \Illuminate\Http\Response
-     * @throws \Illuminate\Validation\ValidationException
      */
     public function storeClubSurvey(Request $request)
     {

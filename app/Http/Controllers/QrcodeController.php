@@ -52,7 +52,6 @@ class QrcodeController extends Controller
      * @param Request $request
      * @param StudentService $studentService
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\Response
-     * @throws \Illuminate\Validation\ValidationException
      */
     public function bind(Request $request, StudentService $studentService)
     {

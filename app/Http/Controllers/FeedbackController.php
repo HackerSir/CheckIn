@@ -105,22 +105,20 @@ class FeedbackController extends Controller
         if (!$feedback) {
             //自己最後一次填寫的回饋資料
             $lastFeedback = $user->student->feedback()->orderBy('created_at', 'desc')->first();
-            view()->share(compact('lastFeedback'));
         }
 
         return view(
             'feedback.create-or-edit',
-            compact('user', 'club', 'feedback', 'feedbackCreateExpiredAt')
+            compact('user', 'club', 'feedback', 'lastFeedback', 'feedbackCreateExpiredAt')
         );
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param  \Illuminate\Http\Request $request
      * @param Club $club
      * @return \Illuminate\Http\Response
-     * @throws \Illuminate\Validation\ValidationException
      */
     public function store(Request $request, Club $club)
     {

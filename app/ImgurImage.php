@@ -13,13 +13,10 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $extension 副檔名
  * @property string $delete_hash
  * @property int|null $club_id 所屬社團
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property \Carbon\Carbon|null $created_at
+ * @property \Carbon\Carbon|null $updated_at
  * @property-read \App\Club|null $club
  * @property-read string $url
- * @method static \Illuminate\Database\Eloquent\Builder|\App\ImgurImage newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\ImgurImage newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\ImgurImage query()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\ImgurImage whereClubId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\ImgurImage whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\ImgurImage whereDeleteHash($value)

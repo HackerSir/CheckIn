@@ -40,21 +40,6 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Write Eloquent Model Mixins
-    |--------------------------------------------------------------------------
-    |
-    | This will add the necessary DocBlock mixins to the model class
-    | contained in the Laravel Framework. This helps the IDE with
-    | auto-completion.
-    |
-    | Please be aware that this setting changes a file within the /vendor directory.
-    |
-    */
-
-    'write_eloquent_model_mixins' => true,
-
-    /*
-    |--------------------------------------------------------------------------
     | Helper files to include
     |--------------------------------------------------------------------------
     |
@@ -167,13 +152,13 @@ return [
      |
      | For example, normally you would see this:
      |
-     |  * @property \Illuminate\Support\Carbon $created_at
-     |  * @property \Illuminate\Support\Carbon $updated_at
+     |  * @property \Carbon\Carbon $created_at
+     |  * @property \Carbon\Carbon $updated_at
      |
      | With this enabled, the properties will be this:
      |
-     |  * @property \Illuminate\Support\Carbon $createdAt
-     |  * @property \Illuminate\Support\Carbon $updatedAt
+     |  * @property \Carbon\Carbon $createdAt
+     |  * @property \Carbon\Carbon $updatedAt
      |
      | Note, it is currently an all-or-nothing option.
      |
@@ -192,15 +177,4 @@ return [
         'integer' => 'int',
         'boolean' => 'bool',
     ],
-
-    /*
-    |--------------------------------------------------------------------------
-    | Include DocBlocks from classes
-    |--------------------------------------------------------------------------
-    |
-    | Include DocBlocks from classes to allow additional code inspection for
-    | magic methods and properties.
-    |
-    */
-    'include_class_docblocks'     => false,
 ];

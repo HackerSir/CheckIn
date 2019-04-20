@@ -35,10 +35,9 @@ class StudentTicketController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param  \Illuminate\Http\Request $request
      * @param StudentService $studentService
      * @return \Illuminate\Http\Response
-     * @throws \Illuminate\Validation\ValidationException
      */
     public function store(Request $request, StudentService $studentService)
     {
@@ -79,11 +78,10 @@ class StudentTicketController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
-     * @param \App\StudentTicket $studentTicket
+     * @param  \Illuminate\Http\Request $request
+     * @param  \App\StudentTicket $studentTicket
      * @param StudentService $studentService
      * @return \Illuminate\Http\Response
-     * @throws \Illuminate\Validation\ValidationException
      */
     public function update(Request $request, StudentTicket $studentTicket, StudentService $studentService)
     {
@@ -123,10 +121,6 @@ class StudentTicketController extends Controller
         return redirect()->route('student-ticket.index')->with('success', '學生抽獎編號已刪除');
     }
 
-    /**
-     * @return \Illuminate\Http\RedirectResponse
-     * @throws \Exception
-     */
     public function destroyAll()
     {
         StudentTicket::query()->delete();
@@ -166,13 +160,6 @@ class StudentTicketController extends Controller
         return view('student-ticket.import');
     }
 
-    /**
-     * @param Request $request
-     * @param FileService $fileService
-     * @param StudentService $studentService
-     * @return \Illuminate\Http\RedirectResponse
-     * @throws \Illuminate\Validation\ValidationException
-     */
     public function postImport(Request $request, FileService $fileService, StudentService $studentService)
     {
         //檢查匯入檔案格式為xls或xlsx

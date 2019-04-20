@@ -3,7 +3,7 @@
 @section('title', '填寫回饋資料')
 
 @section('buttons')
-    <a href="{{ url()->previous() }}" class="btn btn-secondary">
+    <a href="{{ Url::previous() }}" class="btn btn-secondary">
         <i class="fa fa-arrow-left" aria-hidden="true"></i> 返回
     </a>
 @endsection

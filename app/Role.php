@@ -12,12 +12,9 @@ use Laratrust\Models\LaratrustRole;
  * @property string|null $display_name
  * @property string|null $description
  * @property int $protection
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property \Carbon\Carbon|null $created_at
+ * @property \Carbon\Carbon|null $updated_at
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Permission[] $permissions
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Role newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Role newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Role query()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Role whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Role whereDescription($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Role whereDisplayName($value)

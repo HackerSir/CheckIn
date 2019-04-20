@@ -41,8 +41,8 @@ class LoginController extends Controller
     /**
      * Handle a login request to the application.
      *
-     * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\Response|\Symfony\Component\HttpFoundation\Response|void
+     * @param  \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\Response|\Symfony\Component\HttpFoundation\Response
      * @throws \Illuminate\Validation\ValidationException
      */
     public function login(Request $request)
@@ -55,9 +55,7 @@ class LoginController extends Controller
         if ($this->hasTooManyLoginAttempts($request)) {
             $this->fireLockoutEvent($request);
 
-            $this->sendLockoutResponse($request);
-
-            return;
+            return $this->sendLockoutResponse($request);
         }
 
         //檢查是否啟用二階段驗證

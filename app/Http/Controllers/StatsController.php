@@ -70,6 +70,6 @@ class StatsController extends Controller
         }
         $heatDataJson = '[' . implode(',', $heatData) . ']';
 
-        return view('stats.heatmap', compact('boothData', 'heatDataJson'));
+        return view('stats.heatmap', compact('type', 'boothData', 'heatDataJson'));
     }
 }

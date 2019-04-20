@@ -12,14 +12,11 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $club_id
  * @property int $rating 星等評價
  * @property string|null $comment 意見與建議
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property \Carbon\Carbon|null $created_at
+ * @property \Carbon\Carbon|null $updated_at
  * @property-read \App\Club $club
  * @property-read string $stars
  * @property-read \App\User $user
- * @method static \Illuminate\Database\Eloquent\Builder|\App\ClubSurvey newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\ClubSurvey newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\ClubSurvey query()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\ClubSurvey whereClubId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\ClubSurvey whereComment($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\ClubSurvey whereCreatedAt($value)

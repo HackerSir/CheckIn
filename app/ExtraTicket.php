@@ -11,11 +11,8 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $nid 學號
  * @property string $name 姓名
  * @property string|null $class 系級
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @method static \Illuminate\Database\Eloquent\Builder|\App\ExtraTicket newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\ExtraTicket newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\ExtraTicket query()
+ * @property \Carbon\Carbon|null $created_at
+ * @property \Carbon\Carbon|null $updated_at
  * @method static \Illuminate\Database\Eloquent\Builder|\App\ExtraTicket whereClass($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\ExtraTicket whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\ExtraTicket whereId($value)

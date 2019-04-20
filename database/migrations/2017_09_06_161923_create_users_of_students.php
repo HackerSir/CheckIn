@@ -25,7 +25,7 @@ class CreateUsersOfStudents extends Migration
                 'password'    => '',
                 'confirm_at'  => \Carbon\Carbon::now(),
                 'register_at' => \Carbon\Carbon::now(),
-                'register_ip' => request()->getClientIp(),
+                'register_ip' => \Request::getClientIp(),
             ]);
             //綁定
             $user->student()->save($student);

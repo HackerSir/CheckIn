@@ -182,14 +182,6 @@ class ClubController extends Controller
         return view('club.import');
     }
 
-    /**
-     * @param Request $request
-     * @param FileService $fileService
-     * @param StudentService $studentService
-     * @param UserService $userService
-     * @return \Illuminate\Http\RedirectResponse
-     * @throws \Illuminate\Validation\ValidationException
-     */
     public function postImport(
         Request $request,
         FileService $fileService,

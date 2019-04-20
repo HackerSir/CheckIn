@@ -1,11 +1,3 @@
-<?php
-/**
- * @var  Arcanedev\LogViewer\Entities\Log            $log
- * @var  Illuminate\Pagination\LengthAwarePaginator  $entries
- * @var  string|null                                 $query
- */
-?>
-
 @extends('log-viewer::bootstrap-4._master')
 
 @section('content')
@@ -82,13 +74,13 @@
                     <form action="{{ route('log-viewer::logs.search', [$log->date, $level]) }}" method="GET">
                         <div class=form-group">
                             <div class="input-group">
-                                <input id="query" name="query" class="form-control"  value="{!! $query !!}" placeholder="Type here to search">
+                                <input id="query" name="query" class="form-control"  value="{!! request('query') !!}" placeholder="Type here to search">
                                 <div class="input-group-append">
-                                    @unless (is_null($query))
+                                    @if (request()->has('query'))
                                         <a href="{{ route('log-viewer::logs.show', [$log->date]) }}" class="btn btn-secondary">
-                                            ({{ $entries->count() }} results) <i class="fa fa-fw fa-times"></i>
+                                            <i class="fa fa-fw fa-times"></i>
                                         </a>
-                                    @endunless
+                                    @endif
                                     <button id="search-btn" class="btn btn-primary">
                                         <span class="fa fa-fw fa-search"></span>
                                     </button>
@@ -104,7 +96,7 @@
                 @if ($entries->hasPages())
                     <div class="card-header">
                         <span class="badge badge-info float-right">
-                            Page {{ $entries->currentPage() }} of {{ $entries->lastPage() }}
+                            Page {!! $entries->currentPage() !!} of {!! $entries->lastPage() !!}
                         </span>
                     </div>
                 @endif
@@ -122,7 +114,6 @@
                         </thead>
                         <tbody>
                             @forelse($entries as $key => $entry)
-                                <?php /** @var  Arcanedev\LogViewer\Entities\LogEntry  $entry */ ?>
                                 <tr>
                                     <td>
                                         <span class="badge badge-env">{{ $entry->env }}</span>

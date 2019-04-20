@@ -20,8 +20,8 @@ use Laratrust\Traits\LaratrustUserTrait;
  * @property string|null $last_login_at
  * @property string|null $last_login_ip
  * @property string|null $remember_token
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property \Carbon\Carbon|null $created_at
+ * @property \Carbon\Carbon|null $updated_at
  * @property string|null $google2fa_secret
  * @property int|null $club_id 負責社團
  * @property-read \App\Club|null $club
@@ -35,11 +35,6 @@ use Laratrust\Traits\LaratrustUserTrait;
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Permission[] $permissions
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Role[] $roles
  * @property-read \App\Student $student
- * @method static \Illuminate\Database\Eloquent\Builder|\App\User newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\User newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\User orWherePermissionIs($permission = '')
- * @method static \Illuminate\Database\Eloquent\Builder|\App\User orWhereRoleIs($role = '', $team = null)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\User query()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereClubId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereConfirmAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereConfirmCode($value)
@@ -51,11 +46,11 @@ use Laratrust\Traits\LaratrustUserTrait;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereLastLoginIp($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\User wherePassword($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\User wherePermissionIs($permission = '', $boolean = 'and')
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User wherePermissionIs($permission = '')
  * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereRegisterAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereRegisterIp($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereRememberToken($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereRoleIs($role = '', $team = null, $boolean = 'and')
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereRoleIs($role = '')
  * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereUpdatedAt($value)
  * @mixin \Eloquent
  */

@@ -33,9 +33,8 @@ class ClubTypeController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
-     * @throws \Illuminate\Validation\ValidationException
      */
     public function store(Request $request)
     {
@@ -96,10 +95,9 @@ class ClubTypeController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
-     * @param \App\ClubType $clubType
+     * @param  \Illuminate\Http\Request $request
+     * @param  \App\ClubType $clubType
      * @return \Illuminate\Http\Response
-     * @throws \Illuminate\Validation\ValidationException
      */
     public function update(Request $request, ClubType $clubType)
     {
