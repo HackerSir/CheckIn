@@ -16,14 +16,15 @@ class Google2FAController extends Controller
         if (!$user->google2fa_secret) {
             $google2fa = app('pragmarx.google2fa');
             //產生隨機SecretKey，暫存60分鐘
-            $secretKey = \Cache::remember('2faSecretKey' . $user->id, 60, function () use ($google2fa) {
+            $rememberKey = '2faSecretKey' . $user->id;
+            $secretKey = \Cache::remember($rememberKey, now()->addMinutes(60), function () use ($google2fa) {
                 $secretKey = $google2fa->generateSecretKey();
 
                 return $secretKey;
             });
             session(['2faSecretKey' => $secretKey]);
 
-            $google2faQRCodeUrl = $google2fa->getQRCodeGoogleUrl(
+            $google2faQRCodeUrl = $google2fa->getQRCodeInline(
                 'CheckIn2017',
                 $user->email,
                 $secretKey
