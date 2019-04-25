@@ -13,10 +13,19 @@ class HomeController extends Controller
 {
     public function index()
     {
+        return view('index');
+    }
+
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View
+     * @throws \Exception
+     */
+    public function myQRCode()
+    {
         /** @var User $user */
         $user = auth()->user();
-        if (!$user || !$user->student) {
-            return view('index');
+        if (!$user->student) {
+            return redirect()->route('index')->with('warning', '無學生資料，無法檢視 QR Code');
         }
         $student = $user->student;
         $student->load('records.club.clubType', 'qrcodes.student');

@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', $student->name)
+@section('title', '我的條碼')
 
 @section('content')
     <div class="mt-3 pb-3">

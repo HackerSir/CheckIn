@@ -280,6 +280,8 @@ Route::group(['middleware' => ['auth', 'email']], function () {
             ->name('own-club.data-update-request.store');
     });
 
+    //我的 QR Code
+    Route::get('/my-qrcode', 'HomeController@myQRCode')->name('my-qrcode');
     //QR Code 掃描
     Route::get('qr/{code}', 'QrcodeScanController@scan')->name('qrcode.scan');
     //條碼圖
