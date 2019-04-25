@@ -21,6 +21,7 @@ class LaravelMenu
         //左側
         Menu::make('left', function ($menu) {
             /* @var \Lavary\Menu\Builder $menu */
+            $menu->add('我的條碼', ['route' => 'my-qrcode'])->active('my-qrcode');
             $menu->add('社團介紹', ['route' => 'clubs.index'])->active('clubs');
             $menu->add('搜尋社團及導航', ['route' => 'clubs.index'])->active('clubs');
 

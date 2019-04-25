@@ -14,7 +14,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string|null $submit_at 申請提交時間
  * @property int|null $reviewer_id 審核者
  * @property string|null $review_at 審核時間
- * @property int|null $review_result 審核通過
+ * @property bool|null $review_result 審核通過
  * @property string|null $review_comment 審核評語
  * @property string|null $original_description 原簡介
  * @property string|null $original_url 原網址
@@ -67,6 +67,10 @@ class DataUpdateRequest extends Model
         'description',
         'extra_info',
         'url',
+    ];
+
+    protected $casts = [
+        'review_result' => 'boolean',
     ];
 
     public function user()

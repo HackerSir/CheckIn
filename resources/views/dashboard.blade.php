@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', $student->name)
+@section('title', '我的條碼')
 
 @section('content')
     <div class="mt-3 pb-3">
@@ -57,17 +57,6 @@
 
                     <h1>打卡紀錄</h1>
                     @include('components.record-list', ['student' => $student, 'showFeedbackButton' => true])
-
-                    <hr/>
-
-                    <h1>個人資料</h1>
-                    <dl class="row" style="font-size: 120%">
-                        <dt class="col-md-2">學號</dt>
-                        <dd class="col-md-10">{{ $student->nid }}</dd>
-
-                        <dt class="col-md-2">姓名</dt>
-                        <dd class="col-md-10">{{ $student->name }}</dd>
-                    </dl>
                 </div>
             </div>
         </div>
