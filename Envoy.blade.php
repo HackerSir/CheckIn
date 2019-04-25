@@ -12,9 +12,9 @@
 
 @story('deploy')
     clone_repository
+    update_symlink_env
     run_composer
     stop_horizon
-    update_symlink_env
     yarn_install
     artisan_migrate
     update_symlinks_other
