@@ -25,7 +25,7 @@ class HomeController extends Controller
         /** @var User $user */
         $user = auth()->user();
         if (!$user->student) {
-            return redirect()->route('index')->with('warning', '無學生資料，無法檢視 QR Code');
+            return redirect()->route('index')->with('warning', '非學生帳號，無法檢視 QR Code');
         }
         $student = $user->student;
         $student->load('records.club.clubType', 'qrcodes.student');
