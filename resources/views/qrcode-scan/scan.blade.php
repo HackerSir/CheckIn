@@ -15,11 +15,9 @@
                 <dt class="col-md-2">條碼</dt>
                 <dd class="col-md-10 code">{{ $code }}</dd>
 
-                @if(isset($qrcode))
-                    @if($qrcode->student)
-                        <dt class="col-md-2">學生</dt>
-                        <dd class="col-md-10">{{ $qrcode->student->masked_display_name }}</dd>
-                    @endif
+                @if(isset($qrcode) && $qrcode->student)
+                    <dt class="col-md-2">學生</dt>
+                    <dd class="col-md-10">{{ $qrcode->student->masked_display_name }}</dd>
                 @endif
             </dl>
             @if(isset($qrcode) && $qrcode->student)
@@ -32,11 +30,6 @@
 
                 <h1>打卡集點</h1>
                 @include('components.check-in-progress', ['student' => $qrcode->student])
-
-                <hr/>
-
-                <h1>打卡紀錄</h1>
-                @include('components.record-list', ['student' => $qrcode->student])
             @endif
         </div>
     </div>
