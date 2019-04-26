@@ -53,9 +53,8 @@
             }
         }
 
-        body > .container {
+        body > div:first-child {
             padding-top: 60px;
-            min-height: calc(100vh - 86px);
         }
 
         .table td, .table th {
@@ -86,23 +85,24 @@
     @yield('css')
 </head>
 <body>
-{{-- Navbar --}}
-@include('components.navbar')
-
-{{-- Content --}}
-<div class="container" id="vue-app">
-    @if($xRequestedWithMessage ?? false)
-        <div class="alert alert-warning">
-            <i class="fas fa-exclamation-triangle"></i>
-            {{ $xRequestedWithMessage }}，這可能會使得<b>打卡通知</b>、<b>校內導航</b>等重要功能無法正確運作。<br/>
-            請使用瀏覽器（如：Google Chrome）瀏覽本網站，詳情請見 {{ link_to_route('faq', '常見問題') }}。
-        </div>
-    @endif
-    @yield('content')
+<div class="d-flex flex-column" id="vue-app" style="min-height:100vh;">
+    {{-- Navbar --}}
+    @include('components.navbar')
+    {{-- Main Content --}}
+    <main style="flex-grow:1; display: block!important;" class="d-flex mt-3 mb-3 @yield('container_class', 'container')"
+          id="app">
+        @if($xRequestedWithMessage ?? false)
+            <div class="alert alert-warning">
+                <i class="fas fa-exclamation-triangle"></i>
+                {{ $xRequestedWithMessage }}，這可能會使得<b>打卡通知</b>、<b>校內導航</b>等重要功能無法正確運作。<br/>
+                請使用瀏覽器（如：Google Chrome）瀏覽本網站，詳情請見 {{ link_to_route('faq', '常見問題') }}。
+            </div>
+        @endif
+        @yield('content')
+    </main>
+    {{-- Footer --}}
+    @include('components.footer')
 </div>
-
-{{-- Footer --}}
-@include('components.footer')
 
 {{-- Javascript --}}
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"
