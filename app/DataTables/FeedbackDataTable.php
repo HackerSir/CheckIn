@@ -48,9 +48,6 @@ class FeedbackDataTable extends DataTable
                     $query->where('name', 'like', '%' . $keyword . '%');
                 });
             })
-            ->editColumn('message', function ($feedback) {
-                return view('feedback.datatables.message', compact('feedback'))->render();
-            })
             ->escapeColumns([]);
     }
 

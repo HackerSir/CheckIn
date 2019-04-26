@@ -2,6 +2,7 @@
 
 @section('title', '回饋資料')
 
+@section('container_class', 'container-fluid')
 @section('buttons')
     @if($user->student)
         <a href="{{ route('feedback.my') }}" class="btn btn-secondary">
