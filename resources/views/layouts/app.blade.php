@@ -35,8 +35,6 @@
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
           integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
-    <link rel="stylesheet" href="//cdn.jsdelivr.net/alertifyjs/1.9.0/css/alertify.min.css"/>
-    <link rel="stylesheet" href="//cdn.jsdelivr.net/alertifyjs/1.9.0/css/themes/bootstrap.min.css"/>
     {{-- DataTables --}}
     <link rel="stylesheet" href="//cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css">
     {{--<link rel="stylesheet" href="//cdn.datatables.net/buttons/1.3.1/css/buttons.dataTables.min.css">--}}
@@ -44,6 +42,8 @@
     <link rel="stylesheet" href="{{ asset('css/jquery.datetimepicker.min.css') }}">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet"/>
     <link rel="stylesheet" href="{{ asset(mix('/build-css/select2-bootstrap4.min.css')) }}">
+    {{-- toastr.js --}}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
     <style>
         {{-- https://github.com/twbs/bootstrap/issues/21590 --}}
         @media (max-width: 576px) {
@@ -65,8 +65,7 @@
             background: url("{{ asset('img/background.jpg') }}") no-repeat fixed center / cover !important;
         }
 
-        {{-- 讓 AlertifyJS 的 notify 往下一點，才不會擋到 navbar --}}
-        .alertify-notifier.ajs-top {
+        .toast-top-full-width {
             top: 60px;
         }
 
@@ -114,7 +113,6 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
-<script src="//cdn.jsdelivr.net/alertifyjs/1.9.0/alertify.min.js"></script>
 {{-- DataTables --}}
 <script src="//cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
 {{--<script src="//cdn.datatables.net/buttons/1.3.1/js/dataTables.buttons.min.js"></script>--}}
@@ -122,6 +120,8 @@
 {{--<script src="{{ asset('vendor/datatables/buttons.server-side.js') }}"></script>--}}
 <script src="{{ asset('js/jquery.datetimepicker.full.min.js') }}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.full.min.js"></script>
+{{-- toastr.js --}}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 <script>
     //CSRF Token
     window.Laravel = <?php echo json_encode([
@@ -132,53 +132,35 @@
 </script>
 <script>
     $(function () {
-        //AlertifyJS
-        alertify.defaults = {
-            autoReset: true,
-            basic: false,
-            closable: true,
-            closableByDimmer: true,
-            frameless: false,
-            maintainFocus: true, // <== global default not per instance, applies to all dialogs
-            maximizable: true,
-            modal: true,
-            movable: true,
-            moveBounded: false,
-            overflow: true,
-            padding: true,
-            pinnable: true,
-            pinned: true,
-            preventBodyShift: false, // <== global default not per instance, applies to all dialogs
-            resizable: true,
-            startMaximized: false,
-            transition: 'pulse',
-            notifier: {
-                position: 'top-right'
-            },
-            // language resources
-            glossary: {
-                // dialogs default title
-                title: 'AlertifyJS',
-                // ok button text
-                ok: 'OK',
-                // cancel button text
-                cancel: 'Cancel'
-            },
-            // theme settings
-            theme: {
-                // class name attached to prompt dialog input textbox.
-                input: 'ajs-input',
-                // class name attached to ok button
-                ok: 'ajs-ok',
-                // class name attached to cancel button
-                cancel: 'ajs-cancel'
-            }
+        toastr.options = {
+            "toastClass": "toastr",
+            "closeButton": true,
+            "debug": false,
+            "newestOnTop": true,
+            "progressBar": true,
+            "positionClass": "toast-top-full-width",
+            "preventDuplicates": false,
+            "onclick": null,
+            "showDuration": "3000",
+            "hideDuration": "1000",
+            "timeOut": "5000",
+            "extendedTimeOut": "3000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut"
         };
         @if(session('success'))
-        alertify.notify('{{ session('success') }}', 'success', 5);
+            toastr["success"]('{{ session('success') }}');
         @endif
-        @if(session('warning'))
-        alertify.notify('{{ session('warning') }}', 'warning', 5);
+            @if(session('info'))
+            toastr["info"]('{{ session('info') }}');
+        @endif
+            @if(session('warning'))
+            toastr["warning"]('{{ session('warning') }}');
+        @endif
+            @if(session('error'))
+            toastr["error"]('{{ session('error') }}');
         @endif
         // Tooltip
         $('[title]:not(#tracy-debug *[title])').each(function () {
