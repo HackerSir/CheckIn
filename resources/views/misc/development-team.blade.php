@@ -17,7 +17,7 @@
     <div class="card">
         <div class="card-body">
             <h2 class="card-title">關於我們</h2>
-            <p>我們來自逢甲大學黑客社，是一群為了精進技術而聚集的人們……</p>
+            <p>我們來自<a href="https://www.facebook.com/HackerSir.tw" target="_blank">逢甲大學黑客社</a>，是一群為了精進技術而聚集的人們……</p>
         </div>
         <div class="card-body d-flex flex-column flex-md-row align-items-md-start">
             <div class="d-shrink-0 text-center mr-md-2 d-flex">

@@ -23,7 +23,6 @@ class LaravelMenu
             /* @var \Lavary\Menu\Builder $menu */
             $menu->add('我的條碼', ['route' => 'my-qrcode'])->active('my-qrcode');
             $menu->add('社團介紹', ['route' => 'clubs.index'])->active('clubs');
-            $menu->add('搜尋社團及導航', ['route' => 'clubs.index'])->active('clubs');
 
             $menu->add('攤位地圖', ['route' => ['clubs.map', 'type' => 'static']])->active('map');
         });

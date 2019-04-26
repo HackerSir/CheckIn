@@ -46,7 +46,7 @@
             <br>
             <br>
             <p>Regards,</p>
-            <p><a href="https://www.facebook.com/HackerSir.tw">逢甲大學黑客社</a></p>
+            <p><a href="https://www.facebook.com/HackerSir.tw" target="_blank">逢甲大學黑客社</a></p>
         </div>
     </div>
 @endsection
