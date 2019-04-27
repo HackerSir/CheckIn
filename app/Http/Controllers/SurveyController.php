@@ -15,6 +15,7 @@ class SurveyController extends Controller
      * 主要頁面，可選擇瀏覽或填寫各類型問卷
      *
      * @return \Illuminate\Http\Response
+     * @throws \Exception
      */
     public function index()
     {
@@ -31,6 +32,7 @@ class SurveyController extends Controller
      * 建立或編輯學生問卷
      *
      * @return \Illuminate\Http\Response
+     * @throws \Exception
      */
     public function createOrEditStudentSurvey()
     {
@@ -57,6 +59,7 @@ class SurveyController extends Controller
      * @param Request $request
      * @return \Illuminate\Http\Response
      * @throws \Illuminate\Validation\ValidationException
+     * @throws \Exception
      */
     public function storeStudentSurvey(Request $request)
     {
@@ -109,6 +112,7 @@ class SurveyController extends Controller
      * 建立或編輯社團問卷
      *
      * @return \Illuminate\Http\Response
+     * @throws \Exception
      */
     public function createOrEditClubSurvey()
     {
@@ -132,6 +136,7 @@ class SurveyController extends Controller
      * @param Request $request
      * @return \Illuminate\Http\Response
      * @throws \Illuminate\Validation\ValidationException
+     * @throws \Exception
      */
     public function storeClubSurvey(Request $request)
     {

@@ -16,6 +16,7 @@ class OwnClubController extends Controller
      * Show the form for editing the specified resource.
      *
      * @return \Illuminate\Http\Response
+     * @throws \Exception
      */
     public function edit()
     {
@@ -76,6 +77,7 @@ class OwnClubController extends Controller
 
     /**
      * @return \Illuminate\Http\Response
+     * @throws \Exception
      */
     public function dataUpdateRequestPanel()
     {
@@ -99,6 +101,7 @@ class OwnClubController extends Controller
 
     /**
      * @return \Illuminate\Http\Response
+     * @throws \Exception
      */
     public function createDataUpdateRequest()
     {
