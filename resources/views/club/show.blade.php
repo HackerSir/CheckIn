@@ -116,7 +116,7 @@
                             </small>
                             @if(!Auth::check())
                                 <a href="javascript:void(0)" class="btn btn-primary btn-lg disabled">
-                                    <i class="fa fa-times" aria-hidden="true"></i> 登入後即可填寫
+                                    <i class="fa fa-pencil-alt" aria-hidden="true"></i> 登入後即可填寫
                                 </a>
                             @elseif(Auth::user()->student)
                                 @if(!$feedback)

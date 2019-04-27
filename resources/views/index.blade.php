@@ -30,12 +30,15 @@
             <strong>抱歉！</strong>雖然您已使用NID順利登入，但由於您並非本學期在校生，故無法參與集點活動。
         </div>
     @endif
-    <div class="jumbotron text-center">
+    <div class="jumbotron text-center pb-0">
         <h1 class="font-weight-bold">{{ config('app.cht_name') }}</h1>
-        <h3>2019 逢甲社團博覽會集點打卡</h3>
-        <div class="h4 text-center text-primary" style="margin-top: 2rem">
-            <i class="fas fa-arrow-down mx-2"></i>點擊下方區塊開始使用<i class="fas fa-arrow-down mx-2"></i>
-        </div>
+        <svg viewBox="0 0 400 40" style="max-width: 400px">
+            <text x="50%" y="20" text-anchor="middle" alignment-baseline="middle" font-size="1.75rem" font-weight="500">2019 逢甲社團博覽會集點打卡</text>
+        </svg>
+        <div></div>
+        <svg viewBox="0 0 320 40" fill="#007bff" style="max-width: 320px; margin-top: 30px">
+            <text x="50%" y="20" text-anchor="middle" alignment-baseline="middle" font-size="1.5rem">⬇ 點擊下方區塊開始使用 ⬇</text>
+        </svg>
     </div>
     <div class="row mt-3 pb-3">
         <div class="col-md-6 col-lg-4">
