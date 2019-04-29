@@ -9,7 +9,6 @@ use Illuminate\Database\Query\Builder;
  * App\Student
  *
  * @property int $id
- * @property int|null $user_id 對應使用者
  * @property string $nid 學號
  * @property string $name 姓名
  * @property string $class 班級
@@ -33,7 +32,7 @@ use Illuminate\Database\Query\Builder;
  * @property-read \App\StudentSurvey $studentSurvey
  * @property-read \App\StudentTicket $studentTicket
  * @property-read \App\Ticket $ticket
- * @property-read \App\User|null $user
+ * @property-read \App\User $user
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Student freshman()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Student newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Student newQuery()
@@ -50,7 +49,6 @@ use Illuminate\Database\Query\Builder;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Student whereNid($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Student whereUnitName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Student whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Student whereUserId($value)
  * @mixin \Eloquent
  */
 class Student extends Model
@@ -58,7 +56,6 @@ class Student extends Model
     private static $freshmanInYear = 107;
     protected $fillable = [
         'nid',
-        'user_id',
         'name',
         'class',
         'unit_name',
