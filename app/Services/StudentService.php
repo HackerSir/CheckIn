@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Student;
+use Carbon\Carbon;
 
 class StudentService
 {
@@ -70,6 +71,35 @@ class StudentService
             'dept_name' => $stuInfo['dept_name'],
             'in_year'   => $stuInfo['in_year'],
             'gender'    => $stuInfo['stu_sex'],
+        ]);
+
+        return $student;
+    }
+
+    /**
+     * 更新或新增特定NID的學生
+     *
+     * @param array $userInfo 登入後透過 getUserInfo 取得的資訊
+     * @return Student|null 學生實體
+     */
+    public function updateOrCreateOfUserInfo($userInfo)
+    {
+        //NID轉大寫並清除外側空白
+        $nid = trim(strtoupper($userInfo['id']));
+
+        /** @var Student $student */
+        $student = Student::updateOrCreate([
+            'nid' => $nid,
+        ], [
+            'name'      => $userInfo['name'],
+            'class'     => $userInfo['classname'],
+            'type'      => $userInfo['type'],
+            'unit_id'   => $userInfo['unit_id'],
+            'unit_name' => $userInfo['unit_name'],
+            'dept_id'   => $userInfo['dept_id'],
+            'dept_name' => $userInfo['dept_name'],
+            'is_dummy'  => false,
+            'fetch_at'  => Carbon::now(),
         ]);
 
         return $student;
