@@ -11,6 +11,7 @@ use Laratrust\Traits\LaratrustUserTrait;
  *
  * @property int $id
  * @property string $name
+ * @property string|null $nid NID
  * @property string $email
  * @property string $password
  * @property string|null $confirm_code
@@ -50,6 +51,7 @@ use Laratrust\Traits\LaratrustUserTrait;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereLastLoginAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereLastLoginIp($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereNid($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\User wherePassword($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\User wherePermissionIs($permission = '', $boolean = 'and')
  * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereRegisterAt($value)
@@ -71,6 +73,7 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
+        'nid',
         'email',
         'password',
         'confirm_code',
