@@ -20,7 +20,7 @@ class StudentsDataTable extends DataTable
         $dataTable = new EloquentDataTable($query);
 
         return $dataTable
-            ->addColumn('action', 'student.datatables.action')
+            ->editColumn('name', 'student.datatables.name')
             ->editColumn('nid', function ($student) {
                 /** @var Student $student */
                 return view('student.datatables.nid', compact('student'))->render();
@@ -36,6 +36,10 @@ class StudentsDataTable extends DataTable
                         ->orWhere('unit_name', 'like', '%' . $keyword . '%')
                         ->orWhere('dept_name', 'like', '%' . $keyword . '%');
                 });
+            })
+            ->editColumn('is_dummy', function ($student) {
+                /* @var Student $student */
+                return $student->is_dummy ? 'O' : 'X';
             })
             ->escapeColumns([]);
     }
@@ -61,7 +65,6 @@ class StudentsDataTable extends DataTable
         return $this->builder()
             ->columns($this->getColumns())
             ->minifiedAjax('')
-            ->addAction(['title' => '操作'])
             ->parameters([
                 'order'      => [[0, 'asc']],
                 'pageLength' => 50,
@@ -82,6 +85,8 @@ class StudentsDataTable extends DataTable
             'class'          => ['title' => '院系班級'],
             'in_year'        => ['title' => '入學年度'],
             'gender'         => ['title' => '性別'],
+            'is_dummy'       => ['title' => '虛構資料'],
+            'fetch_at'       => ['title' => '資料獲取時間'],
             'records_count'  => [
                 'searchable' => false,
                 'title'      => '打卡',

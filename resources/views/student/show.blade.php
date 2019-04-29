@@ -25,45 +25,6 @@
         <div class="card-body">
             <h1>基本資料</h1>
             <dl class="row" style="font-size: 120%">
-                <dt class="col-md-2">學號(NID)</dt>
-                <dd class="col-md-10">{{ $student->nid }}</dd>
-
-                <dt class="col-md-2">姓名</dt>
-                <dd class="col-md-10">{{ $student->name }}</dd>
-
-                <dt class="col-md-2">班級</dt>
-                <dd class="col-md-10">{{ $student->class }}</dd>
-
-                <dt class="col-md-2">科系</dt>
-                <dd class="col-md-10">{{ $student->unit_name }}</dd>
-
-                <dt class="col-md-2">學院</dt>
-                <dd class="col-md-10">{{ $student->dept_name }}</dd>
-
-                <dt class="col-md-2">入學年度</dt>
-                <dd class="col-md-10">{{ $student->in_year }}</dd>
-
-                <dt class="col-md-2">性別</dt>
-                <dd class="col-md-10">{{ $student->gender }}</dd>
-
-                <dt class="col-md-2">視為新生</dt>
-                <dd class="col-md-10">
-                    @if($student->consider_as_freshman)
-                        <i class="fa fa-check fa-2x fa-fw text-success" aria-hidden="true"></i>
-                    @else
-                        <i class="fa fa-times fa-2x fa-fw text-danger" aria-hidden="true"></i>
-                    @endif
-                </dd>
-
-                <dt class="col-md-2">新生</dt>
-                <dd class="col-md-10">
-                    @if($student->is_freshman)
-                        <i class="fa fa-check fa-2x fa-fw text-success" aria-hidden="true"></i>
-                    @else
-                        <i class="fa fa-times fa-2x fa-fw text-danger" aria-hidden="true"></i>
-                    @endif
-                </dd>
-
                 @if($student->user && Laratrust::can('user.manage'))
                     <dt class="col-md-2">使用者</dt>
                     <dd class="col-md-10">
@@ -71,6 +32,13 @@
                     </dd>
                 @endif
             </dl>
+
+            @if($student->is_dummy)
+                <div class="alert alert-warning">
+                    <i class="fas fa-exclamation-triangle mr-2"></i>此筆資料為人為輸入之虛構資料，待該使用者登入後，將自動替換為學校提供之實際資料
+                </div>
+            @endif
+            @include('student.info', compact('student'))
 
             <hr/>
 
