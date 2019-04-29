@@ -4,11 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Booth;
 use App\DataTables\StudentsDataTable;
+use App\Http\Requests\StudentRequest;
 use App\Services\LogService;
 use App\Services\StudentService;
 use App\Services\UserService;
 use App\Student;
-use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 
 class StudentController extends Controller
 {
@@ -36,6 +37,8 @@ class StudentController extends Controller
         $this->studentService = $studentService;
         $this->userService = $userService;
         $this->logService = $logService;
+
+        $this->authorizeResource(Student::class);
     }
 
     /**
@@ -62,11 +65,11 @@ class StudentController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param StudentRequest $request
      * @return \Illuminate\Http\Response
      * @throws \Illuminate\Validation\ValidationException
      */
-    public function store(Request $request)
+    public function store(StudentRequest $request)
     {
         $this->validate($request, [
             'nid' => [
@@ -76,13 +79,10 @@ class StudentController extends Controller
             ],
         ]);
 
-        $student = $this->studentService->updateOrCreate($request->get('nid'));
-        if (!$student) {
-            return back()->with('warning', '查無此人');
-        }
-
-        //使用者
-        $this->userService->findOrCreateAndBind($student);
+        $student = Student::create(array_merge($request->all(), [
+            'consider_as_freshman' => $request->exists('consider_as_freshman'),
+            'is_dummy'             => true,
+        ]));
 
         //Log
         $operator = auth()->user();
@@ -151,32 +151,36 @@ class StudentController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Student $student
-     * @param Request $request
+     * @param StudentRequest $request
+     * @param \App\Student $student
      * @return \Illuminate\Http\Response
      */
-    public function update(Student $student, Request $request)
+    public function update(StudentRequest $request, Student $student)
     {
-        $student->update([
+        $updateData = array_merge($request->except(['is_dummy']), [
             'consider_as_freshman' => $request->exists('consider_as_freshman'),
         ]);
+        //實際資料，僅能修改視為新生選項
+        if (!$student->is_dummy) {
+            $updateData = Arr::only($updateData, ['consider_as_freshman']);
+        }
+        $student->update($updateData);
 
         return redirect()->route('student.show', $student)->with('success', '學生資料已更新');
     }
 
     /**
-     * Update the specified resource in storage.
+     * Remove the specified resource from storage.
      *
-     * @param  \App\Student $student
+     * @param Student $student
      * @return \Illuminate\Http\Response
+     * @throws \Exception
      */
-    public function fetch(Student $student)
+    public function destroy(Student $student)
     {
-        $student = $this->studentService->updateOrCreate($student->nid);
-        if (!$student) {
-            return back()->with('warning', '無法更新資料');
-        }
+        $student->delete();
 
-        return redirect()->route('student.index')->with('success', '學生已更新');
+        return redirect()->route('student.index')
+            ->with('success', '學生資料已刪除。');
     }
 }

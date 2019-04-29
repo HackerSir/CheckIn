@@ -62,20 +62,8 @@ Route::group(['middleware' => ['auth', 'email']], function () {
         Route::post('message', 'BroadcastTestController@postMessage')->name('broadcast-test.message');
     });
     //學生管理
-    //權限：student.manage
-    Route::group(['middleware' => 'permission:student.manage'], function () {
-        Route::put('fetch/{student}', 'StudentController@fetch')->name('student.fetch');
-        Route::resource('student', 'StudentController', [
-            'only' => [
-                'index',
-                'create',
-                'store',
-                'show',
-                'edit',
-                'update',
-            ],
-        ]);
-    });
+    //權限：StudentPolicy
+    Route::resource('student', 'StudentController');
     //QR Code管理
     //權限：qrcode.manage
     Route::group(['middleware' => 'permission:qrcode.manage'], function () {

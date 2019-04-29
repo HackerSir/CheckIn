@@ -18,6 +18,13 @@
     <a href="{{ route('student.edit', $student) }}" class="btn btn-primary">
         <i class="fa fa-edit" aria-hidden="true"></i> 編輯學生
     </a>
+    @can('delete', $student)
+        {!! Form::open(['route' => ['student.destroy', $student], 'style' => 'display: inline', 'method' => 'DELETE', 'onSubmit' => "return confirm('確定要刪除嗎？');"]) !!}
+        <button type="submit" class="btn btn-danger">
+            <i class="fa fa-trash" aria-hidden="true"></i> 刪除學生
+        </button>
+        {!! Form::close() !!}
+    @endcan
 @endsection
 
 @section('main_content')
