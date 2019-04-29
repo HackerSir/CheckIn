@@ -196,6 +196,7 @@ class StudentController extends Controller
     public function getImport()
     {
         $this->authorize('import', Student::class);
+
         return view('student.import');
     }
 

@@ -21,6 +21,7 @@ class StudentPolicy
         if (!$user->can('student.manage')) {
             return false;
         }
+
         return null;
     }
 
