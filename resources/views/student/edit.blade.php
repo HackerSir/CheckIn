@@ -15,7 +15,7 @@
             @if($student->is_dummy)
                 @include('student.form')
             @else
-                @include('student.disabled-form')
+                @include('student.readonly-form')
             @endif
 
             <div class="row">
