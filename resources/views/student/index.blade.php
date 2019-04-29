@@ -3,9 +3,16 @@
 @section('title', '學生管理')
 
 @section('buttons')
-    <a href="{{ route('student.create') }}" class="btn btn-primary">
-        <i class="fa fa-plus-circle" aria-hidden="true"></i> 新增學生
-    </a>
+    @can('create', \App\Student::class)
+        <a href="{{ route('student.create') }}" class="btn btn-primary">
+            <i class="fa fa-plus-circle" aria-hidden="true"></i> 新增學生
+        </a>
+    @endcan
+    @can('import', \App\Student::class)
+        <a href="{{ route('student.import') }}" class="btn btn-primary">
+            <i class="fas fa-file-upload"></i> 匯入學生
+        </a>
+    @endcan
 @endsection
 
 @section('container_class', 'container-fluid')

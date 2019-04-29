@@ -5,10 +5,13 @@ namespace App\Http\Controllers;
 use App\Booth;
 use App\DataTables\StudentsDataTable;
 use App\Http\Requests\StudentRequest;
+use App\Imports\StudentImport;
 use App\Services\LogService;
 use App\Services\StudentService;
 use App\Services\UserService;
 use App\Student;
+use Excel;
+use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 
 class StudentController extends Controller
@@ -182,5 +185,57 @@ class StudentController extends Controller
 
         return redirect()->route('student.index')
             ->with('success', '學生資料已刪除。');
+    }
+
+    /**
+     * Show import form
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     */
+    public function getImport()
+    {
+        $this->authorize('import', Student::class);
+        return view('student.import');
+    }
+
+    /**
+     * Import data
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Illuminate\Validation\ValidationException
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     */
+    public function postImport(Request $request)
+    {
+        $this->authorize('import', Student::class);
+        //檢查匯入檔案格式為xls或xlsx
+        $this->validate($request, [
+            'import_file' => 'required|mimes:xls,xlsx',
+        ]);
+        //匯入檔案
+        $import = new StudentImport();
+        Excel::import($import, request()->file('import_file'));
+
+        return redirect()->route('student.import')
+            ->with(
+                'success',
+                "匯入完成（成功：{$import->successCount} 筆，略過：{$import->skipCount} 筆，失敗：{$import->failedCount} 筆）"
+            );
+    }
+
+    /**
+     * Download sample file of import
+     *
+     * @return \Symfony\Component\HttpFoundation\BinaryFileResponse
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     */
+    public function downloadImportSample()
+    {
+        $this->authorize('import', Student::class);
+        $path = resource_path('import-sample/student.xlsx');
+
+        return response()->download($path);
     }
 }

@@ -41,7 +41,7 @@ class StudentRequest extends FormRequest
             'unit_name'            => 'nullable',
             'dept_id'              => 'nullable',
             'dept_name'            => 'nullable',
-            'number'               => 'nullable',
+            'in_year'              => 'nullable|integer',
             'gender'               => 'nullable',
             'consider_as_freshman' => 'nullable',
         ];

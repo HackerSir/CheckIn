@@ -29,6 +29,7 @@
         "laravelcollective/html": "^5.8",
         "laravelium/sitemap": "^3.1",
         "lavary/laravel-menu": "^1.7",
+        "maatwebsite/excel": "^3.1",
         "marvinlabs/laravel-html-bootstrap-4": "^1.6",
         "marvinlabs/laravel-html-font-awesome": "^1.0",
         "milon/barcode": "^5.3",

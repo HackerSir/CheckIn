@@ -15,13 +15,15 @@
     <a href="{{ route('student.index') }}" class="btn btn-secondary">
         <i class="fa fa-arrow-left" aria-hidden="true"></i> 學生管理
     </a>
-    <a href="{{ route('student.edit', $student) }}" class="btn btn-primary">
-        <i class="fa fa-edit" aria-hidden="true"></i> 編輯學生
-    </a>
+    @can('update', $student)
+        <a href="{{ route('student.edit', $student) }}" class="btn btn-primary">
+            <i class="fa fa-edit" aria-hidden="true"></i> 編輯
+        </a>
+    @endcan
     @can('delete', $student)
         {!! Form::open(['route' => ['student.destroy', $student], 'style' => 'display: inline', 'method' => 'DELETE', 'onSubmit' => "return confirm('確定要刪除嗎？');"]) !!}
         <button type="submit" class="btn btn-danger">
-            <i class="fa fa-trash" aria-hidden="true"></i> 刪除學生
+            <i class="fa fa-trash" aria-hidden="true"></i> 刪除
         </button>
         {!! Form::close() !!}
     @endcan
