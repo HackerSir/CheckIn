@@ -11,8 +11,11 @@ use Illuminate\Database\Query\Builder;
  * @property int $id
  * @property string $nid 學號
  * @property string $name 姓名
+ * @property string|null $type 類型
+ * @property string|null $unit_id 科系ID
  * @property string|null $class 班級
  * @property string|null $unit_name 科系
+ * @property string|null $dept_id 學院ID
  * @property string|null $dept_name 學院
  * @property int|null $in_year 入學學年度
  * @property string|null $gender 性別
@@ -43,6 +46,7 @@ use Illuminate\Database\Query\Builder;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Student whereClass($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Student whereConsiderAsFreshman($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Student whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Student whereDeptId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Student whereDeptName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Student whereFetchAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Student whereGender($value)
@@ -51,6 +55,8 @@ use Illuminate\Database\Query\Builder;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Student whereIsDummy($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Student whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Student whereNid($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Student whereType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Student whereUnitId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Student whereUnitName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Student whereUpdatedAt($value)
  * @mixin \Eloquent
@@ -61,8 +67,11 @@ class Student extends Model
     protected $fillable = [
         'nid',
         'name',
+        'type',
         'class',
+        'unit_id',
         'unit_name',
+        'dept_id',
         'dept_name',
         'in_year',
         'gender',
