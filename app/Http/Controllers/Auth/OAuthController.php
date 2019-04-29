@@ -64,20 +64,20 @@ class OAuthController extends Controller
         }
 
         //利用User Code取得學號
-        $userInfo = $this->fcuApiService->getLoginUser($userCode);
+        $userInfo = $this->fcuApiService->getUserInfo($userCode);
         //檢查登入結果
-        if (!is_array($userInfo) || !isset($userInfo['stu_id']) || empty($userInfo['stu_id'])) {
+        if (!is_array($userInfo) || !isset($userInfo['id']) || empty(trim($userInfo['id']))) {
             return redirect()->route('index')->with('warning', '登入失敗(u)');
         }
-        $nid = $userInfo['stu_id'];
+        $nid = trim(strtoupper($userInfo['id']));
 
         //找出使用者
-        $user = $this->userService->findOrCreateByNid($userInfo['stu_id']);
+        $user = $this->userService->findOrCreateByNid($nid);
         //登入使用者
         auth()->login($user, true);
 
         //取得學生資料
-        $student = $this->studentService->updateOrCreate($nid);
+        $student = $this->studentService->updateOrCreateOfUserInfo($userInfo);
         if (!$student) {
             //無學生資料，直接結束流程
             return redirect()->route('index');

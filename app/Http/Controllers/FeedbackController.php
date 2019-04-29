@@ -19,6 +19,7 @@ class FeedbackController extends Controller
      *
      * @param FeedbackDataTable $dataTable
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\Response|\Illuminate\View\View
+     * @throws \Exception
      */
     public function index(FeedbackDataTable $dataTable)
     {
@@ -84,6 +85,7 @@ class FeedbackController extends Controller
      *
      * @param Club $club
      * @return \Illuminate\Http\Response
+     * @throws \Exception
      */
     public function createOrEdit(Club $club)
     {
@@ -121,6 +123,7 @@ class FeedbackController extends Controller
      * @param Club $club
      * @return \Illuminate\Http\Response
      * @throws \Illuminate\Validation\ValidationException
+     * @throws \Exception
      */
     public function store(Request $request, Club $club)
     {
@@ -160,8 +163,9 @@ class FeedbackController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Feedback $feedback
+     * @param \App\Feedback $feedback
      * @return \Illuminate\Http\Response
+     * @throws \Exception
      */
     public function show(Feedback $feedback)
     {

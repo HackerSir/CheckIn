@@ -61,7 +61,7 @@ class RegisterController extends Controller
     /**
      * Get a validator for an incoming registration request.
      *
-     * @param  array $data
+     * @param array $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
     protected function validator(array $data)
@@ -76,7 +76,7 @@ class RegisterController extends Controller
     /**
      * Create a new user instance after a valid registration.
      *
-     * @param  array $data
+     * @param array $data
      * @return User|\Illuminate\Database\Eloquent\Model
      */
     protected function create(array $data)
@@ -91,7 +91,7 @@ class RegisterController extends Controller
     /**
      * 重新包裝註冊方法，以寄送驗證信件
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function register(Request $request)
@@ -100,11 +100,6 @@ class RegisterController extends Controller
         $result = $this->originalRegister($request);
         /* @var User $user */
         $user = auth()->user();
-        // 紀錄註冊時間與IP
-        $user->update([
-            'register_at' => Carbon::now(),
-            'register_ip' => $request->ip(),
-        ]);
         // 賦予第一位註冊的人管理員權限
         if (User::count() == 1) {
             $admin = Role::where('name', '=', 'Admin')->first();

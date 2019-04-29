@@ -10,10 +10,14 @@ use App\Observers\DataUpdateRequestObserver;
 use App\Observers\ImgurImageObserver;
 use App\Observers\QrcodeObserver;
 use App\Observers\RecordObserver;
+use App\Observers\StudentObserver;
 use App\Observers\StudentSurveyObserver;
+use App\Observers\UserObserver;
 use App\Qrcode;
 use App\Record;
+use App\Student;
 use App\StudentSurvey;
+use App\User;
 use Carbon\Carbon;
 use Horizon;
 use Illuminate\Support\ServiceProvider;
@@ -38,6 +42,8 @@ class AppServiceProvider extends ServiceProvider
         view()->share('xRequestedWithMessage', $xRequestedWithMessage);
 
         //Observers
+        User::observe(UserObserver::class);
+        Student::observe(StudentObserver::class);
         Qrcode::observe(QrcodeObserver::class);
         Record::observe(RecordObserver::class);
         ImgurImage::observe(ImgurImageObserver::class);

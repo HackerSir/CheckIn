@@ -39,6 +39,7 @@ return [
         'url-oauth'          => env('FCU_API_URL_OAUTH'),
         'url-get-stu-info'   => env('FCU_API_URL_GET_STU_INFO'),
         'url-get-login-user' => env('FCU_API_URL_GET_LOGIN_USER'),
+        'url-get-user-info'  => env('FCU_API_URL_GET_USER_INFO'),
         'client-id'          => env('FCU_API_CLIENT_ID'),
         'client-url'         => env('FCU_API_CLIENT_URL'),
     ],

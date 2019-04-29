@@ -155,6 +155,7 @@ class ExportController extends Controller
      *
      * @return \Symfony\Component\HttpFoundation\BinaryFileResponse
      * @throws \PhpOffice\PhpSpreadsheet\Exception
+     * @throws \Exception
      */
     public function feedback()
     {

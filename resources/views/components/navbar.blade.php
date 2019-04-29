@@ -12,11 +12,11 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             {{-- 左側選單 --}}
             <ul class="navbar-nav">
-                @include(config('laravel-menu.views.bootstrap-items'), array('items' => Menu::get('left')->roots()))
+                @include(config('laravel-menu.views.bootstrap-items'), ['items' => Menu::get('left')->roots()])
             </ul>
             {{-- 右側選單 --}}
             <ul class="navbar-nav ml-auto">
-                @include(config('laravel-menu.views.bootstrap-items'), array('items' => Menu::get('right')->roots()))
+                @include(config('laravel-menu.views.bootstrap-items'), ['items' => Menu::get('right')->roots()])
             </ul>
         </div>
     </div>

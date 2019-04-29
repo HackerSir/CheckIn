@@ -9,7 +9,6 @@ use Illuminate\Database\Query\Builder;
  * App\Student
  *
  * @property int $id
- * @property int|null $user_id 對應使用者
  * @property string $nid 學號
  * @property string $name 姓名
  * @property string $class 班級
@@ -20,6 +19,8 @@ use Illuminate\Database\Query\Builder;
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property bool $consider_as_freshman 視為新生
+ * @property bool $is_dummy 是否為虛構資料
+ * @property \Illuminate\Support\Carbon|null $fetch_at 最後一次由API獲取資料時間
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Record[] $countedRecords
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Feedback[] $feedback
  * @property-read string $display_name
@@ -33,7 +34,7 @@ use Illuminate\Database\Query\Builder;
  * @property-read \App\StudentSurvey $studentSurvey
  * @property-read \App\StudentTicket $studentTicket
  * @property-read \App\Ticket $ticket
- * @property-read \App\User|null $user
+ * @property-read \App\User $user
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Student freshman()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Student newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Student newQuery()
@@ -43,14 +44,15 @@ use Illuminate\Database\Query\Builder;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Student whereConsiderAsFreshman($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Student whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Student whereDeptName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Student whereFetchAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Student whereGender($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Student whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Student whereInYear($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Student whereIsDummy($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Student whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Student whereNid($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Student whereUnitName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Student whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Student whereUserId($value)
  * @mixin \Eloquent
  */
 class Student extends Model
@@ -58,7 +60,6 @@ class Student extends Model
     private static $freshmanInYear = 107;
     protected $fillable = [
         'nid',
-        'user_id',
         'name',
         'class',
         'unit_name',
@@ -66,10 +67,17 @@ class Student extends Model
         'in_year',
         'gender',
         'consider_as_freshman',
+        'is_dummy',
+        'fetch_at',
     ];
 
     protected $casts = [
         'consider_as_freshman' => 'boolean',
+        'is_dummy'             => 'boolean',
+    ];
+
+    protected $dates = [
+        'fetch_at',
     ];
 
     /**
@@ -77,7 +85,7 @@ class Student extends Model
      */
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'nid', 'nid');
     }
 
     /**

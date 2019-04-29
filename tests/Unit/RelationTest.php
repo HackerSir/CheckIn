@@ -26,7 +26,7 @@ class RelationTest extends TestCase
         /** @var Student $student */
         $student = $this->factoryWithoutObservers(Student::class)->make();
         /** @var User $user */
-        $user = $this->factoryWithoutObservers(User::class)->create();
+        $user = $this->factoryWithoutObservers(User::class)->state('student')->create();
 
         $student->user()->associate($user);
         $student->save();
@@ -40,7 +40,7 @@ class RelationTest extends TestCase
     public function testUserStudentRelation()
     {
         /** @var User $user */
-        $user = $this->factoryWithoutObservers(User::class)->create();
+        $user = $this->factoryWithoutObservers(User::class)->state('student')->create();
         /** @var Student $student */
         $student = $this->factoryWithoutObservers(Student::class)->create();
 

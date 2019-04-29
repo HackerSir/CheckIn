@@ -153,14 +153,6 @@
       <path value="$PROJECT_DIR$/vendor/j0k3r/php-imgur-api-client" />
       <path value="$PROJECT_DIR$/vendor/cakephp/chronos" />
       <path value="$PROJECT_DIR$/vendor/laravel/horizon" />
-      <path value="$PROJECT_DIR$/vendor/laravel/slack-notification-channel" />
-      <path value="$PROJECT_DIR$/vendor/nexmo/client" />
-      <path value="$PROJECT_DIR$/vendor/lcobucci/jwt" />
-      <path value="$PROJECT_DIR$/vendor/php-http/promise" />
-      <path value="$PROJECT_DIR$/vendor/laravel/nexmo-notification-channel" />
-      <path value="$PROJECT_DIR$/vendor/php-http/guzzle6-adapter" />
-      <path value="$PROJECT_DIR$/vendor/php-http/httplug" />
-      <path value="$PROJECT_DIR$/vendor/zendframework/zend-diactoros" />
       <path value="$PROJECT_DIR$/vendor/laravel/helpers" />
     </include_path>
   </component>

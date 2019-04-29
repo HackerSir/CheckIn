@@ -17,6 +17,7 @@ class QrcodeScanController extends Controller
      *
      * @param $code
      * @return \Illuminate\Http\Response
+     * @throws \Exception
      */
     public function scan($code)
     {
