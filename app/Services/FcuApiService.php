@@ -12,6 +12,7 @@ class FcuApiService
     /**
      * @param string $nid
      * @return array|null
+     * @deprecated
      */
     public function getStuInfo($nid)
     {
