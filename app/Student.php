@@ -11,11 +11,11 @@ use Illuminate\Database\Query\Builder;
  * @property int $id
  * @property string $nid 學號
  * @property string $name 姓名
- * @property string $class 班級
- * @property string $unit_name 科系
- * @property string $dept_name 學院
- * @property int $in_year 入學學年度
- * @property string $gender 性別
+ * @property string|null $class 班級
+ * @property string|null $unit_name 科系
+ * @property string|null $dept_name 學院
+ * @property int|null $in_year 入學學年度
+ * @property string|null $gender 性別
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property bool $consider_as_freshman 視為新生
