@@ -23,6 +23,17 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
     ];
 });
 
+$factory->state(App\User::class, 'student', function (Faker\Generator $faker) {
+    $isTeacher = $faker->boolean();
+    $nid = $isTeacher
+        ? $faker->regexify('[DEPMV]([0-9]){7}')
+        : $faker->regexify('T[0-9]{5}');
+
+    return [
+        'nid' => $nid,
+    ];
+});
+
 $factory->define(App\Student::class, function (Faker\Generator $faker) {
     $isTeacher = $faker->boolean();
     $nid = $isTeacher
