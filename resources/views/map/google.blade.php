@@ -1,4 +1,20 @@
-<div class="mt-2" id="map"></div>
+@extends('map.base')
+
+@section('title', 'Google Map - 攤位地圖')
+
+@section('css')
+    @parent
+    <style>
+        #map {
+            width: 100%;
+            height: 70vh;
+        }
+    </style>
+@endsection
+
+@section('main_content')
+    <div class="mt-2" id="map"></div>
+@endsection
 
 @section('js')
     <script src="https://maps.googleapis.com/maps/api/js?key={{ GoogleApi::getKey() }}"></script>

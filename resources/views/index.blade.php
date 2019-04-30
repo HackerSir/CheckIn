@@ -69,7 +69,7 @@
             </a>
         </div>
         <div class="col-md-6 col-lg-4">
-            <a class="card text-center btn btn-outline-primary" href="{{ route('clubs.map') }}">
+            <a class="card text-center btn btn-outline-primary" href="{{ route('clubs.map.static') }}">
                 <div class="card-body">
                     <i class="fas fa-map-marked-alt fa-10x fa-fw mb-1" aria-hidden="true"></i>
                     <h4 class="card-title">攤位地圖</h4>
