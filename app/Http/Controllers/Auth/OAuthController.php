@@ -78,22 +78,21 @@ class OAuthController extends Controller
 
         //取得學生資料
         $student = $this->studentService->updateOrCreateOfUserInfo($userInfo);
-        if (!$student) {
-            //無學生資料，直接結束流程
-            return redirect()->route('index');
-        }
-        //使用者未綁定學生
-        if (!$user->student) {
-            //綁定學生
-            $user->student()->save($student);
+        if ($student) {
+            //有學生資料
+            //使用者未綁定學生
+            if (!$user->student) {
+                //綁定學生
+                $user->student()->save($student);
+            }
+            //更新名稱
+            $user->update(['name' => $student->name]);
         }
         //若學生沒有QR Code
         if (!$student->qrcode) {
             //綁定QRCode
             $student->qrcode()->save(Qrcode::create());
         }
-        //更新名稱
-        $user->update(['name' => $student->name]);
 
         return redirect()->intended();
     }
