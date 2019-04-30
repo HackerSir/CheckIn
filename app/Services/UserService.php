@@ -34,9 +34,10 @@ class UserService
         $email = $nid . '@fcu.edu.tw';
         /** @var User $user */
         $user = User::query()->firstOrCreate([
-            'email' => $email,
+            'nid' => $nid,
         ], [
             'name'        => $nid,
+            'email'       => $email,
             'password'    => '',
             'confirm_at'  => Carbon::now(),
             'register_at' => Carbon::now(),
