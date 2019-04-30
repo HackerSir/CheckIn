@@ -22,7 +22,6 @@ class ClubsDataTable extends DataTable
         $dataTable = new EloquentDataTable($query);
 
         return $dataTable
-            ->addColumn('action', 'club.datatables.action')
             ->editColumn('club_type_id', function ($club) {
                 return view('club.datatables.club-type', compact('club'))->render();
             })
@@ -47,7 +46,7 @@ class ClubsDataTable extends DataTable
                 });
             })
             ->editColumn('is_counted', 'club.datatables.is_counted')
-            ->escapeColumns([]);
+            ->rawColumns(['club_type_id', 'name', 'booth', 'is_counted']);
     }
 
     /**
@@ -71,7 +70,6 @@ class ClubsDataTable extends DataTable
         return $this->builder()
             ->columns($this->getColumns())
             ->minifiedAjax('')
-            ->addAction(['title' => '操作'])
             ->parameters([
                 'order'      => [[0, 'asc']],
                 'pageLength' => 50,

@@ -40,7 +40,7 @@ class StudentSurveyDataTable extends DataTable
             ->editColumn('comment', function ($studentSurvey) {
                 return view('student-survey.datatables.comment', compact('studentSurvey'))->render();
             })
-            ->escapeColumns([]);
+            ->rawColumns(['is_freshman', 'action']);
     }
 
     /**

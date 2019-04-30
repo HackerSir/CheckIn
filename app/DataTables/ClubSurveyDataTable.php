@@ -46,7 +46,7 @@ class ClubSurveyDataTable extends DataTable
             ->editColumn('comment', function ($clubSurvey) {
                 return view('club-survey.datatables.comment', compact('clubSurvey'))->render();
             })
-            ->escapeColumns([]);
+            ->rawColumns(['club_id', 'action']);
     }
 
     /**

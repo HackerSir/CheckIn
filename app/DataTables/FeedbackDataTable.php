@@ -48,7 +48,7 @@ class FeedbackDataTable extends DataTable
                     $query->where('name', 'like', '%' . $keyword . '%');
                 });
             })
-            ->escapeColumns([]);
+            ->rawColumns(['is_freshman', 'club_id', 'action']);
     }
 
     /**

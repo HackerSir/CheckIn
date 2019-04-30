@@ -21,7 +21,6 @@ class UsersDataTable extends DataTable
         $dataTable = new EloquentDataTable($query);
 
         return $dataTable
-            ->addColumn('action', 'user.datatables.action')
             ->editColumn('name', 'user.datatables.name')
             ->editColumn('email', 'user.datatables.email')
             ->editColumn('club_id', function ($user) {
@@ -34,7 +33,7 @@ class UsersDataTable extends DataTable
                     $query->where('name', 'like', '%' . $keyword . '%');
                 });
             })
-            ->escapeColumns([]);
+            ->rawColumns(['name', 'club_id']);
     }
 
     /**
@@ -57,8 +56,7 @@ class UsersDataTable extends DataTable
     {
         return $this->builder()
             ->columns($this->getColumns())
-            ->ajax('')
-            ->addAction(['title' => '操作'])
+            ->minifiedAjax(' ')
             ->parameters($this->getBuilderParameters())
             ->parameters([
                 'order'      => [[0, 'asc']],
@@ -76,6 +74,7 @@ class UsersDataTable extends DataTable
         return [
             'id'      => ['title' => '#'],
             'name'    => ['title' => '使用者'],
+            'nid'     => ['title' => 'NID'],
             'email'   => ['title' => '信箱'],
             'club_id' => ['title' => '負責社團'],
         ];

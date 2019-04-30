@@ -21,7 +21,7 @@ class BoothsDataTable extends DataTable
         $dataTable = new EloquentDataTable($query);
 
         return $dataTable
-            ->addColumn('action', 'booth.datatables.action')
+            ->editColumn('name', 'booth.datatables.name')
             ->editColumn('club_id', function ($booth) {
                 return view('booth.datatables.club', compact('booth'))->render();
             })
@@ -32,7 +32,7 @@ class BoothsDataTable extends DataTable
                     $query->where('name', 'like', '%' . $keyword . '%');
                 });
             })
-            ->escapeColumns([]);
+            ->rawColumns(['name', 'club_id']);
     }
 
     /**
@@ -56,7 +56,6 @@ class BoothsDataTable extends DataTable
         return $this->builder()
             ->columns($this->getColumns())
             ->minifiedAjax('')
-            ->addAction(['title' => '操作'])
             ->parameters([
                 'order'      => [[0, 'asc']],
                 'pageLength' => 50,
