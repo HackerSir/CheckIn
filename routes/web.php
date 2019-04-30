@@ -32,7 +32,6 @@ Route::group(['prefix' => 'map'], function () {
     Route::get('google', 'HomeController@clubsGoogleMap')->name('clubs.map.google');
 });
 
-
 //服務條款(含隱私權跟免責)
 Route::view('terms', 'misc.terms')->name('terms');
 
