@@ -31,13 +31,13 @@ class UserService
      */
     public function findOrCreateByNid($nid)
     {
-        $email = $nid . '@fcu.edu.tw';
+        $nid = trim(strtoupper($nid));
         /** @var User $user */
         $user = User::query()->firstOrCreate([
             'nid' => $nid,
         ], [
             'name'        => $nid,
-            'email'       => $email,
+            'email'       => $nid . '@fcu.edu.tw',
             'password'    => '',
             'confirm_at'  => Carbon::now(),
             'register_at' => Carbon::now(),
