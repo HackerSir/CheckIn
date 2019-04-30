@@ -8,6 +8,7 @@
     </a>
 @endsection
 
+@section('container_class', 'container-fluid')
 @section('main_content')
     <div class="card">
         <div class="card-body">

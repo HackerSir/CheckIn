@@ -176,7 +176,7 @@ class ApiController extends Controller
                     'name'  => $club->clubType ? $club->clubType->name : null,
                     'color' => $club->clubType ? $club->clubType->color : null,
                 ],
-                'excerpt' => str_limit($club->description, 100, '...'),
+                'excerpt' => str_limit(strip_tags($club->description), 100, '...'),
                 'booth'   => $booth ? [
                     'longitude' => $booth->longitude,
                     'latitude'  => $booth->latitude,
@@ -214,8 +214,9 @@ class ApiController extends Controller
                         array_only($feedbackItem->club->toArray(), ['id', 'name']),
                         [
                             'display_name' => $feedbackItem->club->display_name,
-                            'extra_info'   => $feedbackItem->club->extra_info
-                                ? $contentPresenter->showContent($feedbackItem->club->extra_info) : null,
+//                            'extra_info'   => $feedbackItem->club->extra_info
+//                                ? $contentPresenter->showContent($feedbackItem->club->extra_info) : null,
+                            'extra_info'   => $feedbackItem->club->extra_info,
                         ]
                     ),
                 ]
