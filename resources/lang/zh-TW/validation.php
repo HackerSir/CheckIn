@@ -186,4 +186,5 @@ return [
         'image_file'            => '圖片檔案',
         'message'               => '訊息',
     ],
+    'strip_max'  => ':attribute 不能多於 :max 個字元。',
 ];
