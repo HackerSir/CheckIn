@@ -97,6 +97,8 @@ class FeedbackDataTable extends DataTable
             'club_id'     => ['title' => '社團'],
             'phone'       => ['title' => '電話'],
             'email'       => ['title' => '信箱'],
+            'facebook'    => ['title' => 'Facebook'],
+            'line'        => ['title' => 'LINE'],
             'message'     => [
                 'searchable' => false,
                 'orderable'  => false,

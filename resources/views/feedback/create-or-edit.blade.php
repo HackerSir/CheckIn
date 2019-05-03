@@ -31,12 +31,14 @@
                 <ul>
                     <li>電話</li>
                     <li>信箱</li>
+                    <li>Facebook 個人檔案連結</li>
+                    <li>LINE ID</li>
                     <li>給社團的意見</li>
                 </ul>
             </li>
-            <li>請至少填寫一項資料再送出</li>
-            <li>不同社團的回饋資料可以填寫不同的聯絡資訊</li>
-            <li>系統會自動填入之前填寫的<strong>電話</strong>與<strong>信箱</strong>，可於送出前修改</li>
+            <li>請至少填寫一項<strong>聯絡資訊</strong>資料再送出</li>
+            <li>不同社團的回饋資料可以填寫不同的<strong>聯絡資訊</strong></li>
+            <li>系統會自動填入之前填寫的<strong>聯絡資訊</strong>，可於送出前修改</li>
         </ul>
     </div>
     <div class="card mt-1">
@@ -63,9 +65,13 @@
             @if(isset($feedback))
                 {{ bs()->formGroup(bs()->text('phone'))->label('電話')->showAsRow() }}
                 {{ bs()->formGroup(bs()->text('email'))->label('信箱')->showAsRow() }}
+                {{ bs()->formGroup(bs()->text('facebook'))->label('Facebook')->helpText('請填寫個人檔案連結（個人頁面網址）')->showAsRow() }}
+                {{ bs()->formGroup(bs()->text('line'))->label('LINE ID')->showAsRow() }}
             @else
                 {{ bs()->formGroup(bs()->text('phone', $lastFeedback->phone ?? null))->label('電話')->showAsRow() }}
                 {{ bs()->formGroup(bs()->text('email', $lastFeedback->email ?? null))->label('信箱')->showAsRow() }}
+                {{ bs()->formGroup(bs()->text('facebook', $lastFeedback->facebook ?? null))->label('Facebook')->helpText('請填寫個人檔案連結（個人頁面網址）')->showAsRow() }}
+                {{ bs()->formGroup(bs()->text('line', $lastFeedback->line ?? null))->label('LINE ID')->showAsRow() }}
             @endif
             {{ bs()->formGroup(bs()->text('message'))->label('給社團的意見')->showAsRow() }}
 

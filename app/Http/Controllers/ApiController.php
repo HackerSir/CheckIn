@@ -208,7 +208,10 @@ class ApiController extends Controller
         $data = [];
         foreach ($feedback as $feedbackItem) {
             $data[] = array_merge(
-                array_only($feedbackItem->toArray(), ['id', 'student_id', 'phone', 'email', 'message']),
+                array_only(
+                    $feedbackItem->toArray(),
+                    ['id', 'student_id', 'phone', 'email', 'facebook', 'line', 'message']
+                ),
                 [
                     'club' => array_merge(
                         array_only($feedbackItem->club->toArray(), ['id', 'name']),
