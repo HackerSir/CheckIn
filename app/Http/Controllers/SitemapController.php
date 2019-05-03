@@ -23,7 +23,8 @@ class SitemapController extends Controller
             ],
             config('app.cht_name')
         );
-        $sitemap->add(route('clubs.map'), null, 1.0, 'hourly');
+        $sitemap->add(route('clubs.map.static'), null, 1.0, 'hourly');
+        $sitemap->add(route('clubs.map.google'), null, 1.0, 'hourly');
         $sitemap->add(route('clubs.index'), null, 1.0, 'hourly');
 
         //黑客社

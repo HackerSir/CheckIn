@@ -41,7 +41,7 @@ class ClubController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param \Illuminate\Http\Request $request
      * @param ImgurImageService $imgurImageService
      * @return \Illuminate\Http\Response
      * @throws \Exception
@@ -52,8 +52,8 @@ class ClubController extends Controller
             'number'       => 'nullable',
             'name'         => 'required',
             'club_type_id' => 'nullable|exists:club_types,id',
-            'description'  => 'nullable|max:300',
-            'extra_info'   => 'nullable|max:300',
+            'description'  => 'nullable|strip_max:300',
+            'extra_info'   => 'nullable|strip_max:300',
             'url'          => 'nullable|url',
             'image_file'   => 'image',
         ]);
@@ -85,7 +85,7 @@ class ClubController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Club $club
+     * @param \App\Club $club
      * @return \Illuminate\Http\Response
      */
     public function edit(Club $club)
@@ -96,8 +96,8 @@ class ClubController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
-     * @param  \App\Club $club
+     * @param \Illuminate\Http\Request $request
+     * @param \App\Club $club
      * @param ImgurImageService $imgurImageService
      * @return \Illuminate\Http\Response
      * @throws \Exception
@@ -108,8 +108,8 @@ class ClubController extends Controller
             'number'       => 'nullable',
             'name'         => 'required',
             'club_type_id' => 'nullable|exists:club_types,id',
-            'description'  => 'nullable|max:300',
-            'extra_info'   => 'nullable|max:300',
+            'description'  => 'nullable|strip_max:300',
+            'extra_info'   => 'nullable|strip_max:300',
             'url'          => 'nullable|url',
             'image_file'   => 'image',
         ]);
@@ -166,7 +166,7 @@ class ClubController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Club $club
+     * @param \App\Club $club
      * @return \Illuminate\Http\Response
      * @throws \Exception
      */

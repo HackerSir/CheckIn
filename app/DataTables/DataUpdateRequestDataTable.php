@@ -37,7 +37,7 @@ class DataUpdateRequestDataTable extends DataTable
                 /** @var DataUpdateRequest $dataUpdateRequest */
                 return $dataUpdateRequest->show_result;
             })
-            ->escapeColumns([]);
+            ->rawColumns(['club_id', 'review_result', 'action']);
     }
 
     /**
@@ -60,7 +60,7 @@ class DataUpdateRequestDataTable extends DataTable
     {
         return $this->builder()
             ->columns($this->getColumns())
-            ->ajax('')
+            ->minifiedAjax('')
             ->addAction(['title' => '操作'])
             ->parameters($this->getBuilderParameters())
             ->parameters([

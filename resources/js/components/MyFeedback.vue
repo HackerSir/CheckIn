@@ -22,6 +22,18 @@
                     <p class="text-muted" v-else>（未填寫）</p>
                 </dd>
 
+                <dt class="col-md-2">Facebook</dt>
+                <dd class="col-md-10">
+                    <p v-if="feedback.email">{{ feedback.facebook }}</p>
+                    <p class="text-muted" v-else>（未填寫）</p>
+                </dd>
+
+                <dt class="col-md-2">LINE ID</dt>
+                <dd class="col-md-10">
+                    <p v-if="feedback.email">{{ feedback.line }}</p>
+                    <p class="text-muted" v-else>（未填寫）</p>
+                </dd>
+
                 <dt class="col-md-2">給社團的意見</dt>
                 <dd class="col-md-10">
                     <p v-if="feedback.message">{{ feedback.message }}</p>

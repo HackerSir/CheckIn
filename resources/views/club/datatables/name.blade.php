@@ -3,4 +3,4 @@
 @else
     <div class="img-thumbnail" style="display: inline-block; width:40px; height: 40px; vertical-align: middle"></div>
 @endif
-{{ $club->name }}
+{{ link_to_route('clubs.show', $club->name, $club) }}

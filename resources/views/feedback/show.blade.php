@@ -55,6 +55,24 @@
                     @endif
                 </dd>
 
+                <dt class="col-md-2">Facebook</dt>
+                <dd class="col-md-10">
+                    @if(!$feedback->facebook)
+                        <span class="text-muted">（未填寫）</span>
+                    @else
+                        {{ $feedback->facebook }}
+                    @endif
+                </dd>
+
+                <dt class="col-md-2">LINE ID</dt>
+                <dd class="col-md-10">
+                    @if(!$feedback->line)
+                        <span class="text-muted">（未填寫）</span>
+                    @else
+                        {{ $feedback->line }}
+                    @endif
+                </dd>
+
                 <dt class="col-md-2">給社團的意見</dt>
                 <dd class="col-md-10">
                     @if(!$feedback->message)

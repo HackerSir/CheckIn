@@ -34,7 +34,7 @@ class StudentTicketsDataTable extends DataTable
                         ->orWhere('nid', 'like', '%' . $keyword . '%');
                 });
             })
-            ->escapeColumns([]);
+            ->rawColumns(['student_id', 'action']);
     }
 
     /**

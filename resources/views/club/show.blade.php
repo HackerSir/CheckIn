@@ -148,7 +148,7 @@
                 <h2 class="border border-primary rounded">簡介</h2>
                 <p style="font-size: 120%">
                     @if($club->description)
-                        {!! nl2br(e($club->description)) !!}
+                        {!! $club->description !!}
                     @else
                         <span class="text-muted">（未提供簡介）</span>
                     @endif
@@ -159,7 +159,8 @@
                     <h2 class="border border-primary rounded">額外資訊</h2>
                     <p style="font-size: 120%">
                         @if(\Laratrust::can('club.manage') || isset(Auth::user()->club) && Auth::user()->club->id == $club->id || $feedback)
-                            {!! $contentPresenter->showContent($club->extra_info) !!}
+{{--                            {!! $contentPresenter->showContent($club->extra_info) !!}--}}
+                            {!! $club->extra_info !!}
                         @else
                             <div class="alert alert-warning">此社團有提供額外資訊給感興趣加入的學生，填寫回饋資料後即可檢視</div>
                         @endif

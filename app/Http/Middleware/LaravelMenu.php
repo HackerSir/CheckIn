@@ -24,7 +24,7 @@ class LaravelMenu
             $menu->add('我的條碼', ['route' => 'my-qrcode'])->active('my-qrcode');
             $menu->add('社團介紹', ['route' => 'clubs.index'])->active('clubs');
 
-            $menu->add('攤位地圖', ['route' => ['clubs.map', 'type' => 'static']])->active('map');
+            $menu->add('攤位地圖', ['route' => ['clubs.map.static']])->active('map');
         });
         //右側
         Menu::make('right', function ($menu) {

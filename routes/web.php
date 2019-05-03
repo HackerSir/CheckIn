@@ -23,9 +23,14 @@ Route::group(['prefix' => 'oauth', 'namespace' => 'Auth'], function () {
     Route::any('login', 'OAuthController@login')->name('oauth.login');
 });
 
+//攤位
 Route::get('clubs', 'HomeController@clubs')->name('clubs.index');
 Route::get('clubs/{club}', 'HomeController@clubsShow')->name('clubs.show');
-Route::get('map', 'HomeController@clubsMap')->name('clubs.map');
+//地圖
+Route::group(['prefix' => 'map'], function () {
+    Route::get('/', 'HomeController@clubsStaticMap')->name('clubs.map.static');
+    Route::get('google', 'HomeController@clubsGoogleMap')->name('clubs.map.google');
+});
 
 //服務條款(含隱私權跟免責)
 Route::view('terms', 'misc.terms')->name('terms');

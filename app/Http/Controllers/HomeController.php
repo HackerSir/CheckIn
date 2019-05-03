@@ -46,30 +46,27 @@ class HomeController extends Controller
         return view('club.show', compact('club'));
     }
 
-    public function clubsMap(Request $request)
+    public function clubsGoogleMap(Request $request)
     {
-        $type = $request->input('type') ?: 'static';
-
-        if (!in_array($type, ['static', 'google'])) {
-            return redirect()->route('clubs.map', ['type' => 'static']);
-        }
-
         $boothData = [];
-        if ($type == 'google') {
-            $booths = Booth::with('club.clubType')->get();
-            /** @var Booth $booth */
-            foreach ($booths as $booth) {
-                $boothData[] = [
-                    'name'      => $booth->name,
-                    'longitude' => $booth->longitude,
-                    'latitude'  => $booth->latitude,
-                    'club_name' => $booth->name . ($booth->club ? '<br/>' . $booth->club->name : ''),
-                    'fillColor' => $booth->club->clubType->color ?? '#00DD00',
-                    'url'       => is_null($booth->club) ? null : route('clubs.show', $booth->club->id),
-                ];
-            }
+        $booths = Booth::with('club.clubType')->get();
+        /** @var Booth $booth */
+        foreach ($booths as $booth) {
+            $boothData[] = [
+                'name'      => $booth->name,
+                'longitude' => $booth->longitude,
+                'latitude'  => $booth->latitude,
+                'club_name' => $booth->name . ($booth->club ? '<br/>' . $booth->club->name : ''),
+                'fillColor' => $booth->club->clubType->color ?? '#00DD00',
+                'url'       => is_null($booth->club) ? null : route('clubs.show', $booth->club->id),
+            ];
         }
 
-        return view('map.index', compact('type', 'boothData'));
+        return view('map.google', compact('boothData'));
+    }
+
+    public function clubsStaticMap(Request $request)
+    {
+        return view('map.static');
     }
 }

@@ -19,8 +19,7 @@ class ExtraTicketsDataTable extends DataTable
         $dataTable = new EloquentDataTable($query);
 
         return $dataTable
-            ->addColumn('action', 'extra-ticket.datatables.action')
-            ->escapeColumns([]);
+            ->addColumn('action', 'extra-ticket.datatables.action');
     }
 
     /**

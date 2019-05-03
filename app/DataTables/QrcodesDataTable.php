@@ -21,7 +21,6 @@ class QrcodesDataTable extends DataTable
         $dataTable = new EloquentDataTable($query);
 
         return $dataTable
-            ->addColumn('action', 'qrcode.datatables.action')
             ->editColumn('code', function ($qrcode) {
                 return view('qrcode.datatables.code', compact('qrcode'))->render();
             })
@@ -39,7 +38,7 @@ class QrcodesDataTable extends DataTable
             ->editColumn('is_last_one', function ($qrcode) {
                 return view('qrcode.datatables.is_last_one', compact('qrcode'))->render();
             })
-            ->escapeColumns([]);
+            ->rawColumns(['code', 'is_last_one']);
     }
 
     /**
@@ -63,7 +62,6 @@ class QrcodesDataTable extends DataTable
         return $this->builder()
             ->columns($this->getColumns())
             ->minifiedAjax('')
-            ->addAction(['title' => '操作'])
             ->parameters([
                 'order'      => [[0, 'asc']],
                 'pageLength' => 50,

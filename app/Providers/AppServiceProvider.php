@@ -22,6 +22,7 @@ use Carbon\Carbon;
 use Horizon;
 use Illuminate\Support\ServiceProvider;
 use Schema;
+use Validator;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -53,6 +54,16 @@ class AppServiceProvider extends ServiceProvider
 
         Horizon::auth(function ($request) {
             return \Laratrust::can('horizon.manage');
+        });
+
+        //Validation rules
+        Validator::extend('strip_max', function ($attribute, $value, $parameters, $validator) {
+            /** @var Validator $validator */
+            $validator->addReplacer('strip_max', function ($message, $attribute, $rule, $parameters) {
+                return str_replace([':max'], $parameters, $message);
+            });
+
+            return mb_strlen(strip_tags($value)) <= $parameters[0];
         });
     }
 

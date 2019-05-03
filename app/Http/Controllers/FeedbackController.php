@@ -141,20 +141,27 @@ class FeedbackController extends Controller
         }
 
         $this->validate($request, [
-            'phone'   => [
+            'phone'    => [
                 'nullable',
-                'required_without_all:email,message',
+                'required_without_all:email,facebook,line',
                 'max:255',
-                'regex:/^[\d-+()#\s]+$/',
+                'regex:/^[\d\-+()#\s]{8,}$/',
             ],
-            'email'   => 'nullable|required_without_all:phone,message|max:255|email',
-            'message' => 'nullable|required_without_all:email,phone|max:255',
+            'email'    => 'nullable|required_without_all:phone,facebook,line|max:255|email',
+            'facebook' => 'nullable|required_without_all:phone,email,line|max:255',
+            'line'     => [
+                'nullable',
+                'required_without_all:phone,email,facebook',
+                'max:255',
+                'regex:/^[\w\-\.]+$/',
+            ],
+            'message'  => 'nullable|max:255',
         ]);
 
         $feedback = Feedback::updateOrCreate([
             'club_id'    => $club->id,
             'student_id' => $user->student->id,
-        ], $request->only(['phone', 'email', 'message']));
+        ], $request->only(['phone', 'email', 'facebook', 'line', 'message']));
 
         return redirect()->route('feedback.show', $feedback)
             ->with('success', '回饋資料已送出');

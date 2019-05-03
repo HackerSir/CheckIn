@@ -43,7 +43,7 @@ class RecordsDataTable extends DataTable
                     $query->where('name', 'like', '%' . $keyword . '%');
                 });
             })
-            ->escapeColumns([]);
+            ->rawColumns(['student_id', 'club_id']);
     }
 
     /**

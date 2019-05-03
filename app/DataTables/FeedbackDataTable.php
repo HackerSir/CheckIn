@@ -48,7 +48,7 @@ class FeedbackDataTable extends DataTable
                     $query->where('name', 'like', '%' . $keyword . '%');
                 });
             })
-            ->escapeColumns([]);
+            ->rawColumns(['is_freshman', 'club_id', 'action']);
     }
 
     /**
@@ -97,6 +97,8 @@ class FeedbackDataTable extends DataTable
             'club_id'     => ['title' => '社團'],
             'phone'       => ['title' => '電話'],
             'email'       => ['title' => '信箱'],
+            'facebook'    => ['title' => 'Facebook'],
+            'line'        => ['title' => 'LINE'],
             'message'     => [
                 'searchable' => false,
                 'orderable'  => false,

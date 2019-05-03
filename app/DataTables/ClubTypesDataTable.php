@@ -22,7 +22,7 @@ class ClubTypesDataTable extends DataTable
             ->addColumn('action', 'club-type.datatables.action')
             ->editColumn('name', 'club-type.datatables.name')
             ->editColumn('is_counted', 'club-type.datatables.is_counted')
-            ->escapeColumns([]);
+            ->rawColumns(['name', 'is_counted', 'action']);
     }
 
     /**

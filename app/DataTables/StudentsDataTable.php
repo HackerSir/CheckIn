@@ -20,11 +20,11 @@ class StudentsDataTable extends DataTable
         $dataTable = new EloquentDataTable($query);
 
         return $dataTable
-            ->editColumn('name', 'student.datatables.name')
             ->editColumn('nid', function ($student) {
                 /** @var Student $student */
                 return view('student.datatables.nid', compact('student'))->render();
             })
+            ->editColumn('name', 'student.datatables.name')
             ->editColumn('class', function ($student) {
                 return view('student.datatables.class', compact('student'))->render();
             })
@@ -41,7 +41,7 @@ class StudentsDataTable extends DataTable
                 /* @var Student $student */
                 return $student->is_dummy ? 'O' : 'X';
             })
-            ->escapeColumns([]);
+            ->rawColumns(['nid', 'name', 'class']);
     }
 
     /**

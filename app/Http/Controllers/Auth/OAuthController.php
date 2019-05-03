@@ -7,6 +7,7 @@ use App\Qrcode;
 use App\Services\FcuApiService;
 use App\Services\StudentService;
 use App\Services\UserService;
+use Illuminate\Support\Arr;
 
 class OAuthController extends Controller
 {
@@ -71,6 +72,16 @@ class OAuthController extends Controller
         }
         $nid = trim(strtoupper($userInfo['id']));
 
+        //嘗試使用 GetStuInfo 取得 GetUserInfo 無法取得之入學年度與性別資訊
+        $stuInfo = $this->fcuApiService->getStuInfo($nid);
+        if ($stuInfo) {
+            //若順利取得資料
+            //僅取用入學年度與性別資訊
+            $filteredStuInfo = Arr::only($stuInfo, ['in_year', 'stu_sex']);
+            //合併到 userInfo 供後續處理
+            $userInfo = array_merge($userInfo, $filteredStuInfo);
+        }
+
         //找出使用者
         $user = $this->userService->findOrCreateByNid($nid);
         //登入使用者
@@ -78,22 +89,21 @@ class OAuthController extends Controller
 
         //取得學生資料
         $student = $this->studentService->updateOrCreateOfUserInfo($userInfo);
-        if (!$student) {
-            //無學生資料，直接結束流程
-            return redirect()->route('index');
-        }
-        //使用者未綁定學生
-        if (!$user->student) {
-            //綁定學生
-            $user->student()->save($student);
+        if ($student) {
+            //有學生資料
+            //使用者未綁定學生
+            if (!$user->student) {
+                //綁定學生
+                $user->student()->save($student);
+            }
+            //更新名稱
+            $user->update(['name' => $student->name]);
         }
         //若學生沒有QR Code
         if (!$student->qrcode) {
             //綁定QRCode
             $student->qrcode()->save(Qrcode::create());
         }
-        //更新名稱
-        $user->update(['name' => $student->name]);
 
         return redirect()->intended();
     }

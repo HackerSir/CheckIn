@@ -35,7 +35,7 @@ class OwnClubController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param \Illuminate\Http\Request $request
      * @param ImgurImageService $imgurImageService
      * @return \Illuminate\Http\Response
      * @throws \Exception
@@ -52,8 +52,8 @@ class OwnClubController extends Controller
         }
 
         $this->validate($request, [
-            'description' => 'nullable|max:300',
-            'extra_info'  => 'nullable|max:300',
+            'description' => 'nullable|strip_max:300',
+            'extra_info'  => 'nullable|strip_max:300',
             'url'         => 'nullable|url',
             'image_file'  => 'image',
         ]);
@@ -121,8 +121,8 @@ class OwnClubController extends Controller
 
     /**
      * @param Request $request
-     * @throws \Exception
      * @return \Illuminate\Http\Response
+     * @throws \Exception
      */
     public function storeDataUpdateRequest(Request $request)
     {
@@ -139,8 +139,8 @@ class OwnClubController extends Controller
 
         $this->validate($request, [
             'reason'      => 'required|max:255',
-            'description' => 'nullable|max:300',
-            'extra_info'  => 'nullable|max:300',
+            'description' => 'nullable|strip_max:300',
+            'extra_info'  => 'nullable|strip_max:300',
             'url'         => 'nullable|url',
         ]);
 
