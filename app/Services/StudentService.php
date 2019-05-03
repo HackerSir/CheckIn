@@ -98,6 +98,9 @@ class StudentService
             'unit_name' => $userInfo['unit_name'],
             'dept_id'   => $userInfo['dept_id'],
             'dept_name' => $userInfo['dept_name'],
+            // in_year 與 gender 來自 GetStuInfo，非該學期在校生會無法取得這兩個欄位
+            'in_year'   => $userInfo['in_year'] ?? null,
+            'gender'    => $userInfo['stu_sex'] ?? null,
             'is_dummy'  => false,
             'fetch_at'  => Carbon::now(),
         ]);

@@ -7,6 +7,7 @@ use App\Qrcode;
 use App\Services\FcuApiService;
 use App\Services\StudentService;
 use App\Services\UserService;
+use Illuminate\Support\Arr;
 
 class OAuthController extends Controller
 {
@@ -70,6 +71,16 @@ class OAuthController extends Controller
             return redirect()->route('index')->with('warning', '登入失敗(u)');
         }
         $nid = trim(strtoupper($userInfo['id']));
+
+        //嘗試使用 GetStuInfo 取得 GetUserInfo 無法取得之入學年度與性別資訊
+        $stuInfo = $this->fcuApiService->getStuInfo($nid);
+        if ($stuInfo) {
+            //若順利取得資料
+            //僅取用入學年度與性別資訊
+            $filteredStuInfo = Arr::only($stuInfo, ['in_year', 'stu_sex']);
+            //合併到 userInfo 供後續處理
+            $userInfo = array_merge($userInfo, $filteredStuInfo);
+        }
 
         //找出使用者
         $user = $this->userService->findOrCreateByNid($nid);
