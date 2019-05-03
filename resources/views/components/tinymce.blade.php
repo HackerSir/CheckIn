@@ -2,7 +2,7 @@
 <script>
     tinymce.init({
         selector: '.tinymce',
-        language: 'zh_CN',//'zh_TW',
+        language: 'zh_TW',//'zh_CN', 'zh_TW',
         branding: false,
         plugins: 'autolink image link media table hr advlist lists textcolor colorpicker help anchor wordcount searchreplace visualblocks visualchars charmap emoticons code',
         // plugins: 'print preview fullpage searchreplace autolink directionality visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists textcolor wordcount imagetools contextmenu colorpicker textpattern help',
