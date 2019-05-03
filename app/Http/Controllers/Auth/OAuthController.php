@@ -84,8 +84,6 @@ class OAuthController extends Controller
 
         //找出使用者
         $user = $this->userService->findOrCreateByNid($nid);
-        //登入使用者
-        auth()->login($user, true);
 
         //取得學生資料
         $student = $this->studentService->updateOrCreateOfUserInfo($userInfo);
@@ -104,6 +102,9 @@ class OAuthController extends Controller
             //綁定QRCode
             $student->qrcode()->save(Qrcode::create());
         }
+
+        //登入使用者
+        auth()->login($user, true);
 
         return redirect()->intended();
     }
