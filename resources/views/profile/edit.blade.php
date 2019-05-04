@@ -14,7 +14,7 @@
             {{ bs()->openForm('put', route('profile.update'), ['model' => $user]) }}
             {{ bs()->formGroup(bs()->email('email')->readOnly())->label('信箱')
              ->helpText('信箱作為帳號使用，故無法修改')->showAsRow() }}
-            {{ bs()->formGroup(bs()->text('name')->required())->label('名稱')->showAsRow() }}
+            {{ bs()->formGroup(bs()->text('name')->required())->class('required')->label('名稱')->showAsRow() }}
             <div class="row">
                 <div class="mx-auto">
                     {{ bs()->submit('確認', 'primary')->prependChildren(fa()->icon('check')->addClass('mr-2')) }}

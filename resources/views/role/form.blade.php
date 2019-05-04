@@ -1,5 +1,5 @@
-{{ bs()->formGroup(bs()->text('display_name')->required()->placeholder('如：管理員'))->label('顯示名稱')->showAsRow() }}
-{{ bs()->formGroup(bs()->text('description')->required()->placeholder('說明此角色之用途'))->label('簡介')->showAsRow() }}
+{{ bs()->formGroup(bs()->text('display_name')->required()->placeholder('如：管理員'))->class('required')->label('顯示名稱')->showAsRow() }}
+{{ bs()->formGroup(bs()->text('description')->required()->placeholder('說明此角色之用途'))->class('required')->label('簡介')->showAsRow() }}
 
 <div class="form-group row">
     <label class="col-md-2 col-form-label">權限</label>

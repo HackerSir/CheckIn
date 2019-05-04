@@ -6,10 +6,10 @@
     <div class="card">
         <div class="card-body">
             {{ bs()->openForm('post',route('register')) }}
-            {{ bs()->formGroup(bs()->text('name')->required())->label('名稱')->showAsRow() }}
-            {{ bs()->formGroup(bs()->email('email')->required())->label('信箱')->showAsRow() }}
-            {{ bs()->formGroup(bs()->password('password')->required())->label('密碼')->showAsRow() }}
-            {{ bs()->formGroup(bs()->password('password_confirmation')->required())->label('確認密碼')->showAsRow() }}
+            {{ bs()->formGroup(bs()->text('name')->required())->class('required')->label('名稱')->showAsRow() }}
+            {{ bs()->formGroup(bs()->email('email')->required())->class('required')->label('信箱')->showAsRow() }}
+            {{ bs()->formGroup(bs()->password('password')->required())->class('required')->label('密碼')->showAsRow() }}
+            {{ bs()->formGroup(bs()->password('password_confirmation')->required())->class('required')->label('確認密碼')->showAsRow() }}
             <div class="row">
                 <div class="mx-auto">
                     {{ bs()->submit('註冊', 'primary')->prependChildren(fa()->icon('check')->addClass('mr-2')) }}

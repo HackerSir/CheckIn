@@ -12,7 +12,7 @@
     <div class="card">
         <div class="card-body">
             {{ bs()->openForm('post', route('qrcode-set.store')) }}
-            {{ bs()->formGroup(bs()->input('number', 'amount', 1)->required()->autofocus()->attributes(['min' => 1]))->label('QR碼數量')->showAsRow() }}
+            {{ bs()->formGroup(bs()->input('number', 'amount', 1)->required()->autofocus()->attributes(['min' => 1]))->class('required')->label('QR碼數量')->showAsRow() }}
 
             <div class="row">
                 <div class="mx-auto">

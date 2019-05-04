@@ -23,9 +23,9 @@
                 <div class="card-body">
                     {{ bs()->openForm('post', route('qrcode.bind')) }}
                     {{ bs()->formGroup(bs()->inputGroup(bs()->text('nid')->required()->autofocus())
-                    ->suffix(bs()->button(fa()->times())->attributes(['onclick' => "$('input#nid').val('');$('input#nid').focus();return false;"]), false))->label('學號')->showAsRow() }}
+                    ->suffix(bs()->button(fa()->times())->attributes(['onclick' => "$('input#nid').val('');$('input#nid').focus();return false;"]), false))->class('required')->label('學號')->showAsRow() }}
                     {{ bs()->formGroup(bs()->inputGroup(bs()->text('code')->required()->autofocus())
-                    ->suffix(bs()->button(fa()->times())->attributes(['onclick' => "$('input#code').val('');$('input#code').focus();return false;"]), false))->label('代號')->showAsRow() }}
+                    ->suffix(bs()->button(fa()->times())->attributes(['onclick' => "$('input#code').val('');$('input#code').focus();return false;"]), false))->class('required')->label('代號')->showAsRow() }}
 
                     <div class="row">
                         <div class="mx-auto">

@@ -13,9 +13,9 @@
         <div class="card-body">
             {{ bs()->openForm('patch', route('role.update', $role), ['model' => $role]) }}
             @if($role->protection)
-                {{ bs()->formGroup(bs()->text('name')->readOnly()->placeholder('如：admin'))->label('英文名稱')->showAsRow() }}
+                {{ bs()->formGroup(bs()->text('name')->readOnly()->placeholder('如：admin'))->class('required')->label('英文名稱')->showAsRow() }}
             @else
-                {{ bs()->formGroup(bs()->text('name')->required()->placeholder('如：admin'))->label('英文名稱')->showAsRow() }}
+                {{ bs()->formGroup(bs()->text('name')->required()->placeholder('如：admin'))->class('required')->label('英文名稱')->showAsRow() }}
             @endif
             @include('role.form')
 

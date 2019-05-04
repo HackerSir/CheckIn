@@ -9,8 +9,8 @@
                 <strong>警告！</strong>學生請使用<a href="{{ route('oauth.index') }}" class="alert-link">NID登入</a>
             </div>
             {{ bs()->openForm('post', route('login')) }}
-            {{ bs()->formGroup(bs()->text('email')->required())->label('信箱')->showAsRow() }}
-            {{ bs()->formGroup(bs()->password('password')->required())->label('密碼')->showAsRow() }}
+            {{ bs()->formGroup(bs()->text('email')->required())->class('required')->label('信箱')->showAsRow() }}
+            {{ bs()->formGroup(bs()->password('password')->required())->class('required')->label('密碼')->showAsRow() }}
             {{ bs()->formGroup(bs()->checkBox('remember', '記住我'))->showAsRow('no_label') }}
             <div class="row">
                 <div class="mx-auto">

@@ -13,7 +13,7 @@
         <div class="card-body">
             {{ bs()->openForm('patch', route('user.update', $user), ['model' => $user]) }}
             {{ bs()->formGroup(bs()->email('email')->readOnly())->label('信箱')->helpText('信箱作為帳號使用，故無法修改')->showAsRow() }}
-            {{ bs()->formGroup(bs()->text('name')->required())->label('名稱')->showAsRow() }}
+            {{ bs()->formGroup(bs()->text('name')->required())->class('required')->label('名稱')->showAsRow() }}
 
             <div class="form-group row">
                 <label class="col-md-2 col-form-label">角色</label>

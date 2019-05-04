@@ -128,18 +128,21 @@ class StudentController extends Controller
         }
         //使用者
 //        $this->userService->findOrCreateAndBind($student);
+
+        if ($isExistsBefore) {
+            $message = '學生資料已存在，已更新學生資料';
+            $verbInLog = '更新';
+        } else {
+            $message = '學生資料已新增';
+            $verbInLog = '新增';
+        }
         //Log
         $operator = auth()->user();
-        $this->logService->info("[Student][Create] {$operator->name} 新增了 {$student->display_name}", [
+        $this->logService->info("[Student][Create] {$operator->name} {$verbInLog}了 {$student->display_name}", [
             'ip'       => request()->ip(),
             'operator' => $operator,
             'student'  => $student,
         ]);
-        if ($isExistsBefore) {
-            $message = '學生資料已存在，已更新學生資料';
-        } else {
-            $message = '學生資料已新增';
-        }
 
         return redirect()->route('student.show', $student)->with('success', $message);
     }

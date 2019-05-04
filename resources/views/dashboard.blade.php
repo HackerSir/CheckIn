@@ -10,8 +10,8 @@
                     <h1>QR Code</h1>
                     <div class="text-center">
                         @if($student->qrcode)
-                            <p class="text-danger">請在攤位出示此 QR Code 來進行打卡</p>
-                            <img src="{{ route('code-picture.qrcode', $student->qrcode->code) }}" class="img-fluid">
+                            <p class="text-danger">聆聽攤位解說後，請出示此 QR Code 以進行打卡</p>
+                            <img src="{{ route('code-picture.qrcode', $student->qrcode->code) }}" class="img-fluid" alt="QR Code">
                         @else
                             <div class="alert alert-danger" role="alert">
                                 o_O 沒有 QR Code？<br/>

@@ -1,5 +1,5 @@
 {{ bs()->formGroup(bs()->text('number')->placeholder('如：A66'))->label('社團編號')->showAsRow() }}
-{{ bs()->formGroup(bs()->text('name')->placeholder('如：黑客社')->required())->label('名稱')->showAsRow() }}
+{{ bs()->formGroup(bs()->text('name')->placeholder('如：黑客社')->required())->class('required')->label('名稱')->showAsRow() }}
 {{ bs()->formGroup(bs()->select('club_type_id')->options(\App\ClubType::selectOptions()))->label('社團類型')->showAsRow() }}
 {{ bs()->formGroup(bs()->textarea('description')->attribute('rows', 10)->class('tinymce'))->label('描述')->showAsRow() }}
 {{ bs()->formGroup(bs()->textarea('extra_info')->attribute('rows', 10)->class('tinymce'))->label('額外資訊')->helpText('僅限對此社團填寫回饋資料的學生檢視，可放FB社團、LINE群網址等')->showAsRow() }}
