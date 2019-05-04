@@ -234,7 +234,7 @@ class Student extends Model
     public function getIsStaffAttribute()
     {
         //無對應使用者
-        if (!$this->user_id) {
+        if (!$this->user) {
             return false;
         }
 
