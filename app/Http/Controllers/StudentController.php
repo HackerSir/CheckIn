@@ -49,9 +49,12 @@ class StudentController extends Controller
      *
      * @param StudentsDataTable $dataTable
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\Response|\Illuminate\View\View
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function index(StudentsDataTable $dataTable)
     {
+        $this->authorize('index', Student::class);
+
         return $dataTable->render('student.index');
     }
 
