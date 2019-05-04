@@ -63,7 +63,7 @@ use Illuminate\Database\Query\Builder;
  */
 class Student extends Model
 {
-    private static $freshmanInYear = 107;
+    private static $freshmanInYear = 108;
     protected $fillable = [
         'nid',
         'name',
