@@ -173,6 +173,24 @@ class StudentController extends Controller
     }
 
     /**
+     * Update the specified resource in storage.
+     *
+     * @param \App\Student $student
+     * @return \Illuminate\Http\Response
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     */
+    public function fetch(Student $student)
+    {
+        $this->authorize('fetch', $student);
+        $student = $this->studentService->updateOrCreate($student->nid);
+        if (!$student) {
+            return back()->with('warning', '無法更新資料');
+        }
+
+        return redirect()->route('student.show', $student)->with('success', '學生資料已更新');
+    }
+
+    /**
      * Remove the specified resource from storage.
      *
      * @param Student $student

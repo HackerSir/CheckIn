@@ -20,6 +20,13 @@
             <i class="fa fa-edit" aria-hidden="true"></i> 編輯
         </a>
     @endcan
+    @can('fetch', $student)
+        {!! Form::open(['route' => ['student.fetch', $student], 'style' => 'display: inline', 'method' => 'PUT']) !!}
+        <button type="submit" class="btn btn-primary">
+            <i class="fa fa-sync" aria-hidden="true"></i> 更新學生
+        </button>
+        {!! Form::close() !!}
+    @endcan
     @can('delete', $student)
         {!! Form::open(['route' => ['student.destroy', $student], 'style' => 'display: inline', 'method' => 'DELETE', 'onSubmit' => "return confirm('確定要刪除嗎？');"]) !!}
         <button type="submit" class="btn btn-danger">
