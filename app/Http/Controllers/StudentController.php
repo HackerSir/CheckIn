@@ -92,6 +92,59 @@ class StudentController extends Controller
         return redirect()->route('student.index')->with('success', '學生已新增');
     }
 
+
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     */
+    public function createRealStudent()
+    {
+        $this->authorize('create', Student::class);
+
+        return view('student.create-real-student');
+    }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Illuminate\Validation\ValidationException
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     */
+    public function storeRealStudent(Request $request)
+    {
+        $this->authorize('create', Student::class);
+
+        $this->validate($request, [
+            'nid' => [
+                'required',
+                'regex:#^[a-zA-Z]\d+$#',
+//                'unique:students,nid',
+            ],
+        ]);
+        $nid = trim(strtoupper($request->get('nid')));
+        $isExistsBefore = Student::whereNid($nid)->exists();
+        $student = $this->studentService->updateOrCreate($nid);
+        if (!$student) {
+            return back()->with('warning', '查無此人');
+        }
+        //使用者
+//        $this->userService->findOrCreateAndBind($student);
+        //Log
+        $operator = auth()->user();
+        $this->logService->info("[Student][Create] {$operator->name} 新增了 {$student->display_name}", [
+            'ip'       => request()->ip(),
+            'operator' => $operator,
+            'student'  => $student,
+        ]);
+        if ($isExistsBefore) {
+            $message = '學生資料已存在，已更新學生資料';
+        } else {
+            $message = '學生資料已新增';
+        }
+
+        return redirect()->route('student.show', $student)->with('success', $message);
+    }
+
     /**
      * Display the specified resource.
      *

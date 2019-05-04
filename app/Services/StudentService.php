@@ -70,6 +70,8 @@ class StudentService
             'dept_name' => $stuInfo['dept_name'],
             'in_year'   => $stuInfo['in_year'],
             'gender'    => $stuInfo['stu_sex'],
+            'is_dummy'  => false,
+            'fetch_at'  => Carbon::now(),
         ]);
 
         return $student;
