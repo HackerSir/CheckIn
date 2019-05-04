@@ -211,7 +211,7 @@ class Student extends Model
             return true;
         }
         //研究所與教職員不算新生
-        if (starts_with($this->nid, 'M') || starts_with($this->nid, 'T')) {
+        if (starts_with($this->nid, ['M', 'P', 'T'])) {
             return false;
         }
         //檢查入學年度
@@ -263,6 +263,7 @@ class Student extends Model
             ->orWhere(function ($query) {
                 /** @var Builder|static $query */
                 $query->where('nid', 'not like', 'M%')
+                    ->where('nid', 'not like', 'P%')
                     ->where('nid', 'not like', 'T%')
                     ->where(function ($query) {
                         /** @var Builder|static $query */
@@ -281,6 +282,7 @@ class Student extends Model
             ->where(function ($query) {
                 /** @var Builder|static $query */
                 $query->where('nid', 'like', 'M%')
+                    ->orWhere('nid', 'like', 'P%')
                     ->orWhere('nid', 'like', 'T%')
                     ->orWhere(function ($query) {
                         /** @var Builder|static $query */
