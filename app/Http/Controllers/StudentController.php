@@ -70,18 +70,9 @@ class StudentController extends Controller
      *
      * @param StudentRequest $request
      * @return \Illuminate\Http\Response
-     * @throws \Illuminate\Validation\ValidationException
      */
     public function store(StudentRequest $request)
     {
-        $this->validate($request, [
-            'nid' => [
-                'required',
-                'unique:students,nid',
-                'regex:#^[a-zA-Z]\d+$#',
-            ],
-        ]);
-
         $student = Student::create(array_merge($request->all(), [
             'consider_as_freshman' => $request->exists('consider_as_freshman'),
             'is_dummy'             => true,
