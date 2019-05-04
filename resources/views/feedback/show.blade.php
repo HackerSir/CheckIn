@@ -13,7 +13,7 @@
 @section('buttons')
     @php($user = auth()->user())
     @if(optional($user)->student)
-        <a href="{{ route('index') }}" class="btn btn-secondary mb-2">
+        <a href="{{ route('my-qrcode') }}" class="btn btn-secondary mb-2">
             <i class="fa fa-arrow-left" aria-hidden="true"></i> QR Code
         </a>
         <a href="{{ route('feedback.my') }}" class="btn btn-secondary mb-2">
