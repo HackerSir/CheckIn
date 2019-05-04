@@ -22,8 +22,8 @@
     @endcan
     @can('fetch', $student)
         {!! Form::open(['route' => ['student.fetch', $student], 'style' => 'display: inline', 'method' => 'PUT']) !!}
-        <button type="submit" class="btn btn-primary">
-            <i class="fa fa-sync" aria-hidden="true"></i> 更新學生
+        <button type="submit" class="btn btn-success">
+            <i class="fa fa-sync" aria-hidden="true"></i> 更新學生資料
         </button>
         {!! Form::close() !!}
     @endcan
