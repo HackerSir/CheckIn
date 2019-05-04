@@ -10,7 +10,7 @@
                     <h1>QR Code</h1>
                     <div class="text-center">
                         @if($student->qrcode)
-                            <p class="text-danger">請在攤位出示此 QR Code 來進行打卡</p>
+                            <p class="text-danger">聆聽攤位解說後，請出示此 QR Code 以進行打卡</p>
                             <img src="{{ route('code-picture.qrcode', $student->qrcode->code) }}" class="img-fluid">
                         @else
                             <div class="alert alert-danger" role="alert">
