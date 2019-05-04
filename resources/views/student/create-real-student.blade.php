@@ -25,7 +25,7 @@
     <div class="card">
         <div class="card-body">
             {{ bs()->openForm('post', route('student.store-real-student')) }}
-            {{ bs()->formGroup(bs()->text('nid')->required()->autofocus())->label('學號')->showAsRow() }}
+            {{ bs()->formGroup(bs()->text('nid')->required()->autofocus())->class('required')->label('學號')->showAsRow() }}
 
             <div class="row">
                 <div class="mx-auto">

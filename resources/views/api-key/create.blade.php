@@ -12,7 +12,7 @@
     <div class="card">
         <div class="card-body">
             {{ bs()->openForm('post', route('api-key.store')) }}
-            {{ bs()->formGroup(bs()->text('api_key')->required()->attribute('autocomplete', 'off'))->label('API Key')->showAsRow() }}
+            {{ bs()->formGroup(bs()->text('api_key')->required()->attribute('autocomplete', 'off'))->class('required')->label('API Key')->showAsRow() }}
             <div class="row">
                 <div class="mx-auto">
                     {{ bs()->submit('確認', 'primary')->prependChildren(fa()->icon('check')->addClass('mr-2')) }}

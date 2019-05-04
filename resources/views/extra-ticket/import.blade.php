@@ -30,7 +30,7 @@
     <div class="card mt-1">
         <div class="card-body">
             {{ bs()->openForm('post', route('extra-ticket.import'), ['files' => true]) }}
-            {{ bs()->formGroup(bs()->simpleFile('import_file')->required()->accept('.xls,.xlsx'))->label('檔案')->showAsRow() }}
+            {{ bs()->formGroup(bs()->simpleFile('import_file')->required()->accept('.xls,.xlsx'))->class('required')->label('檔案')->showAsRow() }}
             <div class="row">
                 <div class="mx-auto">
                     {{ bs()->submit('確認', 'primary')->prependChildren(fa()->icon('check')->addClass('mr-2')) }}

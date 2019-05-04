@@ -12,7 +12,7 @@
     <div class="card">
         <div class="card-body">
             {{ bs()->openForm('post', route('role.store')) }}
-            {{ bs()->formGroup(bs()->text('name')->required()->placeholder('如：admin'))->label('英文名稱')->showAsRow() }}
+            {{ bs()->formGroup(bs()->text('name')->required()->placeholder('如：admin'))->class('required')->label('英文名稱')->showAsRow() }}
             @include('role.form')
 
             <div class="row">

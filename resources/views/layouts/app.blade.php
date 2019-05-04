@@ -80,6 +80,13 @@
                 overflow-y: auto;
             }
         }
+
+        .form-group.required label:after {
+            font-family: "Font Awesome 5 Free";
+            font-weight: 900;
+            content: " \f621";
+            color: red;
+        }
     </style>
     @yield('css')
 </head>

@@ -27,7 +27,7 @@
                     </p>
                 </div>
             </div>
-            {{ bs()->formGroup(bs()->text('reason')->required())->label('申請原因')->showAsRow() }}
+            {{ bs()->formGroup(bs()->text('reason')->required())->class('required')->label('申請原因')->showAsRow() }}
             <div class="form-group row">
                 <label class="col-md-2 col-form-label">社團</label>
                 <div class="col-md-10">
