@@ -4,8 +4,11 @@
 
 @section('buttons')
     @can('create', \App\Student::class)
-        <a href="{{ route('student.create') }}" class="btn btn-primary">
+        <a href="{{ route('student.create-real-student') }}" class="btn btn-primary">
             <i class="fa fa-plus-circle" aria-hidden="true"></i> 新增學生
+        </a>
+        <a href="{{ route('student.create') }}" class="btn btn-secondary">
+            <i class="fa fa-plus-circle" aria-hidden="true"></i> 新增虛擬學生
         </a>
     @endcan
     @can('import', \App\Student::class)

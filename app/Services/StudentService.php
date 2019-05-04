@@ -48,7 +48,6 @@ class StudentService
      *
      * @param string $nid 學號
      * @return Student|null 學生實體
-     * @deprecated
      */
     public function updateOrCreate($nid)
     {
@@ -71,6 +70,8 @@ class StudentService
             'dept_name' => $stuInfo['dept_name'],
             'in_year'   => $stuInfo['in_year'],
             'gender'    => $stuInfo['stu_sex'],
+            'is_dummy'  => false,
+            'fetch_at'  => Carbon::now(),
         ]);
 
         return $student;

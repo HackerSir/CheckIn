@@ -69,6 +69,9 @@ Route::group(['middleware' => ['auth', 'email']], function () {
     //學生管理
     //權限：StudentPolicy
     Route::prefix('student')->group(function () {
+        Route::put('fetch/{student}', 'StudentController@fetch')->name('student.fetch');
+        Route::get('create-real-student', 'StudentController@createRealStudent')->name('student.create-real-student');
+        Route::post('create-real-student', 'StudentController@storeRealStudent')->name('student.store-real-student');
         Route::get('import', 'StudentController@getImport')->name('student.import');
         Route::post('import', 'StudentController@postImport')->name('student.import');
         Route::get('download-import-sample', 'StudentController@downloadImportSample')

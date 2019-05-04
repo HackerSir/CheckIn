@@ -96,11 +96,11 @@ class OAuthController extends Controller
             }
             //更新名稱
             $user->update(['name' => $student->name]);
-        }
-        //若學生沒有QR Code
-        if (!$student->qrcode) {
-            //綁定QRCode
-            $student->qrcode()->save(Qrcode::create());
+            //若學生沒有QR Code
+            if (!$student->qrcode) {
+                //綁定QRCode
+                $student->qrcode()->save(Qrcode::create());
+            }
         }
 
         //登入使用者
