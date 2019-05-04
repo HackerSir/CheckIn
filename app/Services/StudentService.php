@@ -48,7 +48,6 @@ class StudentService
      *
      * @param string $nid 學號
      * @return Student|null 學生實體
-     * @deprecated
      */
     public function updateOrCreate($nid)
     {
