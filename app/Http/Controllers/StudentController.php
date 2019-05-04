@@ -92,7 +92,6 @@ class StudentController extends Controller
         return redirect()->route('student.index')->with('success', '學生已新增');
     }
 
-
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      * @throws \Illuminate\Auth\Access\AuthorizationException
