@@ -261,6 +261,59 @@ class ExportController extends Controller
     }
 
     /**
+     * 社團清單
+     *
+     * @return \Symfony\Component\HttpFoundation\BinaryFileResponse
+     * @throws \PhpOffice\PhpSpreadsheet\Exception
+     */
+    public function club()
+    {
+        //建立
+        $spreadsheet = new Spreadsheet();
+        $sheet = $spreadsheet->getActiveSheet();
+        //建立匯出資料
+        $this->setTitleRow(
+            $sheet,
+            [
+                'ID',
+                '社團類型',
+                '社團編號',
+                '名稱',
+                '攤位',
+                '打卡次數',
+                '回饋資料',
+            ]
+        );
+        /** @var Collection|Club[] $clubs */
+        $clubs = Club::with('clubType', 'booths')->withCount('records', 'feedback')->orderBy('id')->get();
+        foreach ($clubs as $club) {
+            $this->appendRow($sheet, [
+                $club->id,
+                $club->clubType->name ?? null,
+                $club->number,
+                $club->name,
+                implode('、', $club->booths->pluck('name')->toArray()),
+                $club->records_count,
+                $club->feedback_count,
+            ]);
+        }
+        //調整格式
+        $styleArray = [
+            'borders' => [
+                'right' => [
+                    'style' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THICK,
+                    'color' => ['argb' => '00000000'],
+                ],
+            ],
+        ];
+
+        $sheet->getStyleByColumnAndRow(7, 1, 7, $sheet->getHighestRow())->applyFromArray($styleArray);
+
+        //下載
+        return $this->downloadSpreadsheet($spreadsheet, '社團.xlsx');
+    }
+
+    /**
      * 攤位負責人（僅匯出有對應學生之使用者名單）
      *
      * @return \Symfony\Component\HttpFoundation\BinaryFileResponse
