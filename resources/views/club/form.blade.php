@@ -74,7 +74,7 @@
                     url: '{{ route('api.booth-list') }}',
                     type: 'POST',
                     headers: {
-                        'X-CSRF-Token': window.Laravel.csrfToken,
+                        'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content'),
                         'Accept': 'application/json'
                     },
                     dataType: 'json',
@@ -121,7 +121,7 @@
                     url: '{{ route('api.user-list') }}',
                     type: 'POST',
                     headers: {
-                        'X-CSRF-Token': window.Laravel.csrfToken,
+                        'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content'),
                         'Accept': 'application/json'
                     },
                     dataType: 'json',

@@ -132,7 +132,6 @@
 <script>
     //CSRF Token
     window.Laravel = <?php echo json_encode([
-        'csrfToken' => csrf_token(),
         'baseUrl'   => url('/'),
         'student'   => auth()->user()->student->id ?? null
     ]); ?>
