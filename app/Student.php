@@ -63,6 +63,9 @@ use Illuminate\Database\Query\Builder;
  */
 class Student extends Model
 {
+    protected $primaryKey = 'nid';
+    public $incrementing = false;
+
     private static $freshmanInYear = 108;
     protected $fillable = [
         'nid',

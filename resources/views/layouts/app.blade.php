@@ -133,7 +133,7 @@
     //CSRF Token
     window.Laravel = <?php echo json_encode([
         'baseUrl'   => url('/'),
-        'student'   => auth()->user()->student->id ?? null
+        'student'   => auth()->user()->student->nid ?? null
     ]); ?>
 </script>
 <script>

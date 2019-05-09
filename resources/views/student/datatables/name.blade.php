@@ -1,1 +1,1 @@
-{{ link_to_route('student.show', $name, $id) }}
+{{ link_to_route('student.show', $name, $nid) }}
