@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Model;
  *
  * @property int $id
  * @property int $student_id 對應學生
+ * @property string|null $student_nid 對應學生
  * @property int $club_id 對應社團
  * @property string|null $phone 聯絡電話
  * @property string|null $email 聯絡信箱
@@ -32,6 +33,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Feedback whereMessage($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Feedback wherePhone($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Feedback whereStudentId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Feedback whereStudentNid($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Feedback whereUpdatedAt($value)
  * @mixin \Eloquent
  */
@@ -41,6 +43,7 @@ class Feedback extends Model
 
     protected $fillable = [
         'student_id',
+        'student_nid',
         'club_id',
         'phone',
         'email',

@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Model;
  *
  * @property int $id
  * @property int $student_id
+ * @property string|null $student_nid 對應學生
  * @property int $rating 星等評價
  * @property string|null $comment 意見與建議
  * @property \Illuminate\Support\Carbon|null $created_at
@@ -23,6 +24,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\StudentSurvey whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\StudentSurvey whereRating($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\StudentSurvey whereStudentId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\StudentSurvey whereStudentNid($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\StudentSurvey whereUpdatedAt($value)
  * @mixin \Eloquent
  */
@@ -30,6 +32,7 @@ class StudentSurvey extends Model
 {
     protected $fillable = [
         'student_id',
+        'student_nid',
         'rating',
         'comment',
     ];
