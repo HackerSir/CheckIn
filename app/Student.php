@@ -8,7 +8,6 @@ use Illuminate\Database\Query\Builder;
 /**
  * App\Student
  *
- * @property int $id
  * @property string $nid 學號
  * @property string $name 姓名
  * @property string|null $type 類型
@@ -50,7 +49,6 @@ use Illuminate\Database\Query\Builder;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Student whereDeptName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Student whereFetchAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Student whereGender($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Student whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Student whereInYear($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Student whereIsDummy($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Student whereName($value)

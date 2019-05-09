@@ -79,7 +79,6 @@ class StudentsDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            'id'             => ['title' => '#'],
             'nid'            => ['title' => 'NID'],
             'name'           => ['title' => '姓名'],
             'class'          => ['title' => '院系班級'],
