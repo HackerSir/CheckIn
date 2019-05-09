@@ -22,8 +22,9 @@ class AddStudentNidInStudentSurveys extends Migration
             ->chunk(100, function ($studentSurveys) {
                 /** @var \Illuminate\Database\Eloquent\Collection|\App\StudentSurvey[] $studentSurveys */
                 foreach ($studentSurveys as $studentSurvey) {
-                    DB::table('student_surveys')->where('student_id', $studentSurvey->student->id)
-                        ->update(['student_nid' => $studentSurvey->student->nid]);
+                    $student = DB::table('students')->where('id', $studentSurvey->student_id)->first();
+                    DB::table('student_surveys')->where('student_id', $student->id)
+                        ->update(['student_nid' => $student->nid]);
                 }
             });
     }

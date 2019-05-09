@@ -21,8 +21,9 @@ class AddStudentNidInRecords extends Migration
         \App\Record::whereNotNull('student_id')->with('student')->orderBy('id')->chunk(100, function ($records) {
             /** @var \Illuminate\Database\Eloquent\Collection|\App\Record[] $records */
             foreach ($records as $record) {
-                DB::table('records')->where('student_id', $record->student->id)
-                    ->update(['student_nid' => $record->student->nid]);
+                $student = DB::table('students')->where('id', $record->student_id)->first();
+                DB::table('records')->where('student_id', $student->id)
+                    ->update(['student_nid' => $student->nid]);
             }
         });
     }

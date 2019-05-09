@@ -21,8 +21,9 @@ class AddStudentNidInQrcodes extends Migration
         \App\Qrcode::whereNotNull('student_id')->with('student')->orderBy('id')->chunk(100, function ($qrcodes) {
             /** @var \Illuminate\Database\Eloquent\Collection|\App\Qrcode[] $qrcodes */
             foreach ($qrcodes as $qrcode) {
-                DB::table('qrcodes')->where('student_id', $qrcode->student->id)
-                    ->update(['student_nid' => $qrcode->student->nid]);
+                $student = DB::table('students')->where('id', $qrcode->student_id)->first();
+                DB::table('qrcodes')->where('student_id', $student->id)
+                    ->update(['student_nid' => $student->nid]);
             }
         });
     }
