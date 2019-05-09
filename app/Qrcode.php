@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Model;
  *
  * @property int $id
  * @property string $code 代碼
- * @property int|null $student_id 對應學生
+ * @property string|null $student_nid 對應學生
  * @property \Illuminate\Support\Carbon|null $bind_at 綁定時間
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
@@ -26,7 +26,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Qrcode whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Qrcode whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Qrcode whereQrcodeSetId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Qrcode whereStudentId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Qrcode whereStudentNid($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Qrcode whereUpdatedAt($value)
  * @mixin \Eloquent
  */
@@ -34,7 +34,7 @@ class Qrcode extends Model
 {
     protected $fillable = [
         'code',
-        'student_id',
+        'student_nid',
         'bind_at',
         'qrcode_set_id',
     ];
@@ -52,7 +52,7 @@ class Qrcode extends Model
      */
     public function student()
     {
-        return $this->belongsTo(Student::class);
+        return $this->belongsTo(Student::class, 'student_nid', 'nid');
     }
 
     /**

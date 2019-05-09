@@ -23,7 +23,7 @@ class QrcodeObserver
     public function saving(Qrcode $qrcode)
     {
         //剛綁定
-        if ($qrcode->student_id && $qrcode->isDirty('student_id')) {
+        if ($qrcode->student_nid && $qrcode->isDirty('student_nid')) {
             $qrcode->bind_at = Carbon::now();
         }
     }

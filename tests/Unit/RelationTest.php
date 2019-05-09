@@ -46,7 +46,7 @@ class RelationTest extends TestCase
 
         $user->student()->save($student);
 
-        $this->assertEquals($student->id, $user->student->id);
+        $this->assertEquals($student->nid, $user->student->nid);
     }
 
     /**
@@ -62,7 +62,7 @@ class RelationTest extends TestCase
         $qrcode->student()->associate($student);
         $qrcode->save();
 
-        $this->assertEquals($student->id, $qrcode->student->id);
+        $this->assertEquals($student->nid, $qrcode->student->nid);
     }
 
     /**
@@ -159,7 +159,7 @@ class RelationTest extends TestCase
         $record->save();
 
         $this->assertEquals($record->club->id, $club->id);
-        $this->assertEquals($record->student->id, $student->id);
+        $this->assertEquals($record->student->nid, $student->nid);
         $this->assertContains($record->id, $club->records()->pluck('id'));
         $this->assertContains($record->id, $student->records()->pluck('id'));
     }
@@ -177,7 +177,7 @@ class RelationTest extends TestCase
         $ticket->student()->associate($student);
         $ticket->save();
 
-        $this->assertEquals($student->id, $ticket->student->id);
+        $this->assertEquals($student->nid, $ticket->student->nid);
     }
 
     /**
@@ -212,7 +212,7 @@ class RelationTest extends TestCase
         $feedback->save();
 
         $this->assertEquals($feedback->club->id, $club->id);
-        $this->assertEquals($feedback->student->id, $student->id);
+        $this->assertEquals($feedback->student->nid, $student->nid);
         $this->assertContains($feedback->id, $club->feedback()->pluck('id'));
         $this->assertContains($feedback->id, $student->feedback()->pluck('id'));
     }

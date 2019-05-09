@@ -59,7 +59,7 @@ class StudentTicketController extends Controller
         }
 
         StudentTicket::create(array_merge($request->only('id'), [
-            'student_id' => $student->id,
+            'student_nid' => $student->nid,
         ]));
 
         return redirect()->route('student-ticket.index')->with('success', '學生抽獎編號已新增');
@@ -68,7 +68,7 @@ class StudentTicketController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\StudentTicket $studentTicket
+     * @param \App\StudentTicket $studentTicket
      * @return \Illuminate\Http\Response
      */
     public function edit(StudentTicket $studentTicket)
@@ -103,7 +103,7 @@ class StudentTicketController extends Controller
         }
 
         $studentTicket->update(array_merge($request->only('name', 'class'), [
-            'student_id' => $student->id,
+            'student_nid' => $student->nid,
         ]));
 
         return redirect()->route('student-ticket.index')->with('success', '學生抽獎編號已更新');
@@ -112,7 +112,7 @@ class StudentTicketController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\StudentTicket $studentTicket
+     * @param \App\StudentTicket $studentTicket
      * @return \Illuminate\Http\Response
      * @throws \Exception
      */
@@ -225,11 +225,11 @@ class StudentTicketController extends Controller
                 //建立資料
                 try {
                     //刪除相同ID或NID的紀錄
-                    StudentTicket::query()->where('id', $id)->orWhere('student_id', $student->id)->delete();
+                    StudentTicket::query()->where('id', $id)->orWhere('student_nid', $student->nid)->delete();
                     //新增紀錄
                     StudentTicket::query()->create([
-                        'id'         => $id,
-                        'student_id' => $student->id,
+                        'id'          => $id,
+                        'student_nid' => $student->nid,
                     ]);
                 } catch (\Exception $exception) {
                     $skipCount++;

@@ -25,7 +25,7 @@
             <i class="fa fa-arrow-left" aria-hidden="true"></i> 回饋資料管理
         </a>
     @endif
-    @if(($user->student->id ?? null) == $feedback->student->id)
+    @if(($user->student->nid ?? null) == $feedback->student->nid)
         <a href="{{ route('feedback.create', $feedback->club) }}" class="btn btn-primary mb-2">
             <i class="fa fa-edit" aria-hidden="true"></i> 編輯
         </a>

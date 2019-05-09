@@ -84,13 +84,13 @@ $factory->define(App\Booth::class, function (Faker\Generator $faker) {
 });
 
 $factory->define(App\Record::class, function (Faker\Generator $faker) {
-    $studentIds = \App\Student::query()->pluck('id')->toArray();
+    $studentNids = \App\Student::query()->pluck('nid')->toArray();
     $clubIds = \App\Club::query()->pluck('id')->toArray();
 
     return [
-        'student_id' => $faker->randomElement($studentIds),
-        'club_id'    => $faker->randomElement($clubIds),
-        'ip'         => $faker->ipv4,
+        'student_nid' => $faker->randomElement($studentNids),
+        'club_id'     => $faker->randomElement($clubIds),
+        'ip'          => $faker->ipv4,
     ];
 });
 
@@ -101,26 +101,26 @@ $factory->define(App\Ticket::class, function (Faker\Generator $faker) {
 });
 
 $factory->define(App\Feedback::class, function (Faker\Generator $faker) {
-    $studentIds = \App\Student::query()->pluck('id')->toArray();
+    $studentNids = \App\Student::query()->pluck('nid')->toArray();
     $clubIds = \App\Club::query()->pluck('id')->toArray();
     $option = $faker->numberBetween(1, 7);
 
     return [
-        'student_id' => $faker->randomElement($studentIds),
-        'club_id'    => $faker->randomElement($clubIds),
-        'phone'      => $option & 1 ? $faker->phoneNumber : null,
-        'email'      => $option & 2 ? $faker->email : null,
-        'message'    => $option & 4 ? $faker->paragraph : null,
+        'student_nid' => $faker->randomElement($studentNids),
+        'club_id'     => $faker->randomElement($clubIds),
+        'phone'       => $option & 1 ? $faker->phoneNumber : null,
+        'email'       => $option & 2 ? $faker->email : null,
+        'message'     => $option & 4 ? $faker->paragraph : null,
     ];
 });
 
 $factory->define(App\StudentSurvey::class, function (Faker\Generator $faker) {
-    $studentIds = \App\Student::query()->pluck('id')->toArray();
+    $studentNids = \App\Student::query()->pluck('nid')->toArray();
 
     return [
-        'student_id' => $faker->randomElement($studentIds),
-        'rating'     => $faker->numberBetween(1, 5),
-        'comment'    => $faker->optional()->paragraph,
+        'student_nid' => $faker->randomElement($studentNids),
+        'rating'      => $faker->numberBetween(1, 5),
+        'comment'     => $faker->optional()->paragraph,
     ];
 });
 

@@ -78,7 +78,7 @@ class QrcodeScanController extends Controller
 
         //檢查是否在該攤位重複打卡
         /** @var Record $existRecord */
-        $existRecord = Record::where('student_id', $qrcode->student->id)
+        $existRecord = Record::where('student_nid', $qrcode->student->nid)
             ->where('club_id', $club->id)
             ->first();
         if ($existRecord) {
@@ -91,8 +91,8 @@ class QrcodeScanController extends Controller
         //打卡
         /** @var Record $record */
         $record = Record::query()->firstOrCreate([
-            'student_id' => $qrcode->student->id,
-            'club_id'    => $club->id,
+            'student_nid' => $qrcode->student->nid,
+            'club_id'     => $club->id,
         ], [
             'ip' => request()->getClientIp(),
         ]);

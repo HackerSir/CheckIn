@@ -39,7 +39,7 @@ class QrcodeController extends Controller
     public function bindForm()
     {
         $qrcodes = Qrcode::with('student')
-            ->whereNotNull('student_id')
+            ->whereNotNull('student_nid')
             ->whereNotNull('bind_at')
             ->orderBy('bind_at', 'desc')->take(10)->get();
 
