@@ -92,7 +92,7 @@ class QrcodeScanController extends Controller
         /** @var Record $record */
         $record = Record::query()->firstOrCreate([
             'student_nid' => $qrcode->student->nid,
-            'club_id'    => $club->id,
+            'club_id'     => $club->id,
         ], [
             'ip' => request()->getClientIp(),
         ]);
