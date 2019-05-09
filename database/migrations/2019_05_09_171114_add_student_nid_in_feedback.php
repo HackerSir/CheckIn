@@ -21,8 +21,9 @@ class AddStudentNidInFeedback extends Migration
         \App\Feedback::whereNotNull('student_id')->with('student')->orderBy('id')->chunk(100, function ($feedback) {
             /** @var \Illuminate\Database\Eloquent\Collection|\App\Feedback[] $feedback */
             foreach ($feedback as $feedbackItem) {
-                DB::table('feedback')->where('student_id', $feedbackItem->student->id)
-                    ->update(['student_nid' => $feedbackItem->student->nid]);
+                $student = DB::table('students')->where('id', $feedbackItem->student_id)->first();
+                DB::table('feedback')->where('student_id', $student->id)
+                    ->update(['student_nid' => $student->nid]);
             }
         });
     }

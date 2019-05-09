@@ -21,8 +21,9 @@ class AddStudentNidInTickets extends Migration
         \App\Ticket::whereNotNull('student_id')->with('student')->orderBy('id')->chunk(100, function ($tickets) {
             /** @var \Illuminate\Database\Eloquent\Collection|\App\Ticket[] $tickets */
             foreach ($tickets as $ticket) {
-                DB::table('tickets')->where('student_id', $ticket->student->id)
-                    ->update(['student_nid' => $ticket->student->nid]);
+                $student = DB::table('students')->where('id', $ticket->student_id)->first();
+                DB::table('tickets')->where('student_id', $student->id)
+                    ->update(['student_nid' => $student->nid]);
             }
         });
     }

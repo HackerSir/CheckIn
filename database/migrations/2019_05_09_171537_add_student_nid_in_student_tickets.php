@@ -22,8 +22,9 @@ class AddStudentNidInStudentTickets extends Migration
             ->chunk(100, function ($studentTickets) {
                 /** @var \Illuminate\Database\Eloquent\Collection|\App\StudentTicket[] $studentTickets */
                 foreach ($studentTickets as $studentTicket) {
-                    DB::table('student_tickets')->where('student_id', $studentTicket->student->id)
-                        ->update(['student_nid' => $studentTicket->student->nid]);
+                    $student = DB::table('students')->where('id', $studentTicket->student_id)->first();
+                    DB::table('student_tickets')->where('student_id', $student->id)
+                        ->update(['student_nid' => $student->nid]);
                 }
             });
     }
