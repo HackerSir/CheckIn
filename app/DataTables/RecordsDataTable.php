@@ -22,10 +22,10 @@ class RecordsDataTable extends DataTable
         $dataTable = new EloquentDataTable($query);
 
         return $dataTable
-            ->editColumn('student_id', function ($record) {
+            ->editColumn('student_nid', function ($record) {
                 return view('record.datatables.student', compact('record'))->render();
             })
-            ->filterColumn('student_id', function ($query, $keyword) {
+            ->filterColumn('student_nid', function ($query, $keyword) {
                 /* @var Builder|Record $query */
                 $query->whereHas('student', function ($query) use ($keyword) {
                     /* @var Builder|Student $query */
@@ -43,7 +43,7 @@ class RecordsDataTable extends DataTable
                     $query->where('name', 'like', '%' . $keyword . '%');
                 });
             })
-            ->rawColumns(['student_id', 'club_id']);
+            ->rawColumns(['student_nid', 'club_id']);
     }
 
     /**
@@ -81,11 +81,11 @@ class RecordsDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            'id'         => ['title' => '#'],
-            'student_id' => ['title' => '學生'],
-            'club_id'    => ['title' => '社團'],
-            'ip'         => ['title' => '打卡IP'],
-            'created_at' => ['title' => '打卡時間'],
+            'id'          => ['title' => '#'],
+            'student_nid' => ['title' => '學生'],
+            'club_id'     => ['title' => '社團'],
+            'ip'          => ['title' => '打卡IP'],
+            'created_at'  => ['title' => '打卡時間'],
         ];
     }
 

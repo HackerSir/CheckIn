@@ -24,10 +24,10 @@ class QrcodesDataTable extends DataTable
             ->editColumn('code', function ($qrcode) {
                 return view('qrcode.datatables.code', compact('qrcode'))->render();
             })
-            ->editColumn('student_id', function ($qrcode) {
+            ->editColumn('student_nid', function ($qrcode) {
                 return view('qrcode.datatables.student', compact('qrcode'))->render();
             })
-            ->filterColumn('student_id', function ($query, $keyword) {
+            ->filterColumn('student_nid', function ($query, $keyword) {
                 /* @var Builder|Qrcode $query */
                 $query->whereHas('student', function ($query) use ($keyword) {
                     /* @var Builder|Student $query */
@@ -78,7 +78,7 @@ class QrcodesDataTable extends DataTable
         return [
             'id'          => ['title' => '#'],
             'code'        => ['title' => '代碼'],
-            'student_id'  => ['title' => '學生'],
+            'student_nid' => ['title' => '學生'],
             'bind_at'     => ['title' => '綁定時間'],
             'is_last_one' => [
                 'searchable' => false,

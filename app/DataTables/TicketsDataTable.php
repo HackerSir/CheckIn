@@ -21,10 +21,10 @@ class TicketsDataTable extends DataTable
         $dataTable = new EloquentDataTable($query);
 
         return $dataTable
-            ->editColumn('student_id', function ($ticket) {
+            ->editColumn('student_nid', function ($ticket) {
                 return view('ticket.datatables.student', compact('ticket'))->render();
             })
-            ->filterColumn('student_id', function ($query, $keyword) {
+            ->filterColumn('student_nid', function ($query, $keyword) {
                 /* @var Builder|Ticket $query */
                 $query->whereHas('student', function ($query) use ($keyword) {
                     /* @var Builder|Student $query */
@@ -32,7 +32,7 @@ class TicketsDataTable extends DataTable
                         ->orWhere('nid', 'like', '%' . $keyword . '%');
                 });
             })
-            ->rawColumns(['student_id']);
+            ->rawColumns(['student_nid']);
     }
 
     /**
@@ -70,9 +70,9 @@ class TicketsDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            'id'         => ['title' => '抽獎編號'],
-            'student_id' => ['title' => '學生'],
-            'created_at' => ['title' => '取得時間'],
+            'id'          => ['title' => '抽獎編號'],
+            'student_nid' => ['title' => '學生'],
+            'created_at'  => ['title' => '取得時間'],
         ];
     }
 

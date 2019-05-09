@@ -23,10 +23,10 @@ class FeedbackDataTable extends DataTable
 
         return $dataTable
             ->addColumn('action', 'feedback.datatables.action')
-            ->editColumn('student_id', function ($feedback) {
+            ->editColumn('student_nid', function ($feedback) {
                 return view('feedback.datatables.student', compact('feedback'))->render();
             })
-            ->filterColumn('student_id', function ($query, $keyword) {
+            ->filterColumn('student_nid', function ($query, $keyword) {
                 /* @var Builder|Feedback $query */
                 $query->whereHas('student', function ($query) use ($keyword) {
                     /* @var Builder|Student $query */
@@ -88,7 +88,7 @@ class FeedbackDataTable extends DataTable
     {
         return [
             'id'          => ['title' => '#'],
-            'student_id'  => ['title' => '學生'],
+            'student_nid' => ['title' => '學生'],
             'is_freshman' => [
                 'searchable' => false,
                 'orderable'  => false,

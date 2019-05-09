@@ -22,10 +22,10 @@ class StudentSurveyDataTable extends DataTable
 
         return $dataTable
             ->addColumn('action', 'student-survey.datatables.action')
-            ->editColumn('student_id', function ($studentSurvey) {
+            ->editColumn('student_nid', function ($studentSurvey) {
                 return view('student-survey.datatables.student', compact('studentSurvey'))->render();
             })
-            ->filterColumn('student_id', function ($query, $keyword) {
+            ->filterColumn('student_nid', function ($query, $keyword) {
                 /* @var Builder|StudentSurvey $query */
                 $query->whereHas('student', function ($query) use ($keyword) {
                     /* @var Builder|Student $query */
@@ -80,7 +80,7 @@ class StudentSurveyDataTable extends DataTable
     {
         return [
             'id'          => ['title' => '#'],
-            'student_id'  => ['title' => '學生'],
+            'student_nid' => ['title' => '學生'],
             'is_freshman' => [
                 'searchable' => false,
                 'orderable'  => false,

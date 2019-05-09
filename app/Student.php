@@ -164,7 +164,7 @@ class Student extends Model
      */
     public function feedback()
     {
-        return $this->hasMany(Feedback::class);
+        return $this->hasMany(Feedback::class, 'student_nid', 'nid');
     }
 
     /**
