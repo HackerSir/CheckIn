@@ -81,7 +81,7 @@ class SurveyController extends Controller
         ]);
 
         StudentSurvey::updateOrCreate([
-            'student_id' => $user->student->id,
+            'student_nid' => $user->student->nid,
         ], $request->all());
 
         return redirect()->route('survey.student.show')->with('success', '問卷內容已更新');

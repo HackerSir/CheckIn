@@ -8,14 +8,13 @@ use Illuminate\Database\Eloquent\Model;
  * App\StudentSurvey
  *
  * @property int $id
- * @property int $student_id
  * @property string|null $student_nid 對應學生
  * @property int $rating 星等評價
  * @property string|null $comment 意見與建議
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read string $stars
- * @property-read \App\Student $student
+ * @property-read \App\Student|null $student
  * @method static \Illuminate\Database\Eloquent\Builder|\App\StudentSurvey newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\StudentSurvey newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\StudentSurvey query()
@@ -23,7 +22,6 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\StudentSurvey whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\StudentSurvey whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\StudentSurvey whereRating($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\StudentSurvey whereStudentId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\StudentSurvey whereStudentNid($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\StudentSurvey whereUpdatedAt($value)
  * @mixin \Eloquent
@@ -31,7 +29,6 @@ use Illuminate\Database\Eloquent\Model;
 class StudentSurvey extends Model
 {
     protected $fillable = [
-        'student_id',
         'student_nid',
         'rating',
         'comment',

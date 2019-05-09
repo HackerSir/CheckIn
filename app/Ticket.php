@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Model;
  * App\Ticket
  *
  * @property int $id
- * @property int|null $student_id 對應學生
  * @property string|null $student_nid 對應學生
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
@@ -18,7 +17,6 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Ticket query()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Ticket whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Ticket whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Ticket whereStudentId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Ticket whereStudentNid($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Ticket whereUpdatedAt($value)
  * @mixin \Eloquent
@@ -26,7 +24,6 @@ use Illuminate\Database\Eloquent\Model;
 class Ticket extends Model
 {
     protected $fillable = [
-        'student_id',
         'student_nid',
     ];
 

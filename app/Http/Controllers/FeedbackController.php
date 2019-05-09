@@ -103,7 +103,7 @@ class FeedbackController extends Controller
         }
 
         //曾給該社團的回饋資料
-        $feedback = Feedback::whereClubId($club->id)->whereStudentId($user->student->id)->first();
+        $feedback = Feedback::whereClubId($club->id)->whereStudentNid($user->student->nid)->first();
         if (!$feedback) {
             //自己最後一次填寫的回饋資料
             $lastFeedback = $user->student->feedback()->orderBy('created_at', 'desc')->first();
@@ -159,8 +159,8 @@ class FeedbackController extends Controller
         ]);
 
         $feedback = Feedback::updateOrCreate([
-            'club_id'    => $club->id,
-            'student_id' => $user->student->id,
+            'club_id'     => $club->id,
+            'student_nid' => $user->student->nid,
         ], $request->only(['phone', 'email', 'facebook', 'line', 'message']));
 
         return redirect()->route('feedback.show', $feedback)
@@ -181,7 +181,7 @@ class FeedbackController extends Controller
             /** @var User $user */
             $user = auth()->user();
             if (($user->club_id != $feedback->club_id)
-                && (!$user->student || $user->student->id != $feedback->student_id)) {
+                && (!$user->student || $user->student->nid != $feedback->student_nid)) {
                 abort(403);
             }
             //檢查檢視與下載期限
@@ -192,7 +192,7 @@ class FeedbackController extends Controller
         }
         //打卡紀錄
         $record = Record::whereClubId($feedback->club_id)
-            ->whereStudentId($feedback->student_id)
+            ->whereStudentNid($feedback->student_nid)
             ->first();
 
         return view('feedback.show', compact('feedback', 'record'));

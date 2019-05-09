@@ -9,7 +9,6 @@ use Illuminate\Database\Eloquent\Model;
  * App\Feedback
  *
  * @property int $id
- * @property int $student_id 對應學生
  * @property string|null $student_nid 對應學生
  * @property int $club_id 對應社團
  * @property string|null $phone 聯絡電話
@@ -20,7 +19,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property string|null $message 附加訊息
  * @property-read \App\Club $club
- * @property-read \App\Student $student
+ * @property-read \App\Student|null $student
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Feedback newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Feedback newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Feedback query()
@@ -32,7 +31,6 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Feedback whereLine($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Feedback whereMessage($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Feedback wherePhone($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Feedback whereStudentId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Feedback whereStudentNid($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Feedback whereUpdatedAt($value)
  * @mixin \Eloquent
@@ -42,7 +40,6 @@ class Feedback extends Model
     use NullableFields;
 
     protected $fillable = [
-        'student_id',
         'student_nid',
         'club_id',
         'phone',

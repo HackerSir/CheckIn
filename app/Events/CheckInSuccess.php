@@ -38,7 +38,7 @@ class CheckInSuccess implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new PrivateChannel('student.' . $this->record->student_id);
+        return new PrivateChannel('student.' . $this->record->student_nid);
     }
 
     /**
@@ -49,10 +49,10 @@ class CheckInSuccess implements ShouldBroadcast
     public function broadcastWith()
     {
         $club = $this->record->club;
-        $studentId = $this->record->student_id;
+        $studentNid = $this->record->student_nid;
 
         //是否曾對該社團留過回饋資料？
-        $feedbackExists = (bool) Feedback::whereClubId($club->id)->whereStudentId($studentId)->count();
+        $feedbackExists = (bool) Feedback::whereClubId($club->id)->whereStudentNid($studentNid)->count();
 
         //傳送給前端的資訊
         $data = [

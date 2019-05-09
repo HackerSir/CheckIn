@@ -9,7 +9,6 @@ use Illuminate\Database\Eloquent\Model;
  *
  * @property int $id
  * @property string $ip 打卡IP
- * @property int|null $student_id 對應學生
  * @property string|null $student_nid 對應學生
  * @property int|null $club_id 對應社團
  * @property \Illuminate\Support\Carbon|null $created_at
@@ -23,7 +22,6 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Record whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Record whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Record whereIp($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Record whereStudentId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Record whereStudentNid($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Record whereUpdatedAt($value)
  * @mixin \Eloquent
@@ -31,7 +29,6 @@ use Illuminate\Database\Eloquent\Model;
 class Record extends Model
 {
     protected $fillable = [
-        'student_id',
         'student_nid',
         'club_id',
         'ip',

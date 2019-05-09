@@ -39,11 +39,11 @@ class FeedbackFilterScope implements DataTableScope
     {
         if ($this->club && $this->student) {
             $query->where('club_id', $this->club->id)
-                ->orWhere('student_id', $this->student->id);
+                ->orWhere('student_nid', $this->student->nid);
         } elseif ($this->club) {
             $query->where('club_id', $this->club->id);
         } elseif ($this->student) {
-            $query->where('student_id', $this->student->id);
+            $query->where('student_nid', $this->student->nid);
         }
 
         return $query;
