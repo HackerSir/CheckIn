@@ -1,4 +1,4 @@
-{{ bs()->formGroup(bs()->select('club_id')->options(\App\Club::selectOptions())->required())->class('required')->label('社團')->showAsRow() }}
+{{ bs()->formGroup(bs()->select('club_id', \App\Club::selectOptions(), !isset($teaParty) ? request('club_id') : null)->required())->class('required')->label('社團')->showAsRow() }}
 {{ bs()->formGroup(bs()->text('name')->required()->placeholder('如：迎新茶會、新生茶會'))->class('required')->label('迎新茶會名稱')->showAsRow() }}
 {{ bs()->formGroup(bs()->text('start_at')->required())->class('required')->label('開始時間')->showAsRow() }}
 {{ bs()->formGroup(bs()->text('end_at')->required())->class('required')->label('結束時間')->showAsRow() }}

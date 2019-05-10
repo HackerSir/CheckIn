@@ -168,7 +168,27 @@
                 </div>
             @endif
             <div class="mt-2">
-                <h2 class="border border-primary rounded"><i class="fas fa-mug-hot mx-2"></i>迎新茶會</h2>
+                <h2 class="border border-primary rounded">
+                    <i class="fas fa-mug-hot mx-2"></i>迎新茶會
+                    @if(Laratrust::can('tea-party.manage'))
+                        @if($club->teaParty)
+                            <div style="display: inline-block">
+                                <a href="{{ route('tea-party.edit', $club->teaParty) }}" class="btn btn-primary btn-sm">
+                                    <i class="fa fa-edit" aria-hidden="true"></i> 編輯
+                                </a>
+                            </div>
+                            {!! Form::open(['route' => ['tea-party.destroy', $club->teaParty], 'style' => 'display: inline', 'method' => 'DELETE', 'onSubmit' => "return confirm('確定要刪除嗎？');"]) !!}
+                            <button type="submit" class="btn btn-danger btn-sm">
+                                <i class="fa fa-trash" aria-hidden="true"></i> 刪除
+                            </button>
+                            {!! Form::close() !!}
+                        @else
+                            <a href="{{ route('tea-party.create', ['club_id' => $club->id]) }}" class="btn btn-primary btn-sm">
+                                <i class="fa fa-plus-circle" aria-hidden="true"></i> 新增迎新茶會
+                            </a>
+                        @endif
+                    @endif
+                </h2>
                 <p style="font-size: 120%">
                     @if($club->teaParty)
                         <h3><i class="fas fa-mug-hot mr-2"></i>{{ $club->teaParty->name }}</h3>
