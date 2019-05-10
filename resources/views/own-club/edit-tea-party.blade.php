@@ -1,18 +1,18 @@
 @extends('layouts.base')
 
-@section('title', $teaParty->club->name . ' - 編輯迎新茶會')
+@section('title', $club->name . ' - 編輯迎新茶會')
 
 @section('buttons')
-    <a href="{{ route('tea-party.show', $teaParty) }}" class="btn btn-secondary">
-        <i class="fa fa-arrow-left" aria-hidden="true"></i> 檢視迎新茶會
+    <a href="{{ route('clubs.show', $club) }}" class="btn btn-secondary">
+        <i class="fa fa-arrow-left" aria-hidden="true"></i> 返回
     </a>
 @endsection
 
 @section('main_content')
     <div class="card">
         <div class="card-body">
-            {{ bs()->openForm('patch', route('tea-party.update', $teaParty), ['model' => $teaParty]) }}
-            @include('tea-party.form')
+            {{ bs()->openForm('patch', route('own-club.update-tea-party'), ['model' => $club->teaParty]) }}
+            @include('tea-party.common-form')
 
             <div class="row">
                 <div class="mx-auto">

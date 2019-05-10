@@ -187,6 +187,23 @@
                                 <i class="fa fa-plus-circle" aria-hidden="true"></i> 新增迎新茶會
                             </a>
                         @endif
+                    @elseif(isset(Auth::user()->club) && Auth::user()->club->id == $club->id)
+                        @if($club->teaParty)
+                            <div style="display: inline-block">
+                                <a href="{{ route('own-club.edit-tea-party') }}" class="btn btn-primary btn-sm">
+                                    <i class="fa fa-edit" aria-hidden="true"></i> 編輯
+                                </a>
+                            </div>
+                            {!! Form::open(['route' => ['own-club.destroy-tea-party'], 'style' => 'display: inline', 'method' => 'DELETE', 'onSubmit' => "return confirm('確定要刪除嗎？');"]) !!}
+                            <button type="submit" class="btn btn-danger btn-sm">
+                                <i class="fa fa-trash" aria-hidden="true"></i> 刪除
+                            </button>
+                            {!! Form::close() !!}
+                        @else
+                            <a href="{{ route('own-club.edit-tea-party') }}" class="btn btn-primary btn-sm">
+                                <i class="fa fa-plus-circle" aria-hidden="true"></i> 新增迎新茶會
+                            </a>
+                        @endif
                     @endif
                 </h2>
                 <p style="font-size: 120%">
