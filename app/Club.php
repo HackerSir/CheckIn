@@ -26,6 +26,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property-read bool $is_counted
  * @property-read \App\ImgurImage $imgurImage
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Record[] $records
+ * @property-read \App\TeaParty $teaParty
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\User[] $users
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Club newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Club newQuery()
@@ -129,6 +130,14 @@ class Club extends Model
     public function clubSurvey()
     {
         return $this->hasOne(ClubSurvey::class);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function teaParty()
+    {
+        return $this->hasOne(TeaParty::class);
     }
 
     /**
