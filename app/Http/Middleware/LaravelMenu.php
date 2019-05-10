@@ -70,6 +70,10 @@ class LaravelMenu
                                 ->active('club/data-update-request/*');
                         }
 
+                        if (Laratrust::can('tea-party.manage')) {
+                            $activityMenu->add('迎新茶會管理', ['route' => 'tea-party.index'])->active('tea-party/*');
+                        }
+
                         if (Laratrust::can('club-type.manage')) {
                             $activityMenu->add('社團類型管理', ['route' => 'club-type.index'])->active('club-type/*');
                         }

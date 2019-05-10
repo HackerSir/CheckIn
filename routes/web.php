@@ -150,6 +150,11 @@ Route::group(['middleware' => ['auth', 'email']], function () {
             ],
         ]);
     });
+    //茶會管理
+    //權限：tea-party.manage
+    Route::group(['middleware' => 'permission:tea-party.manage'], function () {
+        Route::resource('tea-party', 'TeaPartyController');
+    });
     //網站設定
     //權限：setting.manage
     Route::group(['middleware' => 'permission:setting.manage', 'prefix' => 'setting'], function () {

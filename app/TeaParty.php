@@ -42,6 +42,7 @@ class TeaParty extends Model
         'location',
         'url',
     ];
+
     protected $dates = [
         'start_at',
         'end_at',
