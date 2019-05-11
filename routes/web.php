@@ -150,6 +150,11 @@ Route::group(['middleware' => ['auth', 'email']], function () {
             ],
         ]);
     });
+    //茶會管理
+    //權限：tea-party.manage
+    Route::group(['middleware' => 'permission:tea-party.manage'], function () {
+        Route::resource('tea-party', 'TeaPartyController');
+    });
     //網站設定
     //權限：setting.manage
     Route::group(['middleware' => 'permission:setting.manage', 'prefix' => 'setting'], function () {
@@ -281,6 +286,9 @@ Route::group(['middleware' => ['auth', 'email']], function () {
             ->name('own-club.data-update-request.create');
         Route::post('data-update-request', 'OwnClubController@storeDataUpdateRequest')
             ->name('own-club.data-update-request.store');
+        Route::get('edit-tea-party', 'OwnClubController@editTeaParty')->name('own-club.edit-tea-party');
+        Route::patch('update-tea-party', 'OwnClubController@updateTeaParty')->name('own-club.update-tea-party');
+        Route::delete('destroy-tea-party', 'OwnClubController@destroyTeaParty')->name('own-club.destroy-tea-party');
     });
 
     //我的 QR Code

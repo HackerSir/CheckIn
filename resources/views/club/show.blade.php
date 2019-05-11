@@ -145,7 +145,7 @@
                 </div>
             </div>
             <div class="mt-2">
-                <h2 class="border border-primary rounded">簡介</h2>
+                <h2 class="border border-primary rounded"><i class="fas fa-newspaper mx-2"></i>簡介</h2>
                 <p style="font-size: 120%">
                     @if($club->description)
                         {!! $club->description !!}
@@ -156,7 +156,7 @@
             </div>
             @if($club->extra_info)
                 <div class="mt-2">
-                    <h2 class="border border-primary rounded">額外資訊</h2>
+                    <h2 class="border border-primary rounded"><i class="fas fa-info-circle mx-2"></i>額外資訊</h2>
                     <p style="font-size: 120%">
                         @if(\Laratrust::can('club.manage') || isset(Auth::user()->club) && Auth::user()->club->id == $club->id || $feedback)
 {{--                            {!! $contentPresenter->showContent($club->extra_info) !!}--}}
@@ -168,7 +168,71 @@
                 </div>
             @endif
             <div class="mt-2">
-                <h2 class="border border-primary rounded">攤位</h2>
+                <h2 class="border border-primary rounded">
+                    <i class="fas fa-mug-hot mx-2"></i>迎新茶會
+                    @if(Laratrust::can('tea-party.manage'))
+                        @if($club->teaParty)
+                            <div style="display: inline-block">
+                                <a href="{{ route('tea-party.edit', $club->teaParty) }}" class="btn btn-primary btn-sm">
+                                    <i class="fa fa-edit" aria-hidden="true"></i> 編輯
+                                </a>
+                            </div>
+                            {!! Form::open(['route' => ['tea-party.destroy', $club->teaParty], 'style' => 'display: inline', 'method' => 'DELETE', 'onSubmit' => "return confirm('確定要刪除嗎？');"]) !!}
+                            <button type="submit" class="btn btn-danger btn-sm">
+                                <i class="fa fa-trash" aria-hidden="true"></i> 刪除
+                            </button>
+                            {!! Form::close() !!}
+                        @else
+                            <a href="{{ route('tea-party.create', ['club_id' => $club->id]) }}" class="btn btn-primary btn-sm">
+                                <i class="fa fa-plus-circle" aria-hidden="true"></i> 新增迎新茶會
+                            </a>
+                        @endif
+                    @elseif(isset(Auth::user()->club) && Auth::user()->club->id == $club->id)
+                        @if($club->teaParty)
+                            <div style="display: inline-block">
+                                <a href="{{ route('own-club.edit-tea-party') }}" class="btn btn-primary btn-sm">
+                                    <i class="fa fa-edit" aria-hidden="true"></i> 編輯
+                                </a>
+                            </div>
+                            {!! Form::open(['route' => ['own-club.destroy-tea-party'], 'style' => 'display: inline', 'method' => 'DELETE', 'onSubmit' => "return confirm('確定要刪除嗎？');"]) !!}
+                            <button type="submit" class="btn btn-danger btn-sm">
+                                <i class="fa fa-trash" aria-hidden="true"></i> 刪除
+                            </button>
+                            {!! Form::close() !!}
+                        @else
+                            <a href="{{ route('own-club.edit-tea-party') }}" class="btn btn-primary btn-sm">
+                                <i class="fa fa-plus-circle" aria-hidden="true"></i> 新增迎新茶會
+                            </a>
+                        @endif
+                    @endif
+                </h2>
+                <p style="font-size: 120%">
+                    @if($club->teaParty)
+                        <h3><i class="fas fa-mug-hot mr-2"></i>{{ $club->teaParty->name }}</h3>
+                        <dl class="row" style="font-size: 120%">
+                            <dt class="col-12 col-sm-4 col-lg-2"><i class="fas fa-clock mr-2"></i>開始時間</dt>
+                            <dd class="col-12 col-sm-8 col-lg-10">{{ $club->teaParty->start_at }}</dd>
+
+                            <dt class="col-12 col-sm-4 col-lg-2"><i class="fas fa-clock mr-2"></i>結束時間</dt>
+                            <dd class="col-12 col-sm-8 col-lg-10">{{ $club->teaParty->end_at }}</dd>
+
+                            <dt class="col-12 col-sm-4 col-lg-2"><i class="fas fa-map-marked-alt mr-2"></i>地點</dt>
+                            <dd class="col-12 col-sm-8 col-lg-10">{{ $club->teaParty->location }}</dd>
+
+                            <dt class="col-12 col-sm-4 col-lg-2"><i class="fas fa-link mr-2"></i>網址</dt>
+                            <dd class="col-12 col-sm-8 col-lg-10">
+                                @if($club->teaParty->url)
+                                    <a href="{{ $club->teaParty->url }}" target="_blank">{{ $club->teaParty->url }}</a>
+                                @endif
+                            </dd>
+                        </dl>
+                    @else
+                        <span class="text-muted">（未提供迎新茶會資訊）</span>
+                    @endif
+                </p>
+            </div>
+            <div class="mt-2">
+                <h2 class="border border-primary rounded"><i class="fas fa-map-marked-alt mx-2"></i>攤位</h2>
                 <div class="row">
                     @forelse($club->booths as $booth)
                         <div class="col-md">

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Club;
 use App\DataUpdateRequest;
 use App\Services\ImgurImageService;
+use App\TeaParty;
 use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -161,6 +162,51 @@ class OwnClubController extends Controller
         ]);
 
         return redirect()->route('clubs.show', $club)->with('success', '申請已送出');
+    }
+
+    /**
+     * @return \Illuminate\Http\Response
+     */
+    public function editTeaParty()
+    {
+        $club = $this->getOwnClub();
+
+        return view('own-club.edit-tea-party', compact('club'));
+    }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\Response
+     * @throws \Illuminate\Validation\ValidationException
+     */
+    public function updateTeaParty(Request $request)
+    {
+        $club = $this->getOwnClub();
+
+        $this->validate($request, [
+            'name'     => 'required',
+            'start_at' => 'required|date|before_or_equal:end_at',
+            'end_at'   => 'required|date|after_or_equal:start_at',
+            'location' => 'required',
+            'url'      => 'nullable|url',
+        ]);
+
+        TeaParty::updateOrCreate(['club_id' => $club->id], $request->except('club_id'));
+
+        return redirect()->route('clubs.show', $club)->with('success', '迎新茶會已更新');
+    }
+
+    /**
+     * @return \Illuminate\Http\Response
+     * @throws \Exception
+     */
+    public function destroyTeaParty()
+    {
+        $club = $this->getOwnClub();
+
+        $club->teaParty->delete();
+
+        return redirect()->route('clubs.show', $club)->with('success', '迎新茶會已刪除');
     }
 
     /**
