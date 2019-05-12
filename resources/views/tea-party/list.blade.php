@@ -7,7 +7,7 @@
     <div class="card">
         <div class="card-body">
             <div class="container py-2">
-                @foreach($teaParties as $teaParty)
+                @forelse($teaParties as $teaParty)
                     <div class="row">
                         {{-- timeline item left dot --}}
                         <div class="col-auto text-center flex-column d-none d-sm-flex">
@@ -68,7 +68,9 @@
                             </div>
                         </div>
                     </div>
-                @endforeach
+                @empty
+                    <div class="text-center text-muted">暫無相關資訊</div>
+                @endforelse
             </div>
         </div>
     </div>
