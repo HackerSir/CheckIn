@@ -8,6 +8,11 @@ use App\TeaParty;
 
 class TeaPartyController extends Controller
 {
+
+    public function list()
+    {
+        return view('tea-party.list');
+    }
     /**
      * Display a listing of the resource.
      *

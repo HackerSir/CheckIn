@@ -31,6 +31,8 @@ Route::group(['prefix' => 'map'], function () {
     Route::get('/', 'HomeController@clubsStaticMap')->name('clubs.map.static');
     Route::get('google', 'HomeController@clubsGoogleMap')->name('clubs.map.google');
 });
+//迎新茶會
+Route::get('tea-parties', 'TeaPartyController@list')->name('tea-party.list');
 
 //服務條款(含隱私權跟免責)
 Route::view('terms', 'misc.terms')->name('terms');
