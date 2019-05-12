@@ -8,6 +8,14 @@ use App\TeaParty;
 
 class TeaPartyController extends Controller
 {
+    public function list()
+    {
+        $teaParties = TeaParty::with('club:id,name,club_type_id', 'club.clubType:id,name,color')
+            ->orderBy('start_at')->get();
+
+        return view('tea-party.list', compact('teaParties'));
+    }
+
     /**
      * Display a listing of the resource.
      *

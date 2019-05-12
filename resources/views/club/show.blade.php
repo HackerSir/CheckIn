@@ -219,12 +219,12 @@
                             <dt class="col-12 col-sm-4 col-lg-2"><i class="fas fa-map-marked-alt mr-2"></i>地點</dt>
                             <dd class="col-12 col-sm-8 col-lg-10">{{ $club->teaParty->location }}</dd>
 
-                            <dt class="col-12 col-sm-4 col-lg-2"><i class="fas fa-link mr-2"></i>網址</dt>
-                            <dd class="col-12 col-sm-8 col-lg-10">
-                                @if($club->teaParty->url)
-                                    <a href="{{ $club->teaParty->url }}" target="_blank">{{ $club->teaParty->url }}</a>
-                                @endif
-                            </dd>
+                            @if($club->teaParty->url)
+                                <dt class="col-12 col-sm-4 col-lg-2"><i class="fas fa-link mr-2"></i>網址</dt>
+                                <dd class="col-12 col-sm-8 col-lg-10">
+                                        <a href="{{ $club->teaParty->url }}" target="_blank">{{ $club->teaParty->url }}</a>
+                                </dd>
+                            @endif
                         </dl>
                     @else
                         <span class="text-muted">（未提供迎新茶會資訊）</span>

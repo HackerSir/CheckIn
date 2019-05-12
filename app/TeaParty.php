@@ -16,6 +16,8 @@ use Illuminate\Database\Eloquent\Model;
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \App\Club $club
+ * @property-read bool $is_ended
+ * @property-read bool $is_started
  * @method static \Illuminate\Database\Eloquent\Builder|\App\TeaParty newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\TeaParty newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\TeaParty query()
@@ -54,5 +56,21 @@ class TeaParty extends Model
     public function club()
     {
         return $this->belongsTo(Club::class);
+    }
+
+    /**
+     * @return bool
+     */
+    public function getIsStartedAttribute()
+    {
+        return $this->start_at->isPast();
+    }
+
+    /**
+     * @return bool
+     */
+    public function getIsEndedAttribute()
+    {
+        return $this->end_at->isPast();
     }
 }

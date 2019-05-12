@@ -6,6 +6,9 @@
     <a href="{{ route('tea-party.index') }}" class="btn btn-secondary">
         <i class="fa fa-arrow-left" aria-hidden="true"></i> 迎新茶會管理
     </a>
+    <a href="{{ route('clubs.show', $teaParty->club) }}" class="btn btn-secondary">
+        <i class="fa fa-arrow-left" aria-hidden="true"></i> 檢視社團
+    </a>
     <a href="{{ route('tea-party.edit', $teaParty) }}" class="btn btn-primary">
         <i class="fa fa-edit" aria-hidden="true"></i> 編輯
     </a>
