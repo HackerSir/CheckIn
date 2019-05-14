@@ -22,6 +22,8 @@
         "select2-bootstrap4-theme": "^1.0.0",
         "socket.io-client": "^2.1.1",
         "vue-holderjs": "^1.0.2",
-        "vue-infinite-loading": "^2.3.3"
+        "vue-infinite-loading": "^2.3.3",
+        "vuex": "^3.1.1",
+        "vuex-persist": "^2.0.0"
     }
 }

@@ -54,6 +54,29 @@
 
 <script>
     import InfiniteLoading from 'vue-infinite-loading';
+    import Vuex from 'vuex'
+    import VuexPersist from 'vuex-persist'
+
+    Vue.use(Vuex);
+    const vuexPersist = new VuexPersist({
+        key: 'club-cards',
+        storage: localStorage
+    });
+    const store = new Vuex.Store({
+        plugins: [vuexPersist.plugin],
+        state: {
+            selectedClubType: null,
+            searchKeyword: ''
+        },
+        mutations: {
+            setSelectedClubType(state, selectedClubType) {
+                state.selectedClubType = selectedClubType
+            },
+            setSearchKeyword(state, searchKeyword) {
+                state.searchKeyword = searchKeyword
+            }
+        }
+    });
 
     export default {
         mounted() {
@@ -63,8 +86,6 @@
         },
         data: function () {
             return {
-                selectedClubType: null,
-                searchKeyword: '',
                 clubTypes: [],
                 clubs: [],
                 isTypingKeyword: false,
@@ -80,6 +101,22 @@
                     return '<i class="fa fa-pencil-alt fa-fw" aria-hidden="true"></i>';
                 } else {
                     return '<i class="fa fa-search fa-fw" aria-hidden="true"></i>';
+                }
+            },
+            selectedClubType: {
+                get() {
+                    return store.state.selectedClubType
+                },
+                set(value) {
+                    store.commit('setSelectedClubType', value)
+                }
+            },
+            searchKeyword: {
+                get() {
+                    return store.state.searchKeyword
+                },
+                set(value) {
+                    store.commit('setSearchKeyword', value)
                 }
             }
         },
