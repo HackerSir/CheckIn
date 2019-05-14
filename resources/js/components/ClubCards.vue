@@ -66,7 +66,9 @@
         plugins: [vuexPersist.plugin],
         state: {
             selectedClubType: null,
-            searchKeyword: ''
+            searchKeyword: '',
+            clubs: [],
+            fetchFinish: false
         },
         mutations: {
             setSelectedClubType(state, selectedClubType) {
@@ -74,6 +76,12 @@
             },
             setSearchKeyword(state, searchKeyword) {
                 state.searchKeyword = searchKeyword
+            },
+            setClubs(state, clubs) {
+                state.clubs = clubs
+            },
+            setFetchFinish(state, fetchFinish) {
+                state.fetchFinish = fetchFinish
             }
         }
     });
@@ -87,7 +95,7 @@
         data: function () {
             return {
                 clubTypes: [],
-                clubs: [],
+                // clubs: [],
                 isTypingKeyword: false,
                 isFetching: false,
                 itemPerPage: 20
@@ -118,10 +126,33 @@
                 set(value) {
                     store.commit('setSearchKeyword', value)
                 }
+            },
+            clubs: {
+                get() {
+                    return store.state.clubs
+                },
+                set(value) {
+                    store.commit('setClubs', value)
+                }
+            },
+            fetchFinish: {
+                get() {
+                    return store.state.fetchFinish
+                },
+                set(value) {
+                    store.commit('setFetchFinish', value)
+                }
             }
         },
         methods: {
             infiniteHandler($state) {
+                if (this.fetchFinish) {
+                    //若暫存資料已完整，直接結束
+                    $state.loaded();
+                    $state.complete();
+                    this.isFetching = false;
+                    return;
+                }
                 setTimeout(() => {
                     this.isFetching = true;
                     let nextPage = Math.ceil(this.clubs.length / this.itemPerPage) + 1;
@@ -139,10 +170,12 @@
                             if (responseBody.current_page >= responseBody.last_page) {
                                 //沒下一頁
                                 $state.complete();
+                                this.fetchFinish = true;
                             }
                         } else {
                             //該頁無內容，表示已完成
                             $state.complete();
+                            this.fetchFinish = true;
                         }
                         this.isFetching = false;
                     });
@@ -150,6 +183,7 @@
             },
             changeFilter() {
                 this.isFetching = true;
+                this.fetchFinish = false;
                 this.clubs = [];
                 this.$nextTick(() => {
                     this.$refs.infiniteLoading.$emit('$InfiniteLoading:reset');
