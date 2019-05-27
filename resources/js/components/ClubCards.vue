@@ -35,7 +35,7 @@
                 <club-card :club="club"></club-card>
             </div>
         </div>
-        <infinite-loading @infinite="infiniteHandler" ref="infiniteLoading">
+        <infinite-loading @infinite="infiniteHandler" :identifier="identifier" ref="infiniteLoading">
             <div slot="no-results">
                 <div class="alert alert-danger">
                     <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
@@ -89,11 +89,12 @@
     export default {
         mounted() {
             this.$nextTick(function () {
-                this.fetch();
+                this.fetchClubTypes();
             });
         },
         data: function () {
             return {
+                identifier: +new Date(),
                 clubTypes: [],
                 // clubs: [],
                 isTypingKeyword: false,
@@ -186,11 +187,12 @@
                 this.fetchFinish = false;
                 this.clubs = [];
                 this.$nextTick(() => {
-                    this.$refs.infiniteLoading.$emit('$InfiniteLoading:reset');
+                    // this.$refs.infiniteLoading.$emit('$InfiniteLoading:reset');
+                    // Reset InfiniteLoading by change identifier
+                    this.identifier++;
                 });
             },
-            fetch: function () {
-                this.isFetching = true;
+            fetchClubTypes: function () {
                 //社團類型
                 let club_type_list_url = Laravel.baseUrl + '/api/club-type-list';
                 axios.post(club_type_list_url).then(response => {

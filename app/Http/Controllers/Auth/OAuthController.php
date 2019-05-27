@@ -89,11 +89,7 @@ class OAuthController extends Controller
         $student = $this->studentService->updateOrCreateOfUserInfo($userInfo);
         if ($student) {
             //有學生資料
-            //使用者未綁定學生
-            if (!$user->student) {
-                //綁定學生
-                $user->student()->save($student);
-            }
+            //由於使用者與學生之間的關聯使用NID判斷，因此不會發生使用者未綁定學生的情況
             //若學生沒有QR Code
             if (!$student->qrcode) {
                 //綁定QRCode
