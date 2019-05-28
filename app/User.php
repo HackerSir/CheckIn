@@ -28,6 +28,7 @@ use Laratrust\Traits\LaratrustUserTrait;
  * @property-read \App\Club|null $club
  * @property-read \App\ClubSurvey $clubSurvey
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\DataUpdateRequest[] $dataUpdateRequests
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Club[] $favoriteClubs
  * @property-read string $display_name
  * @property-read bool $is_confirmed
  * @property-read bool $is_local_account
@@ -154,6 +155,14 @@ class User extends Authenticatable
     }
 
     /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function favoriteClubs()
+    {
+        return $this->belongsToMany(Club::class, 'favorite_club')->withTimestamps();
+    }
+
+    /**
      * 是否為攤位負責人
      *
      * @return bool
@@ -169,5 +178,36 @@ class User extends Authenticatable
     public function getDisplayNameAttribute()
     {
         return $this->student->display_name ?? $this->name;
+    }
+
+    /**
+     * 新增收藏社團
+     *
+     * @param Club $club
+     */
+    public function addFavoriteClub(Club $club)
+    {
+        $this->favoriteClubs()->syncWithoutDetaching($club);
+    }
+
+    /**
+     * 移除收藏社團
+     *
+     * @param Club $club
+     */
+    public function removeFavoriteClub(Club $club)
+    {
+        $this->favoriteClubs()->detach($club);
+    }
+
+    /**
+     * 是否收藏該社團
+     *
+     * @param Club $club
+     * @return bool
+     */
+    public function isFavoriteClub(Club $club)
+    {
+        return $this->favoriteClubs()->where('club_id', $club->id)->exists();
     }
 }
