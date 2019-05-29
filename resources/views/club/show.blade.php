@@ -42,6 +42,9 @@
             </a>
         @endif
     @endif
+    @auth
+        <favorite-club-button favorited="{{ auth()->user()->isFavoriteClub($club) }}" club-id="{{ $club->id }}"></favorite-club-button>
+    @endauth
 @endsection
 
 @section('main_content')
@@ -271,4 +274,5 @@
 
 @section('js')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/holder/2.9.4/holder.min.js"></script>
+    <script src="{{ asset(mix('/build-js/vue.js')) }}"></script>
 @endsection

@@ -45,14 +45,6 @@
     {{-- toastr.js --}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
     <style>
-        {{-- https://github.com/twbs/bootstrap/issues/21590 --}}
-        @media (max-width: 576px) {
-            nav > .container {
-                margin-left: 0;
-                margin-right: 0;
-            }
-        }
-
         body > div:first-child {
             padding-top: 60px;
         }

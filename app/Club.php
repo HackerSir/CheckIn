@@ -21,6 +21,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property-read \App\ClubSurvey $clubSurvey
  * @property-read \App\ClubType|null $clubType
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\DataUpdateRequest[] $dataUpdateRequests
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\User[] $favoriteBy
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Feedback[] $feedback
  * @property-read string $display_name
  * @property-read bool $is_counted
@@ -138,6 +139,14 @@ class Club extends Model
     public function teaParty()
     {
         return $this->hasOne(TeaParty::class);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function favoriteBy()
+    {
+        return $this->belongsToMany(User::class, 'favorite_club')->withTimestamps();
     }
 
     /**

@@ -327,6 +327,8 @@ Route::group(['prefix' => 'api'], function () {
     Route::post('/club-type-list', 'ApiController@clubTypeList')->name('api.club-type-list');
     Route::post('/club-list', 'ApiController@clubList')->name('api.club-list');
     Route::post('/my-feedback-list', 'ApiController@myFeedbackList')->name('api.my-feedback-list');
+    Route::post('/add-favorite-club/{club}', 'ApiController@addFavoriteClub')->name('api.add-favorite-club');
+    Route::post('/remove-favorite-club/{club}', 'ApiController@removeFavoriteClub')->name('api.remove-favorite-club');
 });
 
 //會員系統

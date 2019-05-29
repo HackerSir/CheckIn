@@ -1,4 +1,3 @@
-
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -19,6 +18,7 @@ Vue.component('club-card', require('./components/ClubCard.vue'));
 Vue.component('club-cards', require('./components/ClubCards.vue'));
 Vue.component('my-feedback-list', require('./components/MyFeedbackList.vue'));
 Vue.component('my-feedback', require('./components/MyFeedback.vue'));
+Vue.component('favorite-club-button', require('./components/FavoriteClubButton.vue'));
 
 const app = new Vue({
     el: '#vue-app'
