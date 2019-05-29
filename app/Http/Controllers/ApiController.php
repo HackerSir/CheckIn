@@ -196,11 +196,11 @@ class ApiController extends Controller
     {
         /** @var User $user */
         $user = auth()->user();
-        $student = $user->student;
         //非會員或無學生資料
-        if (!$user || !$student) {
+        if (!$user || !$user->student) {
             abort(403);
         }
+        $student = $user->student;
 
         $contentPresenter = app(ContentPresenter::class);
         /** @var LengthAwarePaginator|Collection|Feedback[] $feedback */
@@ -232,5 +232,14 @@ class ApiController extends Controller
         ];
 
         return $result;
+    }
+
+    public function addFavoriteClub()
+    {
+
+    }
+    public function removeFavoriteClub()
+    {
+
     }
 }
