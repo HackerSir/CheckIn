@@ -23,6 +23,8 @@
                     <a :href="map_url" class="btn btn-outline-primary float-right" target="_blank" v-if="club.booth">
                         <i class="fas fa-map-marked-alt"></i> 地圖
                     </a>
+                    <favorite-club-button :club-id="club.id" :club-name="club.name"
+                                          :favorited="favorited"></favorite-club-button>
                 </div>
             </div>
         </div>
@@ -36,7 +38,8 @@
 
     export default {
         props: [
-            'club'
+            'club',
+            'favorited'
         ],
         computed: {
             club_url: function () {
