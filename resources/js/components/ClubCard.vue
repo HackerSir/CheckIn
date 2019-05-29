@@ -3,9 +3,10 @@
         <div class="card-body d-flex flex-column">
             <div class="d-inline-flex flex-column flex-sm-row" style="min-height: 160px">
                 <div class="flex-shrink-0 p-0 mr-2 text-center">
-                    <img :src="club.image" class="img-fluid" alt="社團圖片" v-if="club.image" style="width: 160px; height: 160px">
+                    <img :src="club.image" class="img-fluid" alt="社團圖片" v-if="club.image"
+                         style="width: 160px; height: 160px">
                     <img src="" v-holder="'img=160x160?random=yes&auto=yes&text=沒有圖片'"
-                         class="img-fluid holder d-none d-sm-block"
+                         class="img-fluid holder d-none d-sm-block" alt="社團圖片"
                          style="width: 160px; height: 160px" v-else>
                 </div>
                 <div class="d-flex flex-column flex-grow-1" style="min-height: 160px">
@@ -29,6 +30,7 @@
                     <i class="fas fa-map-marked-alt"></i> 地圖
                 </a>
                 <favorite-club-button :club-id="club.id" :club-name="club.name"
+                                      btn-class="btn btn-outline-success" btn-text="收藏"
                                       :favorited="favorited" class="mx-sm-1 my-1 my-md-0"></favorite-club-button>
             </div>
         </div>
