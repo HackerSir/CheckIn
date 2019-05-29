@@ -234,12 +234,37 @@ class ApiController extends Controller
         return $result;
     }
 
-    public function addFavoriteClub()
+    public function addFavoriteClub(Club $club)
     {
+        /** @var User $user */
+        $user = auth()->user();
+        //非會員
+        if (!$user) {
+            abort(403);
+        }
 
+        $user->addFavoriteClub($club);
+
+        return response()->json([
+            'success' => true,
+            'club_id' => $club->id,
+        ]);
     }
-    public function removeFavoriteClub()
-    {
 
+    public function removeFavoriteClub(Club $club)
+    {
+        /** @var User $user */
+        $user = auth()->user();
+        //非會員
+        if (!$user) {
+            abort(403);
+        }
+
+        $user->removeFavoriteClub($club);
+
+        return response()->json([
+            'success' => true,
+            'club_id' => $club->id,
+        ]);
     }
 }
