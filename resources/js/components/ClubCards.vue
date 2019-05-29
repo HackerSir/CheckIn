@@ -1,7 +1,7 @@
 <template>
     <div>
-        <div class="d-sm-flex">
-            <div>
+        <div class="d-flex flex-column flex-sm-row flex-wrap">
+            <div class="mt-1">
                 類型
                 <select id="type_select" class="custom-select" v-model="selectedClubType" @change="onSelectChange"
                         style="width: inherit">
@@ -13,8 +13,8 @@
                     <i class="fas fa-question"></i>
                 </button>
             </div>
-            <div class="ml-auto mt-1 form-inline">
-                <span v-html="searchIndicator"></span> 搜尋
+            <div class="ml-sm-auto mt-1 d-inline-flex align-items-center">
+                <p class="text-nowrap mb-0 mr-1"><span v-html="searchIndicator"></span> 搜尋</p>
                 <input type="text" class="form-control" v-model="searchKeyword" @input="onKeywordChange">
             </div>
         </div>
@@ -32,7 +32,7 @@
         </div>
         <div class="row mt-1">
             <div class="col-12 col-lg-6 mt-1" v-for="club in clubs">
-                <club-card :club="club"></club-card>
+                <club-card :club="club" :favorited="favoriteClubIds.includes(club.id)"></club-card>
             </div>
         </div>
         <infinite-loading @infinite="infiniteHandler" :identifier="identifier" ref="infiniteLoading">
@@ -87,9 +87,10 @@
     });
 
     export default {
-        mounted() {
+        created() {
             this.$nextTick(function () {
                 this.fetchClubTypes();
+                this.fetchFavoriteClubIds();
             });
         },
         data: function () {
@@ -97,6 +98,7 @@
                 identifier: +new Date(),
                 clubTypes: [],
                 // clubs: [],
+                favoriteClubIds: [],
                 isTypingKeyword: false,
                 isFetching: false,
                 itemPerPage: 20
@@ -197,6 +199,12 @@
                 let club_type_list_url = Laravel.baseUrl + '/api/club-type-list';
                 axios.post(club_type_list_url).then(response => {
                     this.clubTypes = response.data;
+                });
+            },
+            fetchFavoriteClubIds: function () {
+                let favorite_club_ids_url = Laravel.baseUrl + '/api/my-favorite-club-ids';
+                axios.post(favorite_club_ids_url).then(response => {
+                    this.favoriteClubIds = response.data;
                 });
             },
             onSelectChange: function () {

@@ -43,7 +43,8 @@
         @endif
     @endif
     @auth
-        <favorite-club-button favorited="{{ auth()->user()->isFavoriteClub($club) }}" club-id="{{ $club->id }}"></favorite-club-button>
+        <favorite-club-button favorited="{{ auth()->user()->isFavoriteClub($club) }}" club-id="{{ $club->id }}"
+                              club-name="{{ $club->name }}"></favorite-club-button>
     @endauth
 @endsection
 
@@ -161,13 +162,13 @@
                 <div class="mt-2">
                     <h2 class="border border-primary rounded"><i class="fas fa-info-circle mx-2"></i>額外資訊</h2>
                     <p style="font-size: 120%">
-                        @if(\Laratrust::can('club.manage') || isset(Auth::user()->club) && Auth::user()->club->id == $club->id || $feedback)
-{{--                            {!! $contentPresenter->showContent($club->extra_info) !!}--}}
-                            {!! $club->extra_info !!}
-                        @else
-                            <div class="alert alert-warning">此社團有提供額外資訊給感興趣加入的學生，填寫回饋資料後即可檢視</div>
+                    @if(\Laratrust::can('club.manage') || isset(Auth::user()->club) && Auth::user()->club->id == $club->id || $feedback)
+                        {{--                            {!! $contentPresenter->showContent($club->extra_info) !!}--}}
+                        {!! $club->extra_info !!}
+                    @else
+                        <div class="alert alert-warning">此社團有提供額外資訊給感興趣加入的學生，填寫回饋資料後即可檢視</div>
                         @endif
-                    </p>
+                        </p>
                 </div>
             @endif
             <div class="mt-2">
@@ -186,7 +187,8 @@
                             </button>
                             {!! Form::close() !!}
                         @else
-                            <a href="{{ route('tea-party.create', ['club_id' => $club->id]) }}" class="btn btn-primary btn-sm">
+                            <a href="{{ route('tea-party.create', ['club_id' => $club->id]) }}"
+                               class="btn btn-primary btn-sm">
                                 <i class="fa fa-plus-circle" aria-hidden="true"></i> 新增迎新茶會
                             </a>
                         @endif
@@ -210,29 +212,29 @@
                     @endif
                 </h2>
                 <p style="font-size: 120%">
-                    @if($club->teaParty)
-                        <h3><i class="fas fa-mug-hot mr-2"></i>{{ $club->teaParty->name }}</h3>
-                        <dl class="row" style="font-size: 120%">
-                            <dt class="col-12 col-sm-4 col-lg-2"><i class="fas fa-clock mr-2"></i>開始時間</dt>
-                            <dd class="col-12 col-sm-8 col-lg-10">{{ $club->teaParty->start_at }}</dd>
+                @if($club->teaParty)
+                    <h3><i class="fas fa-mug-hot mr-2"></i>{{ $club->teaParty->name }}</h3>
+                    <dl class="row" style="font-size: 120%">
+                        <dt class="col-12 col-sm-4 col-lg-2"><i class="fas fa-clock mr-2"></i>開始時間</dt>
+                        <dd class="col-12 col-sm-8 col-lg-10">{{ $club->teaParty->start_at }}</dd>
 
-                            <dt class="col-12 col-sm-4 col-lg-2"><i class="fas fa-clock mr-2"></i>結束時間</dt>
-                            <dd class="col-12 col-sm-8 col-lg-10">{{ $club->teaParty->end_at }}</dd>
+                        <dt class="col-12 col-sm-4 col-lg-2"><i class="fas fa-clock mr-2"></i>結束時間</dt>
+                        <dd class="col-12 col-sm-8 col-lg-10">{{ $club->teaParty->end_at }}</dd>
 
-                            <dt class="col-12 col-sm-4 col-lg-2"><i class="fas fa-map-marked-alt mr-2"></i>地點</dt>
-                            <dd class="col-12 col-sm-8 col-lg-10">{{ $club->teaParty->location }}</dd>
+                        <dt class="col-12 col-sm-4 col-lg-2"><i class="fas fa-map-marked-alt mr-2"></i>地點</dt>
+                        <dd class="col-12 col-sm-8 col-lg-10">{{ $club->teaParty->location }}</dd>
 
-                            @if($club->teaParty->url)
-                                <dt class="col-12 col-sm-4 col-lg-2"><i class="fas fa-link mr-2"></i>網址</dt>
-                                <dd class="col-12 col-sm-8 col-lg-10">
-                                        <a href="{{ $club->teaParty->url }}" target="_blank">{{ $club->teaParty->url }}</a>
-                                </dd>
-                            @endif
-                        </dl>
-                    @else
-                        <span class="text-muted">（未提供迎新茶會資訊）</span>
+                        @if($club->teaParty->url)
+                            <dt class="col-12 col-sm-4 col-lg-2"><i class="fas fa-link mr-2"></i>網址</dt>
+                            <dd class="col-12 col-sm-8 col-lg-10">
+                                <a href="{{ $club->teaParty->url }}" target="_blank">{{ $club->teaParty->url }}</a>
+                            </dd>
+                        @endif
+                    </dl>
+                @else
+                    <span class="text-muted">（未提供迎新茶會資訊）</span>
                     @endif
-                </p>
+                    </p>
             </div>
             <div class="mt-2">
                 <h2 class="border border-primary rounded"><i class="fas fa-map-marked-alt mx-2"></i>攤位</h2>

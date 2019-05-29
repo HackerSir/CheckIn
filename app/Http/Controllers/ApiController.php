@@ -192,6 +192,18 @@ class ApiController extends Controller
         return $result;
     }
 
+    public function myFavoriteClubIds()
+    {
+        /** @var User $user */
+        $user = auth()->user();
+        //非會員
+        if (!$user) {
+            return response()->json([]);
+        }
+
+        return response()->json($user->favoriteClubs()->pluck('id')->toArray());
+    }
+
     public function myFeedbackList()
     {
         /** @var User $user */
