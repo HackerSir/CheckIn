@@ -10,6 +10,10 @@
             },
             clubId: {
                 required: true,
+            },
+            clubName: {
+                type: String,
+                required: true
             }
         },
         data: function () {
@@ -17,6 +21,13 @@
                 loading: false,
                 isFavorited: this.favorited
             }
+        },
+        created() {
+            console.log(this.isFavorited + '/' + this.favorited)
+            //在 ClubCards 中，上面的 data 部分無法順利初始化，因此500ms之後再次嘗試進行
+            // _.delay(() => {
+            //     this.isFavorited = this.favorited;
+            // }, 500)
         },
         computed: {
             iconClass: function () {
@@ -39,7 +50,7 @@
                 let addFavoriteClubAPIUrl = Laravel.baseUrl + '/api/add-favorite-club/' + this.clubId;
                 axios.post(addFavoriteClubAPIUrl).then(response => {
                     this.isFavorited = true;
-                    toastr['success']('已新增至收藏社團');
+                    toastr['success']('已收藏「' + this.clubName + '」');
                     this.loading = false;
                 });
             },
@@ -47,7 +58,7 @@
                 let removeFavoriteClubAPIUrl = Laravel.baseUrl + '/api/remove-favorite-club/' + this.clubId;
                 axios.post(removeFavoriteClubAPIUrl).then(response => {
                     this.isFavorited = false;
-                    toastr['success']('已自收藏社團移除');
+                    toastr['success']('已取消收藏「' + this.clubName + '」');
                     this.loading = false;
                 });
             }
