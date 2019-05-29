@@ -133,8 +133,15 @@ class ApiController extends Controller
 
     public function clubList()
     {
+        /** @var User $user */
+        $user = auth()->user();
         /** @var Club|\Illuminate\Database\Eloquent\Builder $clubs */
-        $clubQuery = Club::with('clubType', 'imgurImage', 'booths');
+        if (request()->exists('favorite')) {
+            $clubQuery = $user->favoriteClubs();
+        } else {
+            $clubQuery = Club::with('clubType', 'imgurImage', 'booths');
+        }
+
         //過濾
         /** @var ClubType $clubType */
         $clubType = ClubType::query()->find(request()->get('clubType'));

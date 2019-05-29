@@ -68,7 +68,8 @@
             selectedClubType: null,
             searchKeyword: '',
             clubs: [],
-            fetchFinish: false
+            fetchFinish: false,
+            cacheForFavorite: false
         },
         mutations: {
             setSelectedClubType(state, selectedClubType) {
@@ -82,12 +83,26 @@
             },
             setFetchFinish(state, fetchFinish) {
                 state.fetchFinish = fetchFinish
+            },
+            setCacheForFavorite(state, cacheForFavorite) {
+                state.cacheForFavorite = cacheForFavorite
             }
         }
     });
 
     export default {
+        props: {
+            favoriteOnly: {
+                default: false
+            }
+        },
         created() {
+            //TODO: 檢查 cacheForFavorite，確保暫存資料不會被混用，或許有更好的做法
+            if (this.cacheForFavorite !== this.favoriteOnly) {
+                this.clubs = [];
+                this.fetchFinish = false;
+                this.identifier++;
+            }
             this.$nextTick(function () {
                 this.fetchClubTypes();
                 this.fetchFavoriteClubIds();
@@ -145,6 +160,14 @@
                 set(value) {
                     store.commit('setFetchFinish', value)
                 }
+            },
+            cacheForFavorite: {
+                get() {
+                    return store.state.cacheForFavorite
+                },
+                set(value) {
+                    store.commit('setCacheForFavorite', value)
+                }
             }
         },
         methods: {
@@ -161,6 +184,12 @@
                     let nextPage = Math.ceil(this.clubs.length / this.itemPerPage) + 1;
                     //社團清單
                     let club_list_url = Laravel.baseUrl + '/api/club-list?page=' + nextPage;
+                    //限定顯示收藏社團
+                    if (this.favoriteOnly) {
+                        club_list_url += '&favorite';
+                    }
+                    //TODO: 記錄 cacheForFavorite，確保暫存資料不會被混用，或許有更好的做法
+                    this.cacheForFavorite = this.favoriteOnly;
                     axios.post(club_list_url, {
                         clubType: this.selectedClubType,
                         keyword: this.searchKeyword

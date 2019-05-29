@@ -38,7 +38,9 @@ class HomeController extends Controller
 
     public function clubs()
     {
-        return view('clubs.index');
+        $favoriteOnly = request()->exists('favorite');
+
+        return view('clubs.index', compact('favoriteOnly'));
     }
 
     public function clubsShow(Club $club)
