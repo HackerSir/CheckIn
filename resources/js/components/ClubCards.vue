@@ -1,7 +1,7 @@
 <template>
     <div>
-        <div class="d-sm-flex">
-            <div>
+        <div class="d-flex flex-column flex-sm-row flex-wrap">
+            <div class="mt-1">
                 類型
                 <select id="type_select" class="custom-select" v-model="selectedClubType" @change="onSelectChange"
                         style="width: inherit">
@@ -13,8 +13,8 @@
                     <i class="fas fa-question"></i>
                 </button>
             </div>
-            <div class="ml-auto mt-1 form-inline">
-                <span v-html="searchIndicator"></span> 搜尋
+            <div class="ml-sm-auto mt-1 d-inline-flex align-items-center">
+                <p class="text-nowrap mb-0 mr-1"><span v-html="searchIndicator"></span> 搜尋</p>
                 <input type="text" class="form-control" v-model="searchKeyword" @input="onKeywordChange">
             </div>
         </div>
