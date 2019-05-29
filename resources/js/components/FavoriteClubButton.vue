@@ -1,5 +1,5 @@
 <template>
-    <button class="btn btn-success" @click="handler"><i :class="[iconClass]" class="fa-fw mr-2"></i>收藏社團</button>
+    <button :class="[btnClass]" @click="handler"><i :class="[iconClass]" class="fa-fw mr-2"></i>{{ btnText }}</button>
 </template>
 
 <script>
@@ -14,6 +14,14 @@
             clubName: {
                 type: String,
                 required: true
+            },
+            btnClass: {
+                type: String,
+                default: 'btn btn-success'
+            },
+            btnText: {
+                type: String,
+                default: '收藏社團'
             }
         },
         data: function () {
