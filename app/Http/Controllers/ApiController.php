@@ -136,7 +136,7 @@ class ApiController extends Controller
         /** @var User $user */
         $user = auth()->user();
         /** @var Club|\Illuminate\Database\Eloquent\Builder $clubs */
-        if (request()->exists('favorite')) {
+        if ($user && request()->exists('favorite')) {
             $clubQuery = $user->favoriteClubs();
         } else {
             $clubQuery = Club::with('clubType', 'imgurImage', 'booths');

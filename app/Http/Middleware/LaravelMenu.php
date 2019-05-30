@@ -12,8 +12,8 @@ class LaravelMenu
     /**
      * Handle an incoming request.
      *
-     * @param  \Illuminate\Http\Request $request
-     * @param  \Closure $next
+     * @param \Illuminate\Http\Request $request
+     * @param \Closure $next
      * @return mixed
      */
     public function handle($request, Closure $next)
@@ -25,7 +25,9 @@ class LaravelMenu
             $menu->add('社團介紹', ['route' => 'clubs.index'])->active('clubs');
             $menu->add('攤位地圖', ['route' => ['clubs.map.static']])->active('map');
             $menu->add('迎新茶會', ['route' => ['tea-party.list']])->active('tea-parties');
-            $menu->add('收藏社團', ['route' => ['clubs.index', 'favorite']]);
+            if (auth()->check()) {
+                $menu->add('收藏社團', ['route' => ['clubs.index', 'favorite']]);
+            }
         });
         //右側
         Menu::make('right', function ($menu) {
