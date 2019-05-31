@@ -43,6 +43,7 @@ class ClubPolicy
         if (!$user->student) {
             return false;
         }
+
         return $club->leaders->contains($user->student);
     }
 }
