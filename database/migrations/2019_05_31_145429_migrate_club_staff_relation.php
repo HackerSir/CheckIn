@@ -16,11 +16,15 @@ class MigrateClubStaffRelation extends Migration
             if (!$user->nid) {
                 continue;
             }
-            DB::table('club_student')->updateOrInsert([
-                'student_nid' => $user->nid,
-            ], [
-                'club_id' => $user->club_id,
-            ]);
+            try {
+                DB::table('club_student')->updateOrInsert([
+                    'student_nid' => $user->nid,
+                ], [
+                    'club_id' => $user->club_id,
+                ]);
+            } catch (Exception $ignored) {
+                //
+            }
         }
     }
 
