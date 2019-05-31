@@ -25,6 +25,7 @@
 {{ bs()->formGroup(bs()->simpleFile('image_file')->acceptImage())->label('圖片上傳')
 ->helpText('檔案大小限制：'. app(\App\Services\FileService::class)->imgurUploadMaxSize())->showAsRow() }}
 {{ bs()->formGroup(bs()->select('booth_id[]')->attributes(['id' => 'booth_id', 'multiple']))->label('攤位')->showAsRow() }}
+{{ bs()->formGroup(bs()->select('leader'))->label('社長')->showAsRow() }}
 {{ bs()->formGroup(bs()->select('user_id[]')->attributes(['id' => 'user_id', 'multiple']))->label('攤位負責人')->showAsRow() }}
 
 @section('js')
@@ -152,6 +153,46 @@
                 templateSelection: formatTemplateSelection // omitted for brevity, see the source of this page
             });
             $userSelect.val(selectedUserIds).trigger('change');
+            var $leaderSelect = $('#leader');
+            $leaderSelect.select2({
+                tags: true,
+                tokenSeparators: [',', ' '],
+                data: initialUsers,
+                ajax: {
+                    url: '{{ route('api.user-list') }}',
+                    type: 'POST',
+                    headers: {
+                        'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content'),
+                        'Accept': 'application/json'
+                    },
+                    dataType: 'json',
+                    delay: 250,
+                    data: function (params) {
+                        return {
+                            q: params.term, // search term
+                            page: params.page,
+                            club: {{ $club->id ?? 0 }}
+                        };
+                    },
+                    processResults: function (data, params) {
+                        params.page = params.page || 1;
+                        return {
+                            results: data.items,
+                            pagination: {
+                                more: params.page < data.last_page
+                            }
+                        };
+                    },
+                    cache: true
+                },
+                minimumInputLength: 0,
+                escapeMarkup: function (markup) {
+                    return markup;
+                }, // let our custom formatter work
+                templateResult: formatTemplateUser, // omitted for brevity, see the source of this page
+                templateSelection: formatTemplateSelection // omitted for brevity, see the source of this page
+            });
+            $leaderSelect.val(selectedUserIds).trigger('change');
         });
     </script>
 @endsection

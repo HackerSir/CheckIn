@@ -7,6 +7,7 @@ use App\Club;
 use App\ClubType;
 use App\Feedback;
 use App\Presenters\ContentPresenter;
+use App\Student;
 use App\User;
 use DB;
 use Gravatar;
@@ -26,6 +27,7 @@ class ApiController extends Controller
         $this->middleware('permission:club.manage')->only([
             'boothList',
             'userList',
+            'studentList',
         ]);
     }
 
@@ -118,6 +120,56 @@ class ApiController extends Controller
         $json = [
             'current_page' => $users->currentPage(),
             'last_page'    => $users->lastPage(),
+            'items'        => $items,
+        ];
+
+        return response()->json($json);
+    }
+
+    public function studentList(Request $request)
+    {
+        /** @var Builder|Student $studentsQuery */
+        $studentsQuery = Student::query();
+        //搜尋關鍵字
+        if ($request->has('q')) {
+            $searchPattern = '%' . $request->input('q') . '%';
+            //搜尋學生名稱或NID
+            $studentsQuery->where(function ($query) use ($searchPattern) {
+                /** @var Builder|Student $query */
+                $query->where('name', 'like', $searchPattern)
+                    ->orWhere('nid', 'like', $searchPattern);
+            });
+        }
+        //分頁
+        $perPage = 10;
+        //取得資料
+        /** @var LengthAwarePaginator|Collection|Student[] $students */
+        $students = $studentsQuery->paginate($perPage);
+        //轉換陣列內容
+        $items = [];
+        $clubId = $request->get('club');
+        foreach ($students as $student) {
+            //檢查是否為其他社團之負責人
+            $club = $student->clubs()->first();
+            if ($club && $club->id != $clubId) {
+                $name = $student->name . '（' . $club->name . '）';
+                $disabled = true;
+            } else {
+                $name = $student->name;
+                $disabled = false;
+            }
+            $items[] = [
+                'id'       => $student->id,
+                'name'     => $name,
+                'email'    => $student->email,
+                'gravatar' => Gravatar::src($student->email, 40),
+                'disabled' => $disabled,
+            ];
+        }
+        //建立JSON
+        $json = [
+            'current_page' => $students->currentPage(),
+            'last_page'    => $students->lastPage(),
             'items'        => $items,
         ];
 
