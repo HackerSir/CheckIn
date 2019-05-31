@@ -119,7 +119,7 @@ class User extends Authenticatable
      */
     public function getIsLocalAccountAttribute()
     {
-        return !ends_with($this->email, '@fcu.edu.tw');
+        return !$this->nid;
     }
 
     /**
