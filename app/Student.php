@@ -243,12 +243,7 @@ class Student extends Model
      */
     public function getIsStaffAttribute()
     {
-        //無對應使用者
-        if (!$this->user) {
-            return false;
-        }
-
-        return $this->user->is_staff;
+        return $this->clubs()->exists();
     }
 
     /**
