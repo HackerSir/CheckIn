@@ -129,7 +129,7 @@ class ApiController extends Controller
     public function studentList(Request $request)
     {
         /** @var Builder|Student $studentsQuery */
-        $studentsQuery = Student::query();
+        $studentsQuery = Student::with('clubs');
         //搜尋關鍵字
         if ($request->has('q')) {
             $searchPattern = '%' . $request->input('q') . '%';
@@ -150,7 +150,7 @@ class ApiController extends Controller
         $clubId = $request->get('club');
         foreach ($students as $student) {
             //檢查是否為其他社團之負責人
-            $club = $student->clubs()->first();
+            $club = $student->clubs->first();
             if ($club && $club->id != $clubId) {
                 $name = $student->name . '（' . $club->name . '）';
                 $disabled = true;
