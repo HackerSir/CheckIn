@@ -55,16 +55,17 @@ class ApiController extends Controller
         foreach ($booths as $booth) {
             //檢查是否為其他社團之攤位
             if ($booth->club && $booth->club->id != $clubId) {
-                $name = $booth->name . '（' . $booth->club->name . '）';
                 $disabled = true;
+                $otherClub = $booth->club->name;
             } else {
-                $name = $booth->name;
                 $disabled = false;
+                $otherClub = null;
             }
             $items[] = [
                 'id'       => $booth->id,
-                'name'     => $name,
+                'name'     => $booth->name,
                 'disabled' => $disabled,
+                'club'     => $otherClub,
             ];
         }
         //建立JSON
@@ -150,20 +151,20 @@ class ApiController extends Controller
         $clubId = $request->get('club');
         foreach ($students as $student) {
             //檢查是否為其他社團之負責人
+            /** @var Club $club */
             $club = $student->clubs->first();
             if ($club && $club->id != $clubId) {
-                $name = $student->name . '（' . $club->name . '）';
                 $disabled = true;
+                $otherClub = $club->name;
             } else {
-                $name = $student->name;
                 $disabled = false;
+                $otherClub = null;
             }
             $items[] = [
-                'id'       => $student->id,
-                'name'     => $name,
-                'email'    => $student->email,
-                'gravatar' => Gravatar::src($student->email, 40),
+                'id'       => $student->nid,
+                'name'     => $student->name,
                 'disabled' => $disabled,
+                'club'     => $otherClub,
             ];
         }
         //建立JSON

@@ -10,7 +10,7 @@
         <label for="image_file" class="col-md-2 col-form-label">圖片</label>
         <div class="col-md-10">
             <p class="form-control-plaintext">
-                <img src="{{ $club->imgurImage->thumbnail('t') }}">
+                <img src="{{ $club->imgurImage->thumbnail('t') }}" alt="Club image">
                 <a href="{{ $club->imgurImage->url }}" target="_blank">
                     {{ $club->imgurImage->file_name }}
                 </a>
@@ -25,8 +25,8 @@
 {{ bs()->formGroup(bs()->simpleFile('image_file')->acceptImage())->label('圖片上傳')
 ->helpText('檔案大小限制：'. app(\App\Services\FileService::class)->imgurUploadMaxSize())->showAsRow() }}
 {{ bs()->formGroup(bs()->select('booth_id[]')->attributes(['id' => 'booth_id', 'multiple']))->label('攤位')->showAsRow() }}
-{{ bs()->formGroup(bs()->select('leader'))->label('社長')->showAsRow() }}
-{{ bs()->formGroup(bs()->select('user_id[]')->attributes(['id' => 'user_id', 'multiple']))->label('攤位負責人')->showAsRow() }}
+{{ bs()->formGroup(bs()->select('leader_nid'))->label('社長')->showAsRow() }}
+{{ bs()->formGroup(bs()->select('staff_nid[]')->attributes(['id' => 'staff_nid', 'multiple']))->label('攤位工作人員')->showAsRow() }}
 
 @section('js')
     @parent
@@ -37,22 +37,21 @@
                 if (booth.loading) return booth.text;
                 if (!booth.name) return null;
 
-                var markup = "<div class='container' style='width: 100%'><div class='row'>"
-                    + "<div class='col-md-12'>" + booth.name + "<br/></div>"
-                    + "</div></div>";
-
+                var markup =  booth.name;
+                if(booth.club){
+                    markup += ' <span class="badge badge-warning">' + booth.club + '</span>'
+                }
                 return markup;
             }
 
-            function formatTemplateUser(user) {
-                if (user.loading) return user.text;
-                if (!user.name) return null;
+            function formatTemplateStudent(student) {
+                if (student.loading) return student.text;
+                if (!student.name) return null;
 
-                var markup = "<div class='container' style='width: 100%'><div class='row'>"
-                    + "<div class='col-md-1'><img src='" + user.gravatar + "' /></div>"
-                    + "<div class='col-md-11'>" + user.name + "<br/><small>" + user.email + "</small></div>"
-                    + "</div></div>";
-
+                var markup =  '<span class="badge badge-secondary">' + student.id + '</span> ' + student.name;
+                if(student.club){
+                    markup += ' <span class="badge badge-warning">' + student.club + '</span>'
+                }
                 return markup;
             }
 
@@ -61,8 +60,7 @@
             }
 
             var $boothSelect = $('#booth_id');
-            var selectedBooth = {!! isset($club) ? $club->booths->pluck('name','id')->toJson() : '{}' !!};
-            var selectedBoothIds = {!! isset($club) ? $club->booths->pluck('id')->toJson() : '{}' !!};
+            var selectedBooth = {!! isset($club) ? $club->booths->pluck('name', 'id')->toJson() : '{}' !!};
             var initialBooths = [];
             $.each(selectedBooth, function (key, val) {
                 initialBooths.push({id: key, text: val});
@@ -105,21 +103,12 @@
                 templateResult: formatTemplateBooth, // omitted for brevity, see the source of this page
                 templateSelection: formatTemplateSelection // omitted for brevity, see the source of this page
             });
-            $boothSelect.val(selectedBoothIds).trigger('change');
+            $boothSelect.val(Object.keys(selectedBooth)).trigger('change');
 
-            var $userSelect = $('#user_id');
-            var selectedUser = {!! isset($club) ? $club->users->pluck('name','id')->toJson() : '{}' !!};
-            var selectedUserIds = {!! isset($club) ? $club->users->pluck('id')->toJson() : '{}' !!};
-            var initialUsers = [];
-            $.each(selectedUser, function (key, val) {
-                initialUsers.push({id: key, text: val});
-            });
-            $userSelect.select2({
-                tags: true,
+            var studentSelect2Options = {
                 tokenSeparators: [',', ' '],
-                data: initialUsers,
                 ajax: {
-                    url: '{{ route('api.user-list') }}',
+                    url: '{{ route('api.student-list') }}',
                     type: 'POST',
                     headers: {
                         'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content'),
@@ -149,50 +138,33 @@
                 escapeMarkup: function (markup) {
                     return markup;
                 }, // let our custom formatter work
-                templateResult: formatTemplateUser, // omitted for brevity, see the source of this page
+                templateResult: formatTemplateStudent, // omitted for brevity, see the source of this page
                 templateSelection: formatTemplateSelection // omitted for brevity, see the source of this page
+            };
+            var selectedLeaders = {!! isset($club) ? $club->leaders->pluck('name', 'nid')->toJson() : '{}' !!};
+            var initialLeaders = [];
+            $.each(selectedLeaders, function (key, val) {
+                initialLeaders.push({id: key, text: val});
             });
-            $userSelect.val(selectedUserIds).trigger('change');
-            var $leaderSelect = $('#leader');
-            $leaderSelect.select2({
+            var $leaderSelect = $('#leader_nid');
+            $leaderSelect.select2($.extend({}, studentSelect2Options, {
+                placeholder: '',
+                allowClear: true,
+                data: initialLeaders,
+            }));
+            $leaderSelect.val(Object.keys(selectedLeaders)).trigger('change');
+
+            var selectedStaffs = {!! isset($club) ? $club->staffs->pluck('name', 'nid')->toJson() : '{}' !!};
+            var initialStaffs = [];
+            $.each(selectedStaffs, function (key, val) {
+                initialStaffs.push({id: key, text: val});
+            });
+            var $staffSelect = $('#staff_nid');
+            $staffSelect.select2($.extend({}, studentSelect2Options, {
                 tags: true,
-                tokenSeparators: [',', ' '],
-                data: initialUsers,
-                ajax: {
-                    url: '{{ route('api.user-list') }}',
-                    type: 'POST',
-                    headers: {
-                        'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content'),
-                        'Accept': 'application/json'
-                    },
-                    dataType: 'json',
-                    delay: 250,
-                    data: function (params) {
-                        return {
-                            q: params.term, // search term
-                            page: params.page,
-                            club: {{ $club->id ?? 0 }}
-                        };
-                    },
-                    processResults: function (data, params) {
-                        params.page = params.page || 1;
-                        return {
-                            results: data.items,
-                            pagination: {
-                                more: params.page < data.last_page
-                            }
-                        };
-                    },
-                    cache: true
-                },
-                minimumInputLength: 0,
-                escapeMarkup: function (markup) {
-                    return markup;
-                }, // let our custom formatter work
-                templateResult: formatTemplateUser, // omitted for brevity, see the source of this page
-                templateSelection: formatTemplateSelection // omitted for brevity, see the source of this page
-            });
-            $leaderSelect.val(selectedUserIds).trigger('change');
+                data: initialStaffs,
+            }));
+            $staffSelect.val(Object.keys(selectedStaffs)).trigger('change');
         });
     </script>
 @endsection

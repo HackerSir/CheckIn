@@ -28,7 +28,7 @@
             <i class="fa fa-trash" aria-hidden="true"></i> 刪除社團
         </button>
         {!! Form::close() !!}
-    @elseif(isset(Auth::user()->club) && Auth::user()->club->id == $club->id)
+    @elseif(Gate::allows('as-staff', $club))
         @if(Carbon\Carbon::now()->lte(new Carbon\Carbon(Setting::get('club_edit_deadline'))))
             <a href="{{ route('own-club.edit') }}" class="btn btn-primary">
                 <i class="fa fa-edit" aria-hidden="true"></i> 編輯資料
@@ -97,7 +97,7 @@
                             @endif
                         </dd>
 
-                        @if(\Laratrust::can('club.manage') || (isset(Auth::user()->club) && Auth::user()->club->id == $club->id))
+                        @can('as-staff', $club)
                             <dt class="col-6 col-sm-3">負責人</dt>
                             <dd class="col-6 col-sm-9">
                                 @forelse($club->users as $user)
@@ -111,7 +111,35 @@
                                     <span class="text-muted">（無）</span>
                                 @endforelse
                             </dd>
-                        @endif
+                            <dt class="col-6 col-sm-3">社長</dt>
+                            <dd class="col-6 col-sm-9">
+                                @php
+                                    $leader = $club->leaders()->first();
+                                @endphp
+                                @if($leader)
+                                    @if(Laratrust::can('student.manage'))
+                                        {{ link_to_route('student.show', $leader->name, $leader) }}
+                                    @else
+                                        {{ $leader->name  }}
+                                    @endif
+                                @else
+                                    <span class="text-muted">（無）</span>
+                                @endif
+                            </dd>
+                            <dt class="col-6 col-sm-3">工作人員</dt>
+                            <dd class="col-6 col-sm-9">
+                                @forelse($club->staffs as $staff)
+                                    @if(Laratrust::can('student.manage'))
+                                        {{ link_to_route('student.show', $staff->name, $staff) }}
+                                    @else
+                                        {{ $staff->name }}
+                                    @endif
+                                    <br/>
+                                @empty
+                                    <span class="text-muted">（無）</span>
+                                @endforelse
+                            </dd>
+                        @endcan
 
                         <dt class="col-sm-3">回饋資料</dt>
                         <dd class="col-sm-9">
