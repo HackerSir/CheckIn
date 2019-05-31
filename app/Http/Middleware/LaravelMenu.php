@@ -51,7 +51,7 @@ class LaravelMenu
                     //活動選單
                     if (Laratrust::can('activity-menu.view')) {
                         /** @var \Lavary\Menu\Item $activityMenu */
-                        $activityMenu = $menu->add('活動選單', 'javascript:void(0)');
+                        $activityMenu = $menu->add('活動', 'javascript:void(0)');
 
                         if (Laratrust::can('student.manage')) {
                             $activityMenu->add('學生管理', ['route' => 'student.index'])->active('student/*');
@@ -131,7 +131,7 @@ class LaravelMenu
                     //管理員
                     if (Laratrust::can('menu.view')) {
                         /** @var \Lavary\Menu\Item $adminMenu */
-                        $adminMenu = $menu->add('管理選單', 'javascript:void(0)');
+                        $adminMenu = $menu->add('管理', 'javascript:void(0)');
 
                         if (Laratrust::can(['user.manage', 'user.view'])) {
                             $adminMenu->add('會員清單', ['route' => 'user.index'])->active('user/*');
