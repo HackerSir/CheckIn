@@ -100,6 +100,7 @@ class User extends Authenticatable
 
     protected $appends = [
         'is_confirmed',
+        'is_local_account',
     ];
 
     /**

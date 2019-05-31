@@ -36,14 +36,19 @@
                 <dt class="col-4 col-md-3">名稱</dt>
                 <dd class="col-8 col-md-9">{{ $user->name }}</dd>
 
-                <dt class="col-4 col-md-3">Email</dt>
-                <dd class="col-8 col-md-9">
-                    {{ $user->email }}
-                    @if (!$user->isConfirmed)
-                        <i class="fa fa-exclamation-triangle text-danger" aria-hidden="true"
-                           title="尚未完成信箱驗證"></i>
-                    @endif
-                </dd>
+                @if($user->is_local_account)
+                    <dt class="col-4 col-md-3">Email</dt>
+                    <dd class="col-8 col-md-9">
+                        {{ $user->email }}
+                        @if (!$user->isConfirmed)
+                            <i class="fa fa-exclamation-triangle text-danger" aria-hidden="true"
+                               title="尚未完成信箱驗證"></i>
+                        @endif
+                    </dd>
+                @else
+                    <dt class="col-4 col-md-3">NID</dt>
+                    <dd class="col-8 col-md-9">{{ $user->nid }}</dd>
+                @endif
 
                 <dt class="col-4 col-md-3">角色</dt>
                 <dd class="col-8 col-md-9">
