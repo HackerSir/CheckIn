@@ -26,7 +26,10 @@ use Illuminate\Database\Eloquent\Model;
  * @property-read string $display_name
  * @property-read bool $is_counted
  * @property-read \App\ImgurImage $imgurImage
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Student[] $leaders
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Record[] $records
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Student[] $staffs
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Student[] $students
  * @property-read \App\TeaParty $teaParty
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\User[] $users
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Club newModelQuery()
@@ -139,6 +142,30 @@ class Club extends Model
     public function teaParty()
     {
         return $this->hasOne(TeaParty::class);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function students()
+    {
+        return $this->belongsToMany(Student::class)->withTimestamps()->withPivot('is_leader');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function staffs()
+    {
+        return $this->belongsToMany(Student::class)->withTimestamps()->wherePivot('is_leader', false);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function leaders()
+    {
+        return $this->belongsToMany(Student::class)->withTimestamps()->wherePivot('is_leader', true);
     }
 
     /**

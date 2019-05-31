@@ -23,6 +23,7 @@ use Illuminate\Database\Query\Builder;
  * @property bool $consider_as_freshman 視為新生
  * @property bool $is_dummy 是否為虛構資料
  * @property \Illuminate\Support\Carbon|null $fetch_at 最後一次由API獲取資料時間
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Club[] $clubs
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Record[] $countedRecords
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Feedback[] $feedback
  * @property-read string $display_name
@@ -177,6 +178,14 @@ class Student extends Model
     }
 
     /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function clubs()
+    {
+        return $this->belongsToMany(Club::class)->withTimestamps()->withPivot('is_leader');
+    }
+
+    /**
      * @return string
      */
     public function getDisplayNameAttribute()
@@ -234,12 +243,7 @@ class Student extends Model
      */
     public function getIsStaffAttribute()
     {
-        //無對應使用者
-        if (!$this->user) {
-            return false;
-        }
-
-        return $this->user->is_staff;
+        return $this->clubs()->exists();
     }
 
     /**

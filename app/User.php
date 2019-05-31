@@ -100,6 +100,7 @@ class User extends Authenticatable
 
     protected $appends = [
         'is_confirmed',
+        'is_local_account',
     ];
 
     /**
@@ -119,7 +120,7 @@ class User extends Authenticatable
      */
     public function getIsLocalAccountAttribute()
     {
-        return !ends_with($this->email, '@fcu.edu.tw');
+        return !$this->nid;
     }
 
     /**

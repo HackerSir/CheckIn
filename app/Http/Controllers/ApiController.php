@@ -7,6 +7,7 @@ use App\Club;
 use App\ClubType;
 use App\Feedback;
 use App\Presenters\ContentPresenter;
+use App\Student;
 use App\User;
 use DB;
 use Gravatar;
@@ -26,6 +27,7 @@ class ApiController extends Controller
         $this->middleware('permission:club.manage')->only([
             'boothList',
             'userList',
+            'studentList',
         ]);
     }
 
@@ -53,16 +55,17 @@ class ApiController extends Controller
         foreach ($booths as $booth) {
             //檢查是否為其他社團之攤位
             if ($booth->club && $booth->club->id != $clubId) {
-                $name = $booth->name . '（' . $booth->club->name . '）';
                 $disabled = true;
+                $otherClub = $booth->club->name;
             } else {
-                $name = $booth->name;
                 $disabled = false;
+                $otherClub = null;
             }
             $items[] = [
                 'id'       => $booth->id,
-                'name'     => $name,
+                'name'     => $booth->name,
                 'disabled' => $disabled,
+                'club'     => $otherClub,
             ];
         }
         //建立JSON
@@ -124,6 +127,56 @@ class ApiController extends Controller
         return response()->json($json);
     }
 
+    public function studentList(Request $request)
+    {
+        /** @var Builder|Student $studentsQuery */
+        $studentsQuery = Student::with('clubs');
+        //搜尋關鍵字
+        if ($request->has('q')) {
+            $searchPattern = '%' . $request->input('q') . '%';
+            //搜尋學生名稱或NID
+            $studentsQuery->where(function ($query) use ($searchPattern) {
+                /** @var Builder|Student $query */
+                $query->where('name', 'like', $searchPattern)
+                    ->orWhere('nid', 'like', $searchPattern);
+            });
+        }
+        //分頁
+        $perPage = 10;
+        //取得資料
+        /** @var LengthAwarePaginator|Collection|Student[] $students */
+        $students = $studentsQuery->paginate($perPage);
+        //轉換陣列內容
+        $items = [];
+        $clubId = $request->get('club');
+        foreach ($students as $student) {
+            //檢查是否為其他社團之負責人
+            /** @var Club $club */
+            $club = $student->clubs->first();
+            if ($club && $club->id != $clubId) {
+                $disabled = true;
+                $otherClub = $club->name;
+            } else {
+                $disabled = false;
+                $otherClub = null;
+            }
+            $items[] = [
+                'id'       => $student->nid,
+                'name'     => $student->name,
+                'disabled' => $disabled,
+                'club'     => $otherClub,
+            ];
+        }
+        //建立JSON
+        $json = [
+            'current_page' => $students->currentPage(),
+            'last_page'    => $students->lastPage(),
+            'items'        => $items,
+        ];
+
+        return response()->json($json);
+    }
+
     public function clubTypeList()
     {
         $clubTypes = ClubType::query()->orderBy('id')->pluck('name', 'id');
@@ -136,7 +189,7 @@ class ApiController extends Controller
         /** @var User $user */
         $user = auth()->user();
         /** @var Club|\Illuminate\Database\Eloquent\Builder $clubs */
-        if (request()->exists('favorite')) {
+        if ($user && request()->exists('favorite')) {
             $clubQuery = $user->favoriteClubs();
         } else {
             $clubQuery = Club::with('clubType', 'imgurImage', 'booths');

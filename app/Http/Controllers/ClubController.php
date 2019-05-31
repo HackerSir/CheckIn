@@ -12,6 +12,8 @@ use App\Services\StudentService;
 use App\Services\UserService;
 use App\Student;
 use App\User;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use PhpOffice\PhpSpreadsheet\RichText\RichText;
 
@@ -74,10 +76,35 @@ class ClubController extends Controller
         $attachBooths = Booth::whereDoesntHave('club')->whereIn('id', $attachBoothIds)->get();
         $club->booths()->saveMany($attachBooths);
 
-        //更新攤位負責人
-        $attachUserIds = (array) $request->get('user_id');
-        $attachUsers = User::whereDoesntHave('club')->whereIn('id', $attachUserIds)->get();
-        $club->users()->saveMany($attachUsers);
+        //更新工作人員
+        $staffNids = (array) $request->get('staff_nid');
+        //取得工作人員時，僅留下沒有在其他社團擔任工作人員的學生
+        /** @var Collection|Student[] $staffs */
+        $staffs = Student::whereIn('nid', $staffNids)->whereHas('clubs', function ($query) use ($club) {
+            /** @var Builder $query */
+            $query->where('club_id', '<>', $club->id);
+        }, 0)->get();
+        foreach ($staffs as $staff) {
+            //若已有社團，先清空
+            if ($staff->clubs()->count() > 0) {
+                $staff->clubs()->sync([]);
+            }
+        }
+        $club->students()->sync($staffs->pluck('nid'));
+
+        //更新社長
+        $leaderNid = $request->get('leader_nid');
+        //取得工作人員時，僅留下沒有在其他社團擔任工作人員的學生
+        /** @var Student $leader */
+        $leader = Student::where('nid', $leaderNid)->whereHas('clubs', function ($query) use ($club) {
+            /** @var Builder $query */
+            $query->where('club_id', '<>', $club->id);
+        }, 0)->first();
+        //若已有社團，先清空
+        if ($leader && $leader->clubs()->count() > 0) {
+            $leader->clubs()->sync([]);
+        }
+        $club->leaders()->sync($leader ? [$leader->nid => ['is_leader' => true]] : []);
 
         return redirect()->route('clubs.show', $club)->with('success', '社團已新增');
     }
@@ -145,20 +172,35 @@ class ClubController extends Controller
         $attachBooths = Booth::whereDoesntHave('club')->whereIn('id', $attachBoothIds)->get();
         $club->booths()->saveMany($attachBooths);
 
-        //更新攤位負責人
-        $oldUserIds = (array) $club->users->pluck('id')->toArray();
-        $newUserIds = (array) $request->get('user_id');
-        $detachUserIds = array_diff($oldUserIds, $newUserIds);
-        $attachUserIds = array_diff($newUserIds, $oldUserIds);
-
-        /** @var User[] $detachUsers */
-        $detachUsers = User::whereIn('id', $detachUserIds)->get();
-        foreach ($detachUsers as $detachUser) {
-            $detachUser->club()->dissociate();
-            $detachUser->save();
+        //更新工作人員
+        $staffNids = (array) $request->get('staff_nid');
+        //取得工作人員時，僅留下沒有在其他社團擔任工作人員的學生
+        /** @var Collection|Student[] $staffs */
+        $staffs = Student::whereIn('nid', $staffNids)->whereHas('clubs', function ($query) use ($club) {
+            /** @var Builder $query */
+            $query->where('club_id', '<>', $club->id);
+        }, 0)->get();
+        foreach ($staffs as $staff) {
+            //若已有社團，先清空
+            if ($staff->clubs()->count() > 0) {
+                $staff->clubs()->sync([]);
+            }
         }
-        $attachUsers = User::whereDoesntHave('club')->whereIn('id', $attachUserIds)->get();
-        $club->users()->saveMany($attachUsers);
+        $club->students()->sync($staffs->pluck('nid'));
+
+        //更新社長
+        $leaderNid = $request->get('leader_nid');
+        //取得工作人員時，僅留下沒有在其他社團擔任工作人員的學生
+        /** @var Student $leader */
+        $leader = Student::where('nid', $leaderNid)->whereHas('clubs', function ($query) use ($club) {
+            /** @var Builder $query */
+            $query->where('club_id', '<>', $club->id);
+        }, 0)->first();
+        //若已有社團，先清空
+        if ($leader && $leader->clubs()->count() > 0) {
+            $leader->clubs()->sync([]);
+        }
+        $club->leaders()->sync($leader ? [$leader->nid => ['is_leader' => true]] : []);
 
         return redirect()->route('clubs.show', $club)->with('success', '社團已更新');
     }

@@ -33,7 +33,7 @@ class UsersDataTable extends DataTable
                     $query->where('name', 'like', '%' . $keyword . '%');
                 });
             })
-            ->rawColumns(['name', 'club_id']);
+            ->rawColumns(['name', 'club_id', 'email']);
     }
 
     /**
@@ -74,8 +74,11 @@ class UsersDataTable extends DataTable
         return [
             'id'      => ['title' => '#'],
             'name'    => ['title' => '使用者'],
-            'nid'     => ['title' => 'NID'],
-            'email'   => ['title' => '信箱'],
+            'nid'     => [
+                'title'   => 'NID',
+                'visible' => false,
+            ],
+            'email'   => ['title' => '信箱 or NID'],
             'club_id' => ['title' => '負責社團'],
         ];
     }
