@@ -26,7 +26,9 @@ use Illuminate\Database\Eloquent\Model;
  * @property-read string $display_name
  * @property-read bool $is_counted
  * @property-read \App\ImgurImage $imgurImage
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Student[] $leaders
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Record[] $records
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Student[] $staffs
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Student[] $students
  * @property-read \App\TeaParty $teaParty
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\User[] $users
