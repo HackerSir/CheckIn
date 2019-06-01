@@ -25,7 +25,12 @@ class UsersDataTable extends DataTable
             ->editColumn('name', 'user.datatables.name')
             ->editColumn('email', 'user.datatables.email')
             ->editColumn('club_id', function ($user) {
-                return $user->student ? $user->student->clubs->first()->display_name : null;
+                if (!$user->student) {
+                    return null;
+                }
+                $club = $user->student->clubs->first();
+
+                return $club ? $club->display_name : null;
             })
             ->filterColumn('club_id', function ($query, $keyword) {
                 /* @var Builder|User $query */
