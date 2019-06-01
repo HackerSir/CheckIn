@@ -341,12 +341,14 @@ class ExportController extends Controller
                 '社團名稱',
             ]
         );
-        $users = User::with('student', 'club.clubType')->has('student')->has('club')->orderBy('club_id')->get();
-        foreach ($users as $user) {
-            /** @var Student $student */
-            $student = $user->student;
+        /** @var Collection|Student[] $students */
+        $students = Student::with('clubs.clubType')->has('clubs')->get()
+            ->sortBy(function ($student, $key) {
+                return $student->clubs->first()->id;
+            });
+        foreach ($students as $student) {
             /** @var Club $club */
-            $club = $user->club;
+            $club = $student->clubs->first();
             $this->appendRow($sheet, [
                 $student->nid,
                 $student->name,

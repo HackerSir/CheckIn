@@ -180,7 +180,7 @@ class FeedbackController extends Controller
         if (!\Laratrust::can('feedback.manage')) {
             /** @var User $user */
             $user = auth()->user();
-            if (($user->club_id != $feedback->club_id)
+            if (\Gate::denies('as-staff', $feedback->club)
                 && (!$user->student || $user->student->nid != $feedback->student_nid)) {
                 abort(403);
             }
