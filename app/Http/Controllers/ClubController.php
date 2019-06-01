@@ -261,6 +261,19 @@ class ClubController extends Controller
                     $booth->update(['club_id' => $club->id]);
                 }
 
+                //確保社長與工作人員皆有Student
+                $allStaffNids = array_filter(array_merge([$leaderNid], $staffNids));
+                foreach ($allStaffNids as $nid) {
+                    //試著找出學生
+                    /** @var Student $student */
+                    $student = $studentService->findByNid($nid);
+                    if (!$student) {
+                        //NID無效
+                        $invalidNidCount++;
+                        continue;
+                    }
+                }
+
                 //更新工作人員＆社長
                 $this->updateStaff($club, $leaderNid, $staffNids);
 
