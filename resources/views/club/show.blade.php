@@ -98,19 +98,6 @@
                         </dd>
 
                         @can('as-staff', $club)
-                            <dt class="col-6 col-sm-3">負責人</dt>
-                            <dd class="col-6 col-sm-9">
-                                @forelse($club->users as $user)
-                                    @if(Laratrust::can('user.manage'))
-                                        {{ link_to_route('user.show', $user->name, $user) }}
-                                    @else
-                                        {{ $user->name }}
-                                    @endif
-                                    <br/>
-                                @empty
-                                    <span class="text-muted">（無）</span>
-                                @endforelse
-                            </dd>
                             <dt class="col-6 col-sm-3">社長</dt>
                             <dd class="col-6 col-sm-9">
                                 @php
