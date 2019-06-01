@@ -2,6 +2,7 @@
 
 namespace App\Imports;
 
+use App\Services\StudentService;
 use App\Student;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithBatchInserts;
@@ -65,7 +66,10 @@ class StudentImport implements ToModel, WithHeadingRow, WithChunkReading, WithBa
             return null;
         }
 
-        $student = Student::whereNid($fields['nid'])->first();
+//        $student = Student::whereNid($fields['nid'])->first();
+        //優先嘗試由API取得資料
+        $studentService = app(StudentService::class);
+        $student = $studentService->findByNid($fields['nid']);
         if ($student) { //若已有資料
             if (!$student->is_dummy) {
                 //已有實際資料，略過不處理
