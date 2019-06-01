@@ -190,7 +190,7 @@
                 <div class="mt-2">
                     <h2 class="border border-primary rounded"><i class="fas fa-info-circle mx-2"></i>額外資訊</h2>
                     <p style="font-size: 120%">
-                    @if(\Laratrust::can('club.manage') || isset(Auth::user()->club) && Auth::user()->club->id == $club->id || $feedback)
+                    @if(\Laratrust::can('club.manage') || Gate::allows('as-staff', $club) || $feedback)
                         {{--                            {!! $contentPresenter->showContent($club->extra_info) !!}--}}
                         {!! $club->extra_info !!}
                     @else
@@ -220,7 +220,7 @@
                                 <i class="fa fa-plus-circle" aria-hidden="true"></i> 新增迎新茶會
                             </a>
                         @endif
-                    @elseif(isset(Auth::user()->club) && Auth::user()->club->id == $club->id)
+                    @elseif(Gate::allows('as-staff', $club))
                         @if($club->teaParty)
                             <div style="display: inline-block">
                                 <a href="{{ route('own-club.edit-tea-party') }}" class="btn btn-primary btn-sm">

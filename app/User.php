@@ -25,14 +25,13 @@ use Laratrust\Traits\LaratrustUserTrait;
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property string|null $google2fa_secret
  * @property int|null $club_id 負責社團
- * @property-read \App\Club|null $club
  * @property-read \App\ClubSurvey $clubSurvey
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\DataUpdateRequest[] $dataUpdateRequests
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Club[] $favoriteClubs
+ * @property-read \App\Club|null $club
  * @property-read string $display_name
  * @property-read bool $is_confirmed
  * @property-read bool $is_local_account
- * @property-read bool $is_staff
  * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $notifications
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Permission[] $permissions
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Role[] $roles
@@ -132,14 +131,6 @@ class User extends Authenticatable
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo|\Illuminate\Database\Eloquent\Builder
-     */
-    public function club()
-    {
-        return $this->belongsTo(Club::class);
-    }
-
-    /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany|\Illuminate\Database\Eloquent\Builder
      */
     public function dataUpdateRequests()
@@ -164,21 +155,23 @@ class User extends Authenticatable
     }
 
     /**
-     * 是否為攤位負責人
-     *
-     * @return bool
-     */
-    public function getIsStaffAttribute()
-    {
-        return !is_null($this->club_id);
-    }
-
-    /**
      * @return string
      */
     public function getDisplayNameAttribute()
     {
         return $this->student->display_name ?? $this->name;
+    }
+
+    /**
+     * @return \App\Club|null
+     */
+    public function getClubAttribute()
+    {
+        if (!$this->student) {
+            return null;
+        }
+
+        return $this->student->clubs()->first();
     }
 
     /**

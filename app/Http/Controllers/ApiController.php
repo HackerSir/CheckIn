@@ -102,19 +102,22 @@ class ApiController extends Controller
         $clubId = $request->get('club');
         foreach ($users as $user) {
             //檢查是否為其他社團之負責人
-            if ($user->club && $user->club->id != $clubId) {
-                $name = $user->name . '（' . $user->club->name . '）';
+            /** @var Club $club */
+            $club = $user->club;
+            if ($club && $club->id != $clubId) {
                 $disabled = true;
+                $otherClub = $club->name;
             } else {
-                $name = $user->name;
                 $disabled = false;
+                $otherClub = null;
             }
             $items[] = [
                 'id'       => $user->id,
-                'name'     => $name,
+                'name'     => $user->name,
                 'email'    => $user->email,
                 'gravatar' => Gravatar::src($user->email, 40),
                 'disabled' => $disabled,
+                'club'     => $otherClub,
             ];
         }
         //建立JSON
