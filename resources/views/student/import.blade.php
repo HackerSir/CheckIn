@@ -24,6 +24,7 @@
                 <li><code>類型</code>為「教職員工」或「學生」，但目前任意填寫並不會造成影響</li>
                 <li><code>入學年度</code>須為整數</li>
                 <li><code>性別</code>為大寫「M」或「F」，但目前任意填寫並不會造成影響</li>
+                <li>匯入時，優先嘗試根據<code>NID</code>由學校API取得學生資料，若有實際資料，將以實際資料為準</li>
                 <li>匯入時，將根據<code>NID</code>覆寫現有虛構資料（實際資料不受影響）</li>
                 <li>
                     範例檔案可{{ link_to_route('student.download-import-sample', '按此下載') }}或參考下圖<br/>
