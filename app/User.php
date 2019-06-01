@@ -24,7 +24,6 @@ use Laratrust\Traits\LaratrustUserTrait;
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property string|null $google2fa_secret
- * @property int|null $club_id 負責社團
  * @property-read \App\ClubSurvey $clubSurvey
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\DataUpdateRequest[] $dataUpdateRequests
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Club[] $favoriteClubs
@@ -41,7 +40,6 @@ use Laratrust\Traits\LaratrustUserTrait;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\User orWherePermissionIs($permission = '')
  * @method static \Illuminate\Database\Eloquent\Builder|\App\User orWhereRoleIs($role = '', $team = null)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\User query()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereClubId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereConfirmAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereConfirmCode($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereCreatedAt($value)
@@ -83,7 +81,6 @@ class User extends Authenticatable
         'last_login_at',
         'last_login_ip',
         'google2fa_secret',
-        'club_id',
     ];
 
     /**
