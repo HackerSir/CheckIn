@@ -76,35 +76,10 @@ class ClubController extends Controller
         $attachBooths = Booth::whereDoesntHave('club')->whereIn('id', $attachBoothIds)->get();
         $club->booths()->saveMany($attachBooths);
 
-        //更新工作人員
+        //更新工作人員＆社長
         $staffNids = (array) $request->get('staff_nid');
-        //取得工作人員時，僅留下沒有在其他社團擔任工作人員的學生
-        /** @var Collection|Student[] $staffs */
-        $staffs = Student::whereIn('nid', $staffNids)->whereHas('clubs', function ($query) use ($club) {
-            /** @var Builder $query */
-            $query->where('club_id', '<>', $club->id);
-        }, 0)->get();
-        foreach ($staffs as $staff) {
-            //若已有社團，先清空
-            if ($staff->clubs()->count() > 0) {
-                $staff->clubs()->sync([]);
-            }
-        }
-        $club->students()->sync($staffs->pluck('nid'));
-
-        //更新社長
         $leaderNid = $request->get('leader_nid');
-        //取得工作人員時，僅留下沒有在其他社團擔任工作人員的學生
-        /** @var Student $leader */
-        $leader = Student::where('nid', $leaderNid)->whereHas('clubs', function ($query) use ($club) {
-            /** @var Builder $query */
-            $query->where('club_id', '<>', $club->id);
-        }, 0)->first();
-        //若已有社團，先清空
-        if ($leader && $leader->clubs()->count() > 0) {
-            $leader->clubs()->sync([]);
-        }
-        $club->leaders()->sync($leader ? [$leader->nid => ['is_leader' => true]] : []);
+        $this->updateStaff($club, $leaderNid, $staffNids);
 
         return redirect()->route('clubs.show', $club)->with('success', '社團已新增');
     }
@@ -172,35 +147,10 @@ class ClubController extends Controller
         $attachBooths = Booth::whereDoesntHave('club')->whereIn('id', $attachBoothIds)->get();
         $club->booths()->saveMany($attachBooths);
 
-        //更新工作人員
+        //更新工作人員＆社長
         $staffNids = (array) $request->get('staff_nid');
-        //取得工作人員時，僅留下沒有在其他社團擔任工作人員的學生
-        /** @var Collection|Student[] $staffs */
-        $staffs = Student::whereIn('nid', $staffNids)->whereHas('clubs', function ($query) use ($club) {
-            /** @var Builder $query */
-            $query->where('club_id', '<>', $club->id);
-        }, 0)->get();
-        foreach ($staffs as $staff) {
-            //若已有社團，先清空
-            if ($staff->clubs()->count() > 0) {
-                $staff->clubs()->sync([]);
-            }
-        }
-        $club->students()->sync($staffs->pluck('nid'));
-
-        //更新社長
         $leaderNid = $request->get('leader_nid');
-        //取得工作人員時，僅留下沒有在其他社團擔任工作人員的學生
-        /** @var Student $leader */
-        $leader = Student::where('nid', $leaderNid)->whereHas('clubs', function ($query) use ($club) {
-            /** @var Builder $query */
-            $query->where('club_id', '<>', $club->id);
-        }, 0)->first();
-        //若已有社團，先清空
-        if ($leader && $leader->clubs()->count() > 0) {
-            $leader->clubs()->sync([]);
-        }
-        $club->leaders()->sync($leader ? [$leader->nid => ['is_leader' => true]] : []);
+        $this->updateStaff($club, $leaderNid, $staffNids);
 
         return redirect()->route('clubs.show', $club)->with('success', '社團已更新');
     }
@@ -341,5 +291,41 @@ class ClubController extends Controller
         $path = resource_path('sample/club_import_sample.xlsx');
 
         return response()->download($path);
+    }
+
+    /**
+     * @param Club $club
+     * @param string $leaderNid
+     * @param array $staffNids
+     */
+    private function updateStaff(Club $club, $leaderNid, $staffNids)
+    {
+        //更新工作人員
+        //取得工作人員時，僅留下沒有在其他社團擔任工作人員的學生
+        /** @var Collection|Student[] $staffs */
+        $staffs = Student::whereIn('nid', $staffNids)->whereHas('clubs', function ($query) use ($club) {
+            /** @var Builder $query */
+            $query->where('club_id', '<>', $club->id);
+        }, 0)->get();
+        foreach ($staffs as $staff) {
+            //若已有社團，先清空
+            if ($staff->clubs()->count() > 0) {
+                $staff->clubs()->sync([]);
+            }
+        }
+        $club->students()->sync($staffs->pluck('nid'));
+
+        //更新社長
+        //取得工作人員時，僅留下沒有在其他社團擔任工作人員的學生
+        /** @var Student $leader */
+        $leader = Student::where('nid', $leaderNid)->whereHas('clubs', function ($query) use ($club) {
+            /** @var Builder $query */
+            $query->where('club_id', '<>', $club->id);
+        }, 0)->first();
+        //若已有社團，先清空
+        if ($leader && $leader->clubs()->count() > 0) {
+            $leader->clubs()->sync([]);
+        }
+        $club->leaders()->sync($leader ? [$leader->nid => ['is_leader' => true]] : []);
     }
 }
