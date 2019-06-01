@@ -32,9 +32,10 @@ class StudentService
         //NID轉大寫並清除外側空白
         $nid = trim(strtoupper($nid));
         //嘗試尋找學生
+        /** @var Student $student */
         $student = Student::where('nid', $nid)->first();
-        if ($student) {
-            //若已存在，直接回傳
+        if ($student && !$student->is_dummy) {
+            //若已存在，且為實際資料，直接回傳
             return $student;
         }
         //嘗試透過API尋找
