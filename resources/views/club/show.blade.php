@@ -98,7 +98,8 @@
                         </dd>
 
                         @can('as-staff', $club)
-                            <dt class="col-6 col-sm-3">社長</dt>
+                            <dt class="col-6 col-sm-3 text-muted">社長<i class="fas fa-eye-slash ml-2"
+                                                                       title="僅工作人員可見"></i></dt>
                             <dd class="col-6 col-sm-9">
                                 @php
                                     $leader = $club->leaders()->first();
@@ -113,7 +114,8 @@
                                     <span class="text-muted">（無）</span>
                                 @endif
                             </dd>
-                            <dt class="col-6 col-sm-3">工作人員</dt>
+                            <dt class="col-6 col-sm-3 text-muted">工作人員<i class="fas fa-eye-slash ml-2"
+                                                                         title="僅工作人員可見"></i></dt>
                             <dd class="col-6 col-sm-9">
                                 @forelse($club->staffs as $staff)
                                     @if(Laratrust::can('student.manage'))
