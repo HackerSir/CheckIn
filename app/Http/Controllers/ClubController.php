@@ -223,9 +223,10 @@ class ClubController extends Controller
                 $number = strtoupper($rowData[1]);
                 $clubTypeName = $rowData[2];
                 $boothName = $rowData[3];
-                $ownerNIDs = [];
-                for ($i = 0; $i < 5; $i++) {
-                    $ownerNIDs[$i] = strtoupper($rowData[$i + 4]);
+                $leaderNid = $rowData[4];
+                $staffNids = [];
+                for ($i = 0; $i < 4; $i++) {
+                    $staffNids[$i] = strtoupper($rowData[$i + 5]);
                 }
 
                 //資料必須齊全
@@ -260,23 +261,8 @@ class ClubController extends Controller
                     $booth->update(['club_id' => $club->id]);
                 }
 
-                //攤位負責人
-                $ownerNIDs = array_filter($ownerNIDs);
-                foreach ($ownerNIDs as $ownerNID) {
-                    //試著找出學生
-                    /** @var Student $student */
-                    $student = $studentService->findByNid($ownerNID);
-                    if (!$student) {
-                        //NID無效
-                        $invalidNidCount++;
-                        continue;
-                    }
-                    //找出使用者
-                    $user = $userService->findOrCreateAndBind($student);
-                    //設定為負責人
-                    $user->club()->associate($club);
-                    $user->save();
-                }
+                //更新工作人員＆社長
+                $this->updateStaff($club, $leaderNid, $staffNids);
 
                 $successCount++;
             }
