@@ -3,6 +3,7 @@
 namespace App\DataTables;
 
 use App\Club;
+use App\Student;
 use App\User;
 use Illuminate\Database\Eloquent\Builder;
 use Yajra\DataTables\EloquentDataTable;
@@ -24,13 +25,16 @@ class UsersDataTable extends DataTable
             ->editColumn('name', 'user.datatables.name')
             ->editColumn('email', 'user.datatables.email')
             ->editColumn('club_id', function ($user) {
-                return view('user.datatables.club', compact('user'))->render();
+                return $user->student ? $user->student->clubs->first()->display_name : null;
             })
             ->filterColumn('club_id', function ($query, $keyword) {
                 /* @var Builder|User $query */
-                $query->whereHas('club', function ($query) use ($keyword) {
-                    /* @var Builder|Club $query */
-                    $query->where('name', 'like', '%' . $keyword . '%');
+                $query->whereHas('student', function ($query) use ($keyword) {
+                    /* @var Builder|Student $query */
+                    $query->whereHas('clubs', function ($query) use ($keyword) {
+                        /* @var Builder|Club $query */
+                        $query->where('name', 'like', '%' . $keyword . '%');
+                    });
                 });
             })
             ->rawColumns(['name', 'club_id', 'email']);
@@ -44,7 +48,7 @@ class UsersDataTable extends DataTable
      */
     public function query(User $model)
     {
-        return $model->newQuery()->with('roles', 'club.clubType');
+        return $model->newQuery()->with('roles', 'student.clubs.clubType');
     }
 
     /**
