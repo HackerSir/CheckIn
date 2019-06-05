@@ -23,6 +23,7 @@
     <meta name="theme-color" content="#f8f9fa">
     {{-- CSRF Token --}}
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name="user-id" content="{{ auth()->id() }}">
 
     <link rel="icon" type="image/svg+xml" href="{{ asset('favicon.svg') }}">
     <link rel="icon" type="image/ico" href="{{ asset('favicon.ico') }}">

@@ -20,6 +20,8 @@ Vue.component('my-feedback-list', require('./components/MyFeedbackList.vue'));
 Vue.component('my-feedback', require('./components/MyFeedback.vue'));
 Vue.component('favorite-club-button', require('./components/FavoriteClubButton.vue'));
 
+Vue.prototype.$userId = document.querySelector("meta[name='user-id']").getAttribute('content');
+
 const app = new Vue({
     el: '#vue-app'
 });
