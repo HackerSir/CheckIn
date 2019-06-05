@@ -252,12 +252,12 @@
             }, 1000),
             favoriteButtonClickedHandler: function (action, clubId) {
                 console.log('favoriteButtonHandler', action, clubId);
-                if (action === 'remove') {
-                    //若為取消收藏，自清單移除該社團
-                    this.clubs = this.clubs.filter(function (club) {
-                        return club.id !== clubId
-                    })
-                }
+                // if (action === 'remove') {
+                //     //若為取消收藏，自清單移除該社團
+                //     this.clubs = this.clubs.filter(function (club) {
+                //         return club.id !== clubId
+                //     })
+                // }
             }
         },
         components: {
