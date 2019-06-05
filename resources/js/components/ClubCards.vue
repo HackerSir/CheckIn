@@ -34,7 +34,6 @@
             <div class="col-12 col-lg-6 mt-1" v-for="club in clubs">
                 <club-card :club="club"
                            :favorited="club.isFavorite"
-                           @favorite-button-clicked="favoriteButtonClickedHandler"
                 ></club-card>
             </div>
         </div>
@@ -241,16 +240,7 @@
             delayFetch: _.debounce(function () {
                 this.isTypingKeyword = false;
                 this.changeFilter();
-            }, 1000),
-            favoriteButtonClickedHandler: function (action, clubId) {
-                console.log('favoriteButtonHandler', action, clubId);
-                // if (action === 'remove') {
-                //     //若為取消收藏，自清單移除該社團
-                //     this.clubs = this.clubs.filter(function (club) {
-                //         return club.id !== clubId
-                //     })
-                // }
-            }
+            }, 1000)
         },
         components: {
             InfiniteLoading,

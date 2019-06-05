@@ -32,7 +32,6 @@
                 <favorite-club-button :club-id="club.id" :club-name="club.name"
                                       btn-class="btn btn-outline-success" btn-text="收藏"
                                       :favorited="favorited"
-                                      @favorite-button-clicked="favoriteButtonClickedHandler"
                                       class="mx-sm-1 my-1 my-md-0"></favorite-club-button>
             </div>
         </div>
@@ -58,12 +57,6 @@
                     return '';
                 }
                 return 'https://maps.google.com/?q=' + this.club.booth.latitude + ',' + this.club.booth.longitude;
-            }
-        },
-        methods: {
-            favoriteButtonClickedHandler: function (action, clubId) {
-                //直接把事件往上傳
-                this.$emit('favorite-button-clicked', action, clubId);
             }
         }
     }

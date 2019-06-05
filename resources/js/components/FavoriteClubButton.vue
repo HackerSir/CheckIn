@@ -83,8 +83,6 @@
                 axios.post(addFavoriteClubAPIUrl).then(response => {
                     //更新暫存資料
                     store.commit('addFavoriteClub', this.clubId);
-                    //觸發事件
-                    this.$emit('favorite-button-clicked', 'add', this.clubId);
                     this.isFavorited = true;
                     toastr['success']('已收藏「' + this.clubName + '」');
                     this.loading = false;
@@ -95,8 +93,6 @@
                 axios.post(removeFavoriteClubAPIUrl).then(response => {
                     //更新暫存資料
                     store.commit('removeFavoriteClub', this.clubId);
-                    //觸發事件
-                    this.$emit('favorite-button-clicked', 'remove', this.clubId);
                     this.isFavorited = false;
                     toastr['success']('已取消收藏「' + this.clubName + '」');
                     this.loading = false;
