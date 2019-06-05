@@ -222,7 +222,7 @@ class ApiController extends Controller
         $clubQuery->orderBy('id');
 
         //使用者收藏社團
-        $userFavoriteClubIds = $user->favoriteClubs()->pluck('id');
+        $userFavoriteClubIds = $user ? $user->favoriteClubs()->pluck('id') : collect();
 
         //取得社團
         /** @var LengthAwarePaginator|Club[]|Collection $clubs */
