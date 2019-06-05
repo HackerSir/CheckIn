@@ -58,7 +58,7 @@
         <div class="card mt-2">
             <div class="card-body">
                 {{ bs()->openForm('post', route('terms.agree')) }}
-                <div class="h3 text-center">
+                <div class="text-center" style="font-size: 1.75rem">
                     <label style="vertical-align: middle">
                         <input class="mr-2" style="height: 2rem; width: 2rem" name="agree" type="checkbox" value="1"
                                required>我已閱讀並同意服務條款
