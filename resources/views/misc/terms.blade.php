@@ -3,6 +3,11 @@
 @section('title', '服務條款 Terms of Service')
 
 @section('main_content')
+    @if($showAgreementInfo)
+        <div class="alert alert-info">
+            <i class="fas fa-info-circle mr-2"></i>使用本站服務前，您必須同意服務條款
+        </div>
+    @endif
     <p class="text-right">修訂日期：2017年08月16日</p>
     <div class="card">
         <div class="card-body">
@@ -49,4 +54,23 @@
             <p><a href="https://www.facebook.com/HackerSir.tw" target="_blank">逢甲大學黑客社</a></p>
         </div>
     </div>
+    @if($showAgreementInfo)
+        <div class="card mt-2">
+            <div class="card-body">
+                {{ bs()->openForm('post', route('terms.agree')) }}
+                <div class="text-center" style="font-size: 1.75rem">
+                    <label style="vertical-align: middle">
+                        <input class="mr-2" style="height: 2rem; width: 2rem" name="agree" type="checkbox" value="1"
+                               required>我已閱讀並同意服務條款
+                    </label>
+                </div>
+                <div class="row mt-2">
+                    <div class="mx-auto">
+                        {{ bs()->submit('確認', 'primary')->prependChildren(fa()->icon('check')->addClass('mr-2')) }}
+                    </div>
+                </div>
+                {{ bs()->closeForm() }}
+            </div>
+        </div>
+    @endif
 @endsection

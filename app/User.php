@@ -24,6 +24,7 @@ use Laratrust\Traits\LaratrustUserTrait;
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property string|null $google2fa_secret
+ * @property \Illuminate\Support\Carbon|null $agree_terms_at 同意條款時間
  * @property-read \App\ClubSurvey $clubSurvey
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\DataUpdateRequest[] $dataUpdateRequests
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Club[] $favoriteClubs
@@ -40,6 +41,7 @@ use Laratrust\Traits\LaratrustUserTrait;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\User orWherePermissionIs($permission = '')
  * @method static \Illuminate\Database\Eloquent\Builder|\App\User orWhereRoleIs($role = '', $team = null)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\User query()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereAgreeTermsAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereConfirmAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereConfirmCode($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereCreatedAt($value)
@@ -81,6 +83,7 @@ class User extends Authenticatable
         'last_login_at',
         'last_login_ip',
         'google2fa_secret',
+        'agree_terms_at',
     ];
 
     /**
@@ -97,6 +100,10 @@ class User extends Authenticatable
     protected $appends = [
         'is_confirmed',
         'is_local_account',
+    ];
+
+    protected $dates = [
+        'agree_terms_at',
     ];
 
     /**
