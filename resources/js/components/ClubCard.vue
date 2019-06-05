@@ -32,7 +32,9 @@
                 <favorite-club-button :club-id="club.id" :club-name="club.name"
                                       btn-class="btn btn-outline-success" btn-text="收藏"
                                       :favorited="favorited"
-                                      class="mx-sm-1 my-1 my-md-0"></favorite-club-button>
+                                      class="mx-sm-1 my-1 my-md-0"
+                                      v-if="$userId"
+                ></favorite-club-button>
             </div>
         </div>
     </div>
