@@ -2,6 +2,10 @@
 
 @section('title', !$favoriteOnly ? '社團攤位' : '收藏社團')
 
+@section('meta')
+    <meta name="club-last-updated-at" content="{{ $clubLastUpdatedAt }}">
+@endsection
+
 @section('main_content')
     <div class="card">
         <div class="card-body">

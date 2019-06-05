@@ -39,8 +39,9 @@ class HomeController extends Controller
     public function clubs()
     {
         $favoriteOnly = request()->exists('favorite');
+        $clubLastUpdatedAt = Club::query()->max('updated_at');
 
-        return view('clubs.index', compact('favoriteOnly'));
+        return view('clubs.index', compact('favoriteOnly', 'clubLastUpdatedAt'));
     }
 
     public function clubsShow(Club $club)
