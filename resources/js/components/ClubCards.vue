@@ -33,7 +33,7 @@
         <div class="row mt-1">
             <div class="col-12 col-lg-6 mt-1" v-for="club in clubs">
                 <club-card :club="club"
-                           :favorited="favoriteClubIds.includes(club.id)"
+                           :favorited="club.isFavorite"
                            @favorite-button-clicked="favoriteButtonClickedHandler"
                 ></club-card>
             </div>
