@@ -15,6 +15,7 @@
         plugins: [vuexPersist.plugin],
         state: {
             clubs: [],
+            favoriteButtonLastTriggeredAt: +new Date()
         },
         mutations: {
             addFavoriteClub(state, clubId) {
@@ -32,6 +33,9 @@
                     //若有緩存資料，則更新緩存資料的收藏狀態
                     state.clubs[idx].isFavorite = false;
                 }
+            },
+            renewFavoriteButtonLastTriggeredAt(state) {
+                state.favoriteButtonLastTriggeredAt = +new Date()
             }
         }
     });
@@ -91,6 +95,7 @@
                 axios.post(addFavoriteClubAPIUrl).then(response => {
                     //更新暫存資料
                     store.commit('addFavoriteClub', this.clubId);
+                    store.commit('renewFavoriteButtonLastTriggeredAt');
                     this.isFavorited = true;
                     toastr['success']('已收藏「' + this.clubName + '」');
                     this.loading = false;
@@ -101,6 +106,7 @@
                 axios.post(removeFavoriteClubAPIUrl).then(response => {
                     //更新暫存資料
                     store.commit('removeFavoriteClub', this.clubId);
+                    store.commit('renewFavoriteButtonLastTriggeredAt');
                     this.isFavorited = false;
                     toastr['success']('已取消收藏「' + this.clubName + '」');
                     this.loading = false;

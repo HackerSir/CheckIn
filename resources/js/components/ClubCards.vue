@@ -71,6 +71,7 @@
             searchKeyword: '',
             clubs: [],
             clubCachedAt: null,
+            favoriteButtonLastTriggeredAt: +new Date(),
             fetchFinish: false,
             cacheForFavorite: false
         },
@@ -104,8 +105,11 @@
         },
         created() {
             //TODO: 檢查 cacheForFavorite，確保暫存資料不會被混用，或許有更好的做法
-            //若緩存之後，資料仍有更新，則強制更新
-            if (this.cacheForFavorite !== this.favoriteOnly || this.clubLastUpdateAt > this.clubCachedAt) {
+            //若緩存之後，資料仍有更新，則強制更新；若正檢視收藏社團，則亦考慮最後一次使用收藏按鈕的時間點
+            if (this.cacheForFavorite !== this.favoriteOnly
+                || this.clubLastUpdateAt > this.clubCachedAt
+                || (this.favoriteOnly && this.favoriteButtonLastTriggeredAt > this.clubCachedAt)
+            ) {
                 this.clubs = [];
                 this.fetchFinish = false;
                 this.identifier++;
@@ -186,6 +190,11 @@
                 get() {
                     let clubLastUpdateAtString = $('meta[name="club-last-updated-at"]').attr('content');
                     return +new Date(clubLastUpdateAtString);
+                }
+            },
+            favoriteButtonLastTriggeredAt: {
+                get() {
+                    return store.state.favoriteButtonLastTriggeredAt
                 }
             }
         },
