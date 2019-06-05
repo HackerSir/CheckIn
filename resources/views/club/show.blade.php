@@ -43,7 +43,7 @@
         @endif
     @endif
     @auth
-        <favorite-club-button favorited="{{ auth()->user()->isFavoriteClub($club) }}" club-id="{{ $club->id }}"
+        <favorite-club-button favorited="{{ auth()->user()->isFavoriteClub($club) }}" :club-id="{{ $club->id }}"
                               club-name="{{ $club->name }}"></favorite-club-button>
     @endauth
 @endsection

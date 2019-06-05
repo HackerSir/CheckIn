@@ -32,7 +32,9 @@
         </div>
         <div class="row mt-1">
             <div class="col-12 col-lg-6 mt-1" v-for="club in clubs">
-                <club-card :club="club" :favorited="favoriteClubIds.includes(club.id)"></club-card>
+                <club-card :club="club"
+                           :favorited="club.isFavorite"
+                ></club-card>
             </div>
         </div>
         <infinite-loading @infinite="infiniteHandler" :identifier="identifier" ref="infiniteLoading">
@@ -59,7 +61,7 @@
 
     Vue.use(Vuex);
     const vuexPersist = new VuexPersist({
-        key: 'club-cards',
+        key: 'checkin/club',
         storage: localStorage
     });
     const store = new Vuex.Store({
@@ -68,6 +70,8 @@
             selectedClubType: null,
             searchKeyword: '',
             clubs: [],
+            clubCachedAt: null,
+            favoriteButtonLastTriggeredAt: +new Date(),
             fetchFinish: false,
             cacheForFavorite: false
         },
@@ -86,6 +90,9 @@
             },
             setCacheForFavorite(state, cacheForFavorite) {
                 state.cacheForFavorite = cacheForFavorite
+            },
+            setClubCachedAt(state, clubCachedAt) {
+                state.clubCachedAt = clubCachedAt;
             }
         }
     });
@@ -98,14 +105,17 @@
         },
         created() {
             //TODO: 檢查 cacheForFavorite，確保暫存資料不會被混用，或許有更好的做法
-            if (this.cacheForFavorite !== this.favoriteOnly) {
+            //若緩存之後，資料仍有更新，則強制更新；若正檢視收藏社團，則亦考慮最後一次使用收藏按鈕的時間點
+            if (this.cacheForFavorite !== this.favoriteOnly
+                || this.clubLastUpdateAt > this.clubCachedAt
+                || (this.favoriteOnly && this.favoriteButtonLastTriggeredAt > this.clubCachedAt)
+            ) {
                 this.clubs = [];
                 this.fetchFinish = false;
                 this.identifier++;
             }
             this.$nextTick(function () {
                 this.fetchClubTypes();
-                this.fetchFavoriteClubIds();
             });
         },
         data: function () {
@@ -113,7 +123,6 @@
                 identifier: +new Date(),
                 clubTypes: [],
                 // clubs: [],
-                favoriteClubIds: [],
                 isTypingKeyword: false,
                 isFetching: false,
                 itemPerPage: 20
@@ -168,6 +177,25 @@
                 set(value) {
                     store.commit('setCacheForFavorite', value)
                 }
+            },
+            clubCachedAt: {
+                get() {
+                    return store.state.clubCachedAt
+                },
+                set(value) {
+                    store.commit('setClubCachedAt', value)
+                }
+            },
+            clubLastUpdateAt: {
+                get() {
+                    let clubLastUpdateAtString = $('meta[name="club-last-updated-at"]').attr('content');
+                    return +new Date(clubLastUpdateAtString);
+                }
+            },
+            favoriteButtonLastTriggeredAt: {
+                get() {
+                    return store.state.favoriteButtonLastTriggeredAt
+                }
             }
         },
         methods: {
@@ -209,6 +237,7 @@
                             $state.complete();
                             this.fetchFinish = true;
                         }
+                        this.clubCachedAt = +new Date();
                         this.isFetching = false;
                     });
                 }, 200);
@@ -228,12 +257,6 @@
                 let club_type_list_url = Laravel.baseUrl + '/api/club-type-list';
                 axios.post(club_type_list_url).then(response => {
                     this.clubTypes = response.data;
-                });
-            },
-            fetchFavoriteClubIds: function () {
-                let favorite_club_ids_url = Laravel.baseUrl + '/api/my-favorite-club-ids';
-                axios.post(favorite_club_ids_url).then(response => {
-                    this.favoriteClubIds = response.data;
                 });
             },
             onSelectChange: function () {
