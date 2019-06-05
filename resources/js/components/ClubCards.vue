@@ -108,7 +108,6 @@
             }
             this.$nextTick(function () {
                 this.fetchClubTypes();
-                this.fetchFavoriteClubIds();
             });
         },
         data: function () {
@@ -116,7 +115,6 @@
                 identifier: +new Date(),
                 clubTypes: [],
                 // clubs: [],
-                favoriteClubIds: [],
                 isTypingKeyword: false,
                 isFetching: false,
                 itemPerPage: 20
@@ -231,12 +229,6 @@
                 let club_type_list_url = Laravel.baseUrl + '/api/club-type-list';
                 axios.post(club_type_list_url).then(response => {
                     this.clubTypes = response.data;
-                });
-            },
-            fetchFavoriteClubIds: function () {
-                let favorite_club_ids_url = Laravel.baseUrl + '/api/my-favorite-club-ids';
-                axios.post(favorite_club_ids_url).then(response => {
-                    this.favoriteClubIds = response.data;
                 });
             },
             onSelectChange: function () {
