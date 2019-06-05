@@ -18,12 +18,20 @@
         },
         mutations: {
             addFavoriteClub(state, clubId) {
+                //嘗試從緩存資料找到該社團
                 let idx = state.clubs.findIndex((element) => element.id === clubId);
-                state.clubs[idx].isFavorite = true;
+                if (idx !== -1) {
+                    //若有緩存資料，則更新緩存資料的收藏狀態
+                    state.clubs[idx].isFavorite = true;
+                }
             },
             removeFavoriteClub(state, clubId) {
+                //嘗試從緩存資料找到該社團
                 let idx = state.clubs.findIndex((element) => element.id === clubId);
-                state.clubs[idx].isFavorite = false;
+                if (idx !== -1) {
+                    //若有緩存資料，則更新緩存資料的收藏狀態
+                    state.clubs[idx].isFavorite = false;
+                }
             }
         }
     });
