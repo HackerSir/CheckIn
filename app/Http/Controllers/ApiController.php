@@ -221,6 +221,9 @@ class ApiController extends Controller
 
         $clubQuery->orderBy('id');
 
+        //使用者收藏社團
+        $userFavoriteClubIds = $user->favoriteClubs()->pluck('id');
+
         //取得社團
         /** @var LengthAwarePaginator|Club[]|Collection $clubs */
         $clubs = $clubQuery->paginate(20);
@@ -232,18 +235,19 @@ class ApiController extends Controller
             $booth = $club->booths->first();
 
             $data[] = [
-                'id'      => $club->id,
-                'name'    => $club->name,
-                'image'   => $club->imgurImage ? $club->imgurImage->thumbnail('b') : null,
-                'tag'     => [
+                'id'         => $club->id,
+                'name'       => $club->name,
+                'image'      => $club->imgurImage ? $club->imgurImage->thumbnail('b') : null,
+                'tag'        => [
                     'name'  => $club->clubType ? $club->clubType->name : null,
                     'color' => $club->clubType ? $club->clubType->color : null,
                 ],
-                'excerpt' => str_limit(strip_tags($club->description), 100, '...'),
-                'booth'   => $booth ? [
+                'excerpt'    => str_limit(strip_tags($club->description), 100, '...'),
+                'booth'      => $booth ? [
                     'longitude' => $booth->longitude,
                     'latitude'  => $booth->latitude,
                 ] : null,
+                'isFavorite' => $userFavoriteClubIds->contains($club->id),
             ];
         }
         $result = [
