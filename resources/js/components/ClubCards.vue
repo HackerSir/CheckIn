@@ -70,6 +70,7 @@
             selectedClubType: null,
             searchKeyword: '',
             clubs: [],
+            clubCachedAt: null,
             fetchFinish: false,
             cacheForFavorite: false
         },
@@ -88,6 +89,9 @@
             },
             setCacheForFavorite(state, cacheForFavorite) {
                 state.cacheForFavorite = cacheForFavorite
+            },
+            setClubCachedAt(state, clubCachedAt) {
+                state.clubCachedAt = clubCachedAt;
             }
         }
     });
@@ -100,7 +104,8 @@
         },
         created() {
             //TODO: 檢查 cacheForFavorite，確保暫存資料不會被混用，或許有更好的做法
-            if (this.cacheForFavorite !== this.favoriteOnly) {
+            //若緩存之後，資料仍有更新，則強制更新
+            if (this.cacheForFavorite !== this.favoriteOnly || this.clubLastUpdateAt > this.clubCachedAt) {
                 this.clubs = [];
                 this.fetchFinish = false;
                 this.identifier++;
@@ -168,6 +173,20 @@
                 set(value) {
                     store.commit('setCacheForFavorite', value)
                 }
+            },
+            clubCachedAt: {
+                get() {
+                    return store.state.clubCachedAt
+                },
+                set(value) {
+                    store.commit('setClubCachedAt', value)
+                }
+            },
+            clubLastUpdateAt: {
+                get() {
+                    let clubLastUpdateAtString = $('meta[name="club-last-updated-at"]').attr('content');
+                    return +new Date(clubLastUpdateAtString);
+                }
             }
         },
         methods: {
@@ -209,6 +228,7 @@
                             $state.complete();
                             this.fetchFinish = true;
                         }
+                        this.clubCachedAt = +new Date();
                         this.isFetching = false;
                     });
                 }, 200);
