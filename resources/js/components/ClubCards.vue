@@ -32,7 +32,10 @@
         </div>
         <div class="row mt-1">
             <div class="col-12 col-lg-6 mt-1" v-for="club in clubs">
-                <club-card :club="club" :favorited="favoriteClubIds.includes(club.id)"></club-card>
+                <club-card :club="club"
+                           :favorited="favoriteClubIds.includes(club.id)"
+                           @favorite-button-clicked="favoriteButtonClickedHandler"
+                ></club-card>
             </div>
         </div>
         <infinite-loading @infinite="infiniteHandler" :identifier="identifier" ref="infiniteLoading">
@@ -246,7 +249,16 @@
             delayFetch: _.debounce(function () {
                 this.isTypingKeyword = false;
                 this.changeFilter();
-            }, 1000)
+            }, 1000),
+            favoriteButtonClickedHandler: function (action, clubId) {
+                console.log('favoriteButtonHandler', action, clubId);
+                if (action === 'remove') {
+                    //若為取消收藏，自清單移除該社團
+                    this.clubs = this.clubs.filter(function (club) {
+                        return club.id !== clubId
+                    })
+                }
+            }
         },
         components: {
             InfiniteLoading,

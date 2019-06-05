@@ -59,6 +59,7 @@
                     this.isFavorited = true;
                     toastr['success']('已收藏「' + this.clubName + '」');
                     this.loading = false;
+                    this.$emit('favorite-button-clicked', 'add', this.clubId);
                 });
             },
             removeFavoriteClub: function () {
@@ -67,6 +68,7 @@
                     this.isFavorited = false;
                     toastr['success']('已取消收藏「' + this.clubName + '」');
                     this.loading = false;
+                    this.$emit('favorite-button-clicked', 'remove', this.clubId);
                 });
             }
         }
