@@ -62,7 +62,7 @@
 
     Vue.use(Vuex);
     const vuexPersist = new VuexPersist({
-        key: 'club-cards',
+        key: 'checkin/club',
         storage: localStorage
     });
     const store = new Vuex.Store({
