@@ -1,5 +1,5 @@
 <template>
-    <button :class="[btnClass]" @click="handler"><i :class="[iconClass]" class="fa-fw mr-2"></i>{{ btnText }}</button>
+    <button :class="[btnClass]" @click="handler" :disabled="this.loading"><i :class="[iconClass]" class="fa-fw mr-2"></i>{{ btnText }}</button>
 </template>
 
 <script>
