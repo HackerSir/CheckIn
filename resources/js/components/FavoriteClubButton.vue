@@ -67,12 +67,6 @@
                 isFavorited: this.favorited
             }
         },
-        created() {
-            //FIXME: 在 ClubCards 中，上面的 data 部分無法順利初始化，因此500ms之後再次嘗試進行
-            _.delay(() => {
-                this.isFavorited = this.favorited;
-            }, 500)
-        },
         computed: {
             iconClass: function () {
                 if (this.loading) {
