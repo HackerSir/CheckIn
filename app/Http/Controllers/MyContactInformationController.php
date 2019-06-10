@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\MyContactInformationRequest;
 use App\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Setting;
 
 class MyContactInformationController extends Controller
 {
@@ -36,9 +38,16 @@ class MyContactInformationController extends Controller
 
     /**
      * @return \Illuminate\Http\Response
+     * @throws \Exception
      */
     public function createOrEdit()
     {
+        //檢查填寫期限
+        $feedbackCreateExpiredAt = new Carbon(Setting::get('feedback_create_expired_at'));
+        if (Carbon::now()->gt($feedbackCreateExpiredAt)) {
+            return back()->with('warning', '回饋資料填寫已截止，無法對聯過資料進行修改');
+        }
+
         /** @var User $user */
         $user = auth()->user();
 
@@ -50,9 +59,16 @@ class MyContactInformationController extends Controller
     /**
      * @param Request $request
      * @return  \Illuminate\Http\Response
+     * @throws \Exception
      */
     public function store(MyContactInformationRequest $request)
     {
+        //檢查填寫期限
+        $feedbackCreateExpiredAt = new Carbon(Setting::get('feedback_create_expired_at'));
+        if (Carbon::now()->gt($feedbackCreateExpiredAt)) {
+            return back()->with('warning', '回饋資料填寫已截止，無法對聯過資料進行修改');
+        }
+
         /** @var User $user */
         $user = auth()->user();
 
