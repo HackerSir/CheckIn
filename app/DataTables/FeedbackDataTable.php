@@ -23,7 +23,7 @@ class FeedbackDataTable extends DataTable
 
         return $dataTable
             ->addColumn('action', 'feedback.datatables.action')
-            ->editColumn('student_nid', function ($feedback) {
+            ->editColumn('student_nid', function (Feedback $feedback) {
                 return view('feedback.datatables.student', compact('feedback'))->render();
             })
             ->filterColumn('student_nid', function ($query, $keyword) {
@@ -34,11 +34,11 @@ class FeedbackDataTable extends DataTable
                         ->orWhere('nid', 'like', '%' . $keyword . '%');
                 });
             })
-            ->addColumn('is_freshman', function ($feedback) {
+            ->addColumn('is_freshman', function (Feedback $feedback) {
                 /** @var Feedback $feedback */
                 return view('feedback.datatables.is_freshman', compact('feedback'))->render();
             })
-            ->editColumn('club_id', function ($feedback) {
+            ->editColumn('club_id', function (Feedback $feedback) {
                 return view('feedback.datatables.club', compact('feedback'))->render();
             })
             ->filterColumn('club_id', function ($query, $keyword) {
@@ -47,6 +47,22 @@ class FeedbackDataTable extends DataTable
                     /* @var Builder|Club $query */
                     $query->where('name', 'like', '%' . $keyword . '%');
                 });
+            })
+            ->editColumn('phone', function (Feedback $feedback) {
+                return ($feedback->phone && $feedback->student->contactInformation)
+                    ? $feedback->student->contactInformation->phone : null;
+            })
+            ->editColumn('email', function (Feedback $feedback) {
+                return ($feedback->email && $feedback->student->contactInformation)
+                    ? $feedback->student->contactInformation->email : null;
+            })
+            ->editColumn('facebook', function (Feedback $feedback) {
+                return ($feedback->facebook && $feedback->student->contactInformation)
+                    ? $feedback->student->contactInformation->facebook : null;
+            })
+            ->editColumn('line', function (Feedback $feedback) {
+                return ($feedback->line && $feedback->student->contactInformation)
+                    ? $feedback->student->contactInformation->line : null;
             })
             ->rawColumns(['is_freshman', 'club_id', 'action']);
     }
@@ -59,7 +75,7 @@ class FeedbackDataTable extends DataTable
      */
     public function query(Feedback $model)
     {
-        return $model->newQuery()->with('student', 'club.clubType');
+        return $model->newQuery()->with('student.contactInformation', 'club.clubType');
     }
 
     /**
