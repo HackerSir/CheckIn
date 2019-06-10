@@ -108,10 +108,10 @@ $factory->define(App\Feedback::class, function (Faker\Generator $faker) {
     return [
         'student_nid' => $faker->randomElement($studentNids),
         'club_id'     => $faker->randomElement($clubIds),
-        'phone'       => (boolean) ($option & 1),
-        'email'       => (boolean) ($option & 2),
-        'facebook'    => (boolean) ($option & 4),
-        'line'        => (boolean) ($option & 8),
+        'phone'       => (bool) ($option & 1),
+        'email'       => (bool) ($option & 2),
+        'facebook'    => (bool) ($option & 4),
+        'line'        => (bool) ($option & 8),
         'message'     => $faker->optional()->paragraph,
     ];
 });
