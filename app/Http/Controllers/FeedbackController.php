@@ -42,12 +42,14 @@ class FeedbackController extends Controller
             //檢查檢視與下載期限
             $feedbackDownloadExpiredAt = new Carbon(Setting::get('feedback_download_expired_at'));
             if (Carbon::now()->gt($feedbackDownloadExpiredAt)) {
-                if ($user->student) {
-                    //若有學生，跳轉至「我的回饋資料」
-                    return redirect()->route('feedback.my')->with('warning', '已超過檢視期限，若需查看資料，請聯繫各委會輔導老師');
-                } else {
-                    //若無學生，直接返回
-                    return back()->with('warning', '已超過檢視期限，若需查看資料，請聯繫各委會輔導老師');
+                //跳轉至「我的回饋資料」
+                return redirect()->route('feedback.my')->with('warning', '已超過檢視期限，若需查看資料，請聯繫各委會輔導老師');
+            }
+            $endAt = new Carbon(Setting::get('end_at'));
+            if (Carbon::now()->gt($endAt)) {
+                //活動結束，確認是否為社長
+                if (!$user->club->pivot->is_leader) {
+                    return back()->route('feedback.my')->with('warning', '活動已結束，僅社長可查看資料');
                 }
             }
             //只能看到自己社團的
@@ -188,6 +190,19 @@ class FeedbackController extends Controller
             $feedbackDownloadExpiredAt = new Carbon(Setting::get('feedback_download_expired_at'));
             if (Carbon::now()->gt($feedbackDownloadExpiredAt)) {
                 return back()->with('warning', '已超過檢視期限，若需查看資料，請聯繫各委會輔導老師');
+            }
+            $endAt = new Carbon(Setting::get('end_at'));
+            if (Carbon::now()->gt($endAt)) {
+                //活動結束
+                if (!$user->student) {
+                    //若無學生，直接返回
+                    return back()->with('warning', '已超過檢視期限，若需查看資料，請聯繫各委會輔導老師');
+                }
+                //確認是否為社長或資料擁有者
+                if (!($user->club && $user->club->pivot->is_leader)
+                    && ($user->student->nid != $feedback->student_nid)) {
+                    return redirect()->route('feedback.my')->with('warning', '活動已結束，僅社長可查看資料');
+                }
             }
         }
         //打卡紀錄

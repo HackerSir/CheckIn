@@ -171,6 +171,10 @@ class ExportController extends Controller
                 if (Carbon::now()->gt($feedbackDownloadExpiredAt)) {
                     return back()->with('warning', '已超過檢視期限，若需查看資料，請聯繫各委會輔導老師');
                 }
+                //確認是否為社長
+                if (!$user->club->pivot->is_leader) {
+                    return back()->with('warning', '匯出功能限社長使用');
+                }
                 //攤位負責人看到自己社團的
                 $feedbackQuery->where('club_id', $user->club->id);
             } else {
