@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\ContactInformation;
 use App\User;
 use Closure;
 use Laratrust;
@@ -102,6 +103,11 @@ class LaravelMenu
                         }
 
                         $this->addDivider($activityMenu);
+
+                        if (\Gate::allows('index', ContactInformation::class)) {
+                            $activityMenu->add('聯絡資料管理', ['route' => 'contact-information.index'])
+                                ->active('contact-information/*');
+                        }
 
                         if (Laratrust::can('feedback.manage')) {
                             $activityMenu->add('回饋資料管理', ['route' => 'feedback.index'])->active('feedback/*');
