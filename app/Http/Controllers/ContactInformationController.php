@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\ContactInformation;
-use Illuminate\Http\Request;
+use App\DataTables\ContactInformationDataTable;
+use App\Http\Requests\ContactInformationRequest;
 
 class ContactInformationController extends Controller
 {
@@ -18,14 +19,15 @@ class ContactInformationController extends Controller
     /**
      * Display a listing of the resource.
      *
+     * @param ContactInformationDataTable $dataTable
      * @return \Illuminate\Http\Response
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
-    public function index()
+    public function index(ContactInformationDataTable $dataTable)
     {
         $this->authorize('index', ContactInformation::class);
 
-        //TODO
+        return $dataTable->render('contact-information.index');
     }
 
     /**
@@ -35,7 +37,7 @@ class ContactInformationController extends Controller
      */
     public function create()
     {
-        //TODO
+        return view('contact-information.create');
     }
 
     /**
@@ -44,9 +46,11 @@ class ContactInformationController extends Controller
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ContactInformationRequest $request)
     {
-        //TODO
+        $contactInformation = ContactInformation::create($request->all());
+
+        return redirect()->route('contact-information.show', $contactInformation)->with('success', '聯絡資料已建立');
     }
 
     /**
@@ -57,7 +61,7 @@ class ContactInformationController extends Controller
      */
     public function show(ContactInformation $contactInformation)
     {
-        //TODO
+        return view('contact-information.show', compact('contactInformation'));
     }
 
     /**
@@ -68,7 +72,7 @@ class ContactInformationController extends Controller
      */
     public function edit(ContactInformation $contactInformation)
     {
-        //TODO
+        return view('contact-information.edit', compact('contactInformation'));
     }
 
     /**
@@ -78,9 +82,11 @@ class ContactInformationController extends Controller
      * @param \App\ContactInformation $contactInformation
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, ContactInformation $contactInformation)
+    public function update(ContactInformationRequest $request, ContactInformation $contactInformation)
     {
-        //
+        $contactInformation->update($request->except('student_nid'));
+
+        return redirect()->route('contact-information.show', $contactInformation)->with('success', '聯絡資料已更新');
     }
 
     /**
@@ -88,9 +94,12 @@ class ContactInformationController extends Controller
      *
      * @param \App\ContactInformation $contactInformation
      * @return \Illuminate\Http\Response
+     * @throws \Exception
      */
     public function destroy(ContactInformation $contactInformation)
     {
-        //TODO
+        $contactInformation->delete();
+
+        return redirect()->route('contact-information.index')->with('success', '聯絡資料已刪除');
     }
 }

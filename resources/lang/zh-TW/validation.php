@@ -185,6 +185,8 @@ return [
         'import_file'           => '匯入檔案',
         'image_file'            => '圖片檔案',
         'message'               => '訊息',
+        'line'                  => 'LINE',
+        'facebook'              => 'Facebook',
     ],
     'strip_max'  => ':attribute 不能多於 :max 個字元。',
 ];

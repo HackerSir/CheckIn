@@ -331,6 +331,7 @@ Route::group(['prefix' => 'api'], function () {
     Route::post('/booth-list', 'ApiController@boothList')->name('api.booth-list');
     Route::post('/user-list', 'ApiController@userList')->name('api.user-list');
     Route::post('/club-student-list', 'ApiController@clubStudentList')->name('api.club-student-list');
+    Route::post('/student-list', 'ApiController@studentList')->name('api.student-list');
     Route::post('/club-type-list', 'ApiController@clubTypeList')->name('api.club-type-list');
     Route::post('/club-list', 'ApiController@clubList')->name('api.club-list');
     Route::post('/my-favorite-club-ids', 'ApiController@myFavoriteClubIds')->name('api.my-favorite-club-ids');

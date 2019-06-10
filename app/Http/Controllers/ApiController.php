@@ -180,6 +180,44 @@ class ApiController extends Controller
         return response()->json($json);
     }
 
+    public function studentList(Request $request)
+    {
+        /** @var Builder|Student $studentsQuery */
+        $studentsQuery = Student::with('clubs');
+        //搜尋關鍵字
+        if ($request->has('q')) {
+            $searchPattern = '%' . $request->input('q') . '%';
+            //搜尋學生名稱或NID
+            $studentsQuery->where(function ($query) use ($searchPattern) {
+                /** @var Builder|Student $query */
+                $query->where('name', 'like', $searchPattern)
+                    ->orWhere('nid', 'like', $searchPattern);
+            });
+        }
+        //分頁
+        $perPage = 10;
+        //取得資料
+        /** @var LengthAwarePaginator|Collection|Student[] $students */
+        $students = $studentsQuery->paginate($perPage);
+        //轉換陣列內容
+        $items = [];
+        foreach ($students as $student) {
+            $items[] = [
+                'id'       => $student->nid,
+                'name'     => $student->name,
+                'disabled' => false,
+            ];
+        }
+        //建立JSON
+        $json = [
+            'current_page' => $students->currentPage(),
+            'last_page'    => $students->lastPage(),
+            'items'        => $items,
+        ];
+
+        return response()->json($json);
+    }
+
     public function clubTypeList()
     {
         $clubTypes = ClubType::query()->orderBy('id')->pluck('name', 'id');
