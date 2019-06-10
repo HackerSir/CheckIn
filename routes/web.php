@@ -83,6 +83,14 @@ Route::group(['middleware' => ['auth', 'email']], function () {
             ->name('student.download-import-sample');
     });
     Route::resource('student', 'StudentController');
+    //我的聯絡資料
+    Route::prefix('my-contact-information')->group(function () {
+        Route::get('/', 'MyContactInformationController@index')->name('contact-information.my.index');
+        Route::get('edit', 'MyContactInformationController@createOrEdit')
+            ->name('contact-information.my.create-or-edit');
+        Route::post('/', 'MyContactInformationController@store')
+            ->name('contact-information.my.store');
+    });
     //聯絡資料管理
     //權限：ContactInformationPolicy
     Route::resource('contact-information', 'ContactInformationController');
