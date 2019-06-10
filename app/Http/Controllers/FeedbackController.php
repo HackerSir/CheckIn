@@ -110,11 +110,6 @@ class FeedbackController extends Controller
 
         //曾給該社團的回饋資料
         $feedback = Feedback::whereClubId($club->id)->whereStudentNid($user->student->nid)->first();
-        if (!$feedback) {
-            //自己最後一次填寫的回饋資料
-            $lastFeedback = $user->student->feedback()->orderBy('created_at', 'desc')->first();
-            view()->share(compact('lastFeedback'));
-        }
 
         return view(
             'feedback.create-or-edit',
@@ -143,27 +138,22 @@ class FeedbackController extends Controller
         }
 
         $this->validate($request, [
-            'phone'    => [
-                'nullable',
-                'required_without_all:email,facebook,line',
-                'max:255',
-                'regex:/^[\d\-+()#\s]{8,}$/',
-            ],
-            'email'    => 'nullable|required_without_all:phone,facebook,line|max:255|email',
-            'facebook' => 'nullable|required_without_all:phone,email,line|max:255',
-            'line'     => [
-                'nullable',
-                'required_without_all:phone,email,facebook',
-                'max:255',
-                'regex:/^[\w\-\.]+$/',
-            ],
+            'phone'    => 'nullable|required_without_all:email,facebook,line',
+            'email'    => 'nullable|required_without_all:phone,facebook,line',
+            'facebook' => 'nullable|required_without_all:phone,email,line',
+            'line'     => 'nullable|required_without_all:phone,email,facebook',
             'message'  => 'nullable|max:255',
         ]);
 
         $feedback = Feedback::updateOrCreate([
             'club_id'     => $club->id,
             'student_nid' => $user->student->nid,
-        ], $request->only(['phone', 'email', 'facebook', 'line', 'message']));
+        ], array_merge($request->only(['message']), [
+            'phone'    => $request->has('phone'),
+            'email'    => $request->has('email'),
+            'facebook' => $request->has('facebook'),
+            'line'     => $request->has('line'),
+        ]));
 
         return redirect()->route('feedback.show', $feedback)
             ->with('success', '回饋資料已送出');

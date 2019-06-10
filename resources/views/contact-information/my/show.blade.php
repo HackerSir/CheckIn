@@ -3,6 +3,9 @@
 @section('title', '聯絡資料')
 
 @section('buttons')
+    <a href="{{ route('feedback.my') }}" class="btn btn-secondary">
+        <i class="far fa-comment mr-2"></i>我的回饋資料
+    </a>
     @if(\Carbon\Carbon::now()->lte(new Carbon\Carbon(Setting::get('feedback_create_expired_at'))))
         <a href="{{ route('contact-information.my.create-or-edit') }}" class="btn btn-primary">
             <i class="fa fa-edit mr-2"></i>編輯

@@ -27,7 +27,7 @@
                     <li>入學年度</li>
                     <li>性別</li>
                 </ul>
-                以及您下方填寫的資料
+                以及您下方勾選的資料
                 <ul>
                     <li>電話</li>
                     <li>信箱</li>
@@ -36,9 +36,7 @@
                     <li>給社團的意見</li>
                 </ul>
             </li>
-            <li>請至少填寫一項<strong>聯絡資訊</strong>資料再送出</li>
-            <li>不同社團的回饋資料可以填寫不同的<strong>聯絡資訊</strong></li>
-            <li>系統會自動填入之前填寫的<strong>聯絡資訊</strong>，可於送出前修改</li>
+            <li>請至少勾選一項<strong>聯絡資訊</strong>資料再送出</li>
         </ul>
     </div>
     <div class="card mt-1">
@@ -62,17 +60,30 @@
                 </div>
             </div>
 
-            @if(isset($feedback))
-                {{ bs()->formGroup(bs()->text('phone'))->label('電話')->showAsRow() }}
-                {{ bs()->formGroup(bs()->text('email'))->label('信箱')->showAsRow() }}
-                {{ bs()->formGroup(bs()->text('facebook'))->label('Facebook')->helpText('請填寫個人檔案連結（個人頁面網址）')->showAsRow() }}
-                {{ bs()->formGroup(bs()->text('line'))->label('LINE ID')->showAsRow() }}
+            @if($user->student->contactInformation->phone)
+                {{ bs()->formGroup(bs()->checkBox('phone', $user->student->contactInformation->phone))->label('電話')->showAsRow() }}
             @else
-                {{ bs()->formGroup(bs()->text('phone', $lastFeedback->phone ?? null))->label('電話')->showAsRow() }}
-                {{ bs()->formGroup(bs()->text('email', $lastFeedback->email ?? null))->label('信箱')->showAsRow() }}
-                {{ bs()->formGroup(bs()->text('facebook', $lastFeedback->facebook ?? null))->label('Facebook')->helpText('請填寫個人檔案連結（個人頁面網址）')->showAsRow() }}
-                {{ bs()->formGroup(bs()->text('line', $lastFeedback->line ?? null))->label('LINE ID')->showAsRow() }}
+                {{ bs()->formGroup(bs()->checkBox('phone', '未填寫')->disabled())->label('電話')->showAsRow() }}
             @endif
+
+            @if($user->student->contactInformation->email)
+                {{ bs()->formGroup(bs()->checkBox('email', $user->student->contactInformation->email))->label('信箱')->showAsRow() }}
+            @else
+                {{ bs()->formGroup(bs()->checkBox('email', '未填寫')->disabled())->label('信箱')->showAsRow() }}
+            @endif
+
+            @if($user->student->contactInformation->facebook)
+                {{ bs()->formGroup(bs()->checkBox('facebook', $user->student->contactInformation->facebook))->label('Facebook')->showAsRow() }}
+            @else
+                {{ bs()->formGroup(bs()->checkBox('facebook', '未填寫')->disabled())->label('Facebook')->showAsRow() }}
+            @endif
+
+            @if($user->student->contactInformation->line)
+                {{ bs()->formGroup(bs()->checkBox('line', $user->student->contactInformation->line))->label('LINE ID')->showAsRow() }}
+            @else
+                {{ bs()->formGroup(bs()->checkBox('line', '未填寫')->disabled())->label('LINE ID')->showAsRow() }}
+            @endif
+
             {{ bs()->formGroup(bs()->text('message'))->label('給社團的意見')->showAsRow() }}
 
             <div class="row">
