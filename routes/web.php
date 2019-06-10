@@ -83,6 +83,9 @@ Route::group(['middleware' => ['auth', 'email']], function () {
             ->name('student.download-import-sample');
     });
     Route::resource('student', 'StudentController');
+    //聯絡資料管理
+    //權限：ContactInformationPolicy
+    Route::resource('contact-information', 'ContactInformationController');
     //QR Code管理
     //權限：qrcode.manage
     Route::group(['middleware' => 'permission:qrcode.manage'], function () {
