@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use App\ContactInformation;
+use App\Student;
 use App\User;
 use Closure;
 use Laratrust;
@@ -54,7 +55,7 @@ class LaravelMenu
                         /** @var \Lavary\Menu\Item $activityMenu */
                         $activityMenu = $menu->add('活動', 'javascript:void(0)');
 
-                        if (Laratrust::can('student.manage')) {
+                        if (\Gate::allows('index', Student::class)) {
                             $activityMenu->add('學生管理', ['route' => 'student.index'])->active('student/*');
                         }
 
