@@ -15,6 +15,18 @@ use Setting;
 class FeedbackController extends Controller
 {
     /**
+     * FeedbackController constructor.
+     */
+    public function __construct()
+    {
+        $this->middleware('nid_account')->only([
+            'my',
+            'createOrEdit',
+            'store',
+        ]);
+    }
+
+    /**
      * Display a listing of the resource.
      *
      * @param FeedbackDataTable $dataTable
@@ -74,10 +86,6 @@ class FeedbackController extends Controller
     {
         /** @var User $user */
         $user = auth()->user();
-        //檢查是否為學生帳號
-        if (!$user->student) {
-            return back()->with('warning', '此功能限學生帳號使用');
-        }
 
         return view('feedback.my', compact('user'));
     }
@@ -93,10 +101,6 @@ class FeedbackController extends Controller
     {
         /** @var User $user */
         $user = auth()->user();
-        //檢查是否為學生帳號
-        if (!$user->student) {
-            return back()->with('warning', '此功能限學生帳號使用');
-        }
 
         //檢查填寫期限
         $feedbackCreateExpiredAt = new Carbon(Setting::get('feedback_create_expired_at'));
@@ -131,10 +135,6 @@ class FeedbackController extends Controller
     {
         /** @var User $user */
         $user = auth()->user();
-        //檢查是否為學生帳號
-        if (!$user->student) {
-            return back()->with('warning', '此功能限學生帳號使用');
-        }
 
         //檢查填寫期限
         $feedbackCreateExpiredAt = new Carbon(Setting::get('feedback_create_expired_at'));

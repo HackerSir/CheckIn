@@ -9,16 +9,20 @@ use Illuminate\Http\Request;
 class MyContactInformationController extends Controller
 {
     /**
+     * MyContactInformationController constructor.
+     */
+    public function __construct()
+    {
+        $this->middleware('nid_account');
+    }
+
+    /**
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
         /** @var User $user */
         $user = auth()->user();
-        //檢查是否為學生帳號
-        if (!$user->student) {
-            return back()->with('warning', '此功能限學生帳號使用');
-        }
 
         //若未填寫，跳轉至編輯頁面
         if (!$user->student->contactInformation) {
@@ -37,10 +41,6 @@ class MyContactInformationController extends Controller
     {
         /** @var User $user */
         $user = auth()->user();
-        //檢查是否為學生帳號
-        if (!$user->student) {
-            return back()->with('warning', '此功能限學生帳號使用');
-        }
 
         $contactInformation = $user->student->contactInformation;
 
@@ -55,10 +55,6 @@ class MyContactInformationController extends Controller
     {
         /** @var User $user */
         $user = auth()->user();
-        //檢查是否為學生帳號
-        if (!$user->student) {
-            return back()->with('warning', '此功能限學生帳號使用');
-        }
 
         $user->student->contactInformation()->updateOrCreate([], $request->except('student_nid'));
 
