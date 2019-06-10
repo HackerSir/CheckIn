@@ -103,14 +103,16 @@ $factory->define(App\Ticket::class, function (Faker\Generator $faker) {
 $factory->define(App\Feedback::class, function (Faker\Generator $faker) {
     $studentNids = \App\Student::query()->pluck('nid')->toArray();
     $clubIds = \App\Club::query()->pluck('id')->toArray();
-    $option = $faker->numberBetween(1, 7);
+    $option = $faker->numberBetween(1, 15);
 
     return [
         'student_nid' => $faker->randomElement($studentNids),
         'club_id'     => $faker->randomElement($clubIds),
-        'phone'       => $option & 1 ? $faker->phoneNumber : null,
-        'email'       => $option & 2 ? $faker->email : null,
-        'message'     => $option & 4 ? $faker->paragraph : null,
+        'phone'       => (boolean) ($option & 1),
+        'email'       => (boolean) ($option & 2),
+        'facebook'    => (boolean) ($option & 4),
+        'line'        => (boolean) ($option & 8),
+        'message'     => $faker->optional()->paragraph,
     ];
 });
 
