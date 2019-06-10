@@ -11,10 +11,10 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $id
  * @property string|null $student_nid 對應學生
  * @property int $club_id 對應社團
- * @property string|null $phone 聯絡電話
- * @property string|null $email 聯絡信箱
- * @property string|null $facebook FB個人檔案連結
- * @property string|null $line LINE ID
+ * @property bool $phone 聯絡電話
+ * @property bool $email 聯絡信箱
+ * @property bool $facebook FB個人檔案連結
+ * @property bool $line LINE ID
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property string|null $message 附加訊息
@@ -50,11 +50,14 @@ class Feedback extends Model
     ];
 
     protected $nullable = [
-        'phone',
-        'email',
-        'facebook',
-        'line',
         'message',
+    ];
+
+    protected $casts = [
+        'phone'    => 'boolean',
+        'email'    => 'boolean',
+        'facebook' => 'boolean',
+        'line'     => 'boolean',
     ];
 
     /**
