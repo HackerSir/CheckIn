@@ -11,7 +11,6 @@ use Setting;
 
 class HomeController extends Controller
 {
-
     /**
      * HomeController constructor.
      */
