@@ -11,6 +11,15 @@ use Setting;
 
 class HomeController extends Controller
 {
+
+    /**
+     * HomeController constructor.
+     */
+    public function __construct()
+    {
+        $this->middleware('nid_account')->only(['myQRCode']);
+    }
+
     public function index()
     {
         return view('index');
@@ -24,9 +33,7 @@ class HomeController extends Controller
     {
         /** @var User $user */
         $user = auth()->user();
-        if (!$user->student) {
-            return redirect()->route('index')->with('warning', '非學生帳號，無法檢視 QR Code');
-        }
+
         $student = $user->student;
         $student->load('records.club.clubType', 'qrcodes.student');
 
