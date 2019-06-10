@@ -108,7 +108,7 @@
             var studentSelect2Options = {
                 tokenSeparators: [',', ' '],
                 ajax: {
-                    url: '{{ route('api.student-list') }}',
+                    url: '{{ route('api.club-student-list') }}',
                     type: 'POST',
                     headers: {
                         'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content'),

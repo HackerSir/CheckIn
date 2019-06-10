@@ -27,7 +27,7 @@ class ApiController extends Controller
         $this->middleware('permission:club.manage')->only([
             'boothList',
             'userList',
-            'studentList',
+            'clubStudentList',
         ]);
     }
 
@@ -130,7 +130,7 @@ class ApiController extends Controller
         return response()->json($json);
     }
 
-    public function studentList(Request $request)
+    public function clubStudentList(Request $request)
     {
         /** @var Builder|Student $studentsQuery */
         $studentsQuery = Student::with('clubs');
