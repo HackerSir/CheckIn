@@ -24,6 +24,7 @@ use Illuminate\Database\Query\Builder;
  * @property bool $is_dummy 是否為虛構資料
  * @property \Illuminate\Support\Carbon|null $fetch_at 最後一次由API獲取資料時間
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Club[] $clubs
+ * @property-read \App\ContactInformation $contactInformation
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Record[] $countedRecords
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Feedback[] $feedback
  * @property-read string $display_name
@@ -159,6 +160,14 @@ class Student extends Model
     public function studentTicket()
     {
         return $this->hasOne(StudentTicket::class);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function contactInformation()
+    {
+        return $this->hasOne(ContactInformation::class);
     }
 
     /**
