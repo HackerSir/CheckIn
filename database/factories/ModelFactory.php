@@ -162,3 +162,16 @@ $factory->define(App\ExtraTicket::class, function (Faker\Generator $faker) {
         'class' => "資訊工程學系{$grade}年級{$class}班",
     ];
 });
+
+$factory->define(App\ContactInformation::class, function (Faker\Generator $faker) {
+    $studentNids = \App\Student::query()->pluck('nid')->toArray();
+    $option = $faker->numberBetween(1, 15);
+
+    return [
+        'student_nid' => $faker->randomElement($studentNids),
+        'phone'       => $option & 1 ? $faker->phoneNumber : null,
+        'email'       => $option & 2 ? $faker->email : null,
+        'facebook'    => $option & 4 ? $faker->url : null,
+        'line'        => $option & 8 ? $faker->userName : null,
+    ];
+});
