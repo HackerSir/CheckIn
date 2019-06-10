@@ -30,7 +30,7 @@
 
                 <dt class="col-md-2">LINE ID</dt>
                 <dd class="col-md-10">
-                    <p v-if="feedback.email">{{ feedback.line }}</p>
+                    <p v-if="feedback.line">{{ feedback.line }}</p>
                     <p class="text-muted" v-else>（未填寫）</p>
                 </dd>
 
