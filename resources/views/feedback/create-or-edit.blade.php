@@ -15,7 +15,7 @@
     <div class="alert alert-warning" role="alert">
         請注意：
         <ul style="padding-left: 20px">
-            <li>對每個社團只能填寫一份回饋資料，送出後仍可於回饋資料填寫截止（{{ new Carbon\Carbon(Setting::get('end_at')) }}）之前多次修改，截止後將無法填寫或修改</li>
+            <li>對每個社團只能填寫一份回饋資料，送出後仍可於回饋資料填寫截止（{{ new Carbon\Carbon(Setting::get('feedback_create_expired_at')) }}）之前多次修改，截止後將無法填寫或修改</li>
             <li>
                 送出回饋資料後，該社團可以取得您以下的資訊：
                 <ul>
