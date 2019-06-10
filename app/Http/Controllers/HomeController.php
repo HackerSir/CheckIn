@@ -17,7 +17,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('nid_account')->only(['myQRCode']);
+        $this->middleware(['nid_account', 'contact_information_ready'])->only(['myQRCode']);
     }
 
     public function index()

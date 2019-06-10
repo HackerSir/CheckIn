@@ -19,7 +19,7 @@ class FeedbackController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('nid_account')->only([
+        $this->middleware(['nid_account', 'contact_information_ready'])->only([
             'my',
             'createOrEdit',
             'store',
