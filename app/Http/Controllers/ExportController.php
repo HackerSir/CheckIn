@@ -207,6 +207,8 @@ class ExportController extends Controller
                 '社團名稱',
                 '電話',
                 '信箱',
+                'Facebook',
+                'LINE',
                 '附加訊息',
             ]
         );
@@ -236,6 +238,8 @@ class ExportController extends Controller
                 $club->name,
                 $feedbackItem->phone,
                 $feedbackItem->email,
+                $feedbackItem->facebook,
+                $feedbackItem->line,
                 $message,
             ]);
         }

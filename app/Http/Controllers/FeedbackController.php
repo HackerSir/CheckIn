@@ -138,21 +138,21 @@ class FeedbackController extends Controller
         }
 
         $this->validate($request, [
-            'phone'    => 'nullable|required_without_all:email,facebook,line',
-            'email'    => 'nullable|required_without_all:phone,facebook,line',
-            'facebook' => 'nullable|required_without_all:phone,email,line',
-            'line'     => 'nullable|required_without_all:phone,email,facebook',
-            'message'  => 'nullable|max:255',
+            'include_phone'    => 'nullable|required_without_all:include_email,include_facebook,include_line',
+            'include_email'    => 'nullable|required_without_all:include_phone,include_facebook,include_line',
+            'include_facebook' => 'nullable|required_without_all:include_phone,include_email,include_line',
+            'include_line'     => 'nullable|required_without_all:include_phone,include_email,include_facebook',
+            'message'          => 'nullable|max:255',
         ]);
 
         $feedback = Feedback::updateOrCreate([
             'club_id'     => $club->id,
             'student_nid' => $user->student->nid,
         ], array_merge($request->only(['message']), [
-            'phone'    => $request->has('phone'),
-            'email'    => $request->has('email'),
-            'facebook' => $request->has('facebook'),
-            'line'     => $request->has('line'),
+            'include_phone'    => $request->has('include_phone'),
+            'include_email'    => $request->has('include_email'),
+            'include_facebook' => $request->has('include_facebook'),
+            'include_line'     => $request->has('include_line'),
         ]));
 
         return redirect()->route('feedback.show', $feedback)

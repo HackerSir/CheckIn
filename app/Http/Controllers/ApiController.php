@@ -327,14 +327,10 @@ class ApiController extends Controller
             $data[] = array_merge(
                 array_only(
                     $feedbackItem->toArray(),
-                    ['id', 'student_nid', 'message']
+                    ['id', 'student_nid', 'message', 'phone', 'email', 'facebook', 'line']
                 ),
                 [
-                    'phone'    => $feedbackItem->phone ? $student->contactInformation->phone : null,
-                    'email'    => $feedbackItem->email ? $student->contactInformation->email : null,
-                    'facebook' => $feedbackItem->facebook ? $student->contactInformation->facebook : null,
-                    'line'     => $feedbackItem->line ? $student->contactInformation->line : null,
-                    'club'     => array_merge(
+                    'club' => array_merge(
                         array_only($feedbackItem->club->toArray(), ['id', 'name']),
                         [
                             'display_name' => $feedbackItem->club->display_name,

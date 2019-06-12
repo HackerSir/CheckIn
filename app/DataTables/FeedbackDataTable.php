@@ -48,22 +48,6 @@ class FeedbackDataTable extends DataTable
                     $query->where('name', 'like', '%' . $keyword . '%');
                 });
             })
-            ->editColumn('phone', function (Feedback $feedback) {
-                return ($feedback->phone && $feedback->student->contactInformation)
-                    ? $feedback->student->contactInformation->phone : null;
-            })
-            ->editColumn('email', function (Feedback $feedback) {
-                return ($feedback->email && $feedback->student->contactInformation)
-                    ? $feedback->student->contactInformation->email : null;
-            })
-            ->editColumn('facebook', function (Feedback $feedback) {
-                return ($feedback->facebook && $feedback->student->contactInformation)
-                    ? $feedback->student->contactInformation->facebook : null;
-            })
-            ->editColumn('line', function (Feedback $feedback) {
-                return ($feedback->line && $feedback->student->contactInformation)
-                    ? $feedback->student->contactInformation->line : null;
-            })
             ->rawColumns(['is_freshman', 'club_id', 'action']);
     }
 
@@ -75,7 +59,7 @@ class FeedbackDataTable extends DataTable
      */
     public function query(Feedback $model)
     {
-        return $model->newQuery()->with('student.contactInformation', 'club.clubType');
+        return $model->newQuery()->with('student', 'club.clubType');
     }
 
     /**

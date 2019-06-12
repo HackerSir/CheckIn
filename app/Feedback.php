@@ -11,10 +11,14 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $id
  * @property string|null $student_nid 對應學生
  * @property int $club_id 對應社團
- * @property bool $phone 聯絡電話
- * @property bool $email 聯絡信箱
- * @property bool $facebook FB個人檔案連結
- * @property bool $line LINE ID
+ * @property string|null $phone 聯絡電話
+ * @property string|null $email 聯絡信箱
+ * @property string|null $facebook FB個人檔案連結
+ * @property string|null $line LINE ID
+ * @property bool $include_phone 聯絡電話
+ * @property bool $include_email 聯絡信箱
+ * @property bool $include_facebook FB個人檔案連結
+ * @property bool $include_line LINE ID
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property string|null $message 附加訊息
@@ -28,6 +32,10 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Feedback whereEmail($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Feedback whereFacebook($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Feedback whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Feedback whereIncludeEmail($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Feedback whereIncludeFacebook($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Feedback whereIncludeLine($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Feedback whereIncludePhone($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Feedback whereLine($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Feedback whereMessage($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Feedback wherePhone($value)
@@ -46,6 +54,10 @@ class Feedback extends Model
         'email',
         'facebook',
         'line',
+        'include_phone',
+        'include_email',
+        'include_facebook',
+        'include_line',
         'message',
     ];
 
@@ -54,10 +66,10 @@ class Feedback extends Model
     ];
 
     protected $casts = [
-        'phone'    => 'boolean',
-        'email'    => 'boolean',
-        'facebook' => 'boolean',
-        'line'     => 'boolean',
+        'include_phone'    => 'boolean',
+        'include_email'    => 'boolean',
+        'include_facebook' => 'boolean',
+        'include_line'     => 'boolean',
     ];
 
     /**
@@ -74,5 +86,20 @@ class Feedback extends Model
     public function student()
     {
         return $this->belongsTo(Student::class, 'student_nid', 'nid');
+    }
+
+    /**
+     * 從聯絡資料中，將資料同步至此
+     */
+    public function syncContactInformation()
+    {
+        //檢查欄位
+        $checkFields = ['phone', 'email', 'facebook', 'line'];
+        //使用者的聯絡資料
+        $contactInformation = $this->student->contactInformation;
+        //同步資料
+        foreach ($checkFields as $checkField) {
+            $this->$checkField = $this->{'include_' . $checkField} ? $contactInformation->$checkField : null;
+        }
     }
 }

@@ -61,27 +61,27 @@
             </div>
 
             @if($user->student->contactInformation->phone)
-                {{ bs()->formGroup(bs()->checkBox('phone', $user->student->contactInformation->phone))->label('電話')->showAsRow() }}
+                {{ bs()->formGroup(bs()->checkBox('include_phone', $user->student->contactInformation->phone))->label('電話')->showAsRow() }}
             @else
-                {{ bs()->formGroup(bs()->checkBox('phone', '未填寫')->disabled())->label('電話')->showAsRow() }}
+                {{ bs()->formGroup(bs()->checkBox('include_phone', '未填寫')->disabled())->label('電話')->showAsRow() }}
             @endif
 
             @if($user->student->contactInformation->email)
-                {{ bs()->formGroup(bs()->checkBox('email', $user->student->contactInformation->email))->label('信箱')->showAsRow() }}
+                {{ bs()->formGroup(bs()->checkBox('include_email', $user->student->contactInformation->email))->label('信箱')->showAsRow() }}
             @else
-                {{ bs()->formGroup(bs()->checkBox('email', '未填寫')->disabled())->label('信箱')->showAsRow() }}
+                {{ bs()->formGroup(bs()->checkBox('include_email', '未填寫')->disabled())->label('信箱')->showAsRow() }}
             @endif
 
             @if($user->student->contactInformation->facebook)
-                {{ bs()->formGroup(bs()->checkBox('facebook', $user->student->contactInformation->facebook))->label('Facebook')->showAsRow() }}
+                {{ bs()->formGroup(bs()->checkBox('include_facebook', $user->student->contactInformation->facebook))->label('Facebook')->showAsRow() }}
             @else
-                {{ bs()->formGroup(bs()->checkBox('facebook', '未填寫')->disabled())->label('Facebook')->showAsRow() }}
+                {{ bs()->formGroup(bs()->checkBox('include_facebook', '未填寫')->disabled())->label('Facebook')->showAsRow() }}
             @endif
 
             @if($user->student->contactInformation->line)
-                {{ bs()->formGroup(bs()->checkBox('line', $user->student->contactInformation->line))->label('LINE ID')->showAsRow() }}
+                {{ bs()->formGroup(bs()->checkBox('include_line', $user->student->contactInformation->line))->label('LINE ID')->showAsRow() }}
             @else
-                {{ bs()->formGroup(bs()->checkBox('line', '未填寫')->disabled())->label('LINE ID')->showAsRow() }}
+                {{ bs()->formGroup(bs()->checkBox('include_line', '未填寫')->disabled())->label('LINE ID')->showAsRow() }}
             @endif
 
             {{ bs()->formGroup(bs()->text('message'))->label('給社團的意見')->showAsRow() }}

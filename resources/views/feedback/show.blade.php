@@ -42,7 +42,7 @@
                     @if(!$feedback->phone)
                         <span class="text-muted">（未填寫）</span>
                     @else
-                        {{ $feedback->student->contactInformation->phone }}
+                        {{ $feedback->phone }}
                     @endif
                 </dd>
 
@@ -51,7 +51,7 @@
                     @if(!$feedback->email)
                         <span class="text-muted">（未填寫）</span>
                     @else
-                        {{ $feedback->student->contactInformation->email }}
+                        {{ $feedback->email }}
                     @endif
                 </dd>
 
@@ -60,7 +60,7 @@
                     @if(!$feedback->facebook)
                         <span class="text-muted">（未填寫）</span>
                     @else
-                        {{ $feedback->student->contactInformation->facebook }}
+                        {{ $feedback->facebook }}
                     @endif
                 </dd>
 
@@ -69,7 +69,7 @@
                     @if(!$feedback->line)
                         <span class="text-muted">（未填寫）</span>
                     @else
-                        {{ $feedback->student->contactInformation->line }}
+                        {{ $feedback->line }}
                     @endif
                 </dd>
 
