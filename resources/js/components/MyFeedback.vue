@@ -39,6 +39,15 @@
                     <p v-if="feedback.message">{{ feedback.message }}</p>
                     <p class="text-muted" v-else>（未填寫）</p>
                 </dd>
+
+                <dt class="col-md-2" v-if="feedback.custom_question">社團提問</dt>
+                <dd class="col-md-10" v-if="feedback.custom_question">
+                    <span class="badge badge-secondary">提問</span>
+                    {{ feedback.custom_question }}<br/>
+                    <span class="badge badge-secondary">回答</span>
+                    <span v-if="feedback.answer_of_custom_question">{{ feedback.answer_of_custom_question }}</span>
+                    <span class="text-muted" v-else>（未填寫）</span>
+                </dd>
             </dl>
             <div class="alert alert-info" v-if="feedback.club.extra_info">
                 <h5 class="text-center">此社團提供給填寫者的額外資訊</h5>

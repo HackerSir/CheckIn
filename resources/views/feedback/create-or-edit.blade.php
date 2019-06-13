@@ -15,7 +15,9 @@
     <div class="alert alert-warning" role="alert">
         請注意：
         <ul style="padding-left: 20px">
-            <li>對每個社團只能填寫一份回饋資料，送出後仍可於回饋資料填寫截止（{{ new Carbon\Carbon(Setting::get('feedback_create_expired_at')) }}）之前多次修改，截止後將無法填寫或修改</li>
+            <li>對每個社團只能填寫一份回饋資料，送出後仍可於回饋資料填寫截止（{{ new Carbon\Carbon(Setting::get('feedback_create_expired_at')) }}
+                ）之前多次修改，截止後將無法填寫或修改
+            </li>
             <li>
                 送出回饋資料後，該社團可以取得您以下的資訊：
                 <ul>
@@ -85,6 +87,15 @@
             @endif
 
             {{ bs()->formGroup(bs()->text('message'))->label('給社團的意見')->showAsRow() }}
+
+            @if($club->custom_question)
+                <hr/>
+                @if(isset($feedback) && $feedback->custom_question != $club->custom_question)
+                    <div class="alert alert-danger">社團提問內容稍早已被變更，可能需要重新回答問題</div>
+                @endif
+                {{ bs()->formGroup(html()->div($club->custom_question)->class('form-control-plaintext'))->label('社團提問')->showAsRow() }}
+                {{ bs()->formGroup(bs()->text('answer_of_custom_question'))->label('你的回答')->showAsRow() }}
+            @endif
 
             <div class="row">
                 <div class="mx-auto">

@@ -138,21 +138,24 @@ class FeedbackController extends Controller
         }
 
         $this->validate($request, [
-            'include_phone'    => 'nullable|required_without_all:include_email,include_facebook,include_line',
-            'include_email'    => 'nullable|required_without_all:include_phone,include_facebook,include_line',
-            'include_facebook' => 'nullable|required_without_all:include_phone,include_email,include_line',
-            'include_line'     => 'nullable|required_without_all:include_phone,include_email,include_facebook',
-            'message'          => 'nullable|max:255',
+            'include_phone'             => 'nullable|required_without_all:include_email,include_facebook,include_line',
+            'include_email'             => 'nullable|required_without_all:include_phone,include_facebook,include_line',
+            'include_facebook'          => 'nullable|required_without_all:include_phone,include_email,include_line',
+            'include_line'              => 'nullable|required_without_all:include_phone,include_email,include_facebook',
+            'message'                   => 'nullable|max:255',
+            'answer_of_custom_question' => 'nullable|max:255',
         ]);
 
         $feedback = Feedback::updateOrCreate([
             'club_id'     => $club->id,
             'student_nid' => $user->student->nid,
         ], array_merge($request->only(['message']), [
-            'include_phone'    => $request->has('include_phone'),
-            'include_email'    => $request->has('include_email'),
-            'include_facebook' => $request->has('include_facebook'),
-            'include_line'     => $request->has('include_line'),
+            'include_phone'             => $request->has('include_phone'),
+            'include_email'             => $request->has('include_email'),
+            'include_facebook'          => $request->has('include_facebook'),
+            'include_line'              => $request->has('include_line'),
+            'custom_question'           => $club->custom_question,
+            'answer_of_custom_question' => $club->custom_question ? $request->get('answer_of_custom_question') : null,
         ]));
 
         return redirect()->route('feedback.show', $feedback)

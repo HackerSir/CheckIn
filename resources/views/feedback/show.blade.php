@@ -81,6 +81,22 @@
                         {{ $feedback->message }}
                     @endif
                 </dd>
+
+                <dt class="col-md-2">社團提問</dt>
+                <dd class="col-md-10">
+                    @if(!$feedback->custom_question)
+                        <span class="text-muted">（無）</span>
+                    @else
+                        <span class="badge badge-secondary">提問</span>
+                        {{ $feedback->custom_question }}<br/>
+                        <span class="badge badge-secondary">回答</span>
+                        @if(!$feedback->answer_of_custom_question)
+                            <span class="text-muted">（未填寫）</span>
+                        @else
+                            {{ $feedback->answer_of_custom_question }}
+                        @endif
+                    @endif
+                </dd>
             </dl>
 
             <hr>
