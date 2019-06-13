@@ -210,6 +210,8 @@ class ExportController extends Controller
                 'Facebook',
                 'LINE',
                 '附加訊息',
+                '社團自訂問題',
+                '對於社團自訂問題的回答',
             ]
         );
         foreach ($feedback as $feedbackItem) {
@@ -241,6 +243,8 @@ class ExportController extends Controller
                 $feedbackItem->facebook,
                 $feedbackItem->line,
                 $message,
+                $feedbackItem->custom_question,
+                $feedbackItem->answer_of_custom_question,
             ]);
         }
         //調整格式
