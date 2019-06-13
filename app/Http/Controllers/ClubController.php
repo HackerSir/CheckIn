@@ -58,7 +58,7 @@ class ClubController extends Controller
             'extra_info'      => 'nullable|strip_max:300',
             'url'             => 'nullable|url',
             'image_file'      => 'image',
-            'custom_question' => 'nullable|max:200',
+            'custom_question' => 'nullable|max:255',
         ]);
 
         $club = Club::create(array_merge($request->all(), [
@@ -115,7 +115,7 @@ class ClubController extends Controller
             'extra_info'      => 'nullable|strip_max:300',
             'url'             => 'nullable|url',
             'image_file'      => 'image',
-            'custom_question' => 'nullable|max:200',
+            'custom_question' => 'nullable|max:255',
         ]);
 
         $club->update(array_merge($request->all(), [

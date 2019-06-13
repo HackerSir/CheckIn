@@ -57,7 +57,7 @@ class OwnClubController extends Controller
             'extra_info'      => 'nullable|strip_max:300',
             'url'             => 'nullable|url',
             'image_file'      => 'image',
-            'custom_question' => 'nullable|max:200',
+            'custom_question' => 'nullable|max:255',
         ]);
 
         $club->update($request->only(['description', 'url', 'extra_info', 'custom_question']));
@@ -144,7 +144,7 @@ class OwnClubController extends Controller
             'description'     => 'nullable|strip_max:300',
             'extra_info'      => 'nullable|strip_max:300',
             'url'             => 'nullable|url',
-            'custom_question' => 'nullable|max:200',
+            'custom_question' => 'nullable|max:255',
         ]);
 
         //試著刪除之前送出但為審核的申請
