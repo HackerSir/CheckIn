@@ -53,13 +53,14 @@ class OwnClubController extends Controller
         }
 
         $this->validate($request, [
-            'description' => 'nullable|strip_max:300',
-            'extra_info'  => 'nullable|strip_max:300',
-            'url'         => 'nullable|url',
-            'image_file'  => 'image',
+            'description'     => 'nullable|strip_max:300',
+            'extra_info'      => 'nullable|strip_max:300',
+            'url'             => 'nullable|url',
+            'image_file'      => 'image',
+            'custom_question' => 'nullable|max:200',
         ]);
 
-        $club->update($request->only(['description', 'url', 'extra_info']));
+        $club->update($request->only(['description', 'url', 'extra_info', 'custom_question']));
 
         //上傳圖片
         $uploadedFile = $request->file('image_file');

@@ -1,6 +1,7 @@
 {{ bs()->formGroup(bs()->text('number')->placeholder('如：A66'))->label('社團編號')->showAsRow() }}
 {{ bs()->formGroup(bs()->text('name')->placeholder('如：黑客社')->required())->class('required')->label('名稱')->showAsRow() }}
 {{ bs()->formGroup(bs()->select('club_type_id')->options(\App\ClubType::selectOptions()))->label('社團類型')->showAsRow() }}
+<hr/>
 {{ bs()->formGroup(bs()->textarea('description')->attribute('rows', 10)->class('tinymce'))->label('描述')->showAsRow() }}
 {{ bs()->formGroup(bs()->textarea('extra_info')->attribute('rows', 10)->class('tinymce'))->label('額外資訊')->helpText('僅限對此社團填寫回饋資料的學生檢視，可放FB社團、LINE群網址等')->showAsRow() }}
 {{ bs()->formGroup(bs()->input('url', 'url')->placeholder('網站、粉絲專頁等'))->label('網址')->showAsRow() }}
@@ -24,6 +25,9 @@
 
 {{ bs()->formGroup(bs()->simpleFile('image_file')->acceptImage())->label('圖片上傳')
 ->helpText('檔案大小限制：'. app(\App\Services\FileService::class)->imgurUploadMaxSize())->showAsRow() }}
+{{ bs()->formGroup(bs()->text('custom_question'))->label('自訂問題')
+->helpText('學生填寫回饋資料時，可一併詢問一個問題')->showAsRow() }}
+<hr/>
 {{ bs()->formGroup(bs()->select('booth_id[]')->attributes(['id' => 'booth_id', 'multiple']))->label('攤位')->showAsRow() }}
 {{ bs()->formGroup(bs()->select('leader_nid'))->label('社長')->showAsRow() }}
 {{ bs()->formGroup(bs()->select('staff_nid[]')->attributes(['id' => 'staff_nid', 'multiple']))->label('攤位工作人員')->showAsRow() }}

@@ -128,6 +128,11 @@
                                     <span class="text-muted">（無）</span>
                                 @endforelse
                             </dd>
+                            <dt class="col-6 col-sm-3 text-muted">自訂問題<i class="fas fa-eye-slash ml-2"
+                                                                         title="僅工作人員可見"></i></dt>
+                            <dd class="col-6 col-sm-9">
+                                {{ $club->custom_question }}
+                            </dd>
                         @endcan
 
                         <dt class="col-sm-3">回饋資料</dt>
