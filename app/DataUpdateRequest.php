@@ -24,6 +24,8 @@ use Illuminate\Database\Eloquent\Model;
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property string|null $original_extra_info 原額外資訊
  * @property string|null $extra_info 額外資訊
+ * @property string|null $original_custom_question 原自訂問題
+ * @property string|null $custom_question 自訂問題
  * @property-read \App\Club $club
  * @property-read string $show_result
  * @property-read \App\User|null $reviewer
@@ -33,9 +35,11 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\DataUpdateRequest query()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\DataUpdateRequest whereClubId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\DataUpdateRequest whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\DataUpdateRequest whereCustomQuestion($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\DataUpdateRequest whereDescription($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\DataUpdateRequest whereExtraInfo($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\DataUpdateRequest whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\DataUpdateRequest whereOriginalCustomQuestion($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\DataUpdateRequest whereOriginalDescription($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\DataUpdateRequest whereOriginalExtraInfo($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\DataUpdateRequest whereOriginalUrl($value)
@@ -64,9 +68,11 @@ class DataUpdateRequest extends Model
         'original_description',
         'original_extra_info',
         'original_url',
+        'original_custom_question',
         'description',
         'extra_info',
         'url',
+        'custom_question',
     ];
 
     protected $casts = [
