@@ -17,6 +17,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property string|null $extra_info 額外資訊
+ * @property string|null $custom_question 自訂問題
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Booth[] $booths
  * @property-read \App\ClubSurvey $clubSurvey
  * @property-read \App\ClubType|null $clubType
@@ -37,6 +38,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Club query()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Club whereClubTypeId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Club whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Club whereCustomQuestion($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Club whereDescription($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Club whereExtraInfo($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Club whereId($value)
@@ -57,6 +59,7 @@ class Club extends Model
         'description',
         'extra_info',
         'url',
+        'custom_question',
     ];
 
     protected $nullable = [
