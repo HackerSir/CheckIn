@@ -22,13 +22,17 @@ use Illuminate\Database\Eloquent\Model;
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property string|null $message 附加訊息
+ * @property string|null $custom_question 社團自訂問題
+ * @property string|null $answer_of_custom_question 對於社團自訂問題的回答
  * @property-read \App\Club $club
  * @property-read \App\Student|null $student
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Feedback newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Feedback newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Feedback query()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Feedback whereAnswerOfCustomQuestion($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Feedback whereClubId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Feedback whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Feedback whereCustomQuestion($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Feedback whereEmail($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Feedback whereFacebook($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Feedback whereId($value)
@@ -59,6 +63,8 @@ class Feedback extends Model
         'include_facebook',
         'include_line',
         'message',
+        'custom_question',
+        'answer_of_custom_question',
     ];
 
     protected $nullable = [
