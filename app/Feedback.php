@@ -15,19 +15,31 @@ use Illuminate\Database\Eloquent\Model;
  * @property string|null $email 聯絡信箱
  * @property string|null $facebook FB個人檔案連結
  * @property string|null $line LINE ID
+ * @property bool $include_phone 聯絡電話
+ * @property bool $include_email 聯絡信箱
+ * @property bool $include_facebook FB個人檔案連結
+ * @property bool $include_line LINE ID
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property string|null $message 附加訊息
+ * @property string|null $custom_question 社團自訂問題
+ * @property string|null $answer_of_custom_question 對於社團自訂問題的回答
  * @property-read \App\Club $club
  * @property-read \App\Student|null $student
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Feedback newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Feedback newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Feedback query()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Feedback whereAnswerOfCustomQuestion($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Feedback whereClubId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Feedback whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Feedback whereCustomQuestion($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Feedback whereEmail($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Feedback whereFacebook($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Feedback whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Feedback whereIncludeEmail($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Feedback whereIncludeFacebook($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Feedback whereIncludeLine($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Feedback whereIncludePhone($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Feedback whereLine($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Feedback whereMessage($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Feedback wherePhone($value)
@@ -46,15 +58,24 @@ class Feedback extends Model
         'email',
         'facebook',
         'line',
+        'include_phone',
+        'include_email',
+        'include_facebook',
+        'include_line',
         'message',
+        'custom_question',
+        'answer_of_custom_question',
     ];
 
     protected $nullable = [
-        'phone',
-        'email',
-        'facebook',
-        'line',
         'message',
+    ];
+
+    protected $casts = [
+        'include_phone'    => 'boolean',
+        'include_email'    => 'boolean',
+        'include_facebook' => 'boolean',
+        'include_line'     => 'boolean',
     ];
 
     /**
@@ -71,5 +92,20 @@ class Feedback extends Model
     public function student()
     {
         return $this->belongsTo(Student::class, 'student_nid', 'nid');
+    }
+
+    /**
+     * 從聯絡資料中，將資料同步至此
+     */
+    public function syncContactInformation()
+    {
+        //檢查欄位
+        $checkFields = ['phone', 'email', 'facebook', 'line'];
+        //使用者的聯絡資料
+        $contactInformation = $this->student->contactInformation;
+        //同步資料
+        foreach ($checkFields as $checkField) {
+            $this->$checkField = $this->{'include_' . $checkField} ? $contactInformation->$checkField : null;
+        }
     }
 }

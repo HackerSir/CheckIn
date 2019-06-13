@@ -15,7 +15,9 @@
     <div class="alert alert-warning" role="alert">
         請注意：
         <ul style="padding-left: 20px">
-            <li>對每個社團只能填寫一份回饋資料，送出後仍可於回饋資料填寫截止（{{ new Carbon\Carbon(Setting::get('end_at')) }}）之前多次修改，截止後將無法填寫或修改</li>
+            <li>對每個社團只能填寫一份回饋資料，送出後仍可於回饋資料填寫截止（{{ new Carbon\Carbon(Setting::get('feedback_create_expired_at')) }}
+                ）之前多次修改，截止後將無法填寫或修改
+            </li>
             <li>
                 送出回饋資料後，該社團可以取得您以下的資訊：
                 <ul>
@@ -27,7 +29,7 @@
                     <li>入學年度</li>
                     <li>性別</li>
                 </ul>
-                以及您下方填寫的資料
+                以及您下方勾選的資料
                 <ul>
                     <li>電話</li>
                     <li>信箱</li>
@@ -36,9 +38,7 @@
                     <li>給社團的意見</li>
                 </ul>
             </li>
-            <li>請至少填寫一項<strong>聯絡資訊</strong>資料再送出</li>
-            <li>不同社團的回饋資料可以填寫不同的<strong>聯絡資訊</strong></li>
-            <li>系統會自動填入之前填寫的<strong>聯絡資訊</strong>，可於送出前修改</li>
+            <li>請至少勾選一項<strong>聯絡資訊</strong>資料再送出</li>
         </ul>
     </div>
     <div class="card mt-1">
@@ -62,18 +62,40 @@
                 </div>
             </div>
 
-            @if(isset($feedback))
-                {{ bs()->formGroup(bs()->text('phone'))->label('電話')->showAsRow() }}
-                {{ bs()->formGroup(bs()->text('email'))->label('信箱')->showAsRow() }}
-                {{ bs()->formGroup(bs()->text('facebook'))->label('Facebook')->helpText('請填寫個人檔案連結（個人頁面網址）')->showAsRow() }}
-                {{ bs()->formGroup(bs()->text('line'))->label('LINE ID')->showAsRow() }}
+            @if($user->student->contactInformation->phone)
+                {{ bs()->formGroup(bs()->checkBox('include_phone', $user->student->contactInformation->phone))->label('電話')->showAsRow() }}
             @else
-                {{ bs()->formGroup(bs()->text('phone', $lastFeedback->phone ?? null))->label('電話')->showAsRow() }}
-                {{ bs()->formGroup(bs()->text('email', $lastFeedback->email ?? null))->label('信箱')->showAsRow() }}
-                {{ bs()->formGroup(bs()->text('facebook', $lastFeedback->facebook ?? null))->label('Facebook')->helpText('請填寫個人檔案連結（個人頁面網址）')->showAsRow() }}
-                {{ bs()->formGroup(bs()->text('line', $lastFeedback->line ?? null))->label('LINE ID')->showAsRow() }}
+                {{ bs()->formGroup(bs()->checkBox('include_phone', '未填寫')->disabled())->label('電話')->showAsRow() }}
             @endif
+
+            @if($user->student->contactInformation->email)
+                {{ bs()->formGroup(bs()->checkBox('include_email', $user->student->contactInformation->email))->label('信箱')->showAsRow() }}
+            @else
+                {{ bs()->formGroup(bs()->checkBox('include_email', '未填寫')->disabled())->label('信箱')->showAsRow() }}
+            @endif
+
+            @if($user->student->contactInformation->facebook)
+                {{ bs()->formGroup(bs()->checkBox('include_facebook', $user->student->contactInformation->facebook))->label('Facebook')->showAsRow() }}
+            @else
+                {{ bs()->formGroup(bs()->checkBox('include_facebook', '未填寫')->disabled())->label('Facebook')->showAsRow() }}
+            @endif
+
+            @if($user->student->contactInformation->line)
+                {{ bs()->formGroup(bs()->checkBox('include_line', $user->student->contactInformation->line))->label('LINE ID')->showAsRow() }}
+            @else
+                {{ bs()->formGroup(bs()->checkBox('include_line', '未填寫')->disabled())->label('LINE ID')->showAsRow() }}
+            @endif
+
             {{ bs()->formGroup(bs()->text('message'))->label('給社團的意見')->showAsRow() }}
+
+            @if($club->custom_question)
+                <hr/>
+                @if(isset($feedback) && $feedback->custom_question != $club->custom_question)
+                    <div class="alert alert-danger">社團提問內容稍早已被變更，可能需要重新回答問題</div>
+                @endif
+                {{ bs()->formGroup(html()->div($club->custom_question)->class('form-control-plaintext'))->label('社團提問')->showAsRow() }}
+                {{ bs()->formGroup(bs()->text('answer_of_custom_question'))->label('你的回答')->showAsRow() }}
+            @endif
 
             <div class="row">
                 <div class="mx-auto">

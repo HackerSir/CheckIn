@@ -27,7 +27,7 @@ class ApiController extends Controller
         $this->middleware('permission:club.manage')->only([
             'boothList',
             'userList',
-            'studentList',
+            'clubStudentList',
         ]);
     }
 
@@ -130,7 +130,7 @@ class ApiController extends Controller
         return response()->json($json);
     }
 
-    public function studentList(Request $request)
+    public function clubStudentList(Request $request)
     {
         /** @var Builder|Student $studentsQuery */
         $studentsQuery = Student::with('clubs');
@@ -168,6 +168,44 @@ class ApiController extends Controller
                 'name'     => $student->name,
                 'disabled' => $disabled,
                 'club'     => $otherClub,
+            ];
+        }
+        //建立JSON
+        $json = [
+            'current_page' => $students->currentPage(),
+            'last_page'    => $students->lastPage(),
+            'items'        => $items,
+        ];
+
+        return response()->json($json);
+    }
+
+    public function studentList(Request $request)
+    {
+        /** @var Builder|Student $studentsQuery */
+        $studentsQuery = Student::with('clubs');
+        //搜尋關鍵字
+        if ($request->has('q')) {
+            $searchPattern = '%' . $request->input('q') . '%';
+            //搜尋學生名稱或NID
+            $studentsQuery->where(function ($query) use ($searchPattern) {
+                /** @var Builder|Student $query */
+                $query->where('name', 'like', $searchPattern)
+                    ->orWhere('nid', 'like', $searchPattern);
+            });
+        }
+        //分頁
+        $perPage = 10;
+        //取得資料
+        /** @var LengthAwarePaginator|Collection|Student[] $students */
+        $students = $studentsQuery->paginate($perPage);
+        //轉換陣列內容
+        $items = [];
+        foreach ($students as $student) {
+            $items[] = [
+                'id'       => $student->nid,
+                'name'     => $student->name,
+                'disabled' => false,
             ];
         }
         //建立JSON
@@ -289,7 +327,17 @@ class ApiController extends Controller
             $data[] = array_merge(
                 array_only(
                     $feedbackItem->toArray(),
-                    ['id', 'student_nid', 'phone', 'email', 'facebook', 'line', 'message']
+                    [
+                        'id',
+                        'student_nid',
+                        'message',
+                        'phone',
+                        'email',
+                        'facebook',
+                        'line',
+                        'custom_question',
+                        'answer_of_custom_question',
+                    ]
                 ),
                 [
                     'club' => array_merge(

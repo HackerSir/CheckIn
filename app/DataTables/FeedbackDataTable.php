@@ -23,7 +23,7 @@ class FeedbackDataTable extends DataTable
 
         return $dataTable
             ->addColumn('action', 'feedback.datatables.action')
-            ->editColumn('student_nid', function ($feedback) {
+            ->editColumn('student_nid', function (Feedback $feedback) {
                 return view('feedback.datatables.student', compact('feedback'))->render();
             })
             ->filterColumn('student_nid', function ($query, $keyword) {
@@ -34,11 +34,11 @@ class FeedbackDataTable extends DataTable
                         ->orWhere('nid', 'like', '%' . $keyword . '%');
                 });
             })
-            ->addColumn('is_freshman', function ($feedback) {
+            ->addColumn('is_freshman', function (Feedback $feedback) {
                 /** @var Feedback $feedback */
                 return view('feedback.datatables.is_freshman', compact('feedback'))->render();
             })
-            ->editColumn('club_id', function ($feedback) {
+            ->editColumn('club_id', function (Feedback $feedback) {
                 return view('feedback.datatables.club', compact('feedback'))->render();
             })
             ->filterColumn('club_id', function ($query, $keyword) {
@@ -48,7 +48,10 @@ class FeedbackDataTable extends DataTable
                     $query->where('name', 'like', '%' . $keyword . '%');
                 });
             })
-            ->rawColumns(['is_freshman', 'club_id', 'action']);
+            ->editColumn('contact_info', function (Feedback $feedback) {
+                return view('feedback.datatables.contact_info', compact('feedback'))->render();
+            })
+            ->rawColumns(['is_freshman', 'club_id', 'contact_info', 'action']);
     }
 
     /**
@@ -87,23 +90,42 @@ class FeedbackDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            'id'          => ['title' => '#'],
-            'student_nid' => ['title' => '學生'],
-            'is_freshman' => [
-                'searchable' => false,
-                'orderable'  => false,
+            'id'                        => ['title' => '#'],
+            'student_nid'               => ['title' => '學生'],
+            'is_freshman'               => [
                 'title'      => '新生',
-            ],
-            'club_id'     => ['title' => '社團'],
-            'phone'       => ['title' => '電話'],
-            'email'       => ['title' => '信箱'],
-            'facebook'    => ['title' => 'Facebook'],
-            'line'        => ['title' => 'LINE'],
-            'message'     => [
                 'searchable' => false,
                 'orderable'  => false,
-                'title'      => '訊息',
             ],
+            'club_id'                   => ['title' => '社團'],
+            'contact_info'              => [
+                'title'      => '聯絡資訊',
+                'searchable' => false,
+                'orderable'  => false,
+            ],
+            'phone'                     => [
+                'title'   => '電話',
+                'visible' => false,
+            ],
+            'email'                     => [
+                'title'   => '信箱',
+                'visible' => false,
+            ],
+            'facebook'                  => [
+                'title'   => 'Facebook',
+                'visible' => false,
+            ],
+            'line'                      => [
+                'title'   => 'LINE',
+                'visible' => false,
+            ],
+            'message'                   => [
+                'title'      => '訊息',
+                'searchable' => false,
+                'orderable'  => false,
+            ],
+            'custom_question'           => ['title' => '社團自訂問題'],
+            'answer_of_custom_question' => ['title' => '對於社團自訂問題的回答'],
         ];
     }
 

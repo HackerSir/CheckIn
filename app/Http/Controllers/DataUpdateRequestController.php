@@ -36,7 +36,7 @@ class DataUpdateRequestController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\DataUpdateRequest $dataUpdateRequest
+     * @param \App\DataUpdateRequest $dataUpdateRequest
      * @return \Illuminate\Http\Response
      */
     public function show(DataUpdateRequest $dataUpdateRequest)
@@ -73,9 +73,10 @@ class DataUpdateRequestController extends Controller
         if ($reviewResult) {
             $club = $dataUpdateRequest->club;
             $club->update([
-                'description' => $dataUpdateRequest->description,
-                'extra_info'  => $dataUpdateRequest->extra_info,
-                'url'         => $dataUpdateRequest->url,
+                'description'     => $dataUpdateRequest->description,
+                'extra_info'      => $dataUpdateRequest->extra_info,
+                'url'             => $dataUpdateRequest->url,
+                'custom_question' => $dataUpdateRequest->custom_question,
             ]);
         }
 

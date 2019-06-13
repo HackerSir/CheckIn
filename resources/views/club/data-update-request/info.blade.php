@@ -66,6 +66,12 @@
                 {{ link_to($dataUpdateRequest->original_url, $dataUpdateRequest->original_url, ['target' => '_blank']) }}
             @endif
         </div>
+        <div>
+            <div style="font-weight: bold; font-size: 1.2rem"><span class="badge badge-secondary">自訂問題</span></div>
+            <blockquote>
+                {{ $dataUpdateRequest->original_custom_question }}
+            </blockquote>
+        </div>
     </div>
     <div class="col">
         <b>新內容</b>
@@ -86,6 +92,12 @@
             @if($dataUpdateRequest->url)
                 {{ link_to($dataUpdateRequest->url, $dataUpdateRequest->url, ['target' => '_blank']) }}
             @endif
+        </div>
+        <div>
+            <div style="font-weight: bold; font-size: 1.2rem"><span class="badge badge-secondary">自訂問題</span></div>
+            <blockquote>
+                {{ $dataUpdateRequest->custom_question }}
+            </blockquote>
         </div>
     </div>
 </div>

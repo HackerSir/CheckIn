@@ -1,5 +1,5 @@
 <template>
-    <button :class="[btnClass]" @click="handler"><i :class="[iconClass]" class="fa-fw mr-2"></i>{{ btnText }}</button>
+    <button :class="[btnClass]" @click="handler" :disabled="this.loading"><i :class="[iconClass]" class="fa-fw mr-2"></i>{{ btnText }}</button>
 </template>
 
 <script>
@@ -66,12 +66,6 @@
                 loading: false,
                 isFavorited: this.favorited
             }
-        },
-        created() {
-            //FIXME: 在 ClubCards 中，上面的 data 部分無法順利初始化，因此500ms之後再次嘗試進行
-            _.delay(() => {
-                this.isFavorited = this.favorited;
-            }, 500)
         },
         computed: {
             iconClass: function () {

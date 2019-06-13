@@ -14,6 +14,7 @@
             {{ bs()->formGroup(bs()->text('number')->disabled())->label('社團編號')->showAsRow() }}
             {{ bs()->formGroup(bs()->text('name')->disabled())->label('名稱')->showAsRow() }}
             {{ bs()->formGroup(bs()->select('club_type_id')->options(\App\ClubType::selectOptions())->disabled())->label('社團類型')->showAsRow() }}
+            <hr/>
             {{ bs()->formGroup(bs()->textarea('description')->attribute('rows', 10)->class('tinymce'))->label('描述')->showAsRow() }}
             {{ bs()->formGroup(bs()->textarea('extra_info')->attribute('rows', 10)->class('tinymce'))->label('額外資訊')->helpText('僅限對此社團填寫回饋資料的學生檢視，可放FB社團、LINE群網址等')->showAsRow() }}
             {{ bs()->formGroup(bs()->input('url', 'url')->placeholder('網站、粉絲專頁等'))->label('網址')->showAsRow() }}
@@ -37,6 +38,8 @@
 
             {{ bs()->formGroup(bs()->simpleFile('image_file')->acceptImage())->label('圖片上傳')
             ->helpText('檔案大小限制：'. app(\App\Services\FileService::class)->imgurUploadMaxSize())->showAsRow() }}
+            {{ bs()->formGroup(bs()->text('custom_question'))->label('自訂問題')
+            ->helpText('學生填寫回饋資料時，可一併詢問一個問題')->showAsRow() }}
 
             <div class="row">
                 <div class="mx-auto">

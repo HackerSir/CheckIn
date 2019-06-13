@@ -53,18 +53,20 @@ class Kernel extends HttpKernel
      * @var array
      */
     protected $routeMiddleware = [
-        'auth'            => \Illuminate\Auth\Middleware\Authenticate::class,
-        'auth.basic'      => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
-        'bindings'        => \Illuminate\Routing\Middleware\SubstituteBindings::class,
-        'can'             => \Illuminate\Auth\Middleware\Authorize::class,
-        'guest'           => \App\Http\Middleware\RedirectIfAuthenticated::class,
-        'throttle'        => \Illuminate\Routing\Middleware\ThrottleRequests::class,
-        'email'           => \App\Http\Middleware\EmailConfirm::class,
-        'role'            => \Laratrust\Middleware\LaratrustRole::class,
-        'permission'      => \Laratrust\Middleware\LaratrustPermission::class,
-        'ability'         => \Laratrust\Middleware\LaratrustAbility::class,
-        'register.toggle' => \App\Http\Middleware\RegisterEnableToggle::class,
-        'local_account'   => \App\Http\Middleware\LocalAccount::class,
-        'imgur'           => \Redeman\Imgur\Middleware\AuthenticateImgur::class,
+        'auth'                      => \Illuminate\Auth\Middleware\Authenticate::class,
+        'auth.basic'                => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
+        'bindings'                  => \Illuminate\Routing\Middleware\SubstituteBindings::class,
+        'can'                       => \Illuminate\Auth\Middleware\Authorize::class,
+        'guest'                     => \App\Http\Middleware\RedirectIfAuthenticated::class,
+        'throttle'                  => \Illuminate\Routing\Middleware\ThrottleRequests::class,
+        'email'                     => \App\Http\Middleware\EmailConfirm::class,
+        'role'                      => \Laratrust\Middleware\LaratrustRole::class,
+        'permission'                => \Laratrust\Middleware\LaratrustPermission::class,
+        'ability'                   => \Laratrust\Middleware\LaratrustAbility::class,
+        'register.toggle'           => \App\Http\Middleware\RegisterEnableToggle::class,
+        'local_account'             => \App\Http\Middleware\LocalAccount::class,
+        'nid_account'               => \App\Http\Middleware\NIDAccount::class,
+        'imgur'                     => \Redeman\Imgur\Middleware\AuthenticateImgur::class,
+        'contact_information_ready' => \App\Http\Middleware\ContactInformationReady::class,
     ];
 }

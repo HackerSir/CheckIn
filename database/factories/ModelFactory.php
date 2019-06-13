@@ -103,14 +103,16 @@ $factory->define(App\Ticket::class, function (Faker\Generator $faker) {
 $factory->define(App\Feedback::class, function (Faker\Generator $faker) {
     $studentNids = \App\Student::query()->pluck('nid')->toArray();
     $clubIds = \App\Club::query()->pluck('id')->toArray();
-    $option = $faker->numberBetween(1, 7);
+    $option = $faker->numberBetween(1, 15);
 
     return [
         'student_nid' => $faker->randomElement($studentNids),
         'club_id'     => $faker->randomElement($clubIds),
-        'phone'       => $option & 1 ? $faker->phoneNumber : null,
-        'email'       => $option & 2 ? $faker->email : null,
-        'message'     => $option & 4 ? $faker->paragraph : null,
+        'phone'       => (bool) ($option & 1),
+        'email'       => (bool) ($option & 2),
+        'facebook'    => (bool) ($option & 4),
+        'line'        => (bool) ($option & 8),
+        'message'     => $faker->optional()->paragraph,
     ];
 });
 
@@ -160,5 +162,18 @@ $factory->define(App\ExtraTicket::class, function (Faker\Generator $faker) {
         'nid'   => $nid,
         'name'  => $faker->name,
         'class' => "資訊工程學系{$grade}年級{$class}班",
+    ];
+});
+
+$factory->define(App\ContactInformation::class, function (Faker\Generator $faker) {
+    $studentNids = \App\Student::query()->pluck('nid')->toArray();
+    $option = $faker->numberBetween(1, 15);
+
+    return [
+        'student_nid' => $faker->randomElement($studentNids),
+        'phone'       => $option & 1 ? $faker->phoneNumber : null,
+        'email'       => $option & 2 ? $faker->email : null,
+        'facebook'    => $option & 4 ? $faker->url : null,
+        'line'        => $option & 8 ? $faker->userName : null,
     ];
 });

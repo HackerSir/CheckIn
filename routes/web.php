@@ -83,6 +83,17 @@ Route::group(['middleware' => ['auth', 'email']], function () {
             ->name('student.download-import-sample');
     });
     Route::resource('student', 'StudentController');
+    //我的聯絡資料
+    Route::prefix('my-contact-information')->group(function () {
+        Route::get('/', 'MyContactInformationController@index')->name('contact-information.my.index');
+        Route::get('edit', 'MyContactInformationController@createOrEdit')
+            ->name('contact-information.my.create-or-edit');
+        Route::post('/', 'MyContactInformationController@store')
+            ->name('contact-information.my.store');
+    });
+    //聯絡資料管理
+    //權限：ContactInformationPolicy
+    Route::resource('contact-information', 'ContactInformationController');
     //QR Code管理
     //權限：qrcode.manage
     Route::group(['middleware' => 'permission:qrcode.manage'], function () {
@@ -327,6 +338,7 @@ Route::group(['middleware' => ['auth', 'email']], function () {
 Route::group(['prefix' => 'api'], function () {
     Route::post('/booth-list', 'ApiController@boothList')->name('api.booth-list');
     Route::post('/user-list', 'ApiController@userList')->name('api.user-list');
+    Route::post('/club-student-list', 'ApiController@clubStudentList')->name('api.club-student-list');
     Route::post('/student-list', 'ApiController@studentList')->name('api.student-list');
     Route::post('/club-type-list', 'ApiController@clubTypeList')->name('api.club-type-list');
     Route::post('/club-list', 'ApiController@clubList')->name('api.club-list');

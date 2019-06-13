@@ -3,10 +3,14 @@
 namespace App\Providers;
 
 use App\Club;
+use App\ContactInformation;
 use App\DataUpdateRequest;
+use App\Feedback;
 use App\ImgurImage;
 use App\Observers\ClubObserver;
+use App\Observers\ContactInformationObserver;
 use App\Observers\DataUpdateRequestObserver;
+use App\Observers\FeedbackObserver;
 use App\Observers\ImgurImageObserver;
 use App\Observers\QrcodeObserver;
 use App\Observers\RecordObserver;
@@ -51,6 +55,8 @@ class AppServiceProvider extends ServiceProvider
         Club::observe(ClubObserver::class);
         StudentSurvey::observe(StudentSurveyObserver::class);
         DataUpdateRequest::observe(DataUpdateRequestObserver::class);
+        Feedback::observe(FeedbackObserver::class);
+        ContactInformation::observe(ContactInformationObserver::class);
 
         Horizon::auth(function ($request) {
             return \Laratrust::can('horizon.manage');

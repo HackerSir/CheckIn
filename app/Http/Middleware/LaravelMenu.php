@@ -2,6 +2,8 @@
 
 namespace App\Http\Middleware;
 
+use App\ContactInformation;
+use App\Student;
 use App\User;
 use Closure;
 use Laratrust;
@@ -53,7 +55,7 @@ class LaravelMenu
                         /** @var \Lavary\Menu\Item $activityMenu */
                         $activityMenu = $menu->add('活動', 'javascript:void(0)');
 
-                        if (Laratrust::can('student.manage')) {
+                        if (\Gate::allows('index', Student::class)) {
                             $activityMenu->add('學生管理', ['route' => 'student.index'])->active('student/*');
                         }
 
@@ -102,6 +104,11 @@ class LaravelMenu
                         }
 
                         $this->addDivider($activityMenu);
+
+                        if (\Gate::allows('index', ContactInformation::class)) {
+                            $activityMenu->add('聯絡資料管理', ['route' => 'contact-information.index'])
+                                ->active('contact-information/*');
+                        }
 
                         if (Laratrust::can('feedback.manage')) {
                             $activityMenu->add('回饋資料管理', ['route' => 'feedback.index'])->active('feedback/*');
@@ -168,6 +175,10 @@ class LaravelMenu
                 /** @var \Lavary\Menu\Item $userMenu */
                 $userMenu = $menu->add($user->name, 'javascript:void(0)');
                 $userMenu->add('個人資料', ['route' => 'profile'])->active('profile/*');
+                if ($user->student) {
+                    $userMenu->add('聯絡資料', ['route' => 'contact-information.my.index'])
+                        ->active('my-contact-information/*');
+                }
                 $userMenu->add('登出', ['route' => 'logout']);
             } else {
                 //遊客

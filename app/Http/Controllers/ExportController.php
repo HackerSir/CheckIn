@@ -171,6 +171,10 @@ class ExportController extends Controller
                 if (Carbon::now()->gt($feedbackDownloadExpiredAt)) {
                     return back()->with('warning', '已超過檢視期限，若需查看資料，請聯繫各委會輔導老師');
                 }
+                //確認是否為社長
+                if (!$user->club->pivot->is_leader) {
+                    return back()->with('warning', '匯出功能限社長使用');
+                }
                 //攤位負責人看到自己社團的
                 $feedbackQuery->where('club_id', $user->club->id);
             } else {
@@ -203,7 +207,11 @@ class ExportController extends Controller
                 '社團名稱',
                 '電話',
                 '信箱',
+                'Facebook',
+                'LINE',
                 '附加訊息',
+                '社團自訂問題',
+                '對於社團自訂問題的回答',
             ]
         );
         foreach ($feedback as $feedbackItem) {
@@ -232,7 +240,11 @@ class ExportController extends Controller
                 $club->name,
                 $feedbackItem->phone,
                 $feedbackItem->email,
+                $feedbackItem->facebook,
+                $feedbackItem->line,
                 $message,
+                $feedbackItem->custom_question,
+                $feedbackItem->answer_of_custom_question,
             ]);
         }
         //調整格式

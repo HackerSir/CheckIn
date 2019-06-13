@@ -15,6 +15,18 @@ use Setting;
 class FeedbackController extends Controller
 {
     /**
+     * FeedbackController constructor.
+     */
+    public function __construct()
+    {
+        $this->middleware(['nid_account', 'contact_information_ready'])->only([
+            'my',
+            'createOrEdit',
+            'store',
+        ]);
+    }
+
+    /**
      * Display a listing of the resource.
      *
      * @param FeedbackDataTable $dataTable
@@ -42,12 +54,14 @@ class FeedbackController extends Controller
             //檢查檢視與下載期限
             $feedbackDownloadExpiredAt = new Carbon(Setting::get('feedback_download_expired_at'));
             if (Carbon::now()->gt($feedbackDownloadExpiredAt)) {
-                if ($user->student) {
-                    //若有學生，跳轉至「我的回饋資料」
-                    return redirect()->route('feedback.my')->with('warning', '已超過檢視期限，若需查看資料，請聯繫各委會輔導老師');
-                } else {
-                    //若無學生，直接返回
-                    return back()->with('warning', '已超過檢視期限，若需查看資料，請聯繫各委會輔導老師');
+                //跳轉至「我的回饋資料」
+                return redirect()->route('feedback.my')->with('warning', '已超過檢視期限，若需查看資料，請聯繫各委會輔導老師');
+            }
+            $endAt = new Carbon(Setting::get('end_at'));
+            if (Carbon::now()->gt($endAt)) {
+                //活動結束，確認是否為社長
+                if (!$user->club->pivot->is_leader) {
+                    return back()->route('feedback.my')->with('warning', '活動已結束，僅社長可查看資料');
                 }
             }
             //只能看到自己社團的
@@ -72,10 +86,6 @@ class FeedbackController extends Controller
     {
         /** @var User $user */
         $user = auth()->user();
-        //檢查是否為學生帳號
-        if (!$user->student) {
-            return back()->with('warning', '此功能限學生帳號使用');
-        }
 
         return view('feedback.my', compact('user'));
     }
@@ -91,10 +101,6 @@ class FeedbackController extends Controller
     {
         /** @var User $user */
         $user = auth()->user();
-        //檢查是否為學生帳號
-        if (!$user->student) {
-            return back()->with('warning', '此功能限學生帳號使用');
-        }
 
         //檢查填寫期限
         $feedbackCreateExpiredAt = new Carbon(Setting::get('feedback_create_expired_at'));
@@ -104,11 +110,6 @@ class FeedbackController extends Controller
 
         //曾給該社團的回饋資料
         $feedback = Feedback::whereClubId($club->id)->whereStudentNid($user->student->nid)->first();
-        if (!$feedback) {
-            //自己最後一次填寫的回饋資料
-            $lastFeedback = $user->student->feedback()->orderBy('created_at', 'desc')->first();
-            view()->share(compact('lastFeedback'));
-        }
 
         return view(
             'feedback.create-or-edit',
@@ -129,10 +130,6 @@ class FeedbackController extends Controller
     {
         /** @var User $user */
         $user = auth()->user();
-        //檢查是否為學生帳號
-        if (!$user->student) {
-            return back()->with('warning', '此功能限學生帳號使用');
-        }
 
         //檢查填寫期限
         $feedbackCreateExpiredAt = new Carbon(Setting::get('feedback_create_expired_at'));
@@ -141,27 +138,25 @@ class FeedbackController extends Controller
         }
 
         $this->validate($request, [
-            'phone'    => [
-                'nullable',
-                'required_without_all:email,facebook,line',
-                'max:255',
-                'regex:/^[\d\-+()#\s]{8,}$/',
-            ],
-            'email'    => 'nullable|required_without_all:phone,facebook,line|max:255|email',
-            'facebook' => 'nullable|required_without_all:phone,email,line|max:255',
-            'line'     => [
-                'nullable',
-                'required_without_all:phone,email,facebook',
-                'max:255',
-                'regex:/^[\w\-\.]+$/',
-            ],
-            'message'  => 'nullable|max:255',
+            'include_phone'             => 'nullable|required_without_all:include_email,include_facebook,include_line',
+            'include_email'             => 'nullable|required_without_all:include_phone,include_facebook,include_line',
+            'include_facebook'          => 'nullable|required_without_all:include_phone,include_email,include_line',
+            'include_line'              => 'nullable|required_without_all:include_phone,include_email,include_facebook',
+            'message'                   => 'nullable|max:255',
+            'answer_of_custom_question' => 'nullable|max:255',
         ]);
 
         $feedback = Feedback::updateOrCreate([
             'club_id'     => $club->id,
             'student_nid' => $user->student->nid,
-        ], $request->only(['phone', 'email', 'facebook', 'line', 'message']));
+        ], array_merge($request->only(['message']), [
+            'include_phone'             => $request->has('include_phone'),
+            'include_email'             => $request->has('include_email'),
+            'include_facebook'          => $request->has('include_facebook'),
+            'include_line'              => $request->has('include_line'),
+            'custom_question'           => $club->custom_question,
+            'answer_of_custom_question' => $club->custom_question ? $request->get('answer_of_custom_question') : null,
+        ]));
 
         return redirect()->route('feedback.show', $feedback)
             ->with('success', '回饋資料已送出');
@@ -188,6 +183,19 @@ class FeedbackController extends Controller
             $feedbackDownloadExpiredAt = new Carbon(Setting::get('feedback_download_expired_at'));
             if (Carbon::now()->gt($feedbackDownloadExpiredAt)) {
                 return back()->with('warning', '已超過檢視期限，若需查看資料，請聯繫各委會輔導老師');
+            }
+            $endAt = new Carbon(Setting::get('end_at'));
+            if (Carbon::now()->gt($endAt)) {
+                //活動結束
+                if (!$user->student) {
+                    //若無學生，直接返回
+                    return back()->with('warning', '已超過檢視期限，若需查看資料，請聯繫各委會輔導老師');
+                }
+                //確認是否為社長或資料擁有者
+                if (!($user->club && $user->club->pivot->is_leader)
+                    && ($user->student->nid != $feedback->student_nid)) {
+                    return redirect()->route('feedback.my')->with('warning', '活動已結束，僅社長可查看資料');
+                }
             }
         }
         //打卡紀錄

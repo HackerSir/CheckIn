@@ -51,13 +51,14 @@ class ClubController extends Controller
     public function store(Request $request, ImgurImageService $imgurImageService)
     {
         $this->validate($request, [
-            'number'       => 'nullable',
-            'name'         => 'required',
-            'club_type_id' => 'nullable|exists:club_types,id',
-            'description'  => 'nullable|strip_max:300',
-            'extra_info'   => 'nullable|strip_max:300',
-            'url'          => 'nullable|url',
-            'image_file'   => 'image',
+            'number'          => 'nullable',
+            'name'            => 'required',
+            'club_type_id'    => 'nullable|exists:club_types,id',
+            'description'     => 'nullable|strip_max:300',
+            'extra_info'      => 'nullable|strip_max:300',
+            'url'             => 'nullable|url',
+            'image_file'      => 'image',
+            'custom_question' => 'nullable|max:255',
         ]);
 
         $club = Club::create(array_merge($request->all(), [
@@ -107,13 +108,14 @@ class ClubController extends Controller
     public function update(Request $request, Club $club, ImgurImageService $imgurImageService)
     {
         $this->validate($request, [
-            'number'       => 'nullable',
-            'name'         => 'required',
-            'club_type_id' => 'nullable|exists:club_types,id',
-            'description'  => 'nullable|strip_max:300',
-            'extra_info'   => 'nullable|strip_max:300',
-            'url'          => 'nullable|url',
-            'image_file'   => 'image',
+            'number'          => 'nullable',
+            'name'            => 'required',
+            'club_type_id'    => 'nullable|exists:club_types,id',
+            'description'     => 'nullable|strip_max:300',
+            'extra_info'      => 'nullable|strip_max:300',
+            'url'             => 'nullable|url',
+            'image_file'      => 'image',
+            'custom_question' => 'nullable|max:255',
         ]);
 
         $club->update(array_merge($request->all(), [
