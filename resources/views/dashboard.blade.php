@@ -56,7 +56,7 @@
                     <hr/>
 
                     <h1>打卡紀錄</h1>
-                    @include('components.record-list', ['student' => $student, 'showFeedbackButton' => true])
+                    <record-list></record-list>
                 </div>
             </div>
         </div>
@@ -110,4 +110,5 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"
             integrity="sha256-CutOzxCRucUsn6C6TcEYsauvvYilEniTXldPa6/wu0k=" crossorigin="anonymous"></script>
     <script src="{{ asset(mix('/build-js/checkin.js')) }}"></script>
+    <script src="{{ asset(mix('/build-js/vue.js')) }}"></script>
 @endsection
