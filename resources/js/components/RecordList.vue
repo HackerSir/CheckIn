@@ -1,7 +1,7 @@
 <template>
     <ul class="list-group">
-        <li class="list-group-item clearfix" v-for="record in records">
-            <div class="float-xl-left">
+        <li class="list-group-item d-flex flex-column flex-md-row" v-for="record in records">
+            <div>
                 <h4 class="mb-1"><a :href="club_url(record.club_id)">{{ record.club }}</a>
                     <span v-html="record.club_type_tag"></span>
                     <span class='badge badge-secondary' v-if="!record.is_counted">不列入集點</span>
@@ -13,7 +13,7 @@
                     </span>
                 </p>
             </div>
-            <div class="float-xl-right">
+            <div class="ml-md-auto align-self-center">
                 <a :href="feedback_show_url(record.feedback_id)" class="btn btn-success"
                    v-if="record.feedback_id !== null">
                     <i class="fa fa-search"></i> 檢視回饋資料
@@ -24,9 +24,7 @@
             </div>
         </li>
         <li class="list-group-item" v-if="records.length === 0">
-            <div>
-                尚無打卡紀錄，快去打卡吧
-            </div>
+            尚無打卡紀錄，快去打卡吧
         </li>
     </ul>
 </template>
