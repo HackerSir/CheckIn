@@ -344,6 +344,7 @@ Route::group(['prefix' => 'api'], function () {
     Route::post('/club-list', 'ApiController@clubList')->name('api.club-list');
     Route::post('/my-favorite-club-ids', 'ApiController@myFavoriteClubIds')->name('api.my-favorite-club-ids');
     Route::post('/my-feedback-list', 'ApiController@myFeedbackList')->name('api.my-feedback-list');
+    Route::post('/my-record-list', 'ApiController@myRecordList')->name('api.my-record-list');
     Route::post('/add-favorite-club/{club}', 'ApiController@addFavoriteClub')->name('api.add-favorite-club');
     Route::post('/remove-favorite-club/{club}', 'ApiController@removeFavoriteClub')->name('api.remove-favorite-club');
 });

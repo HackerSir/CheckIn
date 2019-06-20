@@ -361,6 +361,35 @@ class ApiController extends Controller
         return $result;
     }
 
+    public function myRecordList()
+    {
+        /** @var User $user */
+        $user = auth()->user();
+        //非會員或無學生資料
+        if (!$user || !$user->student) {
+            abort(403);
+        }
+        //學生資料
+        $student = $user->student;
+        $student->load('records.club:id,name,club_type_id', 'records.club.clubType');
+        //相關的回饋資料
+        $feedback = Feedback::where('student_nid', $student->nid)->select('id', 'club_id')->get()->keyBy('club_id');
+
+        $data = [];
+        foreach ($student->records as $record) {
+            $data[] = [
+                'club_id'       => $record->club->id,
+                'club'          => $record->club->name,
+                'club_type_tag' => $record->club->clubType->tag ?? null,
+                'is_counted'    => $record->club->is_counted,
+                'created_at'    => $record->created_at,
+                'feedback_id'   => $feedback->has($record->club->id) ? $feedback->get($record->club->id)->id : null,
+            ];
+        }
+
+        return $data;
+    }
+
     public function addFavoriteClub(Club $club)
     {
         /** @var User $user */
