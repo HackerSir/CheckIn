@@ -15,7 +15,7 @@ use App\Student;
 use App\User;
 
 Broadcast::channel('student.{student}', function (User $user, Student $student) {
-    return $user->id == $student->user_id;
+    return $user->nid == $student->nid;
 });
 
 Broadcast::channel('admin.test', function (User $user) {
