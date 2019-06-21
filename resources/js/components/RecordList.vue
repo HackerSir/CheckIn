@@ -30,6 +30,8 @@
 </template>
 
 <script>
+    require('../bootstrap-echo-vue');
+
     export default {
         data: function () {
             return {
@@ -38,6 +40,18 @@
         },
         created() {
             this.fetch();
+        },
+        mounted() {
+            // Listen for the 'CheckInSuccess' event in the 'student.NID' private channel
+            this.$echo.private('student.' + window.Laravel.student).listen('CheckInSuccess', (payload) => {
+                console.log(payload);
+                this.$nextTick(() => {
+                    //TODO: 顯示 modal
+
+                    //刷新打卡紀錄
+                    this.fetch();
+                })
+            });
         },
         methods: {
             fetch() {
