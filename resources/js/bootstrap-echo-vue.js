@@ -1,4 +1,4 @@
-import VueEcho from 'vue-echo-laravel';
+import VueEcho from 'vue-echo';
 
 window.io = require('socket.io-client');
 
