@@ -20,12 +20,12 @@ class StudentsDataTable extends DataTable
         $dataTable = new EloquentDataTable($query);
 
         return $dataTable
-            ->editColumn('nid', function ($student) {
+            ->editColumn('nid', function (Student $student) {
                 /** @var Student $student */
                 return view('student.datatables.nid', compact('student'))->render();
             })
             ->editColumn('name', 'student.datatables.name')
-            ->editColumn('class', function ($student) {
+            ->editColumn('class', function (Student $student) {
                 return view('student.datatables.class', compact('student'))->render();
             })
             ->filterColumn('class', function ($query, $keyword) {
@@ -37,8 +37,7 @@ class StudentsDataTable extends DataTable
                         ->orWhere('dept_name', 'like', '%' . $keyword . '%');
                 });
             })
-            ->editColumn('is_dummy', function ($student) {
-                /* @var Student $student */
+            ->editColumn('is_dummy', function (Student $student) {
                 return $student->is_dummy ? 'O' : 'X';
             })
             ->rawColumns(['nid', 'name', 'class']);

@@ -21,7 +21,7 @@ class TicketsDataTable extends DataTable
         $dataTable = new EloquentDataTable($query);
 
         return $dataTable
-            ->editColumn('student_nid', function ($ticket) {
+            ->editColumn('student_nid', function (Ticket $ticket) {
                 return view('ticket.datatables.student', compact('ticket'))->render();
             })
             ->filterColumn('student_nid', function ($query, $keyword) {

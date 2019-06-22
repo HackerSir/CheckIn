@@ -23,7 +23,7 @@ class ClubSurveyDataTable extends DataTable
 
         return $dataTable
             ->addColumn('action', 'club-survey.datatables.action')
-            ->editColumn('user_id', function ($clubSurvey) {
+            ->editColumn('user_id', function (ClubSurvey $clubSurvey) {
                 return view('club-survey.datatables.user', compact('clubSurvey'))->render();
             })
             ->filterColumn('user_id', function ($query, $keyword) {
@@ -33,7 +33,7 @@ class ClubSurveyDataTable extends DataTable
                     $query->where('name', 'like', '%' . $keyword . '%');
                 });
             })
-            ->editColumn('club_id', function ($clubSurvey) {
+            ->editColumn('club_id', function (ClubSurvey $clubSurvey) {
                 return view('club-survey.datatables.club', compact('clubSurvey'))->render();
             })
             ->filterColumn('club_id', function ($query, $keyword) {

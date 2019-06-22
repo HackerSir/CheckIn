@@ -24,7 +24,7 @@ class UsersDataTable extends DataTable
         return $dataTable
             ->editColumn('name', 'user.datatables.name')
             ->editColumn('email', 'user.datatables.email')
-            ->editColumn('club_id', function ($user) {
+            ->editColumn('club_id', function (User $user) {
                 if (!$user->student) {
                     return null;
                 }

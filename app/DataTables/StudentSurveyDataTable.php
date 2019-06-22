@@ -22,7 +22,7 @@ class StudentSurveyDataTable extends DataTable
 
         return $dataTable
             ->addColumn('action', 'student-survey.datatables.action')
-            ->editColumn('student_nid', function ($studentSurvey) {
+            ->editColumn('student_nid', function (StudentSurvey $studentSurvey) {
                 return view('student-survey.datatables.student', compact('studentSurvey'))->render();
             })
             ->filterColumn('student_nid', function ($query, $keyword) {
@@ -33,11 +33,10 @@ class StudentSurveyDataTable extends DataTable
                         ->orWhere('nid', 'like', '%' . $keyword . '%');
                 });
             })
-            ->addColumn('is_freshman', function ($studentSurvey) {
-                /** @var StudentSurvey $studentSurvey */
+            ->addColumn('is_freshman', function (StudentSurvey $studentSurvey) {
                 return view('student-survey.datatables.is_freshman', compact('studentSurvey'))->render();
             })
-            ->editColumn('comment', function ($studentSurvey) {
+            ->editColumn('comment', function (StudentSurvey $studentSurvey) {
                 return view('student-survey.datatables.comment', compact('studentSurvey'))->render();
             })
             ->rawColumns(['is_freshman', 'action']);

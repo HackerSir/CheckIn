@@ -23,7 +23,7 @@ class DataUpdateRequestDataTable extends DataTable
 
         return $dataTable
             ->addColumn('action', 'club.data-update-request.datatables.action')
-            ->editColumn('club_id', function ($dataUpdateRequest) {
+            ->editColumn('club_id', function (DataUpdateRequest $dataUpdateRequest) {
                 return view('club.data-update-request.datatables.club', compact('dataUpdateRequest'))->render();
             })
             ->filterColumn('club_id', function ($query, $keyword) {
@@ -33,8 +33,7 @@ class DataUpdateRequestDataTable extends DataTable
                     $query->where('name', 'like', '%' . $keyword . '%');
                 });
             })
-            ->editColumn('review_result', function ($dataUpdateRequest) {
-                /** @var DataUpdateRequest $dataUpdateRequest */
+            ->editColumn('review_result', function (DataUpdateRequest $dataUpdateRequest) {
                 return $dataUpdateRequest->show_result;
             })
             ->rawColumns(['club_id', 'review_result', 'action']);

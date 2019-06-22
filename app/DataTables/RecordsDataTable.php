@@ -22,7 +22,7 @@ class RecordsDataTable extends DataTable
         $dataTable = new EloquentDataTable($query);
 
         return $dataTable
-            ->editColumn('student_nid', function ($record) {
+            ->editColumn('student_nid', function (Record $record) {
                 return view('record.datatables.student', compact('record'))->render();
             })
             ->filterColumn('student_nid', function ($query, $keyword) {
@@ -33,7 +33,7 @@ class RecordsDataTable extends DataTable
                         ->orWhere('nid', 'like', '%' . $keyword . '%');
                 });
             })
-            ->editColumn('club_id', function ($record) {
+            ->editColumn('club_id', function (Record $record) {
                 return view('record.datatables.club', compact('record'))->render();
             })
             ->filterColumn('club_id', function ($query, $keyword) {
