@@ -111,9 +111,11 @@ class FeedbackController extends Controller
         //曾給該社團的回饋資料
         $feedback = Feedback::whereClubId($club->id)->whereStudentNid($user->student->nid)->first();
 
+        $intentionOptions = [null => null] + Feedback::$intentionText;
+
         return view(
             'feedback.create-or-edit',
-            compact('user', 'club', 'feedback', 'feedbackCreateExpiredAt')
+            compact('user', 'club', 'feedback', 'feedbackCreateExpiredAt', 'intentionOptions')
         );
     }
 
@@ -144,12 +146,14 @@ class FeedbackController extends Controller
             'include_line'              => 'nullable|required_without_all:include_phone,include_email,include_facebook',
             'message'                   => 'nullable|max:255',
             'answer_of_custom_question' => 'nullable|max:255',
+            'join_club_intention'       => 'required|in:0,1,2',
+            'join_tea_party_intention'  => 'required|in:0,1,2',
         ]);
 
         $feedback = Feedback::updateOrCreate([
             'club_id'     => $club->id,
             'student_nid' => $user->student->nid,
-        ], array_merge($request->only(['message']), [
+        ], array_merge($request->only(['message', 'join_club_intention', 'join_tea_party_intention']), [
             'include_phone'             => $request->has('include_phone'),
             'include_email'             => $request->has('include_email'),
             'include_facebook'          => $request->has('include_facebook'),

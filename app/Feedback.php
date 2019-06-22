@@ -88,7 +88,7 @@ class Feedback extends Model
         'join_tea_party_intention' => 'int',
     ];
 
-    protected static $intentionText = [
+    public static $intentionText = [
         0 => '不參加',
         1 => '考慮中',
         2 => '參加',

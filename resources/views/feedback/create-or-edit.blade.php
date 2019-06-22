@@ -29,13 +29,16 @@
                     <li>入學年度</li>
                     <li>性別</li>
                 </ul>
-                以及您下方勾選的資料
+                以及您下方勾選或填寫的資料
                 <ul>
                     <li>電話</li>
                     <li>信箱</li>
                     <li>Facebook 個人檔案連結</li>
                     <li>LINE ID</li>
                     <li>給社團的意見</li>
+                    <li>對於社團提問的回答</li>
+                    <li>加入社團意願</li>
+                    <li>參與迎新茶會意願</li>
                 </ul>
             </li>
             <li>請至少勾選一項<strong>聯絡資訊</strong>資料再送出</li>
@@ -45,22 +48,8 @@
         <div class="card-body">
             {{ bs()->openForm('post', route('feedback.store', $club), ['model' => $feedback]) }}
 
-            <div class="form-group row">
-                <label class="col-md-2 col-form-label">基本資料</label>
-                <div class="col-md-10">
-                    <p class="form-control-plaintext">
-                        {{ $user->student->display_name }}
-                    </p>
-                </div>
-            </div>
-            <div class="form-group row">
-                <label class="col-md-2 col-form-label">社團</label>
-                <div class="col-md-10">
-                    <p class="form-control-plaintext">
-                        {!! $club->display_name ?? '' !!}
-                    </p>
-                </div>
-            </div>
+            {{ bs()->formGroup(html()->div($user->student->display_name)->class('form-control-plaintext'))->label('基本資料')->showAsRow() }}
+            {{ bs()->formGroup(html()->div($club->display_name ?? null)->class('form-control-plaintext'))->label('社團')->showAsRow() }}
 
             @if($user->student->contactInformation->phone)
                 {{ bs()->formGroup(bs()->checkBox('include_phone', $user->student->contactInformation->phone))->label('電話')->showAsRow() }}
@@ -96,6 +85,42 @@
                 {{ bs()->formGroup(html()->div($club->custom_question)->class('form-control-plaintext'))->label('社團提問')->showAsRow() }}
                 {{ bs()->formGroup(bs()->text('answer_of_custom_question'))->label('你的回答')->showAsRow() }}
             @endif
+
+            <hr/>
+            {{ bs()->formGroup(bs()->select('join_club_intention', $intentionOptions)->required())->class('required')->label('加入社團意願')->showAsRow() }}
+            <div class="form-group row">
+                <label class="col-md-2 col-form-label">迎新茶會資訊</label>
+                <div class="col-md-10">
+                    <div class="form-control-plaintext">
+                        @if($club->teaParty)
+                            <dl class="row ">
+                                <dt class="col-12 col-sm-4 col-lg-2"><i class="fas fa-clock mr-2"></i>茶會名稱</dt>
+                                <dd class="col-12 col-sm-8 col-lg-10">{{ $club->teaParty->name }}</dd>
+
+                                <dt class="col-12 col-sm-4 col-lg-2"><i class="fas fa-clock mr-2"></i>開始時間</dt>
+                                <dd class="col-12 col-sm-8 col-lg-10">{{ $club->teaParty->start_at }}</dd>
+
+                                <dt class="col-12 col-sm-4 col-lg-2"><i class="fas fa-clock mr-2"></i>結束時間</dt>
+                                <dd class="col-12 col-sm-8 col-lg-10">{{ $club->teaParty->end_at }}</dd>
+
+                                <dt class="col-12 col-sm-4 col-lg-2"><i class="fas fa-map-marked-alt mr-2"></i>地點</dt>
+                                <dd class="col-12 col-sm-8 col-lg-10">{{ $club->teaParty->location }}</dd>
+
+                                @if($club->teaParty->url)
+                                    <dt class="col-12 col-sm-4 col-lg-2"><i class="fas fa-link mr-2"></i>網址</dt>
+                                    <dd class="col-12 col-sm-8 col-lg-10">
+                                        <a href="{{ $club->teaParty->url }}"
+                                           target="_blank">{{ $club->teaParty->url }}</a>
+                                    </dd>
+                                @endif
+                            </dl>
+                        @else
+                            暫未提供相關資訊，請回答「若舉辦迎新茶會，是否有意願參與？」
+                        @endif
+                    </div>
+                </div>
+            </div>
+            {{ bs()->formGroup(bs()->select('join_tea_party_intention', $intentionOptions)->required())->class('required')->label('參與迎新茶會意願')->showAsRow() }}
 
             <div class="row">
                 <div class="mx-auto">
