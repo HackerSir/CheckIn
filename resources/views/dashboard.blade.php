@@ -62,7 +62,8 @@
         </div>
     </div>
 
-    {{-- Alert Modal --}}
+    {{--
+    <!-- Alert Modal -->
     <div class="modal fade" id="alertModal" tabindex="-1" role="dialog" aria-labelledby="alertModalLabel"
          aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
@@ -104,6 +105,7 @@
             </div>
         </div>
     </div>
+    --}}
 @endsection
 
 @section('js')
