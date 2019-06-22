@@ -36,7 +36,7 @@
         <!--  Alert Modal -->
         <transition @enter="startTransitionModal" @after-enter="endTransitionModal"
                     @before-leave="endTransitionModal" @after-leave="startTransitionModal">
-            <div class="modal fade" v-if="showModal && !modalPayload.ask_for_feedback" id="alertModal" tabindex="-1"
+            <div class="modal fade" v-if="showAlertModal" id="alertModal" tabindex="-1"
                  role="dialog" aria-labelledby="alertModalLabel" aria-hidden="true" ref="modal">
                 <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
@@ -61,7 +61,7 @@
         <!-- Confirm Modal -->
         <transition @enter="startTransitionModal" @after-enter="endTransitionModal"
                     @before-leave="endTransitionModal" @after-leave="startTransitionModal">
-            <div class="modal fade" v-if="showModal && modalPayload.ask_for_feedback" id="confirmModal" tabindex="-1"
+            <div class="modal fade" v-if="showConfirmModal" id="confirmModal" tabindex="-1"
                  role="dialog" aria-labelledby="confirmModalLabel" aria-hidden="true" ref="modal">
                 <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
@@ -123,6 +123,14 @@
                 //顯示 modal
                 this.showModal = true;
             });
+        },
+        computed: {
+            showAlertModal() {
+                return this.showModal && !this.modalPayload.ask_for_feedback
+            },
+            showConfirmModal() {
+                return this.showModal && this.modalPayload.ask_for_feedback
+            }
         },
         methods: {
             fetch() {
