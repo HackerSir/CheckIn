@@ -6,10 +6,10 @@ use App\Club;
 use App\DataTables\FeedbackDataTable;
 use App\DataTables\Scopes\FeedbackFilterScope;
 use App\Feedback;
+use App\Http\Requests\FeedbackRequest;
 use App\Record;
 use App\User;
 use Carbon\Carbon;
-use Illuminate\Http\Request;
 use Setting;
 
 class FeedbackController extends Controller
@@ -122,13 +122,12 @@ class FeedbackController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param FeedbackRequest $request
      * @param Club $club
      * @return \Illuminate\Http\Response
-     * @throws \Illuminate\Validation\ValidationException
      * @throws \Exception
      */
-    public function store(Request $request, Club $club)
+    public function store(FeedbackRequest $request, Club $club)
     {
         /** @var User $user */
         $user = auth()->user();
@@ -138,17 +137,6 @@ class FeedbackController extends Controller
         if (Carbon::now()->gt($feedbackCreateExpiredAt)) {
             return back()->with('warning', '回饋資料填寫已截止');
         }
-
-        $this->validate($request, [
-            'include_phone'             => 'nullable|required_without_all:include_email,include_facebook,include_line',
-            'include_email'             => 'nullable|required_without_all:include_phone,include_facebook,include_line',
-            'include_facebook'          => 'nullable|required_without_all:include_phone,include_email,include_line',
-            'include_line'              => 'nullable|required_without_all:include_phone,include_email,include_facebook',
-            'message'                   => 'nullable|max:255',
-            'answer_of_custom_question' => 'nullable|max:255',
-            'join_club_intention'       => 'required|in:0,1,2',
-            'join_tea_party_intention'  => 'required|in:0,1,2',
-        ]);
 
         $feedback = Feedback::updateOrCreate([
             'club_id'     => $club->id,
