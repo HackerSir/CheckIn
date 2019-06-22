@@ -43,4 +43,11 @@ class FeedbackRequest extends FormRequest
 
         return $rules;
     }
+
+    public function messages()
+    {
+        return [
+            'required_without_all' => '至少需勾選一項聯絡資訊',
+        ];
+    }
 }
