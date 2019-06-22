@@ -28,6 +28,7 @@ class UsersDataTable extends DataTable
                 if (!$user->student) {
                     return null;
                 }
+                /** @var Club $club */
                 $club = $user->student->clubs->first();
 
                 return $club ? $club->display_name : null;
