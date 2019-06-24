@@ -41,7 +41,7 @@
                 <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="alertModalLabel">訊息</h5>
+                            <h5 class="modal-title" id="alertModalLabel">打卡成功</h5>
                             <button type="button" class="close" @click="onModalClosed" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
@@ -66,22 +66,71 @@
                 <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="confirmModalLabel">訊息</h5>
-                            <button type="button" class="close" @click="onModalClosed" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
+                            <h5 class="modal-title" id="confirmModalLabel">打卡成功</h5>
+                            <!--                            <button type="button" class="close" @click="onModalClosed" aria-label="Close">-->
+                            <!--                                <span aria-hidden="true">&times;</span>-->
+                            <!--                            </button>-->
                         </div>
                         <div class="modal-body">
                             <span id="confirmMessage">
                                 於「{{ modalPayload.club_name }}」打卡成功<br/>
-                                是否願意留下回饋資料？
+                                請填寫以下項目以完成集點
                             </span>
+                            <hr>
+                            <div class="d-flex flex-column align-items-center">
+                                <h4>加入社團意願</h4>
+                                <div class="btn-group btn-group-toggle">
+                                    <label class="btn btn-outline-secondary"
+                                           :class="{ 'active': joinClubIntention === 2 }">
+                                        <input type="radio" :value="2" name="join_club_intention" required
+                                               v-model="joinClubIntention"> 參加
+                                    </label>
+                                    <label class="btn btn-outline-secondary"
+                                           :class="{ 'active': joinClubIntention === 1 }">
+                                        <input type="radio" :value="1" name="join_club_intention" required
+                                               v-model="joinClubIntention"> 考慮中
+                                    </label>
+                                    <label class="btn btn-outline-secondary"
+                                           :class="{ 'active': joinClubIntention === 0 }">
+                                        <input type="radio" :value="0" name="join_club_intention" required
+                                               v-model="joinClubIntention"> 不參加
+                                    </label>
+                                </div>
+                                <h4>參與迎新茶會意願</h4>
+                                <template v-if="modalPayload.tea_party.exists">
+                                    <span>
+                                        <i class="fas fa-clock mr-2"></i>{{
+                                        $moment(modalPayload.tea_party.start_at).format('YYYY-MM-DD HH:mm') }}
+                                    </span>
+                                    <span>
+                                        <i class="fas fa-map-marked-alt mr-2"></i>{{ modalPayload.tea_party.location }}
+                                    </span>
+                                </template>
+                                <div class="btn-group btn-group-toggle">
+                                    <label class="btn btn-outline-secondary"
+                                           :class="{ 'active': joinTeaPartyIntention === 2 }">
+                                        <input type="radio" :value="2" name="join_tea_party_intention" required
+                                               v-model="joinTeaPartyIntention"> 參加
+                                    </label>
+                                    <label class="btn btn-outline-secondary"
+                                           :class="{ 'active': joinTeaPartyIntention === 1 }">
+                                        <input type="radio" :value="1" name="join_tea_party_intention" required
+                                               v-model="joinTeaPartyIntention"> 考慮中
+                                    </label>
+                                    <label class="btn btn-outline-secondary"
+                                           :class="{ 'active': joinTeaPartyIntention === 0 }">
+                                        <input type="radio" :value="0" name="join_tea_party_intention" required
+                                               v-model="joinTeaPartyIntention"> 不參加
+                                    </label>
+                                </div>
+                            </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" @click="onModalClosed">稍後再說
-                            </button>
-                            <button type="button" class="btn btn-primary" id="confirmButton" @click="onModalConfirmed">
-                                前往填寫
+                            <!--                            <button type="button" class="btn btn-secondary" @click="onModalClosed">稍後再說-->
+                            <!--                            </button>-->
+                            <button type="button" class="btn btn-primary" id="confirmButton" @click="onModalConfirmed"
+                                    :disabled="!confirmButtonEnabled">
+                                繼續
                             </button>
                         </div>
                     </div>
@@ -104,8 +153,16 @@
                 modalPayload: {
                     ask_for_feedback: true,
                     club_name: '',
-                    feedback_url: ''
+                    feedback_url: '',
+                    tea_party: {
+                        exists: false,
+                        start_at: '',
+                        location: ''
+                    },
                 },
+                joinClubIntention: -1,
+                joinTeaPartyIntention: -1,
+                submitting: false
             }
         },
         created() {
@@ -120,6 +177,10 @@
                 }
                 console.log(payload);
                 this.modalPayload = payload;
+                //重置選項
+                this.joinClubIntention = -1;
+                this.joinTeaPartyIntention = -1;
+                this.submitting = false;
                 //顯示 modal
                 this.showModal = true;
             });
@@ -130,6 +191,12 @@
             },
             showConfirmModal() {
                 return this.showModal && this.modalPayload.ask_for_feedback
+            },
+            confirmButtonEnabled() {
+                if (this.submitting) {
+                    return false;
+                }
+                return this.joinClubIntention >= 0 && this.joinTeaPartyIntention >= 0;
             }
         },
         methods: {
@@ -159,9 +226,19 @@
                 this.fetch();
             },
             onModalConfirmed() {
-                if (this.modalPayload && this.modalPayload.feedback_url) {
-                    window.location.href = this.modalPayload.feedback_url;
+                this.submitting = true;
+                //兩題都選擇不參加
+                if (this.joinClubIntention === 0 && this.joinTeaPartyIntention === 0) {
+                    //TODO: 記錄回饋資料
+                    this.showModal = false;
+                    //刷新打卡紀錄
+                    this.fetch();
+                    return;
                 }
+                //若兩題有一題選擇參加或考慮中
+                //進行跳轉
+                //TODO: 帶上選項
+                window.location.href = this.modalPayload.feedback_url;
             },
             startTransitionModal() {
                 this.$refs.backdrop.classList.toggle("d-block");
