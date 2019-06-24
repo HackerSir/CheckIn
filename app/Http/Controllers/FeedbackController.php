@@ -111,11 +111,9 @@ class FeedbackController extends Controller
         //曾給該社團的回饋資料
         $feedback = Feedback::whereClubId($club->id)->whereStudentNid($user->student->nid)->first();
 
-        $intentionOptions = [null => null] + Feedback::$intentionText;
-
         return view(
             'feedback.create-or-edit',
-            compact('user', 'club', 'feedback', 'feedbackCreateExpiredAt', 'intentionOptions')
+            compact('user', 'club', 'feedback', 'feedbackCreateExpiredAt')
         );
     }
 

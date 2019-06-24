@@ -89,9 +89,9 @@ class Feedback extends Model
     ];
 
     public static $intentionText = [
-        0 => '不參加',
-        1 => '考慮中',
         2 => '參加',
+        1 => '考慮中',
+        0 => '不參加',
     ];
 
     /**

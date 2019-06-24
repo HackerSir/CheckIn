@@ -87,7 +87,20 @@
             @endif
 
             <hr/>
-            {{ bs()->formGroup(bs()->select('join_club_intention', $intentionOptions)->required())->class('required')->label('加入社團意願')->showAsRow() }}
+            {{--            {{ bs()->formGroup(bs()->select('join_club_intention', $intentionOptions)->required())->class('required')->label('加入社團意願')->showAsRow() }}--}}
+            <div class="form-group row">
+                <label class="col-md-2 col-form-label">加入社團意願</label>
+                <div class="col-md-10">
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        @foreach(\App\Feedback::$intentionText as $key => $value)
+                            <label class="btn btn-outline-secondary">
+                                <input type="radio" name="join_club_intention" value="{{ $key }}" required
+                                       @if(isset($feedback) && $feedback->join_club_intention == $key) checked @endif> {{ $value }}
+                            </label>
+                        @endforeach
+                    </div>
+                </div>
+            </div>
             <div class="form-group row">
                 <label class="col-md-2 col-form-label">迎新茶會資訊</label>
                 <div class="col-md-10">
@@ -120,7 +133,20 @@
                     </div>
                 </div>
             </div>
-            {{ bs()->formGroup(bs()->select('join_tea_party_intention', $intentionOptions)->required())->class('required')->label('參與迎新茶會意願')->showAsRow() }}
+            {{--            {{ bs()->formGroup(bs()->select('join_tea_party_intention', $intentionOptions)->required())->class('required')->label('參與迎新茶會意願')->showAsRow() }}--}}
+            <div class="form-group row">
+                <label class="col-md-2 col-form-label">參與迎新茶會意願</label>
+                <div class="col-md-10">
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        @foreach(\App\Feedback::$intentionText as $key => $value)
+                            <label class="btn btn-outline-secondary">
+                                <input type="radio" name="join_tea_party_intention" value="{{ $key }}" required
+                                       @if(isset($feedback) && $feedback->join_tea_party_intention == $key) checked @endif> {{ $value }}
+                            </label>
+                        @endforeach
+                    </div>
+                </div>
+            </div>
 
             <div class="row">
                 <div class="mx-auto">
@@ -130,4 +156,12 @@
             {{ bs()->closeForm() }}
         </div>
     </div>
+@endsection
+
+@section('js')
+    <script>
+        $(function () {
+            $('.btn-group-toggle > label.btn:has(input[type=radio]:checked)').addClass('active')
+        })
+    </script>
 @endsection
