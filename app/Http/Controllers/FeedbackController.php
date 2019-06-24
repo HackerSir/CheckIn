@@ -61,7 +61,7 @@ class FeedbackController extends Controller
             if (Carbon::now()->gt($endAt)) {
                 //活動結束，確認是否為社長
                 if (!$user->club->pivot->is_leader) {
-                    return back()->route('feedback.my')->with('warning', '活動已結束，僅社長可查看資料');
+                    return back()->with('warning', '活動已結束，僅社長可查看資料');
                 }
             }
             //只能看到自己社團的
