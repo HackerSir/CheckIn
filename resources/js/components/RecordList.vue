@@ -65,16 +65,10 @@
                  role="dialog" aria-labelledby="confirmModalLabel" aria-hidden="true" ref="modal">
                 <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="confirmModalLabel">打卡成功</h5>
-                            <!--                            <button type="button" class="close" @click="onModalClosed" aria-label="Close">-->
-                            <!--                                <span aria-hidden="true">&times;</span>-->
-                            <!--                            </button>-->
-                        </div>
                         <div class="modal-body">
                             <span id="confirmMessage">
-                                於「{{ modalPayload.club_name }}」打卡成功<br/>
-                                請填寫以下項目以完成集點
+                                即將於「{{ modalPayload.club_name }}」打卡<br/>
+                                請填寫以下項目以完成打卡
                             </span>
                             <hr>
                             <div class="d-flex flex-column align-items-center">
