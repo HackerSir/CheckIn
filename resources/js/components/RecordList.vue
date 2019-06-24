@@ -260,6 +260,7 @@
             startTransitionModal() {
                 this.$refs.backdrop.classList.toggle("d-block");
                 this.$refs.modal && this.$refs.modal.classList.toggle("d-block");
+                $("body").toggleClass("modal-open");
             },
             endTransitionModal() {
                 this.$refs.backdrop.classList.toggle("show");
