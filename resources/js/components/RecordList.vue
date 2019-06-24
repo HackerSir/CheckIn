@@ -151,8 +151,9 @@
                 records: [],
                 showModal: false,
                 modalPayload: {
-                    ask_for_feedback: true,
+                    club_id: 0,
                     club_name: '',
+                    ask_for_feedback: true,
                     feedback_url: '',
                     tea_party: {
                         exists: false,
@@ -229,10 +230,23 @@
                 this.submitting = true;
                 //兩題都選擇不參加
                 if (this.joinClubIntention === 0 && this.joinTeaPartyIntention === 0) {
-                    //TODO: 記錄回饋資料
-                    this.showModal = false;
-                    //刷新打卡紀錄
-                    this.fetch();
+                    //記錄回饋資料
+                    let store_feedback_url = Laravel.baseUrl + '/api/store-feedback/' + this.modalPayload.club_id;
+                    axios.post(store_feedback_url, {
+                        'join_club_intention': 0,
+                        'join_tea_party_intention': 0
+                    }).then(response => {
+                        let success = response.data.success;
+                        if (success) {
+                            toastr["success"]('參與意願已記錄');
+                        } else {
+                            toastr["error"]('發生錯誤，請嘗試自行點擊打卡紀錄中的填寫回饋資料');
+                        }
+                        this.submitting = false;
+                        this.showModal = false;
+                        //刷新打卡紀錄
+                        this.fetch();
+                    });
                     return;
                 }
                 //若兩題有一題選擇參加或考慮中

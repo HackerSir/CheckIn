@@ -56,6 +56,7 @@ class CheckInSuccess implements ShouldBroadcast
 
         //傳送給前端的資訊
         $data = [
+            'club_id'          => $club->id,
             'club_name'        => $club->name,
             'ask_for_feedback' => !$feedbackExists,
             'feedback_url'     => route('feedback.create', $club),

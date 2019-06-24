@@ -361,6 +361,31 @@ class ApiController extends Controller
         return $result;
     }
 
+    public function storeFeedback(Request $request, Club $club)
+    {
+        /** @var User $user */
+        $user = auth()->user();
+        //非會員或無學生資料
+        if (!$user || !$user->student) {
+            abort(403);
+        }
+        $student = $user->student;
+
+        try {
+            Feedback::updateOrCreate([
+                'student_nid' => $student->nid,
+                'club_id'     => $club->id,
+            ], [
+                'join_club_intention'      => $request->get('join_club_intention'),
+                'join_tea_party_intention' => $request->get('join_tea_party_intention'),
+            ]);
+        } catch (\Exception $exception) {
+            return ['success' => false];
+        }
+
+        return ['success' => true];
+    }
+
     public function myRecordList()
     {
         /** @var User $user */
