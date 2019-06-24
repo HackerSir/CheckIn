@@ -236,9 +236,12 @@
                     return;
                 }
                 //若兩題有一題選擇參加或考慮中
-                //進行跳轉
-                //TODO: 帶上選項
-                window.location.href = this.modalPayload.feedback_url;
+                //進行跳轉（含參加意願選項）
+                let params = new URLSearchParams({
+                    join_club_intention: this.joinClubIntention,
+                    join_tea_party_intention: this.joinTeaPartyIntention
+                });
+                window.location.href = this.modalPayload.feedback_url + '?' + params;
             },
             startTransitionModal() {
                 this.$refs.backdrop.classList.toggle("d-block");

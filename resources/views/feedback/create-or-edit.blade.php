@@ -95,7 +95,8 @@
                         @foreach(\App\Feedback::$intentionText as $key => $value)
                             <label class="btn btn-outline-secondary">
                                 <input type="radio" name="join_club_intention" value="{{ $key }}" required
-                                       @if(isset($feedback) && $feedback->join_club_intention == $key) checked @endif> {{ $value }}
+                                       @if(isset($feedback) && $feedback->join_club_intention == $key
+                                       || !isset($feedback) && request('join_club_intention') == $key) checked @endif> {{ $value }}
                             </label>
                         @endforeach
                     </div>
@@ -141,7 +142,8 @@
                         @foreach(\App\Feedback::$intentionText as $key => $value)
                             <label class="btn btn-outline-secondary">
                                 <input type="radio" name="join_tea_party_intention" value="{{ $key }}" required
-                                       @if(isset($feedback) && $feedback->join_tea_party_intention == $key) checked @endif> {{ $value }}
+                                       @if(isset($feedback) && $feedback->join_tea_party_intention == $key
+                                       || !isset($feedback) && request('join_tea_party_intention') == $key) checked @endif> {{ $value }}
                             </label>
                         @endforeach
                     </div>
