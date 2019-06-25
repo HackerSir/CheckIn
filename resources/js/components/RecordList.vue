@@ -170,7 +170,6 @@
                     console.log('Skip "CheckInSuccess" broadcast:', payload.club_name);
                     return;
                 }
-                console.log(payload);
                 this.modalPayload = payload;
                 //重置選項
                 this.joinClubIntention = -1;
