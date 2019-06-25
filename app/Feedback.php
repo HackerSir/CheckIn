@@ -130,7 +130,7 @@ class Feedback extends Model
      */
     public function getJoinClubIntentionTextAttribute()
     {
-        if (!$this->join_club_intention) {
+        if ($this->join_club_intention === null) {
             return null;
         }
 
@@ -142,7 +142,7 @@ class Feedback extends Model
      */
     public function getJoinTeaPartyIntentionTextAttribute()
     {
-        if (!$this->join_tea_party_intention) {
+        if ($this->join_tea_party_intention === null) {
             return null;
         }
 
