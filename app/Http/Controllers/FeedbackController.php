@@ -68,7 +68,7 @@ class FeedbackController extends Controller
             //只能看到自己社團的，且無法看到對於加入社團與參與茶會皆無意願的
             $dataTable->addScope(new FeedbackClubScope($user->club));
             //社團統計資料
-            $feedbackQuery->where('club_id', $user->club->id) ->where(function ($query) {
+            $feedbackQuery->where('club_id', $user->club->id)->where(function ($query) {
                 /** @var Builder|Feedback $query */
                 $query->where('join_club_intention', '<>', 0)
                     ->orWhere('join_tea_party_intention', '<>', 0);
