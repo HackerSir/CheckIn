@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Club;
 use App\DataTables\FeedbackDataTable;
-use App\DataTables\Scopes\FeedbackFilterScope;
+use App\DataTables\Scopes\FeedbackClubScope;
 use App\Feedback;
 use App\Http\Requests\FeedbackRequest;
 use App\Record;
@@ -64,8 +64,8 @@ class FeedbackController extends Controller
                     return back()->with('warning', '活動已結束，僅社長可查看資料');
                 }
             }
-            //只能看到自己社團的
-            $dataTable->addScope(new FeedbackFilterScope($user->club, null));
+            //只能看到自己社團的，且無法看到對於加入社團與參與茶會皆無意願的
+            $dataTable->addScope(new FeedbackClubScope($user->club));
             //社團統計資料
             $feedbackQuery->where('club_id', $user->club->id);
             $recordQuery->where('club_id', $user->club->id);
