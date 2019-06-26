@@ -24,7 +24,7 @@
                             <i class="fa fa-search"></i> 檢視回饋資料
                         </a>
                         <a :href="feedback_edit_url(record.club_id)" class="btn btn-primary" v-else>
-                            <i class="fa fa-edit"></i> 填寫回饋資料
+                            <i class="fa fa-edit"></i> 按我完成集點
                         </a>
                     </div>
                 </li>
