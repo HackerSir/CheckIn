@@ -137,11 +137,15 @@ class Student extends Model
     {
         return $this->hasMany(Record::class)
             ->whereHas('club', function ($query) {
-                /** @var Builder|Club|$query */
+                /** @var Builder|Club $query */
                 $query->whereHas('clubType', function ($query) {
-                    /** @var Builder|ClubType|$query */
+                    /** @var Builder|ClubType $query */
                     $query->where('is_counted', true);
                 });
+            })
+            ->whereHas('club.feedback', function ($query) {
+                /** @var Builder|Feedback $query */
+                $query->where('student_nid', $this->nid);
             })
             ->orderBy('created_at', 'desc');
     }
