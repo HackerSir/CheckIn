@@ -2462,6 +2462,13 @@ fastparse@^1.1.1:
   resolved "https://registry.yarnpkg.com/fastparse/-/fastparse-1.1.2.tgz#91728c5a5942eced8531283c79441ee4122c35a9"
   integrity sha512-483XLLxTVIwWK3QTrMGRqUfUpoOs/0hbQrl2oz4J0pAcm3A3bu84wxTFqGqkJzewCLdME38xJLJAxBABfQT8sQ==
 
+faye-websocket@0.9.4:
+  version "0.9.4"
+  resolved "https://registry.yarnpkg.com/faye-websocket/-/faye-websocket-0.9.4.tgz#885934c79effb0409549e0c0a3801ed17a40cdad"
+  integrity sha1-iFk0x57/sECVSeDAo4Ae0XpAza0=
+  dependencies:
+    websocket-driver ">=0.5.1"
+
 faye-websocket@^0.10.0:
   version "0.10.0"
   resolved "https://registry.yarnpkg.com/faye-websocket/-/faye-websocket-0.10.0.tgz#4e492f8d04dfb6f89003507f6edbf2d501e7c6f4"
@@ -3592,6 +3599,11 @@ kind-of@^6.0.0, kind-of@^6.0.2:
   resolved "https://registry.yarnpkg.com/kind-of/-/kind-of-6.0.2.tgz#01146b36a6218e64e58f3a8d66de5d7fc6f6d051"
   integrity sha512-s5kLOcnH0XqDO+FvuaLX8DDjZ18CGFk7VygH40QoKPUQhW4e2rvM0rwUq0t8IQDOwYSeLK01U90OjzBTme2QqA==
 
+laravel-echo@^1.0.5:
+  version "1.5.4"
+  resolved "https://registry.yarnpkg.com/laravel-echo/-/laravel-echo-1.5.4.tgz#4630671162d98442955bba8504846766dddece73"
+  integrity sha512-FTfgLQopGTPxIthYqFLbaZQ14kDuRH0AJa7N7HJNmWM5zJ4/qtZcP6zsfvATGazF+5Sr0M7IWgtF+OaNIUHqcw==
+
 laravel-echo@^1.4.0:
   version "1.5.3"
   resolved "https://registry.yarnpkg.com/laravel-echo/-/laravel-echo-1.5.3.tgz#4a810eff43fb09c9bdba74396ee028c7abd485f9"
@@ -4077,6 +4089,11 @@ mkdirp@0.5.x, "mkdirp@>=0.5 0", mkdirp@^0.5.0, mkdirp@^0.5.1, mkdirp@~0.5.0, mkd
   integrity sha1-MAV0OOrGz3+MR2fzhkjWaX11yQM=
   dependencies:
     minimist "0.0.8"
+
+moment@^2.11.1:
+  version "2.24.0"
+  resolved "https://registry.yarnpkg.com/moment/-/moment-2.24.0.tgz#0d055d53f5052aa653c9f6eb68bb5d12bf5c2b5b"
+  integrity sha512-bV7f+6l2QigeBBZSM/6yTNq4P2fNpSWj/0e7jQcy87A8e7o2nAfP/34/2ky5Vw4B9S446EtIhodAzkFCcR4dQg==
 
 move-concurrently@^1.0.1:
   version "1.0.1"
@@ -5132,6 +5149,14 @@ punycode@^2.1.0:
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/punycode/-/punycode-2.1.1.tgz#b58b010ac40c22c5657616c8d2c2c02c7bf479ec"
   integrity sha512-XRsRjdf+j5ml+y/6GKHPZbrF/8p2Yga0JPtdqTIY2Xe5ohJPD9saDJJLPvp9+NSBprVvevdXZybnj2cv8OEd0A==
+
+pusher-js@^3.2.1:
+  version "3.2.4"
+  resolved "https://registry.yarnpkg.com/pusher-js/-/pusher-js-3.2.4.tgz#29dfc5c58ffa576dc71afba07815a3f895a71dc5"
+  integrity sha1-Kd/FxY/6V23HGvugeBWj+JWnHcU=
+  dependencies:
+    faye-websocket "0.9.4"
+    xmlhttprequest "^1.8.0"
 
 q@^1.1.2:
   version "1.5.1"
@@ -6523,6 +6548,14 @@ vm-browserify@0.0.4:
   dependencies:
     indexof "0.0.1"
 
+vue-echo@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/vue-echo/-/vue-echo-1.0.2.tgz#4a1aa4d123e28abd7b01de7ef270ee528a531406"
+  integrity sha512-WCrq4xcYjK1h0c0P3x9jFs4j1EEToAHbZUI/AANUebHkyeNLbe6JX7pUhAkTkz1YbjzkkP/84lNnMrDgbAVrRw==
+  dependencies:
+    laravel-echo "^1.0.5"
+    pusher-js "^3.2.1"
+
 vue-holderjs@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/vue-holderjs/-/vue-holderjs-1.0.2.tgz#1556a15da78f751ab7c0e6acbbe24a672e44770e"
@@ -6559,6 +6592,13 @@ vue-loader@^13.7.1:
     vue-hot-reload-api "^2.2.0"
     vue-style-loader "^3.0.0"
     vue-template-es2015-compiler "^1.6.0"
+
+vue-moment@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/vue-moment/-/vue-moment-4.0.0.tgz#20809d1e7d7fca63d556fb8d008b95993d32f5ea"
+  integrity sha512-lNkEPuA3i3A4q4TDSwOXoRF4Y2vHHdaTOSvpPyGgxoFQP8n4sUh6jU5aJj3FIMlXo5UaHLPIz5hvvpvYx9Wj0w==
+  dependencies:
+    moment "^2.11.1"
 
 vue-style-loader@^3.0.0:
   version "3.1.2"
@@ -6799,6 +6839,11 @@ xmlhttprequest-ssl@~1.5.4:
   version "1.5.5"
   resolved "https://registry.yarnpkg.com/xmlhttprequest-ssl/-/xmlhttprequest-ssl-1.5.5.tgz#c2876b06168aadc40e57d97e81191ac8f4398b3e"
   integrity sha1-wodrBhaKrcQOV9l+gRkayPQ5iz4=
+
+xmlhttprequest@^1.8.0:
+  version "1.8.0"
+  resolved "https://registry.yarnpkg.com/xmlhttprequest/-/xmlhttprequest-1.8.0.tgz#67fe075c5c24fef39f9d65f5f7b7fe75171968fc"
+  integrity sha1-Z/4HXFwk/vOfnWX197f+dRcZaPw=
 
 xtend@^4.0.0, xtend@~4.0.1:
   version "4.0.1"

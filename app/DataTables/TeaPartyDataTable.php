@@ -22,7 +22,7 @@ class TeaPartyDataTable extends DataTable
         $dataTable = new EloquentDataTable($query);
 
         return $dataTable
-            ->editColumn('club_id', function ($teaParty) {
+            ->editColumn('club_id', function (TeaParty $teaParty) {
                 return view('tea-party.datatables.club', compact('teaParty'))->render();
             })
             ->filterColumn('club_id', function ($query, $keyword) {

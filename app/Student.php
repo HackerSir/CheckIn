@@ -136,12 +136,18 @@ class Student extends Model
     public function countedRecords()
     {
         return $this->hasMany(Record::class)
+            //社團所屬類型必須為可集點
             ->whereHas('club', function ($query) {
-                /** @var Builder|Club|$query */
+                /** @var Builder|Club $query */
                 $query->whereHas('clubType', function ($query) {
-                    /** @var Builder|ClubType|$query */
+                    /** @var Builder|ClubType $query */
                     $query->where('is_counted', true);
                 });
+            })
+            //必須填寫該社團的回饋資料
+            ->whereHas('club.feedback', function ($query) {
+                /** @var Builder|Feedback $query */
+                $query->where('student_nid', $this->nid);
             })
             ->orderBy('created_at', 'desc');
     }

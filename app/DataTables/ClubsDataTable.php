@@ -22,7 +22,7 @@ class ClubsDataTable extends DataTable
         $dataTable = new EloquentDataTable($query);
 
         return $dataTable
-            ->editColumn('club_type_id', function ($club) {
+            ->editColumn('club_type_id', function (Club $club) {
                 return view('club.datatables.club-type', compact('club'))->render();
             })
             ->filterColumn('club_type_id', function ($query, $keyword) {
@@ -32,10 +32,10 @@ class ClubsDataTable extends DataTable
                     $query->where('name', 'like', '%' . $keyword . '%');
                 });
             })
-            ->editColumn('name', function ($club) {
+            ->editColumn('name', function (Club $club) {
                 return view('club.datatables.name', compact('club'))->render();
             })
-            ->addColumn('booth', function ($club) {
+            ->addColumn('booth', function (Club $club) {
                 return view('club.datatables.booth', compact('club'))->render();
             })
             ->filterColumn('booth', function ($query, $keyword) {

@@ -23,7 +23,7 @@ class StudentTicketsDataTable extends DataTable
 
         return $dataTable
             ->addColumn('action', 'student-ticket.datatables.action')
-            ->editColumn('student_nid', function ($ticket) {
+            ->editColumn('student_nid', function (StudentTicket $ticket) {
                 return view('student-ticket.datatables.student', compact('ticket'))->render();
             })
             ->filterColumn('student_nid', function ($query, $keyword) {

@@ -97,6 +97,16 @@
                         @endif
                     @endif
                 </dd>
+
+                <dt class="col-md-2">加入社團意願</dt>
+                <dd class="col-md-10">
+                   {{ \App\Feedback::$intentionText[$feedback->join_club_intention] ?? null }}
+                </dd>
+
+                <dt class="col-md-2">參與迎新茶會意願</dt>
+                <dd class="col-md-10">
+                   {{ \App\Feedback::$intentionText[$feedback->join_tea_party_intention] ?? null }}
+                </dd>
             </dl>
 
             <hr>

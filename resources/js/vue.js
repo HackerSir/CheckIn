@@ -18,9 +18,18 @@ Vue.component('club-card', require('./components/ClubCard.vue'));
 Vue.component('club-cards', require('./components/ClubCards.vue'));
 Vue.component('my-feedback-list', require('./components/MyFeedbackList.vue'));
 Vue.component('my-feedback', require('./components/MyFeedback.vue'));
+Vue.component('record-list', require('./components/RecordList'));
 Vue.component('favorite-club-button', require('./components/FavoriteClubButton.vue'));
 
 Vue.prototype.$userId = document.querySelector("meta[name='user-id']").getAttribute('content');
+
+// VueMoment ($moment)
+const moment = require('moment');
+require('moment/locale/zh-tw');
+Vue.use(require('vue-moment'), {
+    moment
+});
+moment.locale('zh-tw');
 
 const app = new Vue({
     el: '#vue-app'

@@ -22,7 +22,7 @@ class BoothsDataTable extends DataTable
 
         return $dataTable
             ->editColumn('name', 'booth.datatables.name')
-            ->editColumn('club_id', function ($booth) {
+            ->editColumn('club_id', function (Booth $booth) {
                 return view('booth.datatables.club', compact('booth'))->render();
             })
             ->filterColumn('club_id', function ($query, $keyword) {

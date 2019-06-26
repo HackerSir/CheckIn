@@ -21,10 +21,10 @@ class QrcodesDataTable extends DataTable
         $dataTable = new EloquentDataTable($query);
 
         return $dataTable
-            ->editColumn('code', function ($qrcode) {
+            ->editColumn('code', function (Qrcode $qrcode) {
                 return view('qrcode.datatables.code', compact('qrcode'))->render();
             })
-            ->editColumn('student_nid', function ($qrcode) {
+            ->editColumn('student_nid', function (Qrcode $qrcode) {
                 return view('qrcode.datatables.student', compact('qrcode'))->render();
             })
             ->filterColumn('student_nid', function ($query, $keyword) {
@@ -35,7 +35,7 @@ class QrcodesDataTable extends DataTable
                         ->orWhere('nid', 'like', '%' . $keyword . '%');
                 });
             })
-            ->editColumn('is_last_one', function ($qrcode) {
+            ->editColumn('is_last_one', function (Qrcode $qrcode) {
                 return view('qrcode.datatables.is_last_one', compact('qrcode'))->render();
             })
             ->rawColumns(['code', 'is_last_one']);

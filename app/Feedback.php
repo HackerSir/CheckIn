@@ -24,7 +24,11 @@ use Illuminate\Database\Eloquent\Model;
  * @property string|null $message 附加訊息
  * @property string|null $custom_question 社團自訂問題
  * @property string|null $answer_of_custom_question 對於社團自訂問題的回答
+ * @property int|null $join_club_intention 加入社團意願
+ * @property int|null $join_tea_party_intention 參加迎新茶會意願
  * @property-read \App\Club $club
+ * @property-read string|null $join_club_intention_text
+ * @property-read string|null $join_tea_party_intention_text
  * @property-read \App\Student|null $student
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Feedback newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Feedback newQuery()
@@ -40,6 +44,8 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Feedback whereIncludeFacebook($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Feedback whereIncludeLine($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Feedback whereIncludePhone($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Feedback whereJoinClubIntention($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Feedback whereJoinTeaPartyIntention($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Feedback whereLine($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Feedback whereMessage($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Feedback wherePhone($value)
@@ -65,6 +71,8 @@ class Feedback extends Model
         'message',
         'custom_question',
         'answer_of_custom_question',
+        'join_club_intention',
+        'join_tea_party_intention',
     ];
 
     protected $nullable = [
@@ -72,10 +80,18 @@ class Feedback extends Model
     ];
 
     protected $casts = [
-        'include_phone'    => 'boolean',
-        'include_email'    => 'boolean',
-        'include_facebook' => 'boolean',
-        'include_line'     => 'boolean',
+        'include_phone'            => 'boolean',
+        'include_email'            => 'boolean',
+        'include_facebook'         => 'boolean',
+        'include_line'             => 'boolean',
+        'join_club_intention'      => 'int',
+        'join_tea_party_intention' => 'int',
+    ];
+
+    public static $intentionText = [
+        2 => '參加',
+        1 => '考慮中',
+        0 => '不參加',
     ];
 
     /**
@@ -107,5 +123,29 @@ class Feedback extends Model
         foreach ($checkFields as $checkField) {
             $this->$checkField = $this->{'include_' . $checkField} ? $contactInformation->$checkField : null;
         }
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getJoinClubIntentionTextAttribute()
+    {
+        if ($this->join_club_intention === null) {
+            return null;
+        }
+
+        return self::$intentionText[$this->join_club_intention] ?? null;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getJoinTeaPartyIntentionTextAttribute()
+    {
+        if ($this->join_tea_party_intention === null) {
+            return null;
+        }
+
+        return self::$intentionText[$this->join_tea_party_intention] ?? null;
     }
 }

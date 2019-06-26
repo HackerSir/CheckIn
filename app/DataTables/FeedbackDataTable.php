@@ -34,10 +34,6 @@ class FeedbackDataTable extends DataTable
                         ->orWhere('nid', 'like', '%' . $keyword . '%');
                 });
             })
-            ->addColumn('is_freshman', function (Feedback $feedback) {
-                /** @var Feedback $feedback */
-                return view('feedback.datatables.is_freshman', compact('feedback'))->render();
-            })
             ->editColumn('club_id', function (Feedback $feedback) {
                 return view('feedback.datatables.club', compact('feedback'))->render();
             })
@@ -51,7 +47,20 @@ class FeedbackDataTable extends DataTable
             ->editColumn('contact_info', function (Feedback $feedback) {
                 return view('feedback.datatables.contact_info', compact('feedback'))->render();
             })
-            ->rawColumns(['is_freshman', 'club_id', 'contact_info', 'action']);
+            ->editColumn('custom_question_and_answer', function (Feedback $feedback) {
+                if (!$feedback->custom_question) {
+                    return null;
+                }
+
+                return view('feedback.datatables.custom_question_and_answer', compact('feedback'))->render();
+            })
+            ->editColumn('join_club_intention', function (Feedback $feedback) {
+                return $feedback->join_club_intention_text;
+            })
+            ->editColumn('join_tea_party_intention', function (Feedback $feedback) {
+                return $feedback->join_tea_party_intention_text;
+            })
+            ->rawColumns(['student_nid', 'club_id', 'contact_info', 'custom_question_and_answer', 'action']);
     }
 
     /**
@@ -90,42 +99,56 @@ class FeedbackDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            'id'                        => ['title' => '#'],
-            'student_nid'               => ['title' => '學生'],
-            'is_freshman'               => [
-                'title'      => '新生',
-                'searchable' => false,
-                'orderable'  => false,
-            ],
-            'club_id'                   => ['title' => '社團'],
-            'contact_info'              => [
+            'id'                         => ['title' => '#'],
+            'student_nid'                => ['title' => '學生'],
+            'club_id'                    => ['title' => '社團'],
+            'contact_info'               => [
                 'title'      => '聯絡資訊',
                 'searchable' => false,
                 'orderable'  => false,
             ],
-            'phone'                     => [
+            'phone'                      => [
                 'title'   => '電話',
                 'visible' => false,
             ],
-            'email'                     => [
+            'email'                      => [
                 'title'   => '信箱',
                 'visible' => false,
             ],
-            'facebook'                  => [
+            'facebook'                   => [
                 'title'   => 'Facebook',
                 'visible' => false,
             ],
-            'line'                      => [
+            'line'                       => [
                 'title'   => 'LINE',
                 'visible' => false,
             ],
-            'message'                   => [
+            'message'                    => [
                 'title'      => '訊息',
                 'searchable' => false,
                 'orderable'  => false,
             ],
-            'custom_question'           => ['title' => '社團自訂問題'],
-            'answer_of_custom_question' => ['title' => '對於社團自訂問題的回答'],
+            'custom_question_and_answer' => [
+                'title'      => '社團自訂問答',
+                'searchable' => false,
+                'orderable'  => false,
+            ],
+            'custom_question'            => [
+                'title'   => '社團自訂問題',
+                'visible' => false,
+            ],
+            'answer_of_custom_question'  => [
+                'title'   => '對於社團自訂問題的回答',
+                'visible' => false,
+            ],
+            'join_club_intention'        => [
+                'title'      => '加入社團意願',
+                'searchable' => false,
+            ],
+            'join_tea_party_intention'   => [
+                'title'      => '參加迎新茶會意願',
+                'searchable' => false,
+            ],
         ];
     }
 
