@@ -97,7 +97,7 @@
                             <label class="btn btn-outline-secondary">
                                 <input type="radio" name="join_club_intention" value="{{ $key }}" required
                                        @if(isset($feedback) && $feedback->join_club_intention == $key
-                                       || !isset($feedback) && request('join_club_intention') == $key) checked @endif> {{ $value }}
+                                       || !isset($feedback) && request()->has('join_club_intention') && request('join_club_intention') == $key) checked @endif> {{ $value }}
                             </label>
                         @endforeach
                     </div>
@@ -144,7 +144,7 @@
                             <label class="btn btn-outline-secondary">
                                 <input type="radio" name="join_tea_party_intention" value="{{ $key }}" required
                                        @if(isset($feedback) && $feedback->join_tea_party_intention == $key
-                                       || !isset($feedback) && request('join_tea_party_intention') == $key) checked @endif> {{ $value }}
+                                       || !isset($feedback) && request()->has('join_tea_party_intention') && request('join_tea_party_intention') == $key) checked @endif> {{ $value }}
                             </label>
                         @endforeach
                     </div>
