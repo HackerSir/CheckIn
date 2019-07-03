@@ -23,6 +23,10 @@
                         <i class="fa fa-check text-success" aria-hidden="true" title="最後一組"></i>
                     @endif
                 </dd>
+                <dt class="col-4 col-md-2">自動建立</dt>
+                <dd class="col-8 col-md-10">
+                    <span class="code">{{ $qrcode->auto_generated ? 'O' : 'X' }}</span>
+                </dd>
 
                 <dt class="col-4 col-md-2">學生</dt>
                 <dd class="col-8 col-md-10">
