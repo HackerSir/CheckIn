@@ -51,7 +51,10 @@ class QrcodeSetController extends Controller
 
         $amount = $request->get('amount');
         for ($i = 0; $i < $amount; $i++) {
-            Qrcode::create(['qrcode_set_id' => $qrcodeSet->id]);
+            Qrcode::create([
+                'qrcode_set_id'  => $qrcodeSet->id,
+                'auto_generated' => false,
+            ]);
         }
 
         return redirect()->route('qrcode-set.show', $qrcodeSet->id)->with('success', "QR Code 已新增{$amount}組");
@@ -60,7 +63,7 @@ class QrcodeSetController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\QrcodeSet $qrcodeSet
+     * @param \App\QrcodeSet $qrcodeSet
      * @param QrcodesDataTable $qrcodesDataTable
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\Response|\Illuminate\View\View
      */
