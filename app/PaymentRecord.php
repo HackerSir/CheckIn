@@ -70,6 +70,7 @@ class PaymentRecord extends Model
     {
         return $this->belongsTo(Student::class, 'nid', 'nid')->whereHas('feedback', function ($query) {
             /** @var Builder|Feedback $query */
+            //FIXME: $this->club_id 這用法似乎會導致無法進行 Eager loading
             $query->where('club_id', $this->club_id)
                 ->where(function ($query) {
                     /** @var Builder|Feedback $query */

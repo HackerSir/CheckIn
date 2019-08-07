@@ -7,11 +7,11 @@
     <a href="{{ route('payment-record.create') }}" class="btn btn-primary">
         <i class="fa fa-plus-circle mr-2"></i>新增
     </a>
-    {{--    {!! Form::open(['route' => ['export.feedback'], 'style' => 'display: inline']) !!}--}}
-    {{--    <button type="submit" class="btn btn-primary">--}}
-    {{--        <i class="fa fa-download" aria-hidden="true"></i> 匯出--}}
-    {{--    </button>--}}
-    {{--    {!! Form::close() !!}--}}
+    {!! Form::open(['route' => ['export.payment-record'], 'style' => 'display: inline']) !!}
+    <button type="submit" class="btn btn-primary">
+        <i class="fa fa-download mr-2"></i>匯出
+    </button>
+    {!! Form::close() !!}
 @endsection
 
 @section('main_content')

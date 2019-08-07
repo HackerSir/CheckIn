@@ -96,6 +96,7 @@ Route::group(['middleware' => ['auth', 'email']], function () {
     Route::resource('contact-information', 'ContactInformationController');
     //繳費紀錄管理
     //權限：PaymentRecordPolicy
+    Route::post('export/payment-record', 'ExportController@paymentRecord')->name('export.payment-record');
     Route::resource('payment-record', 'PaymentRecordController');
     //QR Code管理
     //權限：qrcode.manage

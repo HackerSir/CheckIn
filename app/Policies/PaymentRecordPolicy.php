@@ -80,4 +80,13 @@ class PaymentRecordPolicy
     {
         return $user->club->id == $paymentRecord->club_id;
     }
+
+    /**
+     * @param User $user
+     * @return bool
+     */
+    public function export(User $user)
+    {
+        return true;
+    }
 }
