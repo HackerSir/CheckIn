@@ -14,6 +14,7 @@ class CreatePaymentRecordsTable extends Migration
     {
         Schema::create('payment_records', function (Blueprint $table) {
             $table->increments('id');
+            $table->unsignedInteger('club_id')->comment('社團');
             $table->string('nid')->comment('NID');
             $table->string('name')->nullable()->comment('姓名');
             $table->boolean('is_paid')->nullable()->comment('姓名');
@@ -24,6 +25,8 @@ class CreatePaymentRecordsTable extends Migration
 
             $table->foreign('user_id')->references('id')->on('users')
                 ->onUpdate('cascade')->onDelete('set null');
+            $table->foreign('club_id')->references('id')->on('clubs')
+                ->onUpdate('cascade')->onDelete('cascade');
         });
     }
 

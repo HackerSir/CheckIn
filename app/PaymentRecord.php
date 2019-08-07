@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
  * App\PaymentRecord
  *
  * @property int $id
+ * @property int $club_id 社團
  * @property string $nid NID
  * @property string|null $name 姓名
  * @property bool|null $is_paid 姓名
@@ -16,10 +17,12 @@ use Illuminate\Database\Eloquent\Model;
  * @property int|null $user_id 使用者
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Club $club
  * @property-read \App\User|null $user
  * @method static \Illuminate\Database\Eloquent\Builder|\App\PaymentRecord newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\PaymentRecord newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\PaymentRecord query()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\PaymentRecord whereClubId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\PaymentRecord whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\PaymentRecord whereHandler($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\PaymentRecord whereId($value)
@@ -40,6 +43,7 @@ class PaymentRecord extends Model
         'handler',
         'note',
         'user_id',
+        'club_id',
     ];
 
     protected $casts = [
@@ -49,5 +53,10 @@ class PaymentRecord extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function club()
+    {
+        return $this->belongsTo(Club::class);
     }
 }

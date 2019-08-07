@@ -28,6 +28,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property-read bool $is_counted
  * @property-read \App\ImgurImage $imgurImage
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Student[] $leaders
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\PaymentRecord[] $paymentRecords
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Record[] $records
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Student[] $staffs
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Student[] $students
@@ -177,6 +178,11 @@ class Club extends Model
     public function favoriteBy()
     {
         return $this->belongsToMany(User::class, 'favorite_club')->withTimestamps();
+    }
+
+    public function paymentRecords()
+    {
+        return $this->hasMany(PaymentRecord::class);
     }
 
     /**
