@@ -95,7 +95,7 @@ Route::group(['middleware' => ['auth', 'email']], function () {
     //權限：ContactInformationPolicy
     Route::resource('contact-information', 'ContactInformationController');
     //繳費紀錄管理
-    //TODO: 權限
+    //權限：PaymentRecordPolicy
     Route::resource('payment-record', 'PaymentRecordController');
     //QR Code管理
     //權限：qrcode.manage
