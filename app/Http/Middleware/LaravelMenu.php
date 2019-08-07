@@ -45,7 +45,10 @@ class LaravelMenu
                     $menu->add('平台問卷', ['route' => 'survey.index'])->active('survey/*');
                     //負責的社團
                     if ($user->club) {
-                        $menu->add($user->club->name, ['route' => ['clubs.show', $user->club]]);
+                        $myClubMenu = $menu->add('我的社團', 'javascript:void(0)');
+                        $myClubMenu->add($user->club->name, ['route' => ['clubs.show', $user->club]]);
+                        $myClubMenu->add('繳費紀錄', ['route' => 'payment-record.index'])
+                            ->active('payment-record/*');
                     }
                     if ($user->student || $user->club) {
                         $menu->add('回饋資料', ['route' => 'feedback.index'])->active('feedback/*');
@@ -85,6 +88,11 @@ class LaravelMenu
 
                         if (Laratrust::can('record.manage')) {
                             $activityMenu->add('打卡紀錄管理', ['route' => 'record.index'])->active('record/*');
+                        }
+
+                        if (Laratrust::can('payment-record.manage')) {
+                            $activityMenu->add('繳費紀錄管理', ['route' => 'payment-record.index'])
+                                ->active('payment-record/*');
                         }
 
                         $this->addDivider($activityMenu);
