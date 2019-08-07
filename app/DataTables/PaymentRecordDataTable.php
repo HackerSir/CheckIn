@@ -26,6 +26,12 @@ class PaymentRecordDataTable extends DataTable
             ->editColumn('club_id', function (PaymentRecord $paymentRecord) {
                 return view('payment-record.datatables.club', compact('paymentRecord'))->render();
             })
+            ->editColumn('student', function (PaymentRecord $paymentRecord) {
+                return $paymentRecord->student->display_name ?? null;
+            })
+            ->editColumn('is_paid', function (PaymentRecord $paymentRecord) {
+                return $paymentRecord->is_paid ? 'O' : 'X';
+            })
             ->filterColumn('club_id', function ($query, $keyword) {
                 /* @var Builder|PaymentRecord $query */
                 $query->whereHas('club', function ($query) use ($keyword) {
@@ -88,6 +94,7 @@ class PaymentRecordDataTable extends DataTable
             'club_id'    => ['title' => '社團'],
             'nid'        => ['title' => 'NID'],
             'name'       => ['title' => '姓名'],
+            'student'    => ['title' => '對應學生'],
             'is_paid'    => ['title' => '已付清'],
             'handler'    => ['title' => '經手人'],
             'note'       => ['title' => '備註'],

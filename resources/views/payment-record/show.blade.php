@@ -26,7 +26,19 @@
                 </dd>
 
                 <dt class="col-4 col-md-2">NID</dt>
+                <dd class="col-8 col-md-10">{{ $paymentRecord->nid }}</dd>
+
+                <dt class="col-4 col-md-2">姓名</dt>
                 <dd class="col-8 col-md-10">{{ $paymentRecord->name }}</dd>
+
+                <dt class="col-4 col-md-2">對應學生</dt>
+                <dd class="col-8 col-md-10">
+                    @if($paymentRecord->student)
+                        {{ $paymentRecord->student->display_name }}
+                    @else
+                        <span class="badge badge-secondary">該 NID 無效、該學生未填寫回饋資料，或該學生於回饋資料中表示對於參與社團與茶會皆無意願</span>
+                    @endif
+                </dd>
 
                 <dt class="col-4 col-md-2">繳費狀況</dt>
                 <dd class="col-8 col-md-10">{{ $paymentRecord->is_paid ? '已繳清' : '未繳清' }}</dd>

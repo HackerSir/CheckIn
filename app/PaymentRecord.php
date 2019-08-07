@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -18,6 +19,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \App\Club $club
+ * @property-read \App\Student $student
  * @property-read \App\User|null $user
  * @method static \Illuminate\Database\Eloquent\Builder|\App\PaymentRecord newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\PaymentRecord newQuery()
@@ -58,5 +60,22 @@ class PaymentRecord extends Model
     public function club()
     {
         return $this->belongsTo(Club::class);
+    }
+
+    /**
+     * 對應學生，必須有填寫該社團回饋資料，且對於參與社團或茶會有意願
+     * @return Builder|\Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function student()
+    {
+        return $this->belongsTo(Student::class, 'nid', 'nid')->whereHas('feedback', function ($query) {
+            /** @var Builder|Feedback $query */
+            $query->where('club_id', $this->club_id)
+                ->where(function ($query) {
+                    /** @var Builder|Feedback $query */
+                    $query->where('join_club_intention', '<>', 0)
+                        ->orWhere('join_tea_party_intention', '<>', 0);
+                });
+        });
     }
 }
