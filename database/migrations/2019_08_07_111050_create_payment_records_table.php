@@ -17,7 +17,7 @@ class CreatePaymentRecordsTable extends Migration
             $table->unsignedInteger('club_id')->comment('社團');
             $table->string('nid')->comment('NID');
             $table->string('name')->nullable()->comment('姓名');
-            $table->boolean('is_paid')->nullable()->comment('姓名');
+            $table->boolean('is_paid')->nullable()->comment('已付清');
             $table->string('handler')->nullable()->comment('經手人');
             $table->string('note')->nullable()->comment('備註');
             $table->unsignedInteger('user_id')->nullable()->comment('使用者');

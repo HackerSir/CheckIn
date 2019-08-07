@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $club_id 社團
  * @property string $nid NID
  * @property string|null $name 姓名
- * @property bool|null $is_paid 姓名
+ * @property bool|null $is_paid 已付清
  * @property string|null $handler 經手人
  * @property string|null $note 備註
  * @property int|null $user_id 使用者
