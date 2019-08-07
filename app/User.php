@@ -33,6 +33,7 @@ use Laratrust\Traits\LaratrustUserTrait;
  * @property-read bool $is_confirmed
  * @property-read bool $is_local_account
  * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $notifications
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\PaymentRecord[] $paymentRecords
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Permission[] $permissions
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Role[] $roles
  * @property-read \App\Student $student
@@ -156,6 +157,11 @@ class User extends Authenticatable
     public function favoriteClubs()
     {
         return $this->belongsToMany(Club::class, 'favorite_club')->withTimestamps();
+    }
+
+    public function paymentRecords()
+    {
+        return $this->hasMany(PaymentRecord::class);
     }
 
     /**

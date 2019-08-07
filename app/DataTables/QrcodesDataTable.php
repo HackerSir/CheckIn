@@ -35,6 +35,9 @@ class QrcodesDataTable extends DataTable
                         ->orWhere('nid', 'like', '%' . $keyword . '%');
                 });
             })
+            ->editColumn('auto_generated', function (Qrcode $qrcode) {
+                return $qrcode->auto_generated ? 'O' : 'X';
+            })
             ->editColumn('is_last_one', function (Qrcode $qrcode) {
                 return view('qrcode.datatables.is_last_one', compact('qrcode'))->render();
             })
@@ -76,11 +79,15 @@ class QrcodesDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            'id'          => ['title' => '#'],
-            'code'        => ['title' => '代碼'],
-            'student_nid' => ['title' => '學生'],
-            'bind_at'     => ['title' => '綁定時間'],
-            'is_last_one' => [
+            'id'             => ['title' => '#'],
+            'code'           => ['title' => '代碼'],
+            'student_nid'    => ['title' => '學生'],
+            'bind_at'        => ['title' => '綁定時間'],
+            'auto_generated' => [
+                'title'      => '自動建立',
+                'searchable' => false,
+            ],
+            'is_last_one'    => [
                 'searchable' => false,
                 'orderable'  => false,
                 'title'      => '最後一組',

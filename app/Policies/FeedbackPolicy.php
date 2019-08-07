@@ -30,7 +30,7 @@ class FeedbackPolicy
         if (\Laratrust::can('feedback.manage') || $isOwner) {
             return true;
         }
-        //對於加入社團或參與茶會皆無意願
+        //對於加入社團與參與茶會皆無意願
         if (!$feedback->join_club_intention && !$feedback->join_tea_party_intention) {
             return false;
         }

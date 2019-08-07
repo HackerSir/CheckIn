@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Club;
 use App\ClubSurvey;
 use App\Feedback;
+use App\PaymentRecord;
 use App\Record;
 use App\Student;
 use App\StudentSurvey;
@@ -520,6 +521,77 @@ class ExportController extends Controller
                 $club->name,
                 $clubSurvey->rating,
                 $comment,
+            ]);
+        }
+        //調整格式
+        $styleArray = [
+            'borders' => [
+                'right' => [
+                    'style' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THICK,
+                    'color' => ['argb' => '00000000'],
+                ],
+            ],
+        ];
+
+        $sheet->getStyleByColumnAndRow(9, 1, 9, $sheet->getHighestRow())->applyFromArray($styleArray);
+
+        //下載
+        return $this->downloadSpreadsheet($spreadsheet, '社團問卷.xlsx');
+    }
+
+    /**
+     * 繳費紀錄
+     *
+     * @return \Symfony\Component\HttpFoundation\BinaryFileResponse
+     * @throws \PhpOffice\PhpSpreadsheet\Exception
+     */
+    public function paymentRecord()
+    {
+        \Gate::authorize('export', PaymentRecord::class);
+
+        $paymentRecordQuery = PaymentRecord::with('club', 'user.student');
+        /** @var User $user */
+        $user = auth()->user();
+        if (!$user->can('payment-record.manage')) {
+            $paymentRecordQuery->where('club_id', $user->club->id);
+        }
+        $paymentRecords = $paymentRecordQuery->get();
+        //建立
+        $spreadsheet = new Spreadsheet();
+        $sheet = $spreadsheet->getActiveSheet();
+        //建立匯出資料
+        $this->setTitleRow(
+            $sheet,
+            [
+                '#',
+                '社團',
+                'NID',
+                '姓名',
+                '對應學生',
+                '已付清',
+                '經手人',
+                '備註',
+                '操作者',
+                '更新時間',
+            ]
+        );
+        foreach ($paymentRecords as $paymentRecord) {
+            $note = $paymentRecord->note;
+            if (starts_with($note, '=')) {
+                $note = "'" . $note;
+            }
+
+            $this->appendRow($sheet, [
+                $paymentRecord->id,
+                $paymentRecord->club->name,
+                $paymentRecord->nid,
+                $paymentRecord->name,
+                $paymentRecord->student->display_name ?? null,
+                $paymentRecord->is_paid ? 'O' : 'X',
+                $paymentRecord->handler,
+                $note,
+                $paymentRecord->user->display_name ?? null,
+                $paymentRecord->updated_at,
             ]);
         }
         //調整格式
