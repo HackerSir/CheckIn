@@ -2,7 +2,7 @@
 
 namespace App\Providers;
 
-use Gate;
+use Illuminate\Support\Facades\Gate;
 use Laravel\Horizon\HorizonApplicationServiceProvider;
 
 class HorizonServiceProvider extends HorizonApplicationServiceProvider
