@@ -4,7 +4,6 @@ namespace App\Providers;
 
 use App\Club;
 use App\ContactInformation;
-use App\DataUpdateRequest;
 use App\Feedback;
 use App\ImgurImage;
 use App\Observers\ActivityObserver;
@@ -57,7 +56,6 @@ class AppServiceProvider extends ServiceProvider
         ImgurImage::observe(ImgurImageObserver::class);
         Club::observe(ClubObserver::class);
         StudentSurvey::observe(StudentSurveyObserver::class);
-        DataUpdateRequest::observe(DataUpdateRequestObserver::class);
         Feedback::observe(FeedbackObserver::class);
         ContactInformation::observe(ContactInformationObserver::class);
 

@@ -2,8 +2,6 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
-
 /**
  * App\DataUpdateRequest
  *
@@ -54,8 +52,9 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\DataUpdateRequest whereUserId($value)
  * @mixin \Eloquent
  */
-class DataUpdateRequest extends Model
+class DataUpdateRequest extends LoggableModel
 {
+    protected static $logName = 'data-update-request';
     protected $fillable = [
         'user_id',
         'club_id',
@@ -107,5 +106,10 @@ class DataUpdateRequest extends Model
         }
 
         return '<span class="text-danger"><i class="fas fa-fw fa-times"></i> 不通過</span>';
+    }
+
+    protected function getNameForActivityLog(): string
+    {
+        return $this->club->name . ' 的資料更新申請';
     }
 }
