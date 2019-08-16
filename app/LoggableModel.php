@@ -5,7 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Activitylog\Traits\LogsActivity;
 
-class LoggableModel extends Model
+abstract class LoggableModel extends Model
 {
     use LogsActivity;
     protected static $logName = 'loggable-model';
@@ -19,6 +19,8 @@ class LoggableModel extends Model
 
     public function getDescriptionForEvent(string $eventName): string
     {
-        return self::$eventText[$eventName] . ' ' . $this->name;
+        return self::$eventText[$eventName] . ' ' . $this->getNameForActivityLog();
     }
+
+    abstract protected function getNameForActivityLog(): string;
 }

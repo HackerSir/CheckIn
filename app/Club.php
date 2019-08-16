@@ -227,4 +227,9 @@ class Club extends LoggableModel
 
         return $options;
     }
+
+    protected function getNameForActivityLog(): string
+    {
+        return $this->name;
+    }
 }
