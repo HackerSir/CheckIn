@@ -7,6 +7,7 @@ use App\ContactInformation;
 use App\DataUpdateRequest;
 use App\Feedback;
 use App\ImgurImage;
+use App\Observers\ActivityObserver;
 use App\Observers\ClubObserver;
 use App\Observers\ContactInformationObserver;
 use App\Observers\DataUpdateRequestObserver;
@@ -26,6 +27,7 @@ use Carbon\Carbon;
 use Horizon;
 use Illuminate\Support\ServiceProvider;
 use Schema;
+use Spatie\Activitylog\Models\Activity;
 use Validator;
 
 class AppServiceProvider extends ServiceProvider
@@ -47,6 +49,7 @@ class AppServiceProvider extends ServiceProvider
         view()->share('xRequestedWithMessage', $xRequestedWithMessage);
 
         //Observers
+        Activity::observe(ActivityObserver::class);
         User::observe(UserObserver::class);
         Student::observe(StudentObserver::class);
         Qrcode::observe(QrcodeObserver::class);
