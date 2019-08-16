@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Route;
+use Spatie\Activitylog\Models\Activity;
 
 class RouteServiceProvider extends ServiceProvider
 {
@@ -26,6 +27,8 @@ class RouteServiceProvider extends ServiceProvider
         //
 
         parent::boot();
+
+        Route::model('activity-log', Activity::class);
     }
 
     /**
