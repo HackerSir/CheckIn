@@ -55,14 +55,15 @@ class AuthListener
         ]);
 
         //寫入紀錄
-        $this->logService->info('[Auth][Login] ' . $user->name . ' (' . $user->email . ')' . PHP_EOL, [
-            'user' => [
-                'id'    => $user->id,
-                'email' => $user->email,
-                'name'  => $user->name,
-            ],
-            'ip'   => $ip,
-        ]);
+        activity('auth')->by($user)->log(':causer.name (:causer.email) 登入');
+//        $this->logService->info('[Auth][Login] ' . $user->name . ' (' . $user->email . ')' . PHP_EOL, [
+//            'user' => [
+//                'id'    => $user->id,
+//                'email' => $user->email,
+//                'name'  => $user->name,
+//            ],
+//            'ip'   => $ip,
+//        ]);
     }
 
     /**
@@ -79,13 +80,14 @@ class AuthListener
         }
         $ip = request()->getClientIp();
         //寫入紀錄
-        $this->logService->info('[Auth][Logout] ' . $user->name . ' (' . $user->email . ')' . PHP_EOL, [
-            'user' => [
-                'id'    => $user->id,
-                'email' => $user->email,
-                'name'  => $user->name,
-            ],
-            'ip'   => $ip,
-        ]);
+        activity('auth')->by($user)->log(':causer.name (:causer.email) 登出');
+//        $this->logService->info('[Auth][Logout] ' . $user->name . ' (' . $user->email . ')' . PHP_EOL, [
+//            'user' => [
+//                'id'    => $user->id,
+//                'email' => $user->email,
+//                'name'  => $user->name,
+//            ],
+//            'ip'   => $ip,
+//        ]);
     }
 }

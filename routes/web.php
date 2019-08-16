@@ -321,6 +321,10 @@ Route::group(['middleware' => ['auth', 'email']], function () {
         Route::get('barcode/{code}', 'CodePictureController@barcode')->name('code-picture.barcode');
     });
 
+    //活動紀錄
+    Route::middleware('permission:activity-log.access')->group(function () {
+        Route::resource('activity-log', 'ActivityLogController')->only(['index', 'show']);
+    });
     //會員資料
     Route::group(['prefix' => 'profile'], function () {
         //查看會員資料

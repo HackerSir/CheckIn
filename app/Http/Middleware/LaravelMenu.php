@@ -165,6 +165,10 @@ class LaravelMenu
                                 ->active('broadcast-test/*');
                         }
 
+                        if (Laratrust::can('activity-log.access')) {
+                            $adminMenu->add('活動紀錄', ['route' => 'activity-log.index'])->active('activity-log/*');
+                        }
+
                         if (Laratrust::can('horizon.manage')) {
                             $adminMenu->add(
                                 'Horizon <i class="fa fa-external-link-alt" aria-hidden="true"></i>',
