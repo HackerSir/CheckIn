@@ -9,7 +9,6 @@ use App\ImgurImage;
 use App\Observers\ActivityObserver;
 use App\Observers\ClubObserver;
 use App\Observers\ContactInformationObserver;
-use App\Observers\DataUpdateRequestObserver;
 use App\Observers\FeedbackObserver;
 use App\Observers\ImgurImageObserver;
 use App\Observers\QrcodeObserver;
