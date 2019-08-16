@@ -3,7 +3,6 @@
 namespace App;
 
 use Iatstuti\Database\Support\NullableFields;
-use Illuminate\Database\Eloquent\Model;
 
 /**
  * App\Club
@@ -49,9 +48,10 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Club whereUrl($value)
  * @mixin \Eloquent
  */
-class Club extends Model
+class Club extends LoggableModel
 {
     use NullableFields;
+    protected static $logName = 'club';
 
     protected $fillable = [
         'name',
