@@ -4,7 +4,7 @@
 
 @section('buttons')
     <a href="{{ route('profile') }}" class="btn btn-secondary">
-        <i class="fa fa-arrow-left" aria-hidden="true"></i> 個人資料
+        <i class="fa fa-arrow-left mr-2"></i>個人資料
     </a>
 @endsection
 

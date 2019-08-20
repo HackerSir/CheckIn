@@ -4,14 +4,14 @@
 
 @section('buttons')
     <a href="{{ route('contact-information.index') }}" class="btn btn-secondary">
-        <i class="fa fa-arrow-left" aria-hidden="true"></i> 聯絡資料
+        <i class="fa fa-arrow-left mr-2"></i>聯絡資料
     </a>
     <a href="{{ route('contact-information.edit', $contactInformation) }}" class="btn btn-primary">
-        <i class="fa fa-edit" aria-hidden="true"></i> 編輯
+        <i class="fa fa-edit mr-2"></i>編輯
     </a>
     {!! Form::open(['route' => ['contact-information.destroy', $contactInformation], 'style' => 'display: inline', 'method' => 'DELETE', 'onSubmit' => "return confirm('確定要刪除嗎？');"]) !!}
     <button type="submit" class="btn btn-danger">
-        <i class="fa fa-trash" aria-hidden="true"></i> 刪除
+        <i class="fa fa-trash mr-2"></i>刪除
     </button>
     {!! Form::close() !!}
 @endsection
@@ -94,9 +94,9 @@
                 <dt class="col-md-2">新生</dt>
                 <dd class="col-md-10">
                     @if($contactInformation->student->is_freshman)
-                        <i class="fa fa-check fa-2x text-success" aria-hidden="true"></i>
+                        <i class="fa fa-check fa-2x text-success"></i>
                     @else
-                        <i class="fa fa-times fa-2x text-danger" aria-hidden="true"></i>
+                        <i class="fa fa-times fa-2x text-danger"></i>
                     @endif
                 </dd>
             </dl>

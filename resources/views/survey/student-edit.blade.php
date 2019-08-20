@@ -9,11 +9,11 @@
 @section('buttons')
     @if($studentSurvey)
         <a href="{{ route('survey.student.show') }}" class="btn btn-secondary">
-            <i class="fa fa-arrow-left" aria-hidden="true"></i> 返回
+            <i class="fa fa-arrow-left mr-2"></i>返回
         </a>
     @else
         <a href="{{ route('survey.index') }}" class="btn btn-secondary">
-            <i class="fa fa-arrow-left" aria-hidden="true"></i> 返回
+            <i class="fa fa-arrow-left mr-2"></i>返回
         </a>
     @endif
 @endsection

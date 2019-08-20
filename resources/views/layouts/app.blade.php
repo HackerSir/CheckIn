@@ -46,40 +46,11 @@
     <link rel="stylesheet" href="{{ asset(mix('/build-css/select2-bootstrap4.min.css')) }}">
     {{-- toastr.js --}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+    <link rel="stylesheet" href="{{ asset(mix('/build-css/app.css')) }}">
+
     <style>
-        body > div:first-child {
-            padding-top: 60px;
-        }
-
-        .table td, .table th {
-            vertical-align: middle;
-        }
-
         body {
-            background: url("{{ asset('img/background.jpg') }}") no-repeat fixed center / cover !important;
-        }
-
-        .toast-top-full-width {
-            top: 60px;
-        }
-
-        .code {
-            font-family: Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-            font-size: 120%;
-        }
-
-        @media (max-width: 1200px) {
-            .navbar-collapse {
-                max-height: calc(100vh - 56px);
-                overflow-y: auto;
-            }
-        }
-
-        .form-group.required label:after {
-            font-family: "Font Awesome 5 Free";
-            font-weight: 900;
-            content: " \f621";
-            color: red;
+            background-image: url("{{ asset('img/background.jpg') }}") !important;
         }
     </style>
     @yield('css')
@@ -126,30 +97,14 @@
 <script>
     //CSRF Token
     window.Laravel = <?php echo json_encode([
-        'baseUrl'   => url('/'),
-        'student'   => auth()->user()->student->nid ?? null
+        'baseUrl' => url('/'),
+        'student' => auth()->user()->student->nid ?? null
     ]); ?>
 </script>
+{{-- 各種 js 的設定 --}}
+<script src="{{ asset(mix('build-js/options.js')) }}"></script>
 <script>
     $(function () {
-        toastr.options = {
-            "toastClass": "toastr",
-            "closeButton": true,
-            "debug": false,
-            "newestOnTop": true,
-            "progressBar": true,
-            "positionClass": "toast-top-full-width",
-            "preventDuplicates": false,
-            "onclick": null,
-            "showDuration": "3000",
-            "hideDuration": "1000",
-            "timeOut": "5000",
-            "extendedTimeOut": "3000",
-            "showEasing": "swing",
-            "hideEasing": "linear",
-            "showMethod": "fadeIn",
-            "hideMethod": "fadeOut"
-        };
         @if(session('success'))
             toastr["success"]('{{ session('success') }}');
         @endif
@@ -168,8 +123,6 @@
                 placement: 'right'
             });
         });
-        //DataTimePicker
-        $.datetimepicker.setLocale('zh-TW');
         // Google分析
         @if(config('services.google.analysis.id'))
         (function (i, s, o, g, r, a, m) {
@@ -187,43 +140,6 @@
         ga('send', 'pageview');
         @endif
     });
-    // DataTables 預設設定
-    (function ($, DataTable) {
-        $.extend(true, DataTable.defaults, {
-            pageLength: 10,
-            autoWidth: false,
-            responsive: true,
-            dom: "<'row'<'col-md-6'l><'col-md-6'f>><'row'<'col-md-12'rt>><'row'<'col-md-6'i><'col-md-6'p>>",
-            stateSave: true,
-            language: {
-                "decimal": "",
-                "emptyTable": "沒有資料",
-                "thousands": ",",
-                "processing": "處理中...",
-                "loadingRecords": "載入中...",
-                "lengthMenu": "顯示 _MENU_ 項結果",
-                "zeroRecords": "沒有符合的結果",
-                "info": "顯示第 _START_ 至 _END_ 項結果，共 _TOTAL_ 項",
-                "infoEmpty": "顯示第 0 至 0 項結果，共 0 項",
-                "infoFiltered": "(從 _MAX_ 項結果中過濾)",
-                "infoPostFix": "",
-                "search": "搜尋：",
-                "paginate": {
-                    "first": "第一頁",
-                    "previous": "上一頁",
-                    "next": "下一頁",
-                    "last": "最後一頁"
-                },
-                "aria": {
-                    "sortAscending": ": 升冪排列",
-                    "sortDescending": ": 降冪排列"
-                }
-            }
-        });
-        DataTable.ext.errMode = 'throw';
-    })(jQuery, jQuery.fn.dataTable);
-    // select2 預設設定
-    $.fn.select2.defaults.set("theme", "bootstrap4");
 </script>
 @yield('js')
 

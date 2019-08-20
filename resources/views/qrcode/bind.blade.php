@@ -12,7 +12,7 @@
 
 @section('buttons')
     <a href="{{ route('qrcode.index') }}" class="btn btn-secondary mb-2">
-        <i class="fa fa-arrow-left" aria-hidden="true"></i> QR Code
+        <i class="fa fa-arrow-left mr-2"></i>QR Code
     </a>
 @endsection
 

@@ -4,7 +4,7 @@
 
 @section('buttons')
     <a href="{{ route('user.show', $user) }}" class="btn btn-secondary">
-        <i class="fa fa-arrow-left" aria-hidden="true"></i> 會員資料
+        <i class="fa fa-arrow-left mr-2"></i>會員資料
     </a>
 @endsection
 
@@ -26,8 +26,7 @@
                                        @if($user->hasRole($role->name)) checked disabled @endif>
                                 <label class="custom-control-label" for="roleCheck{{ $role->id }}">
                                     {{ $role->display_name }}（{{ $role->description }}）
-                                    <i class="fa fa-exclamation-triangle text-danger" aria-hidden="true"
-                                       title="禁止解除自己的管理員職務"></i>
+                                    <i class="fa fa-exclamation-triangle text-danger" title="禁止解除自己的管理員職務"></i>
                                 </label>
                             </div>
                         @else

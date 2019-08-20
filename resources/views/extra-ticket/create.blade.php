@@ -4,7 +4,7 @@
 
 @section('buttons')
     <a href="{{ route('extra-ticket.index') }}" class="btn btn-secondary">
-        <i class="fa fa-arrow-left" aria-hidden="true"></i> 工作人員抽獎編號管理
+        <i class="fa fa-arrow-left mr-2"></i>工作人員抽獎編號管理
     </a>
 @endsection
 

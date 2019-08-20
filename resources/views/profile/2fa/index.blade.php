@@ -4,7 +4,7 @@
 
 @section('buttons')
     <a href="{{ route('profile') }}" class="btn btn-secondary">
-        <i class="fa fa-arrow-left" aria-hidden="true"></i> 個人資料
+        <i class="fa fa-arrow-left mr-2"></i>個人資料
     </a>
 @endsection
 
@@ -63,12 +63,12 @@
                     <div class="mx-auto">
                         @if($user->google2fa_secret)
                             <button type="submit" class="btn btn-danger">
-                                <i class="fa fa-toggle-off" aria-hidden="true"></i> 停用
+                                <i class="fa fa-toggle-off mr-2"></i>停用
                             </button>
                         @else
                             {{ Form::hidden('toggle', 'on') }}
                             <button type="submit" class="btn btn-primary">
-                                <i class="fa fa-toggle-on" aria-hidden="true"></i> 啟用
+                                <i class="fa fa-toggle-on mr-2"></i>啟用
                             </button>
                         @endif
                     </div>

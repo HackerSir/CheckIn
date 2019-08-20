@@ -4,7 +4,7 @@
 
 @section('buttons')
     <a href="{{ route('club-type.index') }}" class="btn btn-secondary">
-        <i class="fa fa-arrow-left" aria-hidden="true"></i> 社團類型管理
+        <i class="fa fa-arrow-left mr-2"></i>社團類型管理
     </a>
 @endsection
 

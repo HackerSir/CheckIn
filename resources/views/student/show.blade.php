@@ -13,24 +13,24 @@
 
 @section('buttons')
     <a href="{{ route('student.index') }}" class="btn btn-secondary">
-        <i class="fa fa-arrow-left" aria-hidden="true"></i> 學生管理
+        <i class="fa fa-arrow-left mr-2"></i>學生管理
     </a>
     @can('update', $student)
         <a href="{{ route('student.edit', $student) }}" class="btn btn-primary">
-            <i class="fa fa-edit" aria-hidden="true"></i> 編輯
+            <i class="fa fa-edit mr-2"></i>編輯
         </a>
     @endcan
     @can('fetch', $student)
         {!! Form::open(['route' => ['student.fetch', $student], 'style' => 'display: inline', 'method' => 'PUT']) !!}
         <button type="submit" class="btn btn-success">
-            <i class="fa fa-sync" aria-hidden="true"></i> 更新學生資料
+            <i class="fa fa-sync mr-2"></i>更新學生資料
         </button>
         {!! Form::close() !!}
     @endcan
     @can('delete', $student)
         {!! Form::open(['route' => ['student.destroy', $student], 'style' => 'display: inline', 'method' => 'DELETE', 'onSubmit' => "return confirm('確定要刪除嗎？');"]) !!}
         <button type="submit" class="btn btn-danger">
-            <i class="fa fa-trash" aria-hidden="true"></i> 刪除
+            <i class="fa fa-trash mr-2"></i>刪除
         </button>
         {!! Form::close() !!}
     @endcan
@@ -87,7 +87,7 @@
                                 <span class="code">{{ $qrcode->code }}</span>
                             @endif
                             @if($qrcode->is_last_one)
-                                <i class="fa fa-check text-success" aria-hidden="true" title="最後一組"></i>
+                                <i class="fa fa-check text-success" title="最後一組"></i>
                             @endif
                         </td>
                         <td>

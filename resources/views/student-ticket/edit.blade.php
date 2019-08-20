@@ -9,7 +9,7 @@
 
 @section('buttons')
     <a href="{{ route('student-ticket.index') }}" class="btn btn-secondary">
-        <i class="fa fa-arrow-left" aria-hidden="true"></i> 學生抽獎編號管理
+        <i class="fa fa-arrow-left mr-2"></i>學生抽獎編號管理
     </a>
 @endsection
 

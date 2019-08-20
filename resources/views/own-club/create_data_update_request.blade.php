@@ -4,7 +4,7 @@
 
 @section('buttons')
     <a href="{{ route('own-club.data-update-request.index') }}" class="btn btn-secondary">
-        <i class="fa fa-arrow-left" aria-hidden="true"></i> 返回
+        <i class="fa fa-arrow-left mr-2"></i>返回
     </a>
 @endsection
 @section('main_content')

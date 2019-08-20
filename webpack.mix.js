@@ -13,6 +13,8 @@ const {mix} = require('laravel-mix');
 let buildJsPath = 'public/build-js';
 let buildCssPath = 'public/build-css';
 
+mix.stylus('resources/stylus/app.styl', buildCssPath).version();
+
 mix.js('resources/js/vue.js', buildJsPath)
     .js('resources/js/checkin.js', buildJsPath)
     .js('resources/js/broadcast-test.js', buildJsPath)
@@ -22,3 +24,4 @@ mix.copy('node_modules/select2-bootstrap4-theme/dist/select2-bootstrap4.min.css'
     .version();
 
 mix.js('resources/js/search-form.js', buildJsPath).version();
+mix.js('resources/js/options.js', buildJsPath).version();

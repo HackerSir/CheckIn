@@ -4,7 +4,7 @@
 
 @section('buttons')
     <a href="{{ route('qrcode.index') }}" class="btn btn-secondary mb-2">
-        <i class="fa fa-arrow-left" aria-hidden="true"></i> QR Code
+        <i class="fa fa-arrow-left mr-2"></i>QR Code
     </a>
 @endsection
 
@@ -20,7 +20,7 @@
                 <dd class="col-8 col-md-10">
                     <span class="code">{{ $qrcode->code }}</span>
                     @if($qrcode->is_last_one)
-                        <i class="fa fa-check text-success" aria-hidden="true" title="最後一組"></i>
+                        <i class="fa fa-check text-success" title="最後一組"></i>
                     @endif
                 </dd>
                 <dt class="col-4 col-md-2">自動建立</dt>

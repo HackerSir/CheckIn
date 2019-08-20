@@ -99,13 +99,13 @@ class DataUpdateRequest extends LoggableModel
     public function getShowResultAttribute()
     {
         if (is_null($this->review_result)) {
-            return '<span class="text-info"><i class="fas fa-fw fa-question"></i> 等待審核</span>';
+            return '<span class="text-info"><i class="fas fa-fw fa-question mr-2"></i>等待審核</span>';
         }
         if ($this->review_result) {
-            return '<span class="text-success"><i class="fas fa-fw fa-check"></i> 通過</span>';
+            return '<span class="text-success"><i class="fas fa-fw fa-check mr-2"></i>通過</span>';
         }
 
-        return '<span class="text-danger"><i class="fas fa-fw fa-times"></i> 不通過</span>';
+        return '<span class="text-danger"><i class="fas fa-fw fa-times mr-2"></i>不通過</span>';
     }
 
     protected function getNameForActivityLog(): string

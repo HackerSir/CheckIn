@@ -4,7 +4,7 @@
 
 @section('buttons')
     <a href="{{ route('qrcode-set.index') }}" class="btn btn-secondary mb-2">
-        <i class="fa fa-arrow-left" aria-hidden="true"></i> QR Code 集
+        <i class="fa fa-arrow-left mr-2"></i>QR Code 集
     </a>
 @endsection
 
@@ -25,7 +25,7 @@
         <div class="card-body text-center">
             {{ Form::open(['route' => ['qrcode-set.download', $qrcodeSet]]) }}
             <button type="submit" class="btn btn-primary">
-                <i class="fa fa-file-word" aria-hidden="true"></i> 下載 QR Code 列印用 Word 檔
+                <i class="fa fa-file-word mr-2"></i>下載 QR Code 列印用 Word 檔
             </button>
             {{ Form::close() }}
         </div>

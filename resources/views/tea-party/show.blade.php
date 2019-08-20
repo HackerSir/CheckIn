@@ -4,17 +4,17 @@
 
 @section('buttons')
     <a href="{{ route('tea-party.index') }}" class="btn btn-secondary">
-        <i class="fa fa-arrow-left" aria-hidden="true"></i> 迎新茶會管理
+        <i class="fa fa-arrow-left mr-2"></i>迎新茶會管理
     </a>
     <a href="{{ route('clubs.show', $teaParty->club) }}" class="btn btn-secondary">
-        <i class="fa fa-arrow-left" aria-hidden="true"></i> 檢視社團
+        <i class="fa fa-arrow-left mr-2"></i>檢視社團
     </a>
     <a href="{{ route('tea-party.edit', $teaParty) }}" class="btn btn-primary">
-        <i class="fa fa-edit" aria-hidden="true"></i> 編輯
+        <i class="fa fa-edit mr-2"></i>編輯
     </a>
     {!! Form::open(['route' => ['tea-party.destroy', $teaParty], 'style' => 'display: inline', 'method' => 'DELETE', 'onSubmit' => "return confirm('確定要刪除嗎？');"]) !!}
     <button type="submit" class="btn btn-danger">
-        <i class="fa fa-trash" aria-hidden="true"></i> 刪除
+        <i class="fa fa-trash mr-2"></i>刪除
     </button>
     {!! Form::close() !!}
 @endsection

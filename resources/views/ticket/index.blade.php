@@ -4,7 +4,7 @@
 
 @section('buttons')
     <a href="{{ route('ticket.ticket') }}" class="btn btn-primary" target="_blank">
-        <i class="fa fa-external-link-alt" aria-hidden="true"></i> 抽獎編號展示
+        <i class="fa fa-external-link-alt mr-2"></i>抽獎編號展示
     </a>
 @endsection
 

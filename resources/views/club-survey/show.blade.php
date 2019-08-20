@@ -12,7 +12,7 @@
 
 @section('buttons')
     <a href="{{ route('club-survey.index') }}" class="btn btn-secondary mb-2">
-        <i class="fa fa-arrow-left" aria-hidden="true"></i> 社團問卷
+        <i class="fa fa-arrow-left mr-2"></i>社團問卷
     </a>
 @endsection
 
