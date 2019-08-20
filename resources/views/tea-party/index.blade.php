@@ -4,7 +4,7 @@
 
 @section('buttons')
     <a href="{{ route('tea-party.create') }}" class="btn btn-primary">
-        <i class="fa fa-plus-circle" aria-hidden="true"></i> 新增迎新茶會
+        <i class="fa fa-plus-circle mr-2"></i>新增迎新茶會
     </a>
 @endsection
 

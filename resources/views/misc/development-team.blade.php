@@ -38,10 +38,10 @@
                 </div>
                 <div class="d-flex mt-auto flex-column justify-content-center flex-sm-row justify-content-md-start">
                     <a href="https://kid7.club/" class="btn btn-outline-primary m-1" target="_blank">
-                        <i class="fas fa-home"></i> 個人主頁
+                        <i class="fas fa-home mr-2"></i>個人主頁
                     </a>
                     <a href="https://www.facebook.com/MagicYuan7" class="btn btn-outline-primary m-1" target="_blank">
-                        <i class="fab fa-facebook-square"></i> Facebook
+                        <i class="fab fa-facebook-square mr-2"></i>Facebook
                     </a>
                 </div>
             </div>
@@ -65,10 +65,10 @@
                 </div>
                 <div class="d-flex mt-auto flex-column justify-content-center flex-sm-row justify-content-md-start">
                     <a href="https://fgo-friend.illya.tw/" class="btn btn-outline-primary m-1" target="_blank">
-                        <i class="fas fa-user-friends"></i> FGO Friend
+                        <i class="fas fa-user-friends mr-2"></i>FGO Friend
                     </a>
                     <a href="https://illya.tw/" class="btn btn-outline-primary m-1" target="_blank">
-                        <i class="fas fa-wrench"></i> illya.tw
+                        <i class="fas fa-wrench mr-2"></i>illya.tw
                     </a>
                 </div>
             </div>

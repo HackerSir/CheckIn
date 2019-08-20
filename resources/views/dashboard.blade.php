@@ -29,21 +29,21 @@
                     <div class="text-center">
                         @if($student->studentSurvey)
                             <a href="{{ route('survey.student.show') }}" class="btn btn-success">
-                                <i class="fa fa-search"></i> 檢視平台問卷
+                                <i class="fa fa-search mr-2"></i>檢視平台問卷
                             </a>
                         @elseif(Carbon\Carbon::now()->gt(new Carbon\Carbon(Setting::get('end_at'))))
                             <button type="button" class="btn btn-primary disabled">
-                                <i class="fa fa-edit"></i> 填寫平台問卷
+                                <i class="fa fa-edit mr-2"></i>填寫平台問卷
                             </button>
                             <small class="text-danger">已超過填寫時間</small>
                         @elseif(!$student->has_enough_counted_records)
                             <button type="button" class="btn btn-primary disabled">
-                                <i class="fa fa-edit"></i> 填寫平台問卷
+                                <i class="fa fa-edit mr-2"></i>填寫平台問卷
                             </button><br/>
                             <small class="text-danger">請先完成<strong>打卡集點</strong></small>
                         @else
                             <a href="{{ route('survey.student.edit') }}" class="btn btn-primary">
-                                <i class="fa fa-edit"></i> 填寫平台問卷
+                                <i class="fa fa-edit mr-2"></i>填寫平台問卷
                             </a>
                         @endif
                     </div>

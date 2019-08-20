@@ -4,7 +4,7 @@
 
 @section('buttons')
     <a href="{{ route('student.show', $student) }}" class="btn btn-secondary">
-        <i class="fa fa-arrow-left" aria-hidden="true"></i> 檢視學生
+        <i class="fa fa-arrow-left mr-2"></i>檢視學生
     </a>
 @endsection
 

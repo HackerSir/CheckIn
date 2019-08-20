@@ -12,7 +12,7 @@
 
 @section('buttons')
     <a href="{{ route('student-survey.index') }}" class="btn btn-secondary mb-2">
-        <i class="fa fa-arrow-left" aria-hidden="true"></i> 學生問卷
+        <i class="fa fa-arrow-left mr-2"></i>學生問卷
     </a>
 @endsection
 
@@ -53,9 +53,9 @@
                 <dt class="col-md-4">新生</dt>
                 <dd class="col-md-8">
                     @if($studentSurvey->student->is_freshman)
-                        <i class="fa fa-check fa-2x text-success" aria-hidden="true"></i>
+                        <i class="fa fa-check fa-2x text-success"></i>
                     @else
-                        <i class="fa fa-times fa-2x text-danger" aria-hidden="true"></i>
+                        <i class="fa fa-times fa-2x text-danger"></i>
                     @endif
                 </dd>
             </dl>

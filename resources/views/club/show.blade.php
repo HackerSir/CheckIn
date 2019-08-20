@@ -14,31 +14,31 @@
 
 @section('buttons')
     <a href="{{ route('clubs.index') }}" class="btn btn-secondary">
-        <i class="fa fa-arrow-left" aria-hidden="true"></i> 社團攤位
+        <i class="fa fa-arrow-left mr-2"></i>社團攤位
     </a>
     @if(\Laratrust::can('club.manage'))
         <a href="{{ route('club.index') }}" class="btn btn-secondary">
-            <i class="fa fa-arrow-left" aria-hidden="true"></i> 社團管理
+            <i class="fa fa-arrow-left mr-2"></i>社團管理
         </a>
         <a href="{{ route('club.edit', $club) }}" class="btn btn-primary">
-            <i class="fa fa-edit" aria-hidden="true"></i> 編輯資料
+            <i class="fa fa-edit mr-2"></i>編輯資料
         </a>
         {!! Form::open(['route' => ['club.destroy', $club], 'style' => 'display: inline', 'method' => 'DELETE', 'onSubmit' => "return confirm('確定要刪除嗎？');"]) !!}
         <button type="submit" class="btn btn-danger">
-            <i class="fa fa-trash" aria-hidden="true"></i> 刪除社團
+            <i class="fa fa-trash mr-2"></i>刪除社團
         </button>
         {!! Form::close() !!}
     @elseif(Gate::allows('as-staff', $club))
         @if(Carbon\Carbon::now()->lte(new Carbon\Carbon(Setting::get('club_edit_deadline'))))
             <a href="{{ route('own-club.edit') }}" class="btn btn-primary">
-                <i class="fa fa-edit" aria-hidden="true"></i> 編輯資料
+                <i class="fa fa-edit mr-2"></i>編輯資料
             </a>
         @else
             <button class="btn btn-primary disabled" onclick="alert('已超過資料編輯期限，請提交社團資料修改申請')">
-                <i class="fa fa-edit" aria-hidden="true"></i> 編輯資料
+                <i class="fa fa-edit mr-2"></i>編輯資料
             </button>
             <a href="{{ route('own-club.data-update-request.index') }}" class="btn btn-primary">
-                <i class="fa fa-edit" aria-hidden="true"></i> 社團資料修改申請
+                <i class="fa fa-edit mr-2"></i>社團資料修改申請
             </a>
         @endif
     @endif
@@ -77,11 +77,11 @@
                         <dd class="col-6 col-sm-9">
                             @if($club->is_counted)
                                 <span class="text-success">
-                                    <i class="far fa-check-square" aria-hidden="true"></i> 列入集點
+                                    <i class="far fa-check-square mr-2"></i>列入集點
                                 </span>
                             @else
                                 <span class="text-danger">
-                                    <i class="far fa-square" aria-hidden="true"></i> 不列入集點
+                                    <i class="far fa-square mr-2"></i>不列入集點
                                 </span>
                             @endif
                         </dd>
@@ -142,21 +142,21 @@
                             </small>
                             @if(!Auth::check())
                                 <a href="javascript:void(0)" class="btn btn-primary btn-lg disabled">
-                                    <i class="fa fa-pencil-alt" aria-hidden="true"></i> 登入後即可填寫
+                                    <i class="fa fa-pencil-alt mr-2"></i>登入後即可填寫
                                 </a>
                             @elseif(Auth::user()->student)
                                 @if(!$feedback)
                                     <a href="{{ route('feedback.create', $club) }}" class="btn btn-primary btn-lg">
-                                        <i class="fa fa-pencil-alt" aria-hidden="true"></i> 按此填寫
+                                        <i class="fa fa-pencil-alt mr-2"></i>按此填寫
                                     </a>
                                 @else
                                     <a href="{{ route('feedback.create', $club) }}" class="btn btn-success btn-lg">
-                                        <i class="fa fa-check" aria-hidden="true"></i> 已填寫完成
+                                        <i class="fa fa-check mr-2"></i>已填寫完成
                                     </a>
                                 @endif
                             @else
                                 <a href="javascript:void(0)" class="btn btn-primary btn-lg disabled">
-                                    <i class="fa fa-times" aria-hidden="true"></i> 限學生帳號使用
+                                    <i class="fa fa-times mr-2"></i>限學生帳號使用
                                 </a>
                             @endif
                             @php
@@ -200,35 +200,35 @@
                         @if($club->teaParty)
                             <div style="display: inline-block">
                                 <a href="{{ route('tea-party.edit', $club->teaParty) }}" class="btn btn-primary btn-sm">
-                                    <i class="fa fa-edit" aria-hidden="true"></i> 編輯
+                                    <i class="fa fa-edit mr-2"></i>編輯
                                 </a>
                             </div>
                             {!! Form::open(['route' => ['tea-party.destroy', $club->teaParty], 'style' => 'display: inline', 'method' => 'DELETE', 'onSubmit' => "return confirm('確定要刪除嗎？');"]) !!}
                             <button type="submit" class="btn btn-danger btn-sm">
-                                <i class="fa fa-trash" aria-hidden="true"></i> 刪除
+                                <i class="fa fa-trash mr-2"></i>刪除
                             </button>
                             {!! Form::close() !!}
                         @else
                             <a href="{{ route('tea-party.create', ['club_id' => $club->id]) }}"
                                class="btn btn-primary btn-sm">
-                                <i class="fa fa-plus-circle" aria-hidden="true"></i> 新增迎新茶會
+                                <i class="fa fa-plus-circle mr-2"></i>新增迎新茶會
                             </a>
                         @endif
                     @elseif(Gate::allows('as-staff', $club))
                         @if($club->teaParty)
                             <div style="display: inline-block">
                                 <a href="{{ route('own-club.edit-tea-party') }}" class="btn btn-primary btn-sm">
-                                    <i class="fa fa-edit" aria-hidden="true"></i> 編輯
+                                    <i class="fa fa-edit mr-2"></i>編輯
                                 </a>
                             </div>
                             {!! Form::open(['route' => ['own-club.destroy-tea-party'], 'style' => 'display: inline', 'method' => 'DELETE', 'onSubmit' => "return confirm('確定要刪除嗎？');"]) !!}
                             <button type="submit" class="btn btn-danger btn-sm">
-                                <i class="fa fa-trash" aria-hidden="true"></i> 刪除
+                                <i class="fa fa-trash mr-2"></i>刪除
                             </button>
                             {!! Form::close() !!}
                         @else
                             <a href="{{ route('own-club.edit-tea-party') }}" class="btn btn-primary btn-sm">
-                                <i class="fa fa-plus-circle" aria-hidden="true"></i> 新增迎新茶會
+                                <i class="fa fa-plus-circle mr-2"></i>新增迎新茶會
                             </a>
                         @endif
                     @endif

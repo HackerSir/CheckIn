@@ -4,7 +4,7 @@
 
 @section('buttons')
     <a href="{{ route('data-update-request.index') }}" class="btn btn-secondary">
-        <i class="fa fa-arrow-left" aria-hidden="true"></i> 社團資料修改申請管理
+        <i class="fa fa-arrow-left mr-2"></i>社團資料修改申請管理
     </a>
 @endsection
 
@@ -33,8 +33,8 @@
                     </div>
                 </div>
                 {{ bs()->formGroup(bs()->radioGroup('review_result', [
-                  'y' => '<span class="text-success"><i class="fas fa-fw fa-check"></i> 通過</span>',
-                  'n' => '<span class="text-danger"><i class="fas fa-fw fa-times"></i> 不通過</span>',
+                  'y' => '<span class="text-success"><i class="fas fa-fw fa-check mr-2"></i>通過</span>',
+                  'n' => '<span class="text-danger"><i class="fas fa-fw fa-times mr-2"></i>不通過</span>',
                   ]))->label('審核結果')->showAsRow() }}
                 {{ bs()->formGroup(bs()->text('review_comment')->placeholder('若審核不通過，請說明原因'))->label('審核評語')->showAsRow() }}
                 <div class="row">

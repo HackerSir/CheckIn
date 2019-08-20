@@ -5,11 +5,11 @@
 @section('buttons')
     @if(Laratrust::can('qrcode.manage'))
         <a href="{{ route('qrcode.index') }}" class="btn btn-secondary">
-            <i class="fa fa-arrow-left" aria-hidden="true"></i> QR Code
+            <i class="fa fa-arrow-left mr-2"></i>QR Code
         </a>
     @endif
     <a href="{{ route('qrcode-set.create') }}" class="btn btn-primary">
-        <i class="fa fa-plus-circle" aria-hidden="true"></i> 新增 QR Code 集
+        <i class="fa fa-plus-circle mr-2"></i>新增 QR Code 集
     </a>
 @endsection
 

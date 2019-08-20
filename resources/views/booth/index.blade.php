@@ -4,10 +4,10 @@
 
 @section('buttons')
     <a href="{{ route('booth.create') }}" class="btn btn-primary">
-        <i class="fa fa-plus-circle" aria-hidden="true"></i> 新增攤位
+        <i class="fa fa-plus-circle mr-2"></i>新增攤位
     </a>
     <a href="{{ route('booth.import') }}" class="btn btn-primary">
-        <i class="fa fa-upload" aria-hidden="true"></i> 匯入
+        <i class="fa fa-upload mr-2"></i>匯入
     </a>
 @endsection
 

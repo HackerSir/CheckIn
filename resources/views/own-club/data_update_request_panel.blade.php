@@ -4,10 +4,10 @@
 
 @section('buttons')
     <a href="{{ route('clubs.show', $club) }}" class="btn btn-secondary">
-        <i class="fa fa-arrow-left" aria-hidden="true"></i> 返回
+        <i class="fa fa-arrow-left mr-2"></i>返回
     </a>
     <a href="{{ route('own-club.data-update-request.create') }}" class="btn btn-primary">
-        <i class="fa fa-edit" aria-hidden="true"></i> 提交申請
+        <i class="fa fa-edit mr-2"></i>提交申請
     </a>
 @endsection
 

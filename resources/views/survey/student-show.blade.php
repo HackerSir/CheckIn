@@ -12,11 +12,11 @@
 
 @section('buttons')
     <a href="{{ route('survey.index') }}" class="btn btn-secondary">
-        <i class="fa fa-arrow-left" aria-hidden="true"></i> 問卷
+        <i class="fa fa-arrow-left mr-2"></i>問卷
     </a>
     @if(\Carbon\Carbon::now()->lte(new Carbon\Carbon(Setting::get('end_at'))))
         <a href="{{ route('survey.student.edit') }}" class="btn btn-primary">
-            <i class="fa fa-edit" aria-hidden="true"></i> 編輯
+            <i class="fa fa-edit mr-2"></i>編輯
         </a>
     @endif
 @endsection

@@ -30,18 +30,18 @@
     <dt class="col-md-2">視為新生</dt>
     <dd class="col-md-10">
         @if($student->consider_as_freshman)
-            <i class="fa fa-check fa-2x fa-fw text-success" aria-hidden="true"></i>
+            <i class="fa fa-check fa-2x fa-fw text-success"></i>
         @else
-            <i class="fa fa-times fa-2x fa-fw text-danger" aria-hidden="true"></i>
+            <i class="fa fa-times fa-2x fa-fw text-danger"></i>
         @endif
     </dd>
 
     <dt class="col-md-2">新生</dt>
     <dd class="col-md-10">
         @if($student->is_freshman)
-            <i class="fa fa-check fa-2x fa-fw text-success" aria-hidden="true"></i>
+            <i class="fa fa-check fa-2x fa-fw text-success"></i>
         @else
-            <i class="fa fa-times fa-2x fa-fw text-danger" aria-hidden="true"></i>
+            <i class="fa fa-times fa-2x fa-fw text-danger"></i>
         @endif
     </dd>
 

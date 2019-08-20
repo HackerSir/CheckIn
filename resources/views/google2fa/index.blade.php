@@ -30,7 +30,7 @@
                 <div class="form-group row">
                     <div class="mx-auto">
                         <button type="submit" class="btn btn-primary">
-                            <i class="fa fa-check" aria-hidden="true"></i> 確認
+                            <i class="fa fa-check mr-2"></i>確認
                         </button>
                     </div>
                 </div>

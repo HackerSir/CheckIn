@@ -44,7 +44,7 @@
         <div class="col-md-6 col-lg-4">
             <a class="card text-center btn btn-outline-primary" href="{{ route('my-qrcode') }}">
                 <div class="card-body">
-                    <i class="fas fa-qrcode fa-10x fa-fw mb-1" aria-hidden="true"></i>
+                    <i class="fas fa-qrcode fa-10x fa-fw mb-1"></i>
                     <h4 class="card-title">快速打卡</h4>
                     <p class="card-text">使用 QR Code 加快打卡</p>
                 </div>
@@ -53,7 +53,7 @@
         <div class="col-md-6 col-lg-4">
             <a class="card text-center btn btn-outline-primary" href="{{ route('my-qrcode') }}">
                 <div class="card-body">
-                    <i class="fas fa-th-large fa-10x fa-fw mb-1" aria-hidden="true"></i>
+                    <i class="fas fa-th-large fa-10x fa-fw mb-1"></i>
                     <h4 class="card-title">即時集點進度</h4>
                     <p class="card-text">隨時查詢進度</p>
                 </div>
@@ -62,7 +62,7 @@
         <div class="col-md-6 col-lg-4">
             <a class="card text-center btn btn-outline-primary" href="{{ route('clubs.index') }}">
                 <div class="card-body">
-                    <i class="fas fa-users fa-10x fa-fw mb-1" aria-hidden="true"></i>
+                    <i class="fas fa-users fa-10x fa-fw mb-1"></i>
                     <h4 class="card-title">尋找社團</h4>
                     <p class="card-text">尋找你感興趣的社團</p>
                 </div>
@@ -71,7 +71,7 @@
         <div class="col-md-6 col-lg-4">
             <a class="card text-center btn btn-outline-primary" href="{{ route('clubs.map.static') }}">
                 <div class="card-body">
-                    <i class="fas fa-map-marked-alt fa-10x fa-fw mb-1" aria-hidden="true"></i>
+                    <i class="fas fa-map-marked-alt fa-10x fa-fw mb-1"></i>
                     <h4 class="card-title">攤位地圖</h4>
                     <p class="card-text">暢遊社博不迷路</p>
                 </div>
@@ -80,7 +80,7 @@
         <div class="col-md-6 col-lg-4">
             <a class="card text-center btn btn-outline-primary" href="{{ route('faq') }}">
                 <div class="card-body">
-                    <i class="fas fa-question-circle fa-10x fa-fw mb-1" aria-hidden="true"></i>
+                    <i class="fas fa-question-circle fa-10x fa-fw mb-1"></i>
                     <h4 class="card-title">常見問題</h4>
                     <p class="card-text">解答您的疑惑</p>
                 </div>

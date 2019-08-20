@@ -171,14 +171,14 @@ class LaravelMenu
 
                         if (Laratrust::can('horizon.manage')) {
                             $adminMenu->add(
-                                'Horizon <i class="fa fa-external-link-alt" aria-hidden="true"></i>',
+                                'Horizon<i class="fa fa-external-link-alt ml-2"></i>',
                                 ['route' => 'horizon.index']
                             )->link->attr('target', '_blank');
                         }
 
                         if (Laratrust::can('log-viewer.access')) {
                             $adminMenu->add(
-                                '記錄檢視器 <i class="fa fa-external-link-alt" aria-hidden="true"></i>',
+                                '記錄檢視器<i class="fa fa-external-link-alt ml-2"></i>',
                                 ['route' => 'log-viewer::dashboard']
                             )->link->attr('target', '_blank');
                         }

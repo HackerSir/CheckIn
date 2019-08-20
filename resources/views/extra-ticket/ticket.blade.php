@@ -11,7 +11,7 @@
                 <input type="text" placeholder="工作人員抽獎編號" id="ticket_search_id" class="form-control mr-sm-2"
                        autocomplete="off">
                 <button type="submit" class="btn btn-primary">
-                    <i class="fa fa-search" aria-hidden="true"></i> 查詢
+                    <i class="fa fa-search mr-2"></i>查詢
                 </button>
                 {{ Form::close() }}
                 <div class="jumbotron text-center mt-3">

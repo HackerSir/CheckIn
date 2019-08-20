@@ -4,7 +4,7 @@
 
 @section('buttons')
     <a href="{{ route('api-key.create') }}" class="btn btn-primary">
-        <i class="fa fa-plus-circle" aria-hidden="true"></i> 新增 API Key
+        <i class="fa fa-plus-circle mr-2"></i>新增 API Key
     </a>
 @endsection
 

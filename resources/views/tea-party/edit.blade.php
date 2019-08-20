@@ -4,10 +4,10 @@
 
 @section('buttons')
     <a href="{{ route('tea-party.show', $teaParty) }}" class="btn btn-secondary">
-        <i class="fa fa-arrow-left" aria-hidden="true"></i> 檢視迎新茶會
+        <i class="fa fa-arrow-left mr-2"></i>檢視迎新茶會
     </a>
     <a href="{{ route('clubs.show', $teaParty->club) }}" class="btn btn-secondary">
-        <i class="fa fa-arrow-left" aria-hidden="true"></i> 檢視社團
+        <i class="fa fa-arrow-left mr-2"></i>檢視社團
     </a>
 @endsection
 

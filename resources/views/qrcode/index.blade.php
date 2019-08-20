@@ -4,11 +4,11 @@
 
 @section('buttons')
     <a href="{{ route('qrcode.bind') }}" class="btn btn-primary">
-        <i class="fa fa-link" aria-hidden="true"></i> 綁定 QR Code
+        <i class="fa fa-link mr-2"></i>綁定 QR Code
     </a>
     @if(Laratrust::can('qrcode-set.manage'))
         <a href="{{ route('qrcode-set.index') }}" class="btn btn-primary">
-            <i class="fa fa-list" aria-hidden="true"></i> QR Code 集
+            <i class="fa fa-list mr-2"></i>QR Code 集
         </a>
     @endif
 @endsection

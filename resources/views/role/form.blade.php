@@ -14,8 +14,7 @@
                     <label class="custom-control-label" for="permissionCheck{{ $permission->id }}">
                         {{ $permission->display_name }}（{{ $permission->name }}）<br/>
                         <small>
-                            <i class="fa fa-angle-double-right"
-                               aria-hidden="true"></i> {{ $permission->description }}
+                            <i class="fa fa-angle-double-right mr-2"></i>{{ $permission->description }}
                         </small>
                     </label>
                 </div>
@@ -27,8 +26,7 @@
                     <label class="custom-control-label" for="permissionCheck{{ $permission->id }}">
                         {{ $permission->display_name }}（{{ $permission->name }}）<br/>
                         <small>
-                            <i class="fa fa-angle-double-right"
-                               aria-hidden="true"></i> {{ $permission->description }}
+                            <i class="fa fa-angle-double-right mr-2"></i>{{ $permission->description }}
                         </small>
                     </label>
                 </div>

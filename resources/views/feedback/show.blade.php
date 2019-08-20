@@ -14,20 +14,20 @@
     @php($user = auth()->user())
     @if(optional($user)->student)
         <a href="{{ route('my-qrcode') }}" class="btn btn-secondary mb-2">
-            <i class="fa fa-arrow-left" aria-hidden="true"></i> QR Code
+            <i class="fa fa-arrow-left mr-2"></i>QR Code
         </a>
         <a href="{{ route('feedback.my') }}" class="btn btn-secondary mb-2">
-            <i class="fa fa-arrow-left" aria-hidden="true"></i> 我的回饋資料
+            <i class="fa fa-arrow-left mr-2"></i>我的回饋資料
         </a>
     @endif
     @if(Laratrust::can('feedback.manage') || optional($user)->club)
         <a href="{{ route('feedback.index') }}" class="btn btn-secondary mb-2">
-            <i class="fa fa-arrow-left" aria-hidden="true"></i> 回饋資料管理
+            <i class="fa fa-arrow-left mr-2"></i>回饋資料管理
         </a>
     @endif
     @if(($user->student->nid ?? null) == $feedback->student->nid)
         <a href="{{ route('feedback.create', $feedback->club) }}" class="btn btn-primary mb-2">
-            <i class="fa fa-edit" aria-hidden="true"></i> 編輯
+            <i class="fa fa-edit mr-2"></i>編輯
         </a>
     @endif
 @endsection
@@ -145,9 +145,9 @@
                 <dt class="col-md-2">新生</dt>
                 <dd class="col-md-10">
                     @if($feedback->student->is_freshman)
-                        <i class="fa fa-check fa-2x text-success" aria-hidden="true"></i>
+                        <i class="fa fa-check fa-2x text-success"></i>
                     @else
-                        <i class="fa fa-times fa-2x text-danger" aria-hidden="true"></i>
+                        <i class="fa fa-times fa-2x text-danger"></i>
                     @endif
                 </dd>
             </dl>

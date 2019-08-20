@@ -5,15 +5,15 @@
 @section('buttons')
     @can('create', \App\Student::class)
         <a href="{{ route('student.create-real-student') }}" class="btn btn-primary">
-            <i class="fa fa-plus-circle" aria-hidden="true"></i> 新增學生
+            <i class="fa fa-plus-circle mr-2"></i>新增學生
         </a>
         <a href="{{ route('student.create') }}" class="btn btn-secondary">
-            <i class="fa fa-plus-circle" aria-hidden="true"></i> 新增虛擬學生
+            <i class="fa fa-plus-circle mr-2"></i>新增虛擬學生
         </a>
     @endcan
     @can('import', \App\Student::class)
         <a href="{{ route('student.import') }}" class="btn btn-primary">
-            <i class="fas fa-file-upload"></i> 匯入學生
+            <i class="fas fa-file-upload mr-2"></i>匯入學生
         </a>
     @endcan
 @endsection
