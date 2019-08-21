@@ -28,7 +28,7 @@ class SitemapController extends Controller
         $sitemap->add(route('clubs.index'), null, 1.0, 'hourly');
 
         //黑客社
-        $hackersir = Club::query()->where('name', 'like', '%黑客社%')->first();
+        $hackersir = Club::where('name', 'like', '%黑客社%')->first();
         if ($hackersir->imgurImage) {
             $images = [
                 ['url' => $hackersir->imgurImage->thumbnail('l')],

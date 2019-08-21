@@ -13,12 +13,12 @@ class CreateUsersOfStudents extends Migration
     {
         //找出沒有使用者的學生
         /** @var \App\Student[]|\Illuminate\Database\Eloquent\Collection $students */
-        $students = \App\Student::query()->whereNull('user_id')->get();
+        $students = \App\Student::whereNull('user_id')->get();
         foreach ($students as $student) {
             //建立使用者
             $email = $student->nid . '@fcu.edu.tw';
             /** @var \App\User $user */
-            $user = \App\User::query()->updateOrCreate([
+            $user = \App\User::updateOrCreate([
                 'email' => $email,
             ], [
                 'name'        => $student->name,

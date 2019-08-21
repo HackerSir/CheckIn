@@ -200,9 +200,9 @@ class ExtraTicketController extends Controller
                 //建立資料
                 try {
                     //刪除相同ID或NID的紀錄
-                    ExtraTicket::query()->where('id', $id)->orWhere('nid', $nid)->delete();
+                    ExtraTicket::where('id', $id)->orWhere('nid', $nid)->delete();
                     //新增紀錄
-                    ExtraTicket::query()->create([
+                    ExtraTicket::create([
                         'id'    => $id,
                         'nid'   => $nid,
                         'name'  => $name,

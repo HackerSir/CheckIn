@@ -33,7 +33,7 @@ class UserService
     {
         $nid = trim(strtoupper($nid));
         /** @var User $user */
-        $user = User::query()->firstOrCreate([
+        $user = User::firstOrCreate([
             'nid' => $nid,
         ], [
             'name'        => $nid,

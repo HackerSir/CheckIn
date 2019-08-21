@@ -169,7 +169,7 @@ class BoothController extends Controller
                     continue;
                 }
                 //建立資料
-                Booth::query()->updateOrCreate([
+                Booth::updateOrCreate([
                     'name' => $name,
                 ], [
                     'latitude'  => $latitude,
