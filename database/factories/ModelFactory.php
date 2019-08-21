@@ -84,8 +84,8 @@ $factory->define(App\Booth::class, function (Faker\Generator $faker) {
 });
 
 $factory->define(App\Record::class, function (Faker\Generator $faker) {
-    $studentNids = \App\Student::query()->pluck('nid')->toArray();
-    $clubIds = \App\Club::query()->pluck('id')->toArray();
+    $studentNids = \App\Student::pluck('nid')->toArray();
+    $clubIds = \App\Club::pluck('id')->toArray();
 
     return [
         'student_nid' => $faker->randomElement($studentNids),
@@ -101,8 +101,8 @@ $factory->define(App\Ticket::class, function (Faker\Generator $faker) {
 });
 
 $factory->define(App\Feedback::class, function (Faker\Generator $faker) {
-    $studentNids = \App\Student::query()->pluck('nid')->toArray();
-    $clubIds = \App\Club::query()->pluck('id')->toArray();
+    $studentNids = \App\Student::pluck('nid')->toArray();
+    $clubIds = \App\Club::pluck('id')->toArray();
     $option = $faker->numberBetween(1, 15);
 
     return [
@@ -117,7 +117,7 @@ $factory->define(App\Feedback::class, function (Faker\Generator $faker) {
 });
 
 $factory->define(App\StudentSurvey::class, function (Faker\Generator $faker) {
-    $studentNids = \App\Student::query()->pluck('nid')->toArray();
+    $studentNids = \App\Student::pluck('nid')->toArray();
 
     return [
         'student_nid' => $faker->randomElement($studentNids),
@@ -127,9 +127,9 @@ $factory->define(App\StudentSurvey::class, function (Faker\Generator $faker) {
 });
 
 $factory->define(App\ClubSurvey::class, function (Faker\Generator $faker) {
-    $userIds = \App\User::query()->whereHas('club')->pluck('id')->toArray();
+    $userIds = \App\User::whereHas('club')->pluck('id')->toArray();
     /** @var \App\User $user */
-    $user = \App\User::query()->find($faker->randomElement($userIds));
+    $user = \App\User::find($faker->randomElement($userIds));
 
     return [
         'user_id' => $user->id,
@@ -166,7 +166,7 @@ $factory->define(App\ExtraTicket::class, function (Faker\Generator $faker) {
 });
 
 $factory->define(App\ContactInformation::class, function (Faker\Generator $faker) {
-    $studentNids = \App\Student::query()->pluck('nid')->toArray();
+    $studentNids = \App\Student::pluck('nid')->toArray();
     $option = $faker->numberBetween(1, 15);
 
     return [

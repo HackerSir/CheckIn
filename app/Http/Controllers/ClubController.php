@@ -233,7 +233,7 @@ class ClubController extends Controller
                 //社團類型
                 if (!empty($clubTypeName)) {
                     /** @var ClubType $clubType */
-                    $clubType = ClubType::query()->firstOrCreate([
+                    $clubType = ClubType::firstOrCreate([
                         'name' => $clubTypeName,
                     ], [
                         'color'      => '#000000',
@@ -243,7 +243,7 @@ class ClubController extends Controller
 
                 //建立社團
                 /** @var Club $club */
-                $club = Club::query()->updateOrCreate([
+                $club = Club::updateOrCreate([
                     'name' => $name,
                 ], [
                     'number'       => $number,

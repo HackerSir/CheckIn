@@ -18,7 +18,7 @@ class GoogleApi
         // 24000 是免費上限 25000 - 1000
         // https://developers.google.com/maps/documentation/javascript/usage?hl=zh-tw
         /** @var ApiKey $apiKey */
-        $apiKey = ApiKey::query()->where('count', '<', 24000)->orderBy('count')->first();
+        $apiKey = ApiKey::where('count', '<', 24000)->orderBy('count')->first();
         if (!$apiKey) {
             Log::error('No Google api key can be used.');
 

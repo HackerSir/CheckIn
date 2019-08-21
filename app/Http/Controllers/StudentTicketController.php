@@ -225,9 +225,9 @@ class StudentTicketController extends Controller
                 //建立資料
                 try {
                     //刪除相同ID或NID的紀錄
-                    StudentTicket::query()->where('id', $id)->orWhere('student_nid', $student->nid)->delete();
+                    StudentTicket::where('id', $id)->orWhere('student_nid', $student->nid)->delete();
                     //新增紀錄
-                    StudentTicket::query()->create([
+                    StudentTicket::create([
                         'id'          => $id,
                         'student_nid' => $student->nid,
                     ]);

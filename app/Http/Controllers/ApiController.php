@@ -219,7 +219,7 @@ class ApiController extends Controller
 
     public function clubTypeList()
     {
-        $clubTypes = ClubType::query()->orderBy('id')->pluck('name', 'id');
+        $clubTypes = ClubType::orderBy('id')->pluck('name', 'id');
 
         return $clubTypes;
     }
@@ -237,7 +237,7 @@ class ApiController extends Controller
 
         //過濾
         /** @var ClubType $clubType */
-        $clubType = ClubType::query()->find(request()->get('clubType'));
+        $clubType = ClubType::find(request()->get('clubType'));
         if ($clubType) {
             $clubQuery->where('club_type_id', $clubType->id);
         }
