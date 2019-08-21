@@ -43,7 +43,7 @@ class ContactInformationController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param ContactInformationRequest $request
      * @return \Illuminate\Http\Response
      */
     public function store(ContactInformationRequest $request)
@@ -78,7 +78,7 @@ class ContactInformationController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param ContactInformationRequest $request
      * @param \App\ContactInformation $contactInformation
      * @return \Illuminate\Http\Response
      */

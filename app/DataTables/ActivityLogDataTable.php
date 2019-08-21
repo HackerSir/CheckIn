@@ -20,11 +20,9 @@ class ActivityLogDataTable extends DataTable
 
         return $dataTable
             ->editColumn('action', 'activity-log.datatables.action')
-            ->editColumn('subject_type', function ($activity) {
-                /** @var Activity $activity */
+            ->editColumn('subject_type', function (Activity $activity) {
                 return str_replace(['App\\', 'Models\\'], '', $activity->subject_type);
-            })->editColumn('causer_type', function ($activity) {
-                /** @var Activity $activity */
+            })->editColumn('causer_type', function (Activity $activity) {
                 return str_replace(['App\\', 'Models\\'], '', $activity->causer_type);
             });
     }
@@ -32,7 +30,7 @@ class ActivityLogDataTable extends DataTable
     /**
      * Get query source of dataTable.
      *
-     * @param \App\User $model
+     * @param Activity $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
     public function query(Activity $model)

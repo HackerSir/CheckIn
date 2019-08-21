@@ -78,7 +78,7 @@ class AuthListener
         if (!$user) {
             return;
         }
-        $ip = request()->getClientIp();
+//        $ip = request()->getClientIp();
         //寫入紀錄
         activity('auth')->by($user)->log(':causer.name (:causer.email) 登出');
 //        $this->logService->info('[Auth][Logout] ' . $user->name . ' (' . $user->email . ')' . PHP_EOL, [

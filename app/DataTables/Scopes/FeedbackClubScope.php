@@ -4,7 +4,6 @@ namespace App\DataTables\Scopes;
 
 use App\Club;
 use App\Feedback;
-use App\Student;
 use Illuminate\Database\Eloquent\Builder;
 use Yajra\DataTables\Contracts\DataTableScope;
 
@@ -18,7 +17,6 @@ class FeedbackClubScope implements DataTableScope
     /**
      * FeedbackFilterScope constructor.
      * @param Club $club
-     * @param Student $student
      */
     public function __construct(Club $club = null)
     {

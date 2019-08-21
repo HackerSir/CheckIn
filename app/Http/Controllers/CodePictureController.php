@@ -14,7 +14,6 @@ class CodePictureController extends Controller
      *
      * @param $code
      * @return \Illuminate\Http\Response
-     * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException
      */
     public function qrcode($code)
     {
@@ -41,7 +40,6 @@ class CodePictureController extends Controller
      *
      * @param $code
      * @return \Illuminate\Http\Response
-     * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException
      */
     public function barcode($code)
     {

@@ -53,7 +53,7 @@ class PaymentRecordController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param PaymentRecordRequest $request
      * @return \Illuminate\Http\Response
      */
     public function store(PaymentRecordRequest $request)
@@ -100,7 +100,7 @@ class PaymentRecordController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param PaymentRecordRequest $request
      * @param \App\PaymentRecord $paymentRecord
      * @return \Illuminate\Http\Response
      */
