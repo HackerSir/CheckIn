@@ -6,7 +6,6 @@ use App\Booth;
 use App\Club;
 use App\User;
 use Carbon\Carbon;
-use Illuminate\Http\Request;
 use Setting;
 
 class HomeController extends Controller
@@ -58,7 +57,7 @@ class HomeController extends Controller
         return view('club.show', compact('club'));
     }
 
-    public function clubsGoogleMap(Request $request)
+    public function clubsGoogleMap()
     {
         $boothData = [];
         $booths = Booth::with('club.clubType')->get();
@@ -77,7 +76,7 @@ class HomeController extends Controller
         return view('map.google', compact('boothData'));
     }
 
-    public function clubsStaticMap(Request $request)
+    public function clubsStaticMap()
     {
         return view('map.static');
     }

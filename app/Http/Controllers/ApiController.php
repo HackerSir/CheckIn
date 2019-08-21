@@ -6,7 +6,6 @@ use App\Booth;
 use App\Club;
 use App\ClubType;
 use App\Feedback;
-use App\Presenters\ContentPresenter;
 use App\Student;
 use App\User;
 use DB;
@@ -319,7 +318,7 @@ class ApiController extends Controller
         }
         $student = $user->student;
 
-        $contentPresenter = app(ContentPresenter::class);
+//        $contentPresenter = app(ContentPresenter::class);
         /** @var LengthAwarePaginator|Collection|Feedback[] $feedback */
         $feedback = $student->feedback()->with('club.clubType')->paginate(10);
         $data = [];

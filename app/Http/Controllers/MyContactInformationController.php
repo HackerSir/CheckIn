@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests\MyContactInformationRequest;
 use App\User;
 use Carbon\Carbon;
-use Illuminate\Http\Request;
 use Setting;
 
 class MyContactInformationController extends Controller
@@ -57,7 +56,7 @@ class MyContactInformationController extends Controller
     }
 
     /**
-     * @param Request $request
+     * @param MyContactInformationRequest $request
      * @return  \Illuminate\Http\Response
      * @throws \Exception
      */

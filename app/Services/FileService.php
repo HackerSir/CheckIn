@@ -113,7 +113,7 @@ class FileService
     public function parseSize($size)
     {
         $unit = preg_replace('/[^bkmgtpezy]/i', '', $size); // Remove the non-unit characters from the size.
-        $size = preg_replace('/[^0-9\.]/', '', $size); // Remove the non-numeric characters from the size.
+        $size = preg_replace('/[^0-9.]/', '', $size); // Remove the non-numeric characters from the size.
         if ($unit) {
             return round($size * pow(1024, stripos('bkmgtpezy', $unit[0])));
         } else {

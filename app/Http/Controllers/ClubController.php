@@ -9,7 +9,6 @@ use App\DataTables\ClubsDataTable;
 use App\Services\FileService;
 use App\Services\ImgurImageService;
 use App\Services\StudentService;
-use App\Services\UserService;
 use App\Student;
 use App\User;
 use Illuminate\Database\Eloquent\Builder;
@@ -180,16 +179,11 @@ class ClubController extends Controller
      * @param Request $request
      * @param FileService $fileService
      * @param StudentService $studentService
-     * @param UserService $userService
      * @return \Illuminate\Http\RedirectResponse
      * @throws \Illuminate\Validation\ValidationException
      */
-    public function postImport(
-        Request $request,
-        FileService $fileService,
-        StudentService $studentService,
-        UserService $userService
-    ) {
+    public function postImport(Request $request, FileService $fileService, StudentService $studentService)
+    {
         //檢查匯入檔案格式為xls或xlsx
         $this->validate($request, [
             'import_file' => 'required|mimes:xls,xlsx',
