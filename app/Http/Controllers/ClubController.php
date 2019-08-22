@@ -7,6 +7,7 @@ use App\Club;
 use App\ClubType;
 use App\DataTables\ClubsDataTable;
 use App\Services\FileService;
+use App\Services\HTMLService;
 use App\Services\ImgurImageService;
 use App\Services\StudentService;
 use App\Student;
@@ -44,10 +45,12 @@ class ClubController extends Controller
      *
      * @param \Illuminate\Http\Request $request
      * @param ImgurImageService $imgurImageService
+     * @param HTMLService $HTMLService
      * @return \Illuminate\Http\Response
+     * @throws \Illuminate\Validation\ValidationException
      * @throws \Exception
      */
-    public function store(Request $request, ImgurImageService $imgurImageService)
+    public function store(Request $request, ImgurImageService $imgurImageService, HTMLService $HTMLService)
     {
         $this->validate($request, [
             'number'          => 'nullable',
@@ -61,7 +64,9 @@ class ClubController extends Controller
         ]);
 
         $club = Club::create(array_merge($request->all(), [
-            'number' => strtoupper($request->get('number')),
+            'number'      => strtoupper($request->get('number')),
+            'description' => $HTMLService->clean($request->get('description')),
+            'extra_info'  => $HTMLService->clean($request->get('extra_info')),
         ]));
 
         //上傳圖片
@@ -101,10 +106,12 @@ class ClubController extends Controller
      * @param \Illuminate\Http\Request $request
      * @param \App\Club $club
      * @param ImgurImageService $imgurImageService
+     * @param HTMLService $HTMLService
      * @return \Illuminate\Http\Response
+     * @throws \Illuminate\Validation\ValidationException
      * @throws \Exception
      */
-    public function update(Request $request, Club $club, ImgurImageService $imgurImageService)
+    public function update(Request $request, Club $club, ImgurImageService $imgurImageService, HTMLService $HTMLService)
     {
         $this->validate($request, [
             'number'          => 'nullable',
@@ -118,7 +125,9 @@ class ClubController extends Controller
         ]);
 
         $club->update(array_merge($request->all(), [
-            'number' => strtoupper($request->get('number')),
+            'number'      => strtoupper($request->get('number')),
+            'description' => $HTMLService->clean($request->get('description')),
+            'extra_info'  => $HTMLService->clean($request->get('extra_info')),
         ]));
 
         //上傳圖片

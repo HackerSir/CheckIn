@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Club;
 use App\DataUpdateRequest;
+use App\Services\HTMLService;
 use App\Services\ImgurImageService;
 use App\TeaParty;
 use App\User;
@@ -38,10 +39,12 @@ class OwnClubController extends Controller
      *
      * @param \Illuminate\Http\Request $request
      * @param ImgurImageService $imgurImageService
+     * @param HTMLService $HTMLService
      * @return \Illuminate\Http\Response
+     * @throws \Illuminate\Validation\ValidationException
      * @throws \Exception
      */
-    public function update(Request $request, ImgurImageService $imgurImageService)
+    public function update(Request $request, ImgurImageService $imgurImageService, HTMLService $HTMLService)
     {
         $club = $this->getOwnClub();
 
@@ -60,7 +63,10 @@ class OwnClubController extends Controller
             'custom_question' => 'nullable|max:255',
         ]);
 
-        $club->update($request->only(['description', 'url', 'extra_info', 'custom_question']));
+        $club->update(array_merge($request->only(['url', 'custom_question']), [
+            'description' => $HTMLService->clean($request->get('description')),
+            'extra_info'  => $HTMLService->clean($request->get('extra_info')),
+        ]));
 
         //上傳圖片
         $uploadedFile = $request->file('image_file');
@@ -123,10 +129,12 @@ class OwnClubController extends Controller
 
     /**
      * @param Request $request
+     * @param HTMLService $HTMLService
      * @return \Illuminate\Http\Response
+     * @throws \Illuminate\Validation\ValidationException
      * @throws \Exception
      */
-    public function storeDataUpdateRequest(Request $request)
+    public function storeDataUpdateRequest(Request $request, HTMLService $HTMLService)
     {
         /** @var User $user */
         $user = auth()->user();
@@ -159,8 +167,8 @@ class OwnClubController extends Controller
             'original_extra_info'      => $club->extra_info,
             'original_url'             => $club->url,
             'original_custom_question' => $club->custom_question,
-            'description'              => $request->get('description'),
-            'extra_info'               => $request->get('extra_info'),
+            'description'              => $HTMLService->clean($request->get('description')),
+            'extra_info'               => $HTMLService->clean($request->get('extra_info')),
             'url'                      => $request->get('url'),
             'custom_question'          => $request->get('custom_question'),
         ]);
