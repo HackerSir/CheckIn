@@ -32,6 +32,7 @@ use Laratrust\Traits\LaratrustUserTrait;
  * @property-read string $display_name
  * @property-read bool $is_confirmed
  * @property-read bool $is_local_account
+ * @property-read string $nid_or_email
  * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $notifications
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\PaymentRecord[] $paymentRecords
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Permission[] $permissions
@@ -101,6 +102,7 @@ class User extends Authenticatable
     protected $appends = [
         'is_confirmed',
         'is_local_account',
+        'nid_or_email',
     ];
 
     protected $dates = [
@@ -182,6 +184,14 @@ class User extends Authenticatable
         }
 
         return $this->student->clubs()->first();
+    }
+
+    /**
+     * @return string
+     */
+    public function getNidOrEmailAttribute()
+    {
+        return $this->nid ?: $this->email;
     }
 
     /**

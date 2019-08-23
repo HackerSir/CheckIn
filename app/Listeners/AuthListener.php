@@ -55,7 +55,7 @@ class AuthListener
         ]);
 
         //寫入紀錄
-        activity('auth')->by($user)->log(':causer.name (:causer.email) 登入');
+        activity('auth')->by($user)->log(':causer.name (:causer.nid_or_email) 登入');
 //        $this->logService->info('[Auth][Login] ' . $user->name . ' (' . $user->email . ')' . PHP_EOL, [
 //            'user' => [
 //                'id'    => $user->id,
@@ -80,7 +80,7 @@ class AuthListener
         }
 //        $ip = request()->getClientIp();
         //寫入紀錄
-        activity('auth')->by($user)->log(':causer.name (:causer.email) 登出');
+        activity('auth')->by($user)->log(':causer.name (:causer.nid_or_email) 登出');
 //        $this->logService->info('[Auth][Logout] ' . $user->name . ' (' . $user->email . ')' . PHP_EOL, [
 //            'user' => [
 //                'id'    => $user->id,

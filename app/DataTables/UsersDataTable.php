@@ -88,7 +88,7 @@ class UsersDataTable extends DataTable
                 'title'   => 'NID',
                 'visible' => false,
             ],
-            'email'   => ['title' => '信箱 or NID'],
+            'email'   => ['title' => 'NID or 信箱'],
             'club_id' => ['title' => '負責社團'],
         ];
     }

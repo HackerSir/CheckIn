@@ -24,6 +24,7 @@ namespace App;
  * @property string|null $extra_info 額外資訊
  * @property string|null $original_custom_question 原自訂問題
  * @property string|null $custom_question 自訂問題
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Spatie\Activitylog\Models\Activity[] $activities
  * @property-read \App\Club $club
  * @property-read string $show_result
  * @property-read \App\User|null $reviewer
