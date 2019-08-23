@@ -17,6 +17,7 @@ use Iatstuti\Database\Support\NullableFields;
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property string|null $extra_info 額外資訊
  * @property string|null $custom_question 自訂問題
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Spatie\Activitylog\Models\Activity[] $activities
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Booth[] $booths
  * @property-read \App\ClubSurvey $clubSurvey
  * @property-read \App\ClubType|null $clubType
