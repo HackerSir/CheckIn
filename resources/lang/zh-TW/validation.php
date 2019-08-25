@@ -187,6 +187,7 @@ return [
         'message'               => '訊息',
         'line'                  => 'LINE',
         'facebook'              => 'Facebook',
+        'extra_info'            => '額外資訊',
         'custom_question'       => '自訂問題',
     ],
     'strip_max'  => ':attribute 不能多於 :max 個字元。',
