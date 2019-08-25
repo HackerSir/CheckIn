@@ -1,5 +1,7 @@
 @extends('layouts.base')
 
+@inject('activityLogPresenter', 'App\Presenters\ActivityLogPresenter')
+
 @section('title', '檢視活動紀錄')
 
 @section('buttons')
@@ -36,7 +38,7 @@
                     <pre class="json border border-primary rounded">{{ $activity->subject }}</pre>
                 </dd>
                 <dt class="col-md-2">Subject Id</dt>
-                <dd class="col-md-10">{{ $activity->subject_id }}</dd>
+                <dd class="col-md-10">{!! $activityLogPresenter->getRouteLink($activity->subject_type, $activity->subject_id) !!}</dd>
                 <dt class="col-md-2">Subject Type</dt>
                 <dd class="col-md-10">{{ $activity->subject_type }}</dd>
             </dl>
@@ -47,7 +49,7 @@
                     <pre class="json border border-primary rounded">{{ $activity->causer }}</pre>
                 </dd>
                 <dt class="col-md-2">Causer Id</dt>
-                <dd class="col-md-10">{{ $activity->causer_id }}</dd>
+                <dd class="col-md-10">{!! $activityLogPresenter->getRouteLink($activity->causer_type, $activity->causer_id) !!}</dd>
                 <dt class="col-md-2">Causer Type</dt>
                 <dd class="col-md-10">{{ $activity->causer_type }}</dd>
             </dl>
