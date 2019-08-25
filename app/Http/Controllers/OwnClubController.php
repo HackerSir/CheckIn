@@ -56,8 +56,8 @@ class OwnClubController extends Controller
         }
 
         $this->validate($request, [
-            'description'     => 'nullable|strip_max:300',
-            'extra_info'      => 'nullable|strip_max:300',
+            'description'     => 'nullable|strip_max:600',
+            'extra_info'      => 'nullable|strip_max:600',
             'url'             => 'nullable|url',
             'image_file'      => 'image',
             'custom_question' => 'nullable|max:255',
@@ -149,8 +149,8 @@ class OwnClubController extends Controller
 
         $this->validate($request, [
             'reason'          => 'required|max:255',
-            'description'     => 'nullable|strip_max:300',
-            'extra_info'      => 'nullable|strip_max:300',
+            'description'     => 'nullable|strip_max:600',
+            'extra_info'      => 'nullable|strip_max:600',
             'url'             => 'nullable|url',
             'custom_question' => 'nullable|max:255',
         ]);
