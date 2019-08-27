@@ -2,8 +2,6 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
-
 /**
  * App\TeaParty
  *
@@ -31,10 +29,11 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\TeaParty whereUrl($value)
  * @mixin \Eloquent
  */
-class TeaParty extends Model
+class TeaParty extends LoggableModel
 {
     protected $primaryKey = 'club_id';
     public $incrementing = false;
+    protected static $logName = 'club';
 
     protected $fillable = [
         'club_id',
@@ -72,5 +71,10 @@ class TeaParty extends Model
     public function getIsEndedAttribute()
     {
         return $this->end_at->isPast();
+    }
+
+    protected function getNameForActivityLog(): string
+    {
+        return $this->club->name . ' 的茶會資訊';
     }
 }
