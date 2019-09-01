@@ -18,6 +18,7 @@ use App\Observers\StudentSurveyObserver;
 use App\Observers\UserObserver;
 use App\Qrcode;
 use App\Record;
+use App\Services\HTMLService;
 use App\Student;
 use App\StudentSurvey;
 use App\User;
@@ -68,8 +69,10 @@ class AppServiceProvider extends ServiceProvider
             $validator->addReplacer('strip_max', function ($message, $attribute, $rule, $parameters) {
                 return str_replace([':max'], $parameters, $message);
             });
+            $HTMLService = app(HTMLService::class);
+            $cleanedText = str_replace("\n", '', strip_tags($HTMLService->clean($value)));
 
-            return mb_strlen(strip_tags($value)) <= $parameters[0];
+            return mb_strlen($cleanedText) <= $parameters[0];
         });
     }
 
