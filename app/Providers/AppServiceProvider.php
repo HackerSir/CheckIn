@@ -24,6 +24,7 @@ use App\User;
 use Carbon\Carbon;
 use Horizon;
 use Illuminate\Support\ServiceProvider;
+use Purifier;
 use Schema;
 use Spatie\Activitylog\Models\Activity;
 use Validator;
@@ -68,8 +69,10 @@ class AppServiceProvider extends ServiceProvider
             $validator->addReplacer('strip_max', function ($message, $attribute, $rule, $parameters) {
                 return str_replace([':max'], $parameters, $message);
             });
+            //確保字數計算結果與前端 TinyMCE 相同
+            $cleanedText = str_replace("\n", '', strip_tags(Purifier::clean($value)));
 
-            return mb_strlen(strip_tags($value)) <= $parameters[0];
+            return mb_strlen($cleanedText) <= $parameters[0];
         });
     }
 
