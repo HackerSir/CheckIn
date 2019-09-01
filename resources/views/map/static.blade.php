@@ -4,18 +4,18 @@
 
 @section('main_content')
     <div class="mt-2">
-        <a href="https://i.imgur.com/piIsMAh.jpg" target="_blank">
-            <img src="https://i.imgur.com/piIsMAh.jpg" class="img-fluid w-100" alt="static map">
+        <a href="https://i.imgur.com/0NsiJbU.jpg" target="_blank">
+            <img src="https://i.imgur.com/0NsiJbU.jpg" class="img-fluid w-100" alt="static map">
         </a>
     </div>
     <div class="mt-2">
-        <a href="https://i.imgur.com/jHW89wn.jpg" target="_blank">
-            <img src="https://i.imgur.com/jHW89wn.jpg" class="img-fluid w-100" alt="static map">
+        <a href="https://i.imgur.com/bYkjBCT.jpg" target="_blank">
+            <img src="https://i.imgur.com/bYkjBCT.jpg" class="img-fluid w-100" alt="static map">
         </a>
     </div>
     <div class="mt-2">
-        <a href="https://i.imgur.com/vTMVsVP.jpg" target="_blank">
-            <img src="https://i.imgur.com/vTMVsVP.jpg" class="img-fluid w-100" alt="static map">
+        <a href="https://i.imgur.com/JsZpHt6.jpg" target="_blank">
+            <img src="https://i.imgur.com/JsZpHt6.jpg" class="img-fluid w-100" alt="static map">
         </a>
     </div>
 @endsection
