@@ -2,8 +2,6 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
-
 /**
  * App\ClubSurvey
  *
@@ -29,8 +27,9 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\ClubSurvey whereUserId($value)
  * @mixin \Eloquent
  */
-class ClubSurvey extends Model
+class ClubSurvey extends LoggableModel
 {
+    protected static $logName = 'club-survey';
     protected $fillable = [
         'user_id',
         'club_id',
@@ -60,5 +59,10 @@ class ClubSurvey extends Model
     public function getStarsAttribute()
     {
         return str_repeat('★', $this->rating) . str_repeat('☆', 5 - $this->rating);
+    }
+
+    protected function getNameForActivityLog(): string
+    {
+        return $this->user->display_name . '的社團問卷';
     }
 }

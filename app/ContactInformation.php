@@ -2,8 +2,6 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
-
 /**
  * App\ContactInformation
  *
@@ -27,8 +25,9 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\ContactInformation whereUpdatedAt($value)
  * @mixin \Eloquent
  */
-class ContactInformation extends Model
+class ContactInformation extends LoggableModel
 {
+    protected static $logName = 'contact-information';
     protected $primaryKey = 'student_nid';
     public $incrementing = false;
 
@@ -43,5 +42,10 @@ class ContactInformation extends Model
     public function student()
     {
         return $this->belongsTo(Student::class);
+    }
+
+    protected function getNameForActivityLog(): string
+    {
+        return $this->student->display_name . '的聯絡資訊';
     }
 }

@@ -2,8 +2,6 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
-
 /**
  * App\StudentTicket
  *
@@ -22,8 +20,9 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\StudentTicket whereUpdatedAt($value)
  * @mixin \Eloquent
  */
-class StudentTicket extends Model
+class StudentTicket extends LoggableModel
 {
+    protected static $logName = 'student-ticket';
     protected $fillable = [
         'id',
         'student_nid',
@@ -43,5 +42,10 @@ class StudentTicket extends Model
     public function getNidAttribute()
     {
         return $this->student->nid;
+    }
+
+    protected function getNameForActivityLog(): string
+    {
+        return $this->name . '的學生抽獎編號';
     }
 }

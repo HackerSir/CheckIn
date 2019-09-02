@@ -2,8 +2,6 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
-
 /**
  * App\ClubType
  *
@@ -26,8 +24,9 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\ClubType whereUpdatedAt($value)
  * @mixin \Eloquent
  */
-class ClubType extends Model
+class ClubType extends LoggableModel
 {
+    protected static $logName = 'club-type';
     protected $fillable = [
         'name',
         'color',
@@ -66,5 +65,10 @@ class ClubType extends Model
     public function getTagAttribute()
     {
         return "<span class='badge badge-secondary' style='background-color:{$this->color}; font-size: 20px;'>{$this->name}</span>";
+    }
+
+    protected function getNameForActivityLog(): string
+    {
+        return $this->name;
     }
 }

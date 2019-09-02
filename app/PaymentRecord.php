@@ -3,7 +3,6 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Model;
 
 /**
  * App\PaymentRecord
@@ -36,8 +35,9 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\PaymentRecord whereUserId($value)
  * @mixin \Eloquent
  */
-class PaymentRecord extends Model
+class PaymentRecord extends LoggableModel
 {
+    protected static $logName = 'payment-record';
     protected $fillable = [
         'nid',
         'name',
@@ -78,5 +78,10 @@ class PaymentRecord extends Model
                         ->orWhere('join_tea_party_intention', '<>', 0);
                 });
         });
+    }
+
+    protected function getNameForActivityLog(): string
+    {
+        return $this->name . ' 在 ' . $this->club->name . ' 的繳費紀錄';
     }
 }

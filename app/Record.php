@@ -2,8 +2,6 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
-
 /**
  * App\Record
  *
@@ -26,8 +24,9 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Record whereUpdatedAt($value)
  * @mixin \Eloquent
  */
-class Record extends Model
+class Record extends LoggableModel
 {
+    protected static $logName = 'record';
     protected $fillable = [
         'student_nid',
         'club_id',
@@ -48,5 +47,10 @@ class Record extends Model
     public function student()
     {
         return $this->belongsTo(Student::class, 'student_nid', 'nid');
+    }
+
+    protected function getNameForActivityLog(): string
+    {
+        return $this->student->display_name . ' 在 ' . $this->club->name . ' 的打卡紀錄';
     }
 }

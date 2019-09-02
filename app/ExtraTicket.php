@@ -2,8 +2,6 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
-
 /**
  * App\ExtraTicket
  *
@@ -24,12 +22,18 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\ExtraTicket whereUpdatedAt($value)
  * @mixin \Eloquent
  */
-class ExtraTicket extends Model
+class ExtraTicket extends LoggableModel
 {
+    protected static $logName = 'extra-ticket';
     protected $fillable = [
         'id',
         'nid',
         'name',
         'class',
     ];
+
+    protected function getNameForActivityLog(): string
+    {
+        return $this->name . '的工作人員抽獎編號';
+    }
 }
