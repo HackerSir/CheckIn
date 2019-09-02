@@ -44,7 +44,7 @@ class MyContactInformationController extends Controller
         //檢查填寫期限
         $feedbackCreateExpiredAt = new Carbon(Setting::get('feedback_create_expired_at'));
         if (Carbon::now()->gt($feedbackCreateExpiredAt)) {
-            return back()->with('warning', '回饋資料填寫已截止，無法對聯過資料進行修改');
+            return back()->with('warning', '回饋資料填寫已截止，無法對聯絡資料進行修改');
         }
 
         /** @var User $user */
@@ -65,7 +65,7 @@ class MyContactInformationController extends Controller
         //檢查填寫期限
         $feedbackCreateExpiredAt = new Carbon(Setting::get('feedback_create_expired_at'));
         if (Carbon::now()->gt($feedbackCreateExpiredAt)) {
-            return back()->with('warning', '回饋資料填寫已截止，無法對聯過資料進行修改');
+            return back()->with('warning', '回饋資料填寫已截止，無法對聯絡資料進行修改');
         }
 
         /** @var User $user */
