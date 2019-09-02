@@ -11,6 +11,7 @@ namespace App;
  * @property bool $is_counted 是否列入抽獎集點
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Spatie\Activitylog\Models\Activity[] $activities
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Club[] $clubs
  * @property-read string $tag
  * @method static \Illuminate\Database\Eloquent\Builder|\App\ClubType newModelQuery()

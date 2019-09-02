@@ -12,6 +12,7 @@ namespace App;
  * @property float|null $latitude 緯度
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Spatie\Activitylog\Models\Activity[] $activities
  * @property-read \App\Club|null $club
  * @property-read string $embed_map_url
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Booth newModelQuery()

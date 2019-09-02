@@ -12,6 +12,7 @@ namespace App;
  * @property string|null $comment 意見與建議
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Spatie\Activitylog\Models\Activity[] $activities
  * @property-read \App\Club $club
  * @property-read string $stars
  * @property-read \App\User $user

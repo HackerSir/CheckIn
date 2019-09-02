@@ -13,9 +13,11 @@ namespace App;
  * @property string|null $url 網址
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Spatie\Activitylog\Models\Activity[] $activities
  * @property-read \App\Club $club
  * @property-read bool $is_ended
  * @property-read bool $is_started
+ * @property-read string $state
  * @method static \Illuminate\Database\Eloquent\Builder|\App\TeaParty newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\TeaParty newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\TeaParty query()
@@ -49,6 +51,10 @@ class TeaParty extends LoggableModel
         'end_at',
     ];
 
+    protected $appends = [
+        'state',
+    ];
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
@@ -71,6 +77,21 @@ class TeaParty extends LoggableModel
     public function getIsEndedAttribute()
     {
         return $this->end_at->isPast();
+    }
+
+    /**
+     * @return string
+     */
+    public function getStateAttribute()
+    {
+        if ($this->is_ended) {
+            return 'ended';
+        }
+        if ($this->is_started) {
+            return 'in_process';
+        }
+
+        return 'not_started';
     }
 
     protected function getNameForActivityLog(): string

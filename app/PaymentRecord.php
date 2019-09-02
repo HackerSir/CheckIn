@@ -17,6 +17,7 @@ use Illuminate\Database\Eloquent\Builder;
  * @property int|null $user_id 使用者
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Spatie\Activitylog\Models\Activity[] $activities
  * @property-read \App\Club $club
  * @property-read \App\Student $student
  * @property-read \App\User|null $user

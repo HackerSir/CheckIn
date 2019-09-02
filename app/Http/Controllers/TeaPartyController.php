@@ -11,7 +11,7 @@ class TeaPartyController extends Controller
     public function list()
     {
         $teaParties = TeaParty::with('club:id,name,club_type_id', 'club.clubType:id,name,color')
-            ->orderBy('start_at')->get();
+            ->orderBy('start_at')->get()->groupBy('state');
 
         return view('tea-party.list', compact('teaParties'));
     }
