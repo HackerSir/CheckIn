@@ -47,6 +47,6 @@ class ContactInformation extends LoggableModel
 
     protected function getNameForActivityLog(): string
     {
-        return $this->student->display_name . '的聯絡資訊';
+        return $this->student->display_name . ' 的聯絡資訊';
     }
 }
