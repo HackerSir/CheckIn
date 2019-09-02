@@ -47,7 +47,7 @@
                                             @endif
                                         </h4>
                                         <div class="ml-md-auto">
-                                            {!! $teaParty->club->clubType->tag !!}{{ $teaParty->club->name }}
+                                            {!! $teaParty->club->display_name !!}
                                         </div>
                                     </div>
                                     <div class="d-flex flex-column flex-md-row">
