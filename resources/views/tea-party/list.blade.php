@@ -5,73 +5,39 @@
 
 @section('main_content')
     <div class="card">
+        <div class="card-header">近期活動</div>
         <div class="card-body">
             <div class="container py-2">
-                @forelse($teaParties as $teaParty)
-                    <div class="row">
-                        {{-- timeline item left dot --}}
-                        <div class="col-auto text-center flex-column d-none d-sm-flex">
-                            <div class="row h-50">
-                                @if($loop->first)
-                                    <div class="col">&nbsp;</div>
-                                @else
-                                    <div class="col border-right">&nbsp;</div>
-                                @endif
-                                <div class="col">&nbsp;</div>
-                            </div>
-                            <h5 class="m-2">
-                                <span
-                                    class="badge badge-pill @if(!$teaParty->is_started) bg-success @else bg-light border @endif">&nbsp;</span>
-                            </h5>
-                            <div class="row h-50">
-                                @if($loop->last)
-                                    <div class="col">&nbsp;</div>
-                                @else
-                                    <div class="col border-right">&nbsp;</div>
-                                @endif
-                                <div class="col">&nbsp;</div>
-                            </div>
-                        </div>
-                        {{-- timeline item event content --}}
-                        <div class="col py-2">
-                            <div class="card @if(!$teaParty->is_started) border-success shadow @endif">
-                                <div class="card-body d-flex flex-column">
-                                    <div class="d-flex flex-column flex-md-row">
-                                        <h4 class="card-title">
-                                            @if($teaParty->url)
-                                                <a href="{{ $teaParty->url }}" target="_blank">
-                                                    {{ $teaParty->name }}<i class="fas fa-external-link-alt ml-2"></i>
-                                                </a>
-                                            @else
-                                                {{ $teaParty->name }}
-                                            @endif
-                                        </h4>
-                                        <div class="ml-md-auto">
-                                            {!! $teaParty->club->display_name !!}
-                                        </div>
-                                    </div>
-                                    <div class="d-flex flex-column flex-md-row">
-                                        <div class="text-muted mx-1">
-                                            <i class="fas fa-clock"></i>
-                                            {{ $teaParty->start_at->format('Y-m-d H:i') }}
-                                            @if($teaParty->start_at->notEqualTo($teaParty->end_at))
-                                                ~
-                                                {{ $teaParty->end_at->format('Y-m-d H:i') }}
-                                            @endif
-                                        </div>
-                                        <div class="text-muted mx-1">
-                                            <i class="fas fa-map-marked-alt"></i>
-                                            {{ $teaParty->location }}
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                @forelse($teaParties['not_started'] ?? [] as $teaParty)
+                    @include('tea-party.list-item')
                 @empty
                     <div class="text-center text-muted">暫無相關資訊</div>
                 @endforelse
             </div>
         </div>
     </div>
+    <div class="card mt-2">
+        <div class="card-header">進行中</div>
+        <div class="card-body">
+            <div class="container py-2">
+                @forelse($teaParties['in_process'] ?? [] as $teaParty)
+                    @include('tea-party.list-item')
+                @empty
+                    <div class="text-center text-muted">目前無進行中活動</div>
+                @endforelse
+            </div>
+        </div>
+    </div>
+    @if(count($teaParties['ended'] ?? []))
+        <div class="card mt-2">
+            <div class="card-header">已結束</div>
+            <div class="card-body">
+                <div class="container py-2">
+                    @foreach($teaParties['ended'] ?? [] as $teaParty)
+                        @include('tea-party.list-item')
+                    @endforeach
+                </div>
+            </div>
+        </div>
+    @endif
 @endsection
