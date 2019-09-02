@@ -2,7 +2,6 @@
 
 @section('title', '迎新茶會')
 
-
 @section('main_content')
     @if($inProcessTeaPartyCount = count($teaParties['in_process'] ?? [])>0)
         <div class="alert alert-info">
@@ -60,12 +59,13 @@
 @section('js')
     <script>
         $('#jumpToInProcessTeaParty').on('click', function () {
-            document.getElementById('inProcessTeaParty').scrollIntoView({
+            window.scrollTo({
+                top: $('#inProcessTeaParty').offset().top - 60,
                 behavior: 'smooth'
             });
         });
         $('.jumpToTop').on('click', function () {
-            document.getElementsByTagName('body')[0].scrollIntoView({
+            $('body')[0].scrollIntoView({
                 behavior: 'smooth'
             });
         });
