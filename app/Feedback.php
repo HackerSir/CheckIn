@@ -3,7 +3,6 @@
 namespace App;
 
 use Iatstuti\Database\Support\NullableFields;
-use Illuminate\Database\Eloquent\Model;
 
 /**
  * App\Feedback
@@ -53,9 +52,10 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Feedback whereUpdatedAt($value)
  * @mixin \Eloquent
  */
-class Feedback extends Model
+class Feedback extends LoggableModel
 {
     use NullableFields;
+    protected static $logName = 'feedback';
 
     protected $fillable = [
         'student_nid',
@@ -147,5 +147,10 @@ class Feedback extends Model
         }
 
         return self::$intentionText[$this->join_tea_party_intention] ?? null;
+    }
+
+    protected function getNameForActivityLog(): string
+    {
+        return $this->student->display_name . ' 給 ' . $this->club->name . ' 的回饋資料';
     }
 }

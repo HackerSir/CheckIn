@@ -2,8 +2,6 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
-
 /**
  * App\StudentSurvey
  *
@@ -26,8 +24,9 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\StudentSurvey whereUpdatedAt($value)
  * @mixin \Eloquent
  */
-class StudentSurvey extends Model
+class StudentSurvey extends LoggableModel
 {
+    protected static $logName = 'student-survey';
     protected $fillable = [
         'student_nid',
         'rating',
@@ -48,5 +47,10 @@ class StudentSurvey extends Model
     public function getStarsAttribute()
     {
         return str_repeat('★', $this->rating) . str_repeat('☆', 5 - $this->rating);
+    }
+
+    protected function getNameForActivityLog(): string
+    {
+        return $this->student->display_name . ' 的學生問卷';
     }
 }

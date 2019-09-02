@@ -2,8 +2,6 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
-
 /**
  * App\Booth
  *
@@ -28,8 +26,10 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Booth whereUpdatedAt($value)
  * @mixin \Eloquent
  */
-class Booth extends Model
+class Booth extends LoggableModel
 {
+    protected static $logName = 'booth';
+
     protected $fillable = [
         'club_id',
         'name',
@@ -61,5 +61,10 @@ class Booth extends Model
         $fullUrl = $url . '?' . urldecode(http_build_query($queryParameters));
 
         return $fullUrl;
+    }
+
+    protected function getNameForActivityLog(): string
+    {
+        return $this->name;
     }
 }
