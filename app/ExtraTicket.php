@@ -11,6 +11,7 @@ namespace App;
  * @property string|null $class 系級
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Spatie\Activitylog\Models\Activity[] $activities
  * @method static \Illuminate\Database\Eloquent\Builder|\App\ExtraTicket newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\ExtraTicket newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\ExtraTicket query()

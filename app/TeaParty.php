@@ -13,6 +13,7 @@ namespace App;
  * @property string|null $url 網址
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Spatie\Activitylog\Models\Activity[] $activities
  * @property-read \App\Club $club
  * @property-read bool $is_ended
  * @property-read bool $is_started

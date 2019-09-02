@@ -9,6 +9,7 @@ namespace App;
  * @property string|null $student_nid 對應學生
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Spatie\Activitylog\Models\Activity[] $activities
  * @property-read string $nid
  * @property-read \App\Student|null $student
  * @method static \Illuminate\Database\Eloquent\Builder|\App\StudentTicket newModelQuery()

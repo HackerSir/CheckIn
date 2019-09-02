@@ -25,6 +25,7 @@ use Iatstuti\Database\Support\NullableFields;
  * @property string|null $answer_of_custom_question 對於社團自訂問題的回答
  * @property int|null $join_club_intention 加入社團意願
  * @property int|null $join_tea_party_intention 參加迎新茶會意願
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Spatie\Activitylog\Models\Activity[] $activities
  * @property-read \App\Club $club
  * @property-read string|null $join_club_intention_text
  * @property-read string|null $join_tea_party_intention_text

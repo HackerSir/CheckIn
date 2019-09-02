@@ -12,6 +12,7 @@ namespace App;
  * @property string|null $line LINE ID
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Spatie\Activitylog\Models\Activity[] $activities
  * @property-read \App\Student $student
  * @method static \Illuminate\Database\Eloquent\Builder|\App\ContactInformation newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\ContactInformation newQuery()
