@@ -11,8 +11,11 @@ namespace App;
  * @property int|null $club_id 對應社團
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property int|null $scanned_by_user_id 掃描者
+ * @property bool $web_scan 使用網站內建掃描器掃描
  * @property-read \Illuminate\Database\Eloquent\Collection|\Spatie\Activitylog\Models\Activity[] $activities
  * @property-read \App\Club|null $club
+ * @property-read \App\User|null $scanBy
  * @property-read \App\Student|null $student
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Record newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Record newQuery()
@@ -21,8 +24,10 @@ namespace App;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Record whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Record whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Record whereIp($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Record whereScannedByUserId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Record whereStudentNid($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Record whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Record whereWebScan($value)
  * @mixin \Eloquent
  */
 class Record extends LoggableModel
@@ -32,6 +37,12 @@ class Record extends LoggableModel
         'student_nid',
         'club_id',
         'ip',
+        'scanned_by_user_id',
+        'web_scan',
+    ];
+
+    protected $casts = [
+        'web_scan' => 'bool',
     ];
 
     /**
@@ -48,6 +59,11 @@ class Record extends LoggableModel
     public function student()
     {
         return $this->belongsTo(Student::class, 'student_nid', 'nid');
+    }
+
+    public function scanBy()
+    {
+        return $this->belongsTo(User::class, 'scanned_by_user_id');
     }
 
     protected function getNameForActivityLog(): string

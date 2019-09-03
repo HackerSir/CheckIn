@@ -315,6 +315,8 @@ Route::group(['middleware' => ['auth', 'email']], function () {
     Route::get('/my-qrcode', 'HomeController@myQRCode')->name('my-qrcode');
     //QR Code 掃描
     Route::get('qr/{code}', 'QrcodeScanController@scan')->name('qrcode.scan');
+    Route::get('scan', 'QrcodeScanController@webScan')->name('qrcode.web-scan');
+    Route::post('scan-api/{code}', 'QrcodeScanController@webScanApi')->name('qrcode.web-scan-api');
     //條碼圖
     Route::group(['prefix' => 'code'], function () {
         Route::get('qrcode/{code}', 'CodePictureController@qrcode')->name('code-picture.qrcode');

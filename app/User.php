@@ -37,6 +37,7 @@ use Laratrust\Traits\LaratrustUserTrait;
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\PaymentRecord[] $paymentRecords
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Permission[] $permissions
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Role[] $roles
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Record[] $scannedRecords
  * @property-read \App\Student $student
  * @method static \Illuminate\Database\Eloquent\Builder|\App\User newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\User newQuery()
@@ -164,6 +165,11 @@ class User extends Authenticatable
     public function paymentRecords()
     {
         return $this->hasMany(PaymentRecord::class);
+    }
+
+    public function scannedRecords()
+    {
+        return $this->hasMany(Record::class, 'scanned_by_user_id');
     }
 
     /**
