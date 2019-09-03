@@ -96,7 +96,7 @@
                 }
             },
             onDecode(decodedString) {
-                this.message = '掃描結果: ' + decodedString;
+                this.message = '掃描結果： ' + decodedString;
                 // 檢查是否為條碼
                 let scanPattern = new UrlPattern(/\/qr\/(.*)$/, ['code']);
                 let scanMatch = scanPattern.match(decodedString);
