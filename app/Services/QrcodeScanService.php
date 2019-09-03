@@ -15,10 +15,11 @@ class QrcodeScanService
     /**
      * @param User $user
      * @param string $code
+     * @param bool $webScan
      * @return array|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
      * @throws \Exception
      */
-    public function scan(User $user, string $code): array
+    public function scan(User $user, string $code, bool $webScan = false): array
     {
         //找出 QR Code
         /** @var Qrcode $qrcode */
@@ -107,6 +108,7 @@ class QrcodeScanService
         ], [
             'ip'                 => request()->getClientIp(),
             'scanned_by_user_id' => $user->id,
+            'web_scan'           => $webScan,
         ]);
 
         event(new CheckInSuccess($record));

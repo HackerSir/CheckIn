@@ -12,6 +12,7 @@ namespace App;
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property int|null $scanned_by_user_id 掃描者
+ * @property bool $web_scan 使用網站內建掃描器掃描
  * @property-read \Illuminate\Database\Eloquent\Collection|\Spatie\Activitylog\Models\Activity[] $activities
  * @property-read \App\Club|null $club
  * @property-read \App\User|null $scanBy
@@ -26,6 +27,7 @@ namespace App;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Record whereScannedByUserId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Record whereStudentNid($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Record whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Record whereWebScan($value)
  * @mixin \Eloquent
  */
 class Record extends LoggableModel
@@ -36,6 +38,11 @@ class Record extends LoggableModel
         'club_id',
         'ip',
         'scanned_by_user_id',
+        'web_scan',
+    ];
+
+    protected $casts = [
+        'web_scan' => 'bool',
     ];
 
     /**

@@ -132,7 +132,7 @@
             btnScanAndView() {
                 // 掃描並檢視（直接跳轉至原掃描畫面）
                 this.showModal = false;
-                window.location.href = window.Laravel.baseUrl + '/qr/' + this.code;
+                window.location.href = window.Laravel.baseUrl + '/qr/' + this.code + '?from=web-scan';
             }
         }
     }

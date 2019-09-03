@@ -28,8 +28,10 @@ class QrcodeScanController extends Controller
             return view('qrcode-scan.scan')->with('level', 'danger')->with('message', '掃描過於頻繁，請稍候重試');
         }
 
+        // 是否使用網站內建掃描器掃描
+        $webScan = request('from') == 'web-scan';
         // 掃描
-        $scanResult = $qrcodeScanService->scan($user, $code);
+        $scanResult = $qrcodeScanService->scan($user, $code, $webScan);
 
         // 找出 QR Code
         /** @var Qrcode $qrcode */
@@ -74,7 +76,7 @@ class QrcodeScanController extends Controller
         }
 
         // 掃描
-        $scanResult = $qrcodeScanService->scan($user, $code);
+        $scanResult = $qrcodeScanService->scan($user, $code, true);
 
         // 找出 QR Code
         /** @var Qrcode $qrcode */
