@@ -23,10 +23,12 @@
         "laravel-echo": "^1.4.0",
         "select2-bootstrap4-theme": "^1.0.0",
         "socket.io-client": "^2.1.1",
+        "url-pattern": "^1.0.3",
         "vue-echo": "^1.0.2",
         "vue-holderjs": "^1.0.2",
         "vue-infinite-loading": "^2.3.3",
         "vue-moment": "^4.0.0",
+        "vue-qrcode-reader": "^2.0.4",
         "vuex": "^3.1.1",
         "vuex-persist": "^2.0.0"
     }
