@@ -2,24 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use App\Club;
-use App\Events\CheckInSuccess;
 use App\Qrcode;
-use App\Record;
+use App\Services\QrcodeScanService;
 use App\User;
-use Carbon\Carbon;
-use Setting;
 
 class QrcodeScanController extends Controller
 {
     /**
      * 掃描QRCode
      *
+     * @param QrcodeScanService $qrcodeScanService
      * @param $code
      * @return \Illuminate\Http\Response
      * @throws \Exception
      */
-    public function scan($code)
+    public function scan(QrcodeScanService $qrcodeScanService, $code)
     {
         /** @var User $user */
         $user = auth()->user();
@@ -31,78 +28,22 @@ class QrcodeScanController extends Controller
             return view('qrcode-scan.scan')->with('level', 'danger')->with('message', '掃描過於頻繁，請稍候重試');
         }
 
-        //找出 QR Code
+        // 掃描
+        $scanResult = $qrcodeScanService->scan($user, $code);
+
+        // 找出 QR Code
         /** @var Qrcode $qrcode */
         $qrcode = Qrcode::where('code', $code)->with('student.records.club.clubType')->first();
-        if (!$qrcode) {
-            return view('qrcode-scan.scan')->with('level', 'danger')->with('message', '無效的 QR Code');
-        }
-        view()->share(compact('qrcode'));
-
-        //檢查QR Code是否已經被學生綁定
-        if (!$qrcode->student) {
-            return view('qrcode-scan.scan')->with('level', 'danger')->with('message', 'QR Code 尚未綁定，請聯絡服務台');
+        if ($qrcode) {
+            view()->share(compact('qrcode'));
         }
 
-        //檢查是否屬於活動時間
-        $startAt = new Carbon(Setting::get('start_at'));
-        if ($startAt->gte(Carbon::now())) {
-            $startAtText = $startAt . '（' . $startAt->diffForHumans() . '）';
-
-            return view('qrcode-scan.scan')->with('level', 'info')
-                ->with('message', '集點活動尚未開始，預計在 ' . $startAtText . ' 開始');
-        }
-        $endAt = new Carbon(Setting::get('end_at'));
-        if ($endAt->lte(Carbon::now())) {
-            $endAtText = $endAt . '（' . $endAt->diffForHumans() . '）';
-
-            return view('qrcode-scan.scan')->with('level', 'info')->with('message', '集點活動已在 ' . $endAtText . ' 結束');
-        }
-
-        //檢查掃描使用者是否為攤位負責人
-        /** @var Club $club */
-        $club = $user->club;
-        if (!$club) {
-            //非攤位負責人，不顯示訊息
+        if (isset($scanResult['level']) && isset($scanResult['message'])) {
+            return view('qrcode-scan.scan')
+                ->with('level', $scanResult['level'])
+                ->with('message', $scanResult['message']);
+        } else {
             return view('qrcode-scan.scan');
         }
-
-        //檢查QR Code為最後一組QR Code
-        if (!$qrcode->is_last_one) {
-            $lastBindingTime = $qrcode->student->qrcode->bind_at;
-            $lastBindingTimeText = $lastBindingTime . '（' . $lastBindingTime->diffForHumans() . '）';
-
-            return view('qrcode-scan.scan')->with('level', 'danger')
-                ->with('message', '非最後一組 QR Code，請使用於 ' . $lastBindingTimeText . ' 綁定之 QR Code');
-        }
-
-        //檢查是否在該攤位重複打卡
-        /** @var Record $existRecord */
-        $existRecord = Record::where('student_nid', $qrcode->student->nid)
-            ->where('club_id', $club->id)
-            ->first();
-        if ($existRecord) {
-            $createdAtText = $existRecord->created_at . '（' . $existRecord->created_at->diffForHumans() . '）';
-
-            return view('qrcode-scan.scan')->with('level', 'warning')
-                ->with('message', "已於 {$createdAtText} 在「{$club->name}」打卡");
-        }
-
-        //打卡
-        /** @var Record $record */
-        $record = Record::firstOrCreate([
-            'student_nid' => $qrcode->student->nid,
-            'club_id'     => $club->id,
-        ], [
-            'ip' => request()->getClientIp(),
-        ]);
-
-        //重新取得資料
-        $qrcode = Qrcode::with('student.records.club.clubType')->find($qrcode->id);
-        view()->share(compact('qrcode'));
-
-        event(new CheckInSuccess($record));
-
-        return view('qrcode-scan.scan')->with('level', 'success')->with('message', "在「{$club->name}」打卡完成");
     }
 }
