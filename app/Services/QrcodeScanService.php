@@ -105,7 +105,8 @@ class QrcodeScanService
             'student_nid' => $qrcode->student->nid,
             'club_id'     => $club->id,
         ], [
-            'ip' => request()->getClientIp(),
+            'ip'                 => request()->getClientIp(),
+            'scanned_by_user_id' => $user->id,
         ]);
 
         event(new CheckInSuccess($record));
