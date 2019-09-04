@@ -1,6 +1,6 @@
 stages:
   - test
-  - sonarqube
+  - analyze
   - deploy
 
 variables:
@@ -75,9 +75,10 @@ php7.3:mysql:5.7:
   image: edbizarro/gitlab-ci-pipeline-php:7.3
 
 sonarqube:
-  stage: sonarqube
+  stage: analyze
   image: danny50610/sonar-scanner
   dependencies: ['php7.3:mysql:5.7']
+  allow_failure: true
   cache:
     key: $CI_COMMIT_REF_NAME
     paths:
@@ -89,6 +90,30 @@ sonarqube:
                     -Dsonar.host.url=$sonar_host_url
                     -Dsonar.login=$sonar_login
 
+outdated-composer:
+    stage: analyze
+    image: edbizarro/gitlab-ci-pipeline-php:7.3-alpine-lts
+    dependencies: []
+    allow_failure: true
+    cache: # Speed up builds
+        key: "$CI_COMMIT_REF_NAME-$CI_JOB_NAME"
+        paths:
+            - vendor
+    script:
+        - composer install --prefer-dist --no-ansi --no-interaction --no-progress --no-scripts --no-suggest
+        - composer outdated --ansi
+        - curl -O https://get.sensiolabs.org/security-checker.phar
+        - php security-checker.phar security:check composer.lock
+
+outdated-yarn:
+    stage: analyze
+    image: edbizarro/gitlab-ci-pipeline-php:7.3-alpine-lts
+    dependencies: []
+    allow_failure: true
+    script:
+        - yarn outdated --color || true
+        - yarn audit --color
+
 deploy_production:
   tags:
     - FCU-IDC
@@ -96,13 +121,12 @@ deploy_production:
   image: danny50610/gitlab-ci-laravel-deploy
   dependencies: []
   script:
-    - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )'
-    - eval $(ssh-agent -s)
-    - ssh-add <(echo "$SSH_PRIVATE_KEY")
-    - mkdir -p ~/.ssh
-    - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
+      - eval $(ssh-agent -s)
+      - ssh-add <(echo "$SSH_PRIVATE_KEY")
+      - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
+      - ~/.composer/vendor/bin/envoy --version
 
-    - ~/.composer/vendor/bin/envoy run deploy --server=$production_server_ip
+      - ~/.composer/vendor/bin/envoy run deploy --ansi --server="$production_server_ip"
   environment:
     name: production
     url: https://checkin.hackersir.org/
