@@ -131,6 +131,8 @@ class StudentTicketController extends Controller
     {
         StudentTicket::query()->delete();
 
+        activity('auth')->by(auth()->user())->log('刪除了 全部的 學生抽獎編號');
+
         return redirect()->route('student-ticket.index')->with('success', '學生抽獎編號已全數刪除');
     }
 
