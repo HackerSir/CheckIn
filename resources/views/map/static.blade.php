@@ -14,8 +14,8 @@
         </a>
     </div>
     <div class="mt-2">
-        <a href="https://i.imgur.com/JsZpHt6.jpg" target="_blank">
-            <img src="https://i.imgur.com/JsZpHt6.jpg" class="img-fluid w-100" alt="static map">
+        <a href="https://i.imgur.com/YwOALyy.jpg" target="_blank">
+            <img src="https://i.imgur.com/YwOALyy.jpg" class="img-fluid w-100" alt="static map">
         </a>
     </div>
 @endsection
