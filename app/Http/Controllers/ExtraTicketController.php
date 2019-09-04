@@ -111,6 +111,8 @@ class ExtraTicketController extends Controller
     {
         ExtraTicket::query()->delete();
 
+        activity('auth')->by(auth()->user())->log('刪除了 全部的 工作人員抽獎編號');
+
         return redirect()->route('extra-ticket.index')->with('success', '工作人員抽獎編號已全數刪除');
     }
 
