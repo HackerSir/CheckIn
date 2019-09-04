@@ -47,6 +47,7 @@ class LaravelMenu
                     if ($user->club) {
                         $myClubMenu = $menu->add('我的社團', 'javascript:void(0)');
                         $myClubMenu->add($user->club->name, ['route' => ['clubs.show', $user->club]]);
+                        $myClubMenu->add('條碼掃描', ['route' => ['qrcode.web-scan']]);
                         $myClubMenu->add('繳費紀錄', ['route' => 'payment-record.index'])
                             ->active('payment-record/*');
                     }
