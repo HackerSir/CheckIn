@@ -19,7 +19,7 @@
                             <h5 class="modal-title">掃描條碼</h5>
                         </div>
                         <div class="modal-body text-center">
-                            <p style="font-size: 3rem">{{ code }}</p>
+                            <p class="code" style="font-size: 3rem">{{ code }}</p>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" @click="btnJustScan">僅掃描</button>
