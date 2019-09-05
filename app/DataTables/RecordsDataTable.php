@@ -43,6 +43,9 @@ class RecordsDataTable extends DataTable
                     $query->where('name', 'like', '%' . $keyword . '%');
                 });
             })
+            ->editColumn('web_scan', function (Record $record) {
+                return $record->web_scan ? 'O' : 'X';
+            })
             ->rawColumns(['student_nid', 'club_id']);
     }
 
@@ -86,6 +89,10 @@ class RecordsDataTable extends DataTable
             'club_id'     => ['title' => '社團'],
             'ip'          => ['title' => '打卡IP'],
             'created_at'  => ['title' => '打卡時間'],
+            'web_scan'    => [
+                'title'      => 'WebScan',
+                'searchable' => false,
+            ],
         ];
     }
 
