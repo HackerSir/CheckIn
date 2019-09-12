@@ -109,6 +109,7 @@ class ExportController extends Controller
                 '社團類型',
                 '社團名稱',
                 '打卡時間',
+                'WebScan',
             ]
         );
         $records = Record::with('student.user', 'club.clubType')->orderBy('created_at')->get();
@@ -132,6 +133,7 @@ class ExportController extends Controller
                 $club->clubType->name ?? '',
                 $club->name,
                 $record->created_at,
+                $record->web_scan,
             ]);
         }
         //調整格式
