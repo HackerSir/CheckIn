@@ -112,30 +112,33 @@ class ExportController extends Controller
                 'WebScan',
             ]
         );
-        $records = Record::with('student.user', 'club.clubType', 'student.clubs')->orderBy('created_at')->get();
-        foreach ($records as $record) {
-            /** @var Student $student */
-            $student = $record->student;
-            /** @var Club $club */
-            $club = $record->club;
-            $this->appendRow($sheet, [
-                $record->id,
-                $student->nid,
-                $student->name,
-                $student->class,
-                $student->unit_name,
-                $student->dept_name,
-                $student->in_year,
-                $student->gender,
-                $student->is_freshman,
-                $student->is_staff,
-                $club->number,
-                $club->clubType->name ?? '',
-                $club->name,
-                $record->created_at,
-                $record->web_scan,
-            ]);
-        }
+        $recordQuery = Record::with('student.user', 'club.clubType', 'student.clubs')->orderBy('created_at');
+        $recordQuery->chunk(1000, function ($records) use ($sheet) {
+            /** @var Record $record */
+            foreach ($records as $record) {
+                /** @var Student $student */
+                $student = $record->student;
+                /** @var Club $club */
+                $club = $record->club;
+                $this->appendRow($sheet, [
+                    $record->id,
+                    $student->nid,
+                    $student->name,
+                    $student->class,
+                    $student->unit_name,
+                    $student->dept_name,
+                    $student->in_year,
+                    $student->gender,
+                    $student->is_freshman,
+                    $student->is_staff,
+                    $club->number,
+                    $club->clubType->name ?? '',
+                    $club->name,
+                    $record->created_at,
+                    $record->web_scan,
+                ]);
+            }
+        });
         //調整格式
         $styleArray = [
             'borders' => [
@@ -162,7 +165,7 @@ class ExportController extends Controller
      */
     public function feedback()
     {
-        $feedbackQuery = Feedback::with('student.user', 'club.clubType');
+        $feedbackQuery = Feedback::with('student.user', 'club.clubType', 'student.clubs');
         //若有管理權限，直接顯示全部
         if (!\Laratrust::can('feedback.manage')) {
             //若無管理權限
@@ -185,8 +188,6 @@ class ExportController extends Controller
                 abort(403);
             }
         }
-        /** @var Feedback[]|Collection $feedback */
-        $feedback = $feedbackQuery->get();
 
         //建立
         $spreadsheet = new Spreadsheet();
@@ -217,39 +218,43 @@ class ExportController extends Controller
                 '對於社團自訂問題的回答',
             ]
         );
-        foreach ($feedback as $feedbackItem) {
-            /** @var Student $student */
-            $student = $feedbackItem->student;
-            /** @var Club $club */
-            $club = $feedbackItem->club;
-            $message = $feedbackItem->message;
-            if (starts_with($message, '=')) {
-                $message = "'" . $message;
-            }
+        $feedbackQuery->chunk(1000, function ($feedback) use ($sheet) {
+            /** @var Feedback $feedbackItem */
+            foreach ($feedback as $feedbackItem) {
+                /** @var Student $student */
+                $student = $feedbackItem->student;
+                /** @var Club $club */
+                $club = $feedbackItem->club;
+                $message = $feedbackItem->message;
+                if (starts_with($message, '=')) {
+                    $message = "'" . $message;
+                }
 
-            $this->appendRow($sheet, [
-                $feedbackItem->id,
-                $student->nid,
-                $student->name,
-                $student->class,
-                $student->unit_name,
-                $student->dept_name,
-                $student->in_year,
-                $student->gender,
-                $student->is_freshman,
-                $student->is_staff,
-                $club->number,
-                $club->clubType->name ?? '',
-                $club->name,
-                $feedbackItem->phone,
-                $feedbackItem->email,
-                $feedbackItem->facebook,
-                $feedbackItem->line,
-                $message,
-                $feedbackItem->custom_question,
-                $feedbackItem->answer_of_custom_question,
-            ]);
-        }
+                $this->appendRow($sheet, [
+                    $feedbackItem->id,
+                    $student->nid,
+                    $student->name,
+                    $student->class,
+                    $student->unit_name,
+                    $student->dept_name,
+                    $student->in_year,
+                    $student->gender,
+                    $student->is_freshman,
+                    $student->is_staff,
+                    $club->number,
+                    $club->clubType->name ?? '',
+                    $club->name,
+                    $feedbackItem->phone,
+                    $feedbackItem->email,
+                    $feedbackItem->facebook,
+                    $feedbackItem->line,
+                    $message,
+                    $feedbackItem->custom_question,
+                    $feedbackItem->answer_of_custom_question,
+                ]);
+            }
+        });
+
         //調整格式
         $styleArray = [
             'borders' => [
@@ -402,7 +407,6 @@ class ExportController extends Controller
      */
     public function studentSurvey()
     {
-        $studentSurveys = StudentSurvey::with('student.user')->get();
         //建立
         $spreadsheet = new Spreadsheet();
         $sheet = $spreadsheet->getActiveSheet();
@@ -424,29 +428,33 @@ class ExportController extends Controller
                 '意見與建議',
             ]
         );
-        foreach ($studentSurveys as $studentSurvey) {
-            /** @var Student $student */
-            $student = $studentSurvey->student;
-            $comment = $studentSurvey->comment;
-            if (starts_with($comment, '=')) {
-                $comment = "'" . $comment;
-            }
+        $studentSurveyQuery = StudentSurvey::with('student.user', 'student.clubs');
+        $studentSurveyQuery->chunk(1000, function ($studentSurveys) use ($sheet) {
+            /** @var StudentSurvey $studentSurvey */
+            foreach ($studentSurveys as $studentSurvey) {
+                /** @var Student $student */
+                $student = $studentSurvey->student;
+                $comment = $studentSurvey->comment;
+                if (starts_with($comment, '=')) {
+                    $comment = "'" . $comment;
+                }
 
-            $this->appendRow($sheet, [
-                $studentSurvey->id,
-                $student->nid,
-                $student->name,
-                $student->class,
-                $student->unit_name,
-                $student->dept_name,
-                $student->in_year,
-                $student->gender,
-                $student->is_freshman,
-                $student->is_staff,
-                $studentSurvey->rating,
-                $comment,
-            ]);
-        }
+                $this->appendRow($sheet, [
+                    $studentSurvey->id,
+                    $student->nid,
+                    $student->name,
+                    $student->class,
+                    $student->unit_name,
+                    $student->dept_name,
+                    $student->in_year,
+                    $student->gender,
+                    $student->is_freshman,
+                    $student->is_staff,
+                    $studentSurvey->rating,
+                    $comment,
+                ]);
+            }
+        });
         //調整格式
         $styleArray = [
             'borders' => [
@@ -471,7 +479,6 @@ class ExportController extends Controller
      */
     public function clubSurvey()
     {
-        $clubSurveys = ClubSurvey::with('user', 'club.clubType')->get();
         //建立
         $spreadsheet = new Spreadsheet();
         $sheet = $spreadsheet->getActiveSheet();
@@ -496,35 +503,39 @@ class ExportController extends Controller
                 '意見與建議',
             ]
         );
-        foreach ($clubSurveys as $clubSurvey) {
-            /** @var Club $club */
-            $club = $clubSurvey->club;
-            /** @var User $user */
-            $user = $clubSurvey->user;
-            $student = $user->student;
-            $comment = $clubSurvey->comment;
-            if (starts_with($comment, '=')) {
-                $comment = "'" . $comment;
-            }
+        $clubSurveyQuery = ClubSurvey::with('user.student', 'club.clubType');
+        $clubSurveyQuery->chunk(1000, function ($clubSurveys) use ($sheet) {
+            /** @var ClubSurvey $clubSurvey */
+            foreach ($clubSurveys as $clubSurvey) {
+                /** @var Club $club */
+                $club = $clubSurvey->club;
+                /** @var User $user */
+                $user = $clubSurvey->user;
+                $student = $user->student;
+                $comment = $clubSurvey->comment;
+                if (starts_with($comment, '=')) {
+                    $comment = "'" . $comment;
+                }
 
-            $this->appendRow($sheet, [
-                $clubSurvey->id,
-                $user->id,
-                $student->nid ?? null,
-                $student->name ?? $user->name,
-                $student->class ?? null,
-                $student->unit_name ?? null,
-                $student->dept_name ?? null,
-                $student->in_year ?? null,
-                $student->gender ?? null,
-                $student->is_freshman ?? null,
-                $club->number,
-                $club->clubType->name ?? null,
-                $club->name,
-                $clubSurvey->rating,
-                $comment,
-            ]);
-        }
+                $this->appendRow($sheet, [
+                    $clubSurvey->id,
+                    $user->id,
+                    $student->nid ?? null,
+                    $student->name ?? $user->name,
+                    $student->class ?? null,
+                    $student->unit_name ?? null,
+                    $student->dept_name ?? null,
+                    $student->in_year ?? null,
+                    $student->gender ?? null,
+                    $student->is_freshman ?? null,
+                    $club->number,
+                    $club->clubType->name ?? null,
+                    $club->name,
+                    $clubSurvey->rating,
+                    $comment,
+                ]);
+            }
+        });
         //調整格式
         $styleArray = [
             'borders' => [
@@ -557,7 +568,6 @@ class ExportController extends Controller
         if (!$user->can('payment-record.manage')) {
             $paymentRecordQuery->where('club_id', $user->club->id);
         }
-        $paymentRecords = $paymentRecordQuery->get();
         //建立
         $spreadsheet = new Spreadsheet();
         $sheet = $spreadsheet->getActiveSheet();
@@ -577,25 +587,27 @@ class ExportController extends Controller
                 '更新時間',
             ]
         );
-        foreach ($paymentRecords as $paymentRecord) {
-            $note = $paymentRecord->note;
-            if (starts_with($note, '=')) {
-                $note = "'" . $note;
-            }
+        $paymentRecordQuery->chunk(1000, function ($paymentRecords) use ($sheet) {
+            foreach ($paymentRecords as $paymentRecord) {
+                $note = $paymentRecord->note;
+                if (starts_with($note, '=')) {
+                    $note = "'" . $note;
+                }
 
-            $this->appendRow($sheet, [
-                $paymentRecord->id,
-                $paymentRecord->club->name,
-                $paymentRecord->nid,
-                $paymentRecord->name,
-                $paymentRecord->student->display_name ?? null,
-                $paymentRecord->is_paid ? 'O' : 'X',
-                $paymentRecord->handler,
-                $note,
-                $paymentRecord->user->display_name ?? null,
-                $paymentRecord->updated_at,
-            ]);
-        }
+                $this->appendRow($sheet, [
+                    $paymentRecord->id,
+                    $paymentRecord->club->name,
+                    $paymentRecord->nid,
+                    $paymentRecord->name,
+                    $paymentRecord->student->display_name ?? null,
+                    $paymentRecord->is_paid ? 'O' : 'X',
+                    $paymentRecord->handler,
+                    $note,
+                    $paymentRecord->user->display_name ?? null,
+                    $paymentRecord->updated_at,
+                ]);
+            }
+        });
         //調整格式
         $styleArray = [
             'borders' => [
@@ -609,6 +621,6 @@ class ExportController extends Controller
         $sheet->getStyleByColumnAndRow(9, 1, 9, $sheet->getHighestRow())->applyFromArray($styleArray);
 
         //下載
-        return $this->downloadSpreadsheet($spreadsheet, '社團問卷.xlsx');
+        return $this->downloadSpreadsheet($spreadsheet, '繳費紀錄.xlsx');
     }
 }
