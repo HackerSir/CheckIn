@@ -112,7 +112,7 @@ class ExportController extends Controller
                 'WebScan',
             ]
         );
-        $records = Record::with('student.user', 'club.clubType')->orderBy('created_at')->get();
+        $records = Record::with('student.user', 'club.clubType', 'student.clubs')->orderBy('created_at')->get();
         foreach ($records as $record) {
             /** @var Student $student */
             $student = $record->student;

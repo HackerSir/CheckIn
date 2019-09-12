@@ -258,6 +258,11 @@ class Student extends Model
      */
     public function getIsStaffAttribute()
     {
+        //如果已經載入 clubs 關聯，直接計算，避免匯出資料時造成過多 query
+        if (isset($this->relations['clubs'])) {
+            return $this->clubs->count() > 0;
+        }
+
         return $this->clubs()->exists();
     }
 
