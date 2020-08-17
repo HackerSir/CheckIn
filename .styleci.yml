@@ -9,6 +9,5 @@ disabled:
   - phpdoc_summary
   - concat_without_spaces
   - not_operator_with_successor_space
-  - simplified_null_return
   - length_ordered_imports
   - phpdoc_to_comment
