@@ -343,8 +343,8 @@ class ApiController extends Controller
                         array_only($feedbackItem->club->toArray(), ['id', 'name']),
                         [
                             'display_name' => $feedbackItem->club->display_name,
-//                            'extra_info'   => $feedbackItem->club->extra_info
-//                                ? $contentPresenter->showContent($feedbackItem->club->extra_info) : null,
+                            //                            'extra_info'   => $feedbackItem->club->extra_info
+                            //                                ? $contentPresenter->showContent($feedbackItem->club->extra_info) : null,
                             'extra_info'   => $feedbackItem->club->extra_info,
                         ]
                     ),

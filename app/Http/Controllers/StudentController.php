@@ -117,7 +117,7 @@ class StudentController extends Controller
             'nid' => [
                 'required',
                 'regex:#^[a-zA-Z]\d+$#',
-//                'unique:students,nid',
+                //                'unique:students,nid',
             ],
         ]);
         $nid = trim(strtoupper($request->get('nid')));
