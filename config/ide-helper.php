@@ -11,9 +11,19 @@ return [
     |
     */
 
-    'filename' => '_ide_helper',
-    'format'   => 'php',
+    'filename'      => '_ide_helper',
+    'format'        => 'php',
 
+    /*
+    |--------------------------------------------------------------------------
+    | Where to write the PhpStorm specific meta file
+    |--------------------------------------------------------------------------
+    |
+    | PhpStorm also supports the directory `.phpstorm.meta.php/` with arbitrary
+    | files in it, should you need additional files for your project; e.g.
+    | `.phpstorm.meta.php/laravel_ide_Helper.php'.
+    |
+    */
     'meta_filename' => '.phpstorm.meta.php',
 
     /*
@@ -29,6 +39,18 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Factory Builders
+    |--------------------------------------------------------------------------
+    |
+    | Set to true to generate factory generators for better factory()
+    | method auto-completion.
+    |
+    */
+
+    'include_factory_builders' => true,
+
+    /*
+    |--------------------------------------------------------------------------
     | Write Model Magic methods
     |--------------------------------------------------------------------------
     |
@@ -37,6 +59,17 @@ return [
     */
 
     'write_model_magic_where' => true,
+
+    /*
+    |--------------------------------------------------------------------------
+    | Write Model relation count properties
+    |--------------------------------------------------------------------------
+    |
+    | Set to false to disable writing of relation count properties to model DocBlocks.
+    |
+    */
+
+    'write_model_relation_count_properties' => true,
 
     /*
     |--------------------------------------------------------------------------
@@ -77,10 +110,26 @@ return [
     | Define in which directories the ide-helper:models command should look
     | for models.
     |
+    | glob patterns are supported to easier reach models in sub-directories,
+    | e.g. `app/Services/* /Models` (without the space)
+    |
     */
 
     'model_locations' => [
         'app',
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Models to ignore
+    |--------------------------------------------------------------------------
+    |
+    | Define which models should be ignored.
+    |
+    */
+
+    'ignored_models' => [
+
     ],
 
     /*
@@ -97,18 +146,7 @@ return [
         'Session'  => ['Illuminate\Session\Store'],
     ],
 
-    'magic' => [
-        'Log' => [
-            'debug'     => 'Monolog\Logger::addDebug',
-            'info'      => 'Monolog\Logger::addInfo',
-            'notice'    => 'Monolog\Logger::addNotice',
-            'warning'   => 'Monolog\Logger::addWarning',
-            'error'     => 'Monolog\Logger::addError',
-            'critical'  => 'Monolog\Logger::addCritical',
-            'alert'     => 'Monolog\Logger::addAlert',
-            'emergency' => 'Monolog\Logger::addEmergency',
-        ],
-    ],
+    'magic' => [],
 
     /*
     |--------------------------------------------------------------------------

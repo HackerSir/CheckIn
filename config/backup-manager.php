@@ -1,11 +1,11 @@
 <?php
 
 return [
-    'local'     => [
+    'local'                => [
         'type' => 'Local',
         'root' => storage_path('backups'),
     ],
-    's3'        => [
+    's3'                   => [
         'type'   => 'AwsS3',
         'key'    => env('AWS_ACCESS_KEY_ID'),
         'secret' => env('AWS_SECRET_ACCESS_KEY'),
@@ -13,14 +13,14 @@ return [
         'bucket' => env('AWS_BUCKET'),
         'root'   => '',
     ],
-    'gcs'       => [
+    'gcs'                  => [
         'type'   => 'Gcs',
         'key'    => '',
         'secret' => '',
         'bucket' => '',
         'root'   => '',
     ],
-    'rackspace' => [
+    'rackspace'            => [
         'type'      => 'Rackspace',
         'username'  => '',
         'key'       => '',
@@ -29,7 +29,7 @@ return [
         'endpoint'  => 'https://identity.api.rackspacecloud.com/v2.0/',
         'root'      => '',
     ],
-    'dropbox'   => [
+    'dropbox'              => [
         'type'   => 'DropboxV2',
         'token'  => '',
         'key'    => '',
@@ -37,7 +37,7 @@ return [
         'app'    => '',
         'root'   => '',
     ],
-    'ftp'       => [
+    'ftp'                  => [
         'type'     => 'Ftp',
         'host'     => '',
         'username' => '',
@@ -48,7 +48,7 @@ return [
         'timeout'  => 30,
         'root'     => '',
     ],
-    'sftp'      => [
+    'sftp'                 => [
         'type'       => 'Sftp',
         'host'       => '',
         'username'   => '',
@@ -58,4 +58,7 @@ return [
         'privateKey' => '',
         'root'       => '',
     ],
+
+    // Add additional options to dump-command (like '--max-allowed-packet')
+    'command-extra-params' => env('BACKUP_MANAGER_EXTRA_PARAMS'),
 ];
