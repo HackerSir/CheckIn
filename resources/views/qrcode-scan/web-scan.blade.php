@@ -2,10 +2,6 @@
 
 @section('title', '條碼掃描')
 
-@section('css')
-    <link rel="stylesheet" href="{{ asset(mix('build-css/vue-qrcode-reader.css')) }}">
-@endsection
-
 @section('main_content')
     <div class="card">
         <div class="card-body">

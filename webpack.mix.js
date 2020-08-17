@@ -23,8 +23,6 @@ mix.js('resources/js/vue.js', buildJsPath)
 
 mix.copy('node_modules/select2-bootstrap4-theme/dist/select2-bootstrap4.min.css', buildCssPath)
     .version();
-mix.copy('node_modules/vue-qrcode-reader/dist/vue-qrcode-reader.css', buildCssPath)
-    .version();
 
 mix.js('resources/js/search-form.js', buildJsPath).version();
 mix.js('resources/js/options.js', buildJsPath).version();
