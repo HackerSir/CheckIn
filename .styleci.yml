@@ -3,7 +3,6 @@ preset: laravel
 enabled:
   - concat_with_spaces
   - align_double_arrow
-  - alpha_ordered_imports
 
 disabled:
   - phpdoc_summary
