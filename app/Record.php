@@ -14,20 +14,21 @@ namespace App;
  * @property int|null $scanned_by_user_id 掃描者
  * @property bool $web_scan 使用網站內建掃描器掃描
  * @property-read \Illuminate\Database\Eloquent\Collection|\Spatie\Activitylog\Models\Activity[] $activities
+ * @property-read int|null $activities_count
  * @property-read \App\Club|null $club
  * @property-read \App\User|null $scanBy
  * @property-read \App\Student|null $student
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Record newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Record newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Record query()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Record whereClubId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Record whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Record whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Record whereIp($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Record whereScannedByUserId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Record whereStudentNid($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Record whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Record whereWebScan($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Record newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Record newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Record query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Record whereClubId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Record whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Record whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Record whereIp($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Record whereScannedByUserId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Record whereStudentNid($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Record whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Record whereWebScan($value)
  * @mixin \Eloquent
  */
 class Record extends LoggableModel

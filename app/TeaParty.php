@@ -14,21 +14,22 @@ namespace App;
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \Illuminate\Database\Eloquent\Collection|\Spatie\Activitylog\Models\Activity[] $activities
+ * @property-read int|null $activities_count
  * @property-read \App\Club $club
  * @property-read bool $is_ended
  * @property-read bool $is_started
  * @property-read string $state
- * @method static \Illuminate\Database\Eloquent\Builder|\App\TeaParty newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\TeaParty newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\TeaParty query()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\TeaParty whereClubId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\TeaParty whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\TeaParty whereEndAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\TeaParty whereLocation($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\TeaParty whereName($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\TeaParty whereStartAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\TeaParty whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\TeaParty whereUrl($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TeaParty newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|TeaParty newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|TeaParty query()
+ * @method static \Illuminate\Database\Eloquent\Builder|TeaParty whereClubId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TeaParty whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TeaParty whereEndAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TeaParty whereLocation($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TeaParty whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TeaParty whereStartAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TeaParty whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TeaParty whereUrl($value)
  * @mixin \Eloquent
  */
 class TeaParty extends LoggableModel

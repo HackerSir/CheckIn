@@ -12,17 +12,18 @@ namespace App;
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \Illuminate\Database\Eloquent\Collection|\Spatie\Activitylog\Models\Activity[] $activities
+ * @property-read int|null $activities_count
  * @property-read string $stars
  * @property-read \App\Student|null $student
- * @method static \Illuminate\Database\Eloquent\Builder|\App\StudentSurvey newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\StudentSurvey newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\StudentSurvey query()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\StudentSurvey whereComment($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\StudentSurvey whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\StudentSurvey whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\StudentSurvey whereRating($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\StudentSurvey whereStudentNid($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\StudentSurvey whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|StudentSurvey newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|StudentSurvey newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|StudentSurvey query()
+ * @method static \Illuminate\Database\Eloquent\Builder|StudentSurvey whereComment($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|StudentSurvey whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|StudentSurvey whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|StudentSurvey whereRating($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|StudentSurvey whereStudentNid($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|StudentSurvey whereUpdatedAt($value)
  * @mixin \Eloquent
  */
 class StudentSurvey extends LoggableModel

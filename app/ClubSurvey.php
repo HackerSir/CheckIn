@@ -13,19 +13,20 @@ namespace App;
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \Illuminate\Database\Eloquent\Collection|\Spatie\Activitylog\Models\Activity[] $activities
+ * @property-read int|null $activities_count
  * @property-read \App\Club $club
  * @property-read string $stars
  * @property-read \App\User $user
- * @method static \Illuminate\Database\Eloquent\Builder|\App\ClubSurvey newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\ClubSurvey newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\ClubSurvey query()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\ClubSurvey whereClubId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\ClubSurvey whereComment($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\ClubSurvey whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\ClubSurvey whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\ClubSurvey whereRating($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\ClubSurvey whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\ClubSurvey whereUserId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ClubSurvey newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|ClubSurvey newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|ClubSurvey query()
+ * @method static \Illuminate\Database\Eloquent\Builder|ClubSurvey whereClubId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ClubSurvey whereComment($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ClubSurvey whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ClubSurvey whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ClubSurvey whereRating($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ClubSurvey whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ClubSurvey whereUserId($value)
  * @mixin \Eloquent
  */
 class ClubSurvey extends LoggableModel

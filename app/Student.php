@@ -24,41 +24,46 @@ use Illuminate\Database\Query\Builder;
  * @property bool $is_dummy 是否為虛構資料
  * @property \Illuminate\Support\Carbon|null $fetch_at 最後一次由API獲取資料時間
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Club[] $clubs
- * @property-read \App\ContactInformation $contactInformation
+ * @property-read int|null $clubs_count
+ * @property-read \App\ContactInformation|null $contactInformation
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Record[] $countedRecords
+ * @property-read int|null $counted_records_count
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Feedback[] $feedback
+ * @property-read int|null $feedback_count
  * @property-read string $display_name
  * @property-read bool $has_enough_counted_records
  * @property-read bool $is_freshman
  * @property-read bool $is_staff
  * @property-read string $masked_display_name
- * @property-read \App\Qrcode $qrcode
+ * @property-read \App\Qrcode|null $qrcode
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Qrcode[] $qrcodes
+ * @property-read int|null $qrcodes_count
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Record[] $records
- * @property-read \App\StudentSurvey $studentSurvey
- * @property-read \App\StudentTicket $studentTicket
- * @property-read \App\Ticket $ticket
+ * @property-read int|null $records_count
+ * @property-read \App\StudentSurvey|null $studentSurvey
+ * @property-read \App\StudentTicket|null $studentTicket
+ * @property-read \App\Ticket|null $ticket
  * @property-read \App\User $user
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Student freshman()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Student newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Student newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Student nonFreshman()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Student query()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Student whereClass($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Student whereConsiderAsFreshman($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Student whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Student whereDeptId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Student whereDeptName($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Student whereFetchAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Student whereGender($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Student whereInYear($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Student whereIsDummy($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Student whereName($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Student whereNid($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Student whereType($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Student whereUnitId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Student whereUnitName($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Student whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Student freshman()
+ * @method static \Illuminate\Database\Eloquent\Builder|Student newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Student newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Student nonFreshman()
+ * @method static \Illuminate\Database\Eloquent\Builder|Student query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Student whereClass($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Student whereConsiderAsFreshman($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Student whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Student whereDeptId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Student whereDeptName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Student whereFetchAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Student whereGender($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Student whereInYear($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Student whereIsDummy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Student whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Student whereNid($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Student whereType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Student whereUnitId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Student whereUnitName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Student whereUpdatedAt($value)
  * @mixin \Eloquent
  */
 class Student extends Model

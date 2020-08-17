@@ -13,17 +13,18 @@ namespace App;
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \Illuminate\Database\Eloquent\Collection|\Spatie\Activitylog\Models\Activity[] $activities
+ * @property-read int|null $activities_count
  * @property-read \App\Student $student
- * @method static \Illuminate\Database\Eloquent\Builder|\App\ContactInformation newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\ContactInformation newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\ContactInformation query()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\ContactInformation whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\ContactInformation whereEmail($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\ContactInformation whereFacebook($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\ContactInformation whereLine($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\ContactInformation wherePhone($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\ContactInformation whereStudentNid($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\ContactInformation whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ContactInformation newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|ContactInformation newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|ContactInformation query()
+ * @method static \Illuminate\Database\Eloquent\Builder|ContactInformation whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ContactInformation whereEmail($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ContactInformation whereFacebook($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ContactInformation whereLine($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ContactInformation wherePhone($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ContactInformation whereStudentNid($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ContactInformation whereUpdatedAt($value)
  * @mixin \Eloquent
  */
 class ContactInformation extends LoggableModel

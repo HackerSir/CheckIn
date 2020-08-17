@@ -12,15 +12,16 @@ namespace App;
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \Illuminate\Database\Eloquent\Collection|\Spatie\Activitylog\Models\Activity[] $activities
- * @method static \Illuminate\Database\Eloquent\Builder|\App\ExtraTicket newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\ExtraTicket newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\ExtraTicket query()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\ExtraTicket whereClass($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\ExtraTicket whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\ExtraTicket whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\ExtraTicket whereName($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\ExtraTicket whereNid($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\ExtraTicket whereUpdatedAt($value)
+ * @property-read int|null $activities_count
+ * @method static \Illuminate\Database\Eloquent\Builder|ExtraTicket newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|ExtraTicket newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|ExtraTicket query()
+ * @method static \Illuminate\Database\Eloquent\Builder|ExtraTicket whereClass($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ExtraTicket whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ExtraTicket whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ExtraTicket whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ExtraTicket whereNid($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ExtraTicket whereUpdatedAt($value)
  * @mixin \Eloquent
  */
 class ExtraTicket extends LoggableModel

@@ -25,32 +25,33 @@ namespace App;
  * @property string|null $original_custom_question 原自訂問題
  * @property string|null $custom_question 自訂問題
  * @property-read \Illuminate\Database\Eloquent\Collection|\Spatie\Activitylog\Models\Activity[] $activities
+ * @property-read int|null $activities_count
  * @property-read \App\Club $club
  * @property-read string $show_result
  * @property-read \App\User|null $reviewer
  * @property-read \App\User|null $user
- * @method static \Illuminate\Database\Eloquent\Builder|\App\DataUpdateRequest newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\DataUpdateRequest newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\DataUpdateRequest query()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\DataUpdateRequest whereClubId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\DataUpdateRequest whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\DataUpdateRequest whereCustomQuestion($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\DataUpdateRequest whereDescription($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\DataUpdateRequest whereExtraInfo($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\DataUpdateRequest whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\DataUpdateRequest whereOriginalCustomQuestion($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\DataUpdateRequest whereOriginalDescription($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\DataUpdateRequest whereOriginalExtraInfo($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\DataUpdateRequest whereOriginalUrl($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\DataUpdateRequest whereReason($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\DataUpdateRequest whereReviewAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\DataUpdateRequest whereReviewComment($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\DataUpdateRequest whereReviewResult($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\DataUpdateRequest whereReviewerId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\DataUpdateRequest whereSubmitAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\DataUpdateRequest whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\DataUpdateRequest whereUrl($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\DataUpdateRequest whereUserId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|DataUpdateRequest newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|DataUpdateRequest newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|DataUpdateRequest query()
+ * @method static \Illuminate\Database\Eloquent\Builder|DataUpdateRequest whereClubId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|DataUpdateRequest whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|DataUpdateRequest whereCustomQuestion($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|DataUpdateRequest whereDescription($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|DataUpdateRequest whereExtraInfo($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|DataUpdateRequest whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|DataUpdateRequest whereOriginalCustomQuestion($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|DataUpdateRequest whereOriginalDescription($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|DataUpdateRequest whereOriginalExtraInfo($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|DataUpdateRequest whereOriginalUrl($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|DataUpdateRequest whereReason($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|DataUpdateRequest whereReviewAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|DataUpdateRequest whereReviewComment($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|DataUpdateRequest whereReviewResult($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|DataUpdateRequest whereReviewerId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|DataUpdateRequest whereSubmitAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|DataUpdateRequest whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|DataUpdateRequest whereUrl($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|DataUpdateRequest whereUserId($value)
  * @mixin \Eloquent
  */
 class DataUpdateRequest extends LoggableModel

@@ -18,22 +18,23 @@ use Illuminate\Database\Eloquent\Builder;
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \Illuminate\Database\Eloquent\Collection|\Spatie\Activitylog\Models\Activity[] $activities
+ * @property-read int|null $activities_count
  * @property-read \App\Club $club
  * @property-read \App\Student $student
  * @property-read \App\User|null $user
- * @method static \Illuminate\Database\Eloquent\Builder|\App\PaymentRecord newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\PaymentRecord newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\PaymentRecord query()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\PaymentRecord whereClubId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\PaymentRecord whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\PaymentRecord whereHandler($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\PaymentRecord whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\PaymentRecord whereIsPaid($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\PaymentRecord whereName($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\PaymentRecord whereNid($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\PaymentRecord whereNote($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\PaymentRecord whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\PaymentRecord whereUserId($value)
+ * @method static Builder|PaymentRecord newModelQuery()
+ * @method static Builder|PaymentRecord newQuery()
+ * @method static Builder|PaymentRecord query()
+ * @method static Builder|PaymentRecord whereClubId($value)
+ * @method static Builder|PaymentRecord whereCreatedAt($value)
+ * @method static Builder|PaymentRecord whereHandler($value)
+ * @method static Builder|PaymentRecord whereId($value)
+ * @method static Builder|PaymentRecord whereIsPaid($value)
+ * @method static Builder|PaymentRecord whereName($value)
+ * @method static Builder|PaymentRecord whereNid($value)
+ * @method static Builder|PaymentRecord whereNote($value)
+ * @method static Builder|PaymentRecord whereUpdatedAt($value)
+ * @method static Builder|PaymentRecord whereUserId($value)
  * @mixin \Eloquent
  */
 class PaymentRecord extends LoggableModel

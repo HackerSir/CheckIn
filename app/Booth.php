@@ -13,18 +13,19 @@ namespace App;
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \Illuminate\Database\Eloquent\Collection|\Spatie\Activitylog\Models\Activity[] $activities
+ * @property-read int|null $activities_count
  * @property-read \App\Club|null $club
  * @property-read string $embed_map_url
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Booth newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Booth newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Booth query()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Booth whereClubId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Booth whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Booth whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Booth whereLatitude($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Booth whereLongitude($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Booth whereName($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Booth whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Booth newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Booth newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Booth query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Booth whereClubId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Booth whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Booth whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Booth whereLatitude($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Booth whereLongitude($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Booth whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Booth whereUpdatedAt($value)
  * @mixin \Eloquent
  */
 class Booth extends LoggableModel

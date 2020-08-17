@@ -18,35 +18,46 @@ use Iatstuti\Database\Support\NullableFields;
  * @property string|null $extra_info 額外資訊
  * @property string|null $custom_question 自訂問題
  * @property-read \Illuminate\Database\Eloquent\Collection|\Spatie\Activitylog\Models\Activity[] $activities
+ * @property-read int|null $activities_count
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Booth[] $booths
- * @property-read \App\ClubSurvey $clubSurvey
+ * @property-read int|null $booths_count
+ * @property-read \App\ClubSurvey|null $clubSurvey
  * @property-read \App\ClubType|null $clubType
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\DataUpdateRequest[] $dataUpdateRequests
+ * @property-read int|null $data_update_requests_count
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\User[] $favoriteBy
+ * @property-read int|null $favorite_by_count
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Feedback[] $feedback
+ * @property-read int|null $feedback_count
  * @property-read string $display_name
  * @property-read bool $is_counted
- * @property-read \App\ImgurImage $imgurImage
+ * @property-read \App\ImgurImage|null $imgurImage
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Student[] $leaders
+ * @property-read int|null $leaders_count
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\PaymentRecord[] $paymentRecords
+ * @property-read int|null $payment_records_count
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Record[] $records
+ * @property-read int|null $records_count
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Student[] $staffs
+ * @property-read int|null $staffs_count
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Student[] $students
- * @property-read \App\TeaParty $teaParty
+ * @property-read int|null $students_count
+ * @property-read \App\TeaParty|null $teaParty
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\User[] $users
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Club newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Club newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Club query()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Club whereClubTypeId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Club whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Club whereCustomQuestion($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Club whereDescription($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Club whereExtraInfo($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Club whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Club whereName($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Club whereNumber($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Club whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Club whereUrl($value)
+ * @property-read int|null $users_count
+ * @method static \Illuminate\Database\Eloquent\Builder|Club newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Club newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Club query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Club whereClubTypeId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Club whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Club whereCustomQuestion($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Club whereDescription($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Club whereExtraInfo($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Club whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Club whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Club whereNumber($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Club whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Club whereUrl($value)
  * @mixin \Eloquent
  */
 class Club extends LoggableModel

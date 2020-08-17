@@ -12,17 +12,19 @@ namespace App;
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \Illuminate\Database\Eloquent\Collection|\Spatie\Activitylog\Models\Activity[] $activities
+ * @property-read int|null $activities_count
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Club[] $clubs
+ * @property-read int|null $clubs_count
  * @property-read string $tag
- * @method static \Illuminate\Database\Eloquent\Builder|\App\ClubType newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\ClubType newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\ClubType query()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\ClubType whereColor($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\ClubType whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\ClubType whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\ClubType whereIsCounted($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\ClubType whereName($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\ClubType whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ClubType newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|ClubType newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|ClubType query()
+ * @method static \Illuminate\Database\Eloquent\Builder|ClubType whereColor($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ClubType whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ClubType whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ClubType whereIsCounted($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ClubType whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ClubType whereUpdatedAt($value)
  * @mixin \Eloquent
  */
 class ClubType extends LoggableModel

@@ -12,13 +12,13 @@ use Illuminate\Database\Eloquent\Model;
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \App\Student|null $student
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Ticket newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Ticket newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Ticket query()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Ticket whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Ticket whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Ticket whereStudentNid($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Ticket whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Ticket newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Ticket newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Ticket query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Ticket whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Ticket whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Ticket whereStudentNid($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Ticket whereUpdatedAt($value)
  * @mixin \Eloquent
  */
 class Ticket extends Model

@@ -17,17 +17,17 @@ use Illuminate\Database\Eloquent\Model;
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \App\Club|null $club
  * @property-read string $url
- * @method static \Illuminate\Database\Eloquent\Builder|\App\ImgurImage newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\ImgurImage newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\ImgurImage query()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\ImgurImage whereClubId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\ImgurImage whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\ImgurImage whereDeleteHash($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\ImgurImage whereExtension($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\ImgurImage whereFileName($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\ImgurImage whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\ImgurImage whereImgurId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\ImgurImage whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ImgurImage newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|ImgurImage newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|ImgurImage query()
+ * @method static \Illuminate\Database\Eloquent\Builder|ImgurImage whereClubId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ImgurImage whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ImgurImage whereDeleteHash($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ImgurImage whereExtension($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ImgurImage whereFileName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ImgurImage whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ImgurImage whereImgurId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ImgurImage whereUpdatedAt($value)
  * @mixin \Eloquent
  */
 class ImgurImage extends Model

@@ -14,15 +14,16 @@ use Laratrust\Models\LaratrustPermission;
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Role[] $roles
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Permission newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Permission newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Permission query()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Permission whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Permission whereDescription($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Permission whereDisplayName($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Permission whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Permission whereName($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Permission whereUpdatedAt($value)
+ * @property-read int|null $roles_count
+ * @method static \Illuminate\Database\Eloquent\Builder|Permission newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Permission newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Permission query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Permission whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Permission whereDescription($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Permission whereDisplayName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Permission whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Permission whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Permission whereUpdatedAt($value)
  * @mixin \Eloquent
  */
 class Permission extends LaratrustPermission

@@ -26,31 +26,32 @@ use Iatstuti\Database\Support\NullableFields;
  * @property int|null $join_club_intention 加入社團意願
  * @property int|null $join_tea_party_intention 參加迎新茶會意願
  * @property-read \Illuminate\Database\Eloquent\Collection|\Spatie\Activitylog\Models\Activity[] $activities
+ * @property-read int|null $activities_count
  * @property-read \App\Club $club
  * @property-read string|null $join_club_intention_text
  * @property-read string|null $join_tea_party_intention_text
  * @property-read \App\Student|null $student
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Feedback newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Feedback newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Feedback query()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Feedback whereAnswerOfCustomQuestion($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Feedback whereClubId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Feedback whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Feedback whereCustomQuestion($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Feedback whereEmail($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Feedback whereFacebook($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Feedback whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Feedback whereIncludeEmail($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Feedback whereIncludeFacebook($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Feedback whereIncludeLine($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Feedback whereIncludePhone($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Feedback whereJoinClubIntention($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Feedback whereJoinTeaPartyIntention($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Feedback whereLine($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Feedback whereMessage($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Feedback wherePhone($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Feedback whereStudentNid($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Feedback whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Feedback newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Feedback newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Feedback query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Feedback whereAnswerOfCustomQuestion($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Feedback whereClubId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Feedback whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Feedback whereCustomQuestion($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Feedback whereEmail($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Feedback whereFacebook($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Feedback whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Feedback whereIncludeEmail($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Feedback whereIncludeFacebook($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Feedback whereIncludeLine($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Feedback whereIncludePhone($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Feedback whereJoinClubIntention($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Feedback whereJoinTeaPartyIntention($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Feedback whereLine($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Feedback whereMessage($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Feedback wherePhone($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Feedback whereStudentNid($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Feedback whereUpdatedAt($value)
  * @mixin \Eloquent
  */
 class Feedback extends LoggableModel
