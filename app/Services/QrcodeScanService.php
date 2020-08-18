@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Club;
+use App\Events\CheckInAlert;
 use App\Events\CheckInSuccess;
 use App\Qrcode;
 use App\Record;
@@ -97,6 +98,20 @@ class QrcodeScanService
                 'success' => false,
                 'level'   => 'warning',
                 'message' => "已於 {$createdAtText} 在「{$club->name}」打卡",
+            ];
+        }
+
+        //檢查打卡冷卻時間
+        $inCooldown = Record::where('student_nid', $qrcode->student->nid)
+            ->where('created_at', '>', now()->subMinutes(3))
+            ->exists();
+        if ($inCooldown) {
+            event(new CheckInAlert($qrcode->student->nid, '每次打卡須間隔 3 分鐘'));
+
+            return [
+                'success' => false,
+                'level'   => 'danger',
+                'message' => '該學生打卡冷卻中，每次打卡須間隔 3 分鐘',
             ];
         }
 
