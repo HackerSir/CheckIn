@@ -177,6 +177,12 @@
                 this.submitting = false;
                 //顯示 modal
                 this.showModal = true;
+            }).listen('CheckInAlert', (payload) => {
+                if (payload.diff >= 60) {
+                    console.log('Skip "CheckInAlert" broadcast:', payload.message);
+                    return;
+                }
+                alert(payload.message);
             });
         },
         computed: {
