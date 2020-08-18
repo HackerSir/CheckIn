@@ -34,9 +34,9 @@
                 <i class="fa fa-edit mr-2"></i>編輯資料
             </a>
         @else
-            <button class="btn btn-primary disabled" onclick="alert('已超過資料編輯期限，請提交社團資料修改申請')">
-                <i class="fa fa-edit mr-2"></i>編輯資料
-            </button>
+{{--            <button class="btn btn-primary disabled" onclick="alert('已超過資料編輯期限，請提交社團資料修改申請')">--}}
+{{--                <i class="fa fa-edit mr-2"></i>編輯資料--}}
+{{--            </button>--}}
             <a href="{{ route('own-club.data-update-request.index') }}" class="btn btn-primary">
                 <i class="fa fa-edit mr-2"></i>社團資料修改申請
             </a>
