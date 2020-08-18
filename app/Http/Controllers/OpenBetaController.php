@@ -7,7 +7,6 @@ use App\User;
 
 class OpenBetaController extends Controller
 {
-
     /**
      * OpenBetaController constructor.
      */
