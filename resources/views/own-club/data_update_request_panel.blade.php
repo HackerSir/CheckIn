@@ -14,7 +14,7 @@
 @section('container_class', 'container-fluid')
 @section('main_content')
     <div class="alert alert-danger">
-        {{-- 由於已超過資料編輯期限，--}}如欲修改社團資料，請透過此介面提交資料修改申請
+        {{-- 由於已超過資料編輯期限，--}}如欲修改社團資料，請透過此介面提交資料修改申請，受理期限請參閱課外活動組公告訊息
     </div>
     <div class="card">
         <div class="card-body">
