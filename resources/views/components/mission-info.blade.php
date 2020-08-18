@@ -22,11 +22,17 @@
             <span class="text-success">
                 <i class="far fa-check-square mr-2"></i>已完成
             </span>
+            @include('components.progress-bar', ['progress' => 100, 'bgClass' => 'bg-success'])
         @else
             <span class="text-danger">
                 <i class="far fa-square mr-2"></i>未完成
             </span>
-            <span>（{{ $student->countedRecords->count() }} / {{ \Setting::get('target') }}）</span>
+            <div class="d-inline-block">（{{ $student->countedRecords->count() }} / {{ \Setting::get('target') }}）</div>
+            @php
+                $progress = ($student->countedRecords->count() / \Setting::get('target')) * 100;
+                $progress = round($progress, 2);
+            @endphp
+            @include('components.progress-bar', ['progress' => $progress, 'bgClass' => 'bg-danger'])
         @endif
     </dd>
     <dt class="col-md-3 col-lg-2">填寫平台問卷</dt>
@@ -36,10 +42,41 @@
                 <span class="text-success">
                     <i class="far fa-check-square mr-2"></i>已完成
                 </span>
+                @include('components.progress-bar', ['progress' => 100, 'bgClass' => 'bg-success'])
             @else
                 <span class="text-danger">
                     <i class="far fa-square mr-2"></i>未完成
                 </span>
+                @if($showSurveyButton ?? false)
+                    @if($student->studentSurvey)
+                        <div class="d-inline-block">
+                            <a href="{{ route('survey.student.show') }}" class="btn btn-success btn-sm">
+                                <i class="fa fa-search mr-2"></i>檢視平台問卷
+                            </a>
+                        </div>
+                    @elseif(Carbon\Carbon::now()->gt(new Carbon\Carbon(Setting::get('end_at'))))
+                        <div class="d-inline-block">
+                            <button type="button" class="btn btn-primary btn-sm disabled">
+                                <i class="fa fa-edit mr-2"></i>填寫平台問卷
+                            </button>
+                            <small class="text-danger">已超過填寫時間</small>
+                        </div>
+                    @elseif(!$student->has_enough_counted_records)
+                        <div class="d-inline-block">
+                            <button type="button" class="btn btn-primary btn-sm disabled">
+                                <i class="fa fa-edit mr-2"></i>填寫平台問卷
+                            </button>
+                            <small class="text-danger">請先完成<strong>打卡集點</strong></small>
+                        </div>
+                    @else
+                        <div class="d-inline-block">
+                            <a href="{{ route('survey.student.edit') }}" class="btn btn-primary btn-sm">
+                                <i class="fa fa-edit mr-2"></i>填寫平台問卷
+                            </a>
+                        </div>
+                    @endif
+                @endif
+                @include('components.progress-bar', ['progress' => 0, 'bgClass' => 'bg-danger'])
             @endif
         </div>
     </dd>

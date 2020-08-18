@@ -63,11 +63,6 @@
 
             <hr/>
 
-            <h1>打卡集點</h1>
-            @include('components.check-in-progress', ['student' => $student])
-
-            <hr/>
-
             <h1>QR Code</h1>
 
             <table class="table table-hover table-bordered">

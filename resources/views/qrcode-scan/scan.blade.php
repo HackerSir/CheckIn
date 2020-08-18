@@ -25,11 +25,6 @@
 
                 <h1>抽獎活動</h1>
                 @include('components.mission-info', ['student' => $qrcode->student])
-
-                <hr/>
-
-                <h1>打卡集點</h1>
-                @include('components.check-in-progress', ['student' => $qrcode->student])
             @endif
         </div>
     </div>
