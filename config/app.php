@@ -19,6 +19,9 @@ return [
 
     'allow_register' => env('ALLOW_REGISTER', true),
 
+    // 測試模式
+    'open_beta'      => env('OPEN_BETA', false),
+
     /*
     |--------------------------------------------------------------------------
     | Application Environment

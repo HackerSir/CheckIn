@@ -71,6 +71,10 @@ Route::group(['middleware' => ['auth', 'email']], function () {
         Route::view('broadcast-test', 'misc.broadcast-test')->name('broadcast-test');
         Route::post('message', 'BroadcastTestController@postMessage')->name('broadcast-test.message');
     });
+    //公開測試相關功能
+    Route::prefix('open-beta')->group(function () {
+        Route::post('promote-to-staff/{club}', 'OpenBetaController@promoteToStaff')->name('open-beta.promote-to-staff');
+    });
     //學生管理
     //權限：StudentPolicy
     Route::prefix('student')->group(function () {

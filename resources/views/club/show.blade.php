@@ -34,9 +34,9 @@
                 <i class="fa fa-edit mr-2"></i>編輯資料
             </a>
         @else
-{{--            <button class="btn btn-primary disabled" onclick="alert('已超過資料編輯期限，請提交社團資料修改申請')">--}}
-{{--                <i class="fa fa-edit mr-2"></i>編輯資料--}}
-{{--            </button>--}}
+            {{--            <button class="btn btn-primary disabled" onclick="alert('已超過資料編輯期限，請提交社團資料修改申請')">--}}
+            {{--                <i class="fa fa-edit mr-2"></i>編輯資料--}}
+            {{--            </button>--}}
             <a href="{{ route('own-club.data-update-request.index') }}" class="btn btn-primary">
                 <i class="fa fa-edit mr-2"></i>社團資料修改申請
             </a>
@@ -46,6 +46,14 @@
         <favorite-club-button favorited="{{ auth()->user()->isFavoriteClub($club) }}" :club-id="{{ $club->id }}"
                               club-name="{{ $club->name }}"></favorite-club-button>
     @endauth
+    @if(config('app.open_beta'))
+        {!! Form::open(['route' => ['open-beta.promote-to-staff', $club], 'style' => 'display: inline', 'onSubmit' => "return confirm('此為測試限定功能，確定要成為該社團工作人員嗎？');"]) !!}
+        <button type="submit" class="btn btn-danger"
+                style="background: repeating-linear-gradient(-45deg,#dc3545,#dc3545 10px,#d9828a 10px,#d9828a 20px)">
+            <i class="fa fa-user-secret mr-2"></i>成為工作人員
+        </button>
+        {!! Form::close() !!}
+    @endif
 @endsection
 
 @section('main_content')
