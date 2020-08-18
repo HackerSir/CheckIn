@@ -215,7 +215,7 @@ class ClubController extends Controller
                 }
                 //該列資料
                 $rowData = [];
-                for ($col = 1; $col <= 9; $col++) {
+                for ($col = 1; $col <= 11; $col++) {
                     $cell = $sheet->getCellByColumnAndRow($col, $row->getRowIndex());
                     $colData = $cell->getValue();
                     if (!($colData instanceof RichText)) {
@@ -230,7 +230,7 @@ class ClubController extends Controller
                 $boothName = $rowData[3];
                 $leaderNid = $rowData[4];
                 $staffNids = [];
-                for ($i = 0; $i < 4; $i++) {
+                for ($i = 0; $i < 6; $i++) {
                     $staffNids[$i] = strtoupper($rowData[$i + 5]);
                 }
 
