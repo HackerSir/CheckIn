@@ -20,6 +20,9 @@
     <div class="card">
         <div class="card-body">
             <dl class="row" style="font-size: 120%">
+                <dt class="col-sm-3">分區</dt>
+                <dd class="col-sm-9">{{ $booth->zone }}</dd>
+
                 <dt class="col-sm-3">攤位編號</dt>
                 <dd class="col-sm-9">{{ $booth->name }}</dd>
 

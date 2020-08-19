@@ -6,6 +6,7 @@ namespace App;
  * App\Booth
  *
  * @property int $id
+ * @property string|null $zone 區域
  * @property int|null $club_id 對應社團
  * @property string $name 名稱
  * @property float|null $longitude 經度
@@ -26,6 +27,7 @@ namespace App;
  * @method static \Illuminate\Database\Eloquent\Builder|Booth whereLongitude($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Booth whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Booth whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Booth whereZone($value)
  * @mixin \Eloquent
  */
 class Booth extends LoggableModel
@@ -33,6 +35,7 @@ class Booth extends LoggableModel
     protected static $logName = 'booth';
 
     protected $fillable = [
+        'zone',
         'club_id',
         'name',
         'longitude',

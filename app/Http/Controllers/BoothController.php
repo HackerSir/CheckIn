@@ -42,6 +42,7 @@ class BoothController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
+            'zone'      => 'nullable',
             'club_id'   => 'nullable|exists:clubs,id',
             'name'      => 'required|unique:booths',
             'longitude' => 'nullable|required_with:latitude|numeric|min:-180|max:180',
@@ -56,7 +57,7 @@ class BoothController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Booth $booth
+     * @param \App\Booth $booth
      * @return \Illuminate\Http\Response
      */
     public function show(Booth $booth)
@@ -67,7 +68,7 @@ class BoothController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Booth $booth
+     * @param \App\Booth $booth
      * @return \Illuminate\Http\Response
      */
     public function edit(Booth $booth)
@@ -86,6 +87,7 @@ class BoothController extends Controller
     public function update(Request $request, Booth $booth)
     {
         $this->validate($request, [
+            'zone'      => 'nullable',
             'club_id'   => 'nullable|exists:clubs,id',
             'name'      => ['required', Rule::unique('booths')->ignore($booth->id)],
             'longitude' => 'nullable|required_with:latitude|numeric|min:-180|max:180',
@@ -100,7 +102,7 @@ class BoothController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Booth $booth
+     * @param \App\Booth $booth
      * @return \Illuminate\Http\Response
      * @throws \Exception
      */
@@ -145,7 +147,7 @@ class BoothController extends Controller
                 }
                 //該列資料
                 $rowData = [];
-                for ($col = 1; $col <= 3; $col++) {
+                for ($col = 1; $col <= 4; $col++) {
                     $cell = $sheet->getCellByColumnAndRow($col, $row->getRowIndex());
                     $colData = $cell->getValue();
                     if (!($colData instanceof RichText)) {
@@ -154,12 +156,13 @@ class BoothController extends Controller
                     $rowData[] = $colData;
                 }
                 //資料
-                $name = $rowData[0];
-                $latitude = filter_var($rowData[1], FILTER_VALIDATE_FLOAT);
+                $zone = $rowData[0] ?: null;
+                $name = $rowData[1];
+                $latitude = filter_var($rowData[2], FILTER_VALIDATE_FLOAT);
                 if ($latitude < -90 || $latitude > 90) {
                     $latitude = null;
                 }
-                $longitude = filter_var($rowData[2], FILTER_VALIDATE_FLOAT);
+                $longitude = filter_var($rowData[3], FILTER_VALIDATE_FLOAT);
                 if ($longitude < -180 || $longitude > 180) {
                     $longitude = null;
                 }
@@ -172,6 +175,7 @@ class BoothController extends Controller
                 Booth::updateOrCreate([
                     'name' => $name,
                 ], [
+                    'zone'      => $zone,
                     'latitude'  => $latitude,
                     'longitude' => $longitude,
                 ]);
