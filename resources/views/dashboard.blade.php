@@ -11,7 +11,8 @@
                     <div class="text-center">
                         @if($student->qrcode)
                             <p class="text-danger">聆聽攤位解說後，請出示此 QR Code 以進行打卡</p>
-                            <img src="{{ route('code-picture.qrcode', $student->qrcode->code) }}" class="img-fluid" alt="QR Code">
+                            <img src="{{ route('code-picture.qrcode', $student->qrcode->code) }}" class="img-fluid"
+                                 alt="QR Code">
                         @else
                             <div class="alert alert-danger" role="alert">
                                 o_O 沒有 QR Code？<br/>
@@ -25,33 +26,7 @@
                     <hr/>
 
                     <h1>抽獎活動</h1>
-                    @include('components.mission-info', ['student' => $student])
-                    <div class="text-center">
-                        @if($student->studentSurvey)
-                            <a href="{{ route('survey.student.show') }}" class="btn btn-success">
-                                <i class="fa fa-search mr-2"></i>檢視平台問卷
-                            </a>
-                        @elseif(Carbon\Carbon::now()->gt(new Carbon\Carbon(Setting::get('end_at'))))
-                            <button type="button" class="btn btn-primary disabled">
-                                <i class="fa fa-edit mr-2"></i>填寫平台問卷
-                            </button>
-                            <small class="text-danger">已超過填寫時間</small>
-                        @elseif(!$student->has_enough_counted_records)
-                            <button type="button" class="btn btn-primary disabled">
-                                <i class="fa fa-edit mr-2"></i>填寫平台問卷
-                            </button><br/>
-                            <small class="text-danger">請先完成<strong>打卡集點</strong></small>
-                        @else
-                            <a href="{{ route('survey.student.edit') }}" class="btn btn-primary">
-                                <i class="fa fa-edit mr-2"></i>填寫平台問卷
-                            </a>
-                        @endif
-                    </div>
-
-                    <hr/>
-
-                    <h1>打卡集點</h1>
-                    @include('components.check-in-progress', ['student' => $student])
+                    @include('components.mission-info', ['student' => $student, 'showSurveyButton' => true])
 
                     <hr/>
 
@@ -109,8 +84,8 @@
 @endsection
 
 @section('js')
-{{--    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"--}}
-{{--            integrity="sha256-CutOzxCRucUsn6C6TcEYsauvvYilEniTXldPa6/wu0k=" crossorigin="anonymous"></script>--}}
-{{--    <script src="{{ asset(mix('/build-js/checkin.js')) }}"></script>--}}
+    {{--    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"--}}
+    {{--            integrity="sha256-CutOzxCRucUsn6C6TcEYsauvvYilEniTXldPa6/wu0k=" crossorigin="anonymous"></script>--}}
+    {{--    <script src="{{ asset(mix('/build-js/checkin.js')) }}"></script>--}}
     <script src="{{ asset(mix('/build-js/vue.js')) }}"></script>
 @endsection

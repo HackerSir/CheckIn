@@ -2,10 +2,10 @@
     <div>
         <div class="d-flex flex-column flex-sm-row flex-wrap">
             <div class="mt-1">
-                類型
+                根據類型過濾：
                 <select id="type_select" class="custom-select" v-model="selectedClubType" @change="onSelectChange"
                         style="width: inherit">
-                    <option :value="null">全部</option>
+                    <option :value="null">- 顯示全部 -</option>
                     <option :value="id" v-for="(name, id) in clubTypes">{{ name }}</option>
                 </select>
                 <button class="btn btn-secondary" type="button" data-toggle="collapse"
@@ -55,11 +55,11 @@
 </template>
 
 <script>
-    import InfiniteLoading from 'vue-infinite-loading';
-    import Vuex from 'vuex'
-    import VuexPersist from 'vuex-persist'
+import InfiniteLoading from 'vue-infinite-loading';
+import Vuex from 'vuex'
+import VuexPersist from 'vuex-persist'
 
-    Vue.use(Vuex);
+Vue.use(Vuex);
     const vuexPersist = new VuexPersist({
         key: 'checkin/club',
         storage: localStorage

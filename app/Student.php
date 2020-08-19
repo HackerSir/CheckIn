@@ -71,7 +71,7 @@ class Student extends Model
     protected $primaryKey = 'nid';
     public $incrementing = false;
 
-    private static $freshmanInYear = 108;
+    private static $freshmanInYear = 109;
     protected $fillable = [
         'nid',
         'name',
