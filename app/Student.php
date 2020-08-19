@@ -33,9 +33,11 @@ use Illuminate\Support\Str;
  * @property-read int|null $feedback_count
  * @property-read string $display_name
  * @property-read bool $has_enough_counted_records
+ * @property-read bool $has_enough_zones_of_counted_records
  * @property-read bool $is_freshman
  * @property-read bool $is_staff
  * @property-read string $masked_display_name
+ * @property-read \Illuminate\Support\Collection $zones_of_counted_records
  * @property-read \App\Qrcode|null $qrcode
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Qrcode[] $qrcodes
  * @property-read int|null $qrcodes_count
@@ -281,6 +283,32 @@ class Student extends Model
         $target = (int) \Setting::get('target');
         //檢查打卡進度
         $count = $this->countedRecords->count();
+
+        return $count >= $target;
+    }
+
+    /**
+     * @return \Illuminate\Support\Collection
+     */
+    public function getZonesOfCountedRecordsAttribute()
+    {
+        // 找出打卡的社團清單
+        $countedRecordClubIds = $this->countedRecords()->pluck('club_id');
+        // 找出對應攤位，並找出區域
+        $zones = Booth::whereIn('club_id', $countedRecordClubIds)->pluck('zone')->filter();
+
+        return $zones;
+    }
+
+    /**
+     * @return bool
+     */
+    public function getHasEnoughZonesOfCountedRecordsAttribute()
+    {
+        //區域收集目標
+        $target = (int) \Setting::get('zone_target');
+        //檢查進度
+        $count = $this->zones_of_counted_records->count();
 
         return $count >= $target;
     }
