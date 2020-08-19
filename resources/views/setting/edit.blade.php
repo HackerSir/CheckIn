@@ -9,6 +9,7 @@
             {{ bs()->formGroup(bs()->text('start_at', Setting::get('start_at'))->required())->class('required')->label('開始打卡時間')->showAsRow() }}
             {{ bs()->formGroup(bs()->text('end_at', Setting::get('end_at'))->required())->class('required')->label('結束打卡時間')->showAsRow() }}
             {{ bs()->formGroup(bs()->input('number', 'target', Setting::get('target'))->required()->attributes(['min' => 0]))->class('required')->label('打卡目標數量')->showAsRow() }}
+            {{ bs()->formGroup(bs()->input('number', 'zone_target', Setting::get('zone_target'))->required()->attributes(['min' => 0]))->class('required')->label('區域收集目標數量')->showAsRow() }}
             {{ bs()->formGroup(bs()->text('feedback_create_expired_at', Setting::get('feedback_create_expired_at'))->required())->class('required')->label('回饋資料填寫期限')->showAsRow() }}
             {{ bs()->formGroup(bs()->text('feedback_download_expired_at', Setting::get('feedback_download_expired_at'))->required())->class('required')->label('回饋資料檢視與下載期限')->showAsRow() }}
             {{ bs()->formGroup(bs()->text('club_edit_deadline', Setting::get('club_edit_deadline'))->required())->class('required')->label('社團資料編輯期限')->showAsRow() }}

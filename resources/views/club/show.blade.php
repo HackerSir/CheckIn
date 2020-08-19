@@ -271,11 +271,16 @@
                 <div class="row">
                     @forelse($club->booths as $booth)
                         <div class="col-md">
-                            @if(\Laratrust::can('booth.manage'))
-                                <h3>{{ link_to_route('booth.show', $booth->name, $booth) }}</h3>
-                            @else
-                                <h3>{{ $booth->name }}</h3>
-                            @endif
+                            <div class="h3">
+                                @if($booth->zone)
+                                    <span class="badge badge-secondary">{{ $booth->zone }}</span>
+                                @endif
+                                @if(\Laratrust::can('booth.manage'))
+                                    {{ link_to_route('booth.show', $booth->name, $booth) }}
+                                @else
+                                    {{ $booth->name }}
+                                @endif
+                            </div>
 
                             <div class="embed-responsive embed-responsive-16by9">
                                 <iframe class="embed-responsive-item"

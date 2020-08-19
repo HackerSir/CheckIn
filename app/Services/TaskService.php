@@ -9,9 +9,10 @@ class TaskService
 {
     public function checkProgress(Student $student)
     {
-        //打卡目標
+        //打卡目標＆區域收集目標
         $target = (int) \Setting::get('target');
-        if ($target <= 0) {
+        $zoneTarget = (int) \Setting::get('zone_target');
+        if ($target <= 0 && $zoneTarget <= 0) {
             //目標非正，視為未啟用此機制
             return;
         }
@@ -27,6 +28,11 @@ class TaskService
         }
         //檢查打卡進度
         if (!$student->has_enough_counted_records) {
+            //未完成
+            return;
+        }
+        //檢查區域收集進度
+        if (!$student->has_enough_zones_of_counted_records) {
             //未完成
             return;
         }

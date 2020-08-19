@@ -2,16 +2,51 @@
 
 namespace App\Http\Controllers;
 
+use App\Club;
 use App\DataTables\TeaPartyDataTable;
+use App\Feedback;
 use App\Http\Requests\TeaPartyRequest;
 use App\TeaParty;
+use App\User;
+use Illuminate\Database\Eloquent\Builder;
 
 class TeaPartyController extends Controller
 {
     public function list()
     {
-        $teaParties = TeaParty::with('club:id,name,club_type_id', 'club.clubType:id,name,color')
-            ->orderBy('start_at')->get()->groupBy('state');
+        $teaPartyQuery = TeaParty::with('club:id,name,club_type_id', 'club.clubType:id,name,color');
+        $type = request('type');
+        if ($type == 'favorite') {
+            // 收藏社團
+            /** @var User $user */
+            $user = auth()->user();
+            $favoriteClubIds = $user->favoriteClubs()->pluck('club_id');
+            $teaPartyQuery->whereIn('club_id', $favoriteClubIds);
+        } elseif ($type == 'join') {
+            // 考慮或已登記參加茶會
+            /** @var User $user */
+            $user = auth()->user();
+            $student = $user->student;
+            $joinedFeedbackClubIds = $student->feedback()->where(function ($query) {
+                /** @var Feedback|Builder $query */
+                $query->where('join_club_intention', '<>', 0)
+                    ->orWhere('join_tea_party_intention', '<>', 0);
+            })->pluck('club_id');
+            $teaPartyQuery->whereIn('club_id', $joinedFeedbackClubIds);
+        }
+        $searchKeyword = request('q');
+        if ($searchKeyword) {
+            $teaPartyQuery->where(function ($query) use ($searchKeyword) {
+                /** @var TeaParty|Builder $query */
+                $query->where('name', 'like', "%{$searchKeyword}%")
+                    ->orWhereHas('club', function ($query) use ($searchKeyword) {
+                        /** @var Club|Builder $query */
+                        $query->where('name', 'like', "%{$searchKeyword}%");
+                    });
+            });
+        }
+
+        $teaParties = $teaPartyQuery->orderBy('start_at')->get()->groupBy('state');
 
         return view('tea-party.list', compact('teaParties'));
     }

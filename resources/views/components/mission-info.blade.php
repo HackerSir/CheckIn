@@ -18,20 +18,39 @@
 <dl class="row" style="font-size: 120%">
     <dt class="col-md-3 col-lg-2">打卡集點</dt>
     <dd class="col-md-7 col-lg-10">
+        @php
+            $progress = ($student->countedRecords->count() / \Setting::get('target')) * 100;
+            $progress = round($progress, 2);
+        @endphp
         @if($student->has_enough_counted_records)
-            <span class="text-success">
-                <i class="far fa-check-square mr-2"></i>已完成
-            </span>
-            @include('components.progress-bar', ['progress' => 100, 'bgClass' => 'bg-success'])
+            <span class="text-success"><i class="far fa-check-square mr-2"></i>已完成</span>
         @else
-            <span class="text-danger">
-                <i class="far fa-square mr-2"></i>未完成
-            </span>
-            <div class="d-inline-block">（{{ $student->countedRecords->count() }} / {{ \Setting::get('target') }}）</div>
-            @php
-                $progress = ($student->countedRecords->count() / \Setting::get('target')) * 100;
-                $progress = round($progress, 2);
-            @endphp
+            <span class="text-danger"><i class="far fa-square mr-2"></i>未完成</span>
+        @endif
+        <div class="d-inline-block">（{{ $student->countedRecords->count() }} / {{ \Setting::get('target') }}）</div>
+        @if($student->has_enough_counted_records)
+            @include('components.progress-bar', ['progress' => $progress, 'bgClass' => 'bg-success'])
+        @else
+            @include('components.progress-bar', ['progress' => $progress, 'bgClass' => 'bg-danger'])
+        @endif
+    </dd>
+    <dt class="col-md-3 col-lg-2">區域收集</dt>
+    <dd class="col-md-7 col-lg-10">
+        @php
+            $progress = ($student->zones_of_counted_records->count() / \Setting::get('zone_target')) * 100;
+            $progress = round($progress, 2);
+        @endphp
+        @if($student->has_enough_zones_of_counted_records)
+            <span class="text-success"><i class="far fa-check-square mr-2"></i>已完成</span>
+        @else
+            <span class="text-danger"><i class="far fa-square mr-2"></i>未完成</span>
+        @endif
+        <div class="d-inline-block">（{{ $student->zones_of_counted_records->count() }}
+            / {{ \Setting::get('zone_target') }}）
+        </div>
+        @if($student->has_enough_zones_of_counted_records)
+            @include('components.progress-bar', ['progress' => $progress, 'bgClass' => 'bg-success'])
+        @else
             @include('components.progress-bar', ['progress' => $progress, 'bgClass' => 'bg-danger'])
         @endif
     </dd>

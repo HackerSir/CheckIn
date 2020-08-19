@@ -395,16 +395,24 @@ class ApiController extends Controller
         }
         //學生資料
         $student = $user->student;
-        $student->load('records.club:id,name,club_type_id', 'records.club.clubType');
+        $student->load('records.club:id,name,club_type_id', 'records.club.clubType', 'records.club.booths');
         //相關的回饋資料
         $feedback = Feedback::where('student_nid', $student->nid)->select('id', 'club_id')->get()->keyBy('club_id');
 
         $data = [];
         foreach ($student->records as $record) {
+            $booth = null;
+            // FIXME: 單一社團擁有多個不同區域的攤位時，顯示上可能會出錯
+            if ($record->club && $record->club->booths->count() > 0) {
+                /** @var Booth $booth */
+                $booth = $record->club->booths->first();
+            }
             $data[] = [
                 'club_id'       => $record->club->id,
                 'club'          => $record->club->name,
                 'club_type_tag' => $record->club->clubType->tag ?? null,
+                'booth'         => $booth->name ?? null,
+                'booth_zone'    => $booth->zone ?? null,
                 'is_counted'    => $record->club->is_counted,
                 'created_at'    => $record->created_at,
                 'feedback_id'   => $feedback->has($record->club->id) ? $feedback->get($record->club->id)->id : null,
