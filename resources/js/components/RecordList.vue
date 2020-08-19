@@ -11,12 +11,20 @@
                             <span v-html="record.club_type_tag"></span>
                             <span class='badge badge-secondary' v-if="!record.is_counted">不列入集點</span>
                         </h4>
-                        <p>
-                            <span :title="$moment(record.created_at).format('YYYY-MM-DD HH:mm:ss')"
-                                  data-toggle="tooltip" data-placement="right">
+                        <div class="text-muted d-flex flex-wrap">
+                            <div :title="$moment(record.created_at).format('YYYY-MM-DD HH:mm:ss')"
+                                 class="d-inline-block mr-2" data-placement="right" data-toggle="tooltip">
+                                <i class="fas fa-clock"></i>
                                 {{ $moment(record.created_at).fromNow() }}
-                            </span>
-                        </p>
+                            </div>
+                            <div class="d-inline-block" v-if="record.booth || record.booth_zone">
+                                <i class="fas fa-store"></i>
+                                <span class="badge badge-secondary" v-if="record.booth_zone">{{
+                                        record.booth_zone
+                                    }}</span>
+                                {{ record.booth }}
+                            </div>
+                        </div>
                     </div>
                     <div class="ml-md-auto align-self-center">
                         <a :href="feedback_show_url(record.feedback_id)" class="btn btn-success"
@@ -94,7 +102,8 @@
                                 <template v-if="modalPayload.tea_party.exists">
                                     <span>
                                         <i class="fas fa-clock mr-2"></i>{{
-                                        $moment(modalPayload.tea_party.start_at).format('YYYY-MM-DD HH:mm') }}
+                                            $moment(modalPayload.tea_party.start_at).format('YYYY-MM-DD HH:mm')
+                                        }}
                                     </span>
                                     <span>
                                         <i class="fas fa-map-marked-alt mr-2"></i>{{ modalPayload.tea_party.location }}
@@ -136,135 +145,135 @@
 </template>
 
 <script>
-    require('../bootstrap-echo-vue');
+require('../bootstrap-echo-vue');
 
-    export default {
-        data: function () {
-            return {
-                loading: true,
-                records: [],
-                showModal: false,
-                modalPayload: {
-                    club_id: 0,
-                    club_name: '',
-                    ask_for_feedback: true,
-                    feedback_url: '',
-                    tea_party: {
-                        exists: false,
-                        start_at: '',
-                        location: ''
-                    },
+export default {
+    data: function () {
+        return {
+            loading: true,
+            records: [],
+            showModal: false,
+            modalPayload: {
+                club_id: 0,
+                club_name: '',
+                ask_for_feedback: true,
+                feedback_url: '',
+                tea_party: {
+                    exists: false,
+                    start_at: '',
+                    location: ''
                 },
-                joinClubIntention: -1,
-                joinTeaPartyIntention: -1,
-                submitting: false
+            },
+            joinClubIntention: -1,
+            joinTeaPartyIntention: -1,
+            submitting: false
+        }
+    },
+    created() {
+        this.fetch();
+    },
+    mounted() {
+        // Listen for the 'CheckInSuccess' event in the 'student.NID' private channel
+        this.$echo.private('student.' + window.Laravel.student).listen('CheckInSuccess', (payload) => {
+            if (payload.diff >= 60) {
+                console.log('Skip "CheckInSuccess" broadcast:', payload.club_name);
+                return;
             }
+            this.modalPayload = payload;
+            //重置選項
+            this.joinClubIntention = -1;
+            this.joinTeaPartyIntention = -1;
+            this.submitting = false;
+            //顯示 modal
+            this.showModal = true;
+        }).listen('CheckInAlert', (payload) => {
+            if (payload.diff >= 60) {
+                console.log('Skip "CheckInAlert" broadcast:', payload.message);
+                return;
+            }
+            alert(payload.message);
+        });
+    },
+    computed: {
+        showAlertModal() {
+            return this.showModal && !this.modalPayload.ask_for_feedback
         },
-        created() {
-            this.fetch();
+        showConfirmModal() {
+            return this.showModal && this.modalPayload.ask_for_feedback
         },
-        mounted() {
-            // Listen for the 'CheckInSuccess' event in the 'student.NID' private channel
-            this.$echo.private('student.' + window.Laravel.student).listen('CheckInSuccess', (payload) => {
-                if (payload.diff >= 60) {
-                    console.log('Skip "CheckInSuccess" broadcast:', payload.club_name);
-                    return;
-                }
-                this.modalPayload = payload;
-                //重置選項
-                this.joinClubIntention = -1;
-                this.joinTeaPartyIntention = -1;
-                this.submitting = false;
-                //顯示 modal
-                this.showModal = true;
-            }).listen('CheckInAlert', (payload) => {
-                if (payload.diff >= 60) {
-                    console.log('Skip "CheckInAlert" broadcast:', payload.message);
-                    return;
-                }
-                alert(payload.message);
+        confirmButtonEnabled() {
+            if (this.submitting) {
+                return false;
+            }
+            return this.joinClubIntention >= 0 && this.joinTeaPartyIntention >= 0;
+        }
+    },
+    methods: {
+        fetch() {
+            this.loading = true;
+            let my_record_list_url = Laravel.baseUrl + '/api/my-record-list';
+            axios.post(my_record_list_url).then(response => {
+                this.records = response.data;
+                this.$nextTick(function () {
+                    $('[data-toggle="tooltip"]').tooltip();
+                });
+                this.loading = false;
             });
         },
-        computed: {
-            showAlertModal() {
-                return this.showModal && !this.modalPayload.ask_for_feedback
-            },
-            showConfirmModal() {
-                return this.showModal && this.modalPayload.ask_for_feedback
-            },
-            confirmButtonEnabled() {
-                if (this.submitting) {
-                    return false;
-                }
-                return this.joinClubIntention >= 0 && this.joinTeaPartyIntention >= 0;
-            }
+        club_url: function (club_id) {
+            return Laravel.baseUrl + '/clubs/' + club_id;
         },
-        methods: {
-            fetch() {
-                this.loading = true;
-                let my_record_list_url = Laravel.baseUrl + '/api/my-record-list';
-                axios.post(my_record_list_url).then(response => {
-                    this.records = response.data;
-                    this.$nextTick(function () {
-                        $('[data-toggle="tooltip"]').tooltip();
-                    });
-                    this.loading = false;
+        feedback_show_url: function (feedback_id) {
+            return Laravel.baseUrl + '/feedback/' + feedback_id;
+        },
+        feedback_edit_url: function (club_id) {
+            return Laravel.baseUrl + '/feedback/create/' + club_id;
+        },
+        onModalClosed() {
+            this.showModal = false;
+            //刷新打卡紀錄
+            this.fetch();
+        },
+        onModalConfirmed() {
+            this.submitting = true;
+            //兩題都選擇不參加
+            if (this.joinClubIntention === 0 && this.joinTeaPartyIntention === 0) {
+                //記錄回饋資料
+                let store_feedback_url = Laravel.baseUrl + '/api/store-feedback/' + this.modalPayload.club_id;
+                axios.post(store_feedback_url, {
+                    'join_club_intention': 0,
+                    'join_tea_party_intention': 0
+                }).then(response => {
+                    let success = response.data.success;
+                    if (success) {
+                        toastr["success"]('參與意願已記錄');
+                    } else {
+                        toastr["error"]('發生錯誤，請嘗試自行點擊打卡紀錄中的填寫回饋資料');
+                    }
+                    this.submitting = false;
+                    this.showModal = false;
+                    //刷新打卡紀錄
+                    this.fetch();
                 });
-            },
-            club_url: function (club_id) {
-                return Laravel.baseUrl + '/clubs/' + club_id;
-            },
-            feedback_show_url: function (feedback_id) {
-                return Laravel.baseUrl + '/feedback/' + feedback_id;
-            },
-            feedback_edit_url: function (club_id) {
-                return Laravel.baseUrl + '/feedback/create/' + club_id;
-            },
-            onModalClosed() {
-                this.showModal = false;
-                //刷新打卡紀錄
-                this.fetch();
-            },
-            onModalConfirmed() {
-                this.submitting = true;
-                //兩題都選擇不參加
-                if (this.joinClubIntention === 0 && this.joinTeaPartyIntention === 0) {
-                    //記錄回饋資料
-                    let store_feedback_url = Laravel.baseUrl + '/api/store-feedback/' + this.modalPayload.club_id;
-                    axios.post(store_feedback_url, {
-                        'join_club_intention': 0,
-                        'join_tea_party_intention': 0
-                    }).then(response => {
-                        let success = response.data.success;
-                        if (success) {
-                            toastr["success"]('參與意願已記錄');
-                        } else {
-                            toastr["error"]('發生錯誤，請嘗試自行點擊打卡紀錄中的填寫回饋資料');
-                        }
-                        this.submitting = false;
-                        this.showModal = false;
-                        //刷新打卡紀錄
-                        this.fetch();
-                    });
-                    return;
-                }
-                //若兩題有一題選擇參加或考慮中
-                //進行跳轉（含參加意願選項）
-                let params = new URLSearchParams({
-                    join_club_intention: this.joinClubIntention,
-                    join_tea_party_intention: this.joinTeaPartyIntention
-                });
-                window.location.href = this.modalPayload.feedback_url + '?' + params;
-            },
-            startTransitionModal() {
-                this.$refs.backdrop.classList.toggle("d-block");
-                this.$refs.modal && this.$refs.modal.classList.toggle("d-block");
-                $("body").toggleClass("modal-open");
-            },
-            endTransitionModal() {
-                this.$refs.backdrop.classList.toggle("show");
-                this.$refs.modal && this.$refs.modal.classList.toggle("show");
+                return;
             }
+            //若兩題有一題選擇參加或考慮中
+            //進行跳轉（含參加意願選項）
+            let params = new URLSearchParams({
+                join_club_intention: this.joinClubIntention,
+                join_tea_party_intention: this.joinTeaPartyIntention
+            });
+            window.location.href = this.modalPayload.feedback_url + '?' + params;
+        },
+        startTransitionModal() {
+            this.$refs.backdrop.classList.toggle("d-block");
+            this.$refs.modal && this.$refs.modal.classList.toggle("d-block");
+            $("body").toggleClass("modal-open");
+        },
+        endTransitionModal() {
+            this.$refs.backdrop.classList.toggle("show");
+            this.$refs.modal && this.$refs.modal.classList.toggle("show");
         }
     }
+}
 </script>
