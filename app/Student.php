@@ -295,7 +295,7 @@ class Student extends Model
         // 找出打卡的社團清單
         $countedRecordClubIds = $this->countedRecords()->pluck('club_id');
         // 找出對應攤位，並找出區域
-        $zones = Booth::whereIn('club_id', $countedRecordClubIds)->pluck('zone')->filter();
+        $zones = Booth::whereIn('club_id', $countedRecordClubIds)->pluck('zone')->unique()->filter();
 
         return $zones;
     }
