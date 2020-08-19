@@ -395,12 +395,11 @@ class ApiController extends Controller
         }
         //學生資料
         $student = $user->student;
-        $student->load('records.club:id,name,club_type_id', 'records.club.clubType');
+        $student->load('records.club:id,name,club_type_id', 'records.club.clubType', 'records.club.booths');
         //相關的回饋資料
         $feedback = Feedback::where('student_nid', $student->nid)->select('id', 'club_id')->get()->keyBy('club_id');
 
         $data = [];
-        $student->load('records.club.booths');
         foreach ($student->records as $record) {
             $booth = null;
             // FIXME: 單一社團擁有多個不同區域的攤位時，顯示上可能會出錯
