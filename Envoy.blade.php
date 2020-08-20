@@ -72,6 +72,7 @@
     cd {{ $new_release_dir }}
     php artisan cache:clear
     php artisan route:cache
+    php artisan view:clear
     php artisan config:cache
 @endtask
 
