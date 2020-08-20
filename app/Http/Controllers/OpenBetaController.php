@@ -36,6 +36,8 @@ class OpenBetaController extends Controller
         }
         $student->clubs()->sync([$club->id]);
 
+        activity('open-beta')->by($user)->on($club)->log('成為了 ' . $club->name . ' 的工作人員');
+
         return back()->with('success', '已成為 ' . $club->name . ' 的工作人員');
     }
 }

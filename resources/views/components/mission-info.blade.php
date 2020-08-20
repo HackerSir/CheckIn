@@ -7,7 +7,7 @@
 @else
     @if(!$student->is_freshman)
         <div class="alert alert-warning">
-            <i class="fas fa-exclamation-triangle mr-2"></i>抽獎活動限<strong>大學部新生</strong>參加，即使完成任務，也無法參加抽獎
+            <i class="fas fa-exclamation-triangle mr-2"></i>抽獎活動限<strong>大學部新生</strong>參加。若非新生，即使完成任務也無法參加抽獎。
         </div>
     @else
         <div class="alert alert-info">

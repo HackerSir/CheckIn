@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Booth;
 use App\DataTables\StudentsDataTable;
+use App\Feedback;
 use App\Http\Requests\StudentRequest;
 use App\Imports\StudentImport;
 use App\Services\LogService;
@@ -188,7 +189,11 @@ class StudentController extends Controller
             view()->share(compact('path'));
         }
 
-        return view('student.show', compact('student'));
+        //相關的回饋資料
+        $feedback = Feedback::where('student_nid', $student->nid)->select(['id', 'club_id'])
+            ->get()->keyBy('club_id');
+
+        return view('student.show', compact('student', 'feedback'));
     }
 
     /**
