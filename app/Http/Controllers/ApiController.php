@@ -397,7 +397,7 @@ class ApiController extends Controller
         $student = $user->student;
         $student->load('records.club:id,name,club_type_id', 'records.club.clubType', 'records.club.booths');
         //相關的回饋資料
-        $feedback = Feedback::where('student_nid', $student->nid)->select('id', 'club_id')->get()->keyBy('club_id');
+        $feedback = Feedback::where('student_nid', $student->nid)->select(['id', 'club_id'])->get()->keyBy('club_id');
 
         $data = [];
         foreach ($student->records as $record) {
