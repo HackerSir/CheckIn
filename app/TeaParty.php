@@ -11,6 +11,7 @@ namespace App;
  * @property \Illuminate\Support\Carbon|null $end_at 結束時間
  * @property string $location 地點
  * @property string|null $url 網址
+ * @property string|null $google_event_id Google日曆活動ID
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \Illuminate\Database\Eloquent\Collection|\Spatie\Activitylog\Models\Activity[] $activities
@@ -25,6 +26,7 @@ namespace App;
  * @method static \Illuminate\Database\Eloquent\Builder|TeaParty whereClubId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|TeaParty whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|TeaParty whereEndAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TeaParty whereGoogleEventId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|TeaParty whereLocation($value)
  * @method static \Illuminate\Database\Eloquent\Builder|TeaParty whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|TeaParty whereStartAt($value)
@@ -45,6 +47,7 @@ class TeaParty extends LoggableModel
         'end_at',
         'location',
         'url',
+        'google_event_id',
     ];
 
     protected $dates = [
@@ -98,5 +101,12 @@ class TeaParty extends LoggableModel
     protected function getNameForActivityLog(): string
     {
         return $this->club->name . ' 的茶會資訊';
+    }
+
+    public function saveWithoutEvents(array $options = [])
+    {
+        return static::withoutEvents(function () use ($options) {
+            return $this->save($options);
+        });
     }
 }
