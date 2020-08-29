@@ -103,6 +103,12 @@ class TeaParty extends LoggableModel
         return $this->club->name . ' 的茶會資訊';
     }
 
+    /**
+     * 儲存但不觸發 Observer 監聽的 Model 事件
+     *
+     * @param array $options
+     * @return mixed
+     */
     public function saveWithoutEvents(array $options = [])
     {
         return static::withoutEvents(function () use ($options) {
