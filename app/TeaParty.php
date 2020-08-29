@@ -17,6 +17,8 @@ namespace App;
  * @property-read \Illuminate\Database\Eloquent\Collection|\Spatie\Activitylog\Models\Activity[] $activities
  * @property-read int|null $activities_count
  * @property-read \App\Club $club
+ * @property-read \Spatie\GoogleCalendar\Event|null $google_event
+ * @property-read string|null $google_event_url
  * @property-read bool $is_ended
  * @property-read bool $is_started
  * @property-read string $state
@@ -65,6 +67,42 @@ class TeaParty extends LoggableModel
     public function club()
     {
         return $this->belongsTo(Club::class);
+    }
+
+    /**
+     * @return \Spatie\GoogleCalendar\Event|null
+     */
+    public function getGoogleEventAttribute()
+    {
+        if (!$this->google_event_id) {
+            return null;
+        }
+        try {
+            //TODO: 可能需要暫存？
+            return \Spatie\GoogleCalendar\Event::find($this->google_event_id);
+        } catch (\Google_Service_Exception $exception) {
+            return null;
+        }
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getGoogleEventUrlAttribute()
+    {
+        if (!$this->google_event_id) {
+            return null;
+        }
+        $rememberKey = sprintf('tp_%s_gevent_url_%s', $this->id, $this->updated_at);
+        try {
+            $url = cache()->remember($rememberKey, now()->addDay(), function () {
+                return $this->google_event->htmlLink;
+            });
+        } catch (\Exception $e) {
+            return null;
+        }
+
+        return $url;
     }
 
     /**

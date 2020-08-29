@@ -29,7 +29,13 @@
                 </dd>
 
                 <dt class="col-4 col-md-2">茶會名稱</dt>
-                <dd class="col-8 col-md-10">{{ $teaParty->name }}</dd>
+                <dd class="col-8 col-md-10">
+                    {{ $teaParty->name }}
+                    @if($teaParty->google_event_url)
+                        <a href="{{ $teaParty->google_event_url }}" class="btn btn-outline-info btn-sm" target="_blank"><i
+                                class="fab fa-google mr-2"></i>在 Google 日曆查看</a>
+                    @endif
+                </dd>
 
                 <dt class="col-4 col-md-2">開始時間</dt>
                 <dd class="col-8 col-md-10">{{ $teaParty->start_at }}</dd>

@@ -3,8 +3,8 @@
 @section('title', '迎新茶會')
 
 @section('main_content')
-    <div class="d-flex">
-        <div class="btn-group my-1" role="group">
+    <div class="d-flex flex-wrap">
+        <div class="btn-group mb-1" role="group">
             <a href="{{ rtrim(request()->fullUrlWithQuery(['type' => null]), '?') }}"
                class="btn btn-secondary @if (!request('type')) active @endif">全部</a>
             <a href="{{ request()->fullUrlWithQuery(['type' => 'favorite']) }}"
@@ -12,7 +12,14 @@
             <a href="{{ request()->fullUrlWithQuery(['type' => 'join']) }}"
                class="btn btn-secondary @if (request('type') == 'join') active @endif">考慮或已登記參加茶會</a>
         </div>
-        <div class="ml-auto">
+        <div class="mb-1 ml-1 mr-auto">
+            @if(config('google-calendar.calendar_id'))
+                <a href="https://calendar.google.com/calendar/embed?src={{ urlencode(config('google-calendar.calendar_id')) }}&ctz=Asia%2FTaipei"
+                   class="btn btn-info" target="_blank"><i
+                        class="fab fa-google mr-2"></i>Google 日曆</a>
+            @endif
+        </div>
+        <div class="mb-1">
             <form action="{{ url()->current() }}" method="get" class="form-inline">
                 <div class="input-group is-invalid">
                     @if(request('type'))

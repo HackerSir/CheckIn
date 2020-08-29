@@ -243,7 +243,12 @@
                 </h2>
                 <p style="font-size: 120%">
                 @if($club->teaParty)
-                    <h3><i class="fas fa-mug-hot mr-2"></i>{{ $club->teaParty->name }}</h3>
+                    <h3><i class="fas fa-mug-hot mr-2"></i>{{ $club->teaParty->name }}
+                        @if($club->teaParty->google_event_url)
+                            <a href="{{ $club->teaParty->google_event_url }}" class="btn btn-outline-info btn-sm"
+                               target="_blank"><i class="fab fa-google mr-2"></i>在 Google 日曆查看</a>
+                        @endif
+                    </h3>
                     <dl class="row" style="font-size: 120%">
                         <dt class="col-12 col-sm-4 col-lg-2"><i class="fas fa-clock mr-2"></i>開始時間</dt>
                         <dd class="col-12 col-sm-8 col-lg-10">{{ $club->teaParty->start_at }}</dd>
