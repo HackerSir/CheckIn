@@ -78,7 +78,7 @@ class TeaPartyDataTable extends DataTable
             'start_at' => ['title' => '開始時間'],
             'end_at'   => ['title' => '結束時間'],
             'location' => ['title' => '地點'],
-            'url'      => ['title' => '網址'],
+            'url'      => ['title' => '網址', 'class' => 'text-break'],
         ];
     }
 
