@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\TeaParty;
+use Google_Service_Exception;
 use Spatie\GoogleCalendar\Event;
 
 class GoogleCalendarService
@@ -28,15 +29,18 @@ class GoogleCalendarService
             return;
         }
         $event = null;
-        if ($teaParty->google_event_id) {
+        $originalGoogleEventID = $teaParty->google_event_id;
+        if ($originalGoogleEventID) {
             // 嘗試找出存在的活動
-            $event = Event::find($teaParty->google_event_id);
+            $event = Event::find($originalGoogleEventID);
         }
         if (!$event) {
             // 建立活動
             $event = new Event();
         }
 
+        // 若活動已被手動刪除，將狀態回復到未刪除
+        $event->status = 'confirmed';
         $event->name = $teaParty->name;
         $event->startDateTime = $teaParty->start_at;
         $event->endDateTime = $teaParty->end_at;
@@ -50,7 +54,20 @@ class GoogleCalendarService
             . '更新時間：' . $teaParty->updated_at . '<br/>'
             . link_to('/', 'CheckIn 逢甲社博集點');
 
-        $event = $event->save();
+        try {
+            $event = $event->save();
+        } catch (Google_Service_Exception $exception) {
+            // 無法儲存活動時，清空活動ID
+            $teaParty->google_event_id = null;
+            $teaParty->saveWithoutEvents();
+            if ($originalGoogleEventID) {
+                // 若原本就有活動ID，表示可能是活動被從日曆刪除，且從垃圾桶移除，
+                // 導致出現 403 的情況，此時再以無活動ID的前提重新嘗試
+                $this->updateEvent($teaParty);
+
+                return;
+            }
+        }
 
         $teaParty->google_event_id = $event->id;
         $teaParty->saveWithoutEvents();
