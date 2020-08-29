@@ -8,7 +8,7 @@ use Spatie\GoogleCalendar\Event;
 class GoogleCalendarService
 {
     /**
-     * @var boolean
+     * @var bool
      */
     private $enabled = true;
 
@@ -49,7 +49,6 @@ class GoogleCalendarService
             . '<br/>'
             . '更新時間：' . $teaParty->updated_at . '<br/>'
             . link_to('/', 'CheckIn 逢甲社博集點');
-
 
         $event = $event->save();
 
