@@ -67,6 +67,7 @@ class GoogleCalendarService
 
                 return;
             }
+            throw $exception;
         }
 
         $teaParty->google_event_id = $event->id;
