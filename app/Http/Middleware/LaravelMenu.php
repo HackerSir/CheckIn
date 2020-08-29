@@ -100,16 +100,22 @@ class LaravelMenu
 
                         if (Laratrust::can('ticket.manage')) {
                             $activityMenu->add('抽獎編號管理', ['route' => 'ticket.index'])->active('ticket/*');
+                        } elseif (Laratrust::can('ticket.show-ticket')) {
+                            $activityMenu->add('抽獎編號展示', ['route' => 'ticket.ticket']);
                         }
 
                         if (Laratrust::can('extra-ticket.manage')) {
                             $activityMenu->add('工作人員抽獎編號管理', ['route' => 'extra-ticket.index'])
                                 ->active('extra-ticket/*');
+                        } elseif (Laratrust::can('extra-ticket.show-ticket')) {
+                            $activityMenu->add('工作人員抽獎編號展示', ['route' => 'extra-ticket.ticket']);
                         }
 
                         if (Laratrust::can('student-ticket.manage')) {
                             $activityMenu->add('學生抽獎編號管理', ['route' => 'student-ticket.index'])
                                 ->active('student-ticket/*');
+                        } elseif (Laratrust::can('student-ticket.show-ticket')) {
+                            $activityMenu->add('學生抽獎編號管理', ['route' => 'student-ticket.ticket']);
                         }
 
                         $this->addDivider($activityMenu);

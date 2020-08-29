@@ -207,10 +207,13 @@ Route::group(['middleware' => ['auth', 'email']], function () {
         ]);
     });
 
+    //抽獎編號展示
+    Route::group(['middleware' => 'permission:ticket.manage|ticket.show-ticket'], function () {
+        Route::get('ticket/ticket', 'TicketController@ticket')->name('ticket.ticket');
+    });
     //抽獎編號管理
     //權限：ticket.manage
     Route::group(['middleware' => 'permission:ticket.manage'], function () {
-        Route::get('ticket/ticket', 'TicketController@ticket')->name('ticket.ticket');
         Route::get('ticket/info', 'TicketController@ticketInfo')->name('ticket.info');
         Route::resource('ticket', 'TicketController', [
             'only' => [
@@ -218,10 +221,13 @@ Route::group(['middleware' => ['auth', 'email']], function () {
             ],
         ]);
     });
+    //工作人員抽獎編號展示
+    Route::group(['middleware' => 'permission:extra-ticket.manage|extra-ticket.show-ticket'], function () {
+        Route::get('extra-ticket/ticket', 'ExtraTicketController@ticket')->name('extra-ticket.ticket');
+    });
     //工作人員抽獎編號管理
     //權限：extra-ticket.manage
     Route::group(['middleware' => 'permission:extra-ticket.manage'], function () {
-        Route::get('extra-ticket/ticket', 'ExtraTicketController@ticket')->name('extra-ticket.ticket');
         Route::get('extra-ticket/info', 'ExtraTicketController@ticketInfo')->name('extra-ticket.info');
         Route::get('extra-ticket/import', 'ExtraTicketController@getImport')->name('extra-ticket.import');
         Route::post('extra-ticket/import', 'ExtraTicketController@postImport')->name('extra-ticket.import');
@@ -234,10 +240,13 @@ Route::group(['middleware' => ['auth', 'email']], function () {
             ],
         ]);
     });
+    //學生抽獎編號展示
+    Route::group(['middleware' => 'permission:student-ticket.manage|student-ticket.show-ticket'], function () {
+        Route::get('student-ticket/ticket', 'StudentTicketController@ticket')->name('student-ticket.ticket');
+    });
     //學生抽獎編號管理
     //權限：student-ticket.manage
     Route::group(['middleware' => 'permission:student-ticket.manage'], function () {
-        Route::get('student-ticket/ticket', 'StudentTicketController@ticket')->name('student-ticket.ticket');
         Route::get('student-ticket/info', 'StudentTicketController@ticketInfo')->name('student-ticket.info');
         Route::get('student-ticket/import', 'StudentTicketController@getImport')->name('student-ticket.import');
         Route::post('student-ticket/import', 'StudentTicketController@postImport')->name('student-ticket.import');
