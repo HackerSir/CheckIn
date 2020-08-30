@@ -285,7 +285,12 @@ export default {
             this.delayFetch();
         },
         updateRandomSeed: function () {
+            // 產生新的 Random Seed
             this.randomSeed = _.random(Number.MIN_SAFE_INTEGER, Number.MAX_SAFE_INTEGER)
+            // 強制重新載入
+            this.clubs = [];
+            this.fetchFinish = false;
+            this.identifier++;
         },
         delayFetch: _.debounce(function () {
             this.isTypingKeyword = false;
