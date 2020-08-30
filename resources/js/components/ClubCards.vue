@@ -12,6 +12,9 @@
                         data-target="#clubTypeDescription" aria-expanded="false" aria-controls="collapseExample">
                     <i class="fas fa-question"></i>
                 </button>
+                <button class="btn btn-success" type="button" @click="updateRandomSeed">
+                    <i class="fas fa-sync mr-2"></i>隨機排列
+                </button>
             </div>
             <div class="ml-sm-auto mt-1 d-inline-flex align-items-center">
                 <p class="text-nowrap mb-0 mr-1"><span v-html="searchIndicator"></span> 搜尋</p>
@@ -73,7 +76,8 @@ Vue.use(Vuex);
             clubCachedAt: null,
             favoriteButtonLastTriggeredAt: +new Date(),
             fetchFinish: false,
-            cacheForFavorite: false
+            cacheForFavorite: false,
+            randomSeed: null
         },
         mutations: {
             setSelectedClubType(state, selectedClubType) {
@@ -93,6 +97,9 @@ Vue.use(Vuex);
             },
             setClubCachedAt(state, clubCachedAt) {
                 state.clubCachedAt = clubCachedAt;
+            },
+            setRandomSeed(state, randomSeed) {
+                state.randomSeed = randomSeed
             }
         }
     });
@@ -196,6 +203,14 @@ Vue.use(Vuex);
                 get() {
                     return store.state.favoriteButtonLastTriggeredAt
                 }
+            },
+            randomSeed: {
+                get() {
+                    return store.state.randomSeed
+                },
+                set(value) {
+                    store.commit('setRandomSeed', value)
+                }
             }
         },
         methods: {
@@ -212,6 +227,9 @@ Vue.use(Vuex);
                     let nextPage = Math.ceil(this.clubs.length / this.itemPerPage) + 1;
                     //社團清單
                     let club_list_url = Laravel.baseUrl + '/api/club-list?page=' + nextPage;
+                    if (this.randomSeed) {
+                        club_list_url += '&randomSeed=' + this.randomSeed;
+                    }
                     //限定顯示收藏社團
                     if (this.favoriteOnly) {
                         club_list_url += '&favorite';
@@ -265,6 +283,9 @@ Vue.use(Vuex);
             onKeywordChange: function () {
                 this.isTypingKeyword = true;
                 this.delayFetch();
+            },
+            updateRandomSeed: function () {
+                this.randomSeed = _.random(Number.MIN_SAFE_INTEGER, Number.MAX_SAFE_INTEGER)
             },
             delayFetch: _.debounce(function () {
                 this.isTypingKeyword = false;
