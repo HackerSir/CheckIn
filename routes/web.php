@@ -215,6 +215,7 @@ Route::group(['middleware' => ['auth', 'email']], function () {
     //權限：ticket.manage
     Route::group(['middleware' => 'permission:ticket.manage'], function () {
         Route::get('ticket/info', 'TicketController@ticketInfo')->name('ticket.info');
+        Route::post('export/ticket', 'ExportController@ticket')->name('export.ticket');
         Route::resource('ticket', 'TicketController', [
             'only' => [
                 'index',
