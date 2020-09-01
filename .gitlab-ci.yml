@@ -67,13 +67,13 @@ variables:
     when: always
 
 php7.4:mysql:5.7:
-    <<: *job_template
-    image: edbizarro/gitlab-ci-pipeline-php:7.4
+  <<: *job_template
+  image: edbizarro/gitlab-ci-pipeline-php:7.4
 
 sonarqube:
-    stage: analyze
+  stage: analyze
   image: danny50610/sonar-scanner
-    dependencies: [ 'php7.4:mysql:5.7' ]
+  dependencies: [ 'php7.4:mysql:5.7' ]
   allow_failure: true
   cache:
     key: $CI_COMMIT_REF_NAME
