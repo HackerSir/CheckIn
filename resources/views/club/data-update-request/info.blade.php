@@ -51,12 +51,10 @@
             <div style="font-weight: bold; font-size: 1.2rem"><span class="badge badge-secondary">原圖片</span></div>
             <blockquote>
                 @if($dataUpdateRequest->originalImgurImage)
-                    <p class="form-control-plaintext">
-                        <img src="{{ $dataUpdateRequest->originalImgurImage->thumbnail('t') }}" alt="Club image">
-                        <a href="{{ $dataUpdateRequest->originalImgurImage->url }}" target="_blank">
-                            {{ $dataUpdateRequest->originalImgurImage->file_name }}
-                        </a>
-                    </p>
+                    <img src="{{ $dataUpdateRequest->originalImgurImage->thumbnail('t') }}" alt="Club image">
+                    <a href="{{ $dataUpdateRequest->originalImgurImage->url }}" target="_blank">
+                        {{ $dataUpdateRequest->originalImgurImage->file_name }}
+                    </a>
                 @endif
             </blockquote>
         </div>
@@ -92,12 +90,12 @@
             <div style="font-weight: bold; font-size: 1.2rem"><span class="badge badge-secondary">新圖片</span></div>
             <blockquote>
                 @if($dataUpdateRequest->imgurImage)
-                    <p class="form-control-plaintext">
-                        <img src="{{ $dataUpdateRequest->imgurImage->thumbnail('t') }}" alt="Club image">
-                        <a href="{{ $dataUpdateRequest->imgurImage->url }}" target="_blank">
-                            {{ $dataUpdateRequest->imgurImage->file_name }}
-                        </a>
-                    </p>
+                    <img src="{{ $dataUpdateRequest->imgurImage->thumbnail('t') }}" alt="Club image">
+                    <a href="{{ $dataUpdateRequest->imgurImage->url }}" target="_blank">
+                        {{ $dataUpdateRequest->imgurImage->file_name }}
+                    </a>
+                @else
+                    <small class="text-muted">（不更換圖片）</small>
                 @endif
             </blockquote>
         </div>
