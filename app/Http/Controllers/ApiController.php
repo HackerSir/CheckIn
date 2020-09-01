@@ -234,6 +234,10 @@ class ApiController extends Controller
         } else {
             $clubQuery = Club::with('clubType', 'imgurImage', 'booths');
         }
+        if ($randomSeed = \request('randomSeed')) {
+            // 根據 Random Seed 隨機排列
+            $clubQuery->orderBy(DB::raw("RAND({$randomSeed})"));
+        }
 
         //過濾
         /** @var ClubType $clubType */

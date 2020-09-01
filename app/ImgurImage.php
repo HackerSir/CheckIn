@@ -13,20 +13,24 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $extension 副檔名
  * @property string $delete_hash
  * @property int|null $club_id 所屬社團
+ * @property string $club_type
+ * @property string|null $memo 備註
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \App\Club|null $club
+ * @property-read Model|\Eloquent $club
  * @property-read string $url
  * @method static \Illuminate\Database\Eloquent\Builder|ImgurImage newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|ImgurImage newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|ImgurImage query()
  * @method static \Illuminate\Database\Eloquent\Builder|ImgurImage whereClubId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ImgurImage whereClubType($value)
  * @method static \Illuminate\Database\Eloquent\Builder|ImgurImage whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|ImgurImage whereDeleteHash($value)
  * @method static \Illuminate\Database\Eloquent\Builder|ImgurImage whereExtension($value)
  * @method static \Illuminate\Database\Eloquent\Builder|ImgurImage whereFileName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|ImgurImage whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|ImgurImage whereImgurId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ImgurImage whereMemo($value)
  * @method static \Illuminate\Database\Eloquent\Builder|ImgurImage whereUpdatedAt($value)
  * @mixin \Eloquent
  */
@@ -38,14 +42,16 @@ class ImgurImage extends Model
         'extension',
         'delete_hash',
         'club_id',
+        'club_type',
+        'memo',
     ];
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo|\Illuminate\Database\Eloquent\Builder
+     * @return \Illuminate\Database\Eloquent\Relations\MorphTo
      */
     public function club()
     {
-        return $this->belongsTo(Club::class);
+        return $this->morphTo();
     }
 
     /**

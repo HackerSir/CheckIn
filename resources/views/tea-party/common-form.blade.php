@@ -9,10 +9,10 @@
     <script>
         $(function () {
             $('input[name=start_at]').datetimepicker({
-                format: 'Y-m-d H:i:s'
+                format: 'Y-m-d H:i:00'
             });
             $('input[name=end_at]').datetimepicker({
-                format: 'Y-m-d H:i:s'
+                format: 'Y-m-d H:i:00'
             });
         });
     </script>

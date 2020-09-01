@@ -54,6 +54,7 @@ class DataUpdateRequestController extends Controller
      * @param DataUpdateRequest $dataUpdateRequest
      * @return \Illuminate\Http\Response
      * @throws \Illuminate\Validation\ValidationException
+     * @throws \Exception
      */
     public function update(Request $request, DataUpdateRequest $dataUpdateRequest)
     {
@@ -78,6 +79,17 @@ class DataUpdateRequestController extends Controller
                 'url'             => $dataUpdateRequest->url,
                 'custom_question' => $dataUpdateRequest->custom_question,
             ]);
+            //更新圖片
+            if ($dataUpdateRequest->imgurImage) {
+                //刪除舊圖
+                if ($club->imgurImage) {
+                    $club->imgurImage->delete();
+                }
+                //儲存新圖
+                $imgurImage = $dataUpdateRequest->imgurImage->replicate();
+                $imgurImage->memo = null;
+                $club->imgurImage()->save($imgurImage);
+            }
         }
 
         $dataUpdateRequest->update([

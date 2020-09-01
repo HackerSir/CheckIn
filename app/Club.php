@@ -63,6 +63,7 @@ use Iatstuti\Database\Support\NullableFields;
 class Club extends LoggableModel
 {
     use NullableFields;
+
     protected static $logName = 'club';
 
     protected $fillable = [
@@ -129,11 +130,11 @@ class Club extends LoggableModel
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne|\Illuminate\Database\Eloquent\Builder
+     * @return \Illuminate\Database\Eloquent\Relations\MorphOne
      */
     public function imgurImage()
     {
-        return $this->hasOne(ImgurImage::class);
+        return $this->morphOne(ImgurImage::class, 'club');
     }
 
     /**

@@ -9,6 +9,7 @@ use App\PaymentRecord;
 use App\Record;
 use App\Student;
 use App\StudentSurvey;
+use App\Ticket;
 use App\User;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
@@ -626,5 +627,48 @@ class ExportController extends Controller
 
         //下載
         return $this->downloadSpreadsheet($spreadsheet, '繳費紀錄.xlsx');
+    }
+
+    /**
+     * 抽獎編號
+     *
+     * @return \Symfony\Component\HttpFoundation\BinaryFileResponse
+     * @throws \PhpOffice\PhpSpreadsheet\Exception
+     */
+    public function ticket()
+    {
+        //建立
+        $spreadsheet = new Spreadsheet();
+        $sheet = $spreadsheet->getActiveSheet();
+        //建立匯出資料
+        $this->setTitleRow(
+            $sheet,
+            [
+                '#',
+                'NID',
+                '姓名',
+                '科系',
+                '學院',
+            ]
+        );
+        $ticketQuery = Ticket::with('student');
+        $ticketQuery->chunk(1000, function ($tickets) use ($sheet) {
+            /** @var Ticket $ticket */
+            foreach ($tickets as $ticket) {
+                /** @var Student $student */
+                $student = $ticket->student;
+
+                $this->appendRow($sheet, [
+                    $ticket->id,
+                    $student->nid,
+                    $student->name,
+                    $student->unit_name,
+                    $student->dept_name,
+                ]);
+            }
+        });
+
+        //下載
+        return $this->downloadSpreadsheet($spreadsheet, '抽獎編號.xlsx');
     }
 }

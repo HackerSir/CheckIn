@@ -129,12 +129,13 @@ class OwnClubController extends Controller
 
     /**
      * @param Request $request
+     * @param ImgurImageService $imgurImageService
      * @param HTMLService $HTMLService
      * @return \Illuminate\Http\Response
      * @throws \Illuminate\Validation\ValidationException
      * @throws \Exception
      */
-    public function storeDataUpdateRequest(Request $request, HTMLService $HTMLService)
+    public function storeDataUpdateRequest(Request $request, ImgurImageService $imgurImageService, HTMLService $HTMLService)
     {
         /** @var User $user */
         $user = auth()->user();
@@ -158,7 +159,7 @@ class OwnClubController extends Controller
         //試著刪除之前送出但為審核的申請
         $club->dataUpdateRequests()->whereNull('review_result')->delete();
         //建立新的審核申請
-        DataUpdateRequest::create([
+        $dataUpdateRequest = DataUpdateRequest::create([
             'user_id'                  => $user->id,
             'club_id'                  => $club->id,
             'reason'                   => $request->get('reason'),
@@ -172,6 +173,22 @@ class OwnClubController extends Controller
             'url'                      => $request->get('url'),
             'custom_question'          => $request->get('custom_question'),
         ]);
+
+        //複製原圖片
+        if ($club->imgurImage) {
+            $originalImgurImage = $club->imgurImage->replicate();
+            $originalImgurImage->memo = 'original';
+            $dataUpdateRequest->originalImgurImage()->save($originalImgurImage);
+        }
+
+        //上傳圖片
+        $uploadedFile = $request->file('image_file');
+        if ($uploadedFile) {
+            //上傳新圖
+            $imgurImage = $imgurImageService->upload($uploadedFile);
+            $imgurImage->memo = 'new';
+            $dataUpdateRequest->imgurImage()->save($imgurImage);
+        }
 
         return redirect()->route('clubs.show', $club)->with('success', '申請已送出');
     }

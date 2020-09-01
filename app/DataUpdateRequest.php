@@ -28,6 +28,8 @@ namespace App;
  * @property-read int|null $activities_count
  * @property-read \App\Club $club
  * @property-read string $show_result
+ * @property-read \App\ImgurImage|null $imgurImage
+ * @property-read \App\ImgurImage|null $originalImgurImage
  * @property-read \App\User|null $reviewer
  * @property-read \App\User|null $user
  * @method static \Illuminate\Database\Eloquent\Builder|DataUpdateRequest newModelQuery()
@@ -83,6 +85,16 @@ class DataUpdateRequest extends LoggableModel
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function imgurImage()
+    {
+        return $this->morphOne(ImgurImage::class, 'club')->where('memo', 'new');
+    }
+
+    public function originalImgurImage()
+    {
+        return $this->morphOne(ImgurImage::class, 'club')->where('memo', 'original');
     }
 
     public function club()

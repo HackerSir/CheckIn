@@ -12,6 +12,9 @@
                         data-target="#clubTypeDescription" aria-expanded="false" aria-controls="collapseExample">
                     <i class="fas fa-question"></i>
                 </button>
+                <button class="btn btn-success" type="button" @click="updateRandomSeed">
+                    <i class="fas fa-sync mr-2"></i>隨機排列
+                </button>
             </div>
             <div class="ml-sm-auto mt-1 d-inline-flex align-items-center">
                 <p class="text-nowrap mb-0 mr-1"><span v-html="searchIndicator"></span> 搜尋</p>
@@ -60,219 +63,242 @@ import Vuex from 'vuex'
 import VuexPersist from 'vuex-persist'
 
 Vue.use(Vuex);
-    const vuexPersist = new VuexPersist({
-        key: 'checkin/club',
-        storage: localStorage
-    });
-    const store = new Vuex.Store({
-        plugins: [vuexPersist.plugin],
-        state: {
-            selectedClubType: null,
-            searchKeyword: '',
-            clubs: [],
-            clubCachedAt: null,
-            favoriteButtonLastTriggeredAt: +new Date(),
-            fetchFinish: false,
-            cacheForFavorite: false
+const vuexPersist = new VuexPersist({
+    key: 'checkin/club',
+    storage: localStorage
+});
+const store = new Vuex.Store({
+    plugins: [vuexPersist.plugin],
+    state: {
+        selectedClubType: null,
+        searchKeyword: '',
+        clubs: [],
+        clubCachedAt: null,
+        favoriteButtonLastTriggeredAt: +new Date(),
+        fetchFinish: false,
+        cacheForFavorite: false,
+        randomSeed: null
+    },
+    mutations: {
+        setSelectedClubType(state, selectedClubType) {
+            state.selectedClubType = selectedClubType
         },
-        mutations: {
-            setSelectedClubType(state, selectedClubType) {
-                state.selectedClubType = selectedClubType
+        setSearchKeyword(state, searchKeyword) {
+            state.searchKeyword = searchKeyword
+        },
+        setClubs(state, clubs) {
+            state.clubs = clubs
+        },
+        setFetchFinish(state, fetchFinish) {
+            state.fetchFinish = fetchFinish
+        },
+        setCacheForFavorite(state, cacheForFavorite) {
+            state.cacheForFavorite = cacheForFavorite
+        },
+        setClubCachedAt(state, clubCachedAt) {
+            state.clubCachedAt = clubCachedAt;
+        },
+        setRandomSeed(state, randomSeed) {
+            state.randomSeed = randomSeed
+        }
+    }
+});
+
+export default {
+    props: {
+        favoriteOnly: {
+            default: false
+        }
+    },
+    created() {
+        //TODO: 檢查 cacheForFavorite，確保暫存資料不會被混用，或許有更好的做法
+        //若緩存之後，資料仍有更新，則強制更新；若正檢視收藏社團，則亦考慮最後一次使用收藏按鈕的時間點
+        if (this.cacheForFavorite !== this.favoriteOnly
+            || this.clubLastUpdateAt > this.clubCachedAt
+            || (this.favoriteOnly && this.favoriteButtonLastTriggeredAt > this.clubCachedAt)
+        ) {
+            this.clubs = [];
+            this.fetchFinish = false;
+            this.identifier++;
+        }
+        this.$nextTick(function () {
+            this.fetchClubTypes();
+        });
+    },
+    data: function () {
+        return {
+            identifier: +new Date(),
+            clubTypes: [],
+            // clubs: [],
+            isTypingKeyword: false,
+            isFetching: false,
+            itemPerPage: 20
+        }
+    },
+    computed: {
+        searchIndicator: function () {
+            if (this.isFetching) {
+                return '<i class="fa fa-spinner fa-pulse fa-fw" aria-hidden="true"></i>';
+            } else if (this.isTypingKeyword) {
+                return '<i class="fa fa-pencil-alt fa-fw" aria-hidden="true"></i>';
+            } else {
+                return '<i class="fa fa-search fa-fw" aria-hidden="true"></i>';
+            }
+        },
+        selectedClubType: {
+            get() {
+                return store.state.selectedClubType
             },
-            setSearchKeyword(state, searchKeyword) {
-                state.searchKeyword = searchKeyword
+            set(value) {
+                store.commit('setSelectedClubType', value)
+            }
+        },
+        searchKeyword: {
+            get() {
+                return store.state.searchKeyword
             },
-            setClubs(state, clubs) {
-                state.clubs = clubs
+            set(value) {
+                store.commit('setSearchKeyword', value)
+            }
+        },
+        clubs: {
+            get() {
+                return store.state.clubs
             },
-            setFetchFinish(state, fetchFinish) {
-                state.fetchFinish = fetchFinish
+            set(value) {
+                store.commit('setClubs', value)
+            }
+        },
+        fetchFinish: {
+            get() {
+                return store.state.fetchFinish
             },
-            setCacheForFavorite(state, cacheForFavorite) {
-                state.cacheForFavorite = cacheForFavorite
+            set(value) {
+                store.commit('setFetchFinish', value)
+            }
+        },
+        cacheForFavorite: {
+            get() {
+                return store.state.cacheForFavorite
             },
-            setClubCachedAt(state, clubCachedAt) {
-                state.clubCachedAt = clubCachedAt;
+            set(value) {
+                store.commit('setCacheForFavorite', value)
+            }
+        },
+        clubCachedAt: {
+            get() {
+                return store.state.clubCachedAt
+            },
+            set(value) {
+                store.commit('setClubCachedAt', value)
+            }
+        },
+        clubLastUpdateAt: {
+            get() {
+                let clubLastUpdateAtString = $('meta[name="club-last-updated-at"]').attr('content');
+                return +new Date(clubLastUpdateAtString);
+            }
+        },
+        favoriteButtonLastTriggeredAt: {
+            get() {
+                return store.state.favoriteButtonLastTriggeredAt
+            }
+        },
+        randomSeed: {
+            get() {
+                return store.state.randomSeed
+            },
+            set(value) {
+                store.commit('setRandomSeed', value)
             }
         }
-    });
-
-    export default {
-        props: {
-            favoriteOnly: {
-                default: false
+    },
+    methods: {
+        infiniteHandler($state) {
+            if (this.fetchFinish) {
+                //若暫存資料已完整，直接結束
+                $state.loaded();
+                $state.complete();
+                this.isFetching = false;
+                return;
             }
-        },
-        created() {
-            //TODO: 檢查 cacheForFavorite，確保暫存資料不會被混用，或許有更好的做法
-            //若緩存之後，資料仍有更新，則強制更新；若正檢視收藏社團，則亦考慮最後一次使用收藏按鈕的時間點
-            if (this.cacheForFavorite !== this.favoriteOnly
-                || this.clubLastUpdateAt > this.clubCachedAt
-                || (this.favoriteOnly && this.favoriteButtonLastTriggeredAt > this.clubCachedAt)
-            ) {
-                this.clubs = [];
-                this.fetchFinish = false;
-                this.identifier++;
-            }
-            this.$nextTick(function () {
-                this.fetchClubTypes();
-            });
-        },
-        data: function () {
-            return {
-                identifier: +new Date(),
-                clubTypes: [],
-                // clubs: [],
-                isTypingKeyword: false,
-                isFetching: false,
-                itemPerPage: 20
-            }
-        },
-        computed: {
-            searchIndicator: function () {
-                if (this.isFetching) {
-                    return '<i class="fa fa-spinner fa-pulse fa-fw" aria-hidden="true"></i>';
-                } else if (this.isTypingKeyword) {
-                    return '<i class="fa fa-pencil-alt fa-fw" aria-hidden="true"></i>';
-                } else {
-                    return '<i class="fa fa-search fa-fw" aria-hidden="true"></i>';
+            setTimeout(() => {
+                this.isFetching = true;
+                let nextPage = Math.ceil(this.clubs.length / this.itemPerPage) + 1;
+                //社團清單
+                let club_list_url = Laravel.baseUrl + '/api/club-list?page=' + nextPage;
+                if (this.randomSeed) {
+                    club_list_url += '&randomSeed=' + this.randomSeed;
                 }
-            },
-            selectedClubType: {
-                get() {
-                    return store.state.selectedClubType
-                },
-                set(value) {
-                    store.commit('setSelectedClubType', value)
+                //限定顯示收藏社團
+                if (this.favoriteOnly) {
+                    club_list_url += '&favorite';
                 }
-            },
-            searchKeyword: {
-                get() {
-                    return store.state.searchKeyword
-                },
-                set(value) {
-                    store.commit('setSearchKeyword', value)
-                }
-            },
-            clubs: {
-                get() {
-                    return store.state.clubs
-                },
-                set(value) {
-                    store.commit('setClubs', value)
-                }
-            },
-            fetchFinish: {
-                get() {
-                    return store.state.fetchFinish
-                },
-                set(value) {
-                    store.commit('setFetchFinish', value)
-                }
-            },
-            cacheForFavorite: {
-                get() {
-                    return store.state.cacheForFavorite
-                },
-                set(value) {
-                    store.commit('setCacheForFavorite', value)
-                }
-            },
-            clubCachedAt: {
-                get() {
-                    return store.state.clubCachedAt
-                },
-                set(value) {
-                    store.commit('setClubCachedAt', value)
-                }
-            },
-            clubLastUpdateAt: {
-                get() {
-                    let clubLastUpdateAtString = $('meta[name="club-last-updated-at"]').attr('content');
-                    return +new Date(clubLastUpdateAtString);
-                }
-            },
-            favoriteButtonLastTriggeredAt: {
-                get() {
-                    return store.state.favoriteButtonLastTriggeredAt
-                }
-            }
-        },
-        methods: {
-            infiniteHandler($state) {
-                if (this.fetchFinish) {
-                    //若暫存資料已完整，直接結束
-                    $state.loaded();
-                    $state.complete();
-                    this.isFetching = false;
-                    return;
-                }
-                setTimeout(() => {
-                    this.isFetching = true;
-                    let nextPage = Math.ceil(this.clubs.length / this.itemPerPage) + 1;
-                    //社團清單
-                    let club_list_url = Laravel.baseUrl + '/api/club-list?page=' + nextPage;
-                    //限定顯示收藏社團
-                    if (this.favoriteOnly) {
-                        club_list_url += '&favorite';
-                    }
-                    //TODO: 記錄 cacheForFavorite，確保暫存資料不會被混用，或許有更好的做法
-                    this.cacheForFavorite = this.favoriteOnly;
-                    axios.post(club_list_url, {
-                        clubType: this.selectedClubType,
-                        keyword: this.searchKeyword
-                    }).then(response => {
-                        let responseBody = response.data;
-                        let clubsData = responseBody.data;
-                        if (clubsData.length) {
-                            this.clubs = this.clubs.concat(clubsData);
-                            $state.loaded();
-                            if (responseBody.current_page >= responseBody.last_page) {
-                                //沒下一頁
-                                $state.complete();
-                                this.fetchFinish = true;
-                            }
-                        } else {
-                            //該頁無內容，表示已完成
+                //TODO: 記錄 cacheForFavorite，確保暫存資料不會被混用，或許有更好的做法
+                this.cacheForFavorite = this.favoriteOnly;
+                axios.post(club_list_url, {
+                    clubType: this.selectedClubType,
+                    keyword: this.searchKeyword
+                }).then(response => {
+                    let responseBody = response.data;
+                    let clubsData = responseBody.data;
+                    if (clubsData.length) {
+                        this.clubs = this.clubs.concat(clubsData);
+                        $state.loaded();
+                        if (responseBody.current_page >= responseBody.last_page) {
+                            //沒下一頁
                             $state.complete();
                             this.fetchFinish = true;
                         }
-                        this.clubCachedAt = +new Date();
-                        this.isFetching = false;
-                    });
-                }, 200);
-            },
-            changeFilter() {
-                this.isFetching = true;
-                this.fetchFinish = false;
-                this.clubs = [];
-                this.$nextTick(() => {
-                    // this.$refs.infiniteLoading.$emit('$InfiniteLoading:reset');
-                    // Reset InfiniteLoading by change identifier
-                    this.identifier++;
+                    } else {
+                        //該頁無內容，表示已完成
+                        $state.complete();
+                        this.fetchFinish = true;
+                    }
+                    this.clubCachedAt = +new Date();
+                    this.isFetching = false;
                 });
-            },
-            fetchClubTypes: function () {
-                //社團類型
-                let club_type_list_url = Laravel.baseUrl + '/api/club-type-list';
-                axios.post(club_type_list_url).then(response => {
-                    this.clubTypes = response.data;
-                });
-            },
-            onSelectChange: function () {
-                this.changeFilter();
-            },
-            onKeywordChange: function () {
-                this.isTypingKeyword = true;
-                this.delayFetch();
-            },
-            delayFetch: _.debounce(function () {
-                this.isTypingKeyword = false;
-                this.changeFilter();
-            }, 1000)
+            }, 200);
         },
-        components: {
-            InfiniteLoading,
-        }
+        changeFilter() {
+            this.isFetching = true;
+            this.fetchFinish = false;
+            this.clubs = [];
+            this.$nextTick(() => {
+                // this.$refs.infiniteLoading.$emit('$InfiniteLoading:reset');
+                // Reset InfiniteLoading by change identifier
+                this.identifier++;
+            });
+        },
+        fetchClubTypes: function () {
+            //社團類型
+            let club_type_list_url = Laravel.baseUrl + '/api/club-type-list';
+            axios.post(club_type_list_url).then(response => {
+                this.clubTypes = response.data;
+            });
+        },
+        onSelectChange: function () {
+            this.changeFilter();
+        },
+        onKeywordChange: function () {
+            this.isTypingKeyword = true;
+            this.delayFetch();
+        },
+        updateRandomSeed: function () {
+            // 產生新的 Random Seed
+            this.randomSeed = _.random(Number.MIN_SAFE_INTEGER, Number.MAX_SAFE_INTEGER)
+            // 強制重新載入
+            this.clubs = [];
+            this.fetchFinish = false;
+            this.identifier++;
+        },
+        delayFetch: _.debounce(function () {
+            this.isTypingKeyword = false;
+            this.changeFilter();
+        }, 1000)
+    },
+    components: {
+        InfiniteLoading,
     }
+}
 </script>

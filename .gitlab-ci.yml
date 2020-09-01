@@ -66,18 +66,14 @@ variables:
     expire_in: 7 days
     when: always
 
-php7.2:mysql:5.7:
+php7.4:mysql:5.7:
   <<: *job_template
-  image: edbizarro/gitlab-ci-pipeline-php:7.2
-
-php7.3:mysql:5.7:
-  <<: *job_template
-  image: edbizarro/gitlab-ci-pipeline-php:7.3
+  image: edbizarro/gitlab-ci-pipeline-php:7.4
 
 sonarqube:
   stage: analyze
   image: danny50610/sonar-scanner
-  dependencies: ['php7.3:mysql:5.7']
+  dependencies: [ 'php7.4:mysql:5.7' ]
   allow_failure: true
   cache:
     key: $CI_COMMIT_REF_NAME
@@ -92,7 +88,7 @@ sonarqube:
 
 outdated-composer:
     stage: analyze
-    image: edbizarro/gitlab-ci-pipeline-php:7.3-alpine-lts
+    image: edbizarro/gitlab-ci-pipeline-php:7.4-alpine
     dependencies: []
     allow_failure: true
     cache: # Speed up builds
@@ -107,7 +103,7 @@ outdated-composer:
 
 outdated-yarn:
     stage: analyze
-    image: edbizarro/gitlab-ci-pipeline-php:7.3-alpine-lts
+    image: edbizarro/gitlab-ci-pipeline-php:7.4-alpine
     dependencies: []
     allow_failure: true
     script:
