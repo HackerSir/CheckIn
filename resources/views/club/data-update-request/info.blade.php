@@ -48,6 +48,19 @@
     <div class="col">
         <b>原內容</b>
         <div>
+            <div style="font-weight: bold; font-size: 1.2rem"><span class="badge badge-secondary">原圖片</span></div>
+            <blockquote>
+                @if($dataUpdateRequest->originalImgurImage)
+                    <p class="form-control-plaintext">
+                        <img src="{{ $dataUpdateRequest->originalImgurImage->thumbnail('t') }}" alt="Club image">
+                        <a href="{{ $dataUpdateRequest->originalImgurImage->url }}" target="_blank">
+                            {{ $dataUpdateRequest->originalImgurImage->file_name }}
+                        </a>
+                    </p>
+                @endif
+            </blockquote>
+        </div>
+        <div>
             <div style="font-weight: bold; font-size: 1.2rem"><span class="badge badge-secondary">社團簡介</span></div>
             <blockquote>
                 {!! $dataUpdateRequest->original_description !!}
@@ -56,7 +69,7 @@
         <div>
             <div style="font-weight: bold; font-size: 1.2rem"><span class="badge badge-secondary">額外資訊</span></div>
             <blockquote>
-{{--                {!! $contentPresenter->showContent($dataUpdateRequest->original_extra_info) !!}--}}
+                {{--                {!! $contentPresenter->showContent($dataUpdateRequest->original_extra_info) !!}--}}
                 {!! $dataUpdateRequest->original_extra_info !!}
             </blockquote>
         </div>
@@ -75,6 +88,19 @@
     </div>
     <div class="col">
         <b>新內容</b>
+        <div>
+            <div style="font-weight: bold; font-size: 1.2rem"><span class="badge badge-secondary">新圖片</span></div>
+            <blockquote>
+                @if($dataUpdateRequest->imgurImage)
+                    <p class="form-control-plaintext">
+                        <img src="{{ $dataUpdateRequest->imgurImage->thumbnail('t') }}" alt="Club image">
+                        <a href="{{ $dataUpdateRequest->imgurImage->url }}" target="_blank">
+                            {{ $dataUpdateRequest->imgurImage->file_name }}
+                        </a>
+                    </p>
+                @endif
+            </blockquote>
+        </div>
         <div>
             <div style="font-weight: bold; font-size: 1.2rem"><span class="badge badge-secondary">社團簡介</span></div>
             <blockquote>
