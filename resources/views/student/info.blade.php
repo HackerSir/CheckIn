@@ -47,4 +47,13 @@
 
     <dt class="col-md-2">資料獲取時間</dt>
     <dd class="col-md-10">{{ $student->fetch_at }}</dd>
+
+    @if($student->club)
+        <dt class="col-md-2">負責社團</dt>
+        <dd class="col-md-10">
+            <a href="{{ route('clubs.show', $student->club) }}">
+                {!! $student->club->display_name !!}
+            </a>
+        </dd>
+    @endif
 </dl>
