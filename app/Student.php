@@ -31,6 +31,7 @@ use Illuminate\Support\Str;
  * @property-read int|null $counted_records_count
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Feedback[] $feedback
  * @property-read int|null $feedback_count
+ * @property-read \App\Club|null $club
  * @property-read string $display_name
  * @property-read bool $has_enough_counted_records
  * @property-read bool $has_enough_zones_of_counted_records
@@ -206,6 +207,14 @@ class Student extends Model
     public function clubs()
     {
         return $this->belongsToMany(Club::class)->withTimestamps()->withPivot('is_leader');
+    }
+
+    /**
+     * @return \App\Club|null
+     */
+    public function getClubAttribute()
+    {
+        return $this->clubs()->first();
     }
 
     /**
