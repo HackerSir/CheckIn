@@ -39,18 +39,23 @@ class GoogleCalendarService
             $event = new Event();
         }
 
+        // 超過5天整的活動視為太長
+        $tooLong = $teaParty->start_at->diffInDays($teaParty->end_at) >= 5;
         // 若活動已被手動刪除，將狀態回復到未刪除
         $event->status = 'confirmed';
         $event->name = $teaParty->name;
         $event->startDateTime = $teaParty->start_at;
-        $event->endDateTime = $teaParty->end_at;
+        $event->endDateTime = $tooLong ? $teaParty->start_at->clone()->addDays(5) : $teaParty->end_at;
         $event->location = $teaParty->location;
         $event->description = '';
         if ($teaParty->url) {
             $event->description .= '活動網址：' . link_to($teaParty->url, $teaParty->url) . '<br/>';
         }
-        $event->description .= '社團：' . link_to_route('clubs.show', $teaParty->club->name, $teaParty->club) . '<br/>'
-            . '<br/>'
+        $event->description .= '社團：' . link_to_route('clubs.show', $teaParty->club->name, $teaParty->club) . '<br/>';
+        if ($tooLong) {
+            $event->description .= '<b>！！！此活動時間長度超過系統限制，實際結束時間請至 CheckIn 網站確認！！！</b><br/>';
+        }
+        $event->description .= '<br/>'
             . '更新時間：' . $teaParty->updated_at . '<br/>'
             . link_to('/', 'CheckIn 逢甲社博集點');
 
