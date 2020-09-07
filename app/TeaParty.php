@@ -22,6 +22,7 @@ namespace App;
  * @property-read bool $is_ended
  * @property-read bool $is_started
  * @property-read string $state
+ * @property-read string $state_for_list
  * @method static \Illuminate\Database\Eloquent\Builder|TeaParty newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|TeaParty newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|TeaParty query()
@@ -127,6 +128,22 @@ class TeaParty extends LoggableModel
     public function getStateAttribute()
     {
         if ($this->is_ended) {
+            return 'ended';
+        }
+        if ($this->is_started) {
+            return 'in_process';
+        }
+
+        return 'not_started';
+    }
+
+    /**
+     * @return string
+     */
+    public function getStateForListAttribute()
+    {
+        // 給茶會清單使用的狀態，開始超過一天也算結束
+        if ($this->is_ended || $this->start_at->diffInDays() >= 1) {
             return 'ended';
         }
         if ($this->is_started) {

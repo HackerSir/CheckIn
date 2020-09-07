@@ -46,7 +46,8 @@ class TeaPartyController extends Controller
             });
         }
 
-        $teaParties = $teaPartyQuery->orderBy('start_at')->get()->groupBy('state');
+        // 根據給茶會清單使用的狀態分群
+        $teaParties = $teaPartyQuery->orderBy('start_at')->get()->groupBy('state_for_list');
 
         return view('tea-party.list', compact('teaParties'));
     }
