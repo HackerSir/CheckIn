@@ -95,7 +95,8 @@
                         {{ $dataUpdateRequest->imgurImage->file_name }}
                     </a>
                 @else
-                    <small class="text-muted">（不更換圖片）</small>
+                    <small class="text-muted">（不更換圖片）<br/>
+                        （←請參考左側圖片）</small>
                 @endif
             </blockquote>
         </div>
