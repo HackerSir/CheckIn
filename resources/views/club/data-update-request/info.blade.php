@@ -44,7 +44,7 @@
         </dl>
     </div>
 </div>
-<div class="row">
+<div class="row text-break">
     <div class="col">
         <b>原內容</b>
         <div>
