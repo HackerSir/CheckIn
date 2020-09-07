@@ -77,7 +77,7 @@
 @endtask
 
 @task('restart_php_service')
-    sudo systemctl reload php7.3-fpm.service
+    sudo systemctl reload php7.4-fpm.service
 @endtask
 
 @task('stop_horizon')
