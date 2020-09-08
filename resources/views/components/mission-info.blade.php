@@ -16,7 +16,12 @@
     @endif
 @endif
 <dl class="row" style="font-size: 120%">
-    <dt class="col-md-3 col-lg-2">打卡集點</dt>
+    <dt class="col-md-3 col-lg-2">
+        打卡集點
+        <button class="btn btn-secondary btn-sm"
+                onclick="alert('新生至社團攤位，聽取社團介紹後，出示QR碼供社團工作人員掃描，並填寫回饋資料完成集點')"><i
+                class="fas fa-question"></i></button>
+    </dt>
     <dd class="col-md-7 col-lg-10">
         @php
             $progress = ($student->countedRecords->count() / \Setting::get('target')) * 100;
@@ -34,7 +39,12 @@
             @include('components.progress-bar', ['progress' => $progress, 'bgClass' => 'bg-danger'])
         @endif
     </dd>
-    <dt class="col-md-3 col-lg-2">區域收集</dt>
+    <dt class="col-md-3 col-lg-2">
+        區域收集
+        <button class="btn btn-secondary btn-sm"
+                onclick="alert('完成7個社團打卡點，7個打卡點需含甲、已、丙、丁、戊、己、體驗區任3區。\n（怎麼看區域：社博網站→攤位地圖）')"><i
+                class="fas fa-question"></i></button>
+    </dt>
     <dd class="col-md-7 col-lg-10">
         @php
             $progress = ($student->zones_of_counted_records->count() / \Setting::get('zone_target')) * 100;
@@ -54,7 +64,12 @@
             @include('components.progress-bar', ['progress' => $progress, 'bgClass' => 'bg-danger'])
         @endif
     </dd>
-    <dt class="col-md-3 col-lg-2">填寫平台問卷</dt>
+    <dt class="col-md-3 col-lg-2">
+        填寫平台問卷
+        <button class="btn btn-secondary btn-sm"
+                onclick="alert('請填寫系統問卷，讓我們知道你使用網站後的感覺。')"><i
+                class="fas fa-question"></i></button>
+    </dt>
     <dd class="col-md-7 col-lg-10">
         <div class="mb-2">
             @if($student->studentSurvey)
