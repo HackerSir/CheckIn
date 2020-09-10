@@ -57,7 +57,7 @@ class TaskCheck extends Command
         $bar->setFormat('%current%/%max% [%bar%] %percent:3s%% %message%');
         $bar->start();
 
-        $studentQuery->chunk(10, function ($students) use ($taskService, &$bar) {
+        $studentQuery->chunk(100, function ($students) use ($taskService, &$bar) {
             /** @var Student $student */
             foreach ($students as $student) {
                 $bar->setMessage('Checking Student: ' . $student->display_name);
