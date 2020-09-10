@@ -16,54 +16,58 @@
     @endif
 @endif
 <dl class="row" style="font-size: 120%">
-    <dt class="col-md-3 col-lg-2">
-        打卡集點
-        <button class="btn btn-secondary btn-sm"
-                onclick="alert('新生至社團攤位，聽取社團介紹後，出示QR碼供社團工作人員掃描，並填寫回饋資料完成集點')"><i
-                class="fas fa-question"></i></button>
-    </dt>
-    <dd class="col-md-7 col-lg-10">
-        @php
-            $progress = ($student->countedRecords->count() / \Setting::get('target')) * 100;
-            $progress = round($progress, 2);
-        @endphp
-        @if($student->has_enough_counted_records)
-            <span class="text-success"><i class="far fa-check-square mr-2"></i>已完成</span>
-        @else
-            <span class="text-danger"><i class="far fa-square mr-2"></i>未完成</span>
-        @endif
-        <div class="d-inline-block">（{{ $student->countedRecords->count() }} / {{ \Setting::get('target') }}）</div>
-        @if($student->has_enough_counted_records)
-            @include('components.progress-bar', ['progress' => $progress, 'bgClass' => 'bg-success'])
-        @else
-            @include('components.progress-bar', ['progress' => $progress, 'bgClass' => 'bg-danger'])
-        @endif
-    </dd>
-    <dt class="col-md-3 col-lg-2">
-        區域收集
-        <button class="btn btn-secondary btn-sm"
-                onclick="alert('完成7個社團打卡點，7個打卡點需含甲、已、丙、丁、戊、己、體驗區任3區。\n（怎麼看區域：社博網站→攤位地圖）')"><i
-                class="fas fa-question"></i></button>
-    </dt>
-    <dd class="col-md-7 col-lg-10">
-        @php
-            $progress = ($student->zones_of_counted_records->count() / \Setting::get('zone_target')) * 100;
-            $progress = round($progress, 2);
-        @endphp
-        @if($student->has_enough_zones_of_counted_records)
-            <span class="text-success"><i class="far fa-check-square mr-2"></i>已完成</span>
-        @else
-            <span class="text-danger"><i class="far fa-square mr-2"></i>未完成</span>
-        @endif
-        <div class="d-inline-block">（{{ $student->zones_of_counted_records->count() }}
-            / {{ \Setting::get('zone_target') }}）
-        </div>
-        @if($student->has_enough_zones_of_counted_records)
-            @include('components.progress-bar', ['progress' => $progress, 'bgClass' => 'bg-success'])
-        @else
-            @include('components.progress-bar', ['progress' => $progress, 'bgClass' => 'bg-danger'])
-        @endif
-    </dd>
+    @if(\Setting::get('target') > 0)
+        <dt class="col-md-3 col-lg-2">
+            打卡集點
+            <button class="btn btn-secondary btn-sm"
+                    onclick="alert('新生至社團攤位，聽取社團介紹後，出示QR碼供社團工作人員掃描，並填寫回饋資料完成集點')"><i
+                    class="fas fa-question"></i></button>
+        </dt>
+        <dd class="col-md-7 col-lg-10">
+            @php
+                $progress = ($student->countedRecords->count() / \Setting::get('target')) * 100;
+                $progress = round($progress, 2);
+            @endphp
+            @if($student->has_enough_counted_records)
+                <span class="text-success"><i class="far fa-check-square mr-2"></i>已完成</span>
+            @else
+                <span class="text-danger"><i class="far fa-square mr-2"></i>未完成</span>
+            @endif
+            <div class="d-inline-block">（{{ $student->countedRecords->count() }} / {{ \Setting::get('target') }}）</div>
+            @if($student->has_enough_counted_records)
+                @include('components.progress-bar', ['progress' => $progress, 'bgClass' => 'bg-success'])
+            @else
+                @include('components.progress-bar', ['progress' => $progress, 'bgClass' => 'bg-danger'])
+            @endif
+        </dd>
+    @endif
+    @if(\Setting::get('zone_target') > 0)
+        <dt class="col-md-3 col-lg-2">
+            區域收集
+            <button class="btn btn-secondary btn-sm"
+                    onclick="alert('完成7個社團打卡點，7個打卡點需含甲、已、丙、丁、戊、己、體驗區任3區。\n（怎麼看區域：社博網站→攤位地圖）')"><i
+                    class="fas fa-question"></i></button>
+        </dt>
+        <dd class="col-md-7 col-lg-10">
+            @php
+                $progress = ($student->zones_of_counted_records->count() / \Setting::get('zone_target')) * 100;
+                $progress = round($progress, 2);
+            @endphp
+            @if($student->has_enough_zones_of_counted_records)
+                <span class="text-success"><i class="far fa-check-square mr-2"></i>已完成</span>
+            @else
+                <span class="text-danger"><i class="far fa-square mr-2"></i>未完成</span>
+            @endif
+            <div class="d-inline-block">（{{ $student->zones_of_counted_records->count() }}
+                / {{ \Setting::get('zone_target') }}）
+            </div>
+            @if($student->has_enough_zones_of_counted_records)
+                @include('components.progress-bar', ['progress' => $progress, 'bgClass' => 'bg-success'])
+            @else
+                @include('components.progress-bar', ['progress' => $progress, 'bgClass' => 'bg-danger'])
+            @endif
+        </dd>
+    @endif
     <dt class="col-md-3 col-lg-2">
         填寫平台問卷
         <button class="btn btn-secondary btn-sm"
