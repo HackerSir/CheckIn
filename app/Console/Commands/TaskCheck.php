@@ -54,7 +54,7 @@ class TaskCheck extends Command
         $taskService = app(TaskService::class);
         $this->info('Starting checking...');
         $bar = $this->output->createProgressBar($studentCount);
-        $bar->setFormat("%current%/%max% [%bar%] %percent:3s%% %message%");
+        $bar->setFormat('%current%/%max% [%bar%] %percent:3s%% %message%');
         $bar->start();
 
         $studentQuery->chunk(10, function ($students) use ($taskService, &$bar) {
