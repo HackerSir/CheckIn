@@ -9,10 +9,12 @@ use App\PaymentRecord;
 use App\Record;
 use App\Student;
 use App\StudentSurvey;
+use App\TeaParty;
 use App\Ticket;
 use App\User;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Str;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
@@ -518,7 +520,7 @@ class ExportController extends Controller
                 $user = $clubSurvey->user;
                 $student = $user->student;
                 $comment = $clubSurvey->comment;
-                if (starts_with($comment, '=')) {
+                if (Str::startsWith($comment, '=')) {
                     $comment = "'" . $comment;
                 }
 
@@ -595,7 +597,7 @@ class ExportController extends Controller
         $paymentRecordQuery->chunk(1000, function ($paymentRecords) use ($sheet) {
             foreach ($paymentRecords as $paymentRecord) {
                 $note = $paymentRecord->note;
-                if (starts_with($note, '=')) {
+                if (Str::startsWith($note, '=')) {
                     $note = "'" . $note;
                 }
 
@@ -670,5 +672,51 @@ class ExportController extends Controller
 
         //下載
         return $this->downloadSpreadsheet($spreadsheet, '抽獎編號.xlsx');
+    }
+
+    /**
+     * 迎新茶會
+     *
+     * @return \Symfony\Component\HttpFoundation\BinaryFileResponse
+     * @throws \PhpOffice\PhpSpreadsheet\Exception
+     */
+    public function teaParty()
+    {
+        //建立
+        $spreadsheet = new Spreadsheet();
+        $sheet = $spreadsheet->getActiveSheet();
+        //建立匯出資料
+        $this->setTitleRow(
+            $sheet,
+            [
+                '#',
+                '社團類型',
+                '社團',
+                '茶會名稱',
+                '開始時間',
+                '結束時間',
+                '地點',
+                '網址',
+            ]
+        );
+        $teaPartyQuery = TeaParty::with('club.clubType');
+        $teaPartyQuery->chunk(1000, function ($teaParties) use ($sheet) {
+            /** @var TeaParty $teaParty */
+            foreach ($teaParties as $teaParty) {
+                $this->appendRow($sheet, [
+                    $teaParty->club_id,
+                    $teaParty->club->clubType->name ?? '',
+                    $teaParty->club->name,
+                    $teaParty->name,
+                    $teaParty->start_at,
+                    $teaParty->end_at,
+                    $teaParty->location,
+                    $teaParty->url,
+                ]);
+            }
+        });
+
+        //下載
+        return $this->downloadSpreadsheet($spreadsheet, '迎新茶會.xlsx');
     }
 }

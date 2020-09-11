@@ -177,6 +177,7 @@ Route::group(['middleware' => ['auth', 'email']], function () {
     //茶會管理
     //權限：tea-party.manage
     Route::group(['middleware' => 'permission:tea-party.manage'], function () {
+        Route::post('export/tea-party', 'ExportController@teaParty')->name('export.tea-party');
         Route::resource('tea-party', 'TeaPartyController');
     });
     //網站設定
