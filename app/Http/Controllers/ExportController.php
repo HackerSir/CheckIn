@@ -13,6 +13,7 @@ use App\Ticket;
 use App\User;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Str;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
@@ -518,7 +519,7 @@ class ExportController extends Controller
                 $user = $clubSurvey->user;
                 $student = $user->student;
                 $comment = $clubSurvey->comment;
-                if (starts_with($comment, '=')) {
+                if (Str::startsWith($comment, '=')) {
                     $comment = "'" . $comment;
                 }
 
@@ -595,7 +596,7 @@ class ExportController extends Controller
         $paymentRecordQuery->chunk(1000, function ($paymentRecords) use ($sheet) {
             foreach ($paymentRecords as $paymentRecord) {
                 $note = $paymentRecord->note;
-                if (starts_with($note, '=')) {
+                if (Str::startsWith($note, '=')) {
                     $note = "'" . $note;
                 }
 
