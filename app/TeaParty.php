@@ -142,8 +142,8 @@ class TeaParty extends LoggableModel
      */
     public function getStateForListAttribute()
     {
-        // 給茶會清單使用的狀態，開始超過一天也算結束
-        if ($this->is_ended || $this->start_at->diffInDays() >= 5) {
+        // 給茶會清單使用的狀態，開始超過五天也算結束
+        if ($this->is_ended || $this->start_at->clone()->addDays(5)->isPast()) {
             return 'ended';
         }
         if ($this->is_started) {
