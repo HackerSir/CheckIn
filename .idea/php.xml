@@ -10,7 +10,6 @@
       <path value="$PROJECT_DIR$/vendor/yajra/laravel-datatables-buttons" />
       <path value="$PROJECT_DIR$/vendor/yajra/laravel-datatables-oracle" />
       <path value="$PROJECT_DIR$/vendor/yajra/laravel-datatables-html" />
-      <path value="$PROJECT_DIR$/vendor/webmozart/glob" />
       <path value="$PROJECT_DIR$/vendor/webmozart/assert" />
       <path value="$PROJECT_DIR$/vendor/kkszymanowski/traitor" />
       <path value="$PROJECT_DIR$/vendor/webmozart/path-util" />
@@ -52,15 +51,12 @@
       <path value="$PROJECT_DIR$/vendor/sebastian/comparator" />
       <path value="$PROJECT_DIR$/vendor/dnoegel/php-xdg-base-dir" />
       <path value="$PROJECT_DIR$/vendor/sebastian/code-unit-reverse-lookup" />
-      <path value="$PROJECT_DIR$/vendor/recca0120/laravel-tracy" />
       <path value="$PROJECT_DIR$/vendor/arcanedev/support" />
       <path value="$PROJECT_DIR$/vendor/barryvdh/reflection-docblock" />
       <path value="$PROJECT_DIR$/vendor/barryvdh/laravel-ide-helper" />
-      <path value="$PROJECT_DIR$/vendor/recca0120/terminal" />
       <path value="$PROJECT_DIR$/vendor/psy/psysh" />
       <path value="$PROJECT_DIR$/vendor/ramsey/uuid" />
       <path value="$PROJECT_DIR$/vendor/arcanedev/log-viewer" />
-      <path value="$PROJECT_DIR$/vendor/predis/predis" />
       <path value="$PROJECT_DIR$/vendor/psr/log" />
       <path value="$PROJECT_DIR$/vendor/phpunit/php-token-stream" />
       <path value="$PROJECT_DIR$/vendor/phpunit/php-timer" />
@@ -73,7 +69,6 @@
       <path value="$PROJECT_DIR$/vendor/phpdocumentor/reflection-common" />
       <path value="$PROJECT_DIR$/vendor/phpdocumentor/type-resolver" />
       <path value="$PROJECT_DIR$/vendor/phpdocumentor/reflection-docblock" />
-      <path value="$PROJECT_DIR$/vendor/nikic/php-parser" />
       <path value="$PROJECT_DIR$/vendor/paragonie/random_compat" />
       <path value="$PROJECT_DIR$/vendor/myclabs/deep-copy" />
       <path value="$PROJECT_DIR$/vendor/nesbot/carbon" />
@@ -144,7 +139,6 @@
       <path value="$PROJECT_DIR$/vendor/j0k3r/php-imgur-api-client" />
       <path value="$PROJECT_DIR$/vendor/cakephp/chronos" />
       <path value="$PROJECT_DIR$/vendor/laravel/horizon" />
-      <path value="$PROJECT_DIR$/vendor/laravel/helpers" />
       <path value="$PROJECT_DIR$/vendor/laravel/slack-notification-channel" />
       <path value="$PROJECT_DIR$/vendor/nexmo/client" />
       <path value="$PROJECT_DIR$/vendor/lcobucci/jwt" />
@@ -158,7 +152,6 @@
       <path value="$PROJECT_DIR$/vendor/symfony/translation-contracts" />
       <path value="$PROJECT_DIR$/vendor/symfony/event-dispatcher-contracts" />
       <path value="$PROJECT_DIR$/vendor/symfony/mime" />
-      <path value="$PROJECT_DIR$/vendor/spatie/string" />
       <path value="$PROJECT_DIR$/vendor/spatie/laravel-activitylog" />
       <path value="$PROJECT_DIR$/vendor/patchwork/utf8" />
       <path value="$PROJECT_DIR$/vendor/anahkiasen/underscore-php" />
@@ -167,7 +160,6 @@
       <path value="$PROJECT_DIR$/vendor/ezyang/htmlpurifier" />
       <path value="$PROJECT_DIR$/vendor/mews/purifier" />
       <path value="$PROJECT_DIR$/vendor/symfony/polyfill-php80" />
-      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-php70" />
       <path value="$PROJECT_DIR$/vendor/symfony/polyfill-intl-normalizer" />
       <path value="$PROJECT_DIR$/vendor/symfony/polyfill-intl-idn" />
       <path value="$PROJECT_DIR$/vendor/symfony/error-handler" />
@@ -177,15 +169,26 @@
       <path value="$PROJECT_DIR$/vendor/psr/http-client" />
       <path value="$PROJECT_DIR$/vendor/psr/http-factory" />
       <path value="$PROJECT_DIR$/vendor/maennchen/zipstream-php" />
-      <path value="$PROJECT_DIR$/vendor/thomaswelton/laravel-gravatar" />
       <path value="$PROJECT_DIR$/vendor/tom-lingham/searchy" />
-      <path value="$PROJECT_DIR$/vendor/firebase/php-jwt" />
       <path value="$PROJECT_DIR$/vendor/google/apiclient-services" />
       <path value="$PROJECT_DIR$/vendor/phpseclib/phpseclib" />
-      <path value="$PROJECT_DIR$/vendor/psr/cache" />
-      <path value="$PROJECT_DIR$/vendor/google/apiclient" />
-      <path value="$PROJECT_DIR$/vendor/google/auth" />
       <path value="$PROJECT_DIR$/vendor/spatie/laravel-google-calendar" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/deprecations" />
+      <path value="$PROJECT_DIR$/vendor/react/promise" />
+      <path value="$PROJECT_DIR$/vendor/symfony/deprecation-contracts" />
+      <path value="$PROJECT_DIR$/vendor/symfony/http-client-contracts" />
+      <path value="$PROJECT_DIR$/vendor/psr/cache" />
+      <path value="$PROJECT_DIR$/vendor/firebase/php-jwt" />
+      <path value="$PROJECT_DIR$/vendor/nikic/php-parser" />
+      <path value="$PROJECT_DIR$/vendor/google/auth" />
+      <path value="$PROJECT_DIR$/vendor/predis/predis" />
+      <path value="$PROJECT_DIR$/vendor/laravel/helpers" />
+      <path value="$PROJECT_DIR$/vendor/recca0120/terminal" />
+      <path value="$PROJECT_DIR$/vendor/spatie/string" />
+      <path value="$PROJECT_DIR$/vendor/thomaswelton/laravel-gravatar" />
+      <path value="$PROJECT_DIR$/vendor/google/apiclient" />
+      <path value="$PROJECT_DIR$/vendor/recca0120/laravel-tracy" />
+      <path value="$PROJECT_DIR$/vendor/webmozart/glob" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="7.1" />

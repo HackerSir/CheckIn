@@ -33,11 +33,8 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/ezyang/htmlpurifier" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/fideloper/proxy" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/filp/whoops" />
-      <excludeFolder url="file://$MODULE_DIR$/vendor/firebase/php-jwt" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/fzaninotto/faker" />
-      <excludeFolder url="file://$MODULE_DIR$/vendor/google/apiclient" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/google/apiclient-services" />
-      <excludeFolder url="file://$MODULE_DIR$/vendor/google/auth" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/graham-campbell/throttle" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/guzzlehttp/guzzle" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/guzzlehttp/promises" />
@@ -49,7 +46,6 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/jakub-onderka/php-console-highlighter" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/kkszymanowski/traitor" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/laravel/framework" />
-      <excludeFolder url="file://$MODULE_DIR$/vendor/laravel/helpers" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/laravel/horizon" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/laravel/tinker" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/laravelcollective/html" />
@@ -70,7 +66,6 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/myclabs/deep-copy" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/myclabs/php-enum" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/nesbot/carbon" />
-      <excludeFolder url="file://$MODULE_DIR$/vendor/nikic/php-parser" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/paragonie/constant_time_encoding" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/paragonie/random_compat" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/patchwork/utf8" />
@@ -95,8 +90,6 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/pragmarx/google2fa" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/pragmarx/google2fa-laravel" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/pragmarx/google2fa-qrcode" />
-      <excludeFolder url="file://$MODULE_DIR$/vendor/predis/predis" />
-      <excludeFolder url="file://$MODULE_DIR$/vendor/psr/cache" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/psr/container" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/psr/http-client" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/psr/http-factory" />
@@ -106,8 +99,6 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/psy/psysh" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/ralouphie/getallheaders" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/ramsey/uuid" />
-      <excludeFolder url="file://$MODULE_DIR$/vendor/recca0120/laravel-tracy" />
-      <excludeFolder url="file://$MODULE_DIR$/vendor/recca0120/terminal" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/santigarcor/laratrust" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/sebastian/code-unit-reverse-lookup" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/sebastian/comparator" />
@@ -123,7 +114,6 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/spatie/laravel-activitylog" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/spatie/laravel-google-calendar" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/spatie/laravel-html" />
-      <excludeFolder url="file://$MODULE_DIR$/vendor/spatie/string" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/swiftmailer/swiftmailer" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/console" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/css-selector" />
@@ -139,7 +129,6 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/polyfill-intl-idn" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/polyfill-intl-normalizer" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/polyfill-mbstring" />
-      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/polyfill-php70" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/polyfill-php72" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/polyfill-php73" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/polyfill-php80" />
@@ -151,18 +140,32 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/var-dumper" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/theseer/tokenizer" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/thomaswelton/gravatarlib" />
-      <excludeFolder url="file://$MODULE_DIR$/vendor/thomaswelton/laravel-gravatar" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/tijsverkoyen/css-to-inline-styles" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/tom-lingham/searchy" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/tracy/tracy" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/vlucas/phpdotenv" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/webmozart/assert" />
-      <excludeFolder url="file://$MODULE_DIR$/vendor/webmozart/glob" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/webmozart/path-util" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/yajra/laravel-datatables-buttons" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/yajra/laravel-datatables-html" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/yish/generators" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/zendframework/zend-escaper" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/doctrine/deprecations" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/react/promise" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/deprecation-contracts" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/http-client-contracts" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/psr/cache" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/firebase/php-jwt" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/nikic/php-parser" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/google/auth" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/predis/predis" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/laravel/helpers" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/recca0120/terminal" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/spatie/string" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/thomaswelton/laravel-gravatar" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/google/apiclient" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/recca0120/laravel-tracy" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/webmozart/glob" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
