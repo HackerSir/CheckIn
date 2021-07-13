@@ -2,7 +2,6 @@
 
 namespace App\Services;
 
-use App;
 use Log;
 use Monolog\Logger as MonologLogger;
 
