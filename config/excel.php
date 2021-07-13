@@ -25,6 +25,16 @@ return [
 
         /*
         |--------------------------------------------------------------------------
+        | Enable strict null comparison
+        |--------------------------------------------------------------------------
+        |
+        | When enabling strict null comparison empty cells ('') will
+        | be added to the sheet.
+        */
+        'strict_null_comparison' => false,
+
+        /*
+        |--------------------------------------------------------------------------
         | CSV Settings
         |--------------------------------------------------------------------------
         |
@@ -74,7 +84,20 @@ return [
         | you can enable it by setting read_only to false.
         |
         */
-        'read_only'   => true,
+        'read_only'    => true,
+
+        /*
+        |--------------------------------------------------------------------------
+        | Ignore Empty
+        |--------------------------------------------------------------------------
+        |
+        | When dealing with imports, you might be interested in ignoring
+        | rows that have null values or empty strings. By default rows
+        | containing empty strings or empty values are not ignored but can be
+        | ignored by enabling the setting ignore_empty to true.
+        |
+        */
+        'ignore_empty' => false,
 
         /*
         |--------------------------------------------------------------------------
@@ -85,7 +108,7 @@ return [
         | Available options: none|slug|custom
         |
         */
-        'heading_row' => [
+        'heading_row'  => [
             'formatter' => 'slug',
         ],
 
@@ -97,7 +120,7 @@ return [
         | Configure e.g. delimiter, enclosure and line ending for CSV imports.
         |
         */
-        'csv'         => [
+        'csv'          => [
             'delimiter'        => ',',
             'enclosure'        => '"',
             'escape_character' => '\\',
@@ -113,7 +136,7 @@ return [
         | Configure e.g. default title, creator, subject,...
         |
         */
-        'properties'  => [
+        'properties'   => [
             'creator'        => '',
             'lastModifiedBy' => '',
             'title'          => '',
