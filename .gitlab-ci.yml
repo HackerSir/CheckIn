@@ -42,6 +42,7 @@ variables:
   script:
     # Config php
     - echo "short_open_tag = Off" | sudo tee /usr/local/etc/php/php.ini
+    - echo "xdebug.mode=coverage" | sudo tee /usr/local/etc/php/conf.d/xdebug.ini
     # Install
     - composer install --prefer-dist --no-ansi --no-interaction --no-progress --no-scripts --no-suggest
     - yarn install
