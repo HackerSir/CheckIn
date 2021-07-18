@@ -164,7 +164,6 @@ return [
          * Package Service Providers...
          */
         Milon\Barcode\BarcodeServiceProvider::class,
-//        Redeman\Imgur\ImgurServiceProvider::class,
 
         /*
          * Application Service Providers...

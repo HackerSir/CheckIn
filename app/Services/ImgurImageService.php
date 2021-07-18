@@ -15,7 +15,7 @@ class ImgurImageService
      * @return ImgurImage
      * @throws \Exception
      */
-    public function upload(UploadedFile $uploadedFile)
+    public function upload(UploadedFile $uploadedFile): ImgurImage
     {
         //取得檔案
         $fileContent = File::get($uploadedFile->getPathname());
@@ -24,14 +24,11 @@ class ImgurImageService
         if (empty(config('imgur.client_id')) || empty(config('imgur.client_secret'))) {
             throw new \Exception('Missing IMGUR_CLIENT_ID or IMGUR_CLIENT_SECRET in .env');
         }
-        /** @var \Imgur\Client $client */
-        $client = app()->make('Imgur\Client');
+        $imageClient = $this->getImgurImageClient();
         $imageData = [
             'image' => base64_encode($fileContent),
             'type'  => 'base64',
         ];
-        /** @var \Imgur\Api\Image $imageClient */
-        $imageClient = $client->api('image');
         $data = $imageClient->upload($imageData);
         //圖檔原始名稱
         $fileOriginalName = $uploadedFile->getClientOriginalName();
@@ -44,5 +41,29 @@ class ImgurImageService
         ]);
 
         return $imgurImage;
+    }
+
+    /**
+     * 透過 Delete Hash 實際刪除在 Imgur 的圖片
+     * @param ImgurImage $imgurImage
+     */
+    public function delete(ImgurImage $imgurImage)
+    {
+        $imageClient = $this->getImgurImageClient();
+        $imageClient->deleteImage($imgurImage->delete_hash);
+    }
+
+    /**
+     * @return  \Imgur\Api\Image
+     */
+    private function getImgurImageClient(): \Imgur\Api\Image
+    {
+        $client = new \Imgur\Client();
+        $client->setOption('client_id', config('imgur.client_id'));
+        $client->setOption('client_secret', config('imgur.client_secret'));
+        /** @var \Imgur\Api\Image $imageClient */
+        $imageClient = $client->api('image');
+
+        return $imageClient;
     }
 }
