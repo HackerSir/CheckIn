@@ -458,6 +458,7 @@ _ide_helper.php
 
 ### Personal Config ###
 .idea/dataSources.xml
+.idea/sqldialects.xml
 
 storage/settings.json
 .idea/remote-mappings.xml
