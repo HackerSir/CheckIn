@@ -21,12 +21,9 @@ class ContactInformationController extends Controller
      *
      * @param ContactInformationDataTable $dataTable
      * @return \Illuminate\Http\Response
-     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function index(ContactInformationDataTable $dataTable)
     {
-        $this->authorize('index', ContactInformation::class);
-
         return $dataTable->render('contact-information.index');
     }
 

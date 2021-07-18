@@ -29,7 +29,7 @@ class ContactInformationPolicy
      * @param User $user
      * @return bool
      */
-    public function index(User $user)
+    public function viewAny(User $user)
     {
         return true;
     }

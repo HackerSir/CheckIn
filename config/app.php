@@ -161,15 +161,10 @@ return [
         App\ExtendThrottle\ExtendThrottleFacadesProvider::class,
 
         /*
-         * Generator Service Provider
-         */
-        \Yish\Generators\GeneratorsServiceProvider::class,
-
-        /*
          * Package Service Providers...
          */
         Milon\Barcode\BarcodeServiceProvider::class,
-        Redeman\Imgur\ImgurServiceProvider::class,
+//        Redeman\Imgur\ImgurServiceProvider::class,
 
         /*
          * Application Service Providers...

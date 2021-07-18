@@ -59,7 +59,7 @@ class LaravelMenu
                         /** @var \Lavary\Menu\Item $activityMenu */
                         $activityMenu = $menu->add('活動', 'javascript:void(0)');
 
-                        if (\Gate::allows('index', Student::class)) {
+                        if (\Gate::allows('viewAny', Student::class)) {
                             $activityMenu->add('學生管理', ['route' => 'student.index'])->active('student/*');
                         }
 
@@ -120,7 +120,7 @@ class LaravelMenu
 
                         $this->addDivider($activityMenu);
 
-                        if (\Gate::allows('index', ContactInformation::class)) {
+                        if (\Gate::allows('viewAny', ContactInformation::class)) {
                             $activityMenu->add('聯絡資料管理', ['route' => 'contact-information.index'])
                                 ->active('contact-information/*');
                         }

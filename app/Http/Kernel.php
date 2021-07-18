@@ -66,7 +66,6 @@ class Kernel extends HttpKernel
         'register.toggle'           => \App\Http\Middleware\RegisterEnableToggle::class,
         'local_account'             => \App\Http\Middleware\LocalAccount::class,
         'nid_account'               => \App\Http\Middleware\NIDAccount::class,
-        'imgur'                     => \Redeman\Imgur\Middleware\AuthenticateImgur::class,
         'contact_information_ready' => \App\Http\Middleware\ContactInformationReady::class,
     ];
 }

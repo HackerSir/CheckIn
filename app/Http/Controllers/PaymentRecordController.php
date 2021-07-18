@@ -23,11 +23,9 @@ class PaymentRecordController extends Controller
      *
      * @param PaymentRecordDataTable $dataTable
      * @return \Illuminate\Http\Response
-     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function index(PaymentRecordDataTable $dataTable)
     {
-        $this->authorize('index', PaymentRecord::class);
         /** @var User $user */
         $user = auth()->user();
         if (!$user->can('payment-record.manage')) {

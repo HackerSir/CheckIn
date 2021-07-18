@@ -32,6 +32,7 @@ class ContactInformation extends LoggableModel
     protected static $logName = 'contact-information';
     protected $primaryKey = 'student_nid';
     public $incrementing = false;
+    protected $keyType = 'string';
 
     protected $fillable = [
         'student_nid',

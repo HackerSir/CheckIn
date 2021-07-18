@@ -29,7 +29,7 @@ class PaymentRecordPolicy
         return null;
     }
 
-    public function index(User $user)
+    public function viewAny(User $user)
     {
         return $user->club != null;
     }
