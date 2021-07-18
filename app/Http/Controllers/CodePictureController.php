@@ -21,7 +21,7 @@ class CodePictureController extends Controller
         if (!$qrcode) {
             abort(404);
         }
-        $scanUrl = route('qrcode.scan', $code);
+        $scanUrl = route('qrcode.scan', [$code, 'openExternalBrowser' => 1]);
 
         $path = DNS2D::getBarcodePNGPath($scanUrl, 'QRCODE', 12, 12);
         $file = File::get($path);
