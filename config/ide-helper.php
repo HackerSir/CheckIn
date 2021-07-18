@@ -7,12 +7,11 @@ return [
     | Filename & Format
     |--------------------------------------------------------------------------
     |
-    | The default filename (without extension) and the format (php or json)
+    | The default filename
     |
     */
 
-    'filename'      => '_ide_helper',
-    'format'        => 'php',
+    'filename'      => '_ide_helper.php',
 
     /*
     |--------------------------------------------------------------------------
@@ -45,6 +44,8 @@ return [
     | Set to true to generate factory generators for better factory()
     | method auto-completion.
     |
+    | Deprecated for Laravel 8 or latest.
+    |
     */
 
     'include_factory_builders' => true,
@@ -59,6 +60,17 @@ return [
     */
 
     'write_model_magic_where' => true,
+
+    /*
+    |--------------------------------------------------------------------------
+    | Write Model External Eloquent Builder methods
+    |--------------------------------------------------------------------------
+    |
+    | Set to false to disable write external eloquent builder methods
+    |
+    */
+
+    'write_model_external_builder_methods' => true,
 
     /*
     |--------------------------------------------------------------------------
@@ -240,5 +252,30 @@ return [
     | magic methods and properties.
     |
     */
-    'include_class_docblocks'     => false,
+    'include_class_docblocks'               => false,
+
+    /*
+    |--------------------------------------------------------------------------
+    | Force FQN usage
+    |--------------------------------------------------------------------------
+    |
+    | Use the fully qualified (class) name in docBlock,
+    | event if class exists in a given file
+    | or there is an import (use className) of a given class
+    |
+    */
+    'force_fqn'                             => false,
+
+    /*
+    |--------------------------------------------------------------------------
+    | Additional relation types
+    |--------------------------------------------------------------------------
+    |
+    | Sometimes it's needed to create custom relation types. The key of the array
+    | is the Relationship Method name. The value of the array is the canonical class
+    | name of the Relationship, e.g. `'relationName' => RelationShipClass::class`.
+    |
+    */
+    'additional_relation_types'             => [],
+
 ];

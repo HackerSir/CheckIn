@@ -1,32 +1,33 @@
 @extends('log-viewer::bootstrap-3._master')
 
+<?php /** @var  Illuminate\Pagination\LengthAwarePaginator $rows */ ?>
+
 @section('content')
     <h1 class="page-header">Logs</h1>
 
-    {!! $rows->render() !!}
+    {{ $rows->render() }}
 
     <div class="table-responsive">
         <table class="table table-condensed table-hover table-stats">
             <thead>
-                <tr>
-                    @foreach($headers as $key => $header)
+            <tr>
+                @foreach($headers as $key => $header)
                     <th class="{{ $key == 'date' ? 'text-left' : 'text-center' }}">
                         @if ($key == 'date')
                             <span class="label label-info">{{ $header }}</span>
                         @else
                             <span class="level level-{{ $key }}">
-                                {!! log_styler()->icon($key) . ' ' . $header !!}
+                                {{ log_styler()->icon($key) }} {{ $header }}
                             </span>
                         @endif
                     </th>
-                    @endforeach
-                    <th class="text-right">Actions</th>
-                </tr>
+                @endforeach
+                <th class="text-right">Actions</th>
+            </tr>
             </thead>
             <tbody>
-                @if ($rows->count() > 0)
-                    @foreach($rows as $date => $row)
-                    <tr>
+            @forelse($rows as $date => $row)
+                <tr>
                         @foreach($row as $key => $value)
                             <td class="{{ $key == 'date' ? 'text-left' : 'text-center' }}">
                                 @if ($key == 'date')
@@ -52,19 +53,18 @@
                             </a>
                         </td>
                     </tr>
-                    @endforeach
-                @else
+            @empty
                     <tr>
                         <td colspan="11" class="text-center">
                             <span class="label label-default">{{ trans('log-viewer::general.empty-logs') }}</span>
                         </td>
                     </tr>
-                @endif
+            @endforelse
             </tbody>
         </table>
     </div>
 
-    {!! $rows->render() !!}
+    {{ $rows->render() }}
 @endsection
 
 @section('modals')

@@ -57,7 +57,7 @@
                                 <td colspan="7">{{ $log->getPath() }}</td>
                             </tr>
                             <tr>
-                                <td>Log entries : </td>
+                                <td>Log entries :</td>
                                 <td>
                                     <span class="badge badge-primary">{{ $entries->total() }}</span>
                                 </td>
@@ -82,10 +82,12 @@
                     <form action="{{ route('log-viewer::logs.search', [$log->date, $level]) }}" method="GET">
                         <div class=form-group">
                             <div class="input-group">
-                                <input id="query" name="query" class="form-control"  value="{!! $query !!}" placeholder="Type here to search">
+                                <input id="query" name="query" class="form-control" value="{{ $query }}"
+                                       placeholder="Type here to search">
                                 <div class="input-group-append">
                                     @unless (is_null($query))
-                                        <a href="{{ route('log-viewer::logs.show', [$log->date]) }}" class="btn btn-secondary">
+                                        <a href="{{ route('log-viewer::logs.show', [$log->date]) }}"
+                                           class="btn btn-secondary">
                                             ({{ $entries->count() }} results) <i class="fa fa-fw fa-times"></i>
                                         </a>
                                     @endunless
@@ -142,25 +144,44 @@
                                     </td>
                                     <td class="text-right">
                                         @if ($entry->hasStack())
-                                            <a class="btn btn-sm btn-light" role="button" data-toggle="collapse" href="#log-stack-{{ $key }}" aria-expanded="false" aria-controls="log-stack-{{ $key }}">
+                                            <a class="btn btn-sm btn-light" role="button" data-toggle="collapse"
+                                               href="#log-stack-{{ $key }}" aria-expanded="false"
+                                               aria-controls="log-stack-{{ $key }}">
                                                 <i class="fa fa-toggle-on"></i> Stack
+                                            </a>
+                                        @endif
+
+                                        @if ($entry->hasContext())
+                                            <a class="btn btn-sm btn-light" role="button" data-toggle="collapse"
+                                               href="#log-context-{{ $key }}" aria-expanded="false"
+                                               aria-controls="log-context-{{ $key }}">
+                                                <i class="fa fa-toggle-on"></i> Context
                                             </a>
                                         @endif
                                     </td>
                                 </tr>
-                                @if ($entry->hasStack())
+                                @if ($entry->hasStack() || $entry->hasContext())
                                     <tr>
                                         <td colspan="5" class="stack py-0">
-                                            <div class="stack-content collapse" id="log-stack-{{ $key }}">
-                                                {!! $entry->stack() !!}
-                                            </div>
+                                            @if ($entry->hasStack())
+                                                <div class="stack-content collapse" id="log-stack-{{ $key }}">
+                                                    {!! $entry->stack() !!}
+                                                </div>
+                                            @endif
+
+                                            @if ($entry->hasContext())
+                                                <div class="stack-content collapse" id="log-context-{{ $key }}">
+                                                    <pre>{{ $entry->context() }}</pre>
+                                                </div>
+                                            @endif
                                         </td>
                                     </tr>
                                 @endif
                             @empty
                                 <tr>
                                     <td colspan="5" class="text-center">
-                                        <span class="badge badge-secondary">{{ trans('log-viewer::general.empty-logs') }}</span>
+                                        <span
+                                            class="badge badge-secondary">{{ trans('log-viewer::general.empty-logs') }}</span>
                                     </td>
                                 </tr>
                             @endforelse
@@ -239,10 +260,16 @@
             });
 
             @unless (empty(log_styler()->toHighlight()))
+            @php
+                $htmlHighlight = version_compare(PHP_VERSION, '7.4.0') >= 0
+                    ? join('|', log_styler()->toHighlight())
+                    : join(log_styler()->toHighlight(), '|');
+            @endphp
+
             $('.stack-content').each(function () {
                 var $this = $(this);
                 var html = $this.html().trim()
-                    .replace(/({!! join('|', log_styler()->toHighlight()) !!})/gm, '<strong>$1</strong>');
+                    .replace(/({!! $htmlHighlight !!})/gm, '<strong>$1</strong>');
 
                 $this.html(html);
             });
