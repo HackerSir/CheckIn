@@ -11,7 +11,7 @@
             </dd>
             <dt class="col-4 col-md-3">申請者</dt>
             <dd class="col-8 col-md-9">
-                @if(Laratrust::can(['user.manage', 'user.view']))
+                @if(Laratrust::isAbleTo(['user.manage', 'user.view']))
                     {{ link_to_route('user.show', $dataUpdateRequest->user->display_name, $dataUpdateRequest->user) }}
                 @else
                     {{ $dataUpdateRequest->user->display_name }}
@@ -30,7 +30,7 @@
             <dt class="col-4 col-md-3">審核者</dt>
             <dd class="col-8 col-md-9">
                 @if($dataUpdateRequest->reviewer)
-                    @if(Laratrust::can(['user.manage', 'user.view']))
+                    @if(Laratrust::isAbleTo(['user.manage', 'user.view']))
                         {{ link_to_route('user.show', $dataUpdateRequest->reviewer->display_name, $dataUpdateRequest->reviewer) }}
                     @else
                         {{ $dataUpdateRequest->reviewer->display_name }}

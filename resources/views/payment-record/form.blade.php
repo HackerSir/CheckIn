@@ -1,4 +1,4 @@
-@if(Laratrust::can('payment-record.manage'))
+@if(Laratrust::isAbleTo('payment-record.manage'))
     {{ bs()->formGroup(bs()->select('club_id', \App\Models\Club::selectOptions())->required())->class('required')->label('社團')->showAsRow() }}
 @else
     {{ bs()->formGroup(bs()->select('club_id', \App\Models\Club::selectOptions(), $user->club->id)->disabled())->label('社團')->showAsRow() }}

@@ -67,7 +67,7 @@
 
                 <dt class="col-md-2">姓名</dt>
                 <dd class="col-md-10">
-                    @if(Laratrust::can('student.manage'))
+                    @if(Laratrust::isAbleTo('student.manage'))
                         <a href="{{ route('student.show', $contactInformation->student) }}">
                             {!! $contactInformation->student->name !!}
                         </a>

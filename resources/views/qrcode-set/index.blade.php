@@ -3,7 +3,7 @@
 @section('title', 'QR Code 集')
 
 @section('buttons')
-    @if(Laratrust::can('qrcode.manage'))
+    @if(Laratrust::isAbleTo('qrcode.manage'))
         <a href="{{ route('qrcode.index') }}" class="btn btn-secondary">
             <i class="fa fa-arrow-left mr-2"></i>QR Code
         </a>

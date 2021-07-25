@@ -31,7 +31,7 @@
                 <dt class="col-4 col-md-2">學生</dt>
                 <dd class="col-8 col-md-10">
                     @if($qrcode->student)
-                        @if(Laratrust::can('student.manage'))
+                        @if(Laratrust::isAbleTo('student.manage'))
                             {{ link_to_route('student.show', $qrcode->student->display_name, $qrcode->student) }}
                         @else
                             {{ $qrcode->student->display_name }}

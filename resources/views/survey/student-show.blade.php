@@ -27,7 +27,7 @@
             <dl class="row" style="font-size: 120%">
                 <dt class="col-md-4">基本資料</dt>
                 <dd class="col-md-8">
-                    @if(Laratrust::can('student.manage'))
+                    @if(Laratrust::isAbleTo('student.manage'))
                         <a href="{{ route('student.show', $studentSurvey->student) }}">
                             {{ $studentSurvey->student->display_name }}
                         </a>

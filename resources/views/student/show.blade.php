@@ -41,7 +41,7 @@
         <div class="card-body">
             <h1>基本資料</h1>
             <dl class="row" style="font-size: 120%">
-                @if($student->user && Laratrust::can('user.manage'))
+                @if($student->user && Laratrust::isAbleTo('user.manage'))
                     <dt class="col-md-2">使用者</dt>
                     <dd class="col-md-10">
                         {{ link_to_route('user.show', $student->user->name, $student->user) }}
@@ -76,7 +76,7 @@
                 @forelse($student->qrcodes as $qrcode)
                     <tr>
                         <td>
-                            @if(Laratrust::can('qrcode.manage'))
+                            @if(Laratrust::isAbleTo('qrcode.manage'))
                                 {{ link_to_route('qrcode.show', $qrcode->code, $qrcode, ['class' => 'code']) }}
                             @else
                                 <span class="code">{{ $qrcode->code }}</span>
@@ -100,7 +100,7 @@
                 </tbody>
             </table>
 
-            @if(\Laratrust::can('student-path.view'))
+            @if(\Laratrust::isAbleTo('student-path.view'))
                 <hr/>
 
                 <h1>移動路徑</h1>
@@ -120,7 +120,7 @@
 @endsection
 
 @section('js')
-    @if(\Laratrust::can('student-path.view') && request()->exists('path'))
+    @if(\Laratrust::isAbleTo('student-path.view') && request()->exists('path'))
         <script src="https://maps.googleapis.com/maps/api/js?key={{ GoogleApi::getKey() }}"></script>
         <script src="{{ asset('js/maplabel-compiled.js') }}"></script>
         <script>

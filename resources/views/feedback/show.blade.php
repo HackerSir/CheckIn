@@ -20,7 +20,7 @@
             <i class="fa fa-arrow-left mr-2"></i>我的回饋資料
         </a>
     @endif
-    @if(Laratrust::can('feedback.manage') || optional($user)->club)
+    @if(Laratrust::isAbleTo('feedback.manage') || optional($user)->club)
         <a href="{{ route('feedback.index') }}" class="btn btn-secondary mb-2">
             <i class="fa fa-arrow-left mr-2"></i>回饋資料管理
         </a>
@@ -118,7 +118,7 @@
 
                 <dt class="col-md-2">姓名</dt>
                 <dd class="col-md-10">
-                    @if(Laratrust::can('student.manage'))
+                    @if(Laratrust::isAbleTo('student.manage'))
                         <a href="{{ route('student.show', $feedback->student) }}">
                             {!! $feedback->student->name !!}
                         </a>

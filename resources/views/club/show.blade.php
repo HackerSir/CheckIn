@@ -16,7 +16,7 @@
     <a href="{{ route('clubs.index') }}" class="btn btn-secondary">
         <i class="fa fa-arrow-left mr-2"></i>社團攤位
     </a>
-    @if(\Laratrust::can('club.manage'))
+    @if(\Laratrust::isAbleTo('club.manage'))
         <a href="{{ route('club.index') }}" class="btn btn-secondary">
             <i class="fa fa-arrow-left mr-2"></i>社團管理
         </a>
@@ -113,7 +113,7 @@
                                     $leader = $club->leaders()->first();
                                 @endphp
                                 @if($leader)
-                                    @if(Laratrust::can('student.manage'))
+                                    @if(Laratrust::isAbleTo('student.manage'))
                                         {{ link_to_route('student.show', $leader->name, $leader) }}
                                     @else
                                         {{ $leader->name  }}
@@ -126,7 +126,7 @@
                                                                          title="僅工作人員可見"></i></dt>
                             <dd class="col-6 col-sm-9">
                                 @forelse($club->staffs as $staff)
-                                    @if(Laratrust::can('student.manage'))
+                                    @if(Laratrust::isAbleTo('student.manage'))
                                         {{ link_to_route('student.show', $staff->name, $staff) }}
                                     @else
                                         {{ $staff->name }}
@@ -192,7 +192,7 @@
                 <div class="mt-2">
                     <h2 class="border border-primary rounded"><i class="fas fa-info-circle mx-2"></i>額外資訊</h2>
                     <p style="font-size: 120%">
-                    @if(\Laratrust::can('club.manage') || Gate::allows('as-staff', $club) || $feedback)
+                    @if(\Laratrust::isAbleTo('club.manage') || Gate::allows('as-staff', $club) || $feedback)
                         {{--                            {!! $contentPresenter->showContent($club->extra_info) !!}--}}
                         {!! $club->extra_info !!}
                     @else
@@ -204,7 +204,7 @@
             <div class="mt-2">
                 <h2 class="border border-primary rounded">
                     <i class="fas fa-mug-hot mx-2"></i>迎新茶會
-                    @if(Laratrust::can('tea-party.manage'))
+                    @if(Laratrust::isAbleTo('tea-party.manage'))
                         @if($club->teaParty)
                             <div style="display: inline-block">
                                 <a href="{{ route('tea-party.edit', $club->teaParty) }}" class="btn btn-primary btn-sm">
@@ -280,7 +280,7 @@
                                 @if($booth->zone)
                                     <span class="badge badge-secondary">{{ $booth->zone }}</span>
                                 @endif
-                                @if(\Laratrust::can('booth.manage'))
+                                @if(\Laratrust::isAbleTo('booth.manage'))
                                     {{ link_to_route('booth.show', $booth->name, $booth) }}
                                 @else
                                     {{ $booth->name }}

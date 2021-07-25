@@ -27,7 +27,7 @@
             <dl class="row" style="font-size: 120%">
                 <dt class="col-md-4">使用者</dt>
                 <dd class="col-md-8">
-                    @if(Laratrust::can('student.manage'))
+                    @if(Laratrust::isAbleTo('student.manage'))
                         <a href="{{ route('user.show', $clubSurvey->user) }}">
                             {{ $clubSurvey->user->name }}
                         </a>
@@ -37,7 +37,7 @@
                 </dd>
                 <dt class="col-md-4">社團</dt>
                 <dd class="col-md-8">
-                    @if(Laratrust::can('club.manage'))
+                    @if(Laratrust::isAbleTo('club.manage'))
                         <a href="{{ route('clubs.show', $clubSurvey->club) }}">
                             {!! $clubSurvey->club->display_name !!}
                         </a>

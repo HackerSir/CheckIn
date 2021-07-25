@@ -9,7 +9,7 @@
             <i class="far fa-comment mr-2"></i>我的回饋資料
         </a>
     @endif
-    @if(\Laratrust::can('feedback.manage') || $user->club)
+    @if(\Laratrust::isAbleTo('feedback.manage') || $user->club)
         {!! Form::open(['route' => ['export.feedback'], 'style' => 'display: inline']) !!}
         <button type="submit" class="btn btn-primary">
             <i class="fa fa-download mr-2"></i>匯出
@@ -20,7 +20,7 @@
 
 @section('main_content')
     @include('feedback.time-range')
-    @if(\Laratrust::can('feedback.manage') || $user->club)
+    @if(\Laratrust::isAbleTo('feedback.manage') || $user->club)
         <div class="alert alert-info my-1">
             {{ optional($user->club)->name }}
             <ul class="mb-0">
