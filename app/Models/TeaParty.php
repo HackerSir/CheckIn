@@ -1,52 +1,60 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use App\Traits\LegacySerializeDate;
+use Eloquent;
+use Exception;
+use Google_Service_Exception;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Carbon;
+use Spatie\Activitylog\Models\Activity;
+use Spatie\GoogleCalendar\Event;
 
 /**
- * App\TeaParty
+ * App\Models\TeaParty
  *
- * @property int $club_id 對應社團
- * @property string $name 茶會名稱
- * @property \Illuminate\Support\Carbon|null $start_at 開始時間
- * @property \Illuminate\Support\Carbon|null $end_at 結束時間
- * @property string $location 地點
- * @property string|null $url 網址
- * @property string|null $google_event_id Google日曆活動ID
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \Illuminate\Database\Eloquent\Collection|\Spatie\Activitylog\Models\Activity[] $activities
+ * @property int $club_id
+ * @property string $name
+ * @property Carbon|null $start_at
+ * @property Carbon|null $end_at
+ * @property string $location
+ * @property string|null $url
+ * @property string|null $google_event_id
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ * @property-read Collection|Activity[] $activities
  * @property-read int|null $activities_count
- * @property-read \App\Club $club
- * @property-read \Spatie\GoogleCalendar\Event|null $google_event
+ * @property-read Club $club
+ * @property-read Event|null $google_event
  * @property-read string|null $google_event_url
  * @property-read bool $is_ended
  * @property-read bool $is_started
  * @property-read string $state
  * @property-read string $state_for_list
- * @method static \Illuminate\Database\Eloquent\Builder|TeaParty newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|TeaParty newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|TeaParty query()
- * @method static \Illuminate\Database\Eloquent\Builder|TeaParty whereClubId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|TeaParty whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|TeaParty whereEndAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|TeaParty whereGoogleEventId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|TeaParty whereLocation($value)
- * @method static \Illuminate\Database\Eloquent\Builder|TeaParty whereName($value)
- * @method static \Illuminate\Database\Eloquent\Builder|TeaParty whereStartAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|TeaParty whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|TeaParty whereUrl($value)
- * @mixin \Eloquent
+ * @method static Builder|TeaParty newModelQuery()
+ * @method static Builder|TeaParty newQuery()
+ * @method static Builder|TeaParty query()
+ * @method static Builder|TeaParty whereClubId($value)
+ * @method static Builder|TeaParty whereCreatedAt($value)
+ * @method static Builder|TeaParty whereEndAt($value)
+ * @method static Builder|TeaParty whereGoogleEventId($value)
+ * @method static Builder|TeaParty whereLocation($value)
+ * @method static Builder|TeaParty whereName($value)
+ * @method static Builder|TeaParty whereStartAt($value)
+ * @method static Builder|TeaParty whereUpdatedAt($value)
+ * @method static Builder|TeaParty whereUrl($value)
+ * @mixin Eloquent
  */
 class TeaParty extends LoggableModel
 {
     use LegacySerializeDate;
 
-    protected $primaryKey = 'club_id';
-    public $incrementing = false;
     protected static $logName = 'club';
-
+    public $incrementing = false;
+    protected $primaryKey = 'club_id';
     protected $fillable = [
         'club_id',
         'name',
@@ -67,7 +75,7 @@ class TeaParty extends LoggableModel
     ];
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
     public function club()
     {
@@ -75,7 +83,7 @@ class TeaParty extends LoggableModel
     }
 
     /**
-     * @return \Spatie\GoogleCalendar\Event|null
+     * @return Event|null
      */
     public function getGoogleEventAttribute()
     {
@@ -84,8 +92,8 @@ class TeaParty extends LoggableModel
         }
         try {
             //TODO: 可能需要暫存？
-            return \Spatie\GoogleCalendar\Event::find($this->google_event_id);
-        } catch (\Google_Service_Exception $exception) {
+            return Event::find($this->google_event_id);
+        } catch (Google_Service_Exception $exception) {
             return null;
         }
     }
@@ -103,7 +111,7 @@ class TeaParty extends LoggableModel
             $url = cache()->remember($rememberKey, now()->addDay(), function () {
                 return $this->google_event->htmlLink;
             });
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             return null;
         }
 
@@ -157,11 +165,6 @@ class TeaParty extends LoggableModel
         return 'not_started';
     }
 
-    protected function getNameForActivityLog(): string
-    {
-        return $this->club->name . ' 的茶會資訊';
-    }
-
     /**
      * 儲存但不觸發 Observer 監聽的 Model 事件
      *
@@ -173,5 +176,10 @@ class TeaParty extends LoggableModel
         return static::withoutEvents(function () use ($options) {
             return $this->save($options);
         });
+    }
+
+    protected function getNameForActivityLog(): string
+    {
+        return $this->club->name . ' 的茶會資訊';
     }
 }

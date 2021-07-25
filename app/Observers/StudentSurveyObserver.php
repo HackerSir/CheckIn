@@ -2,8 +2,8 @@
 
 namespace App\Observers;
 
+use App\Models\StudentSurvey;
 use App\Services\TaskService;
-use App\StudentSurvey;
 
 class StudentSurveyObserver
 {

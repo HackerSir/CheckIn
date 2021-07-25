@@ -2,15 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use App\Club;
 use App\DataTables\FeedbackDataTable;
 use App\DataTables\Scopes\FeedbackClubScope;
-use App\Feedback;
 use App\Http\Requests\FeedbackRequest;
-use App\Record;
-use App\User;
+use App\Models\Club;
+use App\Models\Feedback;
+use App\Models\Record;
+use App\Models\User;
 use Carbon\Carbon;
+use Exception;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Response;
+use Illuminate\View\View;
+use Laratrust;
 use Setting;
 
 class FeedbackController extends Controller
@@ -31,8 +36,8 @@ class FeedbackController extends Controller
      * Display a listing of the resource.
      *
      * @param FeedbackDataTable $dataTable
-     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\Response|\Illuminate\View\View
-     * @throws \Exception
+     * @return JsonResponse|Response|View
+     * @throws Exception
      */
     public function index(FeedbackDataTable $dataTable)
     {
@@ -41,7 +46,7 @@ class FeedbackController extends Controller
         /** @var User $user */
         $user = auth()->user();
         //無管理權限，無社團
-        if (!\Laratrust::can('feedback.manage') && !$user->club) {
+        if (!Laratrust::isAbleTo('feedback.manage') && !$user->club) {
             if ($user->student) {
                 //有學生帳號，直接跳轉至「我的回饋資料」
                 return redirect()->route('feedback.my');
@@ -51,7 +56,7 @@ class FeedbackController extends Controller
             }
         }
         //無管理權限，僅有社團
-        if (!\Laratrust::can('feedback.manage')) {
+        if (!Laratrust::isAbleTo('feedback.manage')) {
             //檢查檢視與下載期限
             $feedbackDownloadExpiredAt = new Carbon(Setting::get('feedback_download_expired_at'));
             if (Carbon::now()->gt($feedbackDownloadExpiredAt)) {
@@ -85,7 +90,7 @@ class FeedbackController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\Response|\Illuminate\View\View
+     * @return JsonResponse|Response|View
      */
     public function my()
     {
@@ -99,8 +104,8 @@ class FeedbackController extends Controller
      * Show the form for creating a new resource.
      *
      * @param Club $club
-     * @return \Illuminate\Http\Response
-     * @throws \Exception
+     * @return Response
+     * @throws Exception
      */
     public function createOrEdit(Club $club)
     {
@@ -127,8 +132,8 @@ class FeedbackController extends Controller
      *
      * @param FeedbackRequest $request
      * @param Club $club
-     * @return \Illuminate\Http\Response
-     * @throws \Exception
+     * @return Response
+     * @throws Exception
      */
     public function store(FeedbackRequest $request, Club $club)
     {
@@ -161,8 +166,8 @@ class FeedbackController extends Controller
      * Display the specified resource.
      *
      * @param \App\Feedback $feedback
-     * @return \Illuminate\Http\Response
-     * @throws \Exception
+     * @return Response
+     * @throws Exception
      */
     public function show(Feedback $feedback)
     {

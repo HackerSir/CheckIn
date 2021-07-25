@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Booth;
-use App\Student;
+use App\Models\Booth;
+use App\Models\Student;
+use Setting;
 
 class StatsController extends Controller
 {
@@ -19,7 +20,7 @@ class StatsController extends Controller
         $count['play']['non_freshman'] = Student::nonFreshman()->has('records')->count();
         $count['play']['total'] = $count['play']['freshman'] + $count['play']['non_freshman'];
         //完成任務人數
-        $target = \Setting::get('target');
+        $target = Setting::get('target');
         $count['finish']['freshman'] = Student::freshman()->has('records', '>=', $target)->count();
         $count['finish']['non_freshman'] = Student::nonFreshman()->has('records', '>=', $target)->count();
         $count['finish']['total'] = $count['finish']['freshman'] + $count['finish']['non_freshman'];

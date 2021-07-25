@@ -2,7 +2,7 @@
 
 namespace App\Observers;
 
-use App\Qrcode;
+use App\Models\Qrcode;
 use Carbon\Carbon;
 
 class QrcodeObserver

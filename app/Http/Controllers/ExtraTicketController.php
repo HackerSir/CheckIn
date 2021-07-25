@@ -3,10 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\DataTables\ExtraTicketsDataTable;
-use App\ExtraTicket;
+use App\Models\ExtraTicket;
 use App\Services\FileService;
+use Exception;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Validation\Rule;
+use Illuminate\Validation\ValidationException;
+use Illuminate\View\View;
 use PhpOffice\PhpSpreadsheet\RichText\RichText;
 
 class ExtraTicketController extends Controller
@@ -15,7 +21,7 @@ class ExtraTicketController extends Controller
      * Display a listing of the resource.
      *
      * @param ExtraTicketsDataTable $dataTable
-     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\Response|\Illuminate\View\View
+     * @return JsonResponse|Response|View
      */
     public function index(ExtraTicketsDataTable $dataTable)
     {
@@ -25,7 +31,7 @@ class ExtraTicketController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function create()
     {
@@ -35,9 +41,9 @@ class ExtraTicketController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
-     * @throws \Illuminate\Validation\ValidationException
+     * @param Request $request
+     * @return Response
+     * @throws ValidationException
      */
     public function store(Request $request)
     {
@@ -58,8 +64,8 @@ class ExtraTicketController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\ExtraTicket $extraTicket
-     * @return \Illuminate\Http\Response
+     * @param \App\ExtraTicket $extraTicket
+     * @return Response
      */
     public function edit(ExtraTicket $extraTicket)
     {
@@ -69,10 +75,10 @@ class ExtraTicketController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param Request $request
      * @param \App\ExtraTicket $extraTicket
-     * @return \Illuminate\Http\Response
-     * @throws \Illuminate\Validation\ValidationException
+     * @return Response
+     * @throws ValidationException
      */
     public function update(Request $request, ExtraTicket $extraTicket)
     {
@@ -92,9 +98,9 @@ class ExtraTicketController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\ExtraTicket $extraTicket
-     * @return \Illuminate\Http\Response
-     * @throws \Exception
+     * @param \App\ExtraTicket $extraTicket
+     * @return Response
+     * @throws Exception
      */
     public function destroy(ExtraTicket $extraTicket)
     {
@@ -104,8 +110,8 @@ class ExtraTicketController extends Controller
     }
 
     /**
-     * @return \Illuminate\Http\RedirectResponse
-     * @throws \Exception
+     * @return RedirectResponse
+     * @throws Exception
      */
     public function destroyAll()
     {
@@ -151,8 +157,8 @@ class ExtraTicketController extends Controller
     /**
      * @param Request $request
      * @param FileService $fileService
-     * @return \Illuminate\Http\RedirectResponse
-     * @throws \Illuminate\Validation\ValidationException
+     * @return RedirectResponse
+     * @throws ValidationException
      */
     public function postImport(Request $request, FileService $fileService)
     {
@@ -210,7 +216,7 @@ class ExtraTicketController extends Controller
                         'name'  => $name,
                         'class' => $class,
                     ]);
-                } catch (\Exception $exception) {
+                } catch (Exception $exception) {
                     $skipCount++;
                     continue;
                 }

@@ -2,13 +2,16 @@
 
 namespace App\Services;
 
-use App\Club;
 use App\Events\CheckInAlert;
 use App\Events\CheckInSuccess;
-use App\Qrcode;
-use App\Record;
-use App\User;
+use App\Models\Club;
+use App\Models\Qrcode;
+use App\Models\Record;
+use App\Models\User;
 use Carbon\Carbon;
+use Exception;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\View\View;
 use Setting;
 
 class QrcodeScanService
@@ -17,8 +20,8 @@ class QrcodeScanService
      * @param User $user
      * @param string $code
      * @param bool $webScan
-     * @return array|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     * @throws \Exception
+     * @return array|Factory|View
+     * @throws Exception
      */
     public function scan(User $user, string $code, bool $webScan = false): array
     {

@@ -2,13 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Club;
 use App\DataTables\TeaPartyDataTable;
-use App\Feedback;
 use App\Http\Requests\TeaPartyRequest;
-use App\TeaParty;
-use App\User;
+use App\Models\Club;
+use App\Models\Feedback;
+use App\Models\TeaParty;
+use App\Models\User;
+use Exception;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Http\Response;
 
 class TeaPartyController extends Controller
 {
@@ -56,7 +58,7 @@ class TeaPartyController extends Controller
      * Display a listing of the resource.
      *
      * @param TeaPartyDataTable $dataTable
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function index(TeaPartyDataTable $dataTable)
     {
@@ -66,7 +68,7 @@ class TeaPartyController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function create()
     {
@@ -77,7 +79,7 @@ class TeaPartyController extends Controller
      * Store a newly created resource in storage.
      *
      * @param TeaPartyRequest $request
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function store(TeaPartyRequest $request)
     {
@@ -90,7 +92,7 @@ class TeaPartyController extends Controller
      * Display the specified resource.
      *
      * @param \App\TeaParty $teaParty
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function show(TeaParty $teaParty)
     {
@@ -101,7 +103,7 @@ class TeaPartyController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param \App\TeaParty $teaParty
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function edit(TeaParty $teaParty)
     {
@@ -113,7 +115,7 @@ class TeaPartyController extends Controller
      *
      * @param TeaPartyRequest $request
      * @param \App\TeaParty $teaParty
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function update(TeaPartyRequest $request, TeaParty $teaParty)
     {
@@ -126,8 +128,8 @@ class TeaPartyController extends Controller
      * Remove the specified resource from storage.
      *
      * @param \App\TeaParty $teaParty
-     * @return \Illuminate\Http\Response
-     * @throws \Exception
+     * @return Response
+     * @throws Exception
      */
     public function destroy(TeaParty $teaParty)
     {

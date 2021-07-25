@@ -2,8 +2,8 @@
 
 namespace App\Policies;
 
-use App\Student;
-use App\User;
+use App\Models\Student;
+use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class StudentPolicy

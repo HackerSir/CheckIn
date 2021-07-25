@@ -1,36 +1,46 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use App\Traits\LegacySerializeDate;
+use Database\Factories\StudentFactory;
+use Eloquent;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Query\Builder;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
+use Setting;
 
 /**
- * App\Student
+ * App\Models\Student
  *
- * @property string $nid 學號
- * @property string $name 姓名
- * @property string|null $type 類型
- * @property string|null $unit_id 科系ID
- * @property string|null $class 班級
- * @property string|null $unit_name 科系
- * @property string|null $dept_id 學院ID
- * @property string|null $dept_name 學院
- * @property int|null $in_year 入學學年度
- * @property string|null $gender 性別
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property bool $consider_as_freshman 視為新生
- * @property bool $is_dummy 是否為虛構資料
- * @property \Illuminate\Support\Carbon|null $fetch_at 最後一次由API獲取資料時間
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Club[] $clubs
+ * @property string $nid
+ * @property string $name
+ * @property string|null $type
+ * @property string|null $unit_id
+ * @property string|null $class
+ * @property string|null $unit_name
+ * @property string|null $dept_id
+ * @property string|null $dept_name
+ * @property int|null $in_year
+ * @property string|null $gender
+ * @property bool $consider_as_freshman
+ * @property bool $is_dummy
+ * @property Carbon|null $fetch_at
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection|Club[] $clubs
  * @property-read int|null $clubs_count
- * @property-read \App\ContactInformation|null $contactInformation
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Record[] $countedRecords
+ * @property-read ContactInformation|null $contactInformation
+ * @property-read \Illuminate\Database\Eloquent\Collection|Record[] $countedRecords
  * @property-read int|null $counted_records_count
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Feedback[] $feedback
+ * @property-read \Illuminate\Database\Eloquent\Collection|Feedback[] $feedback
  * @property-read int|null $feedback_count
  * @property-read \App\Club|null $club
  * @property-read string $display_name
@@ -39,16 +49,17 @@ use Illuminate\Support\Str;
  * @property-read bool $is_freshman
  * @property-read bool $is_staff
  * @property-read string $masked_display_name
- * @property-read \Illuminate\Support\Collection $zones_of_counted_records
- * @property-read \App\Qrcode|null $qrcode
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Qrcode[] $qrcodes
+ * @property-read Collection $zones_of_counted_records
+ * @property-read Qrcode|null $qrcode
+ * @property-read \Illuminate\Database\Eloquent\Collection|Qrcode[] $qrcodes
  * @property-read int|null $qrcodes_count
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Record[] $records
+ * @property-read \Illuminate\Database\Eloquent\Collection|Record[] $records
  * @property-read int|null $records_count
- * @property-read \App\StudentSurvey|null $studentSurvey
- * @property-read \App\StudentTicket|null $studentTicket
- * @property-read \App\Ticket|null $ticket
- * @property-read \App\User $user
+ * @property-read StudentSurvey|null $studentSurvey
+ * @property-read StudentTicket|null $studentTicket
+ * @property-read Ticket|null $ticket
+ * @property-read User $user
+ * @method static StudentFactory factory(...$parameters)
  * @method static \Illuminate\Database\Eloquent\Builder|Student freshman()
  * @method static \Illuminate\Database\Eloquent\Builder|Student newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Student newQuery()
@@ -69,17 +80,17 @@ use Illuminate\Support\Str;
  * @method static \Illuminate\Database\Eloquent\Builder|Student whereUnitId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Student whereUnitName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Student whereUpdatedAt($value)
- * @mixin \Eloquent
+ * @mixin Eloquent
  */
 class Student extends Model
 {
     use LegacySerializeDate;
-
-    protected $primaryKey = 'nid';
-    public $incrementing = false;
-    protected $keyType = 'string';
+    use HasFactory;
 
     private static $freshmanInYear = 109;
+    public $incrementing = false;
+    protected $primaryKey = 'nid';
+    protected $keyType = 'string';
     protected $fillable = [
         'nid',
         'name',
@@ -106,7 +117,7 @@ class Student extends Model
     ];
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo|\Illuminate\Database\Eloquent\Builder
+     * @return BelongsTo|\Illuminate\Database\Eloquent\Builder
      */
     public function user()
     {
@@ -116,7 +127,7 @@ class Student extends Model
     /**
      * 最後一組 QR Code
      *
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne|\Illuminate\Database\Eloquent\Builder
+     * @return HasOne|\Illuminate\Database\Eloquent\Builder
      */
     public function qrcode()
     {
@@ -126,7 +137,7 @@ class Student extends Model
     /**
      * 所有 QR Code
      *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany|\Illuminate\Database\Eloquent\Builder
+     * @return HasMany|\Illuminate\Database\Eloquent\Builder
      */
     public function qrcodes()
     {
@@ -134,7 +145,7 @@ class Student extends Model
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany|\Illuminate\Database\Eloquent\Builder
+     * @return HasMany|\Illuminate\Database\Eloquent\Builder
      */
     public function records()
     {
@@ -142,31 +153,7 @@ class Student extends Model
     }
 
     /**
-     * 有採計的打卡紀錄
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany|\Illuminate\Database\Eloquent\Builder
-     */
-    public function countedRecords()
-    {
-        return $this->hasMany(Record::class)
-            //社團所屬類型必須為可集點
-            ->whereHas('club', function ($query) {
-                /** @var Builder|Club $query */
-                $query->whereHas('clubType', function ($query) {
-                    /** @var Builder|ClubType $query */
-                    $query->where('is_counted', true);
-                });
-            })
-            //必須填寫該社團的回饋資料
-            ->whereHas('club.feedback', function ($query) {
-                /** @var Builder|Feedback $query */
-                $query->where('student_nid', $this->nid);
-            })
-            ->orderBy('created_at', 'desc');
-    }
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne|\Illuminate\Database\Eloquent\Builder
+     * @return HasOne|\Illuminate\Database\Eloquent\Builder
      */
     public function ticket()
     {
@@ -174,7 +161,7 @@ class Student extends Model
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne|\Illuminate\Database\Eloquent\Builder
+     * @return HasOne|\Illuminate\Database\Eloquent\Builder
      */
     public function studentTicket()
     {
@@ -182,7 +169,7 @@ class Student extends Model
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     * @return HasOne
      */
     public function contactInformation()
     {
@@ -190,7 +177,7 @@ class Student extends Model
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany|\Illuminate\Database\Eloquent\Builder
+     * @return HasMany|\Illuminate\Database\Eloquent\Builder
      */
     public function feedback()
     {
@@ -198,19 +185,11 @@ class Student extends Model
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     * @return HasOne
      */
     public function studentSurvey()
     {
         return $this->hasOne(StudentSurvey::class);
-    }
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
-     */
-    public function clubs()
-    {
-        return $this->belongsToMany(Club::class)->withTimestamps()->withPivot('is_leader');
     }
 
     /**
@@ -219,6 +198,14 @@ class Student extends Model
     public function getClubAttribute()
     {
         return $this->clubs()->first();
+    }
+
+    /**
+     * @return BelongsToMany
+     */
+    public function clubs()
+    {
+        return $this->belongsToMany(Club::class)->withTimestamps()->withPivot('is_leader');
     }
 
     /**
@@ -293,7 +280,7 @@ class Student extends Model
     public function getHasEnoughCountedRecordsAttribute()
     {
         //打卡目標
-        $target = (int) \Setting::get('target');
+        $target = (int) Setting::get('target');
         //檢查打卡進度
         $count = $this->countedRecords->count();
 
@@ -301,7 +288,7 @@ class Student extends Model
     }
 
     /**
-     * @return \Illuminate\Support\Collection
+     * @return Collection
      */
     public function getZonesOfCountedRecordsAttribute()
     {
@@ -314,12 +301,36 @@ class Student extends Model
     }
 
     /**
+     * 有採計的打卡紀錄
+     *
+     * @return HasMany|\Illuminate\Database\Eloquent\Builder
+     */
+    public function countedRecords()
+    {
+        return $this->hasMany(Record::class)
+            //社團所屬類型必須為可集點
+            ->whereHas('club', function ($query) {
+                /** @var Builder|Club $query */
+                $query->whereHas('clubType', function ($query) {
+                    /** @var Builder|ClubType $query */
+                    $query->where('is_counted', true);
+                });
+            })
+            //必須填寫該社團的回饋資料
+            ->whereHas('club.feedback', function ($query) {
+                /** @var Builder|Feedback $query */
+                $query->where('student_nid', $this->nid);
+            })
+            ->orderBy('created_at', 'desc');
+    }
+
+    /**
      * @return bool
      */
     public function getHasEnoughZonesOfCountedRecordsAttribute()
     {
         //區域收集目標
-        $target = (int) \Setting::get('zone_target');
+        $target = (int) Setting::get('zone_target');
         //檢查進度
         $count = $this->zones_of_counted_records->count();
 

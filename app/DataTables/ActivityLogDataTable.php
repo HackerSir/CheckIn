@@ -4,7 +4,9 @@ namespace App\DataTables;
 
 use App\Presenters\ActivityLogPresenter;
 use Spatie\Activitylog\Models\Activity;
+use Yajra\DataTables\DataTableAbstract;
 use Yajra\DataTables\EloquentDataTable;
+use Yajra\DataTables\Html\Builder;
 use Yajra\DataTables\Services\DataTable;
 
 class ActivityLogDataTable extends DataTable
@@ -13,7 +15,7 @@ class ActivityLogDataTable extends DataTable
      * Build DataTable class.
      *
      * @param mixed $query Results from query() method.
-     * @return \Yajra\DataTables\DataTableAbstract
+     * @return DataTableAbstract
      */
     public function dataTable($query)
     {
@@ -57,7 +59,7 @@ class ActivityLogDataTable extends DataTable
     /**
      * Optional method if you want to use html builder.
      *
-     * @return \Yajra\DataTables\Html\Builder
+     * @return Builder
      */
     public function html()
     {

@@ -5,16 +5,18 @@ namespace App\ExtendThrottle;
 use App\ExtendThrottle\Factories\ExtendTransformerFactory;
 use GrahamCampbell\Throttle\Factories\CacheFactory;
 use GrahamCampbell\Throttle\Throttle;
+use GrahamCampbell\Throttle\Throttlers\ThrottlerInterface;
+use Illuminate\Http\Request;
 
 class ExtendThrottle
 {
     /**
      * Get a new throttler.
      *
-     * @param string|array|\Illuminate\Http\Request $data
+     * @param string|array|Request $data
      * @param int $limit
      * @param int $time
-     * @return \GrahamCampbell\Throttle\Throttlers\ThrottlerInterface
+     * @return ThrottlerInterface
      */
     public function get($data, $limit = 10, $time = 60)
     {

@@ -3,9 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\DataTables\UsersDataTable;
-use App\Role;
-use App\User;
+use App\Models\Role;
+use App\Models\User;
+use Exception;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Illuminate\Validation\ValidationException;
+use Illuminate\View\View;
 
 class UserController extends Controller
 {
@@ -29,7 +34,7 @@ class UserController extends Controller
      * Display a listing of the resource.
      *
      * @param UsersDataTable $dataTable
-     * @return \Illuminate\Http\JsonResponse|\Illuminate\View\View
+     * @return JsonResponse|View
      */
     public function index(UsersDataTable $dataTable)
     {
@@ -40,7 +45,7 @@ class UserController extends Controller
      * Display the specified resource.
      *
      * @param User $user
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function show(User $user)
     {
@@ -51,7 +56,7 @@ class UserController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param User $user
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function edit(User $user)
     {
@@ -63,10 +68,10 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param Request $request
      * @param User $user
-     * @return \Illuminate\Http\Response
-     * @throws \Illuminate\Validation\ValidationException
+     * @return Response
+     * @throws ValidationException
      */
     public function update(Request $request, User $user)
     {
@@ -102,8 +107,8 @@ class UserController extends Controller
      * Remove the specified resource from storage.
      *
      * @param User $user
-     * @return \Illuminate\Http\Response
-     * @throws \Exception
+     * @return Response
+     * @throws Exception
      */
     public function destroy(User $user)
     {

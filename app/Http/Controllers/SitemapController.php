@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Club;
+use App\Models\Club;
 use Illuminate\Support\Collection;
 
 class SitemapController extends Controller

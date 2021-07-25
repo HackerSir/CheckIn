@@ -2,11 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Booth;
 use App\DataTables\BoothsDataTable;
+use App\Models\Booth;
 use App\Services\FileService;
+use Exception;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Validation\Rule;
+use Illuminate\Validation\ValidationException;
+use Illuminate\View\View;
 use PhpOffice\PhpSpreadsheet\RichText\RichText;
 
 class BoothController extends Controller
@@ -15,7 +21,7 @@ class BoothController extends Controller
      * Display a listing of the resource.
      *
      * @param BoothsDataTable $dataTable
-     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\Response|\Illuminate\View\View
+     * @return JsonResponse|Response|View
      */
     public function index(BoothsDataTable $dataTable)
     {
@@ -25,7 +31,7 @@ class BoothController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function create()
     {
@@ -35,9 +41,9 @@ class BoothController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
-     * @throws \Illuminate\Validation\ValidationException
+     * @param Request $request
+     * @return Response
+     * @throws ValidationException
      */
     public function store(Request $request)
     {
@@ -58,7 +64,7 @@ class BoothController extends Controller
      * Display the specified resource.
      *
      * @param \App\Booth $booth
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function show(Booth $booth)
     {
@@ -69,7 +75,7 @@ class BoothController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param \App\Booth $booth
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function edit(Booth $booth)
     {
@@ -79,10 +85,10 @@ class BoothController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param Request $request
      * @param \App\Booth $booth
-     * @return \Illuminate\Http\Response
-     * @throws \Illuminate\Validation\ValidationException
+     * @return Response
+     * @throws ValidationException
      */
     public function update(Request $request, Booth $booth)
     {
@@ -103,8 +109,8 @@ class BoothController extends Controller
      * Remove the specified resource from storage.
      *
      * @param \App\Booth $booth
-     * @return \Illuminate\Http\Response
-     * @throws \Exception
+     * @return Response
+     * @throws Exception
      */
     public function destroy(Booth $booth)
     {
@@ -121,8 +127,8 @@ class BoothController extends Controller
     /**
      * @param Request $request
      * @param FileService $fileService
-     * @return \Illuminate\Http\RedirectResponse
-     * @throws \Illuminate\Validation\ValidationException
+     * @return RedirectResponse
+     * @throws ValidationException
      */
     public function postImport(Request $request, FileService $fileService)
     {

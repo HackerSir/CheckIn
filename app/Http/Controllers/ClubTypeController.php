@@ -2,10 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\ClubType;
 use App\DataTables\ClubTypesDataTable;
+use App\Models\ClubType;
+use Exception;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Validation\Rule;
+use Illuminate\Validation\ValidationException;
+use Illuminate\View\View;
 
 class ClubTypeController extends Controller
 {
@@ -13,7 +18,7 @@ class ClubTypeController extends Controller
      * Display a listing of the resource.
      *
      * @param ClubTypesDataTable $dataTable
-     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\Response|\Illuminate\View\View
+     * @return JsonResponse|Response|View
      */
     public function index(ClubTypesDataTable $dataTable)
     {
@@ -23,7 +28,7 @@ class ClubTypeController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function create()
     {
@@ -33,9 +38,9 @@ class ClubTypeController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
-     * @throws \Illuminate\Validation\ValidationException
+     * @param Request $request
+     * @return Response
+     * @throws ValidationException
      */
     public function store(Request $request)
     {
@@ -53,7 +58,7 @@ class ClubTypeController extends Controller
     }
 
     /**
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function storeDefault()
     {
@@ -85,8 +90,8 @@ class ClubTypeController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\ClubType $clubType
-     * @return \Illuminate\Http\Response
+     * @param \App\ClubType $clubType
+     * @return Response
      */
     public function edit(ClubType $clubType)
     {
@@ -96,10 +101,10 @@ class ClubTypeController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param Request $request
      * @param \App\ClubType $clubType
-     * @return \Illuminate\Http\Response
-     * @throws \Illuminate\Validation\ValidationException
+     * @return Response
+     * @throws ValidationException
      */
     public function update(Request $request, ClubType $clubType)
     {
@@ -119,9 +124,9 @@ class ClubTypeController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\ClubType $clubType
-     * @return \Illuminate\Http\Response
-     * @throws \Exception
+     * @param \App\ClubType $clubType
+     * @return Response
+     * @throws Exception
      */
     public function destroy(ClubType $clubType)
     {

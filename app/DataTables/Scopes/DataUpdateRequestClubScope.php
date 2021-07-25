@@ -2,7 +2,8 @@
 
 namespace App\DataTables\Scopes;
 
-use App\Club;
+use App\Models\Club;
+use Illuminate\Database\Eloquent\Builder;
 use Yajra\DataTables\Contracts\DataTableScope;
 
 class DataUpdateRequestClubScope implements DataTableScope
@@ -24,7 +25,7 @@ class DataUpdateRequestClubScope implements DataTableScope
     /**
      * Apply a query scope.
      *
-     * @param \Illuminate\Database\Query\Builder|\Illuminate\Database\Eloquent\Builder $query
+     * @param \Illuminate\Database\Query\Builder|Builder $query
      * @return mixed
      */
     public function apply($query)

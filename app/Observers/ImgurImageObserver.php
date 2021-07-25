@@ -2,7 +2,7 @@
 
 namespace App\Observers;
 
-use App\ImgurImage;
+use App\Models\ImgurImage;
 use App\Services\ImgurImageService;
 
 class ImgurImageObserver

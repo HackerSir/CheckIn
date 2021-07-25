@@ -1,5 +1,7 @@
 <?php
 
+namespace Database\Seeders;
+
 use App\Club;
 use App\ClubType;
 use Illuminate\Database\Seeder;

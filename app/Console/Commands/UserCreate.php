@@ -3,10 +3,11 @@
 namespace App\Console\Commands;
 
 use App\Http\Controllers\Auth\RegisterController;
-use App\Role;
-use App\User;
+use App\Models\Role;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
+use URL;
 
 class UserCreate extends Command
 {
@@ -87,7 +88,7 @@ class UserCreate extends Command
         //驗證信件
         $this->info('Sending confirmation email...');
         //設定專案路徑
-        \URL::forceRootUrl(config('app.url'));
+        URL::forceRootUrl(config('app.url'));
         //發送驗證信件
         app(RegisterController::class)->generateConfirmCodeAndSendConfirmMail($user);
         $this->info('Confirmation email sent successfully.');

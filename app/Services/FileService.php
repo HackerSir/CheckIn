@@ -2,10 +2,11 @@
 
 namespace App\Services;
 
-use App\Qrcode;
-use App\QrcodeSet;
+use App\Models\Qrcode;
+use App\Models\QrcodeSet;
 use DNS1D;
 use DNS2D;
+use Exception;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpWord\PhpWord;
@@ -72,7 +73,7 @@ class FileService
         $spreadsheet = null;
         try {
             $spreadsheet = IOFactory::load($filePath);
-        } catch (\Exception $exception) {
+        } catch (Exception $exception) {
             return null;
         }
 
@@ -84,11 +85,6 @@ class FileService
         $maxBytes = min($this->fileUploadMaxBytes(), $this->parseSize('20MB'));
 
         return $this->formatBytes($maxBytes);
-    }
-
-    public function fileUploadMaxSize()
-    {
-        return $this->formatBytes($this->fileUploadMaxBytes());
     }
 
     public function fileUploadMaxBytes()
@@ -134,5 +130,10 @@ class FileService
         $bytes /= pow(1024, $pow);
 
         return round($bytes, $precision) . ' ' . $units[$pow];
+    }
+
+    public function fileUploadMaxSize()
+    {
+        return $this->formatBytes($this->fileUploadMaxBytes());
     }
 }

@@ -2,9 +2,11 @@
 
 namespace App\DataTables;
 
-use App\Student;
-use App\Ticket;
+use App\Models\Student;
+use App\Models\Ticket;
 use Illuminate\Database\Query\Builder;
+use Illuminate\Support\Collection;
+use Yajra\DataTables\DataTableAbstract;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Services\DataTable;
 
@@ -14,7 +16,7 @@ class TicketsDataTable extends DataTable
      * Build DataTable class.
      *
      * @param mixed $query Results from query() method.
-     * @return \Yajra\DataTables\DataTableAbstract
+     * @return DataTableAbstract
      */
     public function dataTable($query)
     {
@@ -39,11 +41,25 @@ class TicketsDataTable extends DataTable
      * Get the query object to be processed by dataTables.
      *
      * @param Ticket $model
-     * @return \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Query\Builder|\Illuminate\Support\Collection
+     * @return \Illuminate\Database\Eloquent\Builder|Builder|Collection
      */
     public function query(Ticket $model)
     {
         return $model->newQuery()->with('student')->select(array_keys($this->getColumns()));
+    }
+
+    /**
+     * Get columns.
+     *
+     * @return array
+     */
+    protected function getColumns()
+    {
+        return [
+            'id'          => ['title' => '抽獎編號'],
+            'student_nid' => ['title' => '學生'],
+            'created_at'  => ['title' => '取得時間'],
+        ];
     }
 
     /**
@@ -60,20 +76,6 @@ class TicketsDataTable extends DataTable
                 'order'      => [[0, 'desc']],
                 'pageLength' => 50,
             ]);
-    }
-
-    /**
-     * Get columns.
-     *
-     * @return array
-     */
-    protected function getColumns()
-    {
-        return [
-            'id'          => ['title' => '抽獎編號'],
-            'student_nid' => ['title' => '學生'],
-            'created_at'  => ['title' => '取得時間'],
-        ];
     }
 
     /**

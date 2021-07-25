@@ -2,7 +2,7 @@
 
 namespace App\Services;
 
-use App\TeaParty;
+use App\Models\TeaParty;
 use Google_Service_Exception;
 use Spatie\GoogleCalendar\Event;
 

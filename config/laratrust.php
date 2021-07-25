@@ -7,6 +7,10 @@
  * @license MIT
  */
 
+use App\Models\Permission;
+use App\Models\Role;
+use App\Models\User;
+
 return [
     /*
     |--------------------------------------------------------------------------
@@ -103,7 +107,7 @@ return [
     |
     */
     'user_models'           => [
-        'users' => 'App\User',
+        'users' => User::class,
     ],
 
     /*
@@ -120,17 +124,17 @@ return [
         /**
          * Role model
          */
-        'role'       => 'App\Role',
+        'role'       => Role::class,
 
         /**
          * Permission model
          */
-        'permission' => 'App\Permission',
+        'permission' => Permission::class,
 
         /**
          * Team model
          */
-        'team'       => 'App\Team',
+        'team'       => 'App\Models\Team',
 
     ],
 

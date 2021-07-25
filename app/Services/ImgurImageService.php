@@ -2,9 +2,12 @@
 
 namespace App\Services;
 
-use App\ImgurImage;
+use App\Models\ImgurImage;
+use Exception;
 use File;
 use Illuminate\Http\UploadedFile;
+use Imgur\Api\Image;
+use Imgur\Client;
 
 class ImgurImageService
 {
@@ -13,7 +16,7 @@ class ImgurImageService
      *
      * @param UploadedFile $uploadedFile
      * @return ImgurImage
-     * @throws \Exception
+     * @throws Exception
      */
     public function upload(UploadedFile $uploadedFile): ImgurImage
     {
@@ -22,7 +25,7 @@ class ImgurImageService
         //將圖片上傳至Imgur
         //檢查Client ID和Client secret
         if (empty(config('imgur.client_id')) || empty(config('imgur.client_secret'))) {
-            throw new \Exception('Missing IMGUR_CLIENT_ID or IMGUR_CLIENT_SECRET in .env');
+            throw new Exception('Missing IMGUR_CLIENT_ID or IMGUR_CLIENT_SECRET in .env');
         }
         $imageClient = $this->getImgurImageClient();
         $imageData = [
@@ -44,6 +47,20 @@ class ImgurImageService
     }
 
     /**
+     * @return  Image
+     */
+    private function getImgurImageClient(): Image
+    {
+        $client = new Client();
+        $client->setOption('client_id', config('imgur.client_id'));
+        $client->setOption('client_secret', config('imgur.client_secret'));
+        /** @var Image $imageClient */
+        $imageClient = $client->api('image');
+
+        return $imageClient;
+    }
+
+    /**
      * 透過 Delete Hash 實際刪除在 Imgur 的圖片
      * @param ImgurImage $imgurImage
      */
@@ -51,19 +68,5 @@ class ImgurImageService
     {
         $imageClient = $this->getImgurImageClient();
         $imageClient->deleteImage($imgurImage->delete_hash);
-    }
-
-    /**
-     * @return  \Imgur\Api\Image
-     */
-    private function getImgurImageClient(): \Imgur\Api\Image
-    {
-        $client = new \Imgur\Client();
-        $client->setOption('client_id', config('imgur.client_id'));
-        $client->setOption('client_secret', config('imgur.client_secret'));
-        /** @var \Imgur\Api\Image $imageClient */
-        $imageClient = $client->api('image');
-
-        return $imageClient;
     }
 }

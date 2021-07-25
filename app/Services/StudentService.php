@@ -2,7 +2,7 @@
 
 namespace App\Services;
 
-use App\Student;
+use App\Models\Student;
 use Carbon\Carbon;
 
 class StudentService

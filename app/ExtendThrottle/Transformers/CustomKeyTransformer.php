@@ -14,7 +14,7 @@ class CustomKeyTransformer implements TransformerInterface
      * @param int $limit
      * @param int $time
      *
-     * @return \GrahamCampbell\Throttle\Data
+     * @return Data
      */
     public function transform($data, int $limit = 10, int $time = 60)
     {

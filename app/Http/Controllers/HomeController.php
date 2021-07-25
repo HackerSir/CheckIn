@@ -2,10 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Booth;
-use App\Club;
-use App\User;
+use App\Models\Booth;
+use App\Models\Club;
+use App\Models\User;
 use Carbon\Carbon;
+use Exception;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\View\View;
 use Setting;
 
 class HomeController extends Controller
@@ -24,8 +28,8 @@ class HomeController extends Controller
     }
 
     /**
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View
-     * @throws \Exception
+     * @return Factory|RedirectResponse|View
+     * @throws Exception
      */
     public function myQRCode()
     {

@@ -2,8 +2,9 @@
 
 namespace App\Imports;
 
+use App\Models\Student;
 use App\Services\StudentService;
-use App\Student;
+use Illuminate\Database\Eloquent\Model;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithBatchInserts;
 use Maatwebsite\Excel\Concerns\WithChunkReading;
@@ -29,7 +30,7 @@ class StudentImport implements ToModel, WithHeadingRow, WithChunkReading, WithBa
     /**
      * @param array $row
      *
-     * @return \Illuminate\Database\Eloquent\Model|null
+     * @return Model|null
      */
     public function model(array $row)
     {

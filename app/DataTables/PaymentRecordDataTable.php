@@ -2,10 +2,11 @@
 
 namespace App\DataTables;
 
-use App\Club;
-use App\PaymentRecord;
-use App\User;
+use App\Models\Club;
+use App\Models\PaymentRecord;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Builder;
+use Yajra\DataTables\DataTableAbstract;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Services\DataTable;
 
@@ -15,7 +16,7 @@ class PaymentRecordDataTable extends DataTable
      * Build DataTable class.
      *
      * @param mixed $query Results from query() method.
-     * @return \Yajra\DataTables\DataTableAbstract
+     * @return DataTableAbstract
      */
     public function dataTable($query)
     {
@@ -57,7 +58,7 @@ class PaymentRecordDataTable extends DataTable
      * Get query source of dataTable.
      *
      * @param PaymentRecord $model
-     * @return \Illuminate\Database\Eloquent\Builder
+     * @return Builder
      */
     public function query(PaymentRecord $model)
     {

@@ -2,8 +2,8 @@
 
 namespace App\Policies;
 
-use App\PaymentRecord;
-use App\User;
+use App\Models\PaymentRecord;
+use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class PaymentRecordPolicy

@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Club;
-use App\User;
+use App\Models\Club;
+use App\Models\User;
 
 class OpenBetaController extends Controller
 {

@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Qrcode;
+use App\Models\Qrcode;
 use DNS1D;
 use DNS2D;
 use File;
+use Response;
 
 class CodePictureController extends Controller
 {
@@ -32,7 +33,7 @@ class CodePictureController extends Controller
             'Cache-Control'  => 'max-age=86400',
         ];
 
-        return \Response::make($file, 200, $headers);
+        return Response::make($file, 200, $headers);
     }
 
     /**
@@ -56,6 +57,6 @@ class CodePictureController extends Controller
             'Cache-Control'  => 'max-age=86400',
         ];
 
-        return \Response::make($file, 200, $headers);
+        return Response::make($file, 200, $headers);
     }
 }

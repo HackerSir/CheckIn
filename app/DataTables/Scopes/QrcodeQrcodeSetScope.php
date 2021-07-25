@@ -2,6 +2,7 @@
 
 namespace App\DataTables\Scopes;
 
+use Illuminate\Database\Eloquent\Builder;
 use Yajra\DataTables\Contracts\DataTableScope;
 
 class QrcodeQrcodeSetScope implements DataTableScope
@@ -23,7 +24,7 @@ class QrcodeQrcodeSetScope implements DataTableScope
     /**
      * Apply a query scope.
      *
-     * @param \Illuminate\Database\Query\Builder|\Illuminate\Database\Eloquent\Builder $query
+     * @param \Illuminate\Database\Query\Builder|Builder $query
      * @return mixed
      */
     public function apply($query)

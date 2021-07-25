@@ -2,7 +2,7 @@
 
 namespace App\Observers;
 
-use App\User;
+use App\Models\User;
 use Carbon\Carbon;
 
 class UserObserver
@@ -10,7 +10,7 @@ class UserObserver
     /**
      * Handle the user "creating" event.
      *
-     * @param  \App\User $user
+     * @param \App\User $user
      * @return void
      */
     public function creating(User $user)

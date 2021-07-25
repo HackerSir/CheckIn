@@ -2,13 +2,14 @@
 
 namespace App\Observers;
 
-use App\DataUpdateRequest;
+use App\Models\DataUpdateRequest;
+use Exception;
 
 class DataUpdateRequestObserver
 {
     /**
      * @param DataUpdateRequest $dataUpdateRequest
-     * @throws \Exception
+     * @throws Exception
      */
     public function deleting(DataUpdateRequest $dataUpdateRequest)
     {

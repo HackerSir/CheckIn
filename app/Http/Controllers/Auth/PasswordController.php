@@ -3,9 +3,12 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\User;
+use App\Models\User;
 use Hash;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Validation\ValidationException;
+use Illuminate\View\View;
 
 class PasswordController extends Controller
 {
@@ -20,7 +23,7 @@ class PasswordController extends Controller
     /**
      * 密碼修改頁面
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function getChangePassword()
     {
@@ -33,8 +36,8 @@ class PasswordController extends Controller
      * 修改密碼
      *
      * @param Request $request
-     * @return \Illuminate\Http\RedirectResponse
-     * @throws \Illuminate\Validation\ValidationException
+     * @return RedirectResponse
+     * @throws ValidationException
      */
     public function putChangePassword(Request $request)
     {

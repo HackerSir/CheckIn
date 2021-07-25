@@ -2,11 +2,17 @@
 
 namespace App\Providers;
 
-use App\Club;
-use App\ContactInformation;
-use App\DataUpdateRequest;
-use App\Feedback;
-use App\ImgurImage;
+use App\Models\Club;
+use App\Models\ContactInformation;
+use App\Models\DataUpdateRequest;
+use App\Models\Feedback;
+use App\Models\ImgurImage;
+use App\Models\Qrcode;
+use App\Models\Record;
+use App\Models\Student;
+use App\Models\StudentSurvey;
+use App\Models\TeaParty;
+use App\Models\User;
 use App\Observers\ActivityObserver;
 use App\Observers\ClubObserver;
 use App\Observers\ContactInformationObserver;
@@ -19,15 +25,11 @@ use App\Observers\StudentObserver;
 use App\Observers\StudentSurveyObserver;
 use App\Observers\TeaPartyObserver;
 use App\Observers\UserObserver;
-use App\Qrcode;
-use App\Record;
-use App\Student;
-use App\StudentSurvey;
-use App\TeaParty;
-use App\User;
 use Carbon\Carbon;
 use Horizon;
+use Illuminate\Pagination\Paginator;
 use Illuminate\Support\ServiceProvider;
+use Laratrust;
 use Purifier;
 use Schema;
 use Spatie\Activitylog\Models\Activity;
@@ -66,7 +68,7 @@ class AppServiceProvider extends ServiceProvider
         DataUpdateRequest::observe(DataUpdateRequestObserver::class);
 
         Horizon::auth(function ($request) {
-            return \Laratrust::can('horizon.manage');
+            return Laratrust::isAbleTo('horizon.manage');
         });
 
         //Validation rules
@@ -80,16 +82,9 @@ class AppServiceProvider extends ServiceProvider
 
             return mb_strlen($cleanedText) <= $parameters[0];
         });
-    }
 
-    /**
-     * Register any application services.
-     *
-     * @return void
-     */
-    public function register()
-    {
-        //
+        // Use Bootstrap's Paginator
+        Paginator::useBootstrap();
     }
 
     /**
@@ -121,5 +116,15 @@ class AppServiceProvider extends ServiceProvider
         }
 
         return null;
+    }
+
+    /**
+     * Register any application services.
+     *
+     * @return void
+     */
+    public function register()
+    {
+        //
     }
 }

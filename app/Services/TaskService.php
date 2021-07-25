@@ -2,16 +2,17 @@
 
 namespace App\Services;
 
-use App\Student;
-use App\Ticket;
+use App\Models\Student;
+use App\Models\Ticket;
+use Setting;
 
 class TaskService
 {
     public function checkProgress(Student $student)
     {
         //打卡目標＆區域收集目標
-        $target = (int) \Setting::get('target');
-        $zoneTarget = (int) \Setting::get('zone_target');
+        $target = (int) Setting::get('target');
+        $zoneTarget = (int) Setting::get('zone_target');
         if ($target <= 0 && $zoneTarget <= 0) {
             //目標非正，視為未啟用此機制
             return;

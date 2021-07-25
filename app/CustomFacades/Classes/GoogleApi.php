@@ -2,7 +2,7 @@
 
 namespace App\CustomFacades\Classes;
 
-use App\ApiKey;
+use App\Models\ApiKey;
 use Log;
 
 class GoogleApi

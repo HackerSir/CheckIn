@@ -6,6 +6,7 @@ use App\ExtendThrottle\Transformers\CustomKeyTransformer;
 use GrahamCampbell\Throttle\Transformers\ArrayTransformer;
 use GrahamCampbell\Throttle\Transformers\RequestTransformer;
 use GrahamCampbell\Throttle\Transformers\TransformerFactory;
+use GrahamCampbell\Throttle\Transformers\TransformerInterface;
 use Illuminate\Http\Request;
 use InvalidArgumentException;
 
@@ -16,9 +17,9 @@ class ExtendTransformerFactory extends TransformerFactory
      *
      * @param mixed $data
      *
-     * @throws \InvalidArgumentException
+     * @return TransformerInterface
+     * @throws InvalidArgumentException
      *
-     * @return \GrahamCampbell\Throttle\Transformers\TransformerInterface
      */
     public function make($data)
     {

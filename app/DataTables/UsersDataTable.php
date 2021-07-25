@@ -2,10 +2,12 @@
 
 namespace App\DataTables;
 
-use App\Club;
-use App\Student;
-use App\User;
+use App\Models\Club;
+use App\Models\Student;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Collection;
+use Yajra\DataTables\DataTableAbstract;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Services\DataTable;
 
@@ -15,7 +17,7 @@ class UsersDataTable extends DataTable
      * Build DataTable class.
      *
      * @param mixed $query Results from query() method.
-     * @return \Yajra\DataTables\DataTableAbstract
+     * @return DataTableAbstract
      */
     public function dataTable($query)
     {
@@ -50,7 +52,7 @@ class UsersDataTable extends DataTable
      * Get the query object to be processed by dataTables.
      *
      * @param User $model
-     * @return \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Query\Builder|\Illuminate\Support\Collection
+     * @return Builder|\Illuminate\Database\Query\Builder|Collection
      */
     public function query(User $model)
     {

@@ -2,8 +2,8 @@
 
 namespace App\Observers;
 
+use App\Models\TeaParty;
 use App\Services\GoogleCalendarService;
-use App\TeaParty;
 
 class TeaPartyObserver
 {

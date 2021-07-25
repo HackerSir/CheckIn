@@ -5,13 +5,14 @@ namespace App\Http\Controllers;
 use App\DataTables\ActivityLogDataTable;
 use App\DataTables\Scopes\ActivityLogNameScope;
 use DB;
+use Illuminate\Http\Response;
 use Spatie\Activitylog\Models\Activity;
 
 class ActivityLogController extends Controller
 {
     /**
      * @param ActivityLogDataTable $dataTable
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function index(ActivityLogDataTable $dataTable)
     {

@@ -2,18 +2,28 @@
 
 namespace App\Http\Controllers;
 
-use App\Booth;
 use App\DataTables\StudentsDataTable;
-use App\Feedback;
 use App\Http\Requests\StudentRequest;
 use App\Imports\StudentImport;
+use App\Models\Booth;
+use App\Models\Feedback;
+use App\Models\Student;
 use App\Services\LogService;
 use App\Services\StudentService;
 use App\Services\UserService;
-use App\Student;
 use Excel;
+use Exception;
+use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Arr;
+use Illuminate\Validation\ValidationException;
+use Illuminate\View\View;
+use Laratrust;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
 class StudentController extends Controller
 {
@@ -49,7 +59,7 @@ class StudentController extends Controller
      * Display a listing of the resource.
      *
      * @param StudentsDataTable $dataTable
-     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\Response|\Illuminate\View\View
+     * @return JsonResponse|Response|View
      */
     public function index(StudentsDataTable $dataTable)
     {
@@ -59,7 +69,7 @@ class StudentController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function create()
     {
@@ -70,7 +80,7 @@ class StudentController extends Controller
      * Store a newly created resource in storage.
      *
      * @param StudentRequest $request
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function store(StudentRequest $request)
     {
@@ -91,8 +101,8 @@ class StudentController extends Controller
     }
 
     /**
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     * @throws \Illuminate\Auth\Access\AuthorizationException
+     * @return Factory|View
+     * @throws AuthorizationException
      */
     public function createRealStudent()
     {
@@ -103,9 +113,9 @@ class StudentController extends Controller
 
     /**
      * @param Request $request
-     * @return \Illuminate\Http\RedirectResponse
-     * @throws \Illuminate\Validation\ValidationException
-     * @throws \Illuminate\Auth\Access\AuthorizationException
+     * @return RedirectResponse
+     * @throws ValidationException
+     * @throws AuthorizationException
      */
     public function storeRealStudent(Request $request)
     {
@@ -149,13 +159,13 @@ class StudentController extends Controller
      * Display the specified resource.
      *
      * @param Student $student
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function show(Student $student)
     {
         $student->load('records.club.clubType', 'records.club.booths', 'qrcodes.student');
 
-        if (\Laratrust::can('student-path.view') && request()->exists('path')) {
+        if (Laratrust::isAbleTo('student-path.view') && request()->exists('path')) {
             $boothData = [];
             $booths = Booth::with('club.clubType')->get();
             /** @var Booth $booth */
@@ -195,7 +205,7 @@ class StudentController extends Controller
 
     /**
      * @param Student $student
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function edit(Student $student)
     {
@@ -207,7 +217,7 @@ class StudentController extends Controller
      *
      * @param StudentRequest $request
      * @param \App\Student $student
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function update(StudentRequest $request, Student $student)
     {
@@ -227,8 +237,8 @@ class StudentController extends Controller
      * Update the specified resource in storage.
      *
      * @param \App\Student $student
-     * @return \Illuminate\Http\Response
-     * @throws \Illuminate\Auth\Access\AuthorizationException
+     * @return Response
+     * @throws AuthorizationException
      */
     public function fetch(Student $student)
     {
@@ -245,8 +255,8 @@ class StudentController extends Controller
      * Remove the specified resource from storage.
      *
      * @param Student $student
-     * @return \Illuminate\Http\Response
-     * @throws \Exception
+     * @return Response
+     * @throws Exception
      */
     public function destroy(Student $student)
     {
@@ -259,8 +269,8 @@ class StudentController extends Controller
     /**
      * Show import form
      *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     * @throws \Illuminate\Auth\Access\AuthorizationException
+     * @return Factory|View
+     * @throws AuthorizationException
      */
     public function getImport()
     {
@@ -273,9 +283,9 @@ class StudentController extends Controller
      * Import data
      *
      * @param Request $request
-     * @return \Illuminate\Http\RedirectResponse
-     * @throws \Illuminate\Validation\ValidationException
-     * @throws \Illuminate\Auth\Access\AuthorizationException
+     * @return RedirectResponse
+     * @throws ValidationException
+     * @throws AuthorizationException
      */
     public function postImport(Request $request)
     {
@@ -298,8 +308,8 @@ class StudentController extends Controller
     /**
      * Download sample file of import
      *
-     * @return \Symfony\Component\HttpFoundation\BinaryFileResponse
-     * @throws \Illuminate\Auth\Access\AuthorizationException
+     * @return BinaryFileResponse
+     * @throws AuthorizationException
      */
     public function downloadImportSample()
     {

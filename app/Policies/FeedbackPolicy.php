@@ -2,10 +2,13 @@
 
 namespace App\Policies;
 
-use App\Feedback;
-use App\User;
+use App\Models\Feedback;
+use App\Models\User;
 use Carbon\Carbon;
+use Exception;
+use Gate;
 use Illuminate\Auth\Access\HandlesAuthorization;
+use Laratrust;
 use Setting;
 
 class FeedbackPolicy
@@ -18,7 +21,7 @@ class FeedbackPolicy
      * @param \App\User $user
      * @param \App\Feedback $feedback
      * @return mixed
-     * @throws \Exception
+     * @throws Exception
      */
     public function view(User $user, Feedback $feedback)
     {
@@ -27,7 +30,7 @@ class FeedbackPolicy
         //擁有者
         $isOwner = $user->student && $user->student->nid == $feedback->student_nid;
         //有管理權限，或是擁有者
-        if (\Laratrust::can('feedback.manage') || $isOwner) {
+        if (Laratrust::isAbleTo('feedback.manage') || $isOwner) {
             return true;
         }
         //對於加入社團與參與茶會皆無意願
@@ -35,7 +38,7 @@ class FeedbackPolicy
             return false;
         }
         //非工作人員
-        if (\Gate::denies('as-staff', $feedback->club)) {
+        if (Gate::denies('as-staff', $feedback->club)) {
             return false;
         }
         //檢查檢視與下載期限

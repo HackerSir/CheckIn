@@ -2,7 +2,7 @@
 
 namespace App\Observers;
 
-use App\Feedback;
+use App\Models\Feedback;
 
 class FeedbackObserver
 {

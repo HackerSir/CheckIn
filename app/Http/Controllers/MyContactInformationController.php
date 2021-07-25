@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\MyContactInformationRequest;
-use App\User;
+use App\Models\User;
 use Carbon\Carbon;
+use Exception;
+use Illuminate\Http\Response;
 use Setting;
 
 class MyContactInformationController extends Controller
@@ -18,7 +20,7 @@ class MyContactInformationController extends Controller
     }
 
     /**
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function index()
     {
@@ -36,8 +38,8 @@ class MyContactInformationController extends Controller
     }
 
     /**
-     * @return \Illuminate\Http\Response
-     * @throws \Exception
+     * @return Response
+     * @throws Exception
      */
     public function createOrEdit()
     {
@@ -57,8 +59,8 @@ class MyContactInformationController extends Controller
 
     /**
      * @param MyContactInformationRequest $request
-     * @return  \Illuminate\Http\Response
-     * @throws \Exception
+     * @return  Response
+     * @throws Exception
      */
     public function store(MyContactInformationRequest $request)
     {

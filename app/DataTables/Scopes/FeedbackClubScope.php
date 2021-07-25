@@ -2,8 +2,8 @@
 
 namespace App\DataTables\Scopes;
 
-use App\Club;
-use App\Feedback;
+use App\Models\Club;
+use App\Models\Feedback;
 use Illuminate\Database\Eloquent\Builder;
 use Yajra\DataTables\Contracts\DataTableScope;
 
@@ -26,7 +26,7 @@ class FeedbackClubScope implements DataTableScope
     /**
      * Apply a query scope.
      *
-     * @param \Illuminate\Database\Query\Builder|\Illuminate\Database\Eloquent\Builder|Feedback $query
+     * @param \Illuminate\Database\Query\Builder|Builder|Feedback $query
      * @return mixed
      */
     public function apply($query)

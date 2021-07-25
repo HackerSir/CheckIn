@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\ClubSurvey;
-use App\StudentSurvey;
-use App\User;
+use App\Models\ClubSurvey;
+use App\Models\StudentSurvey;
+use App\Models\User;
 use Carbon\Carbon;
+use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Illuminate\Validation\ValidationException;
 use Setting;
 
 class SurveyController extends Controller
@@ -14,8 +17,8 @@ class SurveyController extends Controller
     /**
      * 主要頁面，可選擇瀏覽或填寫各類型問卷
      *
-     * @return \Illuminate\Http\Response
-     * @throws \Exception
+     * @return Response
+     * @throws Exception
      */
     public function index()
     {
@@ -31,8 +34,8 @@ class SurveyController extends Controller
     /**
      * 建立或編輯學生問卷
      *
-     * @return \Illuminate\Http\Response
-     * @throws \Exception
+     * @return Response
+     * @throws Exception
      */
     public function createOrEditStudentSurvey()
     {
@@ -41,7 +44,7 @@ class SurveyController extends Controller
         if (!$user->student) {
             return redirect()->route('survey.index')->with('warning', '無法填寫此類型問卷');
         }
-        $endAt = new Carbon(\Setting::get('end_at'));
+        $endAt = new Carbon(Setting::get('end_at'));
         if (Carbon::now()->gt($endAt)) {
             return redirect()->back()->with('warning', '已超過填寫時間');
         }
@@ -57,9 +60,9 @@ class SurveyController extends Controller
      * 儲存學生問卷
      *
      * @param Request $request
-     * @return \Illuminate\Http\Response
-     * @throws \Illuminate\Validation\ValidationException
-     * @throws \Exception
+     * @return Response
+     * @throws ValidationException
+     * @throws Exception
      */
     public function storeStudentSurvey(Request $request)
     {
@@ -68,7 +71,7 @@ class SurveyController extends Controller
         if (!$user->student) {
             return redirect()->route('survey.index')->with('warning', '無法填寫此類型問卷');
         }
-        $endAt = new Carbon(\Setting::get('end_at'));
+        $endAt = new Carbon(Setting::get('end_at'));
         if (Carbon::now()->gt($endAt)) {
             return redirect()->route('survey.index')->with('warning', '已超過填寫時間');
         }
@@ -90,7 +93,7 @@ class SurveyController extends Controller
     /**
      * 檢視學生問卷
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function showStudentSurvey()
     {
@@ -111,8 +114,8 @@ class SurveyController extends Controller
     /**
      * 建立或編輯社團問卷
      *
-     * @return \Illuminate\Http\Response
-     * @throws \Exception
+     * @return Response
+     * @throws Exception
      */
     public function createOrEditClubSurvey()
     {
@@ -121,7 +124,7 @@ class SurveyController extends Controller
         if (!$user->club) {
             return redirect()->route('survey.index')->with('warning', '無法填寫此類型問卷');
         }
-        $endAt = new Carbon(\Setting::get('feedback_create_expired_at'));
+        $endAt = new Carbon(Setting::get('feedback_create_expired_at'));
         if (Carbon::now()->gt($endAt)) {
             return redirect()->back()->with('warning', '已超過填寫時間');
         }
@@ -134,9 +137,9 @@ class SurveyController extends Controller
      * 儲存學生問卷
      *
      * @param Request $request
-     * @return \Illuminate\Http\Response
-     * @throws \Illuminate\Validation\ValidationException
-     * @throws \Exception
+     * @return Response
+     * @throws ValidationException
+     * @throws Exception
      */
     public function storeClubSurvey(Request $request)
     {
@@ -145,7 +148,7 @@ class SurveyController extends Controller
         if (!$user->club) {
             return redirect()->route('survey.index')->with('warning', '無法填寫此類型問卷');
         }
-        $endAt = new Carbon(\Setting::get('feedback_create_expired_at'));
+        $endAt = new Carbon(Setting::get('feedback_create_expired_at'));
         if (Carbon::now()->gt($endAt)) {
             return redirect()->route('survey.index')->with('warning', '已超過填寫時間');
         }
@@ -165,7 +168,7 @@ class SurveyController extends Controller
     /**
      * 檢視學生問卷
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function showClubSurvey()
     {

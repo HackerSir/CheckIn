@@ -2,13 +2,14 @@
 
 namespace App\Observers;
 
-use App\Club;
+use App\Models\Club;
+use Exception;
 
 class ClubObserver
 {
     /**
      * @param Club $club
-     * @throws \Exception
+     * @throws Exception
      */
     public function deleting(Club $club)
     {

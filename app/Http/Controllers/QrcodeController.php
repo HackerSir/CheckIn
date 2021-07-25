@@ -3,9 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\DataTables\QrcodesDataTable;
-use App\Qrcode;
+use App\Models\Qrcode;
 use App\Services\StudentService;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Illuminate\Validation\ValidationException;
+use Illuminate\View\View;
 
 class QrcodeController extends Controller
 {
@@ -13,7 +18,7 @@ class QrcodeController extends Controller
      * Display a listing of the resource.
      *
      * @param QrcodesDataTable $dataTable
-     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\Response|\Illuminate\View\View
+     * @return JsonResponse|Response|View
      */
     public function index(QrcodesDataTable $dataTable)
     {
@@ -23,8 +28,8 @@ class QrcodeController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Qrcode $qrcode
-     * @return \Illuminate\Http\Response
+     * @param \App\Qrcode $qrcode
+     * @return Response
      */
     public function show(Qrcode $qrcode)
     {
@@ -34,7 +39,7 @@ class QrcodeController extends Controller
     /**
      * 綁定QRCode的表單
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function bindForm()
     {
@@ -51,8 +56,8 @@ class QrcodeController extends Controller
      *
      * @param Request $request
      * @param StudentService $studentService
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\Response
-     * @throws \Illuminate\Validation\ValidationException
+     * @return RedirectResponse|Response
+     * @throws ValidationException
      */
     public function bind(Request $request, StudentService $studentService)
     {

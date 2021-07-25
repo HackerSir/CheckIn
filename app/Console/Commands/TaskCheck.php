@@ -2,8 +2,8 @@
 
 namespace App\Console\Commands;
 
+use App\Models\Student;
 use App\Services\TaskService;
-use App\Student;
 use Illuminate\Console\Command;
 
 class TaskCheck extends Command

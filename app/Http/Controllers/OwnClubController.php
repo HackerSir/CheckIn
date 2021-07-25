@@ -2,14 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Club;
-use App\DataUpdateRequest;
+use App\Models\Club;
+use App\Models\DataUpdateRequest;
+use App\Models\TeaParty;
+use App\Models\User;
 use App\Services\HTMLService;
 use App\Services\ImgurImageService;
-use App\TeaParty;
-use App\User;
 use Carbon\Carbon;
+use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Illuminate\Validation\ValidationException;
 use Setting;
 
 class OwnClubController extends Controller
@@ -17,8 +20,8 @@ class OwnClubController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @return \Illuminate\Http\Response
-     * @throws \Exception
+     * @return Response
+     * @throws Exception
      */
     public function edit()
     {
@@ -35,14 +38,30 @@ class OwnClubController extends Controller
     }
 
     /**
+     * 取得自己所負責的社團
+     *
+     * @return Club
+     */
+    private function getOwnClub()
+    {
+        $user = auth()->user();
+        $club = $user->club;
+        if (!$club) {
+            abort(403);
+        }
+
+        return $club;
+    }
+
+    /**
      * Update the specified resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param Request $request
      * @param ImgurImageService $imgurImageService
      * @param HTMLService $HTMLService
-     * @return \Illuminate\Http\Response
-     * @throws \Illuminate\Validation\ValidationException
-     * @throws \Exception
+     * @return Response
+     * @throws ValidationException
+     * @throws Exception
      */
     public function update(Request $request, ImgurImageService $imgurImageService, HTMLService $HTMLService)
     {
@@ -84,8 +103,8 @@ class OwnClubController extends Controller
     }
 
     /**
-     * @return \Illuminate\Http\Response
-     * @throws \Exception
+     * @return Response
+     * @throws Exception
      */
     public function dataUpdateRequestPanel()
     {
@@ -108,8 +127,8 @@ class OwnClubController extends Controller
     }
 
     /**
-     * @return \Illuminate\Http\Response
-     * @throws \Exception
+     * @return Response
+     * @throws Exception
      */
     public function createDataUpdateRequest()
     {
@@ -131,9 +150,9 @@ class OwnClubController extends Controller
      * @param Request $request
      * @param ImgurImageService $imgurImageService
      * @param HTMLService $HTMLService
-     * @return \Illuminate\Http\Response
-     * @throws \Illuminate\Validation\ValidationException
-     * @throws \Exception
+     * @return Response
+     * @throws ValidationException
+     * @throws Exception
      */
     public function storeDataUpdateRequest(Request $request, ImgurImageService $imgurImageService, HTMLService $HTMLService)
     {
@@ -194,7 +213,7 @@ class OwnClubController extends Controller
     }
 
     /**
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function editTeaParty()
     {
@@ -205,8 +224,8 @@ class OwnClubController extends Controller
 
     /**
      * @param Request $request
-     * @return \Illuminate\Http\Response
-     * @throws \Illuminate\Validation\ValidationException
+     * @return Response
+     * @throws ValidationException
      */
     public function updateTeaParty(Request $request)
     {
@@ -226,8 +245,8 @@ class OwnClubController extends Controller
     }
 
     /**
-     * @return \Illuminate\Http\Response
-     * @throws \Exception
+     * @return Response
+     * @throws Exception
      */
     public function destroyTeaParty()
     {
@@ -236,21 +255,5 @@ class OwnClubController extends Controller
         $club->teaParty->delete();
 
         return redirect()->route('clubs.show', $club)->with('success', '迎新茶會已刪除');
-    }
-
-    /**
-     * 取得自己所負責的社團
-     *
-     * @return Club
-     */
-    private function getOwnClub()
-    {
-        $user = auth()->user();
-        $club = $user->club;
-        if (!$club) {
-            abort(403);
-        }
-
-        return $club;
     }
 }

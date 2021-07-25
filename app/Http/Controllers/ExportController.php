@@ -2,92 +2,36 @@
 
 namespace App\Http\Controllers;
 
-use App\Club;
-use App\ClubSurvey;
-use App\Feedback;
-use App\PaymentRecord;
-use App\Record;
-use App\Student;
-use App\StudentSurvey;
-use App\TeaParty;
-use App\Ticket;
-use App\User;
+use App\Models\Club;
+use App\Models\ClubSurvey;
+use App\Models\Feedback;
+use App\Models\PaymentRecord;
+use App\Models\Record;
+use App\Models\Student;
+use App\Models\StudentSurvey;
+use App\Models\TeaParty;
+use App\Models\Ticket;
+use App\Models\User;
 use Carbon\Carbon;
+use Gate;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Str;
+use Laratrust;
+use PhpOffice\PhpSpreadsheet\Exception;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Style\Border;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 use Setting;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
 class ExportController extends Controller
 {
     /**
-     * 下載 Spreadsheet 檔案
-     * @param Spreadsheet $spreadsheet 欲下載的Spreadsheet
-     * @param string|null $fileName 檔名
-     * @return \Symfony\Component\HttpFoundation\BinaryFileResponse
-     * @throws \PhpOffice\PhpSpreadsheet\Exception
-     */
-    private function downloadSpreadsheet(Spreadsheet $spreadsheet, $fileName = null)
-    {
-        $spreadsheet->setActiveSheetIndex(0);
-        $filePath = sys_get_temp_dir() . '/CheckIn2017_export_' . time() . '.xlsx';
-        $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
-        $writer->save($filePath);
-
-        return response()->download($filePath, $fileName);
-    }
-
-    /**
-     * @param Worksheet $sheet
-     * @param array $titles
-     * @return Worksheet
-     */
-    private function setTitleRow(Worksheet $sheet, array $titles)
-    {
-        $col = 1;
-        foreach ($titles as $title) {
-            $sheet->setCellValueByColumnAndRow($col, 1, $title);
-            $col++;
-        }
-        $sheet->freezePaneByColumnAndRow(1, 2);
-        $styleArray = [
-            'borders' => [
-                'bottom' => [
-                    'style' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THICK,
-                    'color' => ['argb' => '00000000'],
-                ],
-            ],
-        ];
-
-        $sheet->getStyleByColumnAndRow(1, 1, $col - 1, 1)->applyFromArray($styleArray);
-
-        return $sheet;
-    }
-
-    /**
-     * @param Worksheet $sheet
-     * @param array $data
-     * @return Worksheet
-     */
-    private function appendRow(Worksheet $sheet, array $data)
-    {
-        $row = $sheet->getHighestRow() + 1;
-        $col = 1;
-        foreach ($data as $datum) {
-            $sheet->setCellValueByColumnAndRow($col, $row, $datum);
-            $col++;
-        }
-
-        return $sheet;
-    }
-
-    /**
      * 打卡紀錄
      *
-     * @return \Symfony\Component\HttpFoundation\BinaryFileResponse
-     * @throws \PhpOffice\PhpSpreadsheet\Exception
+     * @return BinaryFileResponse
+     * @throws Exception
      */
     public function record()
     {
@@ -146,7 +90,7 @@ class ExportController extends Controller
         $styleArray = [
             'borders' => [
                 'right' => [
-                    'style' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THICK,
+                    'style' => Border::BORDER_THICK,
                     'color' => ['argb' => '00000000'],
                 ],
             ],
@@ -160,17 +104,78 @@ class ExportController extends Controller
     }
 
     /**
+     * @param Worksheet $sheet
+     * @param array $titles
+     * @return Worksheet
+     */
+    private function setTitleRow(Worksheet $sheet, array $titles)
+    {
+        $col = 1;
+        foreach ($titles as $title) {
+            $sheet->setCellValueByColumnAndRow($col, 1, $title);
+            $col++;
+        }
+        $sheet->freezePaneByColumnAndRow(1, 2);
+        $styleArray = [
+            'borders' => [
+                'bottom' => [
+                    'style' => Border::BORDER_THICK,
+                    'color' => ['argb' => '00000000'],
+                ],
+            ],
+        ];
+
+        $sheet->getStyleByColumnAndRow(1, 1, $col - 1, 1)->applyFromArray($styleArray);
+
+        return $sheet;
+    }
+
+    /**
+     * @param Worksheet $sheet
+     * @param array $data
+     * @return Worksheet
+     */
+    private function appendRow(Worksheet $sheet, array $data)
+    {
+        $row = $sheet->getHighestRow() + 1;
+        $col = 1;
+        foreach ($data as $datum) {
+            $sheet->setCellValueByColumnAndRow($col, $row, $datum);
+            $col++;
+        }
+
+        return $sheet;
+    }
+
+    /**
+     * 下載 Spreadsheet 檔案
+     * @param Spreadsheet $spreadsheet 欲下載的Spreadsheet
+     * @param string|null $fileName 檔名
+     * @return BinaryFileResponse
+     * @throws Exception
+     */
+    private function downloadSpreadsheet(Spreadsheet $spreadsheet, $fileName = null)
+    {
+        $spreadsheet->setActiveSheetIndex(0);
+        $filePath = sys_get_temp_dir() . '/CheckIn2017_export_' . time() . '.xlsx';
+        $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
+        $writer->save($filePath);
+
+        return response()->download($filePath, $fileName);
+    }
+
+    /**
      * 回饋資料
      *
-     * @return \Symfony\Component\HttpFoundation\BinaryFileResponse
-     * @throws \PhpOffice\PhpSpreadsheet\Exception
+     * @return BinaryFileResponse
+     * @throws Exception
      * @throws \Exception
      */
     public function feedback()
     {
         $feedbackQuery = Feedback::with('student.user', 'club.clubType', 'student.clubs');
         //若有管理權限，直接顯示全部
-        if (!\Laratrust::can('feedback.manage')) {
+        if (!Laratrust::isAbleTo('feedback.manage')) {
             //若無管理權限
             /** @var User $user */
             $user = auth()->user();
@@ -266,7 +271,7 @@ class ExportController extends Controller
         $styleArray = [
             'borders' => [
                 'right' => [
-                    'style' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THICK,
+                    'style' => Border::BORDER_THICK,
                     'color' => ['argb' => '00000000'],
                 ],
             ],
@@ -276,7 +281,7 @@ class ExportController extends Controller
         $sheet->getStyleByColumnAndRow(12, 1, 12, $sheet->getHighestRow())->applyFromArray($styleArray);
 
         //若無管理權限
-        if (!\Laratrust::can('feedback.manage')) {
+        if (!Laratrust::isAbleTo('feedback.manage')) {
             //移除「攤位負責人」欄位
             $sheet->removeColumn('J');
             //補回被移除的分隔線
@@ -290,8 +295,8 @@ class ExportController extends Controller
     /**
      * 社團清單
      *
-     * @return \Symfony\Component\HttpFoundation\BinaryFileResponse
-     * @throws \PhpOffice\PhpSpreadsheet\Exception
+     * @return BinaryFileResponse
+     * @throws Exception
      */
     public function club()
     {
@@ -328,7 +333,7 @@ class ExportController extends Controller
         $styleArray = [
             'borders' => [
                 'right' => [
-                    'style' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THICK,
+                    'style' => Border::BORDER_THICK,
                     'color' => ['argb' => '00000000'],
                 ],
             ],
@@ -343,8 +348,8 @@ class ExportController extends Controller
     /**
      * 攤位負責人（僅匯出有對應學生之使用者名單）
      *
-     * @return \Symfony\Component\HttpFoundation\BinaryFileResponse
-     * @throws \PhpOffice\PhpSpreadsheet\Exception
+     * @return BinaryFileResponse
+     * @throws Exception
      */
     public function clubStaff()
     {
@@ -394,7 +399,7 @@ class ExportController extends Controller
         $styleArray = [
             'borders' => [
                 'right' => [
-                    'style' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THICK,
+                    'style' => Border::BORDER_THICK,
                     'color' => ['argb' => '00000000'],
                 ],
             ],
@@ -409,8 +414,8 @@ class ExportController extends Controller
     /**
      * 學生問卷
      *
-     * @return \Symfony\Component\HttpFoundation\BinaryFileResponse
-     * @throws \PhpOffice\PhpSpreadsheet\Exception
+     * @return BinaryFileResponse
+     * @throws Exception
      */
     public function studentSurvey()
     {
@@ -466,7 +471,7 @@ class ExportController extends Controller
         $styleArray = [
             'borders' => [
                 'right' => [
-                    'style' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THICK,
+                    'style' => Border::BORDER_THICK,
                     'color' => ['argb' => '00000000'],
                 ],
             ],
@@ -481,8 +486,8 @@ class ExportController extends Controller
     /**
      * 社團問卷
      *
-     * @return \Symfony\Component\HttpFoundation\BinaryFileResponse
-     * @throws \PhpOffice\PhpSpreadsheet\Exception
+     * @return BinaryFileResponse
+     * @throws Exception
      */
     public function clubSurvey()
     {
@@ -547,7 +552,7 @@ class ExportController extends Controller
         $styleArray = [
             'borders' => [
                 'right' => [
-                    'style' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THICK,
+                    'style' => Border::BORDER_THICK,
                     'color' => ['argb' => '00000000'],
                 ],
             ],
@@ -562,12 +567,12 @@ class ExportController extends Controller
     /**
      * 繳費紀錄
      *
-     * @return \Symfony\Component\HttpFoundation\BinaryFileResponse
-     * @throws \PhpOffice\PhpSpreadsheet\Exception
+     * @return BinaryFileResponse
+     * @throws Exception
      */
     public function paymentRecord()
     {
-        \Gate::authorize('export', PaymentRecord::class);
+        Gate::authorize('export', PaymentRecord::class);
 
         $paymentRecordQuery = PaymentRecord::with('club', 'user.student');
         /** @var User $user */
@@ -619,7 +624,7 @@ class ExportController extends Controller
         $styleArray = [
             'borders' => [
                 'right' => [
-                    'style' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THICK,
+                    'style' => Border::BORDER_THICK,
                     'color' => ['argb' => '00000000'],
                 ],
             ],
@@ -634,8 +639,8 @@ class ExportController extends Controller
     /**
      * 抽獎編號
      *
-     * @return \Symfony\Component\HttpFoundation\BinaryFileResponse
-     * @throws \PhpOffice\PhpSpreadsheet\Exception
+     * @return BinaryFileResponse
+     * @throws Exception
      */
     public function ticket()
     {
@@ -677,8 +682,8 @@ class ExportController extends Controller
     /**
      * 迎新茶會
      *
-     * @return \Symfony\Component\HttpFoundation\BinaryFileResponse
-     * @throws \PhpOffice\PhpSpreadsheet\Exception
+     * @return BinaryFileResponse
+     * @throws Exception
      */
     public function teaParty()
     {

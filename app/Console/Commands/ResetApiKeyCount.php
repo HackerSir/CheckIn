@@ -2,7 +2,7 @@
 
 namespace App\Console\Commands;
 
-use App\ApiKey;
+use App\Models\ApiKey;
 use Illuminate\Console\Command;
 use Log;
 

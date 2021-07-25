@@ -2,8 +2,8 @@
 
 namespace App\Services;
 
-use App\Student;
-use App\User;
+use App\Models\Student;
+use App\Models\User;
 use Carbon\Carbon;
 
 class UserService

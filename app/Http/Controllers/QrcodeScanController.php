@@ -2,9 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Qrcode;
+use App\Models\Qrcode;
+use App\Models\User;
 use App\Services\QrcodeScanService;
-use App\User;
+use Exception;
+use ExtendThrottle;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Http\Response;
+use Illuminate\View\View;
 
 class QrcodeScanController extends Controller
 {
@@ -13,8 +18,8 @@ class QrcodeScanController extends Controller
      *
      * @param QrcodeScanService $qrcodeScanService
      * @param $code
-     * @return \Illuminate\Http\Response
-     * @throws \Exception
+     * @return Response
+     * @throws Exception
      */
     public function scan(QrcodeScanService $qrcodeScanService, $code)
     {
@@ -23,7 +28,7 @@ class QrcodeScanController extends Controller
 
         view()->share(compact('code'));
         //檢查冷卻（每分鐘60次）
-        $throttle = \ExtendThrottle::get('qrcode scan ' . $user->id, 60, 1);
+        $throttle = ExtendThrottle::get('qrcode scan ' . $user->id, 60, 1);
         if (!$throttle->attempt()) {
             return view('qrcode-scan.scan')->with('level', 'danger')->with('message', '掃描過於頻繁，請稍候重試');
         }
@@ -57,8 +62,8 @@ class QrcodeScanController extends Controller
     /**
      * @param QrcodeScanService $qrcodeScanService
      * @param $code
-     * @return array|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     * @throws \Exception
+     * @return array|Factory|View
+     * @throws Exception
      */
     public function webScanApi(QrcodeScanService $qrcodeScanService, $code)
     {
@@ -66,7 +71,7 @@ class QrcodeScanController extends Controller
         $user = auth()->user();
 
         //檢查冷卻（每分鐘60次）
-        $throttle = \ExtendThrottle::get('qrcode scan ' . $user->id, 60, 1);
+        $throttle = ExtendThrottle::get('qrcode scan ' . $user->id, 60, 1);
         if (!$throttle->attempt()) {
             return [
                 'success' => false,

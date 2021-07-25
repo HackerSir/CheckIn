@@ -2,7 +2,7 @@
 
 namespace App\Support;
 
-use App\User;
+use App\Models\User;
 use Illuminate\Http\Request as IlluminateRequest;
 use PragmaRX\Google2FALaravel\Support\Authenticator;
 

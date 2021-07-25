@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\DataTables\StudentSurveyDataTable;
-use App\StudentSurvey;
+use App\Models\StudentSurvey;
+use Illuminate\Http\Response;
 
 class StudentSurveyController extends Controller
 {
@@ -11,7 +12,7 @@ class StudentSurveyController extends Controller
      * Display a listing of the resource.
      *
      * @param StudentSurveyDataTable $dataTable
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function index(StudentSurveyDataTable $dataTable)
     {
@@ -21,8 +22,8 @@ class StudentSurveyController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\StudentSurvey $studentSurvey
-     * @return \Illuminate\Http\Response
+     * @param \App\StudentSurvey $studentSurvey
+     * @return Response
      */
     public function show(StudentSurvey $studentSurvey)
     {

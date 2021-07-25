@@ -2,9 +2,11 @@
 
 namespace App\DataTables;
 
-use App\Booth;
-use App\Club;
+use App\Models\Booth;
+use App\Models\Club;
 use Illuminate\Database\Query\Builder;
+use Illuminate\Support\Collection;
+use Yajra\DataTables\DataTableAbstract;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Services\DataTable;
 
@@ -14,7 +16,7 @@ class BoothsDataTable extends DataTable
      * Build DataTable class.
      *
      * @param mixed $query Results from query() method.
-     * @return \Yajra\DataTables\DataTableAbstract
+     * @return DataTableAbstract
      */
     public function dataTable($query)
     {
@@ -39,27 +41,11 @@ class BoothsDataTable extends DataTable
      * Get the query object to be processed by dataTables.
      *
      * @param Booth $model
-     * @return \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Query\Builder|\Illuminate\Support\Collection
+     * @return \Illuminate\Database\Eloquent\Builder|Builder|Collection
      */
     public function query(Booth $model)
     {
         return $model->newQuery()->with('club')->select(array_keys($this->getColumns()));
-    }
-
-    /**
-     * Optional method if you want to use html builder.
-     *
-     * @return \Yajra\DataTables\Html\Builder
-     */
-    public function html()
-    {
-        return $this->builder()
-            ->columns($this->getColumns())
-            ->minifiedAjax('')
-            ->parameters([
-                'order'      => [[0, 'asc']],
-                'pageLength' => 50,
-            ]);
     }
 
     /**
@@ -77,6 +63,22 @@ class BoothsDataTable extends DataTable
             'longitude' => ['title' => '經度'],
             'latitude'  => ['title' => '緯度'],
         ];
+    }
+
+    /**
+     * Optional method if you want to use html builder.
+     *
+     * @return \Yajra\DataTables\Html\Builder
+     */
+    public function html()
+    {
+        return $this->builder()
+            ->columns($this->getColumns())
+            ->minifiedAjax('')
+            ->parameters([
+                'order'      => [[0, 'asc']],
+                'pageLength' => 50,
+            ]);
     }
 
     /**

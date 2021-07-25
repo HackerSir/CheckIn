@@ -2,8 +2,11 @@
 
 namespace App\DataTables;
 
-use App\ApiKey;
+use App\Models\ApiKey;
+use Illuminate\Support\Collection;
+use Yajra\DataTables\DataTableAbstract;
 use Yajra\DataTables\EloquentDataTable;
+use Yajra\DataTables\Html\Builder;
 use Yajra\DataTables\Services\DataTable;
 
 class ApiKeysDataTable extends DataTable
@@ -12,7 +15,7 @@ class ApiKeysDataTable extends DataTable
      * Build DataTable class.
      *
      * @param mixed $query Results from query() method.
-     * @return \Yajra\DataTables\DataTableAbstract
+     * @return DataTableAbstract
      */
     public function dataTable($query)
     {
@@ -26,28 +29,11 @@ class ApiKeysDataTable extends DataTable
      * Get the query object to be processed by dataTables.
      *
      * @param ApiKey $model
-     * @return \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Query\Builder|\Illuminate\Support\Collection
+     * @return \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Query\Builder|Collection
      */
     public function query(ApiKey $model)
     {
         return $model->newQuery()->select(array_keys($this->getColumns()));
-    }
-
-    /**
-     * Optional method if you want to use html builder.
-     *
-     * @return \Yajra\DataTables\Html\Builder
-     */
-    public function html()
-    {
-        return $this->builder()
-            ->columns($this->getColumns())
-            ->minifiedAjax('')
-            ->addAction(['title' => '操作'])
-            ->parameters([
-                'order'      => [[0, 'asc']],
-                'pageLength' => 50,
-            ]);
     }
 
     /**
@@ -63,6 +49,23 @@ class ApiKeysDataTable extends DataTable
             'count'       => ['title' => '使用次數'],
             'total_count' => ['title' => '總使用次數'],
         ];
+    }
+
+    /**
+     * Optional method if you want to use html builder.
+     *
+     * @return Builder
+     */
+    public function html()
+    {
+        return $this->builder()
+            ->columns($this->getColumns())
+            ->minifiedAjax('')
+            ->addAction(['title' => '操作'])
+            ->parameters([
+                'order'      => [[0, 'asc']],
+                'pageLength' => 50,
+            ]);
     }
 
     /**

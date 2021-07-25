@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Support\Google2FAAuthenticator;
-use App\User;
+use Cache;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Validation\ValidationException;
 
 class Google2FAController extends Controller
 {
@@ -17,7 +20,7 @@ class Google2FAController extends Controller
             $google2fa = app('pragmarx.google2fa');
             //產生隨機SecretKey，暫存60分鐘
             $rememberKey = '2faSecretKey' . $user->id;
-            $secretKey = \Cache::remember($rememberKey, now()->addMinutes(60), function () use ($google2fa) {
+            $secretKey = Cache::remember($rememberKey, now()->addMinutes(60), function () use ($google2fa) {
                 $secretKey = $google2fa->generateSecretKey();
 
                 return $secretKey;
@@ -38,8 +41,8 @@ class Google2FAController extends Controller
 
     /**
      * @param Request $request
-     * @return \Illuminate\Http\RedirectResponse
-     * @throws \Illuminate\Validation\ValidationException
+     * @return RedirectResponse
+     * @throws ValidationException
      */
     public function toggle(Request $request)
     {
@@ -66,7 +69,7 @@ class Google2FAController extends Controller
             return back()->withErrors(['one_time_password' => '驗證碼無效']);
         }
 
-        \Cache::forget('2faSecretKey' . $user->id);
+        Cache::forget('2faSecretKey' . $user->id);
         session(['2faSecretKey' => null]);
 
         //更新資料

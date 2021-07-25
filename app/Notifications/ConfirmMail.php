@@ -2,7 +2,7 @@
 
 namespace App\Notifications;
 
-use App\User;
+use App\Models\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
@@ -10,6 +10,7 @@ use Illuminate\Notifications\Notification;
 class ConfirmMail extends Notification
 {
     use Queueable;
+
     /**
      * @var User
      */
@@ -29,7 +30,7 @@ class ConfirmMail extends Notification
     /**
      * Get the notification's delivery channels.
      *
-     * @param  mixed $notifiable
+     * @param mixed $notifiable
      * @return array
      */
     public function via($notifiable)
@@ -40,8 +41,8 @@ class ConfirmMail extends Notification
     /**
      * Get the mail representation of the notification.
      *
-     * @param  mixed $notifiable
-     * @return \Illuminate\Notifications\Messages\MailMessage
+     * @param mixed $notifiable
+     * @return MailMessage
      */
     public function toMail($notifiable)
     {
@@ -55,7 +56,7 @@ class ConfirmMail extends Notification
     /**
      * Get the array representation of the notification.
      *
-     * @param  mixed $notifiable
+     * @param mixed $notifiable
      * @return array
      */
     public function toArray($notifiable)

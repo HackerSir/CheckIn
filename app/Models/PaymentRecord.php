@@ -1,28 +1,33 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use App\Traits\LegacySerializeDate;
+use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Carbon;
+use Spatie\Activitylog\Models\Activity;
 
 /**
- * App\PaymentRecord
+ * App\Models\PaymentRecord
  *
  * @property int $id
- * @property int $club_id 社團
- * @property string $nid NID
- * @property string|null $name 姓名
- * @property bool|null $is_paid 已付清
- * @property string|null $handler 經手人
- * @property string|null $note 備註
- * @property int|null $user_id 使用者
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \Illuminate\Database\Eloquent\Collection|\Spatie\Activitylog\Models\Activity[] $activities
+ * @property int $club_id
+ * @property string $nid
+ * @property string|null $name
+ * @property bool|null $is_paid
+ * @property string|null $handler
+ * @property string|null $note
+ * @property int|null $user_id
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ * @property-read Collection|Activity[] $activities
  * @property-read int|null $activities_count
- * @property-read \App\Club $club
- * @property-read \App\Student $student
- * @property-read \App\User|null $user
+ * @property-read Club $club
+ * @property-read Student $student
+ * @property-read User|null $user
  * @method static Builder|PaymentRecord newModelQuery()
  * @method static Builder|PaymentRecord newQuery()
  * @method static Builder|PaymentRecord query()
@@ -36,7 +41,7 @@ use Illuminate\Database\Eloquent\Builder;
  * @method static Builder|PaymentRecord whereNote($value)
  * @method static Builder|PaymentRecord whereUpdatedAt($value)
  * @method static Builder|PaymentRecord whereUserId($value)
- * @mixin \Eloquent
+ * @mixin Eloquent
  */
 class PaymentRecord extends LoggableModel
 {
@@ -69,7 +74,7 @@ class PaymentRecord extends LoggableModel
 
     /**
      * 對應學生，必須有填寫該社團回饋資料，且對於參與社團或茶會有意願
-     * @return Builder|\Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return Builder|BelongsTo
      */
     public function student()
     {

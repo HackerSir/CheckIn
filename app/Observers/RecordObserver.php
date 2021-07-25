@@ -2,7 +2,7 @@
 
 namespace App\Observers;
 
-use App\Record;
+use App\Models\Record;
 use App\Services\TaskService;
 
 class RecordObserver

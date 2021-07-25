@@ -3,15 +3,17 @@
 namespace App\Http\Controllers;
 
 use App\Events\AdminTest;
-use App\User;
+use App\Models\User;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Validation\ValidationException;
 
 class BroadcastTestController extends Controller
 {
     /**
      * @param Request $request
-     * @return \Illuminate\Http\JsonResponse
-     * @throws \Illuminate\Validation\ValidationException
+     * @return JsonResponse
+     * @throws ValidationException
      */
     public function postMessage(Request $request)
     {

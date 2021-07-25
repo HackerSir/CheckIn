@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use App\DataTables\PaymentRecordDataTable;
 use App\DataTables\Scopes\PaymentRecordClubScope;
 use App\Http\Requests\PaymentRecordRequest;
-use App\PaymentRecord;
-use App\User;
+use App\Models\PaymentRecord;
+use App\Models\User;
+use Exception;
+use Illuminate\Http\Response;
 
 class PaymentRecordController extends Controller
 {
@@ -22,7 +24,7 @@ class PaymentRecordController extends Controller
      * Display a listing of the resource.
      *
      * @param PaymentRecordDataTable $dataTable
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function index(PaymentRecordDataTable $dataTable)
     {
@@ -38,7 +40,7 @@ class PaymentRecordController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function create()
     {
@@ -52,7 +54,7 @@ class PaymentRecordController extends Controller
      * Store a newly created resource in storage.
      *
      * @param PaymentRecordRequest $request
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function store(PaymentRecordRequest $request)
     {
@@ -74,7 +76,7 @@ class PaymentRecordController extends Controller
      * Display the specified resource.
      *
      * @param \App\PaymentRecord $paymentRecord
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function show(PaymentRecord $paymentRecord)
     {
@@ -85,7 +87,7 @@ class PaymentRecordController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param \App\PaymentRecord $paymentRecord
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function edit(PaymentRecord $paymentRecord)
     {
@@ -100,7 +102,7 @@ class PaymentRecordController extends Controller
      *
      * @param PaymentRecordRequest $request
      * @param \App\PaymentRecord $paymentRecord
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function update(PaymentRecordRequest $request, PaymentRecord $paymentRecord)
     {
@@ -122,8 +124,8 @@ class PaymentRecordController extends Controller
      * Remove the specified resource from storage.
      *
      * @param \App\PaymentRecord $paymentRecord
-     * @return \Illuminate\Http\Response
-     * @throws \Exception
+     * @return Response
+     * @throws Exception
      */
     public function destroy(PaymentRecord $paymentRecord)
     {

@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\ClubSurvey;
 use App\DataTables\ClubSurveyDataTable;
+use App\Models\ClubSurvey;
+use Illuminate\Http\Response;
 
 class ClubSurveyController extends Controller
 {
@@ -11,7 +12,7 @@ class ClubSurveyController extends Controller
      * Display a listing of the resource.
      *
      * @param ClubSurveyDataTable $dataTable
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function index(ClubSurveyDataTable $dataTable)
     {
@@ -21,8 +22,8 @@ class ClubSurveyController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\ClubSurvey $clubSurvey
-     * @return \Illuminate\Http\Response
+     * @param \App\ClubSurvey $clubSurvey
+     * @return Response
      */
     public function show(ClubSurvey $clubSurvey)
     {

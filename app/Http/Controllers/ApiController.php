@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Booth;
-use App\Club;
-use App\ClubType;
-use App\Feedback;
-use App\Student;
-use App\User;
+use App\Models\Booth;
+use App\Models\Club;
+use App\Models\ClubType;
+use App\Models\Feedback;
+use App\Models\Student;
+use App\Models\User;
 use DB;
+use Exception;
 use Gravatar;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Query\Builder;
@@ -382,7 +383,7 @@ class ApiController extends Controller
                 'join_club_intention'      => $request->get('join_club_intention'),
                 'join_tea_party_intention' => $request->get('join_tea_party_intention'),
             ]);
-        } catch (\Exception $exception) {
+        } catch (Exception $exception) {
             return ['success' => false];
         }
 

@@ -3,9 +3,11 @@
 namespace App\Listeners;
 
 use App\Services\LogService;
+use App\User;
 use Carbon\Carbon;
 use Illuminate\Auth\Events\Login;
 use Illuminate\Auth\Events\Logout;
+use Illuminate\Events\Dispatcher;
 
 class AuthListener
 {
@@ -23,7 +25,7 @@ class AuthListener
     /**
      * 註冊監聽器的訂閱者。
      *
-     * @param \Illuminate\Events\Dispatcher $events
+     * @param Dispatcher $events
      */
     public function subscribe($events)
     {
@@ -45,7 +47,7 @@ class AuthListener
      */
     public function onLogin(Login $event)
     {
-        /* @var \App\User $user */
+        /* @var User $user */
         $user = $event->user;
         $ip = request()->getClientIp();
         //更新最後登入時間與IP
@@ -73,7 +75,7 @@ class AuthListener
      */
     public function onLogout(Logout $event)
     {
-        /* @var \App\User $user */
+        /* @var User $user */
         $user = $event->user;
         if (!$user) {
             return;

@@ -2,15 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\User;
+use App\Models\User;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Validation\ValidationException;
+use Illuminate\View\View;
 
 class ProfileController extends Controller
 {
     /**
      * 查看會員資料
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function getProfile()
     {
@@ -22,7 +25,7 @@ class ProfileController extends Controller
     /**
      * 個人資料編輯頁面
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function getEditProfile()
     {
@@ -35,8 +38,8 @@ class ProfileController extends Controller
      * 編輯個人資料
      *
      * @param Request $request
-     * @return \Illuminate\Http\RedirectResponse
-     * @throws \Illuminate\Validation\ValidationException
+     * @return RedirectResponse
+     * @throws ValidationException
      */
     public function updateProfile(Request $request)
     {

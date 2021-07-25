@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Qrcode;
+use App\Models\Qrcode;
 use App\Services\FcuApiService;
 use App\Services\StudentService;
 use App\Services\UserService;

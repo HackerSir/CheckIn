@@ -2,19 +2,25 @@
 
 namespace App\Http\Controllers;
 
-use App\Booth;
-use App\Club;
-use App\ClubType;
 use App\DataTables\ClubsDataTable;
+use App\Models\Booth;
+use App\Models\Club;
+use App\Models\ClubType;
+use App\Models\Student;
+use App\Models\User;
 use App\Services\FileService;
 use App\Services\HTMLService;
 use App\Services\ImgurImageService;
 use App\Services\StudentService;
-use App\Student;
-use App\User;
+use Exception;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Illuminate\Validation\ValidationException;
+use Illuminate\View\View;
 use PhpOffice\PhpSpreadsheet\RichText\RichText;
 
 class ClubController extends Controller
@@ -23,7 +29,7 @@ class ClubController extends Controller
      * Display a listing of the resource.
      *
      * @param ClubsDataTable $dataTable
-     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\Response|\Illuminate\View\View
+     * @return JsonResponse|Response|View
      */
     public function index(ClubsDataTable $dataTable)
     {
@@ -33,7 +39,7 @@ class ClubController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function create()
     {
@@ -43,12 +49,12 @@ class ClubController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param Request $request
      * @param ImgurImageService $imgurImageService
      * @param HTMLService $HTMLService
-     * @return \Illuminate\Http\Response
-     * @throws \Illuminate\Validation\ValidationException
-     * @throws \Exception
+     * @return Response
+     * @throws ValidationException
+     * @throws Exception
      */
     public function store(Request $request, ImgurImageService $imgurImageService, HTMLService $HTMLService)
     {
@@ -90,10 +96,46 @@ class ClubController extends Controller
     }
 
     /**
+     * @param Club $club
+     * @param string $leaderNid
+     * @param array $staffNids
+     */
+    private function updateStaff(Club $club, $leaderNid, $staffNids)
+    {
+        //更新工作人員
+        //取得工作人員時，僅留下沒有在其他社團擔任工作人員的學生
+        /** @var Collection|Student[] $staffs */
+        $staffs = Student::whereIn('nid', $staffNids)->whereHas('clubs', function ($query) use ($club) {
+            /** @var Builder $query */
+            $query->where('club_id', '<>', $club->id);
+        }, 0)->get();
+        foreach ($staffs as $staff) {
+            //若已有社團，先清空
+            if ($staff->clubs()->count() > 0) {
+                $staff->clubs()->sync([]);
+            }
+        }
+        $club->students()->sync($staffs->pluck('nid'));
+
+        //更新社長
+        //取得工作人員時，僅留下沒有在其他社團擔任工作人員的學生
+        /** @var Student $leader */
+        $leader = Student::where('nid', $leaderNid)->whereHas('clubs', function ($query) use ($club) {
+            /** @var Builder $query */
+            $query->where('club_id', '<>', $club->id);
+        }, 0)->first();
+        //若已有社團，先清空
+        if ($leader && $leader->clubs()->count() > 0) {
+            $leader->clubs()->sync([]);
+        }
+        $club->leaders()->sync($leader ? [$leader->nid => ['is_leader' => true]] : []);
+    }
+
+    /**
      * Show the form for editing the specified resource.
      *
      * @param \App\Club $club
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function edit(Club $club)
     {
@@ -103,13 +145,13 @@ class ClubController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param Request $request
      * @param \App\Club $club
      * @param ImgurImageService $imgurImageService
      * @param HTMLService $HTMLService
-     * @return \Illuminate\Http\Response
-     * @throws \Illuminate\Validation\ValidationException
-     * @throws \Exception
+     * @return Response
+     * @throws ValidationException
+     * @throws Exception
      */
     public function update(Request $request, Club $club, ImgurImageService $imgurImageService, HTMLService $HTMLService)
     {
@@ -169,8 +211,8 @@ class ClubController extends Controller
      * Remove the specified resource from storage.
      *
      * @param \App\Club $club
-     * @return \Illuminate\Http\Response
-     * @throws \Exception
+     * @return Response
+     * @throws Exception
      */
     public function destroy(Club $club)
     {
@@ -188,8 +230,8 @@ class ClubController extends Controller
      * @param Request $request
      * @param FileService $fileService
      * @param StudentService $studentService
-     * @return \Illuminate\Http\RedirectResponse
-     * @throws \Illuminate\Validation\ValidationException
+     * @return RedirectResponse
+     * @throws ValidationException
      */
     public function postImport(Request $request, FileService $fileService, StudentService $studentService)
     {
@@ -295,41 +337,5 @@ class ClubController extends Controller
         $path = resource_path('sample/club_import_sample.xlsx');
 
         return response()->download($path);
-    }
-
-    /**
-     * @param Club $club
-     * @param string $leaderNid
-     * @param array $staffNids
-     */
-    private function updateStaff(Club $club, $leaderNid, $staffNids)
-    {
-        //更新工作人員
-        //取得工作人員時，僅留下沒有在其他社團擔任工作人員的學生
-        /** @var Collection|Student[] $staffs */
-        $staffs = Student::whereIn('nid', $staffNids)->whereHas('clubs', function ($query) use ($club) {
-            /** @var Builder $query */
-            $query->where('club_id', '<>', $club->id);
-        }, 0)->get();
-        foreach ($staffs as $staff) {
-            //若已有社團，先清空
-            if ($staff->clubs()->count() > 0) {
-                $staff->clubs()->sync([]);
-            }
-        }
-        $club->students()->sync($staffs->pluck('nid'));
-
-        //更新社長
-        //取得工作人員時，僅留下沒有在其他社團擔任工作人員的學生
-        /** @var Student $leader */
-        $leader = Student::where('nid', $leaderNid)->whereHas('clubs', function ($query) use ($club) {
-            /** @var Builder $query */
-            $query->where('club_id', '<>', $club->id);
-        }, 0)->first();
-        //若已有社團，先清空
-        if ($leader && $leader->clubs()->count() > 0) {
-            $leader->clubs()->sync([]);
-        }
-        $club->leaders()->sync($leader ? [$leader->nid => ['is_leader' => true]] : []);
     }
 }

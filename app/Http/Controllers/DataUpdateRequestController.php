@@ -2,14 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Club;
 use App\DataTables\DataUpdateRequestDataTable;
 use App\DataTables\Scopes\DataUpdateRequestClubScope;
 use App\DataTables\Scopes\DataUpdateRequestResultScope;
-use App\DataUpdateRequest;
-use App\User;
+use App\Models\Club;
+use App\Models\DataUpdateRequest;
+use App\Models\User;
 use Carbon\Carbon;
+use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Illuminate\Validation\ValidationException;
 
 class DataUpdateRequestController extends Controller
 {
@@ -17,7 +20,7 @@ class DataUpdateRequestController extends Controller
      * Display a listing of the resource.
      *
      * @param DataUpdateRequestDataTable $dataTable
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function index(DataUpdateRequestDataTable $dataTable)
     {
@@ -37,7 +40,7 @@ class DataUpdateRequestController extends Controller
      * Display the specified resource.
      *
      * @param \App\DataUpdateRequest $dataUpdateRequest
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function show(DataUpdateRequest $dataUpdateRequest)
     {
@@ -50,11 +53,11 @@ class DataUpdateRequestController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param Request $request
      * @param DataUpdateRequest $dataUpdateRequest
-     * @return \Illuminate\Http\Response
-     * @throws \Illuminate\Validation\ValidationException
-     * @throws \Exception
+     * @return Response
+     * @throws ValidationException
+     * @throws Exception
      */
     public function update(Request $request, DataUpdateRequest $dataUpdateRequest)
     {

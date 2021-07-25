@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\DataTables\RecordsDataTable;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Response;
+use Illuminate\View\View;
 
 class RecordController extends Controller
 {
@@ -10,7 +13,7 @@ class RecordController extends Controller
      * Display a listing of the resource.
      *
      * @param RecordsDataTable $dataTable
-     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\Response|\Illuminate\View\View
+     * @return JsonResponse|Response|View
      */
     public function index(RecordsDataTable $dataTable)
     {

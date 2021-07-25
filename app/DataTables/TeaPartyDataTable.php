@@ -2,10 +2,11 @@
 
 namespace App\DataTables;
 
-use App\Feedback;
-use App\Student;
-use App\TeaParty;
+use App\Models\Feedback;
+use App\Models\Student;
+use App\Models\TeaParty;
 use Illuminate\Database\Query\Builder;
+use Yajra\DataTables\DataTableAbstract;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Services\DataTable;
 
@@ -15,7 +16,7 @@ class TeaPartyDataTable extends DataTable
      * Build DataTable class.
      *
      * @param mixed $query Results from query() method.
-     * @return \Yajra\DataTables\DataTableAbstract
+     * @return DataTableAbstract
      */
     public function dataTable($query)
     {

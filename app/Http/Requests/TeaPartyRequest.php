@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests;
 
-use App\TeaParty;
+use App\Models\TeaParty;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
