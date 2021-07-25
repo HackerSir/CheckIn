@@ -1,7 +1,7 @@
+import Vue from 'vue';
+
 require('./bootstrap');
 require('./bootstrap-echo');
-
-window.Vue = require('vue');
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -9,7 +9,7 @@ window.Vue = require('vue');
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-Vue.component('broadcast-test', require('./components/BroadcastTest.vue'));
+Vue.component('broadcast-test', require('./components/BroadcastTest.vue').default);
 
 const app = new Vue({
     el: '#vue-app'

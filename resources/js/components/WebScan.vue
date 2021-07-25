@@ -36,11 +36,6 @@
 </template>
 
 <script>
-    import QrcodeStream from 'vue-qrcode-reader'
-    import UrlPattern from 'url-pattern'
-
-    Vue.use(QrcodeStream);
-
     export default {
         name: "WebScan",
         data() {
