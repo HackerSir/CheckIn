@@ -19,7 +19,6 @@ class ExtendTransformerFactory extends TransformerFactory
      *
      * @return TransformerInterface
      * @throws InvalidArgumentException
-     *
      */
     public function make($data)
     {
