@@ -3,7 +3,7 @@
 namespace App\ExtendThrottle\Transformers;
 
 use GrahamCampbell\Throttle\Data;
-use GrahamCampbell\Throttle\Transformers\TransformerInterface;
+use GrahamCampbell\Throttle\Transformer\TransformerInterface;
 
 class CustomKeyTransformer implements TransformerInterface
 {

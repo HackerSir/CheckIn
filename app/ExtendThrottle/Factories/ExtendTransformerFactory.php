@@ -3,10 +3,10 @@
 namespace App\ExtendThrottle\Factories;
 
 use App\ExtendThrottle\Transformers\CustomKeyTransformer;
-use GrahamCampbell\Throttle\Transformers\ArrayTransformer;
-use GrahamCampbell\Throttle\Transformers\RequestTransformer;
-use GrahamCampbell\Throttle\Transformers\TransformerFactory;
-use GrahamCampbell\Throttle\Transformers\TransformerInterface;
+use GrahamCampbell\Throttle\Transformer\ArrayTransformer;
+use GrahamCampbell\Throttle\Transformer\RequestTransformer;
+use GrahamCampbell\Throttle\Transformer\TransformerFactory;
+use GrahamCampbell\Throttle\Transformer\TransformerInterface;
 use Illuminate\Http\Request;
 use InvalidArgumentException;
 

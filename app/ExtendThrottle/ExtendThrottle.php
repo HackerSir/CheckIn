@@ -3,9 +3,9 @@
 namespace App\ExtendThrottle;
 
 use App\ExtendThrottle\Factories\ExtendTransformerFactory;
-use GrahamCampbell\Throttle\Factories\CacheFactory;
+use GrahamCampbell\Throttle\Factory\CacheFactory;
 use GrahamCampbell\Throttle\Throttle;
-use GrahamCampbell\Throttle\Throttlers\ThrottlerInterface;
+use GrahamCampbell\Throttle\Throttler\ThrottlerInterface;
 use Illuminate\Http\Request;
 
 class ExtendThrottle
