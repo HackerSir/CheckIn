@@ -2,15 +2,15 @@
 
 namespace Tests\Unit;
 
-use App\Booth;
-use App\Club;
-use App\ClubType;
-use App\Feedback;
-use App\Qrcode;
-use App\Record;
-use App\Student;
-use App\Ticket;
-use App\User;
+use App\Models\Booth;
+use App\Models\Club;
+use App\Models\ClubType;
+use App\Models\Feedback;
+use App\Models\Qrcode;
+use App\Models\Record;
+use App\Models\Student;
+use App\Models\Ticket;
+use App\Models\User;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Tests\TestCase;
 

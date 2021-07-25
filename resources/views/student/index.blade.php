@@ -3,7 +3,7 @@
 @section('title', '學生管理')
 
 @section('buttons')
-    @can('create', \App\Student::class)
+    @can('create', \App\Models\Student::class)
         <a href="{{ route('student.create-real-student') }}" class="btn btn-primary">
             <i class="fa fa-plus-circle mr-2"></i>新增學生
         </a>
@@ -11,7 +11,7 @@
             <i class="fa fa-plus-circle mr-2"></i>新增虛擬學生
         </a>
     @endcan
-    @can('import', \App\Student::class)
+    @can('import', \App\Models\Student::class)
         <a href="{{ route('student.import') }}" class="btn btn-primary">
             <i class="fas fa-file-upload mr-2"></i>匯入學生
         </a>

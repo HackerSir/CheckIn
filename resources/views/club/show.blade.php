@@ -5,7 +5,7 @@
 @section('title', $club->name)
 
 @php
-    $feedback = \App\Feedback::whereClubId($club->id)->whereStudentNid(Auth::user()->student->nid ?? null)->first();
+    $feedback = \App\Models\Feedback::whereClubId($club->id)->whereStudentNid(Auth::user()->student->nid ?? null)->first();
 @endphp
 
 @if($club->imgurImage)

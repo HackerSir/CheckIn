@@ -4,7 +4,7 @@
 
 @section('buttons')
     {{ bs()->openForm('get', route('data-update-request.index'), ['inline' => true]) }}
-    {{ bs()->inputGroup(bs()->select('club_id', \App\Club::selectOptions(), request('club_id')))->prefix('社團') }}
+    {{ bs()->inputGroup(bs()->select('club_id', \App\Models\Club::selectOptions(), request('club_id')))->prefix('社團') }}
     {{ bs()->inputGroup(bs()->select('result', [
         null => '',
         'wait' => '等待審核',

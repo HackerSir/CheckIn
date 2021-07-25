@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
-use App\Club;
-use App\ClubType;
+use App\Models\Club;
+use App\Models\ClubType;
 use Illuminate\Database\Seeder;
 
 class ClubsTableSeeder extends Seeder
@@ -16,9 +16,8 @@ class ClubsTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\ClubType::class, 8)->create();
-
-        factory(App\Club::class, 50)->create()->each(function (Club $club) {
+        ClubType::factory()->count(8)->create();
+        Club::factory()->count(50)->create()->each(function (Club $club) {
             /** @var ClubType $clubType */
             $clubType = ClubType::inRandomOrder()->first();
 

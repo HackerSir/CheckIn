@@ -11,8 +11,8 @@
 |
 */
 
-use App\Student;
-use App\User;
+use App\Models\Student;
+use App\Models\User;
 
 Broadcast::channel('student.{student}', function (User $user, Student $student) {
     return $user->nid == $student->nid;

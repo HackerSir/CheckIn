@@ -93,7 +93,7 @@
                 <label class="col-md-2 col-form-label">加入社團意願</label>
                 <div class="col-md-10">
                     <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                        @foreach(\App\Feedback::$intentionText as $key => $value)
+                        @foreach(\App\Models\Feedback::$intentionText as $key => $value)
                             <label class="btn btn-outline-secondary">
                                 <input type="radio" name="join_club_intention" value="{{ $key }}" required
                                        @if(isset($feedback) && $feedback->join_club_intention == $key
@@ -140,7 +140,7 @@
                 <label class="col-md-2 col-form-label">參與迎新茶會意願</label>
                 <div class="col-md-10">
                     <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                        @foreach(\App\Feedback::$intentionText as $key => $value)
+                        @foreach(\App\Models\Feedback::$intentionText as $key => $value)
                             <label class="btn btn-outline-secondary">
                                 <input type="radio" name="join_tea_party_intention" value="{{ $key }}" required
                                        @if(isset($feedback) && $feedback->join_tea_party_intention == $key

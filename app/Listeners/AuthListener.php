@@ -2,8 +2,8 @@
 
 namespace App\Listeners;
 
+use App\Models\User;
 use App\Services\LogService;
-use App\User;
 use Carbon\Carbon;
 use Illuminate\Auth\Events\Login;
 use Illuminate\Auth\Events\Logout;
