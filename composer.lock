@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6f2c467cb2ee5447546a3d4454ec2a6a",
+    "content-hash": "fa2bfdfbae02ba79e03d0b7e618e582c",
     "packages": [
         {
             "name": "anlutro/l4-settings",
@@ -5660,6 +5660,77 @@
                 }
             ],
             "time": "2021-06-14T06:54:45+00:00"
+        },
+        {
+            "name": "pobratym/php-imgur-api-client",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/pobratym/php-imgur-api-client.git",
+                "reference": "641c7096a6a7213f2d7dd24ec8909c3ea4fb70a2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/pobratym/php-imgur-api-client/zipball/641c7096a6a7213f2d7dd24ec8909c3ea4fb70a2",
+                "reference": "641c7096a6a7213f2d7dd24ec8909c3ea4fb70a2",
+                "shasum": ""
+            },
+            "require": {
+                "ext-curl": "*",
+                "guzzlehttp/guzzle": "^7",
+                "php": ">=7.2"
+            },
+            "replace": {
+                "adyg/php-imgur-api-client": "self.version"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^2.0",
+                "phpunit/phpunit": ">=8",
+                "symfony/phpunit-bridge": "^5.0"
+            },
+            "default-branch": true,
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Imgur\\": "lib/Imgur/"
+                }
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "Imgur\\tests\\": "tests/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jeremy Benoist",
+                    "email": "jeremy.benoist@gmail.com",
+                    "homepage": "http://www.j0k3r.net"
+                },
+                {
+                    "name": "Adrian Ghiuta",
+                    "email": "adrian.ghiuta@gmail.com",
+                    "homepage": "http://adyg.github.com"
+                }
+            ],
+            "description": "Imgur API v3 client",
+            "homepage": "https://github.com/j0k3r/php-imgur-api-client",
+            "keywords": [
+                "api",
+                "imgur"
+            ],
+            "support": {
+                "source": "https://github.com/pobratym/php-imgur-api-client/tree/v4.0.0"
+            },
+            "funding": [
+                {
+                    "type": "github",
+                    "url": "https://github.com/j0k3r"
+                }
+            ],
+            "time": "2021-07-04T04:53:22+00:00"
         },
         {
             "name": "pragmarx/google2fa",
@@ -12921,7 +12992,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "pobratym/php-imgur-api-client": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
@@ -12931,5 +13004,5 @@
         "ext-json": "*"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.0.0"
+    "plugin-api-version": "2.1.0"
 }

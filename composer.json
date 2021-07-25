@@ -37,6 +37,7 @@
         "mojoblanco/domainos": "^1.1",
         "phpoffice/phpspreadsheet": "^1.6",
         "phpoffice/phpword": "^0.18.0",
+        "pobratym/php-imgur-api-client": "dev-master",
         "pragmarx/google2fa-laravel": "^1.0",
         "predis/predis": "^1.1",
         "santigarcor/laratrust": "^6.3.0",
@@ -59,6 +60,12 @@
         "nunomaduro/collision": "^5.0",
         "phpunit/phpunit": "^9.5"
     },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "git@github.com:pobratym/php-imgur-api-client.git"
+        }
+    ],
     "autoload": {
         "classmap": [
             "database"
