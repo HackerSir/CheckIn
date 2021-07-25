@@ -25,6 +25,7 @@
         "laravel/helpers": "^1.4",
         "laravel/horizon": "^4.0",
         "laravel/tinker": "^2.0",
+        "laravel/ui": "^2.0",
         "laravelcollective/html": "^6.0",
         "laravelium/sitemap": "7.*",
         "lavary/laravel-menu": "^1.7",
