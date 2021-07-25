@@ -4,7 +4,7 @@
 
 @section('content')
     <div class="page-header mb-4">
-        <h1>Logs</h1>
+        <h1>@lang('Logs')</h1>
     </div>
 
     <div class="table-responsive">
@@ -22,22 +22,22 @@
                         @endif
                     </th>
                 @endforeach
-                <th scope="col" class="text-right">Actions</th>
+                <th scope="col" class="text-right">@lang('Actions')</th>
             </tr>
             </thead>
             <tbody>
             @forelse($rows as $date => $row)
                 <tr>
-                        @foreach($row as $key => $value)
-                            <td class="{{ $key == 'date' ? 'text-left' : 'text-center' }}">
-                                @if ($key == 'date')
-                                    <span class="badge badge-primary">{{ $value }}</span>
-                                @elseif ($value == 0)
-                                    <span class="badge empty">{{ $value }}</span>
-                                @else
-                                    <a href="{{ route('log-viewer::logs.filter', [$date, $key]) }}">
-                                        <span class="badge badge-level-{{ $key }}">{{ $value }}</span>
-                                    </a>
+                    @foreach($row as $key => $value)
+                        <td class="{{ $key == 'date' ? 'text-left' : 'text-center' }}">
+                            @if ($key == 'date')
+                                <span class="badge badge-primary">{{ $value }}</span>
+                            @elseif ($value == 0)
+                                <span class="badge empty">{{ $value }}</span>
+                            @else
+                                <a href="{{ route('log-viewer::logs.filter', [$date, $key]) }}">
+                                    <span class="badge badge-level-{{ $key }}">{{ $value }}</span>
+                                </a>
                                 @endif
                             </td>
                         @endforeach
@@ -52,13 +52,13 @@
                                 <i class="fa fa-trash-o"></i>
                             </a>
                         </td>
-                    </tr>
+                </tr>
             @empty
-                    <tr>
-                        <td colspan="11" class="text-center">
-                            <span class="badge badge-secondary">{{ trans('log-viewer::general.empty-logs') }}</span>
-                        </td>
-                    </tr>
+                <tr>
+                    <td colspan="11" class="text-center">
+                        <span class="badge badge-secondary">@lang('The list of logs is empty!')</span>
+                    </td>
+                </tr>
             @endforelse
             </tbody>
         </table>
@@ -77,7 +77,7 @@
                 <input type="hidden" name="date" value="">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title">DELETE LOG FILE</h5>
+                        <h5 class="modal-title">@lang('Delete log file')</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -86,8 +86,10 @@
                         <p></p>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-sm btn-secondary mr-auto" data-dismiss="modal">Cancel</button>
-                        <button type="submit" class="btn btn-sm btn-danger" data-loading-text="Loading&hellip;">DELETE FILE</button>
+                        <button type="button" class="btn btn-sm btn-secondary mr-auto"
+                                data-dismiss="modal">@lang('Cancel')</button>
+                        <button type="submit" class="btn btn-sm btn-danger"
+                                data-loading-text="@lang('Loading')&hellip;">@lang('Delete')</button>
                     </div>
                 </div>
             </form>
@@ -99,26 +101,26 @@
     <script>
         $(function () {
             var deleteLogModal = $('div#delete-log-modal'),
-                deleteLogForm  = $('form#delete-log-form'),
-                submitBtn      = deleteLogForm.find('button[type=submit]');
+                deleteLogForm = $('form#delete-log-form'),
+                submitBtn = deleteLogForm.find('button[type=submit]');
 
-            $("a[href='#delete-log-modal']").on('click', function(event) {
+            $("a[href='#delete-log-modal']").on('click', function (event) {
                 event.preventDefault();
-                var date = $(this).data('log-date');
+                var date = $(this).data('log-date'),
+                    message = "{{ __('Are you sure you want to delete this log file: :date ?') }}";
+
                 deleteLogForm.find('input[name=date]').val(date);
-                deleteLogModal.find('.modal-body p').html(
-                    'Are you sure you want to <span class="badge badge-danger">DELETE</span> this log file <span class="badge badge-primary">' + date + '</span> ?'
-                );
+                deleteLogModal.find('.modal-body p').html(message.replace(':date', date));
 
                 deleteLogModal.modal('show');
             });
 
-            deleteLogForm.on('submit', function(event) {
+            deleteLogForm.on('submit', function (event) {
                 event.preventDefault();
                 submitBtn.button('loading');
 
                 $.ajax({
-                    url:      $(this).attr('action'),
+                    url: $(this).attr('action'),
                     type:     $(this).attr('method'),
                     dataType: 'json',
                     data:     $(this).serialize(),

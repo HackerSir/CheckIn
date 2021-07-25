@@ -252,7 +252,7 @@ return [
     | magic methods and properties.
     |
     */
-    'include_class_docblocks'               => false,
+    'include_class_docblocks'     => false,
 
     /*
     |--------------------------------------------------------------------------
@@ -264,7 +264,7 @@ return [
     | or there is an import (use className) of a given class
     |
     */
-    'force_fqn'                             => false,
+    'force_fqn'                   => false,
 
     /*
     |--------------------------------------------------------------------------
@@ -276,6 +276,6 @@ return [
     | name of the Relationship, e.g. `'relationName' => RelationShipClass::class`.
     |
     */
-    'additional_relation_types'             => [],
+    'additional_relation_types'   => [],
 
 ];
