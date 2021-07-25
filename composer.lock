@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9593468fd508ca06f65507e7d570d94e",
+    "content-hash": "170920cd0950ebcdab920e3611c7caa0",
     "packages": [
         {
             "name": "anlutro/l4-settings",
@@ -4260,6 +4260,59 @@
                 "source": "https://github.com/marvinlabs/laravel-html-font-awesome/tree/v1.1.0"
             },
             "time": "2019-10-10T07:01:29+00:00"
+        },
+        {
+            "name": "mattkingshott/quest",
+            "version": "v1.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mattkingshott/quest.git",
+                "reference": "54e53188043a96f10eac7dcfe7eb07f7ac067e95"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mattkingshott/quest/zipball/54e53188043a96f10eac7dcfe7eb07f7ac067e95",
+                "reference": "54e53188043a96f10eac7dcfe7eb07f7ac067e95",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.4|^8.0"
+            },
+            "require-dev": {
+                "orchestra/testbench": "^6.0",
+                "phpunit/phpunit": "^9.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Quest\\ServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Quest\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "A package that provides pseudo fuzzy-searching to Laravel database queries.",
+            "homepage": "https://github.com/mattkingshott/quest",
+            "keywords": [
+                "fuzzy",
+                "laravel",
+                "php",
+                "quest",
+                "search"
+            ],
+            "support": {
+                "issues": "https://github.com/mattkingshott/quest/issues",
+                "source": "https://github.com/mattkingshott/quest/tree/v1.1.1"
+            },
+            "time": "2021-01-31T12:09:27+00:00"
         },
         {
             "name": "mews/purifier",

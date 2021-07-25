@@ -17,7 +17,6 @@ use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
-use Searchy;
 
 class ApiController extends Controller
 {
@@ -253,7 +252,13 @@ class ApiController extends Controller
             //消滅關鍵字中的特殊字元
             $keyword = Str::replace(['\\', "\x00", "\n", "\r", "'", '"', "\x1a"], '', $keyword);
             //模糊搜索
-            $searchResultIds = Searchy::clubs(['name', 'description'])->query($keyword)->get()->pluck('id')->toArray();
+            $searchResultIds = Club::whereFuzzy('name', $keyword)
+                ->whereFuzzy('description', $keyword)
+                ->orderByFuzzy(['name', 'description'])
+                ->get()
+                ->pluck('id')
+                ->toArray();
+            //$searchResultIds = Searchy::clubs(['name', 'description'])->query($keyword)->get()->pluck('id')->toArray();
             //過濾
             $clubQuery->whereIn('id', $searchResultIds);
             //根據搜尋結果排序

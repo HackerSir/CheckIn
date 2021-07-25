@@ -31,6 +31,7 @@
         "maatwebsite/excel": "^3.1",
         "marvinlabs/laravel-html-bootstrap-4": "^1.6",
         "marvinlabs/laravel-html-font-awesome": "^1.0",
+        "mattkingshott/quest": "^1.1",
         "mews/purifier": "^3.2",
         "milon/barcode": "^8.0.1",
         "mojoblanco/domainos": "^1.1",
