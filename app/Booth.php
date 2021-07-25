@@ -2,6 +2,8 @@
 
 namespace App;
 
+use App\Traits\LegacySerializeDate;
+
 /**
  * App\Booth
  *
@@ -32,6 +34,8 @@ namespace App;
  */
 class Booth extends LoggableModel
 {
+    use LegacySerializeDate;
+
     protected static $logName = 'booth';
 
     protected $fillable = [

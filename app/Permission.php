@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Traits\LegacySerializeDate;
 use Laratrust\Models\LaratrustPermission;
 
 /**
@@ -28,6 +29,8 @@ use Laratrust\Models\LaratrustPermission;
  */
 class Permission extends LaratrustPermission
 {
+    use LegacySerializeDate;
+
     protected $fillable = [
         'name',
         'display_name',

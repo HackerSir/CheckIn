@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Traits\LegacySerializeDate;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -22,6 +23,8 @@ use Illuminate\Database\Eloquent\Model;
  */
 class QrcodeSet extends Model
 {
+    use LegacySerializeDate;
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany|\Illuminate\Database\Eloquent\Builder
      */

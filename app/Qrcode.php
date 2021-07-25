@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Traits\LegacySerializeDate;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -34,6 +35,8 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Qrcode extends Model
 {
+    use LegacySerializeDate;
+
     protected $fillable = [
         'code',
         'student_nid',

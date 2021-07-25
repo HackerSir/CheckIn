@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Traits\LegacySerializeDate;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -23,6 +24,8 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Ticket extends Model
 {
+    use LegacySerializeDate;
+
     protected $fillable = [
         'student_nid',
     ];

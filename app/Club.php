@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Traits\LegacySerializeDate;
 use Iatstuti\Database\Support\NullableFields;
 
 /**
@@ -62,6 +63,7 @@ use Iatstuti\Database\Support\NullableFields;
  */
 class Club extends LoggableModel
 {
+    use LegacySerializeDate;
     use NullableFields;
 
     protected static $logName = 'club';

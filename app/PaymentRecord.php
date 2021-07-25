@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Traits\LegacySerializeDate;
 use Illuminate\Database\Eloquent\Builder;
 
 /**
@@ -39,6 +40,8 @@ use Illuminate\Database\Eloquent\Builder;
  */
 class PaymentRecord extends LoggableModel
 {
+    use LegacySerializeDate;
+
     protected static $logName = 'payment-record';
     protected $fillable = [
         'nid',

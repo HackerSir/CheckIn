@@ -2,12 +2,15 @@
 
 namespace App;
 
+use App\Traits\LegacySerializeDate;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Activitylog\Traits\LogsActivity;
 
 abstract class LoggableModel extends Model
 {
+    use LegacySerializeDate;
     use LogsActivity;
+
     protected static $logName = 'loggable-model';
     protected static $logFillable = true;
     protected static $logOnlyDirty = true;

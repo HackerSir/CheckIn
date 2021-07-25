@@ -2,6 +2,8 @@
 
 namespace App;
 
+use App\Traits\LegacySerializeDate;
+
 /**
  * App\ContactInformation
  *
@@ -29,6 +31,8 @@ namespace App;
  */
 class ContactInformation extends LoggableModel
 {
+    use LegacySerializeDate;
+
     protected static $logName = 'contact-information';
     protected $primaryKey = 'student_nid';
     public $incrementing = false;

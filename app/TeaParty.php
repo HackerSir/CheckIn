@@ -2,6 +2,8 @@
 
 namespace App;
 
+use App\Traits\LegacySerializeDate;
+
 /**
  * App\TeaParty
  *
@@ -39,6 +41,8 @@ namespace App;
  */
 class TeaParty extends LoggableModel
 {
+    use LegacySerializeDate;
+
     protected $primaryKey = 'club_id';
     public $incrementing = false;
     protected static $logName = 'club';

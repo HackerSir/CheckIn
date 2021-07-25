@@ -2,6 +2,8 @@
 
 namespace App;
 
+use App\Traits\LegacySerializeDate;
+
 /**
  * App\DataUpdateRequest
  *
@@ -58,6 +60,8 @@ namespace App;
  */
 class DataUpdateRequest extends LoggableModel
 {
+    use LegacySerializeDate;
+
     protected static $logName = 'data-update-request';
     protected $fillable = [
         'user_id',

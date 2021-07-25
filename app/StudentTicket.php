@@ -2,6 +2,8 @@
 
 namespace App;
 
+use App\Traits\LegacySerializeDate;
+
 /**
  * App\StudentTicket
  *
@@ -24,6 +26,8 @@ namespace App;
  */
 class StudentTicket extends LoggableModel
 {
+    use LegacySerializeDate;
+
     protected static $logName = 'student-ticket';
     protected $fillable = [
         'id',

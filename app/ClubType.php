@@ -2,6 +2,8 @@
 
 namespace App;
 
+use App\Traits\LegacySerializeDate;
+
 /**
  * App\ClubType
  *
@@ -29,6 +31,8 @@ namespace App;
  */
 class ClubType extends LoggableModel
 {
+    use LegacySerializeDate;
+
     protected static $logName = 'club-type';
     protected $fillable = [
         'name',

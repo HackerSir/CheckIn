@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Traits\LegacySerializeDate;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -36,6 +37,8 @@ use Illuminate\Database\Eloquent\Model;
  */
 class ImgurImage extends Model
 {
+    use LegacySerializeDate;
+
     protected $fillable = [
         'imgur_id',
         'file_name',

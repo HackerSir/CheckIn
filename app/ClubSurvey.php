@@ -2,6 +2,8 @@
 
 namespace App;
 
+use App\Traits\LegacySerializeDate;
+
 /**
  * App\ClubSurvey
  *
@@ -31,6 +33,8 @@ namespace App;
  */
 class ClubSurvey extends LoggableModel
 {
+    use LegacySerializeDate;
+
     protected static $logName = 'club-survey';
     protected $fillable = [
         'user_id',

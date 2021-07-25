@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Traits\LegacySerializeDate;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Str;
@@ -72,6 +73,8 @@ use Illuminate\Support\Str;
  */
 class Student extends Model
 {
+    use LegacySerializeDate;
+
     protected $primaryKey = 'nid';
     public $incrementing = false;
     protected $keyType = 'string';
