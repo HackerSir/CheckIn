@@ -2,9 +2,6 @@
 
 namespace App\Console;
 
-use App\Console\Commands\BackupRun;
-use App\Console\Commands\ResetApiKeyCount;
-use App\Console\Commands\UserCreate;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -16,15 +13,13 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        UserCreate::class,
-        ResetApiKeyCount::class,
-        BackupRun::class,
+        //
     ];
 
     /**
      * Define the application's command schedule.
      *
-     * @param  \Illuminate\Console\Scheduling\Schedule $schedule
+     * @param \Illuminate\Console\Scheduling\Schedule $schedule
      * @return void
      */
     protected function schedule(Schedule $schedule)

@@ -42,6 +42,7 @@
         "recca0120/laravel-tracy": "^1.8",
         "santigarcor/laratrust": "^5.2",
         "spatie/laravel-activitylog": "^3.7",
+        "spatie/laravel-backup": "^6.9",
         "spatie/laravel-google-calendar": "^2.2.0",
         "thomaswelton/laravel-gravatar": "^1.1",
         "tom-lingham/searchy": "^2.0",
