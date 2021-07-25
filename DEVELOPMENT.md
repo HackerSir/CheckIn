@@ -59,6 +59,18 @@ Configuration file saved. Run laravel-echo-server start to run server.
     }
 }
 ```
+
 要特別注意的是`authHost`  
 這是 laravel-echo-server 會去跟 laravel 確認那些 user 可以進入那些 private channel (定義在`routes/channels.php`)
 請填上可以訪問到的名稱
+
+# Windows
+
+有些 Composer 套件無法安裝於 Windows 作業系統。  
+若須使用 Windows 作業系統進行開發或佈署，  
+使用 `composer` 指令時，可能需要加上 `--ignore-platform-req ext-pcntl --ignore-platform-req ext-posix` 參數，使其忽略相關的套件檢查。  
+例如：
+
+```bash
+composer install --ignore-platform-req ext-pcntl --ignore-platform-req ext-posix
+```
