@@ -11,7 +11,6 @@ class UserFactory extends Factory
 
     public function definition(): array
     {
-
         return [
             'name'           => $this->faker->name,
             'email'          => $this->faker->unique()->safeEmail,
@@ -27,6 +26,7 @@ class UserFactory extends Factory
             $nid = $isTeacher
                 ? $this->faker->regexify('[DEPMV]([0-9]){7}')
                 : $this->faker->regexify('T[0-9]{5}');
+
             return [
                 'nid' => $nid,
             ];
