@@ -15,6 +15,8 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Str;
 use Searchy;
 
 class ApiController extends Controller
@@ -249,7 +251,7 @@ class ApiController extends Controller
         $keyword = request()->get('keyword');
         if ($keyword) {
             //消滅關鍵字中的特殊字元
-            $keyword = str_replace(['\\', "\x00", "\n", "\r", "'", '"', "\x1a"], '', $keyword);
+            $keyword = Str::replace(['\\', "\x00", "\n", "\r", "'", '"', "\x1a"], '', $keyword);
             //模糊搜索
             $searchResultIds = Searchy::clubs(['name', 'description'])->query($keyword)->get()->pluck('id')->toArray();
             //過濾
@@ -284,7 +286,7 @@ class ApiController extends Controller
                     'name'  => $club->clubType ? $club->clubType->name : null,
                     'color' => $club->clubType ? $club->clubType->color : null,
                 ],
-                'excerpt'    => str_limit(strip_tags($club->description), 100, '...'),
+                'excerpt'    => Str::limit(strip_tags($club->description), 100, '...'),
                 'booth'      => $booth ? [
                     'longitude' => $booth->longitude,
                     'latitude'  => $booth->latitude,
@@ -329,7 +331,7 @@ class ApiController extends Controller
         $data = [];
         foreach ($feedback as $feedbackItem) {
             $data[] = array_merge(
-                array_only(
+                Arr::only(
                     $feedbackItem->toArray(),
                     [
                         'id',
@@ -345,7 +347,7 @@ class ApiController extends Controller
                 ),
                 [
                     'club' => array_merge(
-                        array_only($feedbackItem->club->toArray(), ['id', 'name']),
+                        Arr::only($feedbackItem->club->toArray(), ['id', 'name']),
                         [
                             'display_name' => $feedbackItem->club->display_name,
                             //                            'extra_info'   => $feedbackItem->club->extra_info

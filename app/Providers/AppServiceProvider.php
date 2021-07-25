@@ -29,6 +29,7 @@ use Carbon\Carbon;
 use Horizon;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Str;
 use Laratrust;
 use Purifier;
 use Schema;
@@ -74,11 +75,11 @@ class AppServiceProvider extends ServiceProvider
         //Validation rules
         Validator::extend('strip_max', function ($attribute, $value, $parameters, $validator) {
             /** @var Validator $validator */
-            $validator->addReplacer('strip_max', function ($message, $attribute, $rule, $parameters) {
-                return str_replace([':max'], $parameters, $message);
+            $validator->replacer('strip_max', function ($message, $attribute, $rule, $parameters) {
+                return Str::replace([':max'], $parameters, $message);
             });
             //確保字數計算結果與前端 TinyMCE 相同
-            $cleanedText = str_replace("\n", '', strip_tags(Purifier::clean($value)));
+            $cleanedText = Str::replace("\n", '', strip_tags(Purifier::clean($value)));
 
             return mb_strlen($cleanedText) <= $parameters[0];
         });
@@ -111,7 +112,7 @@ class AppServiceProvider extends ServiceProvider
             return "您似乎正在使用 {$appName} 瀏覽此網站";
         }
 
-        if (starts_with($xRequestedWith, 'com.appspotr')) {
+        if (Str::startsWith($xRequestedWith, 'com.appspotr')) {
             return '您似乎不是使用瀏覽器瀏覽此網站';
         }
 

@@ -13,12 +13,15 @@ use App\Services\HTMLService;
 use App\Services\ImgurImageService;
 use App\Services\StudentService;
 use Exception;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
 use Illuminate\View\View;
 use PhpOffice\PhpSpreadsheet\RichText\RichText;
@@ -39,7 +42,7 @@ class ClubController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return Response
+     * @return Application|Factory|\Illuminate\Contracts\View\View
      */
     public function create()
     {
@@ -52,7 +55,7 @@ class ClubController extends Controller
      * @param Request $request
      * @param ImgurImageService $imgurImageService
      * @param HTMLService $HTMLService
-     * @return Response
+     * @return RedirectResponse
      * @throws ValidationException
      * @throws Exception
      */
@@ -70,7 +73,7 @@ class ClubController extends Controller
         ]);
 
         $club = Club::create(array_merge($request->all(), [
-            'number'      => strtoupper($request->get('number')),
+            'number'      => Str::upper($request->get('number')),
             'description' => $HTMLService->clean($request->get('description')),
             'extra_info'  => $HTMLService->clean($request->get('extra_info')),
         ]));
@@ -134,8 +137,8 @@ class ClubController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param \App\Club $club
-     * @return Response
+     * @param Club $club
+     * @return Application|Factory|\Illuminate\Contracts\View\View
      */
     public function edit(Club $club)
     {
@@ -146,12 +149,11 @@ class ClubController extends Controller
      * Update the specified resource in storage.
      *
      * @param Request $request
-     * @param \App\Club $club
+     * @param Club $club
      * @param ImgurImageService $imgurImageService
      * @param HTMLService $HTMLService
-     * @return Response
+     * @return RedirectResponse
      * @throws ValidationException
-     * @throws Exception
      */
     public function update(Request $request, Club $club, ImgurImageService $imgurImageService, HTMLService $HTMLService)
     {
@@ -167,7 +169,7 @@ class ClubController extends Controller
         ]);
 
         $club->update(array_merge($request->all(), [
-            'number'      => strtoupper($request->get('number')),
+            'number'      => Str::upper($request->get('number')),
             'description' => $HTMLService->clean($request->get('description')),
             'extra_info'  => $HTMLService->clean($request->get('extra_info')),
         ]));
@@ -210,9 +212,8 @@ class ClubController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param \App\Club $club
-     * @return Response
-     * @throws Exception
+     * @param Club $club
+     * @return RedirectResponse
      */
     public function destroy(Club $club)
     {
@@ -249,7 +250,7 @@ class ClubController extends Controller
         $successCount = 0;
         $skipCount = 0;
         $invalidNidCount = 0;
-        foreach ($spreadsheet->getAllSheets() as $sheetId => $sheet) {
+        foreach ($spreadsheet->getAllSheets() as $sheet) {
             foreach ($sheet->getRowIterator() as $rowNumber => $row) {
                 //忽略第一列
                 if ($rowNumber == 1) {
@@ -267,13 +268,13 @@ class ClubController extends Controller
                 }
                 //資料
                 $name = $rowData[0];
-                $number = strtoupper($rowData[1]);
+                $number = Str::upper($rowData[1]);
                 $clubTypeName = $rowData[2];
                 $boothName = $rowData[3];
                 $leaderNid = $rowData[4];
                 $staffNids = [];
                 for ($i = 0; $i < 6; $i++) {
-                    $staffNids[$i] = strtoupper($rowData[$i + 5]);
+                    $staffNids[$i] = Str::upper($rowData[$i + 5]);
                 }
 
                 //資料必須齊全

@@ -9,9 +9,10 @@ use App\Notifications\ConfirmMail;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
+use Illuminate\Support\Str;
 use Illuminate\View\View;
 use Throttle;
 use Validator;
@@ -66,7 +67,7 @@ class RegisterController extends Controller
      * 重新包裝註冊方法，以寄送驗證信件
      *
      * @param Request $request
-     * @return Response
+     * @return JsonResponse|RedirectResponse
      */
     public function register(Request $request)
     {
@@ -94,7 +95,7 @@ class RegisterController extends Controller
     public function generateConfirmCodeAndSendConfirmMail(User $user)
     {
         //產生驗證碼
-        $confirmCode = str_random(60);
+        $confirmCode = Str::random(60);
         //記錄驗證碼
         $user->update([
             'confirm_code' => $confirmCode,
@@ -107,7 +108,7 @@ class RegisterController extends Controller
      * 驗證信箱
      *
      * @param string $confirmCode
-     * @return Response
+     * @return RedirectResponse
      */
     public function emailConfirm($confirmCode)
     {
@@ -128,7 +129,7 @@ class RegisterController extends Controller
     /**
      * 重送驗證信頁面
      *
-     * @return View
+     * @return RedirectResponse|View
      */
     public function resendConfirmMailPage()
     {

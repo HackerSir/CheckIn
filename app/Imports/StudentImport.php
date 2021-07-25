@@ -5,6 +5,7 @@ namespace App\Imports;
 use App\Models\Student;
 use App\Services\StudentService;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithBatchInserts;
 use Maatwebsite\Excel\Concerns\WithChunkReading;
@@ -37,7 +38,7 @@ class StudentImport implements ToModel, WithHeadingRow, WithChunkReading, WithBa
         //FIXME: 單一檔案出現重複NID時，會導致無法匯入
         //欄位
         $fields = [
-            'nid'       => strtoupper($row['NID']),
+            'nid'       => Str::upper($row['NID']),
             'name'      => $row['姓名'],
             'class'     => $row['班級'],
             'type'      => $row['類型'],

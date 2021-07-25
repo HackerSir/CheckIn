@@ -9,6 +9,7 @@ use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Str;
 
 class CheckInAlert implements ShouldBroadcast
 {
@@ -29,7 +30,7 @@ class CheckInAlert implements ShouldBroadcast
      */
     public function __construct(string $studentNid, string $message)
     {
-        $this->studentNid = strtoupper($studentNid);
+        $this->studentNid = Str::upper($studentNid);
         $this->message = $message;
         $this->created_at = Carbon::now();
     }

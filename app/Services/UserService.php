@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Models\Student;
 use App\Models\User;
 use Carbon\Carbon;
+use Illuminate\Support\Str;
 
 class UserService
 {
@@ -31,7 +32,7 @@ class UserService
      */
     public function findOrCreateByNid($nid)
     {
-        $nid = trim(strtoupper($nid));
+        $nid = trim(Str::upper($nid));
         /** @var User $user */
         $user = User::firstOrCreate([
             'nid' => $nid,

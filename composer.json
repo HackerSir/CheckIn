@@ -22,7 +22,6 @@
         "graham-campbell/throttle": "^v8.1.0",
         "guzzlehttp/guzzle": "^7.0.1",
         "laravel/framework": "^8.40",
-        "laravel/helpers": "^1.4",
         "laravel/horizon": "^5.7",
         "laravel/tinker": "^2.5",
         "laravel/ui": "^2.0",

@@ -6,10 +6,13 @@ use App\DataTables\ExtraTicketsDataTable;
 use App\Models\ExtraTicket;
 use App\Services\FileService;
 use Exception;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\ValidationException;
 use Illuminate\View\View;
@@ -31,7 +34,7 @@ class ExtraTicketController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return Response
+     * @return Application|Factory|\Illuminate\Contracts\View\View
      */
     public function create()
     {
@@ -42,7 +45,7 @@ class ExtraTicketController extends Controller
      * Store a newly created resource in storage.
      *
      * @param Request $request
-     * @return Response
+     * @return RedirectResponse
      * @throws ValidationException
      */
     public function store(Request $request)
@@ -55,7 +58,7 @@ class ExtraTicketController extends Controller
         ]);
 
         ExtraTicket::create(array_merge($request->all(), [
-            'nid' => strtoupper($request->get('nid')),
+            'nid' => Str::upper($request->get('nid')),
         ]));
 
         return redirect()->route('extra-ticket.index')->with('success', '工作人員抽獎編號已新增');
@@ -64,8 +67,8 @@ class ExtraTicketController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param \App\ExtraTicket $extraTicket
-     * @return Response
+     * @param ExtraTicket $extraTicket
+     * @return Application|Factory|\Illuminate\Contracts\View\View
      */
     public function edit(ExtraTicket $extraTicket)
     {
@@ -76,8 +79,8 @@ class ExtraTicketController extends Controller
      * Update the specified resource in storage.
      *
      * @param Request $request
-     * @param \App\ExtraTicket $extraTicket
-     * @return Response
+     * @param ExtraTicket $extraTicket
+     * @return RedirectResponse
      * @throws ValidationException
      */
     public function update(Request $request, ExtraTicket $extraTicket)
@@ -89,7 +92,7 @@ class ExtraTicketController extends Controller
         ]);
 
         $extraTicket->update(array_merge($request->only('name', 'class'), [
-            'nid' => strtoupper($request->get('nid')),
+            'nid' => Str::upper($request->get('nid')),
         ]));
 
         return redirect()->route('extra-ticket.index')->with('success', '工作人員抽獎編號已更新');
@@ -98,9 +101,8 @@ class ExtraTicketController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param \App\ExtraTicket $extraTicket
-     * @return Response
-     * @throws Exception
+     * @param ExtraTicket $extraTicket
+     * @return RedirectResponse
      */
     public function destroy(ExtraTicket $extraTicket)
     {
@@ -175,7 +177,7 @@ class ExtraTicketController extends Controller
         }
         $successCount = 0;
         $skipCount = 0;
-        foreach ($spreadsheet->getAllSheets() as $sheetId => $sheet) {
+        foreach ($spreadsheet->getAllSheets() as $sheet) {
             foreach ($sheet->getRowIterator() as $rowNumber => $row) {
                 //忽略第一列
                 if ($rowNumber == 1) {
@@ -197,7 +199,7 @@ class ExtraTicketController extends Controller
                 if (!filter_var($id, FILTER_VALIDATE_INT) || $id <= 0) {
                     $id = null;
                 }
-                $nid = strtoupper($rowData[1]);
+                $nid = Str::upper($rowData[1]);
                 $name = $rowData[2];
                 $class = $rowData[3];
                 //NID與姓名必須填寫

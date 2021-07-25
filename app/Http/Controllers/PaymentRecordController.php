@@ -7,8 +7,12 @@ use App\DataTables\Scopes\PaymentRecordClubScope;
 use App\Http\Requests\PaymentRecordRequest;
 use App\Models\PaymentRecord;
 use App\Models\User;
-use Exception;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Response;
+use Illuminate\Support\Str;
 
 class PaymentRecordController extends Controller
 {
@@ -40,7 +44,7 @@ class PaymentRecordController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return Response
+     * @return Application|Factory|View
      */
     public function create()
     {
@@ -54,7 +58,7 @@ class PaymentRecordController extends Controller
      * Store a newly created resource in storage.
      *
      * @param PaymentRecordRequest $request
-     * @return Response
+     * @return RedirectResponse
      */
     public function store(PaymentRecordRequest $request)
     {
@@ -63,7 +67,7 @@ class PaymentRecordController extends Controller
 
         /** @var PaymentRecord $paymentRecord */
         $paymentRecord = PaymentRecord::create(array_merge($request->validated(), [
-            'nid'     => strtoupper($request->get('nid')),
+            'nid'     => Str::upper($request->get('nid')),
             'is_paid' => $request->has('is_paid'),
             'user_id' => $user->id,
             'club_id' => $user->can('payment-record.manage') ? $request->get('club_id') : $user->club->id,
@@ -75,8 +79,8 @@ class PaymentRecordController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param \App\PaymentRecord $paymentRecord
-     * @return Response
+     * @param PaymentRecord $paymentRecord
+     * @return Application|Factory|View
      */
     public function show(PaymentRecord $paymentRecord)
     {
@@ -86,8 +90,8 @@ class PaymentRecordController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param \App\PaymentRecord $paymentRecord
-     * @return Response
+     * @param PaymentRecord $paymentRecord
+     * @return Application|Factory|View
      */
     public function edit(PaymentRecord $paymentRecord)
     {
@@ -101,17 +105,16 @@ class PaymentRecordController extends Controller
      * Update the specified resource in storage.
      *
      * @param PaymentRecordRequest $request
-     * @param \App\PaymentRecord $paymentRecord
-     * @return Response
+     * @param PaymentRecord $paymentRecord
+     * @return RedirectResponse
      */
     public function update(PaymentRecordRequest $request, PaymentRecord $paymentRecord)
     {
         /** @var User $user */
         $user = auth()->user();
 
-        /** @var PaymentRecord $paymentRecord */
         $paymentRecord->update(array_merge($request->validated(), [
-            'nid'     => strtoupper($request->get('nid')),
+            'nid'     => Str::upper($request->get('nid')),
             'is_paid' => $request->has('is_paid'),
             'user_id' => $user->id,
             'club_id' => $user->can('payment-record.manage') ? $request->get('club_id') : $user->club->id,
@@ -123,9 +126,8 @@ class PaymentRecordController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param \App\PaymentRecord $paymentRecord
-     * @return Response
-     * @throws Exception
+     * @param PaymentRecord $paymentRecord
+     * @return RedirectResponse
      */
     public function destroy(PaymentRecord $paymentRecord)
     {

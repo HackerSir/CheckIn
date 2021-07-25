@@ -4,13 +4,14 @@ namespace App\Observers;
 
 use App\Models\User;
 use Carbon\Carbon;
+use Illuminate\Support\Str;
 
 class UserObserver
 {
     /**
      * Handle the user "creating" event.
      *
-     * @param \App\User $user
+     * @param User $user
      * @return void
      */
     public function creating(User $user)
@@ -29,6 +30,6 @@ class UserObserver
      */
     public function saving(User $user)
     {
-        $user->nid = trim(strtoupper($user->nid));
+        $user->nid = trim(Str::upper($user->nid));
     }
 }

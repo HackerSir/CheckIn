@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Models\Student;
 use Carbon\Carbon;
+use Illuminate\Support\Str;
 
 class StudentService
 {
@@ -30,7 +31,7 @@ class StudentService
     public function findByNid($nid)
     {
         //NID轉大寫並清除外側空白
-        $nid = trim(strtoupper($nid));
+        $nid = trim(Str::upper($nid));
         //嘗試尋找學生
         /** @var Student $student */
         $student = Student::where('nid', $nid)->first();
@@ -53,7 +54,7 @@ class StudentService
     public function updateOrCreate($nid)
     {
         //NID轉大寫並清除外側空白
-        $nid = trim(strtoupper($nid));
+        $nid = trim(Str::upper($nid));
         //透過API取得資料
         $stuInfo = $this->fcuApiService->getStuInfo($nid);
         if (!$stuInfo) {
@@ -87,7 +88,7 @@ class StudentService
     public function updateOrCreateOfUserInfo($userInfo)
     {
         //NID轉大寫並清除外側空白
-        $nid = trim(strtoupper($userInfo['id']));
+        $nid = trim(Str::upper($userInfo['id']));
 
         /** @var Student $student */
         $student = Student::updateOrCreate([

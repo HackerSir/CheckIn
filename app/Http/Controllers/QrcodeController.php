@@ -5,10 +5,13 @@ namespace App\Http\Controllers;
 use App\DataTables\QrcodesDataTable;
 use App\Models\Qrcode;
 use App\Services\StudentService;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
 use Illuminate\View\View;
 
@@ -28,8 +31,8 @@ class QrcodeController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param \App\Qrcode $qrcode
-     * @return Response
+     * @param Qrcode $qrcode
+     * @return Application|Factory|\Illuminate\Contracts\View\View
      */
     public function show(Qrcode $qrcode)
     {
@@ -39,7 +42,7 @@ class QrcodeController extends Controller
     /**
      * 綁定QRCode的表單
      *
-     * @return Response
+     * @return Application|Factory|\Illuminate\Contracts\View\View
      */
     public function bindForm()
     {
@@ -66,7 +69,7 @@ class QrcodeController extends Controller
             'code' => 'required|exists:qrcodes,code',
         ]);
 
-        $nid = trim(strtoupper($request->get('nid')));
+        $nid = trim(Str::upper($request->get('nid')));
         //若以掃描槍輸入，需去除最後一碼
         $nidLength = strlen($nid);
         if (strlen($nid) == 7 || strlen($nid) == 9) {

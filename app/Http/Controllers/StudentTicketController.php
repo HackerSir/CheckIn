@@ -7,10 +7,13 @@ use App\Models\StudentTicket;
 use App\Services\FileService;
 use App\Services\StudentService;
 use Exception;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
 use Illuminate\View\View;
 use PhpOffice\PhpSpreadsheet\RichText\RichText;
@@ -31,7 +34,7 @@ class StudentTicketController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return Response
+     * @return Application|Factory|\Illuminate\Contracts\View\View
      */
     public function create()
     {
@@ -43,7 +46,7 @@ class StudentTicketController extends Controller
      *
      * @param Request $request
      * @param StudentService $studentService
-     * @return Response
+     * @return RedirectResponse
      * @throws ValidationException
      */
     public function store(Request $request, StudentService $studentService)
@@ -74,8 +77,8 @@ class StudentTicketController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param \App\StudentTicket $studentTicket
-     * @return Response
+     * @param StudentTicket $studentTicket
+     * @return Application|Factory|\Illuminate\Contracts\View\View
      */
     public function edit(StudentTicket $studentTicket)
     {
@@ -86,9 +89,9 @@ class StudentTicketController extends Controller
      * Update the specified resource in storage.
      *
      * @param Request $request
-     * @param \App\StudentTicket $studentTicket
+     * @param StudentTicket $studentTicket
      * @param StudentService $studentService
-     * @return Response
+     * @return RedirectResponse
      * @throws ValidationException
      */
     public function update(Request $request, StudentTicket $studentTicket, StudentService $studentService)
@@ -118,9 +121,8 @@ class StudentTicketController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param \App\StudentTicket $studentTicket
-     * @return Response
-     * @throws Exception
+     * @param StudentTicket $studentTicket
+     * @return RedirectResponse
      */
     public function destroy(StudentTicket $studentTicket)
     {
@@ -196,7 +198,7 @@ class StudentTicketController extends Controller
         }
         $successCount = 0;
         $skipCount = 0;
-        foreach ($spreadsheet->getAllSheets() as $sheetId => $sheet) {
+        foreach ($spreadsheet->getAllSheets() as $sheet) {
             foreach ($sheet->getRowIterator() as $rowNumber => $row) {
                 //忽略第一列
                 if ($rowNumber == 1) {
@@ -218,7 +220,7 @@ class StudentTicketController extends Controller
                 if (!filter_var($id, FILTER_VALIDATE_INT) || $id <= 0) {
                     $id = null;
                 }
-                $nid = strtoupper($rowData[1]);
+                $nid = Str::upper($rowData[1]);
                 //NID必須填寫
                 if (empty($nid)) {
                     $skipCount++;

@@ -4,6 +4,7 @@ namespace App\Observers;
 
 use App\Models\Qrcode;
 use Carbon\Carbon;
+use Illuminate\Support\Str;
 
 class QrcodeObserver
 {
@@ -15,7 +16,7 @@ class QrcodeObserver
             || preg_match('#^[a-zA-Z]\d+$#', $qrcode->code)
         ) {
             //隨機產生長度8的大寫英文數字字串
-            $code = strtoupper(str_random(8));
+            $code = Str::upper(Str::random(8));
             $qrcode->code = $code;
         }
     }

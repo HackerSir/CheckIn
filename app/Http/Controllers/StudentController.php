@@ -10,16 +10,17 @@ use App\Models\Feedback;
 use App\Models\Student;
 use App\Services\LogService;
 use App\Services\StudentService;
-use App\Services\UserService;
 use Excel;
 use Exception;
 use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
 use Illuminate\View\View;
 use Laratrust;
@@ -32,10 +33,6 @@ class StudentController extends Controller
      */
     private $studentService;
     /**
-     * @var UserService
-     */
-    private $userService;
-    /**
      * @var LogService
      */
     private $logService;
@@ -43,13 +40,11 @@ class StudentController extends Controller
     /**
      * StudentController constructor.
      * @param StudentService $studentService
-     * @param UserService $userService
      * @param LogService $logService
      */
-    public function __construct(StudentService $studentService, UserService $userService, LogService $logService)
+    public function __construct(StudentService $studentService, LogService $logService)
     {
         $this->studentService = $studentService;
-        $this->userService = $userService;
         $this->logService = $logService;
 
         $this->authorizeResource(Student::class);
@@ -69,7 +64,7 @@ class StudentController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return Response
+     * @return Factory|Application|\Illuminate\Contracts\View\View
      */
     public function create()
     {
@@ -80,7 +75,7 @@ class StudentController extends Controller
      * Store a newly created resource in storage.
      *
      * @param StudentRequest $request
-     * @return Response
+     * @return RedirectResponse
      */
     public function store(StudentRequest $request)
     {
@@ -128,7 +123,7 @@ class StudentController extends Controller
                 //                'unique:students,nid',
             ],
         ]);
-        $nid = trim(strtoupper($request->get('nid')));
+        $nid = trim(Str::upper($request->get('nid')));
         $isExistsBefore = Student::whereNid($nid)->exists();
         $student = $this->studentService->updateOrCreate($nid);
         if (!$student) {
@@ -159,7 +154,7 @@ class StudentController extends Controller
      * Display the specified resource.
      *
      * @param Student $student
-     * @return Response
+     * @return Application|Factory|\Illuminate\Contracts\View\View
      */
     public function show(Student $student)
     {
@@ -205,7 +200,7 @@ class StudentController extends Controller
 
     /**
      * @param Student $student
-     * @return Response
+     * @return Application|Factory|\Illuminate\Contracts\View\View
      */
     public function edit(Student $student)
     {
@@ -216,8 +211,8 @@ class StudentController extends Controller
      * Update the specified resource in storage.
      *
      * @param StudentRequest $request
-     * @param \App\Student $student
-     * @return Response
+     * @param Student $student
+     * @return RedirectResponse
      */
     public function update(StudentRequest $request, Student $student)
     {
@@ -236,8 +231,8 @@ class StudentController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param \App\Student $student
-     * @return Response
+     * @param Student $student
+     * @return RedirectResponse
      * @throws AuthorizationException
      */
     public function fetch(Student $student)
@@ -255,7 +250,7 @@ class StudentController extends Controller
      * Remove the specified resource from storage.
      *
      * @param Student $student
-     * @return Response
+     * @return RedirectResponse
      * @throws Exception
      */
     public function destroy(Student $student)

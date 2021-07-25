@@ -3,6 +3,7 @@
 namespace App\DataTables;
 
 use App\Presenters\ActivityLogPresenter;
+use Illuminate\Support\Str;
 use Spatie\Activitylog\Models\Activity;
 use Yajra\DataTables\DataTableAbstract;
 use Yajra\DataTables\EloquentDataTable;
@@ -27,11 +28,11 @@ class ActivityLogDataTable extends DataTable
             ->editColumn('subject_id', function (Activity $activity) use ($activityLogPresenter) {
                 return $activityLogPresenter->getRouteLink($activity->subject_type, $activity->subject_id);
             })->editColumn('subject_type', function (Activity $activity) {
-                return str_replace(['App\\', 'Models\\'], '', $activity->subject_type);
+                return Str::replace(['App\\', 'Models\\'], '', $activity->subject_type);
             })->editColumn('causer_id', function (Activity $activity) use ($activityLogPresenter) {
                 return $activityLogPresenter->getRouteLink($activity->causer_type, $activity->causer_id);
             })->editColumn('causer_type', function (Activity $activity) {
-                return str_replace(['App\\', 'Models\\'], '', $activity->causer_type);
+                return Str::replace(['App\\', 'Models\\'], '', $activity->causer_type);
             })
             ->rawColumns(['subject_id', 'causer_id', 'action']);
     }

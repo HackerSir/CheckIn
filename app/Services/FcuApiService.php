@@ -6,6 +6,7 @@ use Exception;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Exception\GuzzleException;
+use Illuminate\Support\Str;
 
 class FcuApiService
 {
@@ -15,7 +16,7 @@ class FcuApiService
      */
     public function getStuInfo($nid)
     {
-        $nid = strtoupper($nid);
+        $nid = Str::upper($nid);
         if (empty(trim($nid))) {
             return null;
         }

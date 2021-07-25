@@ -8,6 +8,7 @@ use App\Services\FcuApiService;
 use App\Services\StudentService;
 use App\Services\UserService;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Str;
 
 class OAuthController extends Controller
 {
@@ -70,7 +71,7 @@ class OAuthController extends Controller
         if (!is_array($userInfo) || !isset($userInfo['id']) || empty(trim($userInfo['id']))) {
             return redirect()->route('index')->with('warning', '登入失敗(u)');
         }
-        $nid = trim(strtoupper($userInfo['id']));
+        $nid = trim(Str::upper($userInfo['id']));
 
         //嘗試使用 GetStuInfo 取得 GetUserInfo 無法取得之入學年度與性別資訊
         $stuInfo = $this->fcuApiService->getStuInfo($nid);

@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use App\Models\Student;
 use App\Services\TaskService;
 use Illuminate\Console\Command;
+use Illuminate\Support\Str;
 
 class TaskCheck extends Command
 {
@@ -37,7 +38,7 @@ class TaskCheck extends Command
      */
     public function handle()
     {
-        $nid = strtoupper($this->argument('nid'));
+        $nid = Str::upper($this->argument('nid'));
         $studentQuery = Student::query();
         if ($nid) {
             $this->info('Query student with NID: ' . $nid);
