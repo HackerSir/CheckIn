@@ -36,10 +36,9 @@
         "milon/barcode": "^7.0",
         "mojoblanco/domainos": "^1.1",
         "phpoffice/phpspreadsheet": "^1.6",
-        "phpoffice/phpword": "^0.16.0",
+        "phpoffice/phpword": "^0.18.0",
         "pragmarx/google2fa-laravel": "^1.0",
         "predis/predis": "^1.1",
-        "recca0120/laravel-tracy": "^1.8",
         "santigarcor/laratrust": "^5.2",
         "spatie/laravel-activitylog": "^3.7",
         "spatie/laravel-backup": "^6.9",
@@ -51,20 +50,15 @@
         "yajra/laravel-datatables-oracle": "^9.0"
     },
     "require-dev": {
+        "barryvdh/laravel-debugbar": "^3.6",
         "beyondcode/laravel-dump-server": "^1.0",
+        "facade/ignition": "^2.0",
+        "fakerphp/faker": "^1.15",
         "filp/whoops": "^2.0",
-        "fzaninotto/faker": "^1.4",
         "mockery/mockery": "^1.0",
         "nunomaduro/collision": "^4.1",
-        "phpunit/phpunit": "^8.5",
-        "facade/ignition": "^2.0"
+        "phpunit/phpunit": "^9.5"
     },
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "https://github.com/danny50610/Imgur-Laravel"
-        }
-    ],
     "autoload": {
         "classmap": [
             "database"
