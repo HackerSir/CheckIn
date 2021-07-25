@@ -6,7 +6,6 @@
     import Vuex from 'vuex'
     import VuexPersist from 'vuex-persist'
 
-    Vue.use(Vuex);
     const vuexPersist = new VuexPersist({
         key: 'checkin/club',
         storage: localStorage

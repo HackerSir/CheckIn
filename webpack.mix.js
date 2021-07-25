@@ -1,4 +1,4 @@
-const {mix} = require('laravel-mix');
+const mix = require('laravel-mix');
 
 /*
  |--------------------------------------------------------------------------
@@ -19,6 +19,7 @@ mix.js('resources/js/vue.js', buildJsPath)
     .js('resources/js/checkin.js', buildJsPath)
     .js('resources/js/broadcast-test.js', buildJsPath)
     .js('resources/js/web-scan.js', buildJsPath)
+    .vue({ version: 2 })
     .version();
 
 mix.copy('node_modules/select2-bootstrap4-theme/dist/select2-bootstrap4.min.css', buildCssPath)

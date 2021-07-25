@@ -1,3 +1,4 @@
+import Vue from 'vue';
 import VueEcho from 'vue-echo';
 
 window.io = require('socket.io-client');

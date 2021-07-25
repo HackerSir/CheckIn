@@ -145,8 +145,6 @@
 </template>
 
 <script>
-require('../bootstrap-echo-vue');
-
 export default {
     data: function () {
         return {

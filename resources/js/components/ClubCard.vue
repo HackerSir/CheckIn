@@ -41,10 +41,6 @@
 </template>
 
 <script>
-    import VueHolder from 'vue-holderjs';
-
-    Vue.use(VueHolder);
-
     export default {
         props: [
             'club',
