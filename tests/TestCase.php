@@ -12,13 +12,11 @@ abstract class TestCase extends BaseTestCase
     /**
      * Create a model factory and forget observers so events do not trigger actions.
      * @param Model|string $class
-     * @param string $name
-     * @return \Illuminate\Database\Eloquent\FactoryBuilder
      */
-    public function factoryWithoutObservers($class, $name = null)
+    public function factoryWithoutObservers($class)
     {
         $class::flushEventListeners();
 
-        return factory($class, $name);
+        return call_user_func([$class, 'factory']);
     }
 }

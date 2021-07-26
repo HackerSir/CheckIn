@@ -469,3 +469,4 @@ public/mix-manifest.json
 
 laravel-echo-server.json
 laravel-echo-server.lock
+/clover.xml
