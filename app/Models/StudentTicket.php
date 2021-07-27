@@ -62,6 +62,6 @@ class StudentTicket extends Model
 
     protected function getNameForActivityLog(): string
     {
-        return $this->name . '的學生抽獎編號';
+        return $this->student->display_name . '的學生抽獎編號';
     }
 }
