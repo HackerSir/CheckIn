@@ -2,11 +2,11 @@
 
 namespace App\Observers;
 
-use Spatie\Activitylog\Models\Activity;
+use App\Models\ActivityLog;
 
-class ActivityObserver
+class ActivityLogObserver
 {
-    public function saving(Activity $activity)
+    public function saving(ActivityLog $activity)
     {
         //自動追加記錄IP
         $activity->properties = $activity->properties->put('ip', request()->ip());

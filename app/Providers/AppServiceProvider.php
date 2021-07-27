@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\ActivityLog;
 use App\Models\Club;
 use App\Models\ContactInformation;
 use App\Models\DataUpdateRequest;
@@ -13,7 +14,7 @@ use App\Models\Student;
 use App\Models\StudentSurvey;
 use App\Models\TeaParty;
 use App\Models\User;
-use App\Observers\ActivityObserver;
+use App\Observers\ActivityLogObserver;
 use App\Observers\ClubObserver;
 use App\Observers\ContactInformationObserver;
 use App\Observers\DataUpdateRequestObserver;
@@ -32,7 +33,6 @@ use Illuminate\Support\ServiceProvider;
 use Laratrust;
 use Purifier;
 use Schema;
-use Spatie\Activitylog\Models\Activity;
 use Validator;
 
 class AppServiceProvider extends ServiceProvider
@@ -54,7 +54,7 @@ class AppServiceProvider extends ServiceProvider
         view()->share('xRequestedWithMessage', $xRequestedWithMessage);
 
         //Observers
-        Activity::observe(ActivityObserver::class);
+        ActivityLog::observe(ActivityLogObserver::class);
         User::observe(UserObserver::class);
         Student::observe(StudentObserver::class);
         Qrcode::observe(QrcodeObserver::class);
