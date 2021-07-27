@@ -59,6 +59,8 @@
                 <dd class="col-md-10">
                     <pre class="json border border-primary rounded">{{ $activity->properties }}</pre>
                 </dd>
+                <dt class="col-md-2">IP</dt>
+                <dd class="col-md-10">{{ $activity->ip }}</dd>
                 <dt class="col-md-2">Created At</dt>
                 <dd class="col-md-10">{{ $activity->created_at }}</dd>
             </dl>

@@ -17,6 +17,7 @@ use Spatie\Activitylog\Models\Activity;
  * @property string|null $causer_id
  * @property string|null $causer_type
  * @property \Illuminate\Support\Collection|null $properties
+ * @property string|null $ip IP
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \Illuminate\Database\Eloquent\Model|\Eloquent $causer
@@ -33,6 +34,7 @@ use Spatie\Activitylog\Models\Activity;
  * @method static Builder|ActivityLog whereCreatedAt($value)
  * @method static Builder|ActivityLog whereDescription($value)
  * @method static Builder|ActivityLog whereId($value)
+ * @method static Builder|ActivityLog whereIp($value)
  * @method static Builder|ActivityLog whereLogName($value)
  * @method static Builder|ActivityLog whereProperties($value)
  * @method static Builder|ActivityLog whereSubjectId($value)
