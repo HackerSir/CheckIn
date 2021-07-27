@@ -216,7 +216,7 @@ class StudentController extends Controller
      * Update the specified resource in storage.
      *
      * @param StudentRequest $request
-     * @param \App\Student $student
+     * @param Student $student
      * @return Response
      */
     public function update(StudentRequest $request, Student $student)
@@ -236,7 +236,7 @@ class StudentController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param \App\Student $student
+     * @param Student $student
      * @return Response
      * @throws AuthorizationException
      */

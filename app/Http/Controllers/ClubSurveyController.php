@@ -22,7 +22,7 @@ class ClubSurveyController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param \App\ClubSurvey $clubSurvey
+     * @param ClubSurvey $clubSurvey
      * @return Response
      */
     public function show(ClubSurvey $clubSurvey)

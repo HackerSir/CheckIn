@@ -165,7 +165,7 @@ class FeedbackController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param \App\Feedback $feedback
+     * @param Feedback $feedback
      * @return Response
      * @throws Exception
      */

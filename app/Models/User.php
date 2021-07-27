@@ -197,7 +197,7 @@ class User extends Authenticatable
     }
 
     /**
-     * @return \App\Club|null
+     * @return Club|null
      */
     public function getClubAttribute()
     {

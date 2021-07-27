@@ -134,7 +134,7 @@ class ClubController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param \App\Club $club
+     * @param Club $club
      * @return Response
      */
     public function edit(Club $club)
@@ -146,7 +146,7 @@ class ClubController extends Controller
      * Update the specified resource in storage.
      *
      * @param Request $request
-     * @param \App\Club $club
+     * @param Club $club
      * @param ImgurImageService $imgurImageService
      * @param HTMLService $HTMLService
      * @return Response
@@ -210,7 +210,7 @@ class ClubController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param \App\Club $club
+     * @param Club $club
      * @return Response
      * @throws Exception
      */

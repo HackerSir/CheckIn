@@ -55,7 +55,7 @@ class ContactInformationController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param \App\ContactInformation $contactInformation
+     * @param ContactInformation $contactInformation
      * @return Response
      */
     public function show(ContactInformation $contactInformation)
@@ -66,7 +66,7 @@ class ContactInformationController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param \App\ContactInformation $contactInformation
+     * @param ContactInformation $contactInformation
      * @return Response
      */
     public function edit(ContactInformation $contactInformation)
@@ -78,7 +78,7 @@ class ContactInformationController extends Controller
      * Update the specified resource in storage.
      *
      * @param ContactInformationRequest $request
-     * @param \App\ContactInformation $contactInformation
+     * @param ContactInformation $contactInformation
      * @return Response
      */
     public function update(ContactInformationRequest $request, ContactInformation $contactInformation)
@@ -91,7 +91,7 @@ class ContactInformationController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param \App\ContactInformation $contactInformation
+     * @param ContactInformation $contactInformation
      * @return Response
      * @throws Exception
      */

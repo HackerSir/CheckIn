@@ -90,7 +90,7 @@ class ClubTypeController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param \App\ClubType $clubType
+     * @param ClubType $clubType
      * @return Response
      */
     public function edit(ClubType $clubType)
@@ -102,7 +102,7 @@ class ClubTypeController extends Controller
      * Update the specified resource in storage.
      *
      * @param Request $request
-     * @param \App\ClubType $clubType
+     * @param ClubType $clubType
      * @return Response
      * @throws ValidationException
      */
@@ -124,7 +124,7 @@ class ClubTypeController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param \App\ClubType $clubType
+     * @param ClubType $clubType
      * @return Response
      * @throws Exception
      */

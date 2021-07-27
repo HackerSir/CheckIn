@@ -91,7 +91,7 @@ class TeaPartyController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param \App\TeaParty $teaParty
+     * @param TeaParty $teaParty
      * @return Response
      */
     public function show(TeaParty $teaParty)
@@ -102,7 +102,7 @@ class TeaPartyController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param \App\TeaParty $teaParty
+     * @param TeaParty $teaParty
      * @return Response
      */
     public function edit(TeaParty $teaParty)
@@ -114,7 +114,7 @@ class TeaPartyController extends Controller
      * Update the specified resource in storage.
      *
      * @param TeaPartyRequest $request
-     * @param \App\TeaParty $teaParty
+     * @param TeaParty $teaParty
      * @return Response
      */
     public function update(TeaPartyRequest $request, TeaParty $teaParty)
@@ -127,7 +127,7 @@ class TeaPartyController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param \App\TeaParty $teaParty
+     * @param TeaParty $teaParty
      * @return Response
      * @throws Exception
      */

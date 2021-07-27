@@ -37,8 +37,8 @@ class ContactInformationPolicy
     /**
      * Determine whether the user can view the contact information.
      *
-     * @param \App\User $user
-     * @param \App\ContactInformation $contactInformation
+     * @param User $user
+     * @param ContactInformation $contactInformation
      * @return bool
      */
     public function view(User $user, ContactInformation $contactInformation)
@@ -49,7 +49,7 @@ class ContactInformationPolicy
     /**
      * Determine whether the user can create contact information.
      *
-     * @param \App\User $user
+     * @param User $user
      * @return bool
      */
     public function create(User $user)
@@ -60,8 +60,8 @@ class ContactInformationPolicy
     /**
      * Determine whether the user can update the contact information.
      *
-     * @param \App\User $user
-     * @param \App\ContactInformation $contactInformation
+     * @param User $user
+     * @param ContactInformation $contactInformation
      * @return bool
      */
     public function update(User $user, ContactInformation $contactInformation)
@@ -72,8 +72,8 @@ class ContactInformationPolicy
     /**
      * Determine whether the user can delete the contact information.
      *
-     * @param \App\User $user
-     * @param \App\ContactInformation $contactInformation
+     * @param User $user
+     * @param ContactInformation $contactInformation
      * @return bool
      */
     public function delete(User $user, ContactInformation $contactInformation)

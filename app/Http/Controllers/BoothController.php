@@ -63,7 +63,7 @@ class BoothController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param \App\Booth $booth
+     * @param Booth $booth
      * @return Response
      */
     public function show(Booth $booth)
@@ -74,7 +74,7 @@ class BoothController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param \App\Booth $booth
+     * @param Booth $booth
      * @return Response
      */
     public function edit(Booth $booth)
@@ -86,7 +86,7 @@ class BoothController extends Controller
      * Update the specified resource in storage.
      *
      * @param Request $request
-     * @param \App\Booth $booth
+     * @param Booth $booth
      * @return Response
      * @throws ValidationException
      */
@@ -108,7 +108,7 @@ class BoothController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param \App\Booth $booth
+     * @param Booth $booth
      * @return Response
      * @throws Exception
      */

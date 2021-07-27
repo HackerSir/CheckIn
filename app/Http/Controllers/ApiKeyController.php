@@ -55,7 +55,7 @@ class ApiKeyController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param \App\ApiKey $apiKey
+     * @param ApiKey $apiKey
      * @return Response
      * @throws Exception
      */

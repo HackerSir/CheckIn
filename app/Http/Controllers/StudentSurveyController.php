@@ -22,7 +22,7 @@ class StudentSurveyController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param \App\StudentSurvey $studentSurvey
+     * @param StudentSurvey $studentSurvey
      * @return Response
      */
     public function show(StudentSurvey $studentSurvey)

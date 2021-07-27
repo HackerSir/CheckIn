@@ -68,7 +68,7 @@ class QrcodeSetController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param \App\QrcodeSet $qrcodeSet
+     * @param QrcodeSet $qrcodeSet
      * @param QrcodesDataTable $qrcodesDataTable
      * @return JsonResponse|Response|View
      */

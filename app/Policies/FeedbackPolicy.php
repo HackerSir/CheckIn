@@ -18,8 +18,8 @@ class FeedbackPolicy
     /**
      * Determine whether the user can view the feedback.
      *
-     * @param \App\User $user
-     * @param \App\Feedback $feedback
+     * @param User $user
+     * @param Feedback $feedback
      * @return mixed
      * @throws Exception
      */

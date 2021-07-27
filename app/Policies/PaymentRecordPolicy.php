@@ -37,8 +37,8 @@ class PaymentRecordPolicy
     /**
      * Determine whether the user can view the payment record.
      *
-     * @param \App\User $user
-     * @param \App\PaymentRecord $paymentRecord
+     * @param User $user
+     * @param PaymentRecord $paymentRecord
      * @return mixed
      */
     public function view(User $user, PaymentRecord $paymentRecord)
@@ -49,7 +49,7 @@ class PaymentRecordPolicy
     /**
      * Determine whether the user can create payment records.
      *
-     * @param \App\User $user
+     * @param User $user
      * @return mixed
      */
     public function create(User $user)
@@ -60,8 +60,8 @@ class PaymentRecordPolicy
     /**
      * Determine whether the user can update the payment record.
      *
-     * @param \App\User $user
-     * @param \App\PaymentRecord $paymentRecord
+     * @param User $user
+     * @param PaymentRecord $paymentRecord
      * @return mixed
      */
     public function update(User $user, PaymentRecord $paymentRecord)
@@ -72,8 +72,8 @@ class PaymentRecordPolicy
     /**
      * Determine whether the user can delete the payment record.
      *
-     * @param \App\User $user
-     * @param \App\PaymentRecord $paymentRecord
+     * @param User $user
+     * @param PaymentRecord $paymentRecord
      * @return mixed
      */
     public function delete(User $user, PaymentRecord $paymentRecord)

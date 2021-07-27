@@ -28,7 +28,7 @@ class QrcodeController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param \App\Qrcode $qrcode
+     * @param Qrcode $qrcode
      * @return Response
      */
     public function show(Qrcode $qrcode)

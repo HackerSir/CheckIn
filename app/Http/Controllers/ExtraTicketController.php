@@ -64,7 +64,7 @@ class ExtraTicketController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param \App\ExtraTicket $extraTicket
+     * @param ExtraTicket $extraTicket
      * @return Response
      */
     public function edit(ExtraTicket $extraTicket)
@@ -76,7 +76,7 @@ class ExtraTicketController extends Controller
      * Update the specified resource in storage.
      *
      * @param Request $request
-     * @param \App\ExtraTicket $extraTicket
+     * @param ExtraTicket $extraTicket
      * @return Response
      * @throws ValidationException
      */
@@ -98,7 +98,7 @@ class ExtraTicketController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param \App\ExtraTicket $extraTicket
+     * @param ExtraTicket $extraTicket
      * @return Response
      * @throws Exception
      */

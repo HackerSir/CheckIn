@@ -39,7 +39,7 @@ class DataUpdateRequestController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param \App\DataUpdateRequest $dataUpdateRequest
+     * @param DataUpdateRequest $dataUpdateRequest
      * @return Response
      */
     public function show(DataUpdateRequest $dataUpdateRequest)

@@ -10,7 +10,7 @@ class TeaPartyObserver
     /**
      * Handle the tea party "saved" event.
      *
-     * @param \App\TeaParty $teaParty
+     * @param TeaParty $teaParty
      * @return void
      */
     public function saved(TeaParty $teaParty)
