@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "fa2bfdfbae02ba79e03d0b7e618e582c",
+    "content-hash": "b5eeb2547049cb966bc58db1a7eef80c",
     "packages": [
         {
             "name": "anlutro/l4-settings",
@@ -2648,6 +2648,73 @@
                 "source": "https://github.com/guzzle/psr7/tree/1.8.2"
             },
             "time": "2021-04-26T09:17:50+00:00"
+        },
+        {
+            "name": "hackersir/searchy",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/HackerSir/Laravel-Searchy.git",
+                "reference": "0f526eff5de1ed28f7b8294856dcc5456acae5cc"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/HackerSir/Laravel-Searchy/zipball/0f526eff5de1ed28f7b8294856dcc5456acae5cc",
+                "reference": "0f526eff5de1ed28f7b8294856dcc5456acae5cc",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "^5.1 || ^6.0 || ^7.0 || ^8.0",
+                "php": "^5.5.9 || ^7.0"
+            },
+            "require-dev": {
+                "graham-campbell/testbench": "^3.4 || ^4.0 || ^5.0",
+                "phpunit/phpunit": "^4.8 || ^5.7 || ^6.3 || ^7.0"
+            },
+            "default-branch": true,
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.0-dev"
+                },
+                "laravel": {
+                    "providers": [
+                        "TomLingham\\Searchy\\SearchyServiceProvider"
+                    ],
+                    "aliases": {
+                        "Searchy": "TomLingham\\Searchy\\Facades\\Searchy"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "TomLingham\\Searchy\\": "src/"
+                }
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "TomLingham\\Tests\\Searchy\\": "tests/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Tom Lingham",
+                    "email": "tjlingham@gmail.com"
+                }
+            ],
+            "description": "[tom-lingham/searchy] Laravel Searchy makes user driven searching easy with fuzzy search, basic string matching, Levenshtein Distance and more.",
+            "keywords": [
+                "fuzzy",
+                "laravel",
+                "search"
+            ],
+            "support": {
+                "source": "https://github.com/HackerSir/Laravel-Searchy/tree/master"
+            },
+            "time": "2021-07-27T11:52:49+00:00"
         },
         {
             "name": "justinrainbow/json-schema",
@@ -12993,6 +13060,7 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
+        "hackersir/searchy": 20,
         "pobratym/php-imgur-api-client": 20
     },
     "prefer-stable": false,
