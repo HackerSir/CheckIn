@@ -15,16 +15,17 @@ use Spatie\Activitylog\Models\Activity;
  * App\Models\ClubType
  *
  * @property int $id
- * @property string $name
- * @property string $color
- * @property bool $is_counted
+ * @property string $name 名稱
+ * @property string $color 標籤顏色
+ * @property bool $is_counted 是否列入抽獎集點
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  * @property-read Collection|Activity[] $activities
  * @property-read int|null $activities_count
- * @property-read Collection|Club[] $clubs
+ * @property-read Collection|\App\Models\Club[] $clubs
  * @property-read int|null $clubs_count
- * @property-read string $tag
+ * @property-read string $tag HTML 標籤
+ * @method static \Database\Factories\ClubTypeFactory factory(...$parameters)
  * @method static Builder|ClubType newModelQuery()
  * @method static Builder|ClubType newQuery()
  * @method static Builder|ClubType query()
@@ -75,9 +76,11 @@ class ClubType extends LoggableModel
     }
 
     /**
+     * @comment HTML 標籤
+     *
      * @return string
      */
-    public function getTagAttribute()
+    public function getTagAttribute(): string
     {
         return "<span class='badge badge-secondary' style='background-color:{$this->color}; font-size: 20px;'>{$this->name}</span>";
     }

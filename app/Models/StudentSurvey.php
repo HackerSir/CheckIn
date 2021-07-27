@@ -15,15 +15,16 @@ use Spatie\Activitylog\Models\Activity;
  * App\Models\StudentSurvey
  *
  * @property int $id
- * @property string|null $student_nid
- * @property int $rating
- * @property string|null $comment
+ * @property string|null $student_nid 對應學生
+ * @property int $rating 星等評價
+ * @property string|null $comment 意見與建議
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  * @property-read Collection|Activity[] $activities
  * @property-read int|null $activities_count
- * @property-read string $stars
- * @property-read Student|null $student
+ * @property-read string $stars 星等
+ * @property-read \App\Models\Student|null $student
+ * @method static \Database\Factories\StudentSurveyFactory factory(...$parameters)
  * @method static Builder|StudentSurvey newModelQuery()
  * @method static Builder|StudentSurvey newQuery()
  * @method static Builder|StudentSurvey query()
@@ -56,9 +57,11 @@ class StudentSurvey extends LoggableModel
     }
 
     /**
+     * @comment 星等
+     *
      * @return string
      */
-    public function getStarsAttribute()
+    public function getStarsAttribute(): string
     {
         return str_repeat('★', $this->rating) . str_repeat('☆', 5 - $this->rating);
     }

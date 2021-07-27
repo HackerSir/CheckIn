@@ -15,18 +15,19 @@ use Spatie\Activitylog\Models\Activity;
  * App\Models\Record
  *
  * @property int $id
- * @property string $ip
- * @property string|null $student_nid
- * @property int|null $club_id
- * @property int|null $scanned_by_user_id
- * @property bool $web_scan
+ * @property string $ip 打卡IP
+ * @property string|null $student_nid 對應學生
+ * @property int|null $club_id 對應社團
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
+ * @property int|null $scanned_by_user_id 掃描者
+ * @property bool $web_scan 使用網站內建掃描器掃描
  * @property-read Collection|Activity[] $activities
  * @property-read int|null $activities_count
- * @property-read Club|null $club
- * @property-read User|null $scanBy
- * @property-read Student|null $student
+ * @property-read \App\Models\Club|null $club
+ * @property-read \App\Models\User|null $scanBy
+ * @property-read \App\Models\Student|null $student
+ * @method static \Database\Factories\RecordFactory factory(...$parameters)
  * @method static Builder|Record newModelQuery()
  * @method static Builder|Record newQuery()
  * @method static Builder|Record query()

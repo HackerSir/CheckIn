@@ -17,15 +17,16 @@ use Spatie\Activitylog\Models\Activity;
  * @property int $id
  * @property int $user_id
  * @property int $club_id
- * @property int $rating
- * @property string|null $comment
+ * @property int $rating 星等評價
+ * @property string|null $comment 意見與建議
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  * @property-read Collection|Activity[] $activities
  * @property-read int|null $activities_count
- * @property-read Club $club
- * @property-read string $stars
- * @property-read User $user
+ * @property-read \App\Models\Club $club
+ * @property-read string $stars 星等
+ * @property-read \App\Models\User $user
+ * @method static \Database\Factories\ClubSurveyFactory factory(...$parameters)
  * @method static Builder|ClubSurvey newModelQuery()
  * @method static Builder|ClubSurvey newQuery()
  * @method static Builder|ClubSurvey query()
@@ -68,9 +69,11 @@ class ClubSurvey extends LoggableModel
     }
 
     /**
+     * @comment 星等
+     *
      * @return string
      */
-    public function getStarsAttribute()
+    public function getStarsAttribute(): string
     {
         return str_repeat('★', $this->rating) . str_repeat('☆', 5 - $this->rating);
     }

@@ -19,7 +19,7 @@ use Laratrust\Models\LaratrustRole;
  * @property bool $protection
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
- * @property-read Collection|Permission[] $permissions
+ * @property-read Collection|\App\Models\Permission[] $permissions
  * @property-read int|null $permissions_count
  * @method static Builder|Role newModelQuery()
  * @method static Builder|Role newQuery()

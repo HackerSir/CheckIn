@@ -14,20 +14,20 @@ use Spatie\Activitylog\Models\Activity;
  * App\Models\PaymentRecord
  *
  * @property int $id
- * @property int $club_id
- * @property string $nid
- * @property string|null $name
- * @property bool|null $is_paid
- * @property string|null $handler
- * @property string|null $note
- * @property int|null $user_id
+ * @property int $club_id 社團
+ * @property string $nid NID
+ * @property string|null $name 姓名
+ * @property bool|null $is_paid 已付清
+ * @property string|null $handler 經手人
+ * @property string|null $note 備註
+ * @property int|null $user_id 使用者
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  * @property-read Collection|Activity[] $activities
  * @property-read int|null $activities_count
- * @property-read Club $club
- * @property-read Student $student
- * @property-read User|null $user
+ * @property-read \App\Models\Club $club
+ * @property-read \App\Models\Student $student
+ * @property-read \App\Models\User|null $user
  * @method static Builder|PaymentRecord newModelQuery()
  * @method static Builder|PaymentRecord newQuery()
  * @method static Builder|PaymentRecord query()

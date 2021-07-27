@@ -18,7 +18,7 @@ use Laratrust\Models\LaratrustPermission;
  * @property string|null $description
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
- * @property-read Collection|Role[] $roles
+ * @property-read Collection|\App\Models\Role[] $roles
  * @property-read int|null $roles_count
  * @method static Builder|Permission newModelQuery()
  * @method static Builder|Permission newQuery()
@@ -46,7 +46,7 @@ class Permission extends LaratrustPermission
      *
      * @return bool
      */
-    public function hasRole($roleName)
+    public function hasRole($roleName): bool
     {
         foreach ($this->roles as $role) {
             if ($role->name == $roleName) {

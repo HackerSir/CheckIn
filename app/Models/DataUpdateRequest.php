@@ -13,32 +13,32 @@ use Spatie\Activitylog\Models\Activity;
  * App\Models\DataUpdateRequest
  *
  * @property int $id
- * @property int|null $user_id
- * @property int $club_id
- * @property string $reason
- * @property string|null $submit_at
- * @property int|null $reviewer_id
- * @property string|null $review_at
- * @property bool|null $review_result
- * @property string|null $review_comment
- * @property string|null $original_description
- * @property string|null $original_url
- * @property string|null $description
- * @property string|null $url
- * @property string|null $original_extra_info
- * @property string|null $extra_info
- * @property string|null $original_custom_question
- * @property string|null $custom_question
+ * @property int|null $user_id 申請者
+ * @property int $club_id 社團
+ * @property string $reason 申請理由
+ * @property string|null $submit_at 申請提交時間
+ * @property int|null $reviewer_id 審核者
+ * @property string|null $review_at 審核時間
+ * @property bool|null $review_result 審核通過
+ * @property string|null $review_comment 審核評語
+ * @property string|null $original_description 原簡介
+ * @property string|null $original_url 原網址
+ * @property string|null $description 簡介
+ * @property string|null $url 網址
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
+ * @property string|null $original_extra_info 原額外資訊
+ * @property string|null $extra_info 額外資訊
+ * @property string|null $original_custom_question 原自訂問題
+ * @property string|null $custom_question 自訂問題
  * @property-read Collection|Activity[] $activities
  * @property-read int|null $activities_count
- * @property-read Club $club
- * @property-read string $show_result
- * @property-read ImgurImage|null $imgurImage
- * @property-read ImgurImage|null $originalImgurImage
- * @property-read User|null $reviewer
- * @property-read User|null $user
+ * @property-read \App\Models\Club $club
+ * @property-read string $show_result 審核結果 HTML 標籤
+ * @property-read \App\Models\ImgurImage|null $imgurImage
+ * @property-read \App\Models\ImgurImage|null $originalImgurImage
+ * @property-read \App\Models\User|null $reviewer
+ * @property-read \App\Models\User|null $user
  * @method static Builder|DataUpdateRequest newModelQuery()
  * @method static Builder|DataUpdateRequest newQuery()
  * @method static Builder|DataUpdateRequest query()
@@ -117,9 +117,11 @@ class DataUpdateRequest extends LoggableModel
     }
 
     /**
+     * @comment 審核結果 HTML 標籤
+     *
      * @return string
      */
-    public function getShowResultAttribute()
+    public function getShowResultAttribute(): string
     {
         if (is_null($this->review_result)) {
             return '<span class="text-info"><i class="fas fa-fw fa-question mr-2"></i>等待審核</span>';

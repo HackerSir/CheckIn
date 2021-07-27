@@ -20,43 +20,44 @@ use Spatie\Activitylog\Models\Activity;
  * App\Models\Club
  *
  * @property int $id
- * @property int|null $club_type_id
- * @property string|null $number
- * @property string $name
- * @property string|null $description
- * @property string|null $url
- * @property string|null $extra_info
- * @property string|null $custom_question
+ * @property int|null $club_type_id 社團類型
+ * @property string|null $number 社團編號
+ * @property string $name 名稱
+ * @property string|null $description 簡介
+ * @property string|null $url 網址
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
+ * @property string|null $extra_info 額外資訊
+ * @property string|null $custom_question 自訂問題
  * @property-read Collection|Activity[] $activities
  * @property-read int|null $activities_count
- * @property-read Collection|Booth[] $booths
+ * @property-read Collection|\App\Models\Booth[] $booths
  * @property-read int|null $booths_count
- * @property-read ClubSurvey|null $clubSurvey
- * @property-read ClubType|null $clubType
- * @property-read Collection|DataUpdateRequest[] $dataUpdateRequests
+ * @property-read \App\Models\ClubSurvey|null $clubSurvey
+ * @property-read \App\Models\ClubType|null $clubType
+ * @property-read Collection|\App\Models\DataUpdateRequest[] $dataUpdateRequests
  * @property-read int|null $data_update_requests_count
- * @property-read Collection|User[] $favoriteBy
+ * @property-read Collection|\App\Models\User[] $favoriteBy
  * @property-read int|null $favorite_by_count
- * @property-read Collection|Feedback[] $feedback
+ * @property-read Collection|\App\Models\Feedback[] $feedback
  * @property-read int|null $feedback_count
- * @property-read string $display_name
- * @property-read bool $is_counted
- * @property-read ImgurImage|null $imgurImage
- * @property-read Collection|Student[] $leaders
+ * @property-read string $display_name 顯示名稱
+ * @property-read bool $is_counted 是否列入抽獎集點
+ * @property-read \App\Models\ImgurImage|null $imgurImage
+ * @property-read Collection|\App\Models\Student[] $leaders
  * @property-read int|null $leaders_count
- * @property-read Collection|PaymentRecord[] $paymentRecords
+ * @property-read Collection|\App\Models\PaymentRecord[] $paymentRecords
  * @property-read int|null $payment_records_count
- * @property-read Collection|Record[] $records
+ * @property-read Collection|\App\Models\Record[] $records
  * @property-read int|null $records_count
- * @property-read Collection|Student[] $staffs
+ * @property-read Collection|\App\Models\Student[] $staffs
  * @property-read int|null $staffs_count
- * @property-read Collection|Student[] $students
+ * @property-read Collection|\App\Models\Student[] $students
  * @property-read int|null $students_count
- * @property-read TeaParty|null $teaParty
- * @property-read Collection|User[] $users
+ * @property-read \App\Models\TeaParty|null $teaParty
+ * @property-read Collection|\App\Models\User[] $users
  * @property-read int|null $users_count
+ * @method static \Database\Factories\ClubFactory factory(...$parameters)
  * @method static Builder|Club newModelQuery()
  * @method static Builder|Club newQuery()
  * @method static Builder|Club query()
@@ -230,9 +231,11 @@ class Club extends LoggableModel
     }
 
     /**
+     * @comment 是否列入抽獎集點
+     *
      * @return bool
      */
-    public function getIsCountedAttribute()
+    public function getIsCountedAttribute(): bool
     {
         if (!$this->clubType) {
             return false;
@@ -242,9 +245,11 @@ class Club extends LoggableModel
     }
 
     /**
+     * @comment 顯示名稱
+     *
      * @return string
      */
-    public function getDisplayNameAttribute()
+    public function getDisplayNameAttribute(): string
     {
         $html = '';
         if ($this->clubType) {

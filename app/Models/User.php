@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use App\Traits\LegacySerializeDate;
-use Database\Factories\UserFactory;
 use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
@@ -23,7 +22,7 @@ use Laratrust\Traits\LaratrustUserTrait;
  *
  * @property int $id
  * @property string $name
- * @property string|null $nid
+ * @property string|null $nid NID
  * @property string $email
  * @property string $password
  * @property string|null $confirm_code
@@ -32,33 +31,33 @@ use Laratrust\Traits\LaratrustUserTrait;
  * @property string|null $register_ip
  * @property string|null $last_login_at
  * @property string|null $last_login_ip
- * @property string|null $google2fa_secret
- * @property Carbon|null $agree_terms_at
  * @property string|null $remember_token
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
- * @property-read ClubSurvey|null $clubSurvey
- * @property-read Collection|DataUpdateRequest[] $dataUpdateRequests
+ * @property string|null $google2fa_secret
+ * @property Carbon|null $agree_terms_at 同意條款時間
+ * @property-read \App\Models\ClubSurvey|null $clubSurvey
+ * @property-read Collection|\App\Models\DataUpdateRequest[] $dataUpdateRequests
  * @property-read int|null $data_update_requests_count
- * @property-read Collection|Club[] $favoriteClubs
+ * @property-read Collection|\App\Models\Club[] $favoriteClubs
  * @property-read int|null $favorite_clubs_count
- * @property-read Club|null $club
- * @property-read string $display_name
- * @property-read bool $is_confirmed
- * @property-read bool $is_local_account
- * @property-read string $nid_or_email
+ * @property-read \App\Models\Club|null $club 所屬社團
+ * @property-read string $display_name 顯示名稱
+ * @property-read bool $is_confirmed 帳號是否完成驗證
+ * @property-read bool $is_local_account 是否為本地帳號（非NID登入）
+ * @property-read string $nid_or_email NID 或信箱
  * @property-read DatabaseNotificationCollection|DatabaseNotification[] $notifications
  * @property-read int|null $notifications_count
- * @property-read Collection|PaymentRecord[] $paymentRecords
+ * @property-read Collection|\App\Models\PaymentRecord[] $paymentRecords
  * @property-read int|null $payment_records_count
- * @property-read Collection|Permission[] $permissions
+ * @property-read Collection|\App\Models\Permission[] $permissions
  * @property-read int|null $permissions_count
- * @property-read Collection|Role[] $roles
+ * @property-read Collection|\App\Models\Role[] $roles
  * @property-read int|null $roles_count
- * @property-read Collection|Record[] $scannedRecords
+ * @property-read Collection|\App\Models\Record[] $scannedRecords
  * @property-read int|null $scanned_records_count
- * @property-read Student|null $student
- * @method static UserFactory factory(...$parameters)
+ * @property-read \App\Models\Student|null $student
+ * @method static \Database\Factories\UserFactory factory(...$parameters)
  * @method static Builder|User newModelQuery()
  * @method static Builder|User newQuery()
  * @method static Builder|User orWherePermissionIs($permission = '')
@@ -135,7 +134,7 @@ class User extends Authenticatable
     ];
 
     /**
-     * 帳號是否完成驗證
+     * @comment 帳號是否完成驗證
      *
      * @return bool
      */
@@ -145,7 +144,7 @@ class User extends Authenticatable
     }
 
     /**
-     * 是否為本地帳號（非NID登入）
+     * @comment 是否為本地帳號（非NID登入）
      *
      * @return bool
      */
@@ -189,6 +188,8 @@ class User extends Authenticatable
     }
 
     /**
+     * @comment 顯示名稱
+     *
      * @return string
      */
     public function getDisplayNameAttribute()
@@ -197,6 +198,8 @@ class User extends Authenticatable
     }
 
     /**
+     * @comment 所屬社團
+     *
      * @return Club|null
      */
     public function getClubAttribute()
@@ -209,9 +212,11 @@ class User extends Authenticatable
     }
 
     /**
+     * @comment NID 或信箱
+     *
      * @return string
      */
-    public function getNidOrEmailAttribute()
+    public function getNidOrEmailAttribute(): string
     {
         return $this->nid ?: $this->email;
     }
@@ -250,7 +255,7 @@ class User extends Authenticatable
      * @param Club $club
      * @return bool
      */
-    public function isFavoriteClub(Club $club)
+    public function isFavoriteClub(Club $club): bool
     {
         return $this->favoriteClubs()->where('club_id', $club->id)->exists();
     }

@@ -16,24 +16,24 @@ use Spatie\GoogleCalendar\Event;
 /**
  * App\Models\TeaParty
  *
- * @property int $club_id
- * @property string $name
- * @property Carbon|null $start_at
- * @property Carbon|null $end_at
- * @property string $location
- * @property string|null $url
- * @property string|null $google_event_id
+ * @property int $club_id 對應社團
+ * @property string $name 茶會名稱
+ * @property Carbon|null $start_at 開始時間
+ * @property Carbon|null $end_at 結束時間
+ * @property string $location 地點
+ * @property string|null $url 網址
+ * @property string|null $google_event_id Google日曆活動ID
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  * @property-read Collection|Activity[] $activities
  * @property-read int|null $activities_count
- * @property-read Club $club
- * @property-read Event|null $google_event
- * @property-read string|null $google_event_url
- * @property-read bool $is_ended
- * @property-read bool $is_started
- * @property-read string $state
- * @property-read string $state_for_list
+ * @property-read \App\Models\Club $club
+ * @property-read \Event|null $google_event Google 日曆事件
+ * @property-read string|null $google_event_url Google 日曆事件網址
+ * @property-read bool $is_ended 是否已結束
+ * @property-read bool $is_started 是否已開始
+ * @property-read string $state 狀態
+ * @property-read string $state_for_list （清單用）狀態
  * @method static Builder|TeaParty newModelQuery()
  * @method static Builder|TeaParty newQuery()
  * @method static Builder|TeaParty query()
@@ -83,9 +83,11 @@ class TeaParty extends LoggableModel
     }
 
     /**
+     * @comment Google 日曆事件
+     *
      * @return Event|null
      */
-    public function getGoogleEventAttribute()
+    public function getGoogleEventAttribute(): ?Event
     {
         if (!$this->google_event_id) {
             return null;
@@ -99,9 +101,11 @@ class TeaParty extends LoggableModel
     }
 
     /**
+     * @comment Google 日曆事件網址
+     *
      * @return string|null
      */
-    public function getGoogleEventUrlAttribute()
+    public function getGoogleEventUrlAttribute(): ?string
     {
         if (!$this->google_event_id) {
             return null;
@@ -119,25 +123,31 @@ class TeaParty extends LoggableModel
     }
 
     /**
+     * @comment 是否已開始
+     *
      * @return bool
      */
-    public function getIsStartedAttribute()
+    public function getIsStartedAttribute(): bool
     {
         return $this->start_at->isPast();
     }
 
     /**
+     * @comment 是否已結束
+     *
      * @return bool
      */
-    public function getIsEndedAttribute()
+    public function getIsEndedAttribute(): bool
     {
         return $this->end_at->isPast();
     }
 
     /**
+     * @comment 狀態
+     *
      * @return string
      */
-    public function getStateAttribute()
+    public function getStateAttribute(): string
     {
         if ($this->is_ended) {
             return 'ended';
@@ -150,9 +160,10 @@ class TeaParty extends LoggableModel
     }
 
     /**
+     * @comment （清單用）狀態
      * @return string
      */
-    public function getStateForListAttribute()
+    public function getStateForListAttribute(): string
     {
         // 給茶會清單使用的狀態，開始超過五天也算結束
         if ($this->is_ended || $this->start_at->clone()->addDays(5)->isPast()) {

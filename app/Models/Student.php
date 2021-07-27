@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use App\Traits\LegacySerializeDate;
-use Database\Factories\StudentFactory;
 use Eloquent;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -20,46 +19,46 @@ use Setting;
 /**
  * App\Models\Student
  *
- * @property string $nid
- * @property string $name
- * @property string|null $type
- * @property string|null $unit_id
- * @property string|null $class
- * @property string|null $unit_name
- * @property string|null $dept_id
- * @property string|null $dept_name
- * @property int|null $in_year
- * @property string|null $gender
- * @property bool $consider_as_freshman
- * @property bool $is_dummy
- * @property Carbon|null $fetch_at
+ * @property string $nid 學號
+ * @property string $name 姓名
+ * @property string|null $type 類型
+ * @property string|null $unit_id 科系ID
+ * @property string|null $class 班級
+ * @property string|null $unit_name 科系
+ * @property string|null $dept_id 學院ID
+ * @property string|null $dept_name 學院
+ * @property int|null $in_year 入學學年度
+ * @property string|null $gender 性別
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
- * @property-read \Illuminate\Database\Eloquent\Collection|Club[] $clubs
+ * @property bool $consider_as_freshman 視為新生
+ * @property bool $is_dummy 是否為虛構資料
+ * @property Carbon|null $fetch_at 最後一次由API獲取資料時間
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Club[] $clubs
  * @property-read int|null $clubs_count
- * @property-read ContactInformation|null $contactInformation
- * @property-read \Illuminate\Database\Eloquent\Collection|Record[] $countedRecords
+ * @property-read \App\Models\ContactInformation|null $contactInformation
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Record[] $countedRecords
  * @property-read int|null $counted_records_count
- * @property-read \Illuminate\Database\Eloquent\Collection|Feedback[] $feedback
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Feedback[] $feedback
  * @property-read int|null $feedback_count
- * @property-read \App\Club|null $club
- * @property-read string $display_name
- * @property-read bool $has_enough_counted_records
- * @property-read bool $has_enough_zones_of_counted_records
- * @property-read bool $is_freshman
- * @property-read bool $is_staff
- * @property-read string $masked_display_name
- * @property-read Collection $zones_of_counted_records
- * @property-read Qrcode|null $qrcode
- * @property-read \Illuminate\Database\Eloquent\Collection|Qrcode[] $qrcodes
+ * @property-read \App\Models\Club|null $club 所屬社團
+ * @property-read string $display_name 顯示名稱
+ * @property-read bool $has_enough_counted_records 已有足夠打卡紀錄
+ * @property-read bool $has_enough_zones_of_counted_records 有採計的打卡區域數量已足夠
+ * @property-read bool $is_freshman 是否為新生
+ * @property-read bool $is_staff 是否為攤位負責人
+ * @property-read string $masked_display_name 部份遮蔽後的顯示名稱
+ * @property-read Collection $zones_of_counted_records 有採計的打卡區域數量
+ * @property-read \App\Models\Qrcode|null $qrcode
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Qrcode[] $qrcodes
  * @property-read int|null $qrcodes_count
- * @property-read \Illuminate\Database\Eloquent\Collection|Record[] $records
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Record[] $records
  * @property-read int|null $records_count
- * @property-read StudentSurvey|null $studentSurvey
- * @property-read StudentTicket|null $studentTicket
- * @property-read Ticket|null $ticket
- * @property-read User $user
- * @method static StudentFactory factory(...$parameters)
+ * @property-read \App\Models\StudentSurvey|null $studentSurvey
+ * @property-read \App\Models\StudentTicket|null $studentTicket
+ * @property-read \App\Models\Ticket|null $ticket
+ * @property-read \App\Models\User $user
+ * @method static \Database\Factories\StudentFactory factory(...$parameters)
  * @method static \Illuminate\Database\Eloquent\Builder|Student freshman()
  * @method static \Illuminate\Database\Eloquent\Builder|Student newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Student newQuery()
@@ -193,7 +192,9 @@ class Student extends Model
     }
 
     /**
-     * @return \App\Club|null
+     * @comment 所屬社團
+     *
+     * @return Club|null
      */
     public function getClubAttribute()
     {
@@ -209,6 +210,8 @@ class Student extends Model
     }
 
     /**
+     * @comment 顯示名稱
+     *
      * @return string
      */
     public function getDisplayNameAttribute()
@@ -217,6 +220,8 @@ class Student extends Model
     }
 
     /**
+     * @comment 部份遮蔽後的顯示名稱
+     *
      * @return string
      */
     public function getMaskedDisplayNameAttribute()
@@ -233,7 +238,7 @@ class Student extends Model
     }
 
     /**
-     * 是否為新生
+     * @comment 是否為新生
      *
      * @return bool
      */
@@ -260,7 +265,7 @@ class Student extends Model
     }
 
     /**
-     * 是否為攤位負責人
+     * @comment 是否為攤位負責人
      *
      * @return bool
      */
@@ -275,6 +280,8 @@ class Student extends Model
     }
 
     /**
+     * @comment 已有足夠打卡紀錄
+     *
      * @return bool
      */
     public function getHasEnoughCountedRecordsAttribute()
@@ -288,6 +295,7 @@ class Student extends Model
     }
 
     /**
+     * @comment 有採計的打卡區域數量
      * @return Collection
      */
     public function getZonesOfCountedRecordsAttribute()
@@ -325,6 +333,8 @@ class Student extends Model
     }
 
     /**
+     * @comment 有採計的打卡區域數量已足夠
+     *
      * @return bool
      */
     public function getHasEnoughZonesOfCountedRecordsAttribute()

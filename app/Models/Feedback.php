@@ -16,29 +16,30 @@ use Spatie\Activitylog\Models\Activity;
  * App\Models\Feedback
  *
  * @property int $id
- * @property string|null $student_nid
- * @property int $club_id
- * @property string|null $phone
- * @property string|null $email
- * @property string|null $facebook
- * @property string|null $line
- * @property bool $include_phone
- * @property bool $include_email
- * @property bool $include_facebook
- * @property bool $include_line
- * @property string|null $message
- * @property string|null $custom_question
- * @property string|null $answer_of_custom_question
- * @property int|null $join_club_intention
- * @property int|null $join_tea_party_intention
+ * @property string|null $student_nid 對應學生
+ * @property int $club_id 對應社團
+ * @property string|null $phone 聯絡電話
+ * @property string|null $email 聯絡信箱
+ * @property string|null $facebook FB個人檔案連結
+ * @property string|null $line LINE ID
+ * @property bool $include_phone 聯絡電話
+ * @property bool $include_email 聯絡信箱
+ * @property bool $include_facebook FB個人檔案連結
+ * @property bool $include_line LINE ID
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
+ * @property string|null $message 附加訊息
+ * @property string|null $custom_question 社團自訂問題
+ * @property string|null $answer_of_custom_question 對於社團自訂問題的回答
+ * @property int|null $join_club_intention 加入社團意願
+ * @property int|null $join_tea_party_intention 參加迎新茶會意願
  * @property-read Collection|Activity[] $activities
  * @property-read int|null $activities_count
- * @property-read Club $club
- * @property-read string|null $join_club_intention_text
- * @property-read string|null $join_tea_party_intention_text
- * @property-read Student|null $student
+ * @property-read \App\Models\Club $club
+ * @property-read string|null $join_club_intention_text 加入社團意願
+ * @property-read string|null $join_tea_party_intention_text 參加迎新茶會意願
+ * @property-read \App\Models\Student|null $student
+ * @method static \Database\Factories\FeedbackFactory factory(...$parameters)
  * @method static Builder|Feedback newModelQuery()
  * @method static Builder|Feedback newQuery()
  * @method static Builder|Feedback query()
@@ -135,9 +136,11 @@ class Feedback extends LoggableModel
     }
 
     /**
+     * @comment 加入社團意願
+     *
      * @return string|null
      */
-    public function getJoinClubIntentionTextAttribute()
+    public function getJoinClubIntentionTextAttribute(): ?string
     {
         if ($this->join_club_intention === null) {
             return null;
@@ -147,9 +150,11 @@ class Feedback extends LoggableModel
     }
 
     /**
+     * @comment 參加迎新茶會意願
+     *
      * @return string|null
      */
-    public function getJoinTeaPartyIntentionTextAttribute()
+    public function getJoinTeaPartyIntentionTextAttribute(): ?string
     {
         if ($this->join_tea_party_intention === null) {
             return null;

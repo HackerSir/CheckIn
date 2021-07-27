@@ -13,16 +13,17 @@ use Spatie\Activitylog\Models\Activity;
 /**
  * App\Models\ContactInformation
  *
- * @property string $student_nid
- * @property string|null $phone
- * @property string|null $email
- * @property string|null $facebook
- * @property string|null $line
+ * @property string $student_nid 對應學生
+ * @property string|null $phone 聯絡電話
+ * @property string|null $email 聯絡信箱
+ * @property string|null $facebook FB個人檔案連結
+ * @property string|null $line LINE ID
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  * @property-read Collection|Activity[] $activities
  * @property-read int|null $activities_count
- * @property-read Student $student
+ * @property-read \App\Models\Student $student
+ * @method static \Database\Factories\ContactInformationFactory factory(...$parameters)
  * @method static Builder|ContactInformation newModelQuery()
  * @method static Builder|ContactInformation newQuery()
  * @method static Builder|ContactInformation query()

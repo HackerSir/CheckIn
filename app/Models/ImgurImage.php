@@ -14,16 +14,16 @@ use Illuminate\Support\Carbon;
  *
  * @property int $id
  * @property string $imgur_id
- * @property string $file_name
- * @property string $extension
+ * @property string $file_name 完整原始檔名
+ * @property string $extension 副檔名
  * @property string $delete_hash
- * @property int|null $club_id
+ * @property int|null $club_id 所屬社團
  * @property string $club_type
- * @property string|null $memo
+ * @property string|null $memo 備註
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
- * @property-read Model|Eloquent $club
- * @property-read string $url
+ * @property-read Model|\Eloquent $club
+ * @property-read string $url 取得圖片網址
  * @method static Builder|ImgurImage newModelQuery()
  * @method static Builder|ImgurImage newQuery()
  * @method static Builder|ImgurImage query()
@@ -62,16 +62,16 @@ class ImgurImage extends Model
     }
 
     /**
-     * 取得圖片網址
+     * @comment 取得圖片網址
      *
      * @return string
      */
-    public function getUrlAttribute()
+    public function getUrlAttribute(): string
     {
         return 'https://i.imgur.com/' . $this->imgur_id . '.' . $this->extension;
     }
 
-    public function thumbnail($suffix = null)
+    public function thumbnail($suffix = null): ?string
     {
         if (!empty($suffix) && !in_array($suffix, ['s', 'b', 't', 'm', 'l', 'h'])) {
             return null;

@@ -14,10 +14,11 @@ use Illuminate\Support\Carbon;
  * App\Models\Ticket
  *
  * @property int $id
- * @property string|null $student_nid
+ * @property string|null $student_nid 對應學生
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
- * @property-read Student|null $student
+ * @property-read \App\Models\Student|null $student
+ * @method static \Database\Factories\TicketFactory factory(...$parameters)
  * @method static Builder|Ticket newModelQuery()
  * @method static Builder|Ticket newQuery()
  * @method static Builder|Ticket query()

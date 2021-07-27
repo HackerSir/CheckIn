@@ -14,10 +14,11 @@ use Illuminate\Support\Carbon;
  *
  * @property int $id
  * @property string $api_key
- * @property int $count
- * @property int $total_count
+ * @property int $count 使用次數
+ * @property int $total_count 總使用次數
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
+ * @method static \Database\Factories\ApiKeyFactory factory(...$parameters)
  * @method static Builder|ApiKey newModelQuery()
  * @method static Builder|ApiKey newQuery()
  * @method static Builder|ApiKey query()

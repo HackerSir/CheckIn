@@ -14,13 +14,14 @@ use Spatie\Activitylog\Models\Activity;
  * App\Models\ExtraTicket
  *
  * @property int $id
- * @property string $nid
- * @property string $name
- * @property string|null $class
+ * @property string $nid 學號
+ * @property string $name 姓名
+ * @property string|null $class 系級
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  * @property-read Collection|Activity[] $activities
  * @property-read int|null $activities_count
+ * @method static \Database\Factories\ExtraTicketFactory factory(...$parameters)
  * @method static Builder|ExtraTicket newModelQuery()
  * @method static Builder|ExtraTicket newQuery()
  * @method static Builder|ExtraTicket query()

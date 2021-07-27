@@ -15,17 +15,18 @@ use Spatie\Activitylog\Models\Activity;
  * App\Models\Booth
  *
  * @property int $id
- * @property string|null $zone
- * @property int|null $club_id
- * @property string $name
- * @property float|null $longitude
- * @property float|null $latitude
+ * @property string|null $zone 區域
+ * @property int|null $club_id 對應社團
+ * @property string $name 名稱
+ * @property float|null $longitude 經度
+ * @property float|null $latitude 緯度
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  * @property-read Collection|Activity[] $activities
  * @property-read int|null $activities_count
- * @property-read Club|null $club
- * @property-read string $embed_map_url
+ * @property-read \App\Models\Club|null $club
+ * @property-read string $embed_map_url 內嵌地圖網址
+ * @method static \Database\Factories\BoothFactory factory(...$parameters)
  * @method static Builder|Booth newModelQuery()
  * @method static Builder|Booth newQuery()
  * @method static Builder|Booth query()
@@ -63,11 +64,11 @@ class Booth extends LoggableModel
     }
 
     /**
-     * 內嵌地圖網址
+     * @comment 內嵌地圖網址
      *
      * @return string
      */
-    public function getEmbedMapUrlAttribute()
+    public function getEmbedMapUrlAttribute(): string
     {
         $url = 'https://www.google.com/maps/embed/v1/place';
         $queryParameters = [

@@ -16,7 +16,7 @@ use Illuminate\Support\Carbon;
  * @property int $id
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
- * @property-read Collection|Qrcode[] $qrcodes
+ * @property-read Collection|\App\Models\Qrcode[] $qrcodes
  * @property-read int|null $qrcodes_count
  * @method static Builder|QrcodeSet newModelQuery()
  * @method static Builder|QrcodeSet newQuery()
