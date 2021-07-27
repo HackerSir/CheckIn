@@ -10,7 +10,6 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Carbon;
-use Spatie\Activitylog\Models\Activity;
 
 /**
  * App\Models\PaymentRecord
@@ -25,7 +24,7 @@ use Spatie\Activitylog\Models\Activity;
  * @property int|null $user_id 使用者
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
- * @property-read Collection|Activity[] $activities
+ * @property-read Collection|\App\Models\ActivityLog[] $activities
  * @property-read int|null $activities_count
  * @property-read \App\Models\Club $club
  * @property-read \App\Models\Student $student

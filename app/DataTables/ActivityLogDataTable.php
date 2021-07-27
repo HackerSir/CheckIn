@@ -2,8 +2,8 @@
 
 namespace App\DataTables;
 
+use App\Models\ActivityLog;
 use App\Presenters\ActivityLogPresenter;
-use Spatie\Activitylog\Models\Activity;
 use Yajra\DataTables\DataTableAbstract;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Builder;
@@ -24,14 +24,14 @@ class ActivityLogDataTable extends DataTable
 
         return $dataTable
             ->editColumn('action', 'activity-log.datatables.action')
-            ->editColumn('subject_id', function (Activity $activity) use ($activityLogPresenter) {
-                return $activityLogPresenter->getRouteLink($activity->subject_type, $activity->subject_id);
-            })->editColumn('subject_type', function (Activity $activity) {
-                return str_replace(['App\\', 'Models\\'], '', $activity->subject_type);
-            })->editColumn('causer_id', function (Activity $activity) use ($activityLogPresenter) {
+            ->editColumn('subject_id', function (ActivityLog $activityLog) use ($activityLogPresenter) {
+                return $activityLogPresenter->getRouteLink($activityLog->subject_type, $activityLog->subject_id);
+            })->editColumn('subject_type', function (ActivityLog $activityLog) {
+                return str_replace(['App\\', 'Models\\'], '', $activityLog->subject_type);
+            })->editColumn('causer_id', function (ActivityLog $activity) use ($activityLogPresenter) {
                 return $activityLogPresenter->getRouteLink($activity->causer_type, $activity->causer_id);
-            })->editColumn('causer_type', function (Activity $activity) {
-                return str_replace(['App\\', 'Models\\'], '', $activity->causer_type);
+            })->editColumn('causer_type', function (ActivityLog $activityLog) {
+                return str_replace(['App\\', 'Models\\'], '', $activityLog->causer_type);
             })
             ->rawColumns(['subject_id', 'causer_id', 'action']);
     }
@@ -39,10 +39,10 @@ class ActivityLogDataTable extends DataTable
     /**
      * Get query source of dataTable.
      *
-     * @param Activity $model
+     * @param ActivityLog $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function query(Activity $model)
+    public function query(ActivityLog $model)
     {
         return $model->newQuery()->select(
             'id',

@@ -12,7 +12,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Carbon;
-use Spatie\Activitylog\Models\Activity;
 
 /**
  * App\Models\Feedback
@@ -35,7 +34,7 @@ use Spatie\Activitylog\Models\Activity;
  * @property string|null $answer_of_custom_question 對於社團自訂問題的回答
  * @property int|null $join_club_intention 加入社團意願
  * @property int|null $join_tea_party_intention 參加迎新茶會意願
- * @property-read Collection|Activity[] $activities
+ * @property-read Collection|\App\Models\ActivityLog[] $activities
  * @property-read int|null $activities_count
  * @property-read \App\Models\Club $club
  * @property-read string|null $join_club_intention_text 加入社團意願

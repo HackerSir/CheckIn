@@ -11,7 +11,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Carbon;
-use Spatie\Activitylog\Models\Activity;
 
 /**
  * App\Models\Record
@@ -24,7 +23,7 @@ use Spatie\Activitylog\Models\Activity;
  * @property Carbon|null $updated_at
  * @property int|null $scanned_by_user_id 掃描者
  * @property bool $web_scan 使用網站內建掃描器掃描
- * @property-read Collection|Activity[] $activities
+ * @property-read Collection|\App\Models\ActivityLog[] $activities
  * @property-read int|null $activities_count
  * @property-read \App\Models\Club|null $club
  * @property-read \App\Models\User|null $scanBy

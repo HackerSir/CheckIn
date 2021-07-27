@@ -11,7 +11,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Carbon;
-use Spatie\Activitylog\Models\Activity;
 
 /**
  * App\Models\ClubType
@@ -22,7 +21,7 @@ use Spatie\Activitylog\Models\Activity;
  * @property bool $is_counted 是否列入抽獎集點
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
- * @property-read Collection|Activity[] $activities
+ * @property-read Collection|\App\Models\ActivityLog[] $activities
  * @property-read int|null $activities_count
  * @property-read Collection|\App\Models\Club[] $clubs
  * @property-read int|null $clubs_count

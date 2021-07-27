@@ -12,7 +12,6 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Carbon;
-use Spatie\Activitylog\Models\Activity;
 use Spatie\GoogleCalendar\Event;
 
 /**
@@ -27,7 +26,7 @@ use Spatie\GoogleCalendar\Event;
  * @property string|null $google_event_id Google日曆活動ID
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
- * @property-read Collection|Activity[] $activities
+ * @property-read Collection|\App\Models\ActivityLog[] $activities
  * @property-read int|null $activities_count
  * @property-read \App\Models\Club $club
  * @property-read \Event|null $google_event Google 日曆事件

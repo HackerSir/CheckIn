@@ -11,7 +11,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Carbon;
-use Spatie\Activitylog\Models\Activity;
 
 /**
  * App\Models\Booth
@@ -24,7 +23,7 @@ use Spatie\Activitylog\Models\Activity;
  * @property float|null $latitude 緯度
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
- * @property-read Collection|Activity[] $activities
+ * @property-read Collection|\App\Models\ActivityLog[] $activities
  * @property-read int|null $activities_count
  * @property-read \App\Models\Club|null $club
  * @property-read string $embed_map_url 內嵌地圖網址

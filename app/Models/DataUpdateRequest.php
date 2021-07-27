@@ -9,7 +9,6 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Carbon;
-use Spatie\Activitylog\Models\Activity;
 
 /**
  * App\Models\DataUpdateRequest
@@ -33,7 +32,7 @@ use Spatie\Activitylog\Models\Activity;
  * @property string|null $extra_info 額外資訊
  * @property string|null $original_custom_question 原自訂問題
  * @property string|null $custom_question 自訂問題
- * @property-read Collection|Activity[] $activities
+ * @property-read Collection|\App\Models\ActivityLog[] $activities
  * @property-read int|null $activities_count
  * @property-read \App\Models\Club $club
  * @property-read string $show_result 審核結果 HTML 標籤

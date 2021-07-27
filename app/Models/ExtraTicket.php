@@ -10,7 +10,6 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Carbon;
-use Spatie\Activitylog\Models\Activity;
 
 /**
  * App\Models\ExtraTicket
@@ -21,7 +20,7 @@ use Spatie\Activitylog\Models\Activity;
  * @property string|null $class 系級
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
- * @property-read Collection|Activity[] $activities
+ * @property-read Collection|\App\Models\ActivityLog[] $activities
  * @property-read int|null $activities_count
  * @method static \Database\Factories\ExtraTicketFactory factory(...$parameters)
  * @method static Builder|ExtraTicket newModelQuery()
