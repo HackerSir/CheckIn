@@ -3,10 +3,12 @@
 namespace App\Models;
 
 use App\Traits\LegacySerializeDate;
+use App\Traits\LogModelEvent;
 use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Carbon;
 use Spatie\Activitylog\Models\Activity;
 
@@ -36,12 +38,12 @@ use Spatie\Activitylog\Models\Activity;
  * @method static Builder|ContactInformation whereUpdatedAt($value)
  * @mixin Eloquent
  */
-class ContactInformation extends LoggableModel
+class ContactInformation extends Model
 {
+    use LogModelEvent;
     use LegacySerializeDate;
     use HasFactory;
 
-    protected static $logName = 'contact-information';
     public $incrementing = false;
     protected $primaryKey = 'student_nid';
     protected $keyType = 'string';

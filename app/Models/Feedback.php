@@ -3,11 +3,13 @@
 namespace App\Models;
 
 use App\Traits\LegacySerializeDate;
+use App\Traits\LogModelEvent;
 use Dyrynda\Database\Support\NullableFields;
 use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Carbon;
 use Spatie\Activitylog\Models\Activity;
@@ -63,8 +65,9 @@ use Spatie\Activitylog\Models\Activity;
  * @method static Builder|Feedback whereUpdatedAt($value)
  * @mixin Eloquent
  */
-class Feedback extends LoggableModel
+class Feedback extends Model
 {
+    use LogModelEvent;
     use LegacySerializeDate;
     use NullableFields;
     use HasFactory;
@@ -74,7 +77,6 @@ class Feedback extends LoggableModel
         1 => '考慮中',
         0 => '不參加',
     ];
-    protected static $logName = 'feedback';
     protected $fillable = [
         'student_nid',
         'club_id',

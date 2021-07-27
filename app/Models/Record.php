@@ -3,10 +3,12 @@
 namespace App\Models;
 
 use App\Traits\LegacySerializeDate;
+use App\Traits\LogModelEvent;
 use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Carbon;
 use Spatie\Activitylog\Models\Activity;
@@ -41,12 +43,12 @@ use Spatie\Activitylog\Models\Activity;
  * @method static Builder|Record whereWebScan($value)
  * @mixin Eloquent
  */
-class Record extends LoggableModel
+class Record extends Model
 {
+    use LogModelEvent;
     use LegacySerializeDate;
     use HasFactory;
 
-    protected static $logName = 'record';
     protected $fillable = [
         'student_nid',
         'club_id',

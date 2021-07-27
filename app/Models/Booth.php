@@ -3,10 +3,12 @@
 namespace App\Models;
 
 use App\Traits\LegacySerializeDate;
+use App\Traits\LogModelEvent;
 use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Carbon;
 use Spatie\Activitylog\Models\Activity;
@@ -40,12 +42,11 @@ use Spatie\Activitylog\Models\Activity;
  * @method static Builder|Booth whereZone($value)
  * @mixin Eloquent
  */
-class Booth extends LoggableModel
+class Booth extends Model
 {
+    use LogModelEvent;
     use LegacySerializeDate;
     use HasFactory;
-
-    protected static $logName = 'booth';
 
     protected $fillable = [
         'zone',

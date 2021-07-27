@@ -3,10 +3,12 @@
 namespace App\Models;
 
 use App\Traits\LegacySerializeDate;
+use App\Traits\LogModelEvent;
 use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Carbon;
 use Spatie\Activitylog\Models\Activity;
 
@@ -33,12 +35,12 @@ use Spatie\Activitylog\Models\Activity;
  * @method static Builder|ExtraTicket whereUpdatedAt($value)
  * @mixin Eloquent
  */
-class ExtraTicket extends LoggableModel
+class ExtraTicket extends Model
 {
+    use LogModelEvent;
     use LegacySerializeDate;
     use HasFactory;
 
-    protected static $logName = 'extra-ticket';
     protected $fillable = [
         'id',
         'nid',

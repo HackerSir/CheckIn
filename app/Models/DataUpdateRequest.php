@@ -3,9 +3,11 @@
 namespace App\Models;
 
 use App\Traits\LegacySerializeDate;
+use App\Traits\LogModelEvent;
 use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Carbon;
 use Spatie\Activitylog\Models\Activity;
 
@@ -63,11 +65,11 @@ use Spatie\Activitylog\Models\Activity;
  * @method static Builder|DataUpdateRequest whereUserId($value)
  * @mixin Eloquent
  */
-class DataUpdateRequest extends LoggableModel
+class DataUpdateRequest extends Model
 {
+    use LogModelEvent;
     use LegacySerializeDate;
 
-    protected static $logName = 'data-update-request';
     protected $fillable = [
         'user_id',
         'club_id',

@@ -3,9 +3,11 @@
 namespace App\Models;
 
 use App\Traits\LegacySerializeDate;
+use App\Traits\LogModelEvent;
 use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Carbon;
 use Spatie\Activitylog\Models\Activity;
@@ -30,11 +32,11 @@ use Spatie\Activitylog\Models\Activity;
  * @method static Builder|StudentTicket whereUpdatedAt($value)
  * @mixin Eloquent
  */
-class StudentTicket extends LoggableModel
+class StudentTicket extends Model
 {
+    use LogModelEvent;
     use LegacySerializeDate;
 
-    protected static $logName = 'student-ticket';
     protected $fillable = [
         'id',
         'student_nid',
