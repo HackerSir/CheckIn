@@ -19,5 +19,5 @@ Broadcast::channel('student.{student}', function (User $user, Student $student) 
 });
 
 Broadcast::channel('admin.test', function (User $user) {
-    return $user->can('broadcast.manage');
+    return $user->isAbleTo('broadcast.manage');
 });

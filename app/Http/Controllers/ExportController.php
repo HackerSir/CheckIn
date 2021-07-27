@@ -577,7 +577,7 @@ class ExportController extends Controller
         $paymentRecordQuery = PaymentRecord::with('club', 'user.student');
         /** @var User $user */
         $user = auth()->user();
-        if (!$user->can('payment-record.manage')) {
+        if (!$user->isAbleTo('payment-record.manage')) {
             $paymentRecordQuery->where('club_id', $user->club->id);
         }
         //建立

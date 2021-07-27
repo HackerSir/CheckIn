@@ -17,7 +17,7 @@ class PaymentRecordRequest extends FormRequest
         /** @var User $user */
         $user = $this->user();
 
-        return $user->can('payment-record.manage') || $user->club;
+        return $user->isAbleTo('payment-record.manage') || $user->club;
     }
 
     /**

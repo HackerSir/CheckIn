@@ -18,7 +18,7 @@ class PaymentRecordPolicy
     public function before(User $user, $ability)
     {
         //若有權限，直接允許使用所有功能
-        if ($user->can('payment-record.manage')) {
+        if ($user->isAbleTo('payment-record.manage')) {
             return true;
         }
         //無社團

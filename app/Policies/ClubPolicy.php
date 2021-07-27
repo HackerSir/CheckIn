@@ -22,7 +22,7 @@ class ClubPolicy
             return false;
         }
         //若有權限，直接允許使用所有功能
-        if ($user->can('club.manage')) {
+        if ($user->isAbleTo('club.manage')) {
             return true;
         }
 

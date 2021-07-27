@@ -18,7 +18,7 @@ class ContactInformationPolicy
     public function before(User $user, $ability)
     {
         //若無權限，直接阻止使用所有功能
-        if (!$user->can('student.manage')) {
+        if (!$user->isAbleTo('student.manage')) {
             return false;
         }
 

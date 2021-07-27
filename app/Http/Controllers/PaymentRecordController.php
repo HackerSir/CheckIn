@@ -30,7 +30,7 @@ class PaymentRecordController extends Controller
     {
         /** @var User $user */
         $user = auth()->user();
-        if (!$user->can('payment-record.manage')) {
+        if (!$user->isAbleTo('payment-record.manage')) {
             $dataTable->addScope(new PaymentRecordClubScope($user->club));
         }
 
@@ -66,7 +66,7 @@ class PaymentRecordController extends Controller
             'nid'     => strtoupper($request->get('nid')),
             'is_paid' => $request->has('is_paid'),
             'user_id' => $user->id,
-            'club_id' => $user->can('payment-record.manage') ? $request->get('club_id') : $user->club->id,
+            'club_id' => $user->isAbleTo('payment-record.manage') ? $request->get('club_id') : $user->club->id,
         ]));
 
         return redirect()->route('payment-record.show', $paymentRecord)->with('success', '繳費紀錄已建立');
@@ -114,7 +114,7 @@ class PaymentRecordController extends Controller
             'nid'     => strtoupper($request->get('nid')),
             'is_paid' => $request->has('is_paid'),
             'user_id' => $user->id,
-            'club_id' => $user->can('payment-record.manage') ? $request->get('club_id') : $user->club->id,
+            'club_id' => $user->isAbleTo('payment-record.manage') ? $request->get('club_id') : $user->club->id,
         ]));
 
         return redirect()->route('payment-record.show', $paymentRecord)->with('success', '繳費紀錄已更新');
