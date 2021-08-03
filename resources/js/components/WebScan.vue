@@ -36,17 +36,19 @@
 </template>
 
 <script>
-    export default {
-        name: "WebScan",
-        data() {
-            return {
-                code: 'XXXXXXXX',
-                message: '啟動中...',
-                showModal: false,
-                alertLevel: 'info',
-                alertStudentName: null,
-                alertMessage: null
-            }
+import UrlPattern from 'url-pattern'
+
+export default {
+    name: "WebScan",
+    data() {
+        return {
+            code: 'XXXXXXXX',
+            message: '啟動中...',
+            showModal: false,
+            alertLevel: 'info',
+            alertStudentName: null,
+            alertMessage: null
+        }
         },
         mounted() {
             this.message = '等待掃描...';
@@ -93,7 +95,7 @@
             onDecode(decodedString) {
                 this.message = '掃描結果： ' + decodedString;
                 // 檢查是否為條碼
-                let scanPattern = new UrlPattern(/\/qr\/(.*)$/, ['code']);
+                let scanPattern = new UrlPattern(/\/qr\/(.*?)(?:\?.*)?$/, ['code']);
                 let scanMatch = scanPattern.match(decodedString);
                 if (scanMatch == null || scanMatch.code == null) {
                     // 非條碼
