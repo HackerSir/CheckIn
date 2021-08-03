@@ -33,11 +33,14 @@
     <div class="jumbotron text-center pb-0">
         <h1 class="font-weight-bold">{{ config('app.cht_name') }}</h1>
         <svg viewBox="0 0 400 40" style="max-width: 400px">
-            <text x="50%" y="20" text-anchor="middle" alignment-baseline="middle" font-size="1.75rem" font-weight="500">2020 逢甲社團博覽會集點打卡</text>
+            <text x="50%" y="20" text-anchor="middle" alignment-baseline="middle" font-size="1.75rem" font-weight="500">
+                2021 逢甲社團博覽會集點打卡
+            </text>
         </svg>
         <div></div>
         <svg viewBox="0 0 320 40" fill="#007bff" style="max-width: 320px; margin-top: 30px">
-            <text x="50%" y="20" text-anchor="middle" alignment-baseline="middle" font-size="1.5rem">⬇ 點擊下方區塊開始使用 ⬇</text>
+            <text x="50%" y="20" text-anchor="middle" alignment-baseline="middle" font-size="1.5rem">⬇ 點擊下方區塊開始使用 ⬇
+            </text>
         </svg>
     </div>
     <div class="row mt-3 pb-3">

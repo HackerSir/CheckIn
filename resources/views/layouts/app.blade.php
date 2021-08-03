@@ -17,7 +17,7 @@
     <meta property="og:title" content="{{ $title }}">
     <meta property="og:url" content="{{ URL::current() }}">
     <meta property="og:image" content="@yield('og_image', asset('img/hacker.png'))">
-    <meta property="og:description" content="2020 逢甲社團博覽會集點打卡">
+    <meta property="og:description" content="2021 逢甲社團博覽會集點打卡">
     <meta property="og:type" content="website">
 
     <meta name="theme-color" content="#f8f9fa">
