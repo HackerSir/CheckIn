@@ -1,18 +1,18 @@
 @servers(['web' => 'deployer@' . $server])
 
 @setup
-    $repository = 'https://github.com/HackerSir/CheckIn.git';
-    $checkoutBranch = '2020';
-    $websiteName = 'CheckIn';
-    $releases_dir = '/var/www/' . $websiteName . '/releases';
-    $app_dir = '/var/www/' . $websiteName;
-    $release = date('YmdHis');
-    $new_release_dir = $releases_dir .'/'. $release;
+$repository = 'https://github.com/HackerSir/CheckIn.git';
+$checkoutBranch = '2021';
+$websiteName = 'CheckIn';
+$releases_dir = '/var/www/' . $websiteName . '/releases';
+$app_dir = '/var/www/' . $websiteName;
+$release = date('YmdHis');
+$new_release_dir = $releases_dir .'/'. $release;
 @endsetup
 
 @story('deploy')
-    clone_repository
-    update_symlink_env
+clone_repository
+update_symlink_env
     run_composer
     stop_horizon
     yarn_install
