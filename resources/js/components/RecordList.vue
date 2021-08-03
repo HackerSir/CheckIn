@@ -1,15 +1,15 @@
 <template>
     <div>
         <ul class="list-group">
-            <li class="list-group-item" v-if="loading">
+            <li v-if="loading" class="list-group-item">
                 <i class="fas fa-spinner fa-pulse mr-2"></i>讀取中……
             </li>
             <template v-else>
-                <li class="list-group-item d-flex flex-column flex-md-row" v-for="record in records">
+                <li v-for="record in records" class="list-group-item d-flex flex-column flex-md-row">
                     <div>
                         <h4 class="mb-1"><a :href="club_url(record.club_id)">{{ record.club }}</a>
                             <span v-html="record.club_type_tag"></span>
-                            <span class='badge badge-secondary' v-if="!record.is_counted">不列入集點</span>
+                            <span v-if="!record.is_counted" class='badge badge-secondary'>不列入集點</span>
                         </h4>
                         <div class="text-muted d-flex flex-wrap">
                             <div :title="$moment(record.created_at).format('YYYY-MM-DD HH:mm:ss')"
@@ -17,9 +17,9 @@
                                 <i class="fas fa-clock"></i>
                                 {{ $moment(record.created_at).fromNow() }}
                             </div>
-                            <div class="d-inline-block" v-if="record.booth || record.booth_zone">
+                            <div v-if="record.booth || record.booth_zone" class="d-inline-block">
                                 <i class="fas fa-store"></i>
-                                <span class="badge badge-secondary" v-if="record.booth_zone">{{
+                                <span v-if="record.booth_zone" class="badge badge-secondary">{{
                                         record.booth_zone
                                     }}</span>
                                 {{ record.booth }}
@@ -27,16 +27,16 @@
                         </div>
                     </div>
                     <div class="ml-md-auto align-self-center">
-                        <a :href="feedback_show_url(record.feedback_id)" class="btn btn-success"
-                           v-if="record.feedback_id !== null">
+                        <a v-if="record.feedback_id !== null" :href="feedback_show_url(record.feedback_id)"
+                           class="btn btn-success">
                             <i class="fa fa-search"></i> 檢視回饋資料
                         </a>
-                        <a :href="feedback_edit_url(record.club_id)" class="btn btn-primary" v-else>
+                        <a v-else :href="feedback_edit_url(record.club_id)" class="btn btn-primary">
                             <i class="fa fa-edit"></i> 按我完成集點
                         </a>
                     </div>
                 </li>
-                <li class="list-group-item" v-if="records.length === 0">
+                <li v-if="records.length === 0" class="list-group-item">
                     尚無打卡紀錄，快去打卡吧
                 </li>
             </template>
@@ -44,13 +44,13 @@
         <!--  Alert Modal -->
         <transition @enter="startTransitionModal" @after-enter="endTransitionModal"
                     @before-leave="endTransitionModal" @after-leave="startTransitionModal">
-            <div class="modal fade" v-if="showAlertModal" id="alertModal" tabindex="-1"
-                 role="dialog" aria-labelledby="alertModalLabel" aria-hidden="true" ref="modal">
+            <div v-if="showAlertModal" id="alertModal" ref="modal" aria-hidden="true"
+                 aria-labelledby="alertModalLabel" class="modal fade" role="dialog" tabindex="-1">
                 <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="alertModalLabel">打卡成功</h5>
-                            <button type="button" class="close" @click="onModalClosed" aria-label="Close">
+                            <h5 id="alertModalLabel" class="modal-title">打卡成功</h5>
+                            <button aria-label="Close" class="close" type="button" @click="onModalClosed">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
@@ -60,7 +60,7 @@
                             </span>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-primary" @click="onModalClosed">確認</button>
+                            <button class="btn btn-primary" type="button" @click="onModalClosed">確認</button>
                         </div>
                     </div>
                 </div>
@@ -69,8 +69,8 @@
         <!-- Confirm Modal -->
         <transition @enter="startTransitionModal" @after-enter="endTransitionModal"
                     @before-leave="endTransitionModal" @after-leave="startTransitionModal">
-            <div class="modal fade" v-if="showConfirmModal" id="confirmModal" tabindex="-1"
-                 role="dialog" aria-labelledby="confirmModalLabel" aria-hidden="true" ref="modal">
+            <div v-if="showConfirmModal" id="confirmModal" ref="modal" aria-hidden="true"
+                 aria-labelledby="confirmModalLabel" class="modal fade" role="dialog" tabindex="-1">
                 <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
                         <div class="modal-body">
@@ -82,20 +82,23 @@
                             <div class="d-flex flex-column align-items-center">
                                 <h4>加入社團意願</h4>
                                 <div class="btn-group btn-group-toggle">
-                                    <label class="btn btn-outline-secondary"
-                                           :class="{ 'active': joinClubIntention === 2 }">
-                                        <input type="radio" :value="2" name="join_club_intention" required
-                                               v-model="joinClubIntention"> 參加
+                                    <label :class="{ 'active': joinClubIntention === 2 }"
+                                           class="btn btn-outline-secondary">
+                                        <input v-model="joinClubIntention" :value="2" name="join_club_intention"
+                                               required
+                                               type="radio"> 參加
                                     </label>
-                                    <label class="btn btn-outline-secondary"
-                                           :class="{ 'active': joinClubIntention === 1 }">
-                                        <input type="radio" :value="1" name="join_club_intention" required
-                                               v-model="joinClubIntention"> 考慮中
+                                    <label :class="{ 'active': joinClubIntention === 1 }"
+                                           class="btn btn-outline-secondary">
+                                        <input v-model="joinClubIntention" :value="1" name="join_club_intention"
+                                               required
+                                               type="radio"> 考慮中
                                     </label>
-                                    <label class="btn btn-outline-secondary"
-                                           :class="{ 'active': joinClubIntention === 0 }">
-                                        <input type="radio" :value="0" name="join_club_intention" required
-                                               v-model="joinClubIntention"> 不參加
+                                    <label :class="{ 'active': joinClubIntention === 0 }"
+                                           class="btn btn-outline-secondary">
+                                        <input v-model="joinClubIntention" :value="0" name="join_club_intention"
+                                               required
+                                               type="radio"> 不參加
                                     </label>
                                 </div>
                                 <h4>參與迎新茶會意願</h4>
@@ -110,20 +113,23 @@
                                     </span>
                                 </template>
                                 <div class="btn-group btn-group-toggle">
-                                    <label class="btn btn-outline-secondary"
-                                           :class="{ 'active': joinTeaPartyIntention === 2 }">
-                                        <input type="radio" :value="2" name="join_tea_party_intention" required
-                                               v-model="joinTeaPartyIntention"> 參加
+                                    <label :class="{ 'active': joinTeaPartyIntention === 2 }"
+                                           class="btn btn-outline-secondary">
+                                        <input v-model="joinTeaPartyIntention" :value="2"
+                                               name="join_tea_party_intention" required
+                                               type="radio"> 參加
                                     </label>
-                                    <label class="btn btn-outline-secondary"
-                                           :class="{ 'active': joinTeaPartyIntention === 1 }">
-                                        <input type="radio" :value="1" name="join_tea_party_intention" required
-                                               v-model="joinTeaPartyIntention"> 考慮中
+                                    <label :class="{ 'active': joinTeaPartyIntention === 1 }"
+                                           class="btn btn-outline-secondary">
+                                        <input v-model="joinTeaPartyIntention" :value="1"
+                                               name="join_tea_party_intention" required
+                                               type="radio"> 考慮中
                                     </label>
-                                    <label class="btn btn-outline-secondary"
-                                           :class="{ 'active': joinTeaPartyIntention === 0 }">
-                                        <input type="radio" :value="0" name="join_tea_party_intention" required
-                                               v-model="joinTeaPartyIntention"> 不參加
+                                    <label :class="{ 'active': joinTeaPartyIntention === 0 }"
+                                           class="btn btn-outline-secondary">
+                                        <input v-model="joinTeaPartyIntention" :value="0"
+                                               name="join_tea_party_intention" required
+                                               type="radio"> 不參加
                                     </label>
                                 </div>
                             </div>
@@ -131,8 +137,9 @@
                         <div class="modal-footer">
                             <!--                            <button type="button" class="btn btn-secondary" @click="onModalClosed">稍後再說-->
                             <!--                            </button>-->
-                            <button type="button" class="btn btn-primary" id="confirmButton" @click="onModalConfirmed"
-                                    :disabled="!confirmButtonEnabled">
+                            <button id="confirmButton" :disabled="!confirmButtonEnabled" class="btn btn-primary"
+                                    type="button"
+                                    @click="onModalConfirmed">
                                 繼續
                             </button>
                         </div>
@@ -140,7 +147,7 @@
                 </div>
             </div>
         </transition>
-        <div class="modal-backdrop fade d-none" ref="backdrop"></div>
+        <div ref="backdrop" class="modal-backdrop fade d-none"></div>
     </div>
 </template>
 

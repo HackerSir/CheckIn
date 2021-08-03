@@ -3,13 +3,13 @@
         <div class="d-flex flex-column flex-sm-row flex-wrap">
             <div class="mt-1">
                 根據類型過濾：
-                <select id="type_select" class="custom-select" v-model="selectedClubType" @change="onSelectChange"
-                        style="width: inherit">
+                <select id="type_select" v-model="selectedClubType" class="custom-select" style="width: inherit"
+                        @change="onSelectChange">
                     <option :value="null">- 顯示全部 -</option>
-                    <option :value="id" v-for="(name, id) in clubTypes">{{ name }}</option>
+                    <option v-for="(name, id) in clubTypes" :value="id">{{ name }}</option>
                 </select>
-                <button class="btn btn-secondary" type="button" data-toggle="collapse"
-                        data-target="#clubTypeDescription" aria-expanded="false" aria-controls="collapseExample">
+                <button aria-controls="collapseExample" aria-expanded="false" class="btn btn-secondary"
+                        data-target="#clubTypeDescription" data-toggle="collapse" type="button">
                     <i class="fas fa-question"></i>
                 </button>
                 <button class="btn btn-success" type="button" @click="updateRandomSeed">
@@ -18,10 +18,10 @@
             </div>
             <div class="ml-sm-auto mt-1 d-inline-flex align-items-center">
                 <p class="text-nowrap mb-0 mr-1"><span v-html="searchIndicator"></span> 搜尋</p>
-                <input type="text" class="form-control" v-model="searchKeyword" @input="onKeywordChange">
+                <input v-model="searchKeyword" class="form-control" type="text" @input="onKeywordChange">
             </div>
         </div>
-        <div class="collapse" id="clubTypeDescription">
+        <div id="clubTypeDescription" class="collapse">
             <div class="card card-body">
                 <ul>
                     <li><strong>學藝性</strong>：活動內容多較靜態，可再細分為藝文、學術、宗教、技藝性等，並於校內舉行各種學術性與藝術性的展覽以及研究。</li>
@@ -34,16 +34,16 @@
             </div>
         </div>
         <div class="row mt-1">
-            <div class="col-12 col-lg-6 mt-1" v-for="club in clubs">
+            <div v-for="club in clubs" class="col-12 col-lg-6 mt-1">
                 <club-card :club="club"
                            :favorited="club.isFavorite"
                 ></club-card>
             </div>
         </div>
-        <infinite-loading @infinite="infiniteHandler" :identifier="identifier" ref="infiniteLoading">
+        <infinite-loading ref="infiniteLoading" :identifier="identifier" @infinite="infiniteHandler">
             <div slot="no-results">
                 <div class="alert alert-danger">
-                    <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                    <i aria-hidden="true" class="fa fa-exclamation-triangle"></i>
                     <span v-if="selectedClubType">在「{{ clubTypes[selectedClubType] }}」類型中</span>找不到相關社團
                 </div>
             </div>
@@ -51,7 +51,7 @@
                 沒有更多社團了 ヽ(ﾟ∀ﾟ*)ノ
             </span>
             <span slot="spinner">
-                <i class="fa fa-spinner fa-pulse fa-fw fa-3x mt-3" aria-hidden="true"></i>
+                <i aria-hidden="true" class="fa fa-spinner fa-pulse fa-fw fa-3x mt-3"></i>
             </span>
         </infinite-loading>
     </div>
