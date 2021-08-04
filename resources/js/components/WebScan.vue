@@ -109,8 +109,8 @@ export default {
             // 重置 camera，使其能連續多次讀取同一組 QRCode
             // https://gruhn.github.io/vue-qrcode-reader/demos/ScanSameQrcodeMoreThanOnce.html
             this.pause()
-            await this.timeout(500)
-            this.unpause()
+            // await this.timeout(500)
+            // this.unpause()
         },
         unpause() {
             this.camera = 'auto'
@@ -159,6 +159,8 @@ export default {
                 this.alertStudentName = data.student_name;
                 this.alertMessage = data.message;
             });
+            // 啟動鏡頭，使其能夠繼續掃描
+            this.unpause()
         },
         btnScanAndView() {
             // 掃描並檢視（直接跳轉至原掃描畫面）
