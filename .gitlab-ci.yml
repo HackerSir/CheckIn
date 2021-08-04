@@ -81,6 +81,7 @@ outdated-composer:
         paths:
             - vendor
     script:
+        - sudo composer self-update
         - composer config github-oauth.github.com $COMPOSER_GITHUB_TOKEN
         - composer install --prefer-dist --no-ansi --no-interaction --no-progress --no-scripts --no-suggest
         - composer outdated --ansi
