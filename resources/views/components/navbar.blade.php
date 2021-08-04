@@ -11,7 +11,7 @@
             <li class="nav-item" style="font-size: 20px">
                 <a href="{{ route('my-qrcode') }}" class="nav-link"><i class="fas fa-qrcode mx-2"></i></a>
             </li>
-            @if(auth()->user()->club)
+            @if(auth()->user() && auth()->user()->club)
                 <li class="nav-item" style="font-size: 20px">
                     <a href="{{ route('qrcode.web-scan') }}" class="nav-link"><i class="fas fa-camera mx-2"></i></a>
                 </li>
