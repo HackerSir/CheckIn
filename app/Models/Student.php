@@ -58,6 +58,7 @@ use Setting;
  * @property-read \App\Models\StudentTicket|null $studentTicket
  * @property-read \App\Models\Ticket|null $ticket
  * @property-read \App\Models\User $user
+ *
  * @method static \Database\Factories\StudentFactory factory(...$parameters)
  * @method static \Illuminate\Database\Eloquent\Builder|Student freshman()
  * @method static \Illuminate\Database\Eloquent\Builder|Student newModelQuery()
@@ -296,6 +297,7 @@ class Student extends Model
 
     /**
      * @comment 有採計的打卡區域數量
+     *
      * @return Collection
      */
     public function getZonesOfCountedRecordsAttribute()
@@ -348,7 +350,7 @@ class Student extends Model
     }
 
     /**
-     * @param Builder|static $query
+     * @param  Builder|static  $query
      */
     public function scopeFreshman($query)
     {
@@ -367,7 +369,7 @@ class Student extends Model
     }
 
     /**
-     * @param Builder|static $query
+     * @param  Builder|static  $query
      */
     public function scopeNonFreshman($query)
     {

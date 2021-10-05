@@ -8,7 +8,8 @@ use Exception;
 class ClubObserver
 {
     /**
-     * @param Club $club
+     * @param  Club  $club
+     *
      * @throws Exception
      */
     public function deleting(Club $club)

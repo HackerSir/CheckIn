@@ -10,7 +10,7 @@ class UserObserver
     /**
      * Handle the user "creating" event.
      *
-     * @param User $user
+     * @param  User  $user
      * @return void
      */
     public function creating(User $user)
@@ -24,7 +24,7 @@ class UserObserver
     /**
      * Handle the user "saving" event.
      *
-     * @param User $user
+     * @param  User  $user
      * @return void
      */
     public function saving(User $user)

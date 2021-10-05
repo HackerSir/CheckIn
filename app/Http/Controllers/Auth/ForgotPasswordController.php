@@ -33,8 +33,9 @@ class ForgotPasswordController extends Controller
     /**
      * Validate the email for the given request.
      *
-     * @param Request $request
+     * @param  Request  $request
      * @return void
+     *
      * @throws ValidationException
      */
     protected function validateEmail(Request $request)

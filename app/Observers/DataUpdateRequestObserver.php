@@ -8,7 +8,8 @@ use Exception;
 class DataUpdateRequestObserver
 {
     /**
-     * @param DataUpdateRequest $dataUpdateRequest
+     * @param  DataUpdateRequest  $dataUpdateRequest
+     *
      * @throws Exception
      */
     public function deleting(DataUpdateRequest $dataUpdateRequest)

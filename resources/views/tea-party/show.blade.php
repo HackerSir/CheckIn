@@ -49,7 +49,8 @@
                 <dt class="col-4 col-md-2">網址</dt>
                 <dd class="col-8 col-md-10">
                     @if($teaParty->url)
-                        <a href="{{ $teaParty->url }}" target="_blank">{{ $teaParty->url }}</a>
+                        <a href="{{ $teaParty->url }}" target="_blank"
+                           rel="noopener noreferrer">{{ $teaParty->url }}</a>
                     @endif
                 </dd>
             </dl>

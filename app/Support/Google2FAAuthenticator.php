@@ -16,8 +16,8 @@ class Google2FAAuthenticator extends Authenticator
     /**
      * Authenticator constructor.
      *
-     * @param IlluminateRequest $request
-     * @param User $user
+     * @param  IlluminateRequest  $request
+     * @param  User  $user
      */
     public function __construct(IlluminateRequest $request, User $user)
     {

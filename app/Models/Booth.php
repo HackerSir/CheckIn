@@ -27,6 +27,7 @@ use Illuminate\Support\Carbon;
  * @property-read int|null $activities_count
  * @property-read \App\Models\Club|null $club
  * @property-read string $embed_map_url 內嵌地圖網址
+ *
  * @method static \Database\Factories\BoothFactory factory(...$parameters)
  * @method static Builder|Booth newModelQuery()
  * @method static Builder|Booth newQuery()

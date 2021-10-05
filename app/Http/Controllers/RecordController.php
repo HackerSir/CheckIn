@@ -12,7 +12,7 @@ class RecordController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @param RecordsDataTable $dataTable
+     * @param  RecordsDataTable  $dataTable
      * @return JsonResponse|Response|View
      */
     public function index(RecordsDataTable $dataTable)

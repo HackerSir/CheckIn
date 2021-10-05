@@ -98,7 +98,8 @@
                         <dd class="col-sm-9">
                             @if($club->url)
                                 <p style="word-break: break-all;">
-                                    {{ link_to($club->url, $club->url, ['target' => '_blank']) }}
+                                    <a href="{{ $club->url }}" target="_blank"
+                                       rel="noopener noreferrer">{{ $club->url }}</a>
                                 </p>
                             @else
                                 <span class="text-muted">（無）</span>
@@ -262,7 +263,8 @@
                         @if($club->teaParty->url)
                             <dt class="col-12 col-sm-4 col-lg-2"><i class="fas fa-link mr-2"></i>網址</dt>
                             <dd class="col-12 col-sm-8 col-lg-10">
-                                <a href="{{ $club->teaParty->url }}" target="_blank">{{ $club->teaParty->url }}</a>
+                                <a href="{{ $club->teaParty->url }}" target="_blank"
+                                   rel="noopener noreferrer">{{ $club->teaParty->url }}</a>
                             </dd>
                         @endif
                     </dl>

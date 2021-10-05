@@ -14,7 +14,8 @@ class QrcodeQrcodeSetScope implements DataTableScope
 
     /**
      * QrcodeQrcodeSetScope constructor.
-     * @param int $qrcodeSetId
+     *
+     * @param  int  $qrcodeSetId
      */
     public function __construct($qrcodeSetId)
     {
@@ -24,7 +25,7 @@ class QrcodeQrcodeSetScope implements DataTableScope
     /**
      * Apply a query scope.
      *
-     * @param \Illuminate\Database\Query\Builder|Builder $query
+     * @param  \Illuminate\Database\Query\Builder|Builder  $query
      * @return mixed
      */
     public function apply($query)

@@ -42,9 +42,10 @@ class StudentController extends Controller
 
     /**
      * StudentController constructor.
-     * @param StudentService $studentService
-     * @param UserService $userService
-     * @param LogService $logService
+     *
+     * @param  StudentService  $studentService
+     * @param  UserService  $userService
+     * @param  LogService  $logService
      */
     public function __construct(StudentService $studentService, UserService $userService, LogService $logService)
     {
@@ -58,7 +59,7 @@ class StudentController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @param StudentsDataTable $dataTable
+     * @param  StudentsDataTable  $dataTable
      * @return JsonResponse|Response|View
      */
     public function index(StudentsDataTable $dataTable)
@@ -79,7 +80,7 @@ class StudentController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param StudentRequest $request
+     * @param  StudentRequest  $request
      * @return Response
      */
     public function store(StudentRequest $request)
@@ -102,6 +103,7 @@ class StudentController extends Controller
 
     /**
      * @return Factory|View
+     *
      * @throws AuthorizationException
      */
     public function createRealStudent()
@@ -112,8 +114,9 @@ class StudentController extends Controller
     }
 
     /**
-     * @param Request $request
+     * @param  Request  $request
      * @return RedirectResponse
+     *
      * @throws ValidationException
      * @throws AuthorizationException
      */
@@ -158,7 +161,7 @@ class StudentController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param Student $student
+     * @param  Student  $student
      * @return Response
      */
     public function show(Student $student)
@@ -204,7 +207,7 @@ class StudentController extends Controller
     }
 
     /**
-     * @param Student $student
+     * @param  Student  $student
      * @return Response
      */
     public function edit(Student $student)
@@ -215,8 +218,8 @@ class StudentController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param StudentRequest $request
-     * @param Student $student
+     * @param  StudentRequest  $request
+     * @param  Student  $student
      * @return Response
      */
     public function update(StudentRequest $request, Student $student)
@@ -236,8 +239,9 @@ class StudentController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param Student $student
+     * @param  Student  $student
      * @return Response
+     *
      * @throws AuthorizationException
      */
     public function fetch(Student $student)
@@ -254,8 +258,9 @@ class StudentController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param Student $student
+     * @param  Student  $student
      * @return Response
+     *
      * @throws Exception
      */
     public function destroy(Student $student)
@@ -270,6 +275,7 @@ class StudentController extends Controller
      * Show import form
      *
      * @return Factory|View
+     *
      * @throws AuthorizationException
      */
     public function getImport()
@@ -282,8 +288,9 @@ class StudentController extends Controller
     /**
      * Import data
      *
-     * @param Request $request
+     * @param  Request  $request
      * @return RedirectResponse
+     *
      * @throws ValidationException
      * @throws AuthorizationException
      */
@@ -309,6 +316,7 @@ class StudentController extends Controller
      * Download sample file of import
      *
      * @return BinaryFileResponse
+     *
      * @throws AuthorizationException
      */
     public function downloadImportSample()

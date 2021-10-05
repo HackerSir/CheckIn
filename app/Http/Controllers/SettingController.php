@@ -18,8 +18,9 @@ class SettingController extends Controller
     }
 
     /**
-     * @param Request $request
+     * @param  Request  $request
      * @return Response
+     *
      * @throws ValidationException
      */
     public function update(Request $request)

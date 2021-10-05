@@ -15,9 +15,9 @@ class ExtendTransformerFactory extends TransformerFactory
     /**
      * Make a new transformer instance.
      *
-     * @param mixed $data
-     *
+     * @param  mixed  $data
      * @return TransformerInterface
+     *
      * @throws InvalidArgumentException
      */
     public function make($data)

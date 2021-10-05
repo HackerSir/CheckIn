@@ -34,8 +34,9 @@ class Handler extends ExceptionHandler
      *
      * This is a great spot to send exceptions to Sentry, Bugsnag, etc.
      *
-     * @param Throwable $exception
+     * @param  Throwable  $exception
      * @return void
+     *
      * @throws Throwable
      */
     public function report(Throwable $exception)
@@ -46,8 +47,8 @@ class Handler extends ExceptionHandler
     /**
      * Render an exception into an HTTP response.
      *
-     * @param Request $request
-     * @param Throwable $exception
+     * @param  Request  $request
+     * @param  Throwable  $exception
      * @return Response|\Symfony\Component\HttpFoundation\Response
      */
     public function render($request, Throwable $exception)
@@ -58,8 +59,8 @@ class Handler extends ExceptionHandler
     /**
      * Convert an authentication exception into an unauthenticated response.
      *
-     * @param Request $request
-     * @param AuthenticationException $exception
+     * @param  Request  $request
+     * @param  AuthenticationException  $exception
      * @return Response
      */
     protected function unauthenticated($request, AuthenticationException $exception)

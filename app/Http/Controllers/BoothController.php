@@ -20,7 +20,7 @@ class BoothController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @param BoothsDataTable $dataTable
+     * @param  BoothsDataTable  $dataTable
      * @return JsonResponse|Response|View
      */
     public function index(BoothsDataTable $dataTable)
@@ -41,8 +41,9 @@ class BoothController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param Request $request
+     * @param  Request  $request
      * @return Response
+     *
      * @throws ValidationException
      */
     public function store(Request $request)
@@ -63,7 +64,7 @@ class BoothController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param Booth $booth
+     * @param  Booth  $booth
      * @return Response
      */
     public function show(Booth $booth)
@@ -74,7 +75,7 @@ class BoothController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param Booth $booth
+     * @param  Booth  $booth
      * @return Response
      */
     public function edit(Booth $booth)
@@ -85,9 +86,10 @@ class BoothController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param Request $request
-     * @param Booth $booth
+     * @param  Request  $request
+     * @param  Booth  $booth
      * @return Response
+     *
      * @throws ValidationException
      */
     public function update(Request $request, Booth $booth)
@@ -108,8 +110,9 @@ class BoothController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param Booth $booth
+     * @param  Booth  $booth
      * @return Response
+     *
      * @throws Exception
      */
     public function destroy(Booth $booth)
@@ -125,9 +128,10 @@ class BoothController extends Controller
     }
 
     /**
-     * @param Request $request
-     * @param FileService $fileService
+     * @param  Request  $request
+     * @param  FileService  $fileService
      * @return RedirectResponse
+     *
      * @throws ValidationException
      */
     public function postImport(Request $request, FileService $fileService)

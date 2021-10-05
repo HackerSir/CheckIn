@@ -7,7 +7,7 @@ class ContentPresenter
     /**
      * 顯示用的內容（HTML）
      *
-     * @param null|string $content
+     * @param  null|string  $content
      * @return string
      */
     public function showContent(?string $content): string

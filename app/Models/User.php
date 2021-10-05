@@ -57,6 +57,7 @@ use Laratrust\Traits\LaratrustUserTrait;
  * @property-read Collection|\App\Models\Record[] $scannedRecords
  * @property-read int|null $scanned_records_count
  * @property-read \App\Models\Student|null $student
+ *
  * @method static \Database\Factories\UserFactory factory(...$parameters)
  * @method static Builder|User newModelQuery()
  * @method static Builder|User newQuery()
@@ -224,7 +225,7 @@ class User extends Authenticatable
     /**
      * 新增收藏社團
      *
-     * @param Club $club
+     * @param  Club  $club
      */
     public function addFavoriteClub(Club $club)
     {
@@ -242,7 +243,7 @@ class User extends Authenticatable
     /**
      * 移除收藏社團
      *
-     * @param Club $club
+     * @param  Club  $club
      */
     public function removeFavoriteClub(Club $club)
     {
@@ -252,7 +253,7 @@ class User extends Authenticatable
     /**
      * 是否收藏該社團
      *
-     * @param Club $club
+     * @param  Club  $club
      * @return bool
      */
     public function isFavoriteClub(Club $club): bool

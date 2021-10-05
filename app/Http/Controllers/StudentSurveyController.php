@@ -11,7 +11,7 @@ class StudentSurveyController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @param StudentSurveyDataTable $dataTable
+     * @param  StudentSurveyDataTable  $dataTable
      * @return Response
      */
     public function index(StudentSurveyDataTable $dataTable)
@@ -22,7 +22,7 @@ class StudentSurveyController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param StudentSurvey $studentSurvey
+     * @param  StudentSurvey  $studentSurvey
      * @return Response
      */
     public function show(StudentSurvey $studentSurvey)

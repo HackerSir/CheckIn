@@ -10,7 +10,7 @@ class TeaPartyObserver
     /**
      * Handle the tea party "saved" event.
      *
-     * @param TeaParty $teaParty
+     * @param  TeaParty  $teaParty
      * @return void
      */
     public function saved(TeaParty $teaParty)
@@ -22,7 +22,7 @@ class TeaPartyObserver
     /**
      * Handle the tea party "deleted" event.
      *
-     * @param TeaParty $teaParty
+     * @param  TeaParty  $teaParty
      * @return void
      */
     public function deleted(TeaParty $teaParty)

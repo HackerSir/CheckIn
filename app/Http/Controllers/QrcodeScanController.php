@@ -16,9 +16,10 @@ class QrcodeScanController extends Controller
     /**
      * 掃描QRCode
      *
-     * @param QrcodeScanService $qrcodeScanService
+     * @param  QrcodeScanService  $qrcodeScanService
      * @param $code
      * @return Response
+     *
      * @throws Exception
      */
     public function scan(QrcodeScanService $qrcodeScanService, $code)
@@ -60,9 +61,10 @@ class QrcodeScanController extends Controller
     }
 
     /**
-     * @param QrcodeScanService $qrcodeScanService
+     * @param  QrcodeScanService  $qrcodeScanService
      * @param $code
      * @return array|Factory|View
+     *
      * @throws Exception
      */
     public function webScanApi(QrcodeScanService $qrcodeScanService, $code)

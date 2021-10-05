@@ -14,7 +14,7 @@ class QrcodeSetsDataTable extends DataTable
     /**
      * Build DataTable class.
      *
-     * @param mixed $query Results from query() method.
+     * @param  mixed  $query  Results from query() method.
      * @return DataTableAbstract
      */
     public function dataTable($query)
@@ -28,7 +28,7 @@ class QrcodeSetsDataTable extends DataTable
     /**
      * Get the query object to be processed by dataTables.
      *
-     * @param QrcodeSet $model
+     * @param  QrcodeSet  $model
      * @return \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Query\Builder|Collection
      */
     public function query(QrcodeSet $model)

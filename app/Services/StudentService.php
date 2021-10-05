@@ -14,7 +14,8 @@ class StudentService
 
     /**
      * StudentService constructor.
-     * @param FcuApiService $fcuApiService
+     *
+     * @param  FcuApiService  $fcuApiService
      */
     public function __construct(FcuApiService $fcuApiService)
     {
@@ -24,7 +25,7 @@ class StudentService
     /**
      * 根據NID找到學生，若找到且無本地紀錄，則一併新增
      *
-     * @param string $nid 學號
+     * @param  string  $nid  學號
      * @return Student|null 學生實體
      */
     public function findByNid($nid)
@@ -47,7 +48,7 @@ class StudentService
     /**
      * 更新或新增特定NID的學生
      *
-     * @param string $nid 學號
+     * @param  string  $nid  學號
      * @return Student|null 學生實體
      */
     public function updateOrCreate($nid)
@@ -81,7 +82,7 @@ class StudentService
     /**
      * 更新或新增特定NID的學生
      *
-     * @param array $userInfo 登入後透過 getUserInfo 取得的資訊
+     * @param  array  $userInfo  登入後透過 getUserInfo 取得的資訊
      * @return Student|null 學生實體
      */
     public function updateOrCreateOfUserInfo($userInfo)

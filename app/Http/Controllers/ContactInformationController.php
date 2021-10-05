@@ -21,7 +21,7 @@ class ContactInformationController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @param ContactInformationDataTable $dataTable
+     * @param  ContactInformationDataTable  $dataTable
      * @return Response
      */
     public function index(ContactInformationDataTable $dataTable)
@@ -42,7 +42,7 @@ class ContactInformationController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param ContactInformationRequest $request
+     * @param  ContactInformationRequest  $request
      * @return Response
      */
     public function store(ContactInformationRequest $request)
@@ -55,7 +55,7 @@ class ContactInformationController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param ContactInformation $contactInformation
+     * @param  ContactInformation  $contactInformation
      * @return Response
      */
     public function show(ContactInformation $contactInformation)
@@ -66,7 +66,7 @@ class ContactInformationController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param ContactInformation $contactInformation
+     * @param  ContactInformation  $contactInformation
      * @return Response
      */
     public function edit(ContactInformation $contactInformation)
@@ -77,8 +77,8 @@ class ContactInformationController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param ContactInformationRequest $request
-     * @param ContactInformation $contactInformation
+     * @param  ContactInformationRequest  $request
+     * @param  ContactInformation  $contactInformation
      * @return Response
      */
     public function update(ContactInformationRequest $request, ContactInformation $contactInformation)
@@ -91,8 +91,9 @@ class ContactInformationController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param ContactInformation $contactInformation
+     * @param  ContactInformation  $contactInformation
      * @return Response
+     *
      * @throws Exception
      */
     public function destroy(ContactInformation $contactInformation)

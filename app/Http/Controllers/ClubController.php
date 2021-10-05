@@ -28,7 +28,7 @@ class ClubController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @param ClubsDataTable $dataTable
+     * @param  ClubsDataTable  $dataTable
      * @return JsonResponse|Response|View
      */
     public function index(ClubsDataTable $dataTable)
@@ -49,10 +49,11 @@ class ClubController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param Request $request
-     * @param ImgurImageService $imgurImageService
-     * @param HTMLService $HTMLService
+     * @param  Request  $request
+     * @param  ImgurImageService  $imgurImageService
+     * @param  HTMLService  $HTMLService
      * @return Response
+     *
      * @throws ValidationException
      * @throws Exception
      */
@@ -96,9 +97,9 @@ class ClubController extends Controller
     }
 
     /**
-     * @param Club $club
-     * @param string $leaderNid
-     * @param array $staffNids
+     * @param  Club  $club
+     * @param  string  $leaderNid
+     * @param  array  $staffNids
      */
     private function updateStaff(Club $club, $leaderNid, $staffNids)
     {
@@ -134,7 +135,7 @@ class ClubController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param Club $club
+     * @param  Club  $club
      * @return Response
      */
     public function edit(Club $club)
@@ -145,11 +146,12 @@ class ClubController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param Request $request
-     * @param Club $club
-     * @param ImgurImageService $imgurImageService
-     * @param HTMLService $HTMLService
+     * @param  Request  $request
+     * @param  Club  $club
+     * @param  ImgurImageService  $imgurImageService
+     * @param  HTMLService  $HTMLService
      * @return Response
+     *
      * @throws ValidationException
      * @throws Exception
      */
@@ -210,8 +212,9 @@ class ClubController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param Club $club
+     * @param  Club  $club
      * @return Response
+     *
      * @throws Exception
      */
     public function destroy(Club $club)
@@ -227,10 +230,11 @@ class ClubController extends Controller
     }
 
     /**
-     * @param Request $request
-     * @param FileService $fileService
-     * @param StudentService $studentService
+     * @param  Request  $request
+     * @param  FileService  $fileService
+     * @param  StudentService  $studentService
      * @return RedirectResponse
+     *
      * @throws ValidationException
      */
     public function postImport(Request $request, FileService $fileService, StudentService $studentService)

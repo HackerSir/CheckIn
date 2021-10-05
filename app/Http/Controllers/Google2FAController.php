@@ -40,8 +40,9 @@ class Google2FAController extends Controller
     }
 
     /**
-     * @param Request $request
+     * @param  Request  $request
      * @return RedirectResponse
+     *
      * @throws ValidationException
      */
     public function toggle(Request $request)

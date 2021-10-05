@@ -20,7 +20,7 @@ class StudentTicketController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @param StudentTicketsDataTable $dataTable
+     * @param  StudentTicketsDataTable  $dataTable
      * @return JsonResponse|Response|View
      */
     public function index(StudentTicketsDataTable $dataTable)
@@ -41,9 +41,10 @@ class StudentTicketController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param Request $request
-     * @param StudentService $studentService
+     * @param  Request  $request
+     * @param  StudentService  $studentService
      * @return Response
+     *
      * @throws ValidationException
      */
     public function store(Request $request, StudentService $studentService)
@@ -74,7 +75,7 @@ class StudentTicketController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param StudentTicket $studentTicket
+     * @param  StudentTicket  $studentTicket
      * @return Response
      */
     public function edit(StudentTicket $studentTicket)
@@ -85,10 +86,11 @@ class StudentTicketController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param Request $request
-     * @param StudentTicket $studentTicket
-     * @param StudentService $studentService
+     * @param  Request  $request
+     * @param  StudentTicket  $studentTicket
+     * @param  StudentService  $studentService
      * @return Response
+     *
      * @throws ValidationException
      */
     public function update(Request $request, StudentTicket $studentTicket, StudentService $studentService)
@@ -118,8 +120,9 @@ class StudentTicketController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param StudentTicket $studentTicket
+     * @param  StudentTicket  $studentTicket
      * @return Response
+     *
      * @throws Exception
      */
     public function destroy(StudentTicket $studentTicket)
@@ -131,6 +134,7 @@ class StudentTicketController extends Controller
 
     /**
      * @return RedirectResponse
+     *
      * @throws Exception
      */
     public function destroyAll()
@@ -175,10 +179,11 @@ class StudentTicketController extends Controller
     }
 
     /**
-     * @param Request $request
-     * @param FileService $fileService
-     * @param StudentService $studentService
+     * @param  Request  $request
+     * @param  FileService  $fileService
+     * @param  StudentService  $studentService
      * @return RedirectResponse
+     *
      * @throws ValidationException
      */
     public function postImport(Request $request, FileService $fileService, StudentService $studentService)

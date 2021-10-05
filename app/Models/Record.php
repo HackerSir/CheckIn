@@ -28,6 +28,7 @@ use Illuminate\Support\Carbon;
  * @property-read \App\Models\Club|null $club
  * @property-read \App\Models\User|null $scanBy
  * @property-read \App\Models\Student|null $student
+ *
  * @method static \Database\Factories\RecordFactory factory(...$parameters)
  * @method static Builder|Record newModelQuery()
  * @method static Builder|Record newQuery()

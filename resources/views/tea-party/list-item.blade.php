@@ -29,7 +29,7 @@
                 <div class="d-flex flex-column flex-md-row flex-wrap">
                     <h4 class="card-title">
                         @if($teaParty->url)
-                            <a href="{{ $teaParty->url }}" target="_blank">
+                            <a href="{{ $teaParty->url }}" target="_blank" rel="noopener noreferrer">
                                 {{ $teaParty->name }}<i class="fas fa-external-link-alt ml-2"></i>
                             </a>
                         @else

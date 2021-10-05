@@ -124,8 +124,8 @@
                                 @if($club->teaParty->url)
                                     <dt class="col-12 col-sm-4 col-lg-2"><i class="fas fa-link mr-2"></i>網址</dt>
                                     <dd class="col-12 col-sm-8 col-lg-10">
-                                        <a href="{{ $club->teaParty->url }}"
-                                           target="_blank">{{ $club->teaParty->url }}</a>
+                                        <a href="{{ $club->teaParty->url }}" target="_blank"
+                                           rel="noopener noreferrer">{{ $club->teaParty->url }}</a>
                                     </dd>
                                 @endif
                             </dl>

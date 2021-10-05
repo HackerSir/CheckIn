@@ -1,3 +1,3 @@
 @if($url)
-    <a href="{{ $url }}" target="_blank">{{ $url }}</a>
+    <a href="{{ $url }}" target="_blank" rel="noopener noreferrer">{{ $url }}</a>
 @endif

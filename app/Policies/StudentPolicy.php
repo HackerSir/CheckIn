@@ -11,8 +11,8 @@ class StudentPolicy
     use HandlesAuthorization;
 
     /**
-     * @param User $user
-     * @param string $ability
+     * @param  User  $user
+     * @param  string  $ability
      * @return bool
      */
     public function before(User $user, $ability)
@@ -33,8 +33,8 @@ class StudentPolicy
     /**
      * Determine whether the user can view the student.
      *
-     * @param User $user
-     * @param Student $student
+     * @param  User  $user
+     * @param  Student  $student
      * @return mixed
      */
     public function view(User $user, Student $student)
@@ -45,7 +45,7 @@ class StudentPolicy
     /**
      * Determine whether the user can create students.
      *
-     * @param User $user
+     * @param  User  $user
      * @return mixed
      */
     public function create(User $user)
@@ -56,8 +56,8 @@ class StudentPolicy
     /**
      * Determine whether the user can update the student.
      *
-     * @param User $user
-     * @param Student $student
+     * @param  User  $user
+     * @param  Student  $student
      * @return mixed
      */
     public function update(User $user, Student $student)
@@ -68,8 +68,8 @@ class StudentPolicy
     /**
      * Determine whether the user can fetch the student.
      *
-     * @param User $user
-     * @param Student $student
+     * @param  User  $user
+     * @param  Student  $student
      * @return mixed
      */
     public function fetch(User $user, Student $student)
@@ -80,8 +80,8 @@ class StudentPolicy
     /**
      * Determine whether the user can delete the student.
      *
-     * @param User $user
-     * @param Student $student
+     * @param  User  $user
+     * @param  Student  $student
      * @return mixed
      */
     public function delete(User $user, Student $student)

@@ -18,9 +18,10 @@ class FeedbackPolicy
     /**
      * Determine whether the user can view the feedback.
      *
-     * @param User $user
-     * @param Feedback $feedback
+     * @param  User  $user
+     * @param  Feedback  $feedback
      * @return mixed
+     *
      * @throws Exception
      */
     public function view(User $user, Feedback $feedback)

@@ -14,7 +14,7 @@ class StudentsDataTable extends DataTable
     /**
      * Build DataTable class.
      *
-     * @param mixed $query Results from query() method.
+     * @param  mixed  $query  Results from query() method.
      * @return DataTableAbstract
      */
     public function dataTable($query)
@@ -48,7 +48,7 @@ class StudentsDataTable extends DataTable
     /**
      * Get the query object to be processed by dataTables.
      *
-     * @param Student $model
+     * @param  Student  $model
      * @return \Illuminate\Database\Eloquent\Builder|Builder|Collection
      */
     public function query(Student $model)
