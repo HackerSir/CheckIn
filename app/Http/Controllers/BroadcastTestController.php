@@ -11,8 +11,9 @@ use Illuminate\Validation\ValidationException;
 class BroadcastTestController extends Controller
 {
     /**
-     * @param Request $request
+     * @param  Request  $request
      * @return JsonResponse
+     *
      * @throws ValidationException
      */
     public function postMessage(Request $request)

@@ -19,7 +19,7 @@ class DataUpdateRequestController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @param DataUpdateRequestDataTable $dataTable
+     * @param  DataUpdateRequestDataTable  $dataTable
      * @return Response
      */
     public function index(DataUpdateRequestDataTable $dataTable)
@@ -39,7 +39,7 @@ class DataUpdateRequestController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param DataUpdateRequest $dataUpdateRequest
+     * @param  DataUpdateRequest  $dataUpdateRequest
      * @return Response
      */
     public function show(DataUpdateRequest $dataUpdateRequest)
@@ -53,9 +53,10 @@ class DataUpdateRequestController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param Request $request
-     * @param DataUpdateRequest $dataUpdateRequest
+     * @param  Request  $request
+     * @param  DataUpdateRequest  $dataUpdateRequest
      * @return Response
+     *
      * @throws ValidationException
      * @throws Exception
      */

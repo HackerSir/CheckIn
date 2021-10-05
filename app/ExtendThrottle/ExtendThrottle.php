@@ -13,9 +13,9 @@ class ExtendThrottle
     /**
      * Get a new throttler.
      *
-     * @param string|array|Request $data
-     * @param int $limit
-     * @param int $time
+     * @param  string|array|Request  $data
+     * @param  int  $limit
+     * @param  int  $time
      * @return ThrottlerInterface
      */
     public function get($data, $limit = 10, $time = 60)

@@ -11,8 +11,8 @@ class ClubPolicy
     use HandlesAuthorization;
 
     /**
-     * @param User $user
-     * @param string $ability
+     * @param  User  $user
+     * @param  string  $ability
      * @return bool
      */
     public function before(User $user, $ability)

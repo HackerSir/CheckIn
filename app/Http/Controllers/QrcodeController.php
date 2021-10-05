@@ -17,7 +17,7 @@ class QrcodeController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @param QrcodesDataTable $dataTable
+     * @param  QrcodesDataTable  $dataTable
      * @return JsonResponse|Response|View
      */
     public function index(QrcodesDataTable $dataTable)
@@ -28,7 +28,7 @@ class QrcodeController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param Qrcode $qrcode
+     * @param  Qrcode  $qrcode
      * @return Response
      */
     public function show(Qrcode $qrcode)
@@ -54,9 +54,10 @@ class QrcodeController extends Controller
     /**
      * 綁定QRCode
      *
-     * @param Request $request
-     * @param StudentService $studentService
+     * @param  Request  $request
+     * @param  StudentService  $studentService
      * @return RedirectResponse|Response
+     *
      * @throws ValidationException
      */
     public function bind(Request $request, StudentService $studentService)

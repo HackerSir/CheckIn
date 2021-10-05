@@ -16,7 +16,8 @@ class FeedbackClubScope implements DataTableScope
 
     /**
      * FeedbackFilterScope constructor.
-     * @param Club $club
+     *
+     * @param  Club  $club
      */
     public function __construct(Club $club = null)
     {
@@ -26,7 +27,7 @@ class FeedbackClubScope implements DataTableScope
     /**
      * Apply a query scope.
      *
-     * @param \Illuminate\Database\Query\Builder|Builder|Feedback $query
+     * @param  \Illuminate\Database\Query\Builder|Builder|Feedback  $query
      * @return mixed
      */
     public function apply($query)

@@ -24,6 +24,7 @@ use Illuminate\Support\Carbon;
  * @property Carbon|null $updated_at
  * @property-read Model|\Eloquent $club
  * @property-read string $url 取得圖片網址
+ *
  * @method static Builder|ImgurImage newModelQuery()
  * @method static Builder|ImgurImage newQuery()
  * @method static Builder|ImgurImage query()

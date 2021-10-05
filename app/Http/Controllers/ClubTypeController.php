@@ -17,7 +17,7 @@ class ClubTypeController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @param ClubTypesDataTable $dataTable
+     * @param  ClubTypesDataTable  $dataTable
      * @return JsonResponse|Response|View
      */
     public function index(ClubTypesDataTable $dataTable)
@@ -38,8 +38,9 @@ class ClubTypeController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param Request $request
+     * @param  Request  $request
      * @return Response
+     *
      * @throws ValidationException
      */
     public function store(Request $request)
@@ -90,7 +91,7 @@ class ClubTypeController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param ClubType $clubType
+     * @param  ClubType  $clubType
      * @return Response
      */
     public function edit(ClubType $clubType)
@@ -101,9 +102,10 @@ class ClubTypeController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param Request $request
-     * @param ClubType $clubType
+     * @param  Request  $request
+     * @param  ClubType  $clubType
      * @return Response
+     *
      * @throws ValidationException
      */
     public function update(Request $request, ClubType $clubType)
@@ -124,8 +126,9 @@ class ClubTypeController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param ClubType $clubType
+     * @param  ClubType  $clubType
      * @return Response
+     *
      * @throws Exception
      */
     public function destroy(ClubType $clubType)

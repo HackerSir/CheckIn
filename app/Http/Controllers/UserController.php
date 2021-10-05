@@ -33,7 +33,7 @@ class UserController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @param UsersDataTable $dataTable
+     * @param  UsersDataTable  $dataTable
      * @return JsonResponse|View
      */
     public function index(UsersDataTable $dataTable)
@@ -44,7 +44,7 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param User $user
+     * @param  User  $user
      * @return Response
      */
     public function show(User $user)
@@ -55,7 +55,7 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param User $user
+     * @param  User  $user
      * @return Response
      */
     public function edit(User $user)
@@ -68,9 +68,10 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param Request $request
-     * @param User $user
+     * @param  Request  $request
+     * @param  User  $user
      * @return Response
+     *
      * @throws ValidationException
      */
     public function update(Request $request, User $user)
@@ -106,8 +107,9 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param User $user
+     * @param  User  $user
      * @return Response
+     *
      * @throws Exception
      */
     public function destroy(User $user)

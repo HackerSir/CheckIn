@@ -27,6 +27,7 @@ use Illuminate\Support\Carbon;
  * @property-read \App\Models\Club $club
  * @property-read string $stars 星等
  * @property-read \App\Models\User $user
+ *
  * @method static \Database\Factories\ClubSurveyFactory factory(...$parameters)
  * @method static Builder|ClubSurvey newModelQuery()
  * @method static Builder|ClubSurvey newQuery()

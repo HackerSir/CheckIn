@@ -14,7 +14,8 @@ class DataUpdateRequestResultScope implements DataTableScope
 
     /**
      * DataUpdateRequestResultScope constructor.
-     * @param string $result
+     *
+     * @param  string  $result
      */
     public function __construct(string $result)
     {
@@ -24,7 +25,7 @@ class DataUpdateRequestResultScope implements DataTableScope
     /**
      * Apply a query scope.
      *
-     * @param \Illuminate\Database\Query\Builder|Builder $query
+     * @param  \Illuminate\Database\Query\Builder|Builder  $query
      * @return mixed
      */
     public function apply($query)

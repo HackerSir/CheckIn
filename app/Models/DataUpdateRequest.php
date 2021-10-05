@@ -40,6 +40,7 @@ use Illuminate\Support\Carbon;
  * @property-read \App\Models\ImgurImage|null $originalImgurImage
  * @property-read \App\Models\User|null $reviewer
  * @property-read \App\Models\User|null $user
+ *
  * @method static Builder|DataUpdateRequest newModelQuery()
  * @method static Builder|DataUpdateRequest newQuery()
  * @method static Builder|DataUpdateRequest query()

@@ -11,7 +11,7 @@ class ClubSurveyController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @param ClubSurveyDataTable $dataTable
+     * @param  ClubSurveyDataTable  $dataTable
      * @return Response
      */
     public function index(ClubSurveyDataTable $dataTable)
@@ -22,7 +22,7 @@ class ClubSurveyController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param ClubSurvey $clubSurvey
+     * @param  ClubSurvey  $clubSurvey
      * @return Response
      */
     public function show(ClubSurvey $clubSurvey)

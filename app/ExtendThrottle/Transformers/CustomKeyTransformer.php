@@ -10,10 +10,9 @@ class CustomKeyTransformer implements TransformerInterface
     /**
      * Transform the data into a new data instance.
      *
-     * @param string $data
-     * @param int $limit
-     * @param int $time
-     *
+     * @param  string  $data
+     * @param  int  $limit
+     * @param  int  $time
      * @return Data
      */
     public function transform($data, int $limit = 10, int $time = 60)

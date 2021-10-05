@@ -20,6 +20,7 @@ use Laratrust\Models\LaratrustPermission;
  * @property Carbon|null $updated_at
  * @property-read Collection|\App\Models\Role[] $roles
  * @property-read int|null $roles_count
+ *
  * @method static Builder|Permission newModelQuery()
  * @method static Builder|Permission newQuery()
  * @method static Builder|Permission query()
@@ -43,7 +44,6 @@ class Permission extends LaratrustPermission
 
     /**
      * @param $roleName
-     *
      * @return bool
      */
     public function hasRole($roleName): bool

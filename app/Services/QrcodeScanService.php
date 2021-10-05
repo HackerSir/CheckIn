@@ -17,10 +17,11 @@ use Setting;
 class QrcodeScanService
 {
     /**
-     * @param User $user
-     * @param string $code
-     * @param bool $webScan
+     * @param  User  $user
+     * @param  string  $code
+     * @param  bool  $webScan
      * @return array|Factory|View
+     *
      * @throws Exception
      */
     public function scan(User $user, string $code, bool $webScan = false): array

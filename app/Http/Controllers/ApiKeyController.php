@@ -16,7 +16,7 @@ class ApiKeyController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @param ApiKeysDataTable $dataTable
+     * @param  ApiKeysDataTable  $dataTable
      * @return JsonResponse|Response|View
      */
     public function index(ApiKeysDataTable $dataTable)
@@ -37,8 +37,9 @@ class ApiKeyController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param Request $request
+     * @param  Request  $request
      * @return Response
+     *
      * @throws ValidationException
      */
     public function store(Request $request)
@@ -55,8 +56,9 @@ class ApiKeyController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param ApiKey $apiKey
+     * @param  ApiKey  $apiKey
      * @return Response
+     *
      * @throws Exception
      */
     public function destroy(ApiKey $apiKey)

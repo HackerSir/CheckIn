@@ -37,8 +37,9 @@ class ProfileController extends Controller
     /**
      * 編輯個人資料
      *
-     * @param Request $request
+     * @param  Request  $request
      * @return RedirectResponse
+     *
      * @throws ValidationException
      */
     public function updateProfile(Request $request)

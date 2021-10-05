@@ -40,6 +40,7 @@ use Illuminate\Support\Carbon;
  * @property-read string|null $join_club_intention_text 加入社團意願
  * @property-read string|null $join_tea_party_intention_text 參加迎新茶會意願
  * @property-read \App\Models\Student|null $student
+ *
  * @method static \Database\Factories\FeedbackFactory factory(...$parameters)
  * @method static Builder|Feedback newModelQuery()
  * @method static Builder|Feedback newQuery()

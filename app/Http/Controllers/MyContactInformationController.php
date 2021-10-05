@@ -39,6 +39,7 @@ class MyContactInformationController extends Controller
 
     /**
      * @return Response
+     *
      * @throws Exception
      */
     public function createOrEdit()
@@ -58,8 +59,9 @@ class MyContactInformationController extends Controller
     }
 
     /**
-     * @param MyContactInformationRequest $request
-     * @return  Response
+     * @param  MyContactInformationRequest  $request
+     * @return Response
+     *
      * @throws Exception
      */
     public function store(MyContactInformationRequest $request)

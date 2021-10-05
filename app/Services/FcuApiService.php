@@ -10,7 +10,7 @@ use GuzzleHttp\Exception\GuzzleException;
 class FcuApiService
 {
     /**
-     * @param string $nid
+     * @param  string  $nid
      * @return array|null
      */
     public function getStuInfo($nid)
@@ -37,7 +37,7 @@ class FcuApiService
         try {
             //送出請求並取得結果
             $response = $client->request('GET', $apiUrl, $option);
-        } catch (ClientException | GuzzleException $e) {
+        } catch (ClientException|GuzzleException $e) {
             //忽略例外
             $response = $e->getResponse();
         }
@@ -83,7 +83,7 @@ class FcuApiService
         try {
             //送出請求並取得結果
             $response = $client->request('GET', $apiUrl, $option);
-        } catch (ClientException | GuzzleException $e) {
+        } catch (ClientException|GuzzleException $e) {
             //忽略例外
             $response = $e->getResponse();
         }
@@ -129,7 +129,7 @@ class FcuApiService
         try {
             //送出請求並取得結果
             $response = $client->request('GET', $apiUrl, $option);
-        } catch (ClientException | GuzzleException $e) {
+        } catch (ClientException|GuzzleException $e) {
             //忽略例外
             $response = $e->getResponse();
         }

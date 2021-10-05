@@ -22,7 +22,7 @@ class QrcodeSetController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @param QrcodeSetsDataTable $dataTable
+     * @param  QrcodeSetsDataTable  $dataTable
      * @return JsonResponse|Response|View
      */
     public function index(QrcodeSetsDataTable $dataTable)
@@ -43,8 +43,9 @@ class QrcodeSetController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param Request $request
+     * @param  Request  $request
      * @return Response
+     *
      * @throws ValidationException
      */
     public function store(Request $request)
@@ -68,8 +69,8 @@ class QrcodeSetController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param QrcodeSet $qrcodeSet
-     * @param QrcodesDataTable $qrcodesDataTable
+     * @param  QrcodeSet  $qrcodeSet
+     * @param  QrcodesDataTable  $qrcodesDataTable
      * @return JsonResponse|Response|View
      */
     public function show(QrcodeSet $qrcodeSet, QrcodesDataTable $qrcodesDataTable)
@@ -82,9 +83,10 @@ class QrcodeSetController extends Controller
     /**
      * 下載 QR Code Word
      *
-     * @param QrcodeSet $qrcodeSet
-     * @param FileService $fileService
+     * @param  QrcodeSet  $qrcodeSet
+     * @param  FileService  $fileService
      * @return Response
+     *
      * @throws Exception
      */
     public function download(QrcodeSet $qrcodeSet, FileService $fileService)

@@ -11,7 +11,8 @@ abstract class TestCase extends BaseTestCase
 
     /**
      * Create a model factory and forget observers so events do not trigger actions.
-     * @param Model|string $class
+     *
+     * @param  Model|string  $class
      */
     public function factoryWithoutObservers($class)
     {

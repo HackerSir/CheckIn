@@ -15,7 +15,7 @@ class TeaPartyDataTable extends DataTable
     /**
      * Build DataTable class.
      *
-     * @param mixed $query Results from query() method.
+     * @param  mixed  $query  Results from query() method.
      * @return DataTableAbstract
      */
     public function dataTable($query)
@@ -41,7 +41,7 @@ class TeaPartyDataTable extends DataTable
     /**
      * Get query source of dataTable.
      *
-     * @param TeaParty $model
+     * @param  TeaParty  $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
     public function query(TeaParty $model)

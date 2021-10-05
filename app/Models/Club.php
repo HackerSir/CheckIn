@@ -58,6 +58,7 @@ use Illuminate\Support\Carbon;
  * @property-read \App\Models\TeaParty|null $teaParty
  * @property-read Collection|\App\Models\User[] $users
  * @property-read int|null $users_count
+ *
  * @method static \Database\Factories\ClubFactory factory(...$parameters)
  * @method static Builder|Club newModelQuery()
  * @method static Builder|Club newQuery()

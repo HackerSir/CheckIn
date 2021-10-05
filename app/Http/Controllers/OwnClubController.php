@@ -21,6 +21,7 @@ class OwnClubController extends Controller
      * Show the form for editing the specified resource.
      *
      * @return Response
+     *
      * @throws Exception
      */
     public function edit()
@@ -56,10 +57,11 @@ class OwnClubController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param Request $request
-     * @param ImgurImageService $imgurImageService
-     * @param HTMLService $HTMLService
+     * @param  Request  $request
+     * @param  ImgurImageService  $imgurImageService
+     * @param  HTMLService  $HTMLService
      * @return Response
+     *
      * @throws ValidationException
      * @throws Exception
      */
@@ -104,6 +106,7 @@ class OwnClubController extends Controller
 
     /**
      * @return Response
+     *
      * @throws Exception
      */
     public function dataUpdateRequestPanel()
@@ -128,6 +131,7 @@ class OwnClubController extends Controller
 
     /**
      * @return Response
+     *
      * @throws Exception
      */
     public function createDataUpdateRequest()
@@ -147,10 +151,11 @@ class OwnClubController extends Controller
     }
 
     /**
-     * @param Request $request
-     * @param ImgurImageService $imgurImageService
-     * @param HTMLService $HTMLService
+     * @param  Request  $request
+     * @param  ImgurImageService  $imgurImageService
+     * @param  HTMLService  $HTMLService
      * @return Response
+     *
      * @throws ValidationException
      * @throws Exception
      */
@@ -223,8 +228,9 @@ class OwnClubController extends Controller
     }
 
     /**
-     * @param Request $request
+     * @param  Request  $request
      * @return Response
+     *
      * @throws ValidationException
      */
     public function updateTeaParty(Request $request)
@@ -246,6 +252,7 @@ class OwnClubController extends Controller
 
     /**
      * @return Response
+     *
      * @throws Exception
      */
     public function destroyTeaParty()

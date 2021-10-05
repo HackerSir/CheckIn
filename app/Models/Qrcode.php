@@ -25,6 +25,7 @@ use Illuminate\Support\Carbon;
  * @property-read string $scan_url 掃描用網址
  * @property-read \App\Models\QrcodeSet|null $qrcodeSet
  * @property-read \App\Models\Student|null $student
+ *
  * @method static \Database\Factories\QrcodeFactory factory(...$parameters)
  * @method static Builder|Qrcode newModelQuery()
  * @method static Builder|Qrcode newQuery()
