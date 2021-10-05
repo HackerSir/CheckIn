@@ -14,7 +14,7 @@ class ActivityLogDataTable extends DataTable
     /**
      * Build DataTable class.
      *
-     * @param mixed $query Results from query() method.
+     * @param  mixed  $query  Results from query() method.
      * @return DataTableAbstract
      */
     public function dataTable($query)
@@ -39,7 +39,7 @@ class ActivityLogDataTable extends DataTable
     /**
      * Get query source of dataTable.
      *
-     * @param ActivityLog $model
+     * @param  ActivityLog  $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
     public function query(ActivityLog $model)

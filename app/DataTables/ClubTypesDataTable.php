@@ -14,7 +14,7 @@ class ClubTypesDataTable extends DataTable
     /**
      * Build DataTable class.
      *
-     * @param mixed $query Results from query() method.
+     * @param  mixed  $query  Results from query() method.
      * @return DataTableAbstract
      */
     public function dataTable($query)
@@ -31,7 +31,7 @@ class ClubTypesDataTable extends DataTable
     /**
      * Get the query object to be processed by dataTables.
      *
-     * @param ClubType $model
+     * @param  ClubType  $model
      * @return \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Query\Builder|Collection
      */
     public function query(ClubType $model)

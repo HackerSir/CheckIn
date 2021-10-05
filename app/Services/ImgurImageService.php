@@ -14,8 +14,9 @@ class ImgurImageService
     /**
      * 上傳圖片
      *
-     * @param UploadedFile $uploadedFile
+     * @param  UploadedFile  $uploadedFile
      * @return ImgurImage
+     *
      * @throws Exception
      */
     public function upload(UploadedFile $uploadedFile): ImgurImage
@@ -47,7 +48,7 @@ class ImgurImageService
     }
 
     /**
-     * @return  Image
+     * @return Image
      */
     private function getImgurImageClient(): Image
     {
@@ -62,7 +63,8 @@ class ImgurImageService
 
     /**
      * 透過 Delete Hash 實際刪除在 Imgur 的圖片
-     * @param ImgurImage $imgurImage
+     *
+     * @param  ImgurImage  $imgurImage
      */
     public function delete(ImgurImage $imgurImage)
     {

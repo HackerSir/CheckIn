@@ -18,6 +18,7 @@ use Illuminate\Support\Carbon;
  * @property int $total_count 總使用次數
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
+ *
  * @method static \Database\Factories\ApiKeyFactory factory(...$parameters)
  * @method static Builder|ApiKey newModelQuery()
  * @method static Builder|ApiKey newQuery()

@@ -31,6 +31,7 @@ class ExportController extends Controller
      * 打卡紀錄
      *
      * @return BinaryFileResponse
+     *
      * @throws Exception
      */
     public function record()
@@ -104,8 +105,8 @@ class ExportController extends Controller
     }
 
     /**
-     * @param Worksheet $sheet
-     * @param array $titles
+     * @param  Worksheet  $sheet
+     * @param  array  $titles
      * @return Worksheet
      */
     private function setTitleRow(Worksheet $sheet, array $titles)
@@ -131,8 +132,8 @@ class ExportController extends Controller
     }
 
     /**
-     * @param Worksheet $sheet
-     * @param array $data
+     * @param  Worksheet  $sheet
+     * @param  array  $data
      * @return Worksheet
      */
     private function appendRow(Worksheet $sheet, array $data)
@@ -149,9 +150,11 @@ class ExportController extends Controller
 
     /**
      * 下載 Spreadsheet 檔案
-     * @param Spreadsheet $spreadsheet 欲下載的Spreadsheet
-     * @param string|null $fileName 檔名
+     *
+     * @param  Spreadsheet  $spreadsheet  欲下載的Spreadsheet
+     * @param  string|null  $fileName  檔名
      * @return BinaryFileResponse
+     *
      * @throws Exception
      */
     private function downloadSpreadsheet(Spreadsheet $spreadsheet, $fileName = null)
@@ -168,6 +171,7 @@ class ExportController extends Controller
      * 回饋資料
      *
      * @return BinaryFileResponse
+     *
      * @throws Exception
      * @throws \Exception
      */
@@ -296,6 +300,7 @@ class ExportController extends Controller
      * 社團清單
      *
      * @return BinaryFileResponse
+     *
      * @throws Exception
      */
     public function club()
@@ -349,6 +354,7 @@ class ExportController extends Controller
      * 攤位負責人（僅匯出有對應學生之使用者名單）
      *
      * @return BinaryFileResponse
+     *
      * @throws Exception
      */
     public function clubStaff()
@@ -415,6 +421,7 @@ class ExportController extends Controller
      * 學生問卷
      *
      * @return BinaryFileResponse
+     *
      * @throws Exception
      */
     public function studentSurvey()
@@ -487,6 +494,7 @@ class ExportController extends Controller
      * 社團問卷
      *
      * @return BinaryFileResponse
+     *
      * @throws Exception
      */
     public function clubSurvey()
@@ -568,6 +576,7 @@ class ExportController extends Controller
      * 繳費紀錄
      *
      * @return BinaryFileResponse
+     *
      * @throws Exception
      */
     public function paymentRecord()
@@ -640,6 +649,7 @@ class ExportController extends Controller
      * 抽獎編號
      *
      * @return BinaryFileResponse
+     *
      * @throws Exception
      */
     public function ticket()
@@ -683,6 +693,7 @@ class ExportController extends Controller
      * 迎新茶會
      *
      * @return BinaryFileResponse
+     *
      * @throws Exception
      */
     public function teaParty()

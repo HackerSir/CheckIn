@@ -65,7 +65,7 @@ class RegisterController extends Controller
     /**
      * 重新包裝註冊方法，以寄送驗證信件
      *
-     * @param Request $request
+     * @param  Request  $request
      * @return Response
      */
     public function register(Request $request)
@@ -89,7 +89,7 @@ class RegisterController extends Controller
     /**
      * 產生驗證代碼並發送驗證信件
      *
-     * @param User $user
+     * @param  User  $user
      */
     public function generateConfirmCodeAndSendConfirmMail(User $user)
     {
@@ -106,7 +106,7 @@ class RegisterController extends Controller
     /**
      * 驗證信箱
      *
-     * @param string $confirmCode
+     * @param  string  $confirmCode
      * @return Response
      */
     public function emailConfirm($confirmCode)
@@ -144,7 +144,7 @@ class RegisterController extends Controller
     /**
      * 重送驗證信
      *
-     * @param Request $request
+     * @param  Request  $request
      * @return RedirectResponse
      */
     public function resendConfirmMail(Request $request)
@@ -165,7 +165,7 @@ class RegisterController extends Controller
     /**
      * Get a validator for an incoming registration request.
      *
-     * @param array $data
+     * @param  array  $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
     protected function validator(array $data)
@@ -180,7 +180,7 @@ class RegisterController extends Controller
     /**
      * Create a new user instance after a valid registration.
      *
-     * @param array $data
+     * @param  array  $data
      * @return User|Model
      */
     protected function create(array $data)

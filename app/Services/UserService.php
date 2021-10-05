@@ -11,7 +11,7 @@ class UserService
     /**
      * 尋找使用者，若找不到，則建立使用者並綁定
      *
-     * @param Student $student
+     * @param  Student  $student
      * @return User
      */
     public function findOrCreateAndBind(Student $student)
@@ -26,7 +26,7 @@ class UserService
     }
 
     /**
-     * @param string $nid
+     * @param  string  $nid
      * @return User
      */
     public function findOrCreateByNid($nid)

@@ -9,7 +9,7 @@ class StudentObserver
     /**
      * Handle the student "saving" event.
      *
-     * @param Student $student
+     * @param  Student  $student
      * @return void
      */
     public function saving(Student $student)

@@ -18,6 +18,7 @@ use Illuminate\Support\Carbon;
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  * @property-read \App\Models\Student|null $student
+ *
  * @method static \Database\Factories\TicketFactory factory(...$parameters)
  * @method static Builder|Ticket newModelQuery()
  * @method static Builder|Ticket newQuery()

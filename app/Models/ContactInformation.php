@@ -24,6 +24,7 @@ use Illuminate\Support\Carbon;
  * @property-read Collection|\App\Models\ActivityLog[] $activities
  * @property-read int|null $activities_count
  * @property-read \App\Models\Student $student
+ *
  * @method static \Database\Factories\ContactInformationFactory factory(...$parameters)
  * @method static Builder|ContactInformation newModelQuery()
  * @method static Builder|ContactInformation newQuery()

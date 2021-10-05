@@ -24,8 +24,8 @@ class CheckInAlert implements ShouldBroadcast
     /**
      * Create a new CheckInSuccess event instance.
      *
-     * @param string $studentNid
-     * @param string $message
+     * @param  string  $studentNid
+     * @param  string  $message
      */
     public function __construct(string $studentNid, string $message)
     {

@@ -11,6 +11,7 @@ class ActivityLogNameScope implements DataTableScope
 
     /**
      * ActivityLogNameScope constructor.
+     *
      * @param $logName
      */
     public function __construct($logName)
@@ -21,7 +22,7 @@ class ActivityLogNameScope implements DataTableScope
     /**
      * Apply a query scope.
      *
-     * @param \Illuminate\Database\Query\Builder|Builder $query
+     * @param  \Illuminate\Database\Query\Builder|Builder  $query
      * @return mixed
      */
     public function apply($query)

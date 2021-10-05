@@ -35,6 +35,7 @@ use Spatie\GoogleCalendar\Event;
  * @property-read bool $is_started 是否已開始
  * @property-read string $state 狀態
  * @property-read string $state_for_list （清單用）狀態
+ *
  * @method static Builder|TeaParty newModelQuery()
  * @method static Builder|TeaParty newQuery()
  * @method static Builder|TeaParty query()
@@ -162,6 +163,7 @@ class TeaParty extends Model
 
     /**
      * @comment （清單用）狀態
+     *
      * @return string
      */
     public function getStateForListAttribute(): string
@@ -180,7 +182,7 @@ class TeaParty extends Model
     /**
      * 儲存但不觸發 Observer 監聽的 Model 事件
      *
-     * @param array $options
+     * @param  array  $options
      * @return mixed
      */
     public function saveWithoutEvents(array $options = [])
