@@ -42,8 +42,8 @@ class LogService
     /**
      * Log an message to the logs.
      *
-     * @param string $level
-     * @param string $arguments
+     * @param  string  $level
+     * @param  string  $arguments
      * @return void
      */
     public function __call($level, $arguments)

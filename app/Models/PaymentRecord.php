@@ -29,6 +29,7 @@ use Illuminate\Support\Carbon;
  * @property-read \App\Models\Club $club
  * @property-read \App\Models\Student $student
  * @property-read \App\Models\User|null $user
+ *
  * @method static Builder|PaymentRecord newModelQuery()
  * @method static Builder|PaymentRecord newQuery()
  * @method static Builder|PaymentRecord query()
@@ -75,6 +76,7 @@ class PaymentRecord extends Model
 
     /**
      * 對應學生，必須有填寫該社團回饋資料，且對於參與社團或茶會有意願
+     *
      * @return Builder|BelongsTo
      */
     public function student()

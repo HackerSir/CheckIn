@@ -29,6 +29,7 @@ class HomeController extends Controller
 
     /**
      * @return Factory|RedirectResponse|View
+     *
      * @throws Exception
      */
     public function myQRCode()

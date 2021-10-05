@@ -22,6 +22,7 @@ use Illuminate\Support\Carbon;
  * @property-read int|null $activities_count
  * @property-read string $nid 學生 NID
  * @property-read \App\Models\Student|null $student
+ *
  * @method static Builder|StudentTicket newModelQuery()
  * @method static Builder|StudentTicket newQuery()
  * @method static Builder|StudentTicket query()

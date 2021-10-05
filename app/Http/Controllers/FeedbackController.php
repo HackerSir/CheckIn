@@ -35,8 +35,9 @@ class FeedbackController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @param FeedbackDataTable $dataTable
+     * @param  FeedbackDataTable  $dataTable
      * @return JsonResponse|Response|View
+     *
      * @throws Exception
      */
     public function index(FeedbackDataTable $dataTable)
@@ -103,8 +104,9 @@ class FeedbackController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @param Club $club
+     * @param  Club  $club
      * @return Response
+     *
      * @throws Exception
      */
     public function createOrEdit(Club $club)
@@ -130,9 +132,10 @@ class FeedbackController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param FeedbackRequest $request
-     * @param Club $club
+     * @param  FeedbackRequest  $request
+     * @param  Club  $club
      * @return Response
+     *
      * @throws Exception
      */
     public function store(FeedbackRequest $request, Club $club)
@@ -165,8 +168,9 @@ class FeedbackController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param Feedback $feedback
+     * @param  Feedback  $feedback
      * @return Response
+     *
      * @throws Exception
      */
     public function show(Feedback $feedback)

@@ -15,7 +15,7 @@ class PaymentRecordDataTable extends DataTable
     /**
      * Build DataTable class.
      *
-     * @param mixed $query Results from query() method.
+     * @param  mixed  $query  Results from query() method.
      * @return DataTableAbstract
      */
     public function dataTable($query)
@@ -57,7 +57,7 @@ class PaymentRecordDataTable extends DataTable
     /**
      * Get query source of dataTable.
      *
-     * @param PaymentRecord $model
+     * @param  PaymentRecord  $model
      * @return Builder
      */
     public function query(PaymentRecord $model)

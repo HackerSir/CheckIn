@@ -16,7 +16,7 @@ class FeedbackDataTable extends DataTable
     /**
      * Build DataTable class.
      *
-     * @param mixed $query Results from query() method.
+     * @param  mixed  $query  Results from query() method.
      * @return DataTableAbstract
      */
     public function dataTable($query)
@@ -68,7 +68,7 @@ class FeedbackDataTable extends DataTable
     /**
      * Get the query object to be processed by dataTables.
      *
-     * @param Feedback $model
+     * @param  Feedback  $model
      * @return \Illuminate\Database\Eloquent\Builder|Builder|Collection
      */
     public function query(Feedback $model)

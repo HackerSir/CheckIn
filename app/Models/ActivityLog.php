@@ -23,6 +23,7 @@ use Spatie\Activitylog\Models\Activity;
  * @property-read \Illuminate\Database\Eloquent\Model|\Eloquent $causer
  * @property-read \Illuminate\Support\Collection $changes
  * @property-read \Illuminate\Database\Eloquent\Model|\Eloquent $subject
+ *
  * @method static Builder|Activity causedBy(\Illuminate\Database\Eloquent\Model $causer)
  * @method static Builder|Activity forSubject(\Illuminate\Database\Eloquent\Model $subject)
  * @method static Builder|Activity inLog($logNames)

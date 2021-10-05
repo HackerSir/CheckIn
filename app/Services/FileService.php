@@ -20,7 +20,7 @@ class FileService
      * @link https://github.com/PHPOffice/PHPWord 套件專案
      * @link http://phpword.readthedocs.org/ 開發者文件
      *
-     * @param QrcodeSet $qrcodeSet
+     * @param  QrcodeSet  $qrcodeSet
      * @return PhpWord
      */
     public function generateQRCodeDocFile(QrcodeSet $qrcodeSet)

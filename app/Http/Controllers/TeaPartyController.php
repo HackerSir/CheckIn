@@ -57,7 +57,7 @@ class TeaPartyController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @param TeaPartyDataTable $dataTable
+     * @param  TeaPartyDataTable  $dataTable
      * @return Response
      */
     public function index(TeaPartyDataTable $dataTable)
@@ -78,7 +78,7 @@ class TeaPartyController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param TeaPartyRequest $request
+     * @param  TeaPartyRequest  $request
      * @return Response
      */
     public function store(TeaPartyRequest $request)
@@ -91,7 +91,7 @@ class TeaPartyController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param TeaParty $teaParty
+     * @param  TeaParty  $teaParty
      * @return Response
      */
     public function show(TeaParty $teaParty)
@@ -102,7 +102,7 @@ class TeaPartyController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param TeaParty $teaParty
+     * @param  TeaParty  $teaParty
      * @return Response
      */
     public function edit(TeaParty $teaParty)
@@ -113,8 +113,8 @@ class TeaPartyController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param TeaPartyRequest $request
-     * @param TeaParty $teaParty
+     * @param  TeaPartyRequest  $request
+     * @param  TeaParty  $teaParty
      * @return Response
      */
     public function update(TeaPartyRequest $request, TeaParty $teaParty)
@@ -127,8 +127,9 @@ class TeaPartyController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param TeaParty $teaParty
+     * @param  TeaParty  $teaParty
      * @return Response
+     *
      * @throws Exception
      */
     public function destroy(TeaParty $teaParty)

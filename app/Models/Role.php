@@ -21,6 +21,7 @@ use Laratrust\Models\LaratrustRole;
  * @property Carbon|null $updated_at
  * @property-read Collection|\App\Models\Permission[] $permissions
  * @property-read int|null $permissions_count
+ *
  * @method static Builder|Role newModelQuery()
  * @method static Builder|Role newQuery()
  * @method static Builder|Role query()

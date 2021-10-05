@@ -26,6 +26,7 @@ use Illuminate\Support\Carbon;
  * @property-read Collection|\App\Models\Club[] $clubs
  * @property-read int|null $clubs_count
  * @property-read string $tag HTML 標籤
+ *
  * @method static \Database\Factories\ClubTypeFactory factory(...$parameters)
  * @method static Builder|ClubType newModelQuery()
  * @method static Builder|ClubType newQuery()

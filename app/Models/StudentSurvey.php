@@ -25,6 +25,7 @@ use Illuminate\Support\Carbon;
  * @property-read int|null $activities_count
  * @property-read string $stars 星等
  * @property-read \App\Models\Student|null $student
+ *
  * @method static \Database\Factories\StudentSurveyFactory factory(...$parameters)
  * @method static Builder|StudentSurvey newModelQuery()
  * @method static Builder|StudentSurvey newQuery()

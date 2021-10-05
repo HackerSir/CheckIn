@@ -24,7 +24,7 @@ class CheckInSuccess implements ShouldBroadcast
     /**
      * Create a new CheckInSuccess event instance.
      *
-     * @param Record $record
+     * @param  Record  $record
      */
     public function __construct(Record $record)
     {

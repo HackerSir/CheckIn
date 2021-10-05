@@ -20,7 +20,7 @@ class ExtraTicketController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @param ExtraTicketsDataTable $dataTable
+     * @param  ExtraTicketsDataTable  $dataTable
      * @return JsonResponse|Response|View
      */
     public function index(ExtraTicketsDataTable $dataTable)
@@ -41,8 +41,9 @@ class ExtraTicketController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param Request $request
+     * @param  Request  $request
      * @return Response
+     *
      * @throws ValidationException
      */
     public function store(Request $request)
@@ -64,7 +65,7 @@ class ExtraTicketController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param ExtraTicket $extraTicket
+     * @param  ExtraTicket  $extraTicket
      * @return Response
      */
     public function edit(ExtraTicket $extraTicket)
@@ -75,9 +76,10 @@ class ExtraTicketController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param Request $request
-     * @param ExtraTicket $extraTicket
+     * @param  Request  $request
+     * @param  ExtraTicket  $extraTicket
      * @return Response
+     *
      * @throws ValidationException
      */
     public function update(Request $request, ExtraTicket $extraTicket)
@@ -98,8 +100,9 @@ class ExtraTicketController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param ExtraTicket $extraTicket
+     * @param  ExtraTicket  $extraTicket
      * @return Response
+     *
      * @throws Exception
      */
     public function destroy(ExtraTicket $extraTicket)
@@ -111,6 +114,7 @@ class ExtraTicketController extends Controller
 
     /**
      * @return RedirectResponse
+     *
      * @throws Exception
      */
     public function destroyAll()
@@ -155,9 +159,10 @@ class ExtraTicketController extends Controller
     }
 
     /**
-     * @param Request $request
-     * @param FileService $fileService
+     * @param  Request  $request
+     * @param  FileService  $fileService
      * @return RedirectResponse
+     *
      * @throws ValidationException
      */
     public function postImport(Request $request, FileService $fileService)

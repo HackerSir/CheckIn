@@ -26,9 +26,10 @@ class OAuthController extends Controller
 
     /**
      * OAuthController constructor.
-     * @param FcuApiService $fcuApiService
-     * @param StudentService $studentService
-     * @param UserService $userService
+     *
+     * @param  FcuApiService  $fcuApiService
+     * @param  StudentService  $studentService
+     * @param  UserService  $userService
      */
     public function __construct(FcuApiService $fcuApiService, StudentService $studentService, UserService $userService)
     {

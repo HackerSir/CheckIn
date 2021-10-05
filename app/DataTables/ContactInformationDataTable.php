@@ -15,7 +15,7 @@ class ContactInformationDataTable extends DataTable
     /**
      * Build DataTable class.
      *
-     * @param mixed $query Results from query() method.
+     * @param  mixed  $query  Results from query() method.
      * @return DataTableAbstract
      */
     public function dataTable($query)
@@ -45,7 +45,7 @@ class ContactInformationDataTable extends DataTable
     /**
      * Get the query object to be processed by dataTables.
      *
-     * @param ContactInformation $model
+     * @param  ContactInformation  $model
      * @return \Illuminate\Database\Eloquent\Builder|Builder|Collection
      */
     public function query(ContactInformation $model)

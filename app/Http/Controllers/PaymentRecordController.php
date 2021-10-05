@@ -23,7 +23,7 @@ class PaymentRecordController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @param PaymentRecordDataTable $dataTable
+     * @param  PaymentRecordDataTable  $dataTable
      * @return Response
      */
     public function index(PaymentRecordDataTable $dataTable)
@@ -53,7 +53,7 @@ class PaymentRecordController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param PaymentRecordRequest $request
+     * @param  PaymentRecordRequest  $request
      * @return Response
      */
     public function store(PaymentRecordRequest $request)
@@ -75,7 +75,7 @@ class PaymentRecordController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param PaymentRecord $paymentRecord
+     * @param  PaymentRecord  $paymentRecord
      * @return Response
      */
     public function show(PaymentRecord $paymentRecord)
@@ -86,7 +86,7 @@ class PaymentRecordController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param PaymentRecord $paymentRecord
+     * @param  PaymentRecord  $paymentRecord
      * @return Response
      */
     public function edit(PaymentRecord $paymentRecord)
@@ -100,8 +100,8 @@ class PaymentRecordController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param PaymentRecordRequest $request
-     * @param PaymentRecord $paymentRecord
+     * @param  PaymentRecordRequest  $request
+     * @param  PaymentRecord  $paymentRecord
      * @return Response
      */
     public function update(PaymentRecordRequest $request, PaymentRecord $paymentRecord)
@@ -123,8 +123,9 @@ class PaymentRecordController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param PaymentRecord $paymentRecord
+     * @param  PaymentRecord  $paymentRecord
      * @return Response
+     *
      * @throws Exception
      */
     public function destroy(PaymentRecord $paymentRecord)

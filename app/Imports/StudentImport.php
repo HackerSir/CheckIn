@@ -28,8 +28,7 @@ class StudentImport implements ToModel, WithHeadingRow, WithChunkReading, WithBa
     }
 
     /**
-     * @param array $row
-     *
+     * @param  array  $row
      * @return Model|null
      */
     public function model(array $row)

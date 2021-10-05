@@ -22,6 +22,7 @@ use Illuminate\Support\Carbon;
  * @property Carbon|null $updated_at
  * @property-read Collection|\App\Models\ActivityLog[] $activities
  * @property-read int|null $activities_count
+ *
  * @method static \Database\Factories\ExtraTicketFactory factory(...$parameters)
  * @method static Builder|ExtraTicket newModelQuery()
  * @method static Builder|ExtraTicket newQuery()

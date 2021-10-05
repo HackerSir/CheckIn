@@ -10,8 +10,8 @@ class ActivityLogPresenter
     /**
      * 根據類別和ID取得檢視網址
      *
-     * @param string|null $type
-     * @param int|string|null $id
+     * @param  string|null  $type
+     * @param  int|string|null  $id
      * @return string|null
      */
     public function getRouteLink(?string $type, $id): ?string

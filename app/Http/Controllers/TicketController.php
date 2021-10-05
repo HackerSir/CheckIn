@@ -14,7 +14,7 @@ class TicketController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @param TicketsDataTable $dataTable
+     * @param  TicketsDataTable  $dataTable
      * @return JsonResponse|Response|View
      */
     public function index(TicketsDataTable $dataTable)

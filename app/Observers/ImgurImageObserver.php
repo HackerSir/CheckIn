@@ -8,7 +8,7 @@ use App\Services\ImgurImageService;
 class ImgurImageObserver
 {
     /**
-     * @param ImgurImage $imgurImage
+     * @param  ImgurImage  $imgurImage
      */
     public function deleted(ImgurImage $imgurImage)
     {
