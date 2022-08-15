@@ -117,4 +117,4 @@ deploy_production:
     url: https://checkin.hackersir.org/
   when: manual
   only:
-      - '2021'
+      - '2022'

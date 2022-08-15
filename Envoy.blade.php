@@ -2,7 +2,7 @@
 
 @setup
 $repository = 'https://github.com/HackerSir/CheckIn.git';
-$checkoutBranch = '2021';
+$checkoutBranch = '2022';
 $websiteName = 'CheckIn';
 $releases_dir = '/var/www/' . $websiteName . '/releases';
 $app_dir = '/var/www/' . $websiteName;
