@@ -87,7 +87,7 @@ class Student extends Model
     use LegacySerializeDate;
     use HasFactory;
 
-    private static $freshmanInYear = 109;
+    private static $freshmanInYear = 111;
     public $incrementing = false;
     protected $primaryKey = 'nid';
     protected $keyType = 'string';
