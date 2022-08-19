@@ -17,6 +17,8 @@ class PaymentRecordPolicy
      */
     public function before(User $user, $ability)
     {
+        return false;   // 暫時徹底關閉繳費紀錄模組
+
         //若有權限，直接允許使用所有功能
         if ($user->isAbleTo('payment-record.manage')) {
             return true;
