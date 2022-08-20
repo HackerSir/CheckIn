@@ -24,7 +24,7 @@
 
                 <dt class="col-md-2">Facebook</dt>
                 <dd class="col-md-10">
-                    <p v-if="feedback.email">{{ feedback.facebook }}</p>
+                    <p v-if="feedback.facebook">{{ feedback.facebook }}</p>
                     <p v-else class="text-muted">（未填寫）</p>
                 </dd>
 

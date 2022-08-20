@@ -22,7 +22,7 @@ class LaravelMenu
      * @param  Closure  $next
      * @return mixed
      */
-    public function handle($request, Closure $next)
+    public function handle(Request $request, Closure $next)
     {
         //左側
         Menu::make('left', function ($menu) {
@@ -52,8 +52,8 @@ class LaravelMenu
                         $myClubMenu = $menu->add('我的社團', 'javascript:void(0)');
                         $myClubMenu->add($user->club->name, ['route' => ['clubs.show', $user->club]]);
                         $myClubMenu->add('條碼掃描', ['route' => ['qrcode.web-scan']]);
-                        $myClubMenu->add('繳費紀錄', ['route' => 'payment-record.index'])
-                            ->active('payment-record/*');
+//                        $myClubMenu->add('繳費紀錄', ['route' => 'payment-record.index'])
+//                            ->active('payment-record/*');
                     }
                     if ($user->student || $user->club) {
                         $menu->add('回饋資料', ['route' => 'feedback.index'])->active('feedback/*');
@@ -95,10 +95,10 @@ class LaravelMenu
                             $activityMenu->add('打卡紀錄管理', ['route' => 'record.index'])->active('record/*');
                         }
 
-                        if (Laratrust::isAbleTo('payment-record.manage')) {
-                            $activityMenu->add('繳費紀錄管理', ['route' => 'payment-record.index'])
-                                ->active('payment-record/*');
-                        }
+//                        if (Laratrust::isAbleTo('payment-record.manage')) {
+//                            $activityMenu->add('繳費紀錄管理', ['route' => 'payment-record.index'])
+//                                ->active('payment-record/*');
+//                        }
 
                         $this->addDivider($activityMenu);
 
