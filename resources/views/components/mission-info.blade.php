@@ -45,8 +45,8 @@
         <dt class="col-md-3 col-lg-2">
             區域收集
             <button class="btn btn-secondary btn-sm"
-                    onclick="alert('完成7個社團打卡點，7個打卡點需含甲、已、丙、丁、戊、己、體驗區任3區。\n（怎麼看區域：社博網站→攤位地圖）')"><i
-                    class="fas fa-question"></i></button>
+                    onclick="alert('完成{{ \Setting::get('target') }}個社團打卡點，{{ \Setting::get('target') }}個打卡點需含甲、已、丙、丁、戊、己、體驗區任{{ \Setting::get('zone_target') }}區。\n（怎麼看區域：社博網站→攤位地圖）')">
+                <i class="fas fa-question"></i></button>
         </dt>
         <dd class="col-md-7 col-lg-10">
             @php
