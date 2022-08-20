@@ -22,7 +22,7 @@ class LaravelMenu
      * @param  Closure  $next
      * @return mixed
      */
-    public function handle($request, Closure $next)
+    public function handle(Request $request, Closure $next)
     {
         //左側
         Menu::make('left', function ($menu) {
