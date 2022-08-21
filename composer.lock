@@ -2655,17 +2655,17 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/HackerSir/Laravel-Searchy.git",
-                "reference": "0f526eff5de1ed28f7b8294856dcc5456acae5cc"
+                "reference": "dcc5b3d9e1d787e225b6425066f19b0822f4d01b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/HackerSir/Laravel-Searchy/zipball/0f526eff5de1ed28f7b8294856dcc5456acae5cc",
-                "reference": "0f526eff5de1ed28f7b8294856dcc5456acae5cc",
+                "url": "https://api.github.com/repos/HackerSir/Laravel-Searchy/zipball/dcc5b3d9e1d787e225b6425066f19b0822f4d01b",
+                "reference": "dcc5b3d9e1d787e225b6425066f19b0822f4d01b",
                 "shasum": ""
             },
             "require": {
                 "illuminate/support": "^5.1 || ^6.0 || ^7.0 || ^8.0",
-                "php": "^5.5.9 || ^7.0"
+                "php": ">=7.0"
             },
             "require-dev": {
                 "graham-campbell/testbench": "^3.4 || ^4.0 || ^5.0",
@@ -2714,7 +2714,7 @@
             "support": {
                 "source": "https://github.com/HackerSir/Laravel-Searchy/tree/master"
             },
-            "time": "2021-07-27T11:52:49+00:00"
+            "time": "2022-08-21T09:18:59+00:00"
         },
         {
             "name": "justinrainbow/json-schema",
@@ -13072,5 +13072,5 @@
         "ext-json": "*"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.1.0"
+    "plugin-api-version": "2.3.0"
 }
