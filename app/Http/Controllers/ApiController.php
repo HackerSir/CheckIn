@@ -10,7 +10,6 @@ use App\Models\Student;
 use App\Models\User;
 use DB;
 use Exception;
-use Gravatar;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Http\Request;
@@ -115,7 +114,6 @@ class ApiController extends Controller
                 'id'       => $user->id,
                 'name'     => $user->name,
                 'email'    => $user->email,
-                'gravatar' => Gravatar::src($user->email, 40),
                 'disabled' => $disabled,
                 'club'     => $otherClub,
             ];
