@@ -45,7 +45,6 @@
         "spatie/laravel-activitylog": "^3.7",
         "spatie/laravel-backup": "^6.9",
         "spatie/laravel-google-calendar": "^3.3.0",
-        "thomaswelton/laravel-gravatar": "^1.1",
         "yajra/laravel-datatables-buttons": "^4.6",
         "yajra/laravel-datatables-html": "^4.4",
         "yajra/laravel-datatables-oracle": "^9.0"

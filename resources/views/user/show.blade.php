@@ -2,14 +2,6 @@
 
 @section('title', "{$user->name} - 會員資料")
 
-@section('css')
-    <style>
-        #gravatar:hover {
-            border: 1px dotted black;
-        }
-    </style>
-@endsection
-
 @section('buttons')
     <a href="{{ route('user.index') }}" class="btn btn-secondary">
         <i class="fa fa-arrow-left mr-2"></i>會員清單
@@ -26,11 +18,6 @@
 
 @section('main_content')
     <div class="card">
-        <div class="card-body text-center">
-            {{-- Gravatar大頭貼 --}}
-            <img src="{{ Gravatar::src($user->email, 200) }}" class="img-thumbnail" id="gravatar"
-                 title="Gravatar大頭貼"/>
-        </div>
         <div class="card-body">
             <dl class="row" style="font-size: 120%">
                 <dt class="col-4 col-md-3">名稱</dt>
