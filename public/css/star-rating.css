@@ -7,7 +7,7 @@
     content: "\f005"; /* Star */
     margin: 2px;
     font-size: 2.5rem;
-    font-family: 'Font Awesome 5 Free';
+    font-family: 'Font Awesome 5 Pro';
     font-weight: 200;
     display: inline-block;
 }
@@ -16,7 +16,7 @@
 .starrating > input:checked ~ label:before {
     content: "\f005"; /* Star */
     color: #ffca08;
-    font-family: 'Font Awesome 5 Free';
+    font-family: 'Font Awesome 5 Pro';
     font-weight: 900;
 }
 
@@ -24,7 +24,7 @@
 .starrating > input:hover ~ label:before {
     content: "\f005"; /* Star */
     color: #ffca08;
-    font-family: 'Font Awesome 5 Free';
+    font-family: 'Font Awesome 5 Pro';
     font-weight: 900;
 }
 
